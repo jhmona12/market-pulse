@@ -242,7 +242,7 @@ function sparkline(values) {
     .join(" ");
   return `
     <svg class="spark" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true">
-      <polyline points="${points}" fill="none" stroke="#7fc7a5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      <polyline points="${points}" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
     </svg>
   `;
 }

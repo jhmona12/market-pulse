@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Morning Desk</title>
-    <link rel="stylesheet" href="styles.css?v=20260503-sector-performance" />
+    <link rel="stylesheet" href="styles.css?v=20260503-terminal-nav" />
   </head>
   <body>
     <div class="modal-backdrop" id="signalSetupModal" hidden>
@@ -62,10 +62,21 @@
         </div>
       </header>
 
-      <section class="market-strip" id="marketStrip"></section>
+      <nav class="jump-nav" aria-label="Report sections">
+        <a href="#daily-read">Daily Read</a>
+        <a href="#ai-memo">AI Memo</a>
+        <a href="#sector-performance">Sectors</a>
+        <a href="#desk-calls">Desk Calls</a>
+        <a href="#momentum-book">Momentum</a>
+        <a href="#macro-calendar">Calendar</a>
+        <a href="#macro-pulse">Macro</a>
+        <a href="#source-tape-section">Sources</a>
+      </nav>
+
+      <section class="market-strip" id="marketStrip" aria-label="Market index strip"></section>
 
       <section class="grid">
-        <article class="panel note-panel">
+        <article class="panel note-panel" id="daily-read">
           <div class="panel-title">
             <span>Daily Read</span>
             <button class="icon-button" id="refreshView" title="Reload snapshot" aria-label="Reload snapshot">↻</button>
@@ -84,7 +95,7 @@
           </div>
         </article>
 
-        <article class="panel ai-panel">
+        <article class="panel ai-panel" id="ai-memo">
           <div class="panel-title">
             <span>AI Strategy Memo</span>
             <span id="aiMeta">Macro + momentum</span>
@@ -104,7 +115,7 @@
           </div>
         </article>
 
-        <article class="panel sector-panel">
+        <article class="panel sector-panel" id="sector-performance">
           <div class="panel-title">
             <span>Sector Performance</span>
             <span>SPDR ETF proxies</span>
@@ -112,7 +123,7 @@
           <div class="sector-grid" id="sectorGrid"></div>
         </article>
 
-        <article class="panel recommendations-panel">
+        <article class="panel recommendations-panel" id="desk-calls">
           <div class="panel-title">
             <span>Desk Calls</span>
             <span>Research actions</span>
@@ -120,7 +131,7 @@
           <div class="recommendation-list" id="recommendationList"></div>
         </article>
 
-        <article class="panel opportunities-panel">
+        <article class="panel opportunities-panel" id="momentum-book">
           <div class="panel-title">
             <span>Momentum Book</span>
             <span id="bookMeta">End-of-day</span>
@@ -128,7 +139,7 @@
           <div class="opportunity-list" id="opportunityList"></div>
         </article>
 
-        <article class="panel calendar-panel">
+        <article class="panel calendar-panel" id="macro-calendar">
           <div class="panel-title">
             <span>Macro Calendar</span>
             <span>Market movers</span>
@@ -136,7 +147,7 @@
           <div id="calendarList" class="calendar-list"></div>
         </article>
 
-        <article class="panel macro-panel">
+        <article class="panel macro-panel" id="macro-pulse">
           <div class="panel-title">
             <span>Macro Pulse</span>
             <span>FRED + official releases</span>
@@ -144,7 +155,7 @@
           <div id="macroGrid" class="macro-grid"></div>
         </article>
 
-        <article class="panel source-panel">
+        <article class="panel source-panel" id="source-tape-section">
           <div class="panel-title">
             <span>Source Tape</span>
             <span id="sourceCount">0 sources</span>
@@ -154,6 +165,6 @@
       </section>
     </main>
 
-    <script type="module" src="app.js?v=20260503-sector-performance"></script>
+    <script type="module" src="app.js?v=20260503-terminal-nav"></script>
   </body>
 </html>
