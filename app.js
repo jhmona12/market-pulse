@@ -201,6 +201,15 @@ function formatDate(value) {
   }).format(new Date(value));
 }
 
+function formatShortDate(value) {
+  if (!value) return "Date unavailable";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  }).format(new Date(value));
+}
+
 function pct(value) {
   const number = Number(value || 0);
   return `${number >= 0 ? "+" : ""}${number.toFixed(2)}%`;
@@ -461,7 +470,8 @@ function renderMacro() {
 function renderSources() {
   const sourceTape = $("#sourceTape");
   const sources = state.snapshot.sources || [];
-  $("#sourceCount").textContent = `${sources.length} source${sources.length === 1 ? "" : "s"}`;
+  const articleCount = sources.reduce((total, source) => total + (source.articles?.length || 0), 0);
+  $("#sourceCount").textContent = `${sources.length} sources · ${articleCount} articles`;
   sourceTape.innerHTML = "";
 
   if (!sources.length) {
@@ -472,6 +482,7 @@ function renderSources() {
   sources.forEach((source) => {
     const item = document.createElement("div");
     item.className = "source-item";
+    const articles = source.articles || [];
     item.innerHTML = `
       <div>
         <strong>${esc(source.category || "Source")}</strong>
@@ -480,6 +491,20 @@ function renderSources() {
       <div>
         <a href="${esc(source.url)}" target="_blank" rel="noreferrer">${esc(source.title || source.name)}</a>
         <span>${esc(source.summary || source.notes || "")}</span>
+        ${
+          articles.length
+            ? `<div class="source-articles">${articles
+                .map(
+                  (article) => `
+                    <a class="source-article" href="${esc(article.url)}" target="_blank" rel="noreferrer">
+                      <strong>${esc(article.title)}</strong>
+                      <span>${esc(article.sourceName || source.name)} · ${esc(formatShortDate(article.publishedAt))}</span>
+                    </a>
+                  `
+                )
+                .join("")}</div>`
+            : ""
+        }
       </div>
     `;
     sourceTape.appendChild(item);

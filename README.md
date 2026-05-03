@@ -22,7 +22,7 @@ node scripts/update-data.mjs
 
 That script:
 
-- Reads editable sources from `config/news-sources.md`
+- Reads editable sources from `config/news-sources.md`, discovers recent article links from each source, and ingests the newest articles first
 - Pulls the S&P 500 constituent table from Wikipedia when available
 - Adds a curated ETF universe from `config/universe.json`
 - Fetches free delayed/end-of-day chart history from Yahoo Finance's public chart endpoint
@@ -73,6 +73,8 @@ The refresh script logs AI usage to `data/usage-log.jsonl` and includes the late
 Edit `config/news-sources.md` and add a row to the table. The refresh script will ingest the URL on the next run.
 
 Good source candidates are public market commentaries, official economic release pages, research landing pages, and institution blogs with stable URLs.
+
+For landing pages, the refresh script looks for likely article links, fetches the top candidates, extracts publication dates from page metadata when available, and keeps the newest articles first. You can tune this with `SOURCE_ARTICLES_PER_SOURCE` and `SOURCE_ARTICLE_CANDIDATES`.
 
 ## Data Notes
 

@@ -685,6 +685,27 @@ li {
   outline: none;
 }
 
+.source-articles {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.source-article {
+  display: grid;
+  gap: 3px;
+  padding: 9px;
+  border: 1px solid rgba(79, 216, 255, 0.16);
+  border-radius: 5px;
+  background: rgba(79, 216, 255, 0.04);
+}
+
+.source-article strong {
+  color: var(--ink);
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
 .event em {
   color: var(--accent-3);
   font-family: var(--mono);

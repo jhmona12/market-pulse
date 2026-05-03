@@ -4,6 +4,8 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const maxTickers = Number.parseInt(process.env.MAX_TICKERS || "0", 10);
+const articlesPerSource = Number.parseInt(process.env.SOURCE_ARTICLES_PER_SOURCE || "3", 10);
+const maxArticleCandidates = Number.parseInt(process.env.SOURCE_ARTICLE_CANDIDATES || "10", 10);
 const today = new Date();
 const startDate = new Date(today);
 startDate.setDate(startDate.getDate() - 430);
@@ -90,34 +92,239 @@ function parseMarkdownSources(markdown) {
 }
 
 function decodeHtml(value) {
-  return value
-    .replaceAll("&amp;", "&")
-    .replaceAll("&quot;", "\"")
-    .replaceAll("&#39;", "'")
-    .replaceAll("&nbsp;", " ")
-    .replaceAll("&lt;", "<")
-    .replaceAll("&gt;", ">");
+  let decoded = value;
+  for (let index = 0; index < 3; index += 1) {
+    const next = decoded
+      .replaceAll("&amp;", "&")
+      .replaceAll("&quot;", "\"")
+      .replaceAll("&#39;", "'")
+      .replaceAll("&nbsp;", " ")
+      .replaceAll("&lt;", "<")
+      .replaceAll("&gt;", ">");
+    if (next === decoded) break;
+    decoded = next;
+  }
+  return decoded;
 }
 
 function stripTags(value) {
   return decodeHtml(value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
 }
 
+function attrValue(tag, name) {
+  return tag.match(new RegExp(`${name}\\s*=\\s*["']([^"']+)["']`, "i"))?.[1] || "";
+}
+
+function metaContent(html, names) {
+  const lowered = names.map((name) => name.toLowerCase());
+  for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
+    const tag = match[0];
+    const property = attrValue(tag, "property").toLowerCase();
+    const name = attrValue(tag, "name").toLowerCase();
+    const itemprop = attrValue(tag, "itemprop").toLowerCase();
+    if (lowered.includes(property) || lowered.includes(name) || lowered.includes(itemprop)) {
+      return attrValue(tag, "content");
+    }
+  }
+  return "";
+}
+
+function titleFromHtml(html, fallback) {
+  return stripTags(
+    metaContent(html, ["og:title", "twitter:title", "headline"]) ||
+      html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ||
+      html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ||
+      fallback
+  ).slice(0, 160);
+}
+
+function summaryFromHtml(html, fallback) {
+  return stripTags(
+    metaContent(html, ["description", "og:description", "twitter:description"]) ||
+      html.match(/<p[^>]*>([\s\S]*?)<\/p>/i)?.[1] ||
+      fallback
+  ).slice(0, 320);
+}
+
+function extractJsonLdDates(html) {
+  const dates = [];
+  for (const match of html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    try {
+      const parsed = JSON.parse(stripTags(match[1]));
+      const nodes = Array.isArray(parsed) ? parsed : [parsed, ...(parsed["@graph"] || [])];
+      nodes.forEach((node) => {
+        const value = node?.datePublished || node?.dateModified || node?.uploadDate;
+        if (value) dates.push(value);
+      });
+    } catch {
+      // Some publishers include invalid JSON-LD; date meta tags still cover those pages.
+    }
+  }
+  return dates;
+}
+
+function normalizeDate(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  if (date.getFullYear() < 2000 || date.getFullYear() > today.getFullYear() + 1) return null;
+  return date.toISOString();
+}
+
+function publishedDateFromHtml(html, fallbackText = "") {
+  const candidates = [
+    metaContent(html, [
+      "article:published_time",
+      "datePublished",
+      "date",
+      "publishdate",
+      "pubdate",
+      "sailthru.date",
+      "parsely-pub-date",
+      "dc.date",
+      "dc.date.issued"
+    ]),
+    html.match(/<time[^>]+datetime=["']([^"']+)["'][^>]*>/i)?.[1],
+    ...extractJsonLdDates(html)
+  ];
+
+  const textDate = fallbackText.match(/\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+\d{1,2},\s+20\d{2}\b/i)?.[0];
+  if (textDate) candidates.push(textDate);
+
+  for (const candidate of candidates) {
+    const normalized = normalizeDate(candidate);
+    if (normalized) return normalized;
+  }
+  return null;
+}
+
+function visibleTextFromHtml(html) {
+  const withoutNoise = html
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<nav[\s\S]*?<\/nav>/gi, " ")
+    .replace(/<footer[\s\S]*?<\/footer>/gi, " ")
+    .replace(/<header[\s\S]*?<\/header>/gi, " ");
+  return stripTags(withoutNoise).replace(/\s+/g, " ").trim();
+}
+
+function sameHostOrSubdomain(sourceHost, candidateHost) {
+  return candidateHost === sourceHost || candidateHost.endsWith(`.${sourceHost}`) || sourceHost.endsWith(`.${candidateHost}`);
+}
+
+function articleScore(url, text, source) {
+  const haystack = `${url.pathname} ${url.search} ${text}`.toLowerCase();
+  let score = 0;
+  if (/(commentary|insight|research|market|outlook|weekly|capital-market|strategy|economic|macro|article|blog)/i.test(haystack)) score += 8;
+  if (/(login|sign-in|privacy|terms|careers|contact|subscribe|podcast|webinar|event|video|pdf|mailto|javascript|archive|award|recognition|about|account|solution|product|fund|529|college|advisor|client|why-|alternative-investments|benefits-of|financial-plan|personal-finance|retirement|estate-planning)/i.test(haystack)) score -= 10;
+  if (/20\d{2}[/-]\d{1,2}[/-]\d{1,2}|\d{1,2}[/-]\d{1,2}[/-]20\d{2}/.test(haystack)) score += 5;
+  if (haystack.includes(source.name.toLowerCase().split(" ")[0])) score += 1;
+  if (url.pathname.split("/").filter(Boolean).length >= 2) score += 2;
+  if (url.pathname === "/" || url.hash) score -= 3;
+  return score;
+}
+
+function extractArticleCandidates(html, source) {
+  const sourceUrl = new URL(source.url);
+  const seen = new Set();
+  const candidates = [];
+
+  for (const match of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
+    const href = attrValue(match[1], "href");
+    if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("javascript:")) continue;
+
+    let url;
+    try {
+      url = new URL(decodeHtml(href), sourceUrl);
+    } catch {
+      continue;
+    }
+
+    url.hash = "";
+    if (!["http:", "https:"].includes(url.protocol)) continue;
+    if (!sameHostOrSubdomain(sourceUrl.hostname.replace(/^www\./, ""), url.hostname.replace(/^www\./, ""))) continue;
+    if (seen.has(url.href)) continue;
+
+    const text = stripTags(match[2]).slice(0, 180);
+    const score = articleScore(url, text, source);
+    if (score < 4) continue;
+
+    seen.add(url.href);
+    candidates.push({ url: url.href, linkText: text, score });
+  }
+
+  return candidates
+    .sort((a, b) => b.score - a.score)
+    .slice(0, Math.max(articlesPerSource, maxArticleCandidates));
+}
+
+async function fetchArticle(source, candidate) {
+  const html = await fetchText(candidate.url, { timeout: 14000 });
+  const text = visibleTextFromHtml(html);
+  const title = titleFromHtml(html, candidate.linkText || source.name);
+  const summary = summaryFromHtml(html, source.notes);
+  const publishedAt = publishedDateFromHtml(html, `${candidate.linkText} ${text.slice(0, 800)}`);
+
+  return {
+    sourceName: source.name,
+    title,
+    url: candidate.url,
+    publishedAt,
+    summary,
+    excerpt: text.slice(0, 1800),
+    discoveredFrom: source.url
+  };
+}
+
+function sortArticlesNewestFirst(articles) {
+  return articles.sort((a, b) => {
+    const aTime = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+    const bTime = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+    if (aTime !== bTime) return bTime - aTime;
+    return a.title.localeCompare(b.title);
+  });
+}
+
 async function checkSource(source) {
   try {
     const html = await fetchText(source.url, { timeout: 12000 });
-    const title =
-      html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)?.[1] ||
-      html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ||
-      source.name;
-    const summary =
-      html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i)?.[1] ||
-      html.match(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i)?.[1] ||
-      source.notes;
+    const title = titleFromHtml(html, source.name);
+    const summary = summaryFromHtml(html, source.notes);
+    const landingArticle = {
+      sourceName: source.name,
+      title,
+      url: source.url,
+      publishedAt: publishedDateFromHtml(html),
+      summary,
+      excerpt: visibleTextFromHtml(html).slice(0, 1800),
+      discoveredFrom: source.url
+    };
+    const candidates = extractArticleCandidates(html, source);
+    const candidateArticles = await mapLimit(candidates, 3, async (candidate) => {
+      try {
+        return await fetchArticle(source, candidate);
+      } catch {
+        return null;
+      }
+    });
+    const articlesByUrl = new Map();
+    [landingArticle, ...candidateArticles.filter(Boolean)].forEach((article) => {
+      if (!article.url || articlesByUrl.has(article.url)) return;
+      articlesByUrl.set(article.url, article);
+    });
+    const sortedArticles = sortArticlesNewestFirst([...articlesByUrl.values()]);
+    const datedArticles = sortedArticles.filter((article) => article.publishedAt);
+    const articles = (
+      datedArticles.length
+        ? [...datedArticles, ...sortedArticles.filter((article) => !article.publishedAt && article.url === source.url)]
+        : sortedArticles
+    ).slice(0, articlesPerSource);
     return {
       ...source,
-      title: stripTags(title).slice(0, 140),
-      summary: stripTags(summary).slice(0, 220),
+      title,
+      summary,
+      articles,
+      articleCount: articles.length,
       ok: true
     };
   } catch (error) {
@@ -125,6 +332,8 @@ async function checkSource(source) {
       ...source,
       title: source.name,
       summary: `Source check failed: ${error.message}`,
+      articles: [],
+      articleCount: 0,
       ok: false
     };
   }
@@ -396,11 +605,12 @@ function buildNote({ opportunities, macro, sources }) {
   const above200Pct = Math.round((above200 / universeCount) * 100);
   const sourceHits = sources.filter((source) => source.ok).length;
   const failedSources = sources.length - sourceHits;
+  const articleHits = sources.reduce((total, source) => total + (source.articles?.length || 0), 0);
   const upcomingEvents = calendar.filter((event) => new Date(`${event.date}T23:59:59`) >= new Date()).slice(0, 3);
   const leaderText = leaders.map((item) => item.symbol).join(", ") || "none";
   const etfText = etfLeaders.map((item) => item.symbol).join(", ") || "none";
   const headline = `${breadth}% of screened names are above both 50-day and 200-day averages; top-ranked setups: ${leaderText}.`;
-  const body = `The daily setup is based on end-of-day data across ${universeCount} S&P 500 constituents and major ETFs. ${above50Pct}% are above the 50-day average, ${above200Pct}% are above the 200-day average, and ${breadth}% are above both. The highest-ranked opportunities are ${leaderText}. ETF confirmation leaders are ${etfText}. ${cleanCandidates} names pass the clean-candidate filter, while ${extended} high-scoring names have RSI above 76. ${sourceHits} public source pages were checked for the source tape.`;
+  const body = `The daily setup is based on end-of-day data across ${universeCount} S&P 500 constituents and major ETFs. ${above50Pct}% are above the 50-day average, ${above200Pct}% are above the 200-day average, and ${breadth}% are above both. The highest-ranked opportunities are ${leaderText}. ETF confirmation leaders are ${etfText}. ${cleanCandidates} names pass the clean-candidate filter, while ${extended} high-scoring names have RSI above 76. ${sourceHits} public source pages were checked and ${articleHits} recent articles were ingested for the source tape.`;
 
   return {
     headline,
@@ -410,7 +620,8 @@ function buildNote({ opportunities, macro, sources }) {
       `${above50Pct}% are above the 50-day average and ${above200Pct}% are above the 200-day average.`,
       leaders.length ? `Top score: ${leaders[0].symbol} at ${Math.round(leaders[0].score)} with ${leaders[0].tags.join(", ").toLowerCase() || "trend confirmation"}.` : "No ranked leaders were available.",
       `${cleanCandidates} names pass the clean-candidate filter; ${extended} high-scoring names are above the RSI ceiling.`,
-      `${macro.filter((item) => item.value !== "n/a").length} macro series refreshed from free FRED endpoints.`
+      `${macro.filter((item) => item.value !== "n/a").length} macro series refreshed from free FRED endpoints.`,
+      `${articleHits} recent article summaries were extracted from configured research and commentary sources.`
     ],
     watch: [
       `${extended} screened names have score >= 70 and RSI above 76.`,
@@ -551,14 +762,32 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
   if (!apiKey) return fallbackAiRecommendations("missing_api_key");
 
   const model = process.env.OPENAI_MODEL || defaultOpenAiModel;
+  const sourceArticles = sortArticlesNewestFirst(
+    sources
+      .flatMap((source) => source.articles || [])
+      .filter((article) => article.title && article.url)
+  ).slice(0, 36);
   const payload = {
     generatedAt: new Date().toISOString(),
     macro,
     upcomingEvents: calendar.slice(0, 8),
-    sourceTape: sources
-      .filter((source) => source.ok)
-      .slice(0, 12)
-      .map(({ name, url, category, trust, title, summary }) => ({ name, url, category, trust, title, summary })),
+    sourceTape: sourceArticles.map(({ sourceName, title, url, publishedAt, summary, excerpt }) => ({
+      sourceName,
+      title,
+      url,
+      publishedAt,
+      summary,
+      excerpt: excerpt?.slice(0, 1200) || ""
+    })),
+    sourceStatus: sources.map(({ name, url, category, trust, ok, articleCount, summary }) => ({
+      name,
+      url,
+      category,
+      trust,
+      ok,
+      articleCount,
+      summary
+    })),
     rulesRecommendations,
     sectorPerformance: sectorPerformance.map(({ sector, symbol, change1d, change5d, change30d, ytd, relative30d, above50, above200, rsi14 }) => ({
       sector,
@@ -807,7 +1036,11 @@ async function main() {
   console.log(`Wrote data/snapshot.json with ${opportunities.length} ranked instruments.`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+export { checkSource, extractArticleCandidates, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}
