@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morning Desk</title>
+    <link rel="stylesheet" href="styles.css?v=20260503-sector-performance" />
+  </head>
+  <body>
+    <div class="modal-backdrop" id="signalSetupModal" hidden>
+      <aside class="panel controls-panel" role="dialog" aria-modal="true" aria-labelledby="signalSetupTitle">
+        <div class="panel-title">
+          <span id="signalSetupTitle">Signal Setup</span>
+          <div class="modal-actions">
+            <button class="text-button" id="resetFilters">Reset</button>
+            <button class="icon-button" id="closeSignalSetup" title="Close signal setup" aria-label="Close signal setup">×</button>
+          </div>
+        </div>
+        <label class="control-row">
+          <span>Minimum score</span>
+          <input type="range" id="minScore" min="0" max="100" value="58" />
+          <strong id="minScoreValue">58</strong>
+        </label>
+        <label class="control-row">
+          <span>RSI ceiling</span>
+          <input type="range" id="rsiMax" min="55" max="90" value="76" />
+          <strong id="rsiMaxValue">76</strong>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" id="requireAbove50" checked />
+          <span>Price above 50-day average</span>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" id="requireAbove200" checked />
+          <span>Price above 200-day average</span>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" id="requireVolume" />
+          <span>Volume confirmation</span>
+        </label>
+        <label class="select-row">
+          <span>Universe</span>
+          <select id="universeSelect">
+            <option value="all">Stocks + ETFs</option>
+            <option value="stock">S&P 500 stocks</option>
+            <option value="etf">Major ETFs</option>
+          </select>
+        </label>
+      </aside>
+    </div>
+
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Personal Market Note</p>
+          <h1>Morning Desk</h1>
+        </div>
+        <div class="asof">
+          <span id="asOfDate">Loading</span>
+          <strong id="signalCount">0 signals</strong>
+          <button class="text-button setup-trigger" id="openSignalSetup">Signal Setup</button>
+        </div>
+      </header>
+
+      <section class="market-strip" id="marketStrip"></section>
+
+      <section class="grid">
+        <article class="panel note-panel">
+          <div class="panel-title">
+            <span>Daily Read</span>
+            <button class="icon-button" id="refreshView" title="Reload snapshot" aria-label="Reload snapshot">↻</button>
+          </div>
+          <h2 id="noteHeadline">Loading the tape</h2>
+          <p id="noteBody"></p>
+          <div class="note-columns">
+            <div>
+              <h3>What Changed</h3>
+              <ul id="changedList"></ul>
+            </div>
+            <div>
+              <h3>Watch Items</h3>
+              <ul id="watchList"></ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel ai-panel">
+          <div class="panel-title">
+            <span>AI Strategy Memo</span>
+            <span id="aiMeta">Macro + momentum</span>
+          </div>
+          <h2 id="aiHeadline">Waiting for AI synthesis</h2>
+          <p id="aiMacroView"></p>
+          <div class="ai-recs" id="aiRecommendationList"></div>
+          <div class="ai-notes">
+            <div>
+              <h3>Portfolio Notes</h3>
+              <ul id="aiPortfolioNotes"></ul>
+            </div>
+            <div>
+              <h3>Open Questions</h3>
+              <ul id="aiOpenQuestions"></ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel sector-panel">
+          <div class="panel-title">
+            <span>Sector Performance</span>
+            <span>SPDR ETF proxies</span>
+          </div>
+          <div class="sector-grid" id="sectorGrid"></div>
+        </article>
+
+        <article class="panel recommendations-panel">
+          <div class="panel-title">
+            <span>Desk Calls</span>
+            <span>Research actions</span>
+          </div>
+          <div class="recommendation-list" id="recommendationList"></div>
+        </article>
+
+        <article class="panel opportunities-panel">
+          <div class="panel-title">
+            <span>Momentum Book</span>
+            <span id="bookMeta">End-of-day</span>
+          </div>
+          <div class="opportunity-list" id="opportunityList"></div>
+        </article>
+
+        <article class="panel calendar-panel">
+          <div class="panel-title">
+            <span>Macro Calendar</span>
+            <span>Market movers</span>
+          </div>
+          <div id="calendarList" class="calendar-list"></div>
+        </article>
+
+        <article class="panel macro-panel">
+          <div class="panel-title">
+            <span>Macro Pulse</span>
+            <span>FRED + official releases</span>
+          </div>
+          <div id="macroGrid" class="macro-grid"></div>
+        </article>
+
+        <article class="panel source-panel">
+          <div class="panel-title">
+            <span>Source Tape</span>
+            <span id="sourceCount">0 sources</span>
+          </div>
+          <div id="sourceTape" class="source-tape"></div>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="app.js?v=20260503-sector-performance"></script>
+  </body>
+</html>

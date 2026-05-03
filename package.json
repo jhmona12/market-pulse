@@ -1,0 +1,11 @@
+{
+  "name": "morning-desk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "refresh": "node scripts/update-data.mjs",
+    "refresh:sample": "MAX_TICKERS=80 node scripts/update-data.mjs"
+  }
+}
