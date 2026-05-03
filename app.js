@@ -469,7 +469,7 @@ function renderSources() {
     return;
   }
 
-  sources.slice(0, 12).forEach((source) => {
+  sources.forEach((source) => {
     const item = document.createElement("div");
     item.className = "source-item";
     item.innerHTML = `
