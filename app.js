@@ -332,17 +332,27 @@ function renderAiRecommendations() {
     ai.recommendations.slice(0, 6).forEach((item) => {
       const card = document.createElement("article");
       card.className = "ai-rec";
+      const setup = item.setup || item.rationale || "";
+      const whyNow = item.whyNow || item.macroLink || "";
+      const macroEvidence = item.macroEvidence || item.macroLink || "";
+      const technicalEvidence = item.technicalEvidence || item.momentumEvidence || "";
+      const invalidation = item.invalidation || "";
       card.innerHTML = `
         <header>
           <div>
             <strong>${esc(item.symbol)} · ${esc(item.action)}</strong>
-            <small>${esc(item.macroLink || "")}</small>
+            <small>${esc(whyNow)}</small>
           </div>
           <span class="conviction">${esc(item.conviction || "Review")}</span>
         </header>
-        <p>${esc(item.rationale || "")}</p>
-        <small><strong>Momentum:</strong> ${esc(item.momentumEvidence || "")}</small>
+        <p>${esc(setup)}</p>
+        <div class="ai-evidence">
+          <small><strong>Macro:</strong> ${esc(macroEvidence)}</small>
+          <small><strong>Technical:</strong> ${esc(technicalEvidence)}</small>
+        </div>
         <small><strong>Risk:</strong> ${esc(item.risk || "")}</small>
+        ${invalidation ? `<small><strong>Invalidation:</strong> ${esc(invalidation)}</small>` : ""}
+        ${item.sourceRefs?.length ? `<div class="source-ref-row">${item.sourceRefs.map((ref) => `<span>${esc(ref)}</span>`).join("")}</div>` : ""}
       `;
       list.appendChild(card);
     });

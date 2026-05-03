@@ -767,18 +767,30 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       .flatMap((source) => source.articles || [])
       .filter((article) => article.title && article.url)
   ).slice(0, 36);
+  const sourceTape = sourceArticles.map(({ sourceName, title, url, publishedAt, summary, excerpt }, index) => ({
+    id: `S${index + 1}`,
+    sourceName,
+    title,
+    url,
+    publishedAt,
+    summary,
+    excerpt: excerpt?.slice(0, 1200) || ""
+  }));
+  const validSymbols = [
+    ...new Set([
+      ...opportunities.slice(0, 40).map((item) => item.symbol),
+      ...opportunities.filter((item) => item.type === "etf").slice(0, 15).map((item) => item.symbol),
+      ...rulesRecommendations.map((item) => item.symbol)
+    ])
+  ].filter(Boolean);
+  const sourceRefSchema = sourceTape.length
+    ? { type: "string", enum: sourceTape.map((source) => source.id) }
+    : { type: "string" };
   const payload = {
     generatedAt: new Date().toISOString(),
     macro,
     upcomingEvents: calendar.slice(0, 8),
-    sourceTape: sourceArticles.map(({ sourceName, title, url, publishedAt, summary, excerpt }) => ({
-      sourceName,
-      title,
-      url,
-      publishedAt,
-      summary,
-      excerpt: excerpt?.slice(0, 1200) || ""
-    })),
+    sourceTape,
     sourceStatus: sources.map(({ name, url, category, trust, ok, articleCount, summary }) => ({
       name,
       url,
@@ -809,7 +821,8 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     etfMomentum: opportunities
       .filter((item) => item.type === "etf")
       .slice(0, 10)
-      .map(compactCandidate)
+      .map(compactCandidate),
+    validRecommendationSymbols: validSymbols
   };
 
   const requestBody = {
@@ -845,19 +858,39 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
               items: {
                 type: "object",
                 additionalProperties: false,
-                required: ["symbol", "action", "conviction", "rationale", "macroLink", "momentumEvidence", "risk", "sourceRefs"],
+                required: [
+                  "symbol",
+                  "action",
+                  "conviction",
+                  "setup",
+                  "whyNow",
+                  "rationale",
+                  "macroLink",
+                  "macroEvidence",
+                  "technicalEvidence",
+                  "momentumEvidence",
+                  "risk",
+                  "invalidation",
+                  "sourceRefs"
+                ],
                 properties: {
-                  symbol: { type: "string" },
+                  symbol: validSymbols.length ? { type: "string", enum: validSymbols } : { type: "string" },
                   action: { type: "string" },
                   conviction: { type: "string", enum: ["High", "Medium", "Low", "Review"] },
+                  setup: { type: "string" },
+                  whyNow: { type: "string" },
                   rationale: { type: "string" },
                   macroLink: { type: "string" },
+                  macroEvidence: { type: "string" },
+                  technicalEvidence: { type: "string" },
                   momentumEvidence: { type: "string" },
                   risk: { type: "string" },
+                  invalidation: { type: "string" },
                   sourceRefs: {
                     type: "array",
+                    minItems: sourceTape.length ? 1 : 0,
                     maxItems: 4,
-                    items: { type: "string" }
+                    items: sourceRefSchema
                   }
                 }
               }
@@ -877,7 +910,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
             sourceRefs: {
               type: "array",
               maxItems: 8,
-              items: { type: "string" }
+              items: sourceRefSchema
             }
           }
         }

@@ -43,11 +43,11 @@ The dashboard has two recommendation layers. The first is rules-based: it summar
 - `Watch`: close to qualifying, but needs confirmation.
 - `Risk`: strong momentum but potentially crowded or extended.
 
-The second layer is optional AI synthesis. When `OPENAI_API_KEY` is configured, the refresh script asks the model to connect macro indicators, upcoming catalysts, public source summaries, ETF momentum, and individual company momentum into a structured strategy memo.
+The second layer is optional AI synthesis. When `OPENAI_API_KEY` is configured, the refresh script asks the model to connect macro indicators, upcoming catalysts, recent publication articles, ETF momentum, and individual company momentum into a structured strategy memo.
 
 ## AI Strategy Memo
 
-The dashboard can also generate an AI recommendation section that combines macro indicators, public source summaries, upcoming events, ETF momentum, and individual company momentum.
+The dashboard can also generate an AI recommendation section that combines macro indicators, recent source articles, upcoming events, ETF momentum, and individual company momentum. Recommendations are constrained to ticker symbols in the screened momentum universe and must separate setup, why-now, macro evidence, technical evidence, risk, and invalidation.
 
 Create a local `.env` file:
 
