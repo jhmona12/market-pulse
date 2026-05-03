@@ -91,3 +91,15 @@ The project is intentionally simple to publish:
 - Generated dashboard data: `data/snapshot.json`
 
 Before pushing publicly, review whether you want to commit `data/snapshot.json`. Keeping it committed makes the static dashboard work immediately on GitHub Pages. Excluding it keeps generated market data out of the repo, but then a deployment workflow needs to run the refresh script.
+
+## Public Website
+
+The static dashboard is deployed with GitHub Pages from `.github/workflows/pages.yml`.
+
+Public URL:
+
+```text
+https://jhmona12.github.io/market-pulse/
+```
+
+Market data refreshes on weekdays at `12:00 UTC` through `.github/workflows/refresh-data.yml`. The workflow uses the repository secret `OPENAI_API_KEY`, writes a fresh `data/snapshot.json`, and commits that snapshot back to `main`.
