@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Morning Desk</title>
-    <link rel="stylesheet" href="styles.css?v=20260504-avoid-marketcap" />
+    <link rel="stylesheet" href="styles.css?v=20260504-ticker-lab" />
   </head>
   <body>
     <main class="shell">
@@ -25,6 +25,7 @@
         <a href="#sector-performance">Sectors</a>
         <a href="#desk-calls">Desk Calls</a>
         <a href="#momentum-book">Momentum</a>
+        <a href="#ticker-lab" id="tickerLabNav" hidden>Ticker Lab</a>
         <a href="#stay-away">Stay Away</a>
         <a href="#macro-calendar">Calendar</a>
         <a href="#macro-pulse">Macro</a>
@@ -97,6 +98,22 @@
           <div class="opportunity-list" id="opportunityList"></div>
         </article>
 
+        <article class="panel ticker-lab-panel" id="ticker-lab" hidden>
+          <div class="panel-title">
+            <span>Ticker Lab</span>
+            <span id="tickerLabMeta">Local only</span>
+          </div>
+          <form id="tickerLabForm" class="ticker-lab-form">
+            <label for="tickerLabInput">Tickers</label>
+            <textarea id="tickerLabInput" rows="4" placeholder="AAPL MSFT, TSM, 7203.T"></textarea>
+            <div class="ticker-lab-actions">
+              <button class="text-button" type="submit" id="tickerLabSubmit">Score Tickers</button>
+              <span id="tickerLabStatus">Paste symbols separated by spaces, commas, or lines.</span>
+            </div>
+          </form>
+          <div id="tickerLabResults" class="ticker-lab-results"></div>
+        </article>
+
         <article class="panel avoid-panel" id="stay-away">
           <div class="panel-title">
             <span>Stay Away</span>
@@ -133,6 +150,6 @@
       </section>
     </main>
 
-    <script type="module" src="app.js?v=20260504-source-labels"></script>
+    <script type="module" src="app.js?v=20260504-ticker-lab"></script>
   </body>
 </html>

@@ -102,7 +102,10 @@ def fetch_text(url: str, timeout: int = 30) -> str:
 
 
 def yahoo_symbol(symbol: str) -> str:
-    return symbol.upper().replace(".", "-")
+    normalized = symbol.upper().strip()
+    if re.match(r"^[A-Z]{1,5}\.[A-Z]$", normalized):
+        return normalized.replace(".", "-")
+    return normalized
 
 
 def strip_html(value: str) -> str:

@@ -342,6 +342,7 @@ li {
 .ai-panel,
 .sector-panel,
 .avoid-panel,
+.ticker-lab-panel,
 .opportunities-panel {
   grid-column: 1 / -1;
 }
@@ -356,6 +357,7 @@ li {
 .ai-rec,
 .avoid-card,
 .avoid-sector,
+.ticker-result,
 .recommendation,
 .opportunity,
 .event,
@@ -451,6 +453,7 @@ li {
 
 .ai-recs,
 .avoid-list,
+.ticker-result-grid,
 .recommendation-list,
 .opportunity-list {
   display: grid;
@@ -523,6 +526,106 @@ li {
   font-family: var(--mono);
   font-weight: 900;
   text-align: center;
+}
+
+.ticker-lab-form {
+  display: grid;
+  gap: 10px;
+}
+
+.ticker-lab-form label {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.ticker-lab-form textarea {
+  width: 100%;
+  min-height: 108px;
+  resize: vertical;
+  border: 1px solid rgba(79, 216, 255, 0.2);
+  border-radius: 5px;
+  color: var(--ink);
+  background: rgba(3, 8, 6, 0.86);
+  padding: 12px;
+  font: 0.95rem/1.45 var(--mono);
+}
+
+.ticker-lab-form textarea:focus {
+  border-color: rgba(57, 255, 136, 0.72);
+  outline: none;
+}
+
+.ticker-lab-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.text-button:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
+.ticker-lab-results {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.ticker-lab-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+.ticker-lab-summary strong {
+  color: var(--accent);
+}
+
+.ticker-result {
+  display: grid;
+  gap: 10px;
+  min-height: 250px;
+  padding: 14px;
+}
+
+.ticker-result header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ticker-result strong {
+  display: block;
+  font-family: var(--mono);
+}
+
+.ticker-result span,
+.ticker-result small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.ticker-result p {
+  margin: 0;
+  color: #d7eadf;
+  line-height: 1.42;
+}
+
+.methodology-notes {
+  border: 1px solid rgba(79, 216, 255, 0.16);
+  border-radius: 5px;
+  padding: 12px;
+  background: rgba(79, 216, 255, 0.035);
 }
 
 .ai-rec {
@@ -818,6 +921,7 @@ li {
 	  .ai-recs,
 	  .avoid-list,
 	  .avoid-sector-list,
+	  .ticker-result-grid,
 	  .recommendation-list {
 	    grid-template-columns: 1fr;
 	  }

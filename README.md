@@ -45,6 +45,20 @@ Then open:
 http://localhost:4173
 ```
 
+For the private local Ticker Lab, start the local API server instead:
+
+```bash
+npm run dev:local
+```
+
+Then open:
+
+```text
+http://localhost:4173
+```
+
+The Ticker Lab section only appears when the local API is running. It is hidden on the public GitHub Pages site because GitHub Pages cannot run the local model API.
+
 If port `4173` is already in use, choose another port:
 
 ```bash
@@ -178,6 +192,34 @@ The screener ranks S&P 500 stocks and selected ETFs using end-of-day technical m
 - Proximity to recent highs
 
 The dashboard displays the top model-ranked and rules-confirmed momentum names directly. Screening thresholds live in the refresh code/model pipeline rather than in a floating UI control.
+
+## Private Ticker Lab
+
+Ticker Lab is a local-only workflow for scoring pasted tickers against the current S&P 500 reference universe.
+
+When `npm run dev:local` is running, the dashboard shows a Ticker Lab section where you can paste symbols separated by spaces, commas, semicolons, or new lines. The browser sends those symbols to the local endpoint:
+
+```text
+POST /api/ticker-lab/score
+```
+
+The local server runs:
+
+```bash
+.venv-model/bin/python scripts/modeling/score_live_rank_model.py --focus-symbols "AAPL,TSM"
+```
+
+The scorer:
+
+- Fetches current S&P 500 price history, SPY, sector ETFs, and the pasted focus tickers
+- Scores the focus tickers with the same production XGBoost rank model
+- Compares each focus ticker's model score against the S&P 500 reference scores
+- Returns S&P rank, percentile, model score, trend, RSI, relative return versus SPY, sector context, model reasons, and risk flags
+- Infers a sector proxy for non-S&P tickers using trailing return correlation to SPDR sector ETFs
+
+Ticker Lab output is written under `data/ticker-lab/`, which is ignored by git. The feature is structured so it can later be exposed publicly behind a real backend, but it is not available from the static GitHub Pages deployment.
+
+Important caveat: non-U.S. and exchange-suffix tickers may be less comparable to S&P 500 stocks because currency, trading calendar, market hours, and volume conventions can differ.
 
 ## Scheduled Refresh
 
@@ -442,6 +484,7 @@ index.html                         Static dashboard shell
 styles.css                         Dashboard styling
 app.js                             Browser rendering logic
 scripts/update-data.mjs            Data refresh, source ingestion, screening, AI call
+scripts/local-dashboard-server.mjs Local-only static server and Ticker Lab API
 config/news-sources.md             Editable public source registry
 config/universe.json               ETF and fallback universe configuration
 config/ai-recommendation-prompt.md AI memo prompt

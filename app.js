@@ -161,7 +161,15 @@ const fallbackSnapshot = {
 };
 
 const state = {
-  snapshot: fallbackSnapshot
+  snapshot: fallbackSnapshot,
+  tickerLab: {
+    enabled: false,
+    loading: false,
+    status: "",
+    result: null,
+    error: null,
+    maxTickers: 25
+  }
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -254,6 +262,34 @@ function sourceRefLabel(ref, symbol, researchSources) {
 
 function sourceRefLabels(refs, symbol, researchSources) {
   return [...new Set((refs || []).map((ref) => sourceRefLabel(ref, symbol, researchSources)).filter(Boolean))];
+}
+
+function parseTickerInput(value) {
+  return [
+    ...new Set(
+      String(value || "")
+        .replace(/[,\n\r\t;]+/g, " ")
+        .split(/\s+/)
+        .map((token) => token.trim().toUpperCase().replace(/^\$/, ""))
+        .filter(Boolean)
+        .filter((token) => /^[A-Z0-9][A-Z0-9.^=\-]{0,18}$/.test(token))
+    )
+  ].slice(0, state.tickerLab.maxTickers || 25);
+}
+
+function outlookForTicker(item) {
+  const percentile = Number(item.sp500Percentile ?? item.modelPercentile ?? 0);
+  const riskCount = item.riskFlags?.length || 0;
+  if (percentile >= 80 && riskCount <= 1 && item.above50 && item.above200) return "Favorable";
+  if (percentile >= 45 && riskCount <= 2) return "Mixed";
+  return "Weak";
+}
+
+function tickerNarrative(item) {
+  const rank = item.sp500Rank ? `#${item.sp500Rank} of ${item.sp500UniverseCount}` : `#${item.modelRank} of ${item.modelUniverseCount}`;
+  const trend = item.above50 && item.above200 ? "above both 50-day and 200-day trend lines" : item.above200 ? "above the 200-day trend line but missing shorter-term confirmation" : "below at least one major trend line";
+  const relative = Number.isFinite(Number(item.relativeReturn60VsSpy)) ? `${pct(item.relativeReturn60VsSpy)} over 60 days versus SPY` : "relative-strength data is unavailable";
+  return `${item.symbol} ranks ${rank} versus the S&P 500 reference universe, with ${relative}; it is ${trend}.`;
 }
 
 function money(value) {
@@ -563,6 +599,93 @@ function renderOpportunities() {
   });
 }
 
+function renderTickerLab() {
+  const panel = $("#ticker-lab");
+  const nav = $("#tickerLabNav");
+  if (!panel) return;
+
+  panel.hidden = !state.tickerLab.enabled;
+  if (nav) nav.hidden = !state.tickerLab.enabled;
+  if (!state.tickerLab.enabled) return;
+
+  const submit = $("#tickerLabSubmit");
+  const status = $("#tickerLabStatus");
+  const meta = $("#tickerLabMeta");
+  const results = $("#tickerLabResults");
+  submit.disabled = state.tickerLab.loading;
+  meta.textContent = state.tickerLab.loading ? "Scoring model" : "Local only";
+  status.textContent = state.tickerLab.status || `Paste up to ${state.tickerLab.maxTickers} symbols separated by spaces, commas, or lines.`;
+  results.innerHTML = "";
+
+  if (state.tickerLab.error) {
+    results.innerHTML = `<div class="empty-state">${esc(state.tickerLab.error)}</div>`;
+    return;
+  }
+
+  const payload = state.tickerLab.result;
+  if (!payload) return;
+
+  const summary = document.createElement("div");
+  summary.className = "ticker-lab-summary";
+  summary.innerHTML = `
+    <strong>${esc(payload.results?.length || 0)} scored</strong>
+    <span>As of ${esc(payload.asOfDate || "latest close")} · ${esc(payload.referenceUniverse || "S&P 500")} (${esc(payload.referenceUniverseCount || 0)} names)</span>
+  `;
+  results.appendChild(summary);
+
+  if (payload.unscoredSymbols?.length || Object.keys(payload.failures || {}).length) {
+    const warning = document.createElement("div");
+    warning.className = "empty-state";
+    const failures = Object.entries(payload.failures || {}).map(([symbol, error]) => `${symbol}: ${error}`);
+    warning.textContent = [
+      payload.unscoredSymbols?.length ? `Unscored: ${payload.unscoredSymbols.join(", ")}` : "",
+      failures.length ? `Failures: ${failures.join(" | ")}` : ""
+    ].filter(Boolean).join(" ");
+    results.appendChild(warning);
+  }
+
+  const grid = document.createElement("div");
+  grid.className = "ticker-result-grid";
+  (payload.results || []).forEach((item) => {
+    const card = document.createElement("article");
+    card.className = "ticker-result";
+    const outlook = outlookForTicker(item);
+    const sectorNote =
+      item.sectorSource === "return_correlation"
+        ? `${item.sector} proxy via ${item.sectorEtf}; ${Number(item.sectorCorrelation || 0).toFixed(2)} correlation`
+        : item.sector || "Sector unavailable";
+    card.innerHTML = `
+      <header>
+        <div>
+          <strong>${esc(item.symbol)}</strong>
+          <span>${esc(item.name || item.symbol)}</span>
+        </div>
+        <span class="conviction">${esc(outlook)}</span>
+      </header>
+      <p>${esc(tickerNarrative(item))}</p>
+      <div class="signal-grid">
+        <div><span>S&P rank</span><strong>#${esc(item.sp500Rank || item.modelRank)} / ${esc(item.sp500UniverseCount || item.modelUniverseCount)}</strong></div>
+        <div><span>Percentile</span><strong>${Number(item.sp500Percentile ?? item.modelPercentile ?? 0).toFixed(1)}%</strong></div>
+        <div><span>60D vs SPY</span><strong>${pct(item.relativeReturn60VsSpy)}</strong></div>
+        <div><span>RSI 14</span><strong>${Number(item.rsi14 || 0).toFixed(0)}</strong></div>
+      </div>
+      <small><strong>Sector context:</strong> ${esc(sectorNote)}</small>
+      <small><strong>Model score:</strong> ${Number(item.modelScore || 0).toFixed(6)} · <strong>Close:</strong> ${money(item.close)}</small>
+      ${item.modelReasons?.length ? `<div class="tags">${item.modelReasons.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>` : ""}
+      ${item.riskFlags?.length ? `<small><strong>Risk flags:</strong> ${esc(item.riskFlags.join("; "))}</small>` : ""}
+    `;
+    grid.appendChild(card);
+  });
+  results.appendChild(grid);
+
+  if (payload.methodologyNotes?.length) {
+    const notes = document.createElement("div");
+    notes.className = "methodology-notes";
+    notes.innerHTML = `<h3>Methodology Notes</h3><ul>${payload.methodologyNotes.map((note) => `<li>${esc(note)}</li>`).join("")}</ul>`;
+    results.appendChild(notes);
+  }
+}
+
 function renderCalendar() {
   const target = $("#calendarList");
   target.innerHTML = "";
@@ -647,6 +770,7 @@ function render() {
   renderSectorPerformance();
   renderRecommendations();
   renderOpportunities();
+  renderTickerLab();
   renderCalendar();
   renderMacro();
   renderSources();
@@ -654,6 +778,57 @@ function render() {
 
 function wireControls() {
   on("#refreshView", "click", loadSnapshot);
+  on("#tickerLabForm", "submit", submitTickerLab);
+}
+
+async function checkTickerLabAvailability() {
+  try {
+    const response = await fetch(`/api/ticker-lab/status?ts=${Date.now()}`);
+    if (!response.ok) throw new Error("Ticker Lab API unavailable");
+    const payload = await response.json();
+    state.tickerLab.enabled = Boolean(payload.enabled);
+    state.tickerLab.maxTickers = payload.maxTickers || 25;
+    state.tickerLab.status = `Local model API ready. Paste up to ${state.tickerLab.maxTickers} symbols.`;
+  } catch {
+    state.tickerLab.enabled = false;
+  }
+  renderTickerLab();
+}
+
+async function submitTickerLab(event) {
+  event.preventDefault();
+  const input = $("#tickerLabInput");
+  const tickers = parseTickerInput(input?.value || "");
+  if (!tickers.length) {
+    state.tickerLab.error = "Paste at least one valid ticker symbol.";
+    state.tickerLab.result = null;
+    renderTickerLab();
+    return;
+  }
+
+  state.tickerLab.loading = true;
+  state.tickerLab.error = null;
+  state.tickerLab.result = null;
+  state.tickerLab.status = `Scoring ${tickers.join(", ")} against the S&P 500 reference universe. This can take about a minute.`;
+  renderTickerLab();
+
+  try {
+    const response = await fetch("/api/ticker-lab/score", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ tickers })
+    });
+    const payload = await response.json();
+    if (!response.ok || payload.status === "error") throw new Error(payload.error || "Ticker scoring failed.");
+    state.tickerLab.result = payload;
+    state.tickerLab.status = `Scored ${payload.results?.length || 0} of ${tickers.length} requested ticker${tickers.length === 1 ? "" : "s"}.`;
+  } catch (error) {
+    state.tickerLab.error = error.message;
+    state.tickerLab.status = "Ticker Lab scoring failed.";
+  } finally {
+    state.tickerLab.loading = false;
+    renderTickerLab();
+  }
 }
 
 async function loadSnapshot() {
@@ -670,3 +845,4 @@ async function loadSnapshot() {
 
 wireControls();
 loadSnapshot();
+checkTickerLabAvailability();
