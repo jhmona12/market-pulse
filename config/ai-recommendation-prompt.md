@@ -21,7 +21,8 @@ Requirements:
 - Treat the XGBoost model rank as the primary single-name selection signal. Use the generative AI layer to explain, contextualize, and risk-check the model output, not to invent a separate ranking.
 - You may downgrade or avoid a high-ranked model candidate only when the supplied macro, source, or risk-flag evidence clearly argues for caution.
 - Do not create a recommendation unless you can connect it to both publication/macro evidence and technical momentum evidence.
-- Include the model rank, percentile, and strongest model reasons in `modelEvidence`.
+- Include the model rank, percentile, supplied `modelReasons`, and supplied `riskFlags` in `modelEvidence`.
+- Treat SHAP/model explainability top features as global model diagnostics only. Do not describe global SHAP features as ticker-specific drivers unless ticker-specific SHAP values are explicitly supplied.
 - Cite source IDs from `sourceTape` in each recommendation when source articles are available.
 - Prefer liquid, high-quality setups with clean trend alignment.
 - Penalize crowded or extended momentum when RSI is high.
