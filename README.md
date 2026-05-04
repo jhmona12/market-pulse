@@ -230,6 +230,13 @@ To test whether raw macro fields are swamping the cross-sectional stock signal:
 .venv-model/bin/python scripts/modeling/backtest_model.py --predictions xgboost_spy14_no_macro_test_predictions.csv --output-name xgboost_spy14_no_macro_backtest
 ```
 
+To test whether extreme future-return observations are making the classifier brittle:
+
+```bash
+.venv-model/bin/python scripts/modeling/train_xgboost_model.py --model-name xgboost_spy14_cap50 --train-excess-return-cap 0.50
+.venv-model/bin/python scripts/modeling/backtest_model.py --predictions xgboost_spy14_cap50_test_predictions.csv --output-name xgboost_spy14_cap50_backtest
+```
+
 The current feature set is v1 and intentionally excludes article/news features. It focuses on:
 
 - Momentum and trend

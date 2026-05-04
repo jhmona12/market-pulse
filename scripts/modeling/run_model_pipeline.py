@@ -20,6 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--skip-explain", action="store_true", help="Skip the post-training SHAP-style explanation report.")
     parser.add_argument("--include-macro", action="store_true", help="Include FRED macro observation-date features in the dataset.")
     parser.add_argument("--exclude-macro", action="store_true", help="Drop macro feature columns from the training matrix.")
+    parser.add_argument("--train-excess-return-cap", type=float, default=None, help="Drop train/validation rows with abs excess return above this threshold.")
     parser.add_argument("--skip-quality-report", action="store_true", help="Skip data quality report generation.")
     return parser.parse_args()
 
@@ -43,6 +44,8 @@ def main() -> None:
         train_args = ["scripts/modeling/train_xgboost_model.py", "--dataset", args.dataset_name, "--model-name", args.model_name]
         if args.exclude_macro:
             train_args.append("--exclude-macro")
+        if args.train_excess_return_cap is not None:
+            train_args.extend(["--train-excess-return-cap", str(args.train_excess_return_cap)])
         run_step(*train_args)
         if not args.skip_backtest:
             run_step(

@@ -37,6 +37,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--test-days", type=int, default=252, help="Approximate number of trading days to reserve for test.")
     parser.add_argument("--validation-days", type=int, default=252, help="Approximate number of trading days to reserve for validation.")
     parser.add_argument("--exclude-macro", action="store_true", help="Drop raw macro feature columns from the training matrix.")
+    parser.add_argument(
+        "--train-excess-return-cap",
+        type=float,
+        default=None,
+        help="Drop train/validation rows where abs(excess_return_14d) is above this threshold. Test rows are left untouched.",
+    )
     return parser.parse_args()
 
 
@@ -108,6 +114,15 @@ def main() -> None:
     train = dataset[dataset["date"] < validation_start].copy()
     validation = dataset[(dataset["date"] >= validation_start) & (dataset["date"] < test_start)].copy()
     test = dataset[dataset["date"] >= test_start].copy()
+    dropped_train_outliers = 0
+    dropped_validation_outliers = 0
+    if args.train_excess_return_cap is not None:
+        train_keep = train["excess_return_14d"].abs() <= args.train_excess_return_cap
+        validation_keep = validation["excess_return_14d"].abs() <= args.train_excess_return_cap
+        dropped_train_outliers = int((~train_keep).sum())
+        dropped_validation_outliers = int((~validation_keep).sum())
+        train = train[train_keep].copy()
+        validation = validation[validation_keep].copy()
 
     feature_columns = [column for column in dataset.columns if column not in IDENTITY_COLUMNS]
     if args.exclude_macro:
@@ -193,6 +208,9 @@ def main() -> None:
         "train_rows": int(len(train)),
         "validation_rows": int(len(validation)),
         "test_rows": int(len(test)),
+        "dropped_train_outliers": dropped_train_outliers,
+        "dropped_validation_outliers": dropped_validation_outliers,
+        "train_excess_return_cap": args.train_excess_return_cap,
         "validation_start": validation_start.date().isoformat(),
         "test_start": test_start.date().isoformat(),
         "feature_count": len(feature_columns),
