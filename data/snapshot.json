@@ -1,19 +1,20 @@
 {
-  "generatedAt": "2026-05-03T19:30:40.676Z",
+  "generatedAt": "2026-05-04T00:16:22.902Z",
   "note": {
     "headline": "46% of screened names are above both 50-day and 200-day averages; top-ranked setups: ADI, ANET, AVGO, CAT, HPE.",
-    "body": "The daily setup is based on end-of-day data across 533 S&P 500 constituents and major ETFs. 56% are above the 50-day average, 60% are above the 200-day average, and 46% are above both. The highest-ranked opportunities are ADI, ANET, AVGO, CAT, HPE. ETF confirmation leaders are XLK, EEM, VWO. 111 names pass the clean-candidate filter, while 36 high-scoring names have RSI above 76. 12 public source pages were checked for the source tape.",
+    "body": "The daily setup is based on end-of-day data across 533 S&P 500 constituents and major ETFs. 56% are above the 50-day average, 60% are above the 200-day average, and 46% are above both. The highest-ranked opportunities are ADI, ANET, AVGO, CAT, HPE. ETF confirmation leaders are XLK, EEM, VWO. 111 names pass the clean-candidate filter, while 36 high-scoring names have RSI above 76. 18 public source pages were checked and 42 recent articles were ingested for the source tape.",
     "changed": [
       "46% of screened instruments sit above both 50-day and 200-day moving averages.",
       "56% are above the 50-day average and 60% are above the 200-day average.",
       "Top score: ADI at 100 with fresh cross, major trend, beating spy, near highs.",
       "111 names pass the clean-candidate filter; 36 high-scoring names are above the RSI ceiling.",
-      "6 macro series refreshed from free FRED endpoints."
+      "6 macro series refreshed from free FRED endpoints.",
+      "42 recent article summaries were extracted from configured research and commentary sources."
     ],
     "watch": [
       "36 screened names have score >= 70 and RSI above 76.",
       "Next scheduled macro events: Employment Situation on 2026-05-08; Consumer Price Index on 2026-05-13; Producer Price Index on 2026-05-14.",
-      "1 of 13 configured source pages failed the latest source check."
+      "2 of 20 configured source pages failed the latest source check."
     ]
   },
   "aiRecommendations": {
@@ -21,98 +22,147 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 9841,
+      "inputTokens": 24414,
       "cachedInputTokens": 0,
-      "outputTokens": 1323,
+      "outputTokens": 1616,
       "reasoningTokens": 0,
-      "totalTokens": 11164,
-      "estimatedCostUsd": 0.001021,
+      "totalTokens": 26030,
+      "estimatedCostUsd": 0.001867,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
         "output": 0.4
       }
     },
-    "headline": "Macro backstop supports risk-on tilt; focus on high-conviction, clean-technical setups with room to run before key data releases",
-    "macroView": "- The upcoming high-importance data set includes Employment Situation (May 8), CPI (May 13), PPI (May 14), and FOMC rate decision (June 17/July 29). Expect elevated volatility around these prints. CPI and PCE/Nominal GDP signals in CPI index + GDP strength suggest sticky inflation backdrop but some relief if wage data softens. 10Y/2Y yields modestly off multi-month highs (10Y 4.40% down 2 bps, 2Y at 3.88% down 4 bps); unemployment nudged lower. Fed funds unchanged at 3.64% currently. Tanking or overruling macro catalysts would be driven by surprise CPI/PPI prints or a shift in FOMC rhetoric. Public macro tape stresses gradual tightening path versus data-dependent moves. Key risk is a policy surprise that derails the current risk-on posture. Upcoming Fed/BEA/BLS releases listed in source tape provide official macro context for entry/exit timing.",
+    "headline": "Tech leadership persists; selective momentum scans for ADI/ANET/AVGO/CAT/QCOM/GOOG/MU/MCHP/NXPI/ON/TXN among clean setups; avoid crowded RSI extremes",
+    "macroView": "Macro backdrop shows resilient U.S. growth signals with CPI up and GDP firm; upcoming high-importance data through mid-June (employment, CPI, PPI, GDP second estimate, FOMC decision). Rates modestly firmer; 10Y at 4.40% and 2Y at 3.88% with Fed funds unchanged. Tech and semis remain leadership, but elevated RSI in several names suggests selective entries.",
     "recommendations": [
       {
-        "symbol": "AD I",
-        "action": "Monitor for potential entry on pullback toward 50- or 20-day supports; prepare to initiate on a clean trend + volume pickup if RSI moderates below 75",
+        "symbol": "ADI",
+        "action": "Setup: Watch for pullback toward 50‑day or prior breakout area to re-enter long. If momentum improves on a dip with RSI not diverging, consider for long exposure.",
         "conviction": "High",
-        "rationale": "Macro: Semi-cap equipment and AI-driven demand backdrop could benefit semiconductor names as capex cycles show resilience amid inflation data. Momentum: ADI shows Fresh cross, Major trend, beating SPY, near highs; RSI 71 near cap; volume under 0.63x 20d avg suggests possible pullback setup with upside risk if market sustains. Risk: crowded long with RSI near highs; invalidation if daily RSI breaches 75-78 or if SPY declines on CPI surprises.",
-        "macroLink": "",
-        "momentumEvidence": "TopMomentum shows ADI with 20d/60d positive returns; RS relative to SPY +15.04%",
-        "risk": "RSI overbought; crowded long; price could roll over on CPI surprise",
+        "setup": "Fresh cross + major trend; above 50/100/200 days; volume below avg but improving",
+        "whyNow": "Tech leadership remains intact; 20D return +24.93%; RS vs SPY +15.04%; RSI 71 indicates still strong momentum but not exhausted.",
+        "rationale": "RSI elevated but breadth supportive; momentum signals remain positive; macro stability through data that could reinforce risk appetite.",
+        "macroLink": "S1/S2/S6",
+        "macroEvidence": "Rally supported by macro backdrop; upcoming CPI/PPI and employment data likely to influence rate expectations.",
+        "technicalEvidence": "Above‑average volume around cross; closeness to near highs; 20/60 day returns positive.",
+        "momentumEvidence": "Top momentum metric shows fresh cross, near highs, and strong RS vs SPY.",
+        "risk": "RSI approaching overbought threshold; potential for a pullback into 50‑day area.",
+        "invalidation": "Break below 50‑day/200‑day or RSI falls below 60 with negative price action.",
         "sourceRefs": [
-          "Metric Match: ADI from RulesRecommendations"
+          "S1",
+          "S2",
+          "S6"
         ]
       },
       {
         "symbol": "ANET",
-        "action": "Watch for slight pullback to 50-day or 20-day moving average; consider entry if volume confirms and RSI remains below 75",
+        "action": "Setup: await pullback toward prior breakout zone or consolidation; look for RS improvement with volume uptick before adding.",
         "conviction": "High",
-        "rationale": "Macro: Networking equipment demand remains supportive in an inflation backdrop; data-dependent Fed stance could keep risk appetite afloat. Momentum: ANET exhibits Fresh cross, Major trend, Beating SPY; RSI 69, close to highs but not extreme; volume 1.06x 20d avg supports participation.",
-        "macroLink": "",
-        "momentumEvidence": "ANET in TopMomentum with fresh cross and near highs; 20d return +36.33%",
-        "risk": "High RSI proximity to ceiling; potential pullback if tech sector rotates",
+        "setup": "Fresh cross; above 50/200 days; volume >20D average on rebound",
+        "whyNow": "20D return +36.33%; RS vs SPY +26.44%; RSI 69; still constructive.",
+        "rationale": "Semis leadership intact; clean trend with confirmation via volume and cross.",
+        "macroLink": "S1/S2",
+        "macroEvidence": "Macro backdrop favorable for tech hardware names; ISM/PMI data due with potential impact on demand expectations.",
+        "technicalEvidence": "Fresh cross signals; near highs; strong 60D return; volume uptick supports move.",
+        "momentumEvidence": "Extreme momentum in top lists; ANET among high-conviction names.",
+        "risk": "RSI near top; crowded long trade risk; monitor for distribution.",
+        "invalidation": "Deterioration via break below 50‑day with growing negative volume; RSI failure to hold 60.",
         "sourceRefs": [
-          "Metric Match: ANET from RulesRecommendations"
+          "S1",
+          "S2"
         ]
       },
       {
         "symbol": "AVGO",
-        "action": "Consider long bias on a pullback toward intermediate support with caution on RSI if approaching 70-75; avoid if RSI nears a classic extended zone",
+        "action": "Setup: wait for consolidation break above resistance with healthy volume; consider starter exposure if price holds above 50‑day and RSI stabilizes below 75.",
         "conviction": "High",
-        "rationale": "Macro: BroadSemiconductors benefitting from AI and data center growth; macro inflation data prints could sustain risk-on tilt.",
-        "macroLink": "",
-        "momentumEvidence": "AVGO: Fresh cross, Major trend; 20d return 33.93%; RSI 69; volume below 1x 20d avg suggesting potential for liquidity lift on a pullback",
-        "risk": "Momentum not without risk if tech leadership wanes; crowded name given high RS",
+        "setup": "Fresh cross; above 50/200 days; volume above 20D on breakout",
+        "whyNow": "20D return +33.93%; RS vs SPY +24.05%; RSI 69; momentum strong but not extreme.",
+        "rationale": "Semiconductor/infra signal remains supportive; price action aligned with macro backdrop.",
+        "macroLink": "S6",
+        "macroEvidence": "Bond yields firmer; ISM data risk; but tech capex cycles support AVGO exposure.",
+        "technicalEvidence": "Near highs with fresh cross; volume that supports continuation.",
+        "momentumEvidence": "Ranked highly in momentum lists; solid 20D/60D gains.",
+        "risk": "Setup can be crowded; watch for RSI to overshoot (>75).",
+        "invalidation": "Break below 50‑day with price/volume deterioration.",
         "sourceRefs": [
-          "TopMomentum: AVGO"
+          "S6"
+        ]
+      },
+      {
+        "symbol": "CAT",
+        "action": "Setup: wait for a clean pullback toward breakout zone with volume pickup; consider partial add if momentum stabilizes.",
+        "conviction": "High",
+        "setup": "Fresh cross; above 50/200 days; volume around 1.0x 20D",
+        "whyNow": "20D return +24.28%; RS vs SPY +14.40%; RSI 75 indicates strength near top.",
+        "rationale": "Industrial cyclical leader; price action recent cross supports continuation.",
+        "macroLink": "S4",
+        "macroEvidence": "GDP expansion, solid employment backdrop; industrial activity sensitive to capex cycles.",
+        "technicalEvidence": "Fresh cross; near highs; volume supported move.",
+        "momentumEvidence": "Top momentum list; near highs; extended RSI flagged.",
+        "risk": "Crowded long exposure; RSI near limit.",
+        "invalidation": "Break below 50/200 day with negative volume impulse.",
+        "sourceRefs": [
+          "S4"
         ]
       },
       {
         "symbol": "QCOM",
-        "action": "Prepare to add on a controlled dip with RSI still elevated but not extreme; target sub-80 RSI region if market supports",
+        "action": "Setup: patience for pullback to 50‑day or test of breakout level; only add if RSI stabilizes below 80 and volume confirms.",
         "conviction": "High",
-        "rationale": "Macro: AI/5G chipset demand backdrop; upcoming inflation and employment data could sustain tech capex optimism. Momentum: QCOM shows Extended RSI, RSI 88 in extended zone; near highs with 39.6/20d return; Volume 1.23x points to liquidity.",
-        "macroLink": "",
-        "momentumEvidence": "TopMomentum: QCOM with Fresh cross, Near highs, Extended RSI; return20 39.6%",
-        "risk": "RSI extended; risk of buy-the-dip failing if broader market weakens",
+        "setup": "Fresh cross; above 50/200 days; volume supportive",
+        "whyNow": "20D return +39.6%; RS vs SPY +29.71%; RSI 88 (extended) warns on further upside.",
+        "rationale": "Tech hardware/semis remain strong but avoid overbought entry.",
+        "macroLink": "S3/S6",
+        "macroEvidence": "Fears around credit cycle easing; macro landscape mixed but tech growth signals persist.",
+        "technicalEvidence": "Very strong momentum but RSI at 88 indicates crowdedness; need pause/decline.",
+        "momentumEvidence": "Extended RSI flag; near highs; volume support still present.",
+        "risk": "RSI extreme; risk of pullback to grant better entry.",
+        "invalidation": "RSI >90 or price fails last breakout with declining volume.",
         "sourceRefs": [
-          "ExtendedMomentum: QCOM"
+          "S3",
+          "S6"
         ]
       },
       {
         "symbol": "GOOG",
-        "action": "Avoid chasing at current levels given RSI 86; consider watching for a tactical pullback to support zones with volume confirmation",
+        "action": "Setup: avoid fresh add until RSI cools and price retraces toward the 50‑day; if RSI relaxes under 80 with volume pick-up, consider starter.",
         "conviction": "High",
-        "rationale": "Macro: AI and cloud computing cycle continues; but macro risk is elevated with CPI/PPI prints due soon. Momentum: GOOG shows Extended RSI and very high RSI; price near highs with volume support, but overbought risk elevated.",
-        "macroLink": "",
-        "momentumEvidence": "TopMomentum/ExtendedMomentum: GOOG RSI 86; 20d return 30.14%; Volume 1.57x; Near highs",
-        "risk": "RSI ceiling breached; potential pullback validates entry if price stabilizes",
+        "setup": "Fresh cross; above 50/200 days; volume expansion",
+        "whyNow": "RSI 86; 20D return +30.14%; RS vs SPY +20.26%; near highs.",
+        "rationale": "Large-cap tech leader; extended RSI warrants caution.",
+        "macroLink": "S3",
+        "macroEvidence": "Macro backdrop supportive for big platform names; high macro news flow risk around FOMC.",
+        "technicalEvidence": "Fresh cross; volume support; near highs; extended RSI.",
+        "momentumEvidence": "Top momentum list; extended RSI flagged as risk.",
+        "risk": "Crowded trade; RSI at limit.",
+        "invalidation": "Break below 50‑day with improving volume; RSI retreat below 75.",
         "sourceRefs": [
-          "TopMomentum: GOOG",
-          "ExtendedMomentum: GOOG"
+          "S3"
         ]
       }
     ],
     "portfolioNotes": [
-      "- Favor high-liquidity, high-quality names with clean trend alignment and manageable RSI.",
-      "- Be cautious on crowded momentum during upcoming macro prints; prefer entries with volume confirmation and near a pullback.",
-      "- Monitor for FOMC/Employment/CPI data shifts; adjust entries if price reacts unfavorably to data surprises.",
-      "- ETF overlays: XLK and QQQ show positive momentum and RSI extensions; use as macro-tilt ballast if single-name risk erupts.",
-      "- Hedge idea: consider light hedges or put predators if market shows signs of regime shift around key events."
+      "Monitor macro data cadence (May 8 employment, May 13 CPI, May 14 PPI) for risk-on/off shifts; FOMC on June 17 could recalibrate risk assets.",
+      "OpenQuestions():[]",
+      "sourceRefsExtForActions:[]",
+      "riskMgmtNotes: prioritize clean trends and avoid oversubscribed momentum."
     ],
     "openQuestions": [
-      "- Do we want explicit stop levels for each name based on intraday ATR bands?",
-      "- How will we size exposure given upcoming high-impact data events?",
-      "- Should we prioritize QQQ vs XLK exposure to manage dispersion within tech leadership?"
+      "Are there any conflicting macro signals between CPI vs GDP strength that could derail momentum in semis?",
+      "How will FOMC rate decision expectations influence tech/semis into week of June 17?"
     ],
     "sourceRefs": [
-      "Macro: Upcoming Events (BLS, BEA, Fed)",
-      "Momentum: TopMomentum/ExtendedMomentum data from dashboard"
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S6",
+      "S9",
+      "S15",
+      "S17"
     ]
   },
   "recommendations": [
@@ -8493,29 +8543,29 @@
       "name": "Realty Income",
       "type": "stock",
       "sector": "Real Estate",
-      "score": 75.6709761943108,
+      "score": 75.67097905196982,
       "close": 63.810001373291016,
       "changePct": -0.6693594408119177,
       "rsi14": 54.60036669021501,
       "volumeRatio": 0.8986060282569013,
       "return20": 3.013028147481588,
-      "return60": 3.4769303802930107,
+      "return60": 3.476936781449211,
       "above50": true,
       "above100": true,
       "above200": true,
       "recentCross": true,
       "relativeStrength": -6.870631586766121,
       "history": [
-        64.46458435058594,
+        64.46459197998047,
         63.87971878051758,
         64.35554504394531,
         63.53275680541992,
-        62.49189376831055,
-        62.09537124633789,
-        60.420066833496094,
+        62.49188995361328,
+        62.095367431640625,
+        60.42006301879883,
         60.32093048095703,
         59.934322357177734,
-        59.537803649902344,
+        59.53779983520508,
         59.745975494384766,
         60.16231918334961,
         60.618324279785156,
@@ -9600,10 +9650,10 @@
       "recentCross": true,
       "relativeStrength": -8.727903689338497,
       "history": [
-        78.55538177490234,
+        78.55537414550781,
         78.40687561035156,
         78.65437316894531,
-        79.0107650756836,
+        79.01077270507812,
         78.6048812866211,
         78.8622817993164,
         78.12968444824219,
@@ -9611,7 +9661,7 @@
         78.37718200683594,
         78.62467956542969,
         78.12968444824219,
-        77.93168640136719,
+        77.93169403076172,
         78.02079010009766,
         78.76327514648438,
         78.95626831054688,
@@ -9963,19 +10013,19 @@
       "recentCross": true,
       "relativeStrength": -9.722129138479836,
       "history": [
-        82.01087188720703,
+        82.01087951660156,
         82.06058502197266,
-        82.15999603271484,
-        82.16993713378906,
+        82.15998840332031,
+        82.16992950439453,
         82.02082061767578,
-        82.00093078613281,
+        82.00093841552734,
         81.8219985961914,
         81.94129180908203,
         81.8219985961914,
         81.91146850585938,
         81.7325439453125,
         81.90152740478516,
-        82.01087188720703,
+        82.01087951660156,
         82.08045959472656,
         82.07746887207031,
         82.11735534667969,
@@ -20393,7 +20443,7 @@
       "rsi14": 42.19175159799707,
       "volumeRatio": 1.1427760690910072,
       "return20": -0.08643385118539107,
-      "return60": -0.10877955806067682,
+      "return60": -0.10877254811062435,
       "above50": false,
       "above100": false,
       "above200": true,
@@ -22315,13 +22365,13 @@
       "name": "iShares 7-10 Year Treasury Bond ETF",
       "type": "etf",
       "sector": "Rates",
-      "score": 21.49177602881796,
+      "score": 21.491779634086203,
       "close": 94.73999786376953,
       "changePct": 0.07605378454012,
       "rsi14": 43.257564789344144,
       "volumeRatio": 0.8499988104584493,
       "return20": -0.2181053385385697,
-      "return60": 0.14157830455222312,
+      "return60": 0.14158638035309742,
       "above50": false,
       "above100": false,
       "above200": true,
@@ -22330,8 +22380,8 @@
       "history": [
         95.05887603759766,
         94.95953369140625,
-        95.38670349121094,
-        95.55558776855469,
+        95.3866958618164,
+        95.55558013916016,
         95.11848449707031,
         95.1085433959961,
         94.25421905517578,
@@ -22340,7 +22390,7 @@
         94.7310562133789,
         93.96612548828125,
         93.97606658935547,
-        94.64164733886719,
+        94.64163970947266,
         94.81053161621094,
         94.72779846191406,
         94.94708251953125,
@@ -26280,7 +26330,7 @@
       "history": [
         16.70095443725586,
         16.780012130737305,
-        17.15553855895996,
+        17.155536651611328,
         17.545207977294922,
         17.286752700805664,
         17.624732971191406,
@@ -26495,13 +26545,13 @@
       "name": "iShares 20+ Year Treasury Bond ETF",
       "type": "etf",
       "sector": "Rates",
-      "score": 7.151277201628581,
+      "score": 7.151273221644591,
       "close": 85.61000061035156,
       "changePct": 0.35754094611646786,
       "rsi14": 41.37505330969002,
       "volumeRatio": 1.0909756703619584,
       "return20": -0.9953601972562459,
-      "return60": 0.01886093164801936,
+      "return60": 0.018852016483882326,
       "above50": false,
       "above100": false,
       "above200": false,
@@ -32583,6 +32633,59 @@
       "notes": "Public macro and market views.",
       "title": "Investment News and Insights | BlackRock",
       "summary": "BlackRock provides timely commentaries and special reports which discuss key events driving the financial markets.",
+      "articles": [
+        {
+          "sourceName": "BlackRock Insights",
+          "title": "Weekly market commentary | BlackRock Investment Institute",
+          "url": "https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary",
+          "publishedAt": "2026-04-27T04:00:00.000Z",
+          "summary": "Stay tuned for insights on hot topics and latest trends in the financial market via the Weekly commentary by the BlackRock Investment Institute.",
+          "excerpt": "Weekly market commentary | BlackRock Investment Institute Skip to content BlackRock BlackRock iShares iShares Aladdin Aladdin Our company Our company Individual Investors United States Sign In Manage communications Mutual Fund & 529 accounts Leave the BlackRock site for Individuals to explore other content Advisors I invest on behalf of my clients. Institutions I consult or invest on behalf of a financial institution. General Public I want to learn more about BlackRock. Change location Americas Offshore Australia Austria Belgium Brazil Canada Chile China Offshore - 中国境外 China Onshore - 中国境内 Colombia Czech Republic Denmark Dubai (IFC) Finland France Germany Hong Kong - 香港 Hungary Israel Italy Japan - 日本 Kuwait Luxembourg México Netherlands Norway Poland Portugal Saudi Arabia Singapore Slovakia South Africa Spain Sweden Switzerland Taiwan - 台灣 United Kingdom United States Location not listed Welcome to the BlackRock site for individuals To reach a different BlackRock site directly, please update your user type . RESET MARKET INSIGHTS Weekly market commentary Apr 27, 2026 BlackRock Investment Institute Weekly video_20260427 Nicholas Fawcett Senior Economist BlackRock Investment Institute Header: CAPITAL AT RISK. MARKETING MATERIAL. Opening frame: What’s driving markets? Market take Camera frame We think the Middle East conflict only piles onto inflationary pressures already bubbling under the surface. Higher yields are here to stay, in our view. That means long-term government bonds are no longer effective diversifiers against equity market declines. Title slide: Persistent inflation constrains policy We think the Middle East conflict only piles onto inflationary pressures already bubbling under the surface. Higher yields are here to stay, in our view. That means long-term",
+          "discoveredFrom": "https://www.blackrock.com/us/individual/insights"
+        },
+        {
+          "sourceName": "BlackRock Insights",
+          "title": "Municipal Market Quarterly | BlackRock",
+          "url": "https://www.blackrock.com/us/individual/insights/municipal-quarterly",
+          "publishedAt": "2026-04-21T07:00:00.000Z",
+          "summary": "The BlackRock Municipals team reviews recent activity in the municipal bond market and offers insight on the potential opportunities and challenges ahead.",
+          "excerpt": "Municipal Market Quarterly | BlackRock Skip to content BlackRock BlackRock iShares iShares Aladdin Aladdin Our company Our company Individual Investors United States Sign In Manage communications Mutual Fund & 529 accounts Leave the BlackRock site for Individuals to explore other content Advisors I invest on behalf of my clients. Institutions I consult or invest on behalf of a financial institution. General Public I want to learn more about BlackRock. Change location Americas Offshore Australia Austria Belgium Brazil Canada Chile China Offshore - 中国境外 China Onshore - 中国境内 Colombia Czech Republic Denmark Dubai (IFC) Finland France Germany Hong Kong - 香港 Hungary Israel Italy Japan - 日本 Kuwait Luxembourg México Netherlands Norway Poland Portugal Saudi Arabia Singapore Slovakia South Africa Spain Sweden Switzerland Taiwan - 台灣 United Kingdom United States Location not listed Welcome to the BlackRock site for individuals To reach a different BlackRock site directly, please update your user type . RESET MUNICIPAL MARKET UPDATE Municipal market quarterly update Apr 21, 2026 James Schwartz, CFA Patrick Haskell Sean Carney Opportunity building in municipal bonds amid market volatility After a strong start to the year, geopolitical and macro uncertainty triggered a March repricing that offset earlier gains Improved valuations and upcoming seasonal tailwinds support a more constructive outlook Fundamentals remain solid, but rising credit dispersion reinforces selectivity View market update here Investment funds Explore BlackRock's mutual funds, iShares ETFs and closed-end funds. Funds to match your goals Get investing ideas for funds by asset class, market, region, ... View all funds View all funds Patrick Haskell Head of Municipal Bonds Patrick Haskell, Managing Director, Head of",
+          "discoveredFrom": "https://www.blackrock.com/us/individual/insights"
+        },
+        {
+          "sourceName": "BlackRock Insights",
+          "title": "Macro Implications of Chipflation | Blackrock",
+          "url": "https://www.blackrock.com/us/individual/insights/ai-chip-inflation",
+          "publishedAt": "2026-03-31T07:00:00.000Z",
+          "summary": "AI-driven semiconductor price surges are reshaping inflation dynamics and lifting the competitiveness of developed Asian countries, with important portfolio implications.",
+          "excerpt": "Macro Implications of Chipflation | Blackrock Skip to content BlackRock BlackRock iShares iShares Aladdin Aladdin Our company Our company Individual Investors United States Sign In Manage communications Mutual Fund & 529 accounts Leave the BlackRock site for Individuals to explore other content Advisors I invest on behalf of my clients. Institutions I consult or invest on behalf of a financial institution. General Public I want to learn more about BlackRock. Change location Americas Offshore Australia Austria Belgium Brazil Canada Chile China Offshore - 中国境外 China Onshore - 中国境内 Colombia Czech Republic Denmark Dubai (IFC) Finland France Germany Hong Kong - 香港 Hungary Israel Italy Japan - 日本 Kuwait Luxembourg México Netherlands Norway Poland Portugal Saudi Arabia Singapore Slovakia South Africa Spain Sweden Switzerland Taiwan - 台灣 United Kingdom United States Location not listed Welcome to the BlackRock site for individuals To reach a different BlackRock site directly, please update your user type . RESET Multi-asset insights The Macro Implications of Chipflation Mar 31, 2026 Simon Wan Tom Becker AI hasn’t just increased demand for memory — it has fundamentally recast memory as a defining strategic asset in the AI era. Micron Technology, Inc., March 18, 2026 Quick read: Rising demand for critical microelectronics, bolstered by AI capex and defense spending, is driving semiconductor prices higher and posing upside risks to global goods inflation. Developed Asia (Japan, South Korea, Taiwan) is at the epicenter of the semiconductor boom. As the dominant producers of advanced chips and commoditized memory chips, these economies are benefiting from improving terms-of-trade dynamics that support corporate earnings and debt sustainability. In the BlackRock Tactical Opportunitie",
+          "discoveredFrom": "https://www.blackrock.com/us/individual/insights"
+        }
+      ],
+      "articleCount": 3,
+      "ok": true
+    },
+    {
+      "name": "BlackRock Investment Institute Weekly Commentary",
+      "url": "https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary",
+      "category": "Institution research",
+      "cadence": "Weekly",
+      "trust": "High",
+      "notes": "Public BII weekly market and macro commentary.",
+      "title": "Weekly market commentary | BlackRock Investment Institute",
+      "summary": "Stay tuned for insights on hot topics and latest trends in the financial market via the Weekly commentary by the BlackRock Investment Institute.",
+      "articles": [
+        {
+          "sourceName": "BlackRock Investment Institute Weekly Commentary",
+          "title": "Weekly market commentary | BlackRock Investment Institute",
+          "url": "https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary",
+          "publishedAt": "2026-04-27T04:00:00.000Z",
+          "summary": "Stay tuned for insights on hot topics and latest trends in the financial market via the Weekly commentary by the BlackRock Investment Institute.",
+          "excerpt": "Weekly market commentary | BlackRock Investment Institute Skip to content BlackRock BlackRock iShares iShares Aladdin Aladdin Our company Our company Individual Investors United States Sign In Manage communications Mutual Fund & 529 accounts Leave the BlackRock site for Individuals to explore other content Advisors I invest on behalf of my clients. Institutions I consult or invest on behalf of a financial institution. General Public I want to learn more about BlackRock. Change location Americas Offshore Australia Austria Belgium Brazil Canada Chile China Offshore - 中国境外 China Onshore - 中国境内 Colombia Czech Republic Denmark Dubai (IFC) Finland France Germany Hong Kong - 香港 Hungary Israel Italy Japan - 日本 Kuwait Luxembourg México Netherlands Norway Poland Portugal Saudi Arabia Singapore Slovakia South Africa Spain Sweden Switzerland Taiwan - 台灣 United Kingdom United States Location not listed Welcome to the BlackRock site for individuals To reach a different BlackRock site directly, please update your user type . RESET MARKET INSIGHTS Weekly market commentary Apr 27, 2026 BlackRock Investment Institute Weekly video_20260427 Nicholas Fawcett Senior Economist BlackRock Investment Institute Header: CAPITAL AT RISK. MARKETING MATERIAL. Opening frame: What’s driving markets? Market take Camera frame We think the Middle East conflict only piles onto inflationary pressures already bubbling under the surface. Higher yields are here to stay, in our view. That means long-term government bonds are no longer effective diversifiers against equity market declines. Title slide: Persistent inflation constrains policy We think the Middle East conflict only piles onto inflationary pressures already bubbling under the surface. Higher yields are here to stay, in our view. That means long-term",
+          "discoveredFrom": "https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary"
+        }
+      ],
+      "articleCount": 1,
       "ok": true
     },
     {
@@ -32594,6 +32697,27 @@
       "notes": "Advisor-oriented market commentary.",
       "title": "BlackRock Insights for Advisors | BlackRock",
       "summary": "For timely market analysis, expert podcasts and selected client-friendly materials, BlackRock is one of the world’s leading providers of insights to advisors.",
+      "articles": [
+        {
+          "sourceName": "BlackRock Market Insights",
+          "title": "BlackRock Insights for Advisors | BlackRock",
+          "url": "https://www.blackrock.com/us/financial-professionals/insights",
+          "publishedAt": null,
+          "summary": "For timely market analysis, expert podcasts and selected client-friendly materials, BlackRock is one of the world’s leading providers of insights to advisors.",
+          "excerpt": "BlackRock Insights for Advisors | BlackRock Skip to content BlackRock BlackRock iShares iShares Aladdin Aladdin Our company Our company Advisors United States Sign In Leave the BlackRock site for Advisors to explore other content Individuals I manage my money myself. Institutions I consult or invest on behalf of a financial institution. General Public I want to learn more about BlackRock. Americas Offshore Australia Austria Belgium Brazil Canada Chile China Offshore - 中国境内 China Onshore - 中国境外 Colombia Denmark Dubai (IFC) Finland France Germany Hong Kong - 香港 Hungary Israel Italy Japan - 日本 Korea - 한국 Luxembourg México Netherlands Norway Poland Portugal Saudi Arabia Singapore South Africa Spain Sweden Switzerland Taiwan - 台灣 United Kingdom United States Location not listed \",\"displayValue\":\"Portfolio tools are coming together in one experience May 4. Tools will be offline May 1–3 as we prepare. Learn more >\",\"href\":\"/us/financial-professionals/literature/brochure/advisor-center-360.pdf\",\"rel\":\"noopener\",\"shortLabel\":\"Portfolio tools are coming together in one experience May 4. Tools will be offline May 1–3 as we prepare. Learn more >\",\"target\":\"_blank\"},\"logo\":{\"alt\":\"BlackRock for Advisors homepage\",\"homeLink\":\"/us/financial-professionals\",\"homeLinkTitle\":\"Advisor Center\",\"path\":\"/blk-one01-c-assets/cache-1767630406000/images/media-bin/web/global/wordmark/blackrock-advisor-center-logo-nav.svg\"},\"mastheadData\":{\"countries\":[{\"active\":false,\"additionalStyleClass\":\"\",\"ariaLabel\":\"Americas Offshore\",\"dataLinkEvent\":\"Main Nav|global nav|Country selector switch|switch|switch-country-to|Americas Offshore\",\"displayValue\":\"Americas Offshore\",\"href\":\"https://www.blackrock.com/americas-offshore\"},{\"active\":false,\"additionalStyleClass\":\"\",\"ariaLabel\":\"Australia\",\"dataLinkEvent\":\"M",
+          "discoveredFrom": "https://www.blackrock.com/us/financial-professionals/insights"
+        },
+        {
+          "sourceName": "BlackRock Market Insights",
+          "title": "BlackRock Investment Institute | BlackRock",
+          "url": "https://www.blackrock.com/us/financial-professionals/insights/blackrock-investment-institute",
+          "publishedAt": null,
+          "summary": "The BlackRock Investment Institute helps investors make sense of the markets through timely investment insights and market commentary. Explore our publications.",
+          "excerpt": "BlackRock Investment Institute | BlackRock Skip to content BlackRock BlackRock iShares iShares Aladdin Aladdin Our company Our company Advisors United States Sign In Leave the BlackRock site for Advisors to explore other content Individuals I manage my money myself. Institutions I consult or invest on behalf of a financial institution. General Public I want to learn more about BlackRock. Americas Offshore Australia Austria Belgium Brazil Canada Chile China Offshore - 中国境内 China Onshore - 中国境外 Colombia Denmark Dubai (IFC) Finland France Germany Hong Kong - 香港 Hungary Israel Italy Japan - 日本 Korea - 한국 Luxembourg México Netherlands Norway Poland Portugal Saudi Arabia Singapore South Africa Spain Sweden Switzerland Taiwan - 台灣 United Kingdom United States Location not listed \",\"displayValue\":\"Portfolio tools are coming together in one experience May 4. Tools will be offline May 1–3 as we prepare. Learn more >\",\"href\":\"/us/financial-professionals/literature/brochure/advisor-center-360.pdf\",\"rel\":\"noopener\",\"shortLabel\":\"Portfolio tools are coming together in one experience May 4. Tools will be offline May 1–3 as we prepare. Learn more >\",\"target\":\"_blank\"},\"logo\":{\"alt\":\"BlackRock for Advisors homepage\",\"homeLink\":\"/us/financial-professionals\",\"homeLinkTitle\":\"Advisor Center\",\"path\":\"/blk-one01-c-assets/cache-1767630406000/images/media-bin/web/global/wordmark/blackrock-advisor-center-logo-nav.svg\"},\"mastheadData\":{\"countries\":[{\"active\":false,\"additionalStyleClass\":\"\",\"ariaLabel\":\"Americas Offshore\",\"dataLinkEvent\":\"Header|global nav|Country selector switch|switch|switch-country-to|Americas Offshore\",\"displayValue\":\"Americas Offshore\",\"href\":\"https://www.blackrock.com/americas-offshore\"},{\"active\":false,\"additionalStyleClass\":\"\",\"ariaLabel\":\"Australia\",\"dataLinkEvent\":\"Head",
+          "discoveredFrom": "https://www.blackrock.com/us/financial-professionals/insights"
+        }
+      ],
+      "articleCount": 2,
       "ok": true
     },
     {
@@ -32605,18 +32729,110 @@
       "notes": "Public markets and macro research hub.",
       "title": "Market and Economic Insights | J.P. Morgan",
       "summary": "What’s shaping the global economy and how will it impact markets? Find out here, with detailed insights on market moves and economic impact.",
+      "articles": [
+        {
+          "sourceName": "J.P. Morgan Markets Insights",
+          "title": "2026 Outlooks and Forecasts | J.P. Morgan",
+          "url": "https://www.jpmorgan.com/insights/outlook/jpmorgan-outlook/predictions-and-forecasts",
+          "publishedAt": null,
+          "summary": "Dive into in-depth outlooks and forecasts from our analysts and strategists.",
+          "excerpt": "2026 Outlooks and Forecasts | J.P. Morgan Skip to main content Careers News Contact Us Login Global Asia Pacific Europe Latin America Middle East & Africa North America Global Back to all regions Australia & New Zealand Bangladesh Mainland China | English 中文 Hong Kong SAR, China India Indonesia Japan | English 日本 Korea | English 한국 Malaysia Pakistan Philippines Singapore Sri Lanka Taiwan, China Thailand Vietnam Back to all regions Austria Belgium Channel Islands Denmark Finland France Germany Greece Ireland Italy Luxembourg Netherlands Norway Poland Portugal Russia | English Русский Spain Sweden Switzerland Turkey | English Türkiye United Kingdom Back to all regions Argentina | English Español Brazil | English Português Chile | English Español Colombia | English Español Mexico | English Español Panama Peru | English Español Venezuela Back to all regions Bahrain Egypt Israel Lebanon Nigeria Qatar Saudi Arabia South Africa United Arab Emirates Back to all regions United States Canada | English French Back to menu For Companies and Institutions For Companies and Institutions Commercial Banking We provide credit, financing, treasury and payment solutions to help your business succeed. We also offer best-in-class commercial real estate services for investors and developers. Global Corporate Banking We help clients achieve their long-term strategic goals through financing, liquidity, payments, risk management and investment banking solutions. Investment Banking Providing investment banking solutions, including M&A, capital raising and risk management, for a broad range of corporations, institutions and governments. Payments Your partner for commerce, receivables, cross-currency, working capital, blockchain, liquidity and more. Key Links Industries Insights Client Stories Back",
+          "discoveredFrom": "https://www.jpmorgan.com/insights/markets"
+        },
+        {
+          "sourceName": "J.P. Morgan Markets Insights",
+          "title": "Banking Articles & Insights from J.P. Morgan",
+          "url": "https://www.jpmorgan.com/insights/banking",
+          "publishedAt": null,
+          "summary": "Review banking articles, videos and insights on technology, treasury, business trends and more.",
+          "excerpt": "Banking Articles & Insights from J.P. Morgan Skip to main content Careers News Contact Us Login Global Asia Pacific Europe Latin America Middle East & Africa North America Global Back to all regions Australia & New Zealand Bangladesh Mainland China | English 中文 Hong Kong SAR, China India Indonesia Japan | English 日本 Korea | English 한국 Malaysia Pakistan Philippines Singapore Sri Lanka Taiwan, China Thailand Vietnam Back to all regions Austria Belgium Channel Islands Denmark Finland France Germany Greece Ireland Italy Luxembourg Netherlands Norway Poland Portugal Russia | English Русский Spain Sweden Switzerland Turkey | English Türkiye United Kingdom Back to all regions Argentina | English Español Brazil | English Português Chile | English Español Colombia | English Español Mexico | English Español Panama Peru | English Español Venezuela Back to all regions Bahrain Egypt Israel Lebanon Nigeria Qatar Saudi Arabia South Africa United Arab Emirates Back to all regions United States Canada | English French Back to menu For Companies and Institutions For Companies and Institutions Commercial Banking We provide credit, financing, treasury and payment solutions to help your business succeed. We also offer best-in-class commercial real estate services for investors and developers. Global Corporate Banking We help clients achieve their long-term strategic goals through financing, liquidity, payments, risk management and investment banking solutions. Investment Banking Providing investment banking solutions, including M&A, capital raising and risk management, for a broad range of corporations, institutions and governments. Payments Your partner for commerce, receivables, cross-currency, working capital, blockchain, liquidity and more. Key Links Industries Insights Client Stories B",
+          "discoveredFrom": "https://www.jpmorgan.com/insights/markets"
+        },
+        {
+          "sourceName": "J.P. Morgan Markets Insights",
+          "title": "Business Planning Article & Insights",
+          "url": "https://www.jpmorgan.com/insights/business-planning",
+          "publishedAt": null,
+          "summary": "Access articles and insights with tips, best practices and perspectives from J.P. Morgan specialists to help with business planning and strategic growth.",
+          "excerpt": "Business Planning Article & Insights Skip to main content Careers News Contact Us Login Global Asia Pacific Europe Latin America Middle East & Africa North America Global Back to all regions Australia & New Zealand Bangladesh Mainland China | English 中文 Hong Kong SAR, China India Indonesia Japan | English 日本 Korea | English 한국 Malaysia Pakistan Philippines Singapore Sri Lanka Taiwan, China Thailand Vietnam Back to all regions Austria Belgium Channel Islands Denmark Finland France Germany Greece Ireland Italy Luxembourg Netherlands Norway Poland Portugal Russia | English Русский Spain Sweden Switzerland Turkey | English Türkiye United Kingdom Back to all regions Argentina | English Español Brazil | English Português Chile | English Español Colombia | English Español Mexico | English Español Panama Peru | English Español Venezuela Back to all regions Bahrain Egypt Israel Lebanon Nigeria Qatar Saudi Arabia South Africa United Arab Emirates Back to all regions United States Canada | English French Back to menu For Companies and Institutions For Companies and Institutions Commercial Banking We provide credit, financing, treasury and payment solutions to help your business succeed. We also offer best-in-class commercial real estate services for investors and developers. Global Corporate Banking We help clients achieve their long-term strategic goals through financing, liquidity, payments, risk management and investment banking solutions. Investment Banking Providing investment banking solutions, including M&A, capital raising and risk management, for a broad range of corporations, institutions and governments. Payments Your partner for commerce, receivables, cross-currency, working capital, blockchain, liquidity and more. Key Links Industries Insights Client Stories Back to m",
+          "discoveredFrom": "https://www.jpmorgan.com/insights/markets"
+        }
+      ],
+      "articleCount": 3,
       "ok": true
     },
     {
-      "name": "Wells Fargo Investment Institute",
-      "url": "https://www.wellsfargo.com/investment-institute/",
+      "name": "Wells Fargo Advisors Stock Market News",
+      "url": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm",
       "category": "Institution research",
       "cadence": "Weekly",
       "trust": "High",
-      "notes": "Public market commentary and strategy.",
-      "title": "Wells Fargo Investment Institute",
-      "summary": "Source check failed: 404 Not Found",
-      "ok": false
+      "notes": "Public stock market commentary; replaces retired investment-institute URL.",
+      "title": "Stock Market News | Wells Fargo Investment Institute",
+      "summary": "Stock market news, commentary, data, market activity and economic reports covering Nasdaq Composite, S&P and Dow Jones updated three times daily.",
+      "articles": [
+        {
+          "sourceName": "Wells Fargo Advisors Stock Market News",
+          "title": "Bond Market Commentary | Wells Fargo Investment Institute",
+          "url": "https://www.wellsfargoadvisors.com/research-analysis/commentary/bond-market-commentary.htm?linknav=topnav:ourInsights:marketCommentary:bondMarket",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
+          "summary": "Bond Market Updates from Wells Fargo Investment Institute covering bond market news, data and outlook on a daily basis. Learn about the bond market today.",
+          "excerpt": "Bond Market Commentary | Wells Fargo Investment Institute Yes A checkmark with a circle around it close Bond Market Commentary Updates on bond market data, news, and activity each day. May 1, 2026 Yields higher ahead of PMI data Over in bond land, Treasury yields are slightly higher before the opening bell Friday to start off the month ahead of today’s April manufacturing purchasing managers’ index (PMI) from the Institute for Supply Management (ISM), with S&P Global releasing their finalized reading. As of 7:00 AM ET, the yield on the 10-year note is rising one basis point (0.01%) to 4.38%, while the 30-year bond yield is also increasing one basis point (0.01%) to 4.98%. The yield on the two-year note, which is more sensitive to changes in monetary policy, is up one basis point (0.01%) to 3.88%. Treasury yields were lower on Thursday following the advance reading of first-quarter gross domestic product (GDP) growth accelerating less than expected to an annualized 2.0%, while the core Personal Consumption Expenditures (PCE) Deflator picked up more than-projected to a 4.3% pace. Personal income and personal spending rose 0.6% and 0.9% month-over-month, respectively, while initial jobless claims fell significantly more-than-expected to the lowest level since 1969. The yield on the 10-year note was down six basis points (0.06%) to 4.37%, while the 30-year bond yield fell three basis points (0.03%) to 4.97%. The yield on the two-year note decreased eight basis points (0.08%) to 3.87%. As of end of day Thursday (April 30), futures markets are pricing in one basis point (0.01%) worth of rate cuts at the Federal Reserve's upcoming June meeting, with a cumulative three basis points (0.03%) worth of rate cuts by year-end 2026. On the data front, ISM’s manufacturing PMI and the p",
+          "discoveredFrom": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm"
+        },
+        {
+          "sourceName": "Wells Fargo Advisors Stock Market News",
+          "title": "Stock Market News | Wells Fargo Investment Institute",
+          "url": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm?linknav=topnav:ourInsights:marketCommentary:stockMarket",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
+          "summary": "Stock market news, commentary, data, market activity and economic reports covering Nasdaq Composite, S&P and Dow Jones updated three times daily.",
+          "excerpt": "Stock Market News | Wells Fargo Investment Institute Yes A checkmark with a circle around it close Stock Market News Our market analysts keep you updated on the latest market trends including stock market data, news, market activity, and economic reports in the daily stock market commentary. Opening Comment — Friday, May 01, 2026 DJIA: 49,652.14, up 790.33 S&P 500: 7,209.01, up 73.06 NASDAQ: 24,892.31, up 219.07 Stocks mixed ahead of PMI data Stock futures are mixed Friday morning to start off the month ahead of today’s April manufacturing purchasing managers’ index (PMI) from the Institute for Supply Management (ISM), with S&P Global releasing their finalized reading. As of 7:18 AM ET, the Dow is rising 0.3%, while the S&P 500 is up 0.1%. The Nasdaq 100 is falling 0.1% relative to fair value on the GLOBEX. U.S. equities were higher on Thursday following the advance reading of first-quarter gross domestic product (GDP) growth accelerating less than expected to an annualized 2.0%, while the core Personal Consumption Expenditures (PCE) Deflator picked up more than-projected to a 4.3% pace. Personal income and personal spending rose 0.6% and 0.9% month-over-month, respectively, while initial jobless claims fell significantly more-than-expected to the lowest level since 1969. The Dow was up 1.6%, while the tech-heavy Nasdaq Composite rose 0.9% and hit a new record closing level of 24892.31. The S&P 500 increased 1.0% and set a new record closing level of 7209.01, with 10 of 11 sectors finishing in positive territory. The Communication Services sector was the top performer, rising 4.0%, while the Information Technology sector was the bottom performer, falling 0.6%. On the data front, ISM’s manufacturing PMI and the prices paid component for April are expected to come in at 5",
+          "discoveredFrom": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm"
+        },
+        {
+          "sourceName": "Wells Fargo Advisors Stock Market News",
+          "title": "Stock Market Commentary | Wells Fargo Investment Institute",
+          "url": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-commentary.htm?linknav=topnav:ourInsights:marketCommentary:weeklyCommentary",
+          "publishedAt": "2026-04-29T07:00:00.000Z",
+          "summary": "Weekly stock market commentary from Wells Fargo Investment institute with a focus on technical analysis and an outlook for the US equity market.",
+          "excerpt": "Stock Market Commentary | Wells Fargo Investment Institute Yes A checkmark with a circle around it close Market Commentary Weekly commentary providing market analysis from Wells Fargo Investment Institute. Download full report (PDF) April 29, 2026 Brian Rehling, Co-Head of Global Fixed Income Strategy New Fed chair — what it may mean for bonds and investments Key takeaways Potential for higher income: New longer-maturity bonds, certificates of deposit (CDs), and other fixed-income investments could offer higher yields if the yield curve steepens over time. More price volatility: Bond prices — especially for longer-maturity bonds — may be more volatile as markets adjust to a smaller Federal Reserve (Fed) footprint and less support from Fed bond holdings. Portfolio approach: Shorter- and intermediate-maturity bonds may hold up better in this environment while longer-maturity holdings could face pressure. Mortgage-related investments could also be more volatile if the Fed significantly reduces its mortgage-backed securities holdings. Kevin Warsh is President Donald Trump’s pick to become the next chair of the Federal Reserve. With the Department of Justice having dropped its probe into Chair Powell, Warsh’s confirmation is now expected to move forward; the 56-yearold former Fed governor would replace Jerome Powell when Powell’s term ends in May 2026. Warsh served on the Fed’s Board of Governors from 2006 to 2011 during the financial crisis. He also has Wall Street experience and is known as a thoughtful, reform-minded economist. He has said he will act independently while pursuing changes at the Fed. Warsh believes the Fed has become too large and too complex. He wants to narrow its focus to its core responsibilities: keeping prices stable (managing inflation) and supporti",
+          "discoveredFrom": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm"
+        }
+      ],
+      "articleCount": 3,
+      "ok": true
+    },
+    {
+      "name": "Merrill Capital Market Outlook",
+      "url": "https://www.ml.com/capital-market-outlook.html",
+      "category": "Institution research",
+      "cadence": "Weekly",
+      "trust": "High",
+      "notes": "Public Merrill / Bank of America capital markets outlook.",
+      "title": "Capital Market Outlook: Weekly Market Insights From the CIO",
+      "summary": "This timely commentary from Merrill's Chief Investment Office can help you navigate markets and take advantage of emerging investment trends.",
+      "articles": [
+        {
+          "sourceName": "Merrill Capital Market Outlook",
+          "title": "The BullPen",
+          "url": "https://www.ml.com/financial-research-and-insights/thebullpen.html",
+          "publishedAt": "2026-03-30T07:00:00.000Z",
+          "summary": "The BullPen",
+          "excerpt": "The BullPen Skip To Content 3.1.97 Menu Articles You've come to the right place to find Merrill insights, expert advice and the latest research on a variety of topics. Select a topic of interest: The BullPen Today's markets Investment trends Portfolio strategies Financial planning Retirement Diverse Viewpoints Women investors The BullPen Timely insights to help stay ahead of the curve Today's Markets Private credit turbulence: Optics vs. fundamentals The private credit market has hit some headwinds in 2026, with concerns ranging from lack of liquidity for investors to the impact of artificial intelligence (AI) on corporate borrowers. March 30, 2026 Learn more February 13, 2026 Financial Planning 6 surprising benefits of having a financial plan Pursue all your goals — from a vacation home to retirement and more — with the help of the powerful projections and analysis your advisor can deliver in this detailed document April 17, 2026 Today's Markets Four for the Quarter: Top questions investors are asking right now A real-time conversation with the Chief Investment Office focused on investors’ big concerns as markets navigate uncertainty, potential opportunity, and change. February 27, 2026 Today's Markets What’s trending Tax season scams are common; be wary of unsolicited emails, phone calls, texts or social media messages from the “IRS” May 22, 2025 Portfolio Strategies Long-term investing: Core principles every investor should know They can help you keep moving toward your goals, no matter what the markets are doing Choose your advisor in a more personalized way All our advisors are committed to putting your needs and priorities first. Find some who match your personal preferences too. Loading... Try Advisor Match Answer a few questions Want us to contact you? Submit a ",
+          "discoveredFrom": "https://www.ml.com/capital-market-outlook.html"
+        },
+        {
+          "sourceName": "Merrill Capital Market Outlook",
+          "title": "Capital Market Outlook: Weekly Market Insights From the CIO",
+          "url": "https://www.ml.com/capital-market-outlook.html",
+          "publishedAt": null,
+          "summary": "This timely commentary from Merrill's Chief Investment Office can help you navigate markets and take advantage of emerging investment trends.",
+          "excerpt": "Capital Market Outlook: Weekly Market Insights From the CIO Skip To Content 3.1.97 Menu Capital Market Outlook This timely commentary from our Chief Investment Office can help you navigate markets and take advantage of emerging trends across the globe. Find Contact your advisor {{creationDate}} {{title}} {{subtitle}} {{optionalText}} {{author}} {{creationDate}} Facebook LinkedIn X email Disclaimers Additional Resources Corporations & Institutions Job Seekers Media & Journalists Shareholders About Us Why Merrill Our Services Form CRS & Other Resources Additional Resources Corporations & Institutions Job Seekers Media & Journalists Shareholders About Us Why Merrill Our Services Form CRS & Other Resources Investment and insurance products: Are Not FDIC Insured Are Not Bank Guaranteed May Lose Value Are Not deposits Are Not Insured by Any Federal Government Agency Are Not a Condition to Any Banking Service or Activity Investing involves risk. There is always the potential of losing money when you invest in securities. Past performance does not guarantee future results. Asset allocation, rebalancing and diversification do not guarantee against risk in broadly declining markets. Merrill, its affiliates, and financial advisors do not provide legal, tax, or accounting advice. You should consult your legal and/or tax advisors before making any financial decisions. This material is not intended as a recommendation, offer or solicitation for the purchase or sale of any security or investment strategy. Merrill offers a broad range of brokerage, investment advisory and other services. Additional information is available in our Client Relationship Summary . This material does not take into account a client’s particular investment objectives, financial situations, or needs and is not ",
+          "discoveredFrom": "https://www.ml.com/capital-market-outlook.html"
+        }
+      ],
+      "articleCount": 2,
+      "ok": true
     },
     {
       "name": "Bank of America Institute",
@@ -32627,6 +32843,149 @@
       "notes": "Public consumer, macro, and market research.",
       "title": "Bank of America Institute – Where Thought Finds Leadership",
       "summary": "Bank of America Institute uncovers powerful insights that move business and society forward with original perspectives on the economy and global transformation.",
+      "articles": [
+        {
+          "sourceName": "Bank of America Institute",
+          "title": "Bank of America Institute – Where Thought Finds Leadership",
+          "url": "https://institute.bankofamerica.com/",
+          "publishedAt": "2026-04-15T13:48:25.000Z",
+          "summary": "Bank of America Institute uncovers powerful insights that move business and society forward with original perspectives on the economy and global transformation.",
+          "excerpt": "Bank of America Institute – Where Thought Finds Leadership Skip to main content april 2026 Regional Roundup: Western momentum Consumer spending growth is strongest in the West, even as the region’s job market shows mixed trends, especially in California. 2 min read Economy Do consumers have wiggle room to absorb higher gas prices? April 2026 Economy Who’s still on the move? April 2026 Sustainability Secondhand fashion creates a closet refresh April 2026 Economy Small Business Checkpoint: One shock after another April 2026 Economy Consumer Checkpoint: The madness of March April 2026 Section in the media Watch Liz Everett Krisberg discuss the latest findings from April’s Consumer Checkpoint on CNBC Our exclusive publication leverages the depth and breadth of our data to analyze consumer behavior and its effect on the economy in near real time. It has become a must read for government, business and investment leaders. To read the full analysis go to Consumer Checkpoint Transcript Aired April 10, 2026 bank of america institute Latest insights by topic Economy Sustainability Transformation Economy Economy The Institute Employment Report: March 2026 April 2026 Economy Golf spending is slightly above par April 2026 Economy Not quite mAInstream: A consumer AI profile March 2026 View More Sustainability Sustainability Under the weather: Tracking ski season January 2026 Sustainability Nuclear energy: Who, what, where, when, why? January 2026 Sustainability What’s the impact of natural disasters on local economies? October 2025 View More Transformation Transformation Feeding the world with AI April 2026 Transformation Physical AI, part 3: The future of mobility March 2026 Transformation Physical AI, part 2: Humanoid robots March 2026 View More Want our insights delivered right to ",
+          "discoveredFrom": "https://institute.bankofamerica.com/"
+        }
+      ],
+      "articleCount": 1,
+      "ok": true
+    },
+    {
+      "name": "Highland Associates Research",
+      "url": "https://regions.com/wealth-management/institutional-services/highland-associates/research/",
+      "category": "Institution research",
+      "cadence": "Weekly",
+      "trust": "Medium high",
+      "notes": "Public Highland Associates market commentary; legacy URL redirects here.",
+      "title": "Pardon Our Interruption",
+      "summary": "As you were browsing something about your browser made us think you were a bot. There are a few reasons this might happen:",
+      "articles": [
+        {
+          "sourceName": "Highland Associates Research",
+          "title": "Pardon Our Interruption",
+          "url": "https://regions.com/wealth-management/institutional-services/highland-associates/research/",
+          "publishedAt": null,
+          "summary": "As you were browsing something about your browser made us think you were a bot. There are a few reasons this might happen:",
+          "excerpt": "Pardon Our Interruption Pardon Our Interruption As you were browsing something about your browser made us think you were a bot. There are a few reasons this might happen: You've disabled JavaScript in your web browser. You're a power user moving through this website with super-human speed. You've disabled cookies in your web browser. A third-party browser plugin, such as Ghostery or NoScript, is preventing JavaScript from running. Additional information is available in this support article . To regain access, please make sure that cookies and JavaScript are enabled before reloading the page. Please stand by We&apos;re getting everything ready for you. The page is loading, and you&apos;ll be on your way in just a few moments. Thanks for your patience!",
+          "discoveredFrom": "https://regions.com/wealth-management/institutional-services/highland-associates/research/"
+        }
+      ],
+      "articleCount": 1,
+      "ok": true
+    },
+    {
+      "name": "RBC Wealth Management Jamie Sodhi Blog",
+      "url": "https://wmc.rbcwealthmanagement.com/jamie-sodhi",
+      "category": "Advisor commentary",
+      "cadence": "Periodic",
+      "trust": "Medium",
+      "notes": "Public RBC Wealth Management advisor market blog; submitted URL redirects here.",
+      "title": "Jamie Sodhi | Portfolio Manager & Wealth Advisor | RBC DS | Oshawa, ON",
+      "summary": "Jamie Sodhi is dedicated to helping you take advantage of opportunities, overcome challenges, and reach your goals.",
+      "articles": [
+        {
+          "sourceName": "RBC Wealth Management Jamie Sodhi Blog",
+          "title": "Jamie Sodhi - RBC Dominion Securities Inc. | Will the economy’s 2025 resilience continue?",
+          "url": "https://wmc.rbcwealthmanagement.com/jamie-sodhi/blog/will-the-economys-2025-resilience-continue-10432",
+          "publishedAt": "2025-09-14T07:00:00.000Z",
+          "summary": "Jamie Sodhi - RBC Dominion Securities Inc. | After outpacing cautious expectations in the first half of the year, the global economy could face new challenges from trade policy uncertainty and inflation over the coming months.",
+          "excerpt": "Jamie Sodhi - RBC Dominion Securities Inc. | Will the economy’s 2025 resilience continue? RBC Dominion Securities Inc. Sign In Press enter to follow link Royal Bank of Canada wealth management logo Home Menu Global Insights Will the economy’s 2025 resilience continue? After outpacing cautious expectations in the first half of the year, the global economy could face new challenges from trade policy uncertainty and inflation over the coming months. Share Email Joseph Wu, CFA September 14, 2025 Key points Global growth has withstood U.S. tariffs so far, but fading one-off boosts could weigh on activity into late 2025. Most central banks have the capacity to reduce interest rates to counter the economic drag from trade frictions if necessary. Corporate earnings growth expectations remain constructive, in our view, but heightened valuations suggest limited cushion against setbacks. Economic resilience could be tested For all the disruptions caused by U.S. trade policy, the world economy has so far proved sturdier than anticipated. Growth has slowed but avoided the recessionary outcome many economists forecasted after the Trump administration’s “Liberation Day” tariff salvo in April. Several factors may explain this resilience. Above-trend GDP expansion of 3.3 percent in 2024 put the global economy in a position of strength to start the year, and this helped buffer subsequent trade shocks. As 2025 got underway, a burst of “front-running” as firms and consumers brought forward purchases ahead of higher tariffs temporarily lifted output and trade volumes. Targeted government spending in several large economies added some ballast, while a U.S.-led surge in AI-related spending further bolstered demand. Steady wage gains also helped households weather economic uncertainty through ",
+          "discoveredFrom": "https://wmc.rbcwealthmanagement.com/jamie-sodhi"
+        },
+        {
+          "sourceName": "RBC Wealth Management Jamie Sodhi Blog",
+          "title": "Jamie Sodhi - RBC Dominion Securities Inc. | 2025 Midyear Outlook: Canada",
+          "url": "https://wmc.rbcwealthmanagement.com/jamie-sodhi/blog/2025-midyear-outlook:-canada-10432",
+          "publishedAt": "2025-07-21T07:00:00.000Z",
+          "summary": "Jamie Sodhi - RBC Dominion Securities Inc. | Elevated gold prices should continue to support the TSX, while ongoing tariff uncertainties have us tilting toward perceived less risky categories within fixed income.",
+          "excerpt": "Jamie Sodhi - RBC Dominion Securities Inc. | 2025 Midyear Outlook: Canada RBC Dominion Securities Inc. Sign In Press enter to follow link Royal Bank of Canada wealth management logo Home Menu Global Insights 2025 Midyear Outlook: Canada Elevated gold prices should continue to support the TSX, while ongoing tariff uncertainties have us tilting toward perceived less risky categories within fixed income. Share Email Matt Altro, CFA and Luis Castillo July 21, 2025 Canada equities The Canadian equity market has had a turbulent first half of the year, with a steady but modest downdraft leading up to “Liberation Day,” followed by an easing of fears amid constructive dialogue out of the White House. The TSX has since risen double-digits and has rallied to a new all-time high. Notably, gold has continued to be a material driver of this performance. The strong run-up in gold (up approximately 25 percent year to date) bolstered investor sentiment towards gold miners, as higher bullion prices helped drive operating leverage and strong earnings growth. Much of the strength in gold has been driven by global central bank buying. China’s gold imports reached an 11-month high, increasing 73 percent m/m in April, as the People’s Bank of China (China’s central bank) eased restrictions on bullion inflows. Gold is also widely viewed by investors as a hedge against geopolitical, inflation, and U.S. dollar risks, and we believe these factors may keep gold prices elevated for the foreseeable future. Furthermore, bank valuations now sit at a premium to historical averages, which have us questioning how much higher they can run. While RBC Capital Markets has updated its fiscal 2026 and 2027 estimates to include robust earnings growth and a normalization of provision for credit losses, we continu",
+          "discoveredFrom": "https://wmc.rbcwealthmanagement.com/jamie-sodhi"
+        },
+        {
+          "sourceName": "RBC Wealth Management Jamie Sodhi Blog",
+          "title": "Jamie Sodhi | Portfolio Manager & Wealth Advisor | RBC DS | Oshawa, ON",
+          "url": "https://wmc.rbcwealthmanagement.com/jamie-sodhi",
+          "publishedAt": null,
+          "summary": "Jamie Sodhi is dedicated to helping you take advantage of opportunities, overcome challenges, and reach your goals.",
+          "excerpt": "Jamie Sodhi | Portfolio Manager & Wealth Advisor | RBC DS | Oshawa, ON RBC Dominion Securities Inc. Sign In Press enter to follow link Close RBC Mobile Royal Bank of Canada FREE — On Google Play View Royal Bank of Canada wealth management logo Menu Jamie Sodhi, MBA Portfolio Manager & Wealth Advisor Meet our team Call (905) 434-9884 or fill out the contact form below and we’ll be in touch. Press enter to follow link Meet our team Call (905) 434-9884 or fill out the contact form below and we’ll be in touch. Press enter to follow link View Location on Map Reach out by phone You have dreams. We have the expertise to help you make them a reality. Our team of experts is poised to help you take advantage of opportunities, handle challenges, and – ultimately – reach your goals. Taking an all-encompassing, personalized approach, we lean on the sophisticated tools, best-in-class resources, and esteemed specialists of RBC to manage, grow, and preserve your wealth. Ready to get started? The first step is a conversation Contact us today Our team Our partners Our team Press enter to follow link Professionals at your service Leaning on experience and industry accreditations, our team of experts helps bring financial peace of mind to clients like you. advisor modal Jamie Sodhi Press enter to follow link MBA Investment Advisor Our partners Press enter to follow link Expertise in your corner To serve our clients’ most sophisticated and complex needs, we draw upon the expertise of our esteemed RBC partners. partner modal Bobby Hinduja Press enter to follow link CA CBV CPA Vice-President, High Net Worth Planning Services, Family Office Services, RBC Wealth Management Karen Snowdon-Steacy Press enter to follow link TEP Senior Trust Advisor, RBC Royal Trust Tracey Goldie Press enter to foll",
+          "discoveredFrom": "https://wmc.rbcwealthmanagement.com/jamie-sodhi"
+        }
+      ],
+      "articleCount": 3,
+      "ok": true
+    },
+    {
+      "name": "RG Wealth Financial Insights",
+      "url": "https://rgwealth.com/financial-insights/",
+      "category": "Advisor commentary",
+      "cadence": "Periodic",
+      "trust": "Medium",
+      "notes": "Public financial insights page; may block automated source checks.",
+      "title": "RG Wealth Financial Insights",
+      "summary": "Source check failed: 403 Forbidden",
+      "articles": [],
+      "articleCount": 0,
+      "ok": false
+    },
+    {
+      "name": "LPL Research",
+      "url": "https://www.lpl.com/research/research-team/lpl-research.html",
+      "category": "Institution research",
+      "cadence": "Weekly",
+      "trust": "High",
+      "notes": "Public LPL Research hub; may block automated source checks.",
+      "title": "LPL Research",
+      "summary": "Source check failed: 403 Forbidden",
+      "articles": [],
+      "articleCount": 0,
+      "ok": false
+    },
+    {
+      "name": "Raymond James Commentary And Insights",
+      "url": "https://www.raymondjames.com/commentary-and-insights",
+      "category": "Institution research",
+      "cadence": "Periodic",
+      "trust": "High",
+      "notes": "Public market commentary and insights hub; site may intermittently reject automated checks.",
+      "title": "Commentary and Insights",
+      "summary": "Commentary & Insights",
+      "articles": [
+        {
+          "sourceName": "Raymond James Commentary And Insights",
+          "title": "Wars, markets and economic growth",
+          "url": "https://www.raymondjames.com/commentary-and-insights/economy-policy/2026/05/01/weekly-economic-commentary",
+          "publishedAt": "2026-05-01T12:45:00.000Z",
+          "summary": "Connect with a Raymond James advisor or an office near you.",
+          "excerpt": "Wars, markets and economic growth Skip to content Share: Wars, markets and economic growth Economy & Policy May 01, 2026 Raymond James Chief Economist Eugenio J. Alem&aacute;n discusses current economic conditions. Click here to enlarge A few days ago, a client shared a chart produced by a think tank or a bank economics group that tracked the performance of the S&P 500 over the past five to six decades (recreated and expanded above). Superimposed on the index were markers identifying each major military conflict involving the United States during that period. The message of the chart was hard to miss. Despite repeated wars, equity markets have delivered strong long-term returns, and in some stretches, market performance appears to have coincided with wartime episodes rather neatly. Viewed through the lens of financial markets, the implication seems almost intuitive: wars have not been bad for investors and may even have been supportive. This idea is not new. Many of the textbooks used in undergraduate and graduate macroeconomics feature similar historical charts, showing notably strong economic performance during periods when the US was engaged in military conflicts. Students would naturally connect the dots and reach the conclusion that wars must be good for economic growth. From an investor&rsquo;s perspective, the leap is even easier: if growth is stronger during wars, corporate earnings rise, markets respond and risk assets benefit. The temptation to accept that conclusion is understandable, but it misses the underlying drivers that matter most for markets. The historical relationship between wars and asset prices does not reflect the intrinsic economic value of conflict. Instead, it reflects the way fiscal policy behaves during wartime and how that policy feeds dir",
+          "discoveredFrom": "https://www.raymondjames.com/commentary-and-insights"
+        },
+        {
+          "sourceName": "Raymond James Commentary And Insights",
+          "title": "Plan beyond the present",
+          "url": "https://www.raymondjames.com/commentary-and-insights/business-ownership/2026/04/30/plan-beyond-the-present",
+          "publishedAt": "2026-04-30T11:20:00.000Z",
+          "summary": "Your business deserves an “estate plan” that prepares it for whatever comes next",
+          "excerpt": "Plan beyond the present Skip to content Share: Plan beyond the present Business Ownership Your business deserves an &ldquo;estate plan&rdquo; that prepares it for whatever comes next You&rsquo;ve invested much into making your business successful: hard work, time, money, energy. It&rsquo;s hard to imagine your business without you, but a thoughtful succession plan can help ensure your business enjoys continued success for generations to come. Protecting your legacy A thorough succession plan, one designed to protect your business and your legacy, considers the whole picture, including your exit from the business, your retirement needs and your personal estate. It answers questions like: How can you protect your business and benefits to ensure continuity long term? When considering retirement, how can you gracefully exit the business and realize the maximum value for your hard work? How are your staff and customers protected if something happens to you unexpectedly, such as disability or incapacity? Whether your plan involves a family heir, someone outside the family, an outright sale, or an expert to take over until your chosen heir is fully prepared, succession planning can begin with foundational steps before considering more advanced planning strategies, depending on your business&rsquo; needs. Succession strategies The financial implications of business succession are complex, but you and your financial advisor can consider several options to help you refine your plan. Some key strategies are: Gifting shares of the business to family members or heirs over time, either outright or through a trust or family LLC structure. This can provide flexibility, allowing you to maintain oversight while the next generation prepares for ownership responsibilities. Buy-sell agreeme",
+          "discoveredFrom": "https://www.raymondjames.com/commentary-and-insights"
+        },
+        {
+          "sourceName": "Raymond James Commentary And Insights",
+          "title": "Sharing a wealth epiphany",
+          "url": "https://www.raymondjames.com/commentary-and-insights/estate-giving/2026/04/29/sharing-a-wealth-epiphany",
+          "publishedAt": "2026-04-29T09:47:00.000Z",
+          "summary": "When wealth arrives quickly, generosity – and planning – can be the key to helping it endure.",
+          "excerpt": "Sharing a wealth epiphany Skip to content Share: Sharing a wealth epiphany Estate & Giving When wealth arrives quickly, generosity &ndash; and planning &ndash; can be the key to helping it endure. Maybe it&rsquo;s the moment the stroke of a pen makes the sale of your business official. Or the one when a signing bonus becomes a signed deposit. It might even happen while you&rsquo;re surrounded by family and cameras as your name is announced from the draft stage. &ldquo;I call them wealth epiphanies,&rdquo; said Chip Bauder, a leader in premier wealth solutions at Raymond James. &ldquo;When money is in motion, it&rsquo;s life-changing.&rdquo; However one finds you, a wealth epiphany can shift your circumstances in an instant. Ensuring that instant can be the first in a succession that builds toward a lasting legacy lies in the planning. &ldquo;Significant wealth events are opportunities to assess your current strategy as well as your goals for the next phase of your life and, also, to seriously consider the impact you want to have on future generations,&rdquo; Chip continued. While the word &ldquo;epiphany&rdquo; speaks to the suddenness with which these events arrive, another e-word evokes the capacity they have to build something far bigger: endow. Charitable giving is just one of the facets of a financial legacy, but it&rsquo;s one that can create a positive feedback loop not just of greater good, but potentially of greater wealth. First published in 2000, the Social Capital Community Benchmark Survey found, maybe predictably, that as wealth increases, so does charitable giving. However, some social scientists, including Harvard&rsquo;s Arthur C. Brooks, believe the survey data also indicates a causal link between increased rates of giving and increasing incomes &ndash",
+          "discoveredFrom": "https://www.raymondjames.com/commentary-and-insights"
+        }
+      ],
+      "articleCount": 3,
       "ok": true
     },
     {
@@ -32638,6 +32997,27 @@
       "notes": "FOMC and regulatory releases.",
       "title": "Press Releases",
       "summary": "The Federal Reserve Board of Governors in Washington DC.",
+      "articles": [
+        {
+          "sourceName": "Federal Reserve Press Releases",
+          "title": "Finance and Economics Discussion Series (FEDS)",
+          "url": "https://www.federalreserve.gov/econres/feds/index.htm",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
+          "summary": "The Federal Reserve Board of Governors in Washington DC.",
+          "excerpt": "The Fed - Finance and Economics Discussion Series (FEDS) Skip to main content An official website of the United States Government Here&#x27;s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock Locked padlock icon ) or https:// means you&#x27;ve safely connected to the .gov website. Share sensitive information only on official, secure websites. Back to Home Board of Governors of the Federal Reserve System Stay Connected Federal Reserve Facebook Page Federal Reserve Instagram Page Federal Reserve YouTube Page Federal Reserve Flickr Page Federal Reserve LinkedIn Page Federal Reserve Threads Page Federal Reserve X Page Federal Reserve Bluesky Page Subscribe to RSS Subscribe to Email Recent Postings Calendar Publications Site Map A-Z index Careers FAQs Videos Contact Search Submit Search Button Advanced Toggle Dropdown Menu Main Menu Toggle Button Sections Search Toggle Button Search Search Submit Button Submit Home Economic Research Finance and Economics Discussion Series (FEDS) below when display/hiding this option --> X Bluesky Share PDF --> RSS Staff working papers in the Finance and Economics Discussion Series (FEDS) investigate a broad range of issues in economics and finance, with a focus on the U.S. economy and domestic financial markets. Search Submit Button View by year 2026 FEDS 2026-024 May 2026 Financial Well-being and Inclusion of Justice Involved Populations: Evidence from the SHED Kabir Dasgupta , Jennifer Fernandez, and Alicia Lloro Abstract: This study examines financial challenges faced by justice-involved individuals using 2023-2024 Survey of Household Economics and Decisionmaking data. Individuals with justice system contact experience su",
+          "discoveredFrom": "https://www.federalreserve.gov/newsevents/pressreleases.htm"
+        },
+        {
+          "sourceName": "Federal Reserve Press Releases",
+          "title": "Press Releases",
+          "url": "https://www.federalreserve.gov/newsevents/pressreleases.htm",
+          "publishedAt": null,
+          "summary": "The Federal Reserve Board of Governors in Washington DC.",
+          "excerpt": "Federal Reserve Board - Press Releases Skip to main content An official website of the United States Government Here&#x27;s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock Locked padlock icon ) or https:// means you&#x27;ve safely connected to the .gov website. Share sensitive information only on official, secure websites. Back to Home Board of Governors of the Federal Reserve System Stay Connected Federal Reserve Facebook Page Federal Reserve Instagram Page Federal Reserve YouTube Page Federal Reserve Flickr Page Federal Reserve LinkedIn Page Federal Reserve Threads Page Federal Reserve X Page Federal Reserve Bluesky Page Subscribe to RSS Subscribe to Email Recent Postings Calendar Publications Site Map A-Z index Careers FAQs Videos Contact Search Submit Search Button Advanced Toggle Dropdown Menu Main Menu Toggle Button Sections Search Toggle Button Search Search Submit Button Submit Home News & Events Press Releases RSS Please enable JavaScript if it is disabled in your browser or access the information through the links provided below. Press Releases 2026 FOMC 2026 2025 FOMC 2025 2024 FOMC 2024 2023 FOMC 2023 2022 FOMC 2022 2021 FOMC 2021 2020 FOMC 2020 2019 2018 2017 2016 2015 2014 2013 2012 2011 2010 2009 2008 2007 2006 Archive Sign-up Email Alerts Enter Email for Gov Delivery Signup RSS Related Content Recent Postings Regulatory Reform FOIA Back to Top Last Update: March 13, 2017",
+          "discoveredFrom": "https://www.federalreserve.gov/newsevents/pressreleases.htm"
+        }
+      ],
+      "articleCount": 2,
       "ok": true
     },
     {
@@ -32649,6 +33029,27 @@
       "notes": "Rate decision schedule and materials.",
       "title": "Meeting calendars and information",
       "summary": "The Federal Reserve Board of Governors in Washington DC.",
+      "articles": [
+        {
+          "sourceName": "FOMC Calendars",
+          "title": "Finance and Economics Discussion Series (FEDS)",
+          "url": "https://www.federalreserve.gov/econres/feds/index.htm",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
+          "summary": "The Federal Reserve Board of Governors in Washington DC.",
+          "excerpt": "The Fed - Finance and Economics Discussion Series (FEDS) Skip to main content An official website of the United States Government Here&#x27;s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock Locked padlock icon ) or https:// means you&#x27;ve safely connected to the .gov website. Share sensitive information only on official, secure websites. Back to Home Board of Governors of the Federal Reserve System Stay Connected Federal Reserve Facebook Page Federal Reserve Instagram Page Federal Reserve YouTube Page Federal Reserve Flickr Page Federal Reserve LinkedIn Page Federal Reserve Threads Page Federal Reserve X Page Federal Reserve Bluesky Page Subscribe to RSS Subscribe to Email Recent Postings Calendar Publications Site Map A-Z index Careers FAQs Videos Contact Search Submit Search Button Advanced Toggle Dropdown Menu Main Menu Toggle Button Sections Search Toggle Button Search Search Submit Button Submit Home Economic Research Finance and Economics Discussion Series (FEDS) below when display/hiding this option --> X Bluesky Share PDF --> RSS Staff working papers in the Finance and Economics Discussion Series (FEDS) investigate a broad range of issues in economics and finance, with a focus on the U.S. economy and domestic financial markets. Search Submit Button View by year 2026 FEDS 2026-024 May 2026 Financial Well-being and Inclusion of Justice Involved Populations: Evidence from the SHED Kabir Dasgupta , Jennifer Fernandez, and Alicia Lloro Abstract: This study examines financial challenges faced by justice-involved individuals using 2023-2024 Survey of Household Economics and Decisionmaking data. Individuals with justice system contact experience su",
+          "discoveredFrom": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "sourceName": "FOMC Calendars",
+          "title": "Meeting calendars and information",
+          "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+          "publishedAt": null,
+          "summary": "The Federal Reserve Board of Governors in Washington DC.",
+          "excerpt": "The Fed - Meeting calendars and information Skip to main content An official website of the United States Government Here&#x27;s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock Locked padlock icon ) or https:// means you&#x27;ve safely connected to the .gov website. Share sensitive information only on official, secure websites. Back to Home Board of Governors of the Federal Reserve System Stay Connected Federal Reserve Facebook Page Federal Reserve Instagram Page Federal Reserve YouTube Page Federal Reserve Flickr Page Federal Reserve LinkedIn Page Federal Reserve Threads Page Federal Reserve X Page Federal Reserve Bluesky Page Subscribe to RSS Subscribe to Email Recent Postings Calendar Publications Site Map A-Z index Careers FAQs Videos Contact Search Submit Search Button Advanced Toggle Dropdown Menu Main Menu Toggle Button Sections Search Toggle Button Search Search Submit Button Submit Home Monetary Policy Federal Open Market Committee Federal Open Market Committee Please enable JavaScript if it is disabled in your browser or access the information through the links provided below. Chapters --> About the FOMC Meeting calendars and information Transcripts and other historical materials FAQs Meeting calendars, statements, and minutes (2021-2027) FOMC Search Search all FOMC materials FOMC Document Filter Advanced Search The FOMC holds eight regularly scheduled meetings during the year and other meetings as needed. Links to policy statements and minutes are in the calendars below. The minutes of regularly scheduled meetings are released three weeks after the date of the policy decision. Committee membership changes at the first regularly scheduled me",
+          "discoveredFrom": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        }
+      ],
+      "articleCount": 2,
       "ok": true
     },
     {
@@ -32658,8 +33059,38 @@
       "cadence": "Scheduled",
       "trust": "Very high",
       "notes": "CPI, payrolls, unemployment, PPI, and labor releases.",
-      "title": "Schedule of Selected Releases for May 2026",
-      "summary": "CPI, payrolls, unemployment, PPI, and labor releases.",
+      "title": "May 2026",
+      "summary": "An official website of the United States government Here is how you know",
+      "articles": [
+        {
+          "sourceName": "BLS Economic News Releases",
+          "title": "BLS Weekly Update",
+          "url": "https://www.bls.gov/opub/update.htm",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
+          "summary": "An official website of the United States government Here is how you know",
+          "excerpt": "BLS Weekly Update : U.S. Bureau of Labor Statistics Office of Publications & Special Studies SHARE ON: --> PRINT: BLS Weekly Update This page contains links to selected publications recently published on the Bureau of Labor Statistics website. Week of April 27–May 1, 2026 Economic News Releases Employment Cost Index — March 2026 ( HTML ) ( PDF ) ( Charts ) Business Employment Dynamics — Third Quarter 2025 ( HTML ) ( PDF ) ( Charts ) Metropolitan Area Employment and Unemployment — February 2026 ( HTML ) ( PDF ) ( Charts ) Employment Situation of Veterans — 2025 ( HTML ) ( PDF ) The Economics Daily Labor force participation rate was 73.9 percent for mothers and 93.7 percent for fathers in 2025 Percentage of women in service occupations highest among 16- to 19-year-olds, at 46.8 percent Picture this: a decade of employment in the motion picture and video industries Fatal work injuries declined in 2024 Nonfarm payroll employment up in 2 states, down in 2 states and DC from February 2025 to February 2026 Monthly Labor Review CPI rent regional trends and the impact of the COVID-19 pandemic Upcoming News Releases All times are Eastern Time. Job Openings and Labor Turnover Survey Tuesday, May 05, 2026 (10:00 AM) Labor Market Experience, Education, Partner Status, and Health for those Born 1980-1984 Tuesday, May 05, 2026 (10:00 AM) State Employment and Unemployment (Monthly) Wednesday, May 06, 2026 (10:00 AM) Productivity and Costs Thursday, May 07, 2026 (08:30 AM) Employment Situation Friday, May 08, 2026 (08:30 AM) Consumer Price Index Tuesday, May 12, 2026 (08:30 AM) Real Earnings Tuesday, May 12, 2026 (08:30 AM) More upcoming news releases Get E-mail Updates email: This page is usually updated each Friday. Type your e-mail address into the space in the box above to receive a",
+          "discoveredFrom": "https://www.bls.gov/schedule/news_release/"
+        },
+        {
+          "sourceName": "BLS Economic News Releases",
+          "title": "The Economics Daily Home page",
+          "url": "https://www.bls.gov/opub/ted/",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
+          "summary": "An official website of the United States government Here is how you know",
+          "excerpt": "The Economics Daily Home page : The Economics Daily : U.S. Bureau of Labor Statistics PRINT: TED HOME TOPICS ARCHIVE BY YEAR ARCHIVE BY PROGRAM ABOUT TED SUBSCRIBE The Economics Daily Home page Labor force participation rate was 73.9 percent for mothers and 93.7 percent for fathers in 2025 May 01, 2026 The labor force participation rate (the percentage of the population working or looking for work) for all mothers with children under age 18 was 73.9 percent in 2025, little changed from the prior year. The participation rate for fathers with children under age 18 was also little changed at 93.7 percent in 2025. read full article » Recent Articles View All » April 30, 2026 Percentage of women in service occupations highest among 16- to 19-year-olds, at 46.8 percent The types of jobs people hold often shift over time as they attain education, build new skills, and experience changes in their lives and personal preferences. In 2025, employment patterns in the six major occupational groups varied significantly across different age groups for both women and men. April 29, 2026 Picture this: a decade of employment in the motion picture and video industries From February 2016 through February 2026, employment in the motion picture and video industries reel-y put on a show. After contending with the pandemic, the resulting reduction in film releases, and multiple worker strikes, employment in the industry ended the decade lower than where it started. April 28, 2026 Fatal work injuries declined in 2024 Each year on April 28, Workers’ Memorial Day honors the memory of those who lost their lives, sustained injuries, or became disabled because of their work. A total of 5,070 workers died from on-the-job injuries in the United States in 2024. April 27, 2026 Nonfarm payroll employment",
+          "discoveredFrom": "https://www.bls.gov/schedule/news_release/"
+        },
+        {
+          "sourceName": "BLS Economic News Releases",
+          "title": "Price and Index Number Research Home Page",
+          "url": "https://www.bls.gov/pir/",
+          "publishedAt": "2025-05-13T00:00:00.000Z",
+          "summary": "Price and Index Number Research Home Page",
+          "excerpt": "Price and Index Number Research Home Page : U.S. Bureau of Labor Statistics Price and Index Number Research SHARE ON: Search Price and Index Number Research Bureau of Labor Statistics > Price and Index Number Research > Price research home Price and Index Number Research Price research home Price and Index Number Research Home Page Notices Relocation of the New Tenant Rent Index and All Tenant Regressed Rent Index (7/22/2025) Read More &raquo; Discontinuation of the Disease-Based Price Index research series (5/13/2025) Read More &raquo; Redesign of Price Research webpages Read More &raquo; The Division was created in 1963 in response to the Stigler Commission Report on Federal price statistics. It has had a long and successful history, both in providing economic consulting services to the Bureau and in serving as a source of, and conduit for, new ideas in the economics profession. The Division staff works on long term research, much of it towards resolving of price index measurement problems, using a wide range of methods from microeconomic and macroeconomic theory, consumer economics, industrial organization, econometrics, and statistics. The Division also provides consulting services to the production offices within the Office of Prices and Living Conditions: Consumer Expenditure Surveys (CE) ; Consumer Price Index (CPI) ; Producer Price Index (PPI) ; Import/Export Price Indexes (MXP) . DPINR Research Products: Research New Tenant Rent Index Distribution of Personal Consumption Expenditures Research Supplemental Poverty Measure (SPM) Thresholds Research Disease-Based Price Indexes (R-DBPI) Current research includes: Consumption poverty Title of Presentation: \"Consumption Measurement from a Micro Perspective: A View from the U.S. Bureau of Labor Statistics\" Author(s): ",
+          "discoveredFrom": "https://www.bls.gov/schedule/news_release/"
+        }
+      ],
+      "articleCount": 3,
       "ok": true
     },
     {
@@ -32669,8 +33100,38 @@
       "cadence": "Scheduled",
       "trust": "Very high",
       "notes": "GDP, PCE, income, and trade data.",
-      "title": "Release Schedule | U.S. Bureau of Economic Analysis (BEA)",
-      "summary": "GDP, PCE, income, and trade data.",
+      "title": "Release Schedule",
+      "summary": "An official website of the United States government",
+      "articles": [
+        {
+          "sourceName": "BEA News Release Schedule",
+          "title": "Papers",
+          "url": "https://www.bea.gov/research/papers",
+          "publishedAt": "2026-04-30T12:00:00.000Z",
+          "summary": "An official website of the United States government",
+          "excerpt": "Papers | U.S. Bureau of Economic Analysis (BEA) Skip to main content Home Research @ BEA Papers Papers This page provides access to papers and presentations prepared by BEA staff. Abstracts are presented in HTML format; complete papers are in PDF format with selected tables in XLS format. The views expressed in these papers are solely those of the authors and not necessarily those of the U.S. Bureau of Economic Analysis or the U.S. Department of Commerce. Productivity Growth in the U.S. Medical Care Sector: An Analysis Using the U.S. Bureau of Economic Analysis’ Health Care Expenditure Statistics by Condition Understanding health care productivity is critical, as the sector accounts for about 17% of U.S. GDP. However, official statistics likely understate productivity growth by failing to capture improvements in medical technology and treatment quality. The Health Care Expenditure Statistics by… Read more Calvin Ackley, Abe C. Dunn, Eli Liebman, John A. Romley WP2026-11 Published April 2026 JEL Code(s) E31, I10, O47 Tracking Cannabis in the National Accounts The internationally agreed guidelines for national economic accounts explicitly recommend that illegal market activity should be tracked together with legal market activity (United Nations Statistics Division 2025). This recommendation is not currently implemented by the U.S. Bureau of Economic… Read more Rachel Soloveichik WP2026-10 Published April 2026 JEL Code(s) E01, O17, Q19 Noise Infusion at BEA This paper provides an overview of BEA’s plans to transition from cell suppression to noise infusion (multiplicatively perturbing reported survey values) as its primary method of statistical disclosure limitation (SDL). BEA intends to begin using noise infusion for SDL in summer 2026 for… Read more John Bockrath, Danie",
+          "discoveredFrom": "https://www.bea.gov/news/schedule"
+        },
+        {
+          "sourceName": "BEA News Release Schedule",
+          "title": "Research @ BEA",
+          "url": "https://www.bea.gov/research",
+          "publishedAt": "2026-04-30T12:00:00.000Z",
+          "summary": "Economic research is a critical function at the Bureau of Economic Analysis, and is conducted by staff in each of the program offices as well as the Office of the Chief Economist.",
+          "excerpt": "Research @ BEA | U.S. Bureau of Economic Analysis (BEA) Skip to main content Home Research @ BEA Research @ BEA Research Offices of Research Learn more about BEA's economic research, innovations, and methodology improvements. Research Meet the Researchers Explore BEA researchers' biographies and publications, sorted by name and subject matter expertise. Research Papers Browse economic research papers and presentations, filtered by topic and year. Research Special Sworn Researcher Program Learn how outside researchers can apply to use BEA's company data for statistical research, under strict guidelines. Research Research Using Company-Level Data View published research by academic economists who were granted access to BEA's business confidential data. Research Guest Lectures See the schedule for guest lectures held on-site at BEA. ============================================================================================================== --> Research Fellowship Program Read about BEA fellowship opportunities with the American Statistical Association and National Science Foundation. Latest Research The views expressed in these papers are solely those of the authors and not necessarily those of the U.S. Bureau of Economic Analysis or the U.S. Department of Commerce. Productivity Growth in the U.S. Medical Care Sector: An Analysis Using the U.S. Bureau of Economic Analysis’ Health Care Expenditure Statistics by Condition Understanding health care productivity is critical, as the sector accounts for about 17% of U.S. GDP. However, official statistics likely understate productivity growth by failing to capture improvements in medical technology and treatment quality. The Health Care Expenditure Statistics by… Read more By Calvin Ackley, Abe C. Dunn, Eli Liebman, John A. Rom",
+          "discoveredFrom": "https://www.bea.gov/news/schedule"
+        },
+        {
+          "sourceName": "BEA News Release Schedule",
+          "title": "The BEA Wire | BEA's Official Blog",
+          "url": "https://www.bea.gov/news/blog",
+          "publishedAt": "2026-04-20T13:07:20.000Z",
+          "summary": "An official website of the United States government",
+          "excerpt": "The BEA Wire | BEA&#039;s Official Blog | U.S. Bureau of Economic Analysis (BEA) Skip to main content Home News The BEA Wire | BEA's Official Blog The BEA Wire | BEA's Official Blog When Are Data and Tractors Treated the Same in Economic Accounting? April 20, 2026 A blog post from BEA Director Vipin Arora I’ve struggled over the years with some basic grammar (and I know I’m not the only one). It’s hard for me to remember what an adverb is, or to pick out a simile versus a metaphor. You can add treating the word data as plural to that list. Saying “the data are” instead of the “the data is” doesn’t sound right to me, even though I know that the singular usage has arisen only in recent years… Read More Delving Inside Global Value Chains: Expanded Data Coming Soon March 30, 2026 A blog post from BEA Director Vipin Arora I’d bet most people have heard of global supply chains. But are you familiar with their fraternal twin, global value chains? I’m guessing not. BEA’s statistics on value chains are an underappreciated tool that can help policymakers and the public better understand supply chains. Read More State Personal Income: More Than a Critical Economic Measure March 23, 2026 A blog from BEA Director Vipin Arora It’s widely recognized that BEA’s economic statistics are among the world’s most closely watched. That’s because our data about trade, consumer prices, and economic activity underpin decisions about interest rates and trade policy, taxes and spending, hiring and investing, and more. You might, however, be unaware that BEA data are also used in allocating hundreds of billions in federal funds… Read More A Continual Quest for Improving Data Quality March 16, 2026 A blog post from BEA Director Vipin Arora I wouldn’t imagine the phrase “data quality” stirs the imagi",
+          "discoveredFrom": "https://www.bea.gov/news/schedule"
+        }
+      ],
+      "articleCount": 3,
       "ok": true
     },
     {
@@ -32680,8 +33141,38 @@
       "cadence": "Scheduled",
       "trust": "Very high",
       "notes": "St. Louis Fed release directory.",
-      "title": "Releases of Economic Data | FRED | St. Louis Fed",
+      "title": "Releases",
       "summary": "324 releases of economic data. FRED: Download, graph, and track economic data.",
+      "articles": [
+        {
+          "sourceName": "FRED Releases",
+          "title": "A Millennium of Macroeconomic Data for the UK",
+          "url": "https://fred.stlouisfed.org/release?rid=389",
+          "publishedAt": null,
+          "summary": "Release: A Millennium of Macroeconomic Data for the UK, 128 economic data series, FRED: Download, graph, and track economic data.",
+          "excerpt": "A Millennium of Macroeconomic Data for the UK | FRED | St. Louis Fed --> Skip to main content A Millennium of Macroeconomic Data for the UK Skip to main content Tools Release Calendar Release Website Filter by: View All Filter by \"\" &times; A B C D E F G H I J K L M N O P Q R S T U V W X Y Z # Cancel Displaying for --> Release Calendar Data Source Add to Data List Add to Graph Sort by Popularity Popularity Updated Obs End Obs Start Title Frequency Units Seas Adj Add to Data List Add to Graph Sort by Popularity Popularity Updated Obs End Obs Start Title Frequency Units Seas Adj 3-month London Interbank Offered Rate (LIBOR) Percent per Annum, Quarterly, Not Seasonally Adjusted Q1 1970 to Q4 2016 (2017-06-09) Unemployment Rate in the United Kingdom Percent Monthly, Seasonally Adjusted Jan 1855 to Dec 2016 (2017-08-23) Annual, Not Seasonally Adjusted 1760 to 2016 (2018-03-12) Bank of England Policy Rate in the United Kingdom Not Seasonally Adjusted Percent per Annum, Monthly Nov 1694 to Jan 2017 (2018-03-12) Percent per Annum, Quarterly Q1 1695 to Q4 2016 (2018-03-12) Percent, Annual 1694 to 2016 (2018-03-12) Percent, Annual 1695 to 2016 (2018-03-12) 3-month London Interbank Offered Rate (LIBOR) in the United Kingdom Percent per Annum, Monthly, Not Seasonally Adjusted Jan 1970 to Jan 2017 (2017-06-09) Bank of England Balance Sheet - Total Assets in the United Kingdom Percent of Nominal GDP, Annual, Not Seasonally Adjusted 1701 to 2016 (2018-03-12) Consumer Price Index in the United Kingdom Index 2015=100, Not Seasonally Adjusted Quarterly Q3 1914 to Q4 2016 (2017-06-09) Annual 1209 to 2016 (2018-03-12) Consol (Long-Term Bond) Yields in the United Kingdom Not Seasonally Adjusted Percent per Annum, Quarterly Q3 1753 to Q4 2016 (2025-01-15) Percent, Annual 1703 to 2016 (2025-0",
+          "discoveredFrom": "https://fred.stlouisfed.org/releases"
+        },
+        {
+          "sourceName": "FRED Releases",
+          "title": "Advance Economic Indicators",
+          "url": "https://fred.stlouisfed.org/release?rid=435",
+          "publishedAt": null,
+          "summary": "Release: Advance Economic Indicators, 42 economic data series, FRED: Download, graph, and track economic data.",
+          "excerpt": "Advance Economic Indicators | FRED | St. Louis Fed --> Skip to main content Advance Economic Indicators Skip to main content Tools Release Calendar Release Website Filter by: View All Filter by \"\" &times; A B C D E F G H I J K L M N O P Q R S T U V W X Y Z # Cancel Displaying for --> Release Calendar Data Source Release Tables Table 1. Advance Estimates for U.S. International Trade in Goods by Principal End-Use Category (30) Table 2. Advance Estimates for Wholesale and Retail Inventories (12) Add to Data List Add to Graph Sort by Popularity Popularity Updated Obs End Obs Start Title Frequency Units Seas Adj Add to Data List Add to Graph Sort by Popularity Popularity Updated Obs End Obs Start Title Frequency Units Seas Adj Advance U.S. International Trade in Goods: Balance Millions of Dollars, Monthly Seasonally Adjusted Mar 2026 to Mar 2026 (4 days ago) Not Seasonally Adjusted Mar 2026 to Mar 2026 (4 days ago) Advance Retail Inventories: Retail (Excluding Food Services) Millions of Dollars, Monthly Seasonally Adjusted Feb 2026 to Mar 2026 (4 days ago) Not Seasonally Adjusted Feb 2026 to Mar 2026 (4 days ago) Advance U.S. International Trade in Goods: Imports Millions of Dollars, Monthly Seasonally Adjusted Mar 2026 to Mar 2026 (4 days ago) Not Seasonally Adjusted Mar 2026 to Mar 2026 (4 days ago) Advance U.S. International Trade in Goods: Imports: Industrial Supplies Millions of Dollars, Monthly Seasonally Adjusted Mar 2026 to Mar 2026 (4 days ago) Not Seasonally Adjusted Mar 2026 to Mar 2026 (4 days ago) Advance U.S. International Trade in Goods: Imports: Automotive Vehicles, etc. Millions of Dollars, Monthly Seasonally Adjusted Mar 2026 to Mar 2026 (4 days ago) Not Seasonally Adjusted Mar 2026 to Mar 2026 (4 days ago) Advance U.S. International Trade in Goods: Imports",
+          "discoveredFrom": "https://fred.stlouisfed.org/releases"
+        },
+        {
+          "sourceName": "FRED Releases",
+          "title": "Asia and Pacific Regional Economic Outlook",
+          "url": "https://fred.stlouisfed.org/release?rid=366",
+          "publishedAt": null,
+          "summary": "Release: Asia and Pacific Regional Economic Outlook, 333 economic data series, FRED: Download, graph, and track economic data.",
+          "excerpt": "Asia and Pacific Regional Economic Outlook | FRED | St. Louis Fed --> Skip to main content Asia and Pacific Regional Economic Outlook APD Regional Economic Outlook provides information on recent economic developments and prospects for countries in Asia and the Pacific. Skip to main content Tools Release Calendar Release Website Filter by: View All Filter by \"\" &times; A B C D E F G H I J K L M N O P Q R S T U V W X Y Z # Cancel Displaying for --> Release Calendar Data Source Add to Data List Add to Graph Sort by Popularity Popularity Updated Obs End Obs Start Title Frequency Units Seas Adj Add to Data List Add to Graph Sort by Popularity Popularity Updated Obs End Obs Start Title Frequency Units Seas Adj Prices: Consumer Price Index for Vietnam Percent Change, Annual, Not Seasonally Adjusted 1990 to 2031 (Apr 22) Prices: Consumer Price Index for Japan Percent Change, Annual, Not Seasonally Adjusted 1990 to 2031 (Apr 22) Prices: Consumer Price Index for Taiwan Province of China Percent Change, Annual, Not Seasonally Adjusted 1990 to 2031 (Apr 22) Prices: Consumer Price Index for Malaysia Percent Change, Annual, Not Seasonally Adjusted 1990 to 2031 (Apr 22) Balance of Payments: Total Net Current Account for China, P.R.: Mainland Annual, Not Seasonally Adjusted U.S. Dollars 2016 to 2024 (2019-10-23) Percent of GDP 1997 to 2031 (Apr 22) Balance of Payments: Total Net Current Account for Vietnam Annual, Not Seasonally Adjusted Percent of GDP 1990 to 2031 (Apr 22) U.S. Dollars 2016 to 2024 (2019-10-23) Balance of Payments: Total Net Current Account for India Annual, Not Seasonally Adjusted Percent of GDP 1990 to 2031 (Apr 22) U.S. Dollars 2016 to 2024 (2019-10-23) Prices: Consumer Price Index for Thailand Percent Change, Annual, Not Seasonally Adjusted 1990 to 2031 (Apr 22) P",
+          "discoveredFrom": "https://fred.stlouisfed.org/releases"
+        }
+      ],
+      "articleCount": 3,
       "ok": true
     },
     {
@@ -32692,7 +33183,19 @@
       "trust": "Very high",
       "notes": "Company current reports and catalysts.",
       "title": "SEC.gov | EDGAR Full Text Search",
-      "summary": "Company current reports and catalysts.",
+      "summary": " ",
+      "articles": [
+        {
+          "sourceName": "SEC Current Reports",
+          "title": "SEC.gov | EDGAR Full Text Search",
+          "url": "https://www.sec.gov/edgar/search/#/category=custom&forms=8-K",
+          "publishedAt": null,
+          "summary": " ",
+          "excerpt": "SEC.gov | EDGAR Full Text Search The new EDGAR advanced search gives you access to the full text of electronic filings since 2001. Document word or phrase ? Company name, ticker, CIK number or individual's name + more search options Filing category Browse filing types View all Filing types Browse filing types cancel Filed date range All (since 2001) Last 10 years Last 5 years Last year Last 30 days Custom Invalid Date Filed from Filed to Principal executive offices in Principal executive offices in Incorporated in ? View all - less search options SEARCH Clear all Refine search results by: Entity Form Incorporated in Principal executive offices located in Click headings to show top filters. Document counts shown in # Show Columns Filed Reporting for CIK Located Incorporated File number Film number Form & File Filed Reporting for Filing entity/person CIK Located Incorporated File number Film number Finding users keywords in filename.html &#8249; Previous 1 of 1x2 Next &#8250; &times; Open document Open filing Close Check forms that you want to search. Use the category select to narrow the choices. View all &times; check/uncheck all forms Filter Cancel",
+          "discoveredFrom": "https://www.sec.gov/edgar/search/#/category=custom&forms=8-K"
+        }
+      ],
+      "articleCount": 1,
       "ok": true
     },
     {
@@ -32704,6 +33207,36 @@
       "notes": "Public market news page; respect site terms.",
       "title": "Markets",
       "summary": "View up-to-date U.S. market and world market charts. Get the latest on world economy news and global markets in our Market Overview.",
+      "articles": [
+        {
+          "sourceName": "CNBC Markets",
+          "title": "Asia markets set to open mixed after Trump unveils plan to free ships in Hormuz",
+          "url": "https://www.cnbc.com/2026/05/04/asia-markets-live-updates-today-hang-seng-kospi-asx-oil-us-iran-trump-hormuz.html",
+          "publishedAt": "2026-05-03T23:49:02.000Z",
+          "summary": "Asia markets were set to open mixed Monday as investors assess news of President Donald Trump&#x27;s plan to \"free\" ships stranded in the Strait of Hormuz.",
+          "excerpt": "Asia markets live updates: Hang Seng Index, Kospi, ASX 200 Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Asia-Pacific markets were set to open mixed on Monday Oil prices fell after Trump said the U.S. would attempt to \"free\" ships stranded in the Strait of Hormuz. U.S. stock futures traded close to the flatline as investors monitored the latest developments. A screen displays the Nikkei 225 Stock Average figure on the trading floor at the Nomura Securities Co. headquarters in Tokyo, Japan, on Jan. 11, 2024. Bloomberg | Bloomberg | Getty Images Asia-Pacific markets were set to open mixed Monday as investors assess President Donald Trump &#x27;s plan to \"free\" ships stranded in the Strait of Hormuz, amid lingering tensions between Iran and the U.S. The U.S. would attempt to \"free\" stranded ships affected by the Strait of Hormuz closure since the start of the Iran war, Trump said in his Truth Social post Sunday. Dubbed \"Project Freedom,\" the effort is set to begin on Monday, Middle East time and will focus mainly on getting civilian ships flagged in countries not affiliated with the conflict out of the contested waterway so they can \"freely and ably get on with their business.\" \"U.S. military support to Project Freedom will include guided-missile destroyers, over 100 land and sea-based aircraft, multi-domain unmanned platforms, and 15,000 service members,\" the U.S. Central Command said shortly after Trump&#x27;s announcement. Oil prices fell following the announcement of \"Project Freedom\". West Texas Intermediate futures for July delivery fell 0.59% to $101.34 per barrel as of 7:38 p.m. ET. Brent crude futures were 0.27% lower at $107.88 per barrel. Hong Kong&#x27;s Hang Seng index futures were at 25,",
+          "discoveredFrom": "https://www.cnbc.com/markets/"
+        },
+        {
+          "sourceName": "CNBC Markets",
+          "title": "Stock futures are little changed as investors monitor latest in U.S.-Iran developments: Live updates",
+          "url": "https://www.cnbc.com/2026/05/03/stock-market-today-live-updates.html",
+          "publishedAt": "2026-05-03T22:06:33.000Z",
+          "summary": "The S&P 500 and Nasdaq Composite are coming off of a solid week, having notched fresh records on Friday.",
+          "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Traders works on the floor of the New York Stock Exchange (NYSE) at the opening bell in New York on April 30, 2026. Timothy A. Clary | AFP | Getty Images U.S. stock futures traded close to the flatline Sunday night as investors closely eyed the latest developments in the Middle East. S&P 500 futures added 0.1%, and Nasdaq 100 futures were near flat. Futures tied to the Dow Jones Industrial Average added 81 points, or about 0.2%. On Friday, both the S&P 500 and Nasdaq Composite rose to new all-time intraday and closing highs. The broad market index rose 0.29%, while the tech-heavy Nasdaq climbed 0.89%. The Dow bucked the trend, however, slipping 152.87 points, or 0.31%. In a Sunday Truth Social post, President Donald Trump announced \"Project Freedom,\" which he said entails the U.S. helping to \"free\" cargo ships of nations that aren&#x27;t involved in the Middle East conflict and that have been stranded by the Strait of Hormuz closure. The initiative is slated to start Monday , Trump wrote. \"I have told my Representatives to inform them that we will use best efforts to get their Ships and Crews safely out of the Strait,\" he said in his post. \"In all cases, they said they will not be returning until the area becomes safe for navigation, and everything else.\" The president&#x27;s Truth Social post had no details on how such an effort would unfold. Trump&#x27;s announcement came after Iran said on Sunday that it had received a U.S. response to its latest offer for peace talks. Previously on Friday, Iran reportedly sent an updated peace proposal through Pakistani mediators, boosting investors&#x27; optimism that a settlement with the U.S",
+          "discoveredFrom": "https://www.cnbc.com/markets/"
+        },
+        {
+          "sourceName": "CNBC Markets",
+          "title": "JPMorgan&#x27;s Jamie Dimon issued vague credit recession warning, but the bond market has more pressing issues",
+          "url": "https://www.cnbc.com/2026/05/02/kevin-warsh-federal-reserve-interest-rates-bonds-fixed-income.html",
+          "publishedAt": "2026-05-02T14:23:12.000Z",
+          "summary": "As fears about a credit crisis rise, bond investors may be too complacent with Kevin Warsh to become next Fed chair and volatility in rates likely to follow.",
+          "excerpt": "Bonds have more pressing issue than Jamie Dimon credit crisis warning Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points With Kevin Warsh expected to become the next Fed chair, markets will start to price in how new leadership could shift the path of rates, inflation policy, and future cuts. Many investors remain more focused on stocks, but bonds may react first through changes in treasury yields, duration risk, and credit spreads, and some high-profile figures on Wall Street including JPMorgan CEO Jamie Dimon say the market be be overdue for a credit crisis. Inflation is still above the Federal Reserve&#x27;s 2% target, while rates remain steady between 3.5% - 3.75% after this week&#x27;s FOMC meeting, but complacency in fixed income portfolios could lead to renewed volatility. In this article @TY.1 AGG AGGH Follow your favorite stocks CREATE FREE ACCOUNT watch now VIDEO 6:32 06:32 Beyond Big Tech: ETF managers look to international assets for diversification ETF Edge Risk in the credit markets has received a lot of attention in 2026, from fears about private credit stress to the head of the nation&#x27;s biggest bank, JPMorgan CEO Jamie Dimon, warning this week — though not pointing to any specific current credit market signal — \"We haven&#x27;t had a credit recession in so long, so when we have one, it would be worse than people think. It might be terrible.\" Dimon isn&#x27;t the only Wall Street veteran worried about the longer-term outlook for the bond market. But as investors focus on the likely confirmation of a new Federal Reserve chair, Kevin Warsh , many may be overlooking a more short-term volatile reaction in store for fixed-income portfolios. Whenever there is a Fed transition, treasury yiel",
+          "discoveredFrom": "https://www.cnbc.com/markets/"
+        }
+      ],
+      "articleCount": 3,
       "ok": true
     },
     {
@@ -32715,6 +33248,36 @@
       "notes": "Public finance news page; respect site terms.",
       "title": "Finance News: Wall Street, financial markets, stocks, securities and more from Yahoo Finance",
       "summary": "At Yahoo Finance, you get free stock quotes, up-to-date news, portfolio management resources, international market data, social interaction and mortgage rates that help you manage your financial life.",
+      "articles": [
+        {
+          "sourceName": "Yahoo Finance News",
+          "title": "Cryptocurrency pricing, market & regulation news - Yahoo Finance",
+          "url": "https://finance.yahoo.com/markets/crypto/",
+          "publishedAt": null,
+          "summary": "Get the latest cryptocurrency market news, pricing and regulation information to inform your defi investment strategy. From bitcoin to altcoins, Yahoo Finance has you covered.",
+          "excerpt": "Cryptocurrency pricing, market & regulation news - Yahoo Finance Oops, something went wrong Skip to navigation Skip to main content Skip to right column U.S. markets closed Cryptocurrencies US Markets Europe Markets Asia Markets Cryptocurrencies Rates Commodities Currencies U.S. markets closed Bitcoin USD 78,485.00 -66.70 -0.08% XRP USD 1.39 -0.00 -0.14% Ethereum USD 2,316.50 +2.48 +0.11% Tether USDt USD 1.00 -0.00 -0.01% BNB USD 616.74 -0.67 -0.11% Solana USD 83.73 -0.35 -0.42% ADVERTISEMENT Tether reports $1B in profit with $191.7B in reserves: Q1 Snapshot Tether International's latest reserves report shows its asset cushion grew nearly 30%, backed by $117 billion in US Treasury bills and $6.6 billion in Bitcoin. Blockspace • 2d ago BTC-USD Trump family crypto project quietly sold as holders got stuck Bloomberg • 2d ago 'Most crypto are scams,' claims Elon Musk — What does he hold? CCN • 2d ago Ethereum Foundation sells $23M more in ETH to Tom Lee's BitMine decrypt • 2d ago Latest News How the Iran War Is Quietly Crushing Americans’ Credit Access BeInCrypto • 1h ago CL=F Citizens Financial Joins Project Keystone As Valuation Gap And Momentum Stand Out Simply Wall St. • 2h ago CFG Is Ethereum the Generational Wealth Pick for Real‑World Crypto Use? Motley Fool • 2h ago ETH-USD Tom Lee Says Crypto Already Moved Through a Hidden Bear Phase BeInCrypto • 3h ago Decrypt How Canton Network Lets Institutions Guard Against DeFi Security Risks: Digital Asset CEO decrypt • 3h ago Riot Platforms Stock Pops as Bitcoin Miner Reports Data Center Revenue, Doubled AMD Deal decrypt • 2d ago RIOT Ethereum ETFs Shed $184M Over 4-Day Negative Streak decrypt • 2d ago ETH-USD Tether Reports Billion-Dollar Q1 Profit Amid Crypto Slump—And Says Audit Has Begun decrypt • 2d ago USDT-USD Top Cryp",
+          "discoveredFrom": "https://finance.yahoo.com/news/"
+        },
+        {
+          "sourceName": "Yahoo Finance News",
+          "title": "Finance News: Wall Street, financial markets, stocks, securities and more from Yahoo Finance",
+          "url": "https://finance.yahoo.com/news/",
+          "publishedAt": null,
+          "summary": "At Yahoo Finance, you get free stock quotes, up-to-date news, portfolio management resources, international market data, social interaction and mortgage rates that help you manage your financial life.",
+          "excerpt": "Finance News: Wall Street, financial markets, stocks, securities and more from Yahoo Finance Oops, something went wrong Skip to navigation Skip to main content Skip to right column U.S. markets closed US Markets US Markets Europe Markets Asia Markets Cryptocurrencies Rates Commodities Currencies U.S. markets closed S&P Futures 7,258.00 +14.25 +0.20% Dow Futures 49,646.00 -189.00 -0.38% Nasdaq Futures 27,835.75 +239.75 +0.87% Russell 2000 Futures 2,819.30 +11.50 +0.41% VIX 16.99 +0.10 +0.59% Gold 4,621.00 -23.50 -0.51% ADVERTISEMENT Weʼre unable to load stories right now. NQ=F Nasdaq 100 Jun 26 27,835.75 +239.75 (+0.87%) BTC-USD Bitcoin USD 78,485.00 -66.70 (-0.08%) ES=F E-Mini S&P 500 Jun 26 7,258.00 +14.25 (+0.20%) CL=F Crude Oil Jun 26 101.95 +0.01 (+0.01%) EBAY eBay Inc. 104.07 +0.59 (+0.57%) ADVERTISEMENT Portfolio Sign in to access your portfolio Sign in TEAM Atlassian Corporation 88.88 +20.29 (+29.58%) XNDU Xanadu Quantum Technologies Limited 36.12 +7.02 (+24.12%) TWLO Twilio Inc. 183.34 +35.28 (+23.83%) AXTI AXT, Inc. 96.00 +16.78 (+21.18%) SOUN SoundHound AI, Inc. 9.56 +1.60 (+20.10%) SMMT Summit Therapeutics Inc. 16.12 -5.34 (-24.91%) RBLX Roblox Corporation 45.13 -10.13 (-18.33%) ATMU Atmus Filtration Technologies Inc. 52.65 -10.75 (-16.96%) RYAN Ryan Specialty Holdings, Inc. 30.83 -3.94 (-11.33%) DLB Dolby Laboratories, Inc. 57.46 -6.68 (-10.41%) INTC Intel Corporation 99.61 +5.12 (+5.42%) NOK Nokia Oyj 13.30 +0.39 (+3.02%) NVDA NVIDIA Corporation 198.45 -1.12 (-0.56%) GRAB Grab Holdings Limited 3.6700 -0.1500 (-3.93%) AAPL Apple Inc. 280.25 +9.01 (+3.32%) Top economic events United States There are no important events for this country at this time. Select \"All\" to see top events in other countries or view all events. View All Events Edit your Dock Terms and ",
+          "discoveredFrom": "https://finance.yahoo.com/news/"
+        },
+        {
+          "sourceName": "Yahoo Finance News",
+          "title": "Latest Stock Market News",
+          "url": "https://finance.yahoo.com/topic/stock-market-news/",
+          "publishedAt": null,
+          "summary": "Get the latest news on the stock market and events that move stocks, with in-depth analyses to help you make investing and trading decisions.",
+          "excerpt": "Latest Stock Market News Oops, something went wrong Skip to navigation Skip to main content Skip to right column U.S. markets closed US Markets US Markets Europe Markets Asia Markets Cryptocurrencies Rates Commodities Currencies U.S. markets closed S&P Futures 7,258.00 +14.25 +0.20% Dow Futures 49,646.00 -189.00 -0.38% Nasdaq Futures 27,835.75 +239.75 +0.87% Russell 2000 Futures 2,819.30 +11.50 +0.41% VIX 16.99 +0.10 +0.59% Gold 4,621.00 -23.50 -0.51% ADVERTISEMENT 5 things we learned during S&P 500 earnings season So many lessons from earnings season, so little time Yahoo Finance • 3h ago CVX Traders grapple with 2-sided tail risk as stocks regain highs Bloomberg • 10h ago Palantir expected to report Q1 revenue jump as software stocks rebound Yahoo Finance • 3h ago Allstate valuation check after strong Q1 beat and $4b buyback Simply Wall St. • 6h ago Jim Cramer explains why Wall Street liked Alphabet's quarter Insider Monkey • 8h ago GOOG 7 reasons Wall Street May regret Kevin Warsh as Fed chair 24/7 Wall St. • 7h ago Record highs look riskier in Nasdaq than broader market Yahoo Finance • 8h ago Did Brink's stock drop create a buying opportunity? Insider Monkey • 7h ago BCO Is Corning a good stock to buy now? Insider Monkey • 6h ago GLW TSMC is selling ARM stock. Should you? Barchart • 1d ago TSM Why Ingram Micro shares fell Friday StockStory • 6h ago INGM Should you dump Bitcoin for stocks after S&P 500 record? 24/7 Wall St. • 6h ago ^GSPC Why Warby Parker stock fell Friday StockStory • 6h ago WRBY Pfizer Stock: Still Priced Like It's Dead Money Motley Fool • 40m ago PFE Plug Power Stock Is Still Under $30. Here's Why It's Time to Pounce. Motley Fool • 50m ago PLUG DTE Stock market today: S&P 500, Nasdaq, Dow futures climb as the US and Iran inch toward peace talks LI",
+          "discoveredFrom": "https://finance.yahoo.com/news/"
+        }
+      ],
+      "articleCount": 3,
       "ok": true
     }
   ]
