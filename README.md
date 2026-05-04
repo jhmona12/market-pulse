@@ -165,6 +165,61 @@ When the refresh runs successfully, it:
 
 GitHub scheduled workflows may start several minutes late. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
 
+## Modeling Pipeline
+
+The repo now includes a separate Python modeling workflow for training a directional classifier on the current S&P 500 universe.
+
+Model target:
+
+- Label: stock total return over the next 14 trading days minus SPY total return over the next 14 trading days `> 0`
+- Universe: current S&P 500 constituents only
+- History window: 10 years of cached daily price history
+
+Modeling scripts:
+
+```text
+scripts/modeling/fetch_training_data.py    Cache raw price and macro data locally
+scripts/modeling/build_training_dataset.py Build the labeled feature matrix
+scripts/modeling/train_xgboost_model.py    Train the XGBoost classifier and save reports
+scripts/modeling/run_model_pipeline.py     Run the full modeling pipeline
+scripts/modeling/setup_training_env.sh     Create a local training venv and install the OpenMP runtime
+scripts/modeling/requirements.txt          Python package requirements for training
+```
+
+Local modeling cache and outputs:
+
+```text
+data/modeling/raw/                         Cached price and macro histories
+data/modeling/features/                    Labeled training dataset
+data/modeling/models/                      Saved trained model artifacts
+data/modeling/reports/                     Training reports and test predictions
+```
+
+The modeling cache is ignored by git so large raw history files and model artifacts stay local by default.
+
+Model environment setup:
+
+```bash
+bash scripts/modeling/setup_training_env.sh
+```
+
+Example workflow:
+
+```bash
+/Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/fetch_training_data.py --years 10
+/Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/build_training_dataset.py
+.venv-model/bin/python scripts/modeling/train_xgboost_model.py
+```
+
+The current feature set is v1 and intentionally excludes article/news features. It focuses on:
+
+- Momentum and trend
+- Volume and volatility
+- Relative strength versus SPY
+- Market breadth
+- Sector ETF context
+- Macro series when the FRED cache is available
+
 ## Project Structure
 
 ```text
