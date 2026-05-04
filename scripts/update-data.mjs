@@ -6,6 +6,7 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const maxTickers = Number.parseInt(process.env.MAX_TICKERS || "0", 10);
 const articlesPerSource = Number.parseInt(process.env.SOURCE_ARTICLES_PER_SOURCE || "3", 10);
 const maxArticleCandidates = Number.parseInt(process.env.SOURCE_ARTICLE_CANDIDATES || "10", 10);
+const companyContextCount = Number.parseInt(process.env.COMPANY_CONTEXT_COUNT || "12", 10);
 const snapshotOutput = process.env.SNAPSHOT_OUTPUT || "data/snapshot.json";
 const today = new Date();
 const startDate = new Date(today);
@@ -63,6 +64,26 @@ async function fetchText(url, options = {}) {
     });
     if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
     return await response.text();
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function fetchJson(url, options = {}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), options.timeout || 14000);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        "user-agent": "Mozilla/5.0 MarketPulse/0.1 personal research dashboard",
+        accept: "application/json,text/plain,*/*",
+        origin: "https://www.nasdaq.com",
+        referer: "https://www.nasdaq.com/"
+      }
+    });
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+    return await response.json();
   } finally {
     clearTimeout(timeout);
   }
@@ -942,6 +963,312 @@ function compactCandidate(item) {
   };
 }
 
+function nasdaqValue(node) {
+  return node && typeof node === "object" && "value" in node ? node.value : node;
+}
+
+function parseYahooRssItems(xml, symbol) {
+  return [...xml.matchAll(/<item\b[\s\S]*?<\/item>/gi)]
+    .slice(0, 8)
+    .map((match, index) => {
+      const item = match[0];
+      const title = stripTags(item.match(/<title>([\s\S]*?)<\/title>/i)?.[1] || "");
+      const url = decodeHtml(item.match(/<link>([\s\S]*?)<\/link>/i)?.[1] || "");
+      const publishedAt = normalizeDate(item.match(/<pubDate>([\s\S]*?)<\/pubDate>/i)?.[1] || "");
+      const summary = stripTags(item.match(/<description>([\s\S]*?)<\/description>/i)?.[1] || "").slice(0, 280);
+      return {
+        id: `${symbol}-N${index + 1}`,
+        sourceName: "Yahoo Finance News RSS",
+        title,
+        url,
+        publishedAt,
+        summary
+      };
+    })
+    .filter((item) => item.title && item.url);
+}
+
+function cleanCompanyUrl(value) {
+  if (!value) return null;
+  try {
+    const url = new URL(value.startsWith("http") ? value : `https://${value}`);
+    url.hash = "";
+    return url.href.replace(/\/$/, "");
+  } catch {
+    return null;
+  }
+}
+
+function shortDateFromIso(value) {
+  const normalized = normalizeDate(value);
+  if (!normalized) return null;
+  return new Date(normalized).toISOString().slice(0, 10);
+}
+
+function buildEarningsSummary(earnings) {
+  if (!earnings) return "Earnings timing was unavailable from the free sources checked.";
+  const pieces = [];
+  const lastDate = shortDateFromIso(earnings.lastReportedDate) || earnings.lastReportedDateText;
+  if (lastDate) {
+    pieces.push(
+      `Last reported ${lastDate}${earnings.lastFiscalQuarter ? ` for the ${earnings.lastFiscalQuarter} fiscal quarter` : ""}` +
+        `${earnings.lastEps != null ? `; EPS ${earnings.lastEps}` : ""}` +
+        `${earnings.lastConsensus != null ? ` versus consensus ${earnings.lastConsensus}` : ""}` +
+        `${earnings.lastSurprisePct != null ? `; surprise ${earnings.lastSurprisePct}%` : ""}.`
+    );
+  } else {
+    pieces.push("Last earnings report date was not available from the free sources checked.");
+  }
+
+  const nextDate = shortDateFromIso(earnings.nextReportDate) || earnings.nextReportDateText;
+  if (nextDate) {
+    pieces.push(`Next earnings report date: ${nextDate}.`);
+  } else if (earnings.nextFiscalPeriod) {
+    pieces.push(`Exact next report date was not available; Nasdaq lists the next forecast fiscal period as ${earnings.nextFiscalPeriod}${earnings.nextConsensus != null ? ` with consensus ${earnings.nextConsensus}` : ""}.`);
+  } else {
+    pieces.push("Exact next earnings report date was not available.");
+  }
+  return pieces.join(" ");
+}
+
+function companyOverviewSummary(context) {
+  const description = context?.companyDescription || "";
+  if (!description) return "";
+  return description.length > 320 ? `${description.slice(0, 317).trim()}...` : description;
+}
+
+function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRefs) {
+  const bySymbol = new Map(companyContexts.map((context) => [context.symbol, context]));
+  const validRefSet = new Set(validSourceRefs);
+  const recommendations = (parsed.recommendations || []).map((recommendation) => {
+    const context = bySymbol.get(recommendation.symbol);
+    if (!context) return recommendation;
+
+    const sourceRefs = [
+      ...(recommendation.sourceRefs || []),
+      context.investorRelations?.id,
+      context.earnings?.sourceId
+    ].filter((ref, index, refs) => ref && validRefSet.has(ref) && refs.indexOf(ref) === index);
+
+    return {
+      ...recommendation,
+      companyOverview: companyOverviewSummary(context) || recommendation.companyOverview || "",
+      earningsContext: context.earnings?.summary || recommendation.earningsContext || "",
+      sourceRefs
+    };
+  });
+  return { ...parsed, recommendations };
+}
+
+function likelyIrLink(anchorText, href) {
+  const haystack = `${anchorText} ${href}`.toLowerCase();
+  return /\binvestor(s)?\b|investor-relations|\bir\b/.test(haystack) && !/(careers|privacy|terms|cookie|linkedin|facebook|twitter|youtube|instagram)/.test(haystack);
+}
+
+async function discoverInvestorRelationsUrl(companyUrl) {
+  const cleaned = cleanCompanyUrl(companyUrl);
+  if (!cleaned) return null;
+
+  try {
+    const base = new URL(cleaned);
+    const html = await fetchText(base.href, { timeout: 9000 });
+    for (const match of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
+      const href = attrValue(match[1], "href");
+      const label = stripTags(match[2]);
+      if (!href || !likelyIrLink(label, href)) continue;
+      try {
+        const url = new URL(decodeHtml(href), base);
+        if (!["http:", "https:"].includes(url.protocol)) continue;
+        return url.href;
+      } catch {
+        // Keep looking for a usable investor relations link.
+      }
+    }
+  } catch {
+    // Some homepages block automated requests; deterministic URL guesses still cover many IR sites.
+  }
+
+  const base = new URL(cleaned);
+  const host = base.hostname.replace(/^www\./, "");
+  return `${base.protocol}//investors.${host}`;
+}
+
+function compactIrPage(html, fallbackUrl) {
+  if (!html) return null;
+  const text = visibleTextFromHtml(html).slice(0, 2200);
+  return {
+    title: titleFromHtml(html, "Investor Relations"),
+    summary: summaryFromHtml(html, "Investor relations page"),
+    excerpt: text,
+    url: fallbackUrl
+  };
+}
+
+async function fetchInvestorRelationsContext(symbol, companyUrl) {
+  const investorUrl = await discoverInvestorRelationsUrl(companyUrl);
+  if (!investorUrl) return null;
+
+  try {
+    const html = await fetchText(investorUrl, { timeout: 12000 });
+    return {
+      id: `${symbol}-IR`,
+      type: "investor_relations",
+      sourceName: "Company investor relations",
+      ...compactIrPage(html, investorUrl)
+    };
+  } catch {
+    return {
+      id: `${symbol}-IR`,
+      type: "investor_relations",
+      sourceName: "Company investor relations",
+      title: "Investor Relations",
+      summary: "Investor relations URL discovered, but the page could not be fetched during this refresh.",
+      excerpt: "",
+      url: investorUrl
+    };
+  }
+}
+
+async function fetchNasdaqCompanyContext(symbol) {
+  const [profile, surprise, eps] = await Promise.all([
+    fetchJson(`https://api.nasdaq.com/api/company/${encodeURIComponent(symbol)}/company-profile`, { timeout: 12000 }).catch(() => null),
+    fetchJson(`https://api.nasdaq.com/api/company/${encodeURIComponent(symbol)}/earnings-surprise`, { timeout: 12000 }).catch(() => null),
+    fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/eps?assetclass=stocks`, { timeout: 12000 }).catch(() => null)
+  ]);
+
+  const profileData = profile?.data || {};
+  const surpriseRows = surprise?.data?.earningsSurpriseTable?.rows || [];
+  const epsRows = eps?.data?.earningsPerShare || [];
+  const lastReport = surpriseRows[0] || null;
+  const nextQuarter = epsRows.find((row) => String(row.type || "").toLowerCase().includes("upcoming")) || null;
+
+  return {
+    companyName: nasdaqValue(profileData.CompanyName),
+    companyDescription: stripTags(String(nasdaqValue(profileData.CompanyDescription) || "")).slice(0, 800),
+    companyUrl: cleanCompanyUrl(nasdaqValue(profileData.CompanyUrl)),
+    industry: nasdaqValue(profileData.Industry),
+    sector: nasdaqValue(profileData.Sector),
+    earnings: {
+      lastReportedDate: normalizeDate(lastReport?.dateReported),
+      lastReportedDateText: lastReport?.dateReported || null,
+      lastFiscalQuarter: lastReport?.fiscalQtrEnd || null,
+      lastEps: lastReport?.eps ?? null,
+      lastConsensus: lastReport?.consensusForecast ?? null,
+      lastSurprisePct: lastReport?.percentageSurprise ?? null,
+      nextReportDate: null,
+      nextReportDateText: null,
+      nextFiscalPeriod: nextQuarter?.period || null,
+      nextConsensus: nextQuarter?.consensus ?? null,
+      sourceName: "Nasdaq earnings data",
+      sourceUrl: `https://www.nasdaq.com/market-activity/stocks/${symbol.toLowerCase()}/earnings`
+    }
+  };
+}
+
+async function fetchCompanyNews(symbol) {
+  try {
+    const xml = await fetchText(`https://feeds.finance.yahoo.com/rss/2.0/headline?s=${encodeURIComponent(symbol)}&region=US&lang=en-US`, { timeout: 12000 });
+    return parseYahooRssItems(xml, symbol).slice(0, 5);
+  } catch {
+    return [];
+  }
+}
+
+async function fetchCompanyContext(candidate, index) {
+  const symbol = candidate.symbol;
+  const nasdaq = await fetchNasdaqCompanyContext(symbol);
+  const [investorRelations, news] = await Promise.all([
+    fetchInvestorRelationsContext(symbol, nasdaq.companyUrl),
+    fetchCompanyNews(symbol)
+  ]);
+  const sourcePrefix = `C${index + 1}`;
+  const sources = [];
+  if (investorRelations?.url) {
+    sources.push({
+      id: `${sourcePrefix}-IR`,
+      type: "investor_relations",
+      title: investorRelations.title || `${symbol} Investor Relations`,
+      url: investorRelations.url,
+      sourceName: investorRelations.sourceName
+    });
+  }
+  if (nasdaq.earnings?.sourceUrl) {
+    sources.push({
+      id: `${sourcePrefix}-EARNINGS`,
+      type: "earnings",
+      title: `${symbol} earnings history and forecast`,
+      url: nasdaq.earnings.sourceUrl,
+      sourceName: nasdaq.earnings.sourceName
+    });
+  }
+  news.forEach((item, newsIndex) => {
+    sources.push({
+      id: `${sourcePrefix}-N${newsIndex + 1}`,
+      type: "news",
+      title: item.title,
+      url: item.url,
+      sourceName: item.sourceName,
+      publishedAt: item.publishedAt
+    });
+  });
+
+  return {
+    id: sourcePrefix,
+    symbol,
+    name: candidate.name,
+    modelRank: candidate.modelRank,
+    modelPercentile: candidate.modelPercentile,
+    recentReturns: {
+      return20: candidate.return20,
+      return60: candidate.return60,
+      return120: candidate.return120,
+      relativeReturn60VsSpy: candidate.relativeReturn60VsSpy
+    },
+    companyName: nasdaq.companyName || candidate.name,
+    companyDescription: nasdaq.companyDescription,
+    companyUrl: nasdaq.companyUrl,
+    industry: nasdaq.industry,
+    sector: candidate.sector || nasdaq.sector,
+    investorRelations: investorRelations
+      ? {
+          id: `${sourcePrefix}-IR`,
+          url: investorRelations.url,
+          title: investorRelations.title,
+          summary: investorRelations.summary,
+          excerpt: investorRelations.excerpt?.slice(0, 1200) || ""
+        }
+      : null,
+    earnings: {
+      ...nasdaq.earnings,
+      sourceId: `${sourcePrefix}-EARNINGS`,
+      summary: buildEarningsSummary(nasdaq.earnings)
+    },
+    news: news.map((item, newsIndex) => ({
+      ...item,
+      id: `${sourcePrefix}-N${newsIndex + 1}`
+    })),
+    sources
+  };
+}
+
+async function buildCompanyContexts(candidates) {
+  const selected = candidates.slice(0, Math.max(0, companyContextCount));
+  const contexts = await mapLimit(selected, 3, async (candidate, index) => {
+    try {
+      return await fetchCompanyContext(candidate, index);
+    } catch (error) {
+      return {
+        id: `C${index + 1}`,
+        symbol: candidate.symbol,
+        name: candidate.name,
+        error: error.message,
+        sources: []
+      };
+    }
+  });
+  return contexts.filter(Boolean);
+}
+
 async function buildAiRecommendations({ opportunities, macro, calendar, sources, rulesRecommendations, sectorPerformance, model: modelSummary, promptText }) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (process.env.SKIP_AI === "1") return fallbackAiRecommendations("skipped_by_env");
@@ -963,10 +1290,13 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     excerpt: excerpt?.slice(0, 1200) || ""
   }));
   const modelCandidates = opportunities.filter(hasModelRank).slice(0, 30).map(compactCandidate);
+  const companyContexts = await buildCompanyContexts(modelCandidates);
   const validSymbols = [
     ...new Set(
-      modelCandidates.length
-        ? modelCandidates.map((item) => item.symbol)
+      companyContexts.length
+        ? companyContexts.map((item) => item.symbol)
+        : modelCandidates.length
+          ? modelCandidates.map((item) => item.symbol)
         : [
             ...opportunities.slice(0, 40).map((item) => item.symbol),
             ...opportunities.filter((item) => item.type === "etf").slice(0, 15).map((item) => item.symbol),
@@ -974,8 +1304,10 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
           ]
     )
   ].filter(Boolean);
-  const sourceRefSchema = sourceTape.length
-    ? { type: "string", enum: sourceTape.map((source) => source.id) }
+  const companySourceRefs = companyContexts.flatMap((context) => context.sources || []);
+  const sourceRefIds = [...sourceTape.map((source) => source.id), ...companySourceRefs.map((source) => source.id)];
+  const sourceRefSchema = sourceRefIds.length
+    ? { type: "string", enum: sourceRefIds }
     : { type: "string" };
   const payload = {
     generatedAt: new Date().toISOString(),
@@ -983,6 +1315,8 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     macro,
     upcomingEvents: calendar.slice(0, 8),
     sourceTape,
+    companyContexts,
+    companySourceRefs,
     sourceStatus: sources.map(({ name, url, category, trust, ok, articleCount, summary }) => ({
       name,
       url,
@@ -1058,6 +1392,9 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
                   "setup",
                   "whyNow",
                   "rationale",
+                  "companyOverview",
+                  "earningsContext",
+                  "recentNews",
                   "macroLink",
                   "macroEvidence",
                   "modelEvidence",
@@ -1074,6 +1411,9 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
                   setup: { type: "string" },
                   whyNow: { type: "string" },
                   rationale: { type: "string" },
+                  companyOverview: { type: "string" },
+                  earningsContext: { type: "string" },
+                  recentNews: { type: "string" },
                   macroLink: { type: "string" },
                   macroEvidence: { type: "string" },
                   modelEvidence: { type: "string" },
@@ -1083,8 +1423,8 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
                   invalidation: { type: "string" },
                   sourceRefs: {
                     type: "array",
-                    minItems: sourceTape.length ? 1 : 0,
-                    maxItems: 4,
+                    minItems: sourceRefIds.length ? 1 : 0,
+                    maxItems: 6,
                     items: sourceRefSchema
                   }
                 }
@@ -1104,7 +1444,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
             },
             sourceRefs: {
               type: "array",
-              maxItems: 8,
+              maxItems: 12,
               items: sourceRefSchema
             }
           }
@@ -1112,7 +1452,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       }
     },
     reasoning: { effort: "minimal" },
-    max_output_tokens: 6000
+    max_output_tokens: 8000
   };
 
   try {
@@ -1129,7 +1469,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     const usage = estimateOpenAiCost(aiModel, json.usage);
     const text = responseText(json);
     if (!text) throw new Error("OpenAI response did not include final text; try a larger max_output_tokens value or a lower reasoning effort.");
-    const parsed = JSON.parse(text);
+    const parsed = normalizeAiRecommendationContext(JSON.parse(text), companyContexts, sourceRefIds);
     await appendUsageLog({
       generatedAt: new Date().toISOString(),
       status: "ready",
@@ -1140,6 +1480,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       status: "ready",
       model: aiModel,
       usage,
+      companyContextCount: companyContexts.length,
       ...parsed
     };
   } catch (error) {

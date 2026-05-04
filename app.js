@@ -347,6 +347,9 @@ function renderAiRecommendations() {
       card.className = "ai-rec";
       const setup = item.setup || item.rationale || "";
       const whyNow = item.whyNow || item.macroLink || "";
+      const companyOverview = item.companyOverview || "";
+      const earningsContext = item.earningsContext || "";
+      const recentNews = item.recentNews || "";
       const macroEvidence = item.macroEvidence || item.macroLink || "";
       const modelEvidence = item.modelEvidence || "";
       const technicalEvidence = item.technicalEvidence || item.momentumEvidence || "";
@@ -360,6 +363,15 @@ function renderAiRecommendations() {
           <span class="conviction">${esc(item.conviction || "Review")}</span>
         </header>
         <p>${esc(setup)}</p>
+        ${
+          companyOverview || earningsContext || recentNews
+            ? `<div class="company-context">
+                ${companyOverview ? `<small><strong>Company:</strong> ${esc(companyOverview)}</small>` : ""}
+                ${earningsContext ? `<small><strong>Earnings:</strong> ${esc(earningsContext)}</small>` : ""}
+                ${recentNews ? `<small><strong>News:</strong> ${esc(recentNews)}</small>` : ""}
+              </div>`
+            : ""
+        }
         <div class="ai-evidence">
           <small><strong>Macro:</strong> ${esc(macroEvidence)}</small>
           ${modelEvidence ? `<small><strong>Model:</strong> ${esc(modelEvidence)}</small>` : ""}

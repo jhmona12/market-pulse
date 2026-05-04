@@ -15,6 +15,7 @@ The project is built to run cheaply with free data sources. It is not an intrada
 - Ingests public research and commentary sources listed in `config/news-sources.md`.
 - Discovers recent articles from those source landing pages and prioritizes newer dated articles.
 - Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data into structured research recommendations.
+- Enriches model candidates with company descriptions, investor relations links, earnings context, and recent ticker-specific news where free sources are available.
 
 ## Live Site
 
@@ -67,6 +68,7 @@ The refresh script:
 - Pulls selected macro series from FRED
 - Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
+- Enriches the top model candidates with company context from Nasdaq, company investor relations pages, and Yahoo Finance news RSS
 - Writes the dashboard snapshot to `data/snapshot.json`
 
 To refresh model rankings before the dashboard snapshot:
@@ -91,6 +93,7 @@ Useful source-ingestion knobs:
 ```bash
 SOURCE_ARTICLES_PER_SOURCE=3
 SOURCE_ARTICLE_CANDIDATES=10
+COMPANY_CONTEXT_COUNT=12
 ```
 
 ## AI Strategy Memo
@@ -121,6 +124,8 @@ The AI recommendation schema is intentionally constrained:
 - When model candidates are available, recommendations must use symbols from the model-ranked candidate list.
 - Ticker spelling must match the supplied data.
 - Each recommendation includes model evidence such as rank, percentile, and model reasons.
+- Each recommendation includes a short company overview, earnings context, and a recent-news/catalyst read when company context is available.
+- The AI prompt tells the model to prefer investor relations pages as the primary company source, use Nasdaq for earnings data when dates are machine-readable, and avoid overstating news causality.
 - Each recommendation must connect macro/publication evidence with technical momentum evidence.
 - Recommendations include setup, why-now, macro evidence, technical evidence, risk, and invalidation.
 - Source references use source IDs from the ingested article tape when article data is available.
