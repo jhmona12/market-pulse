@@ -5,7 +5,19 @@ import argparse
 import pandas as pd
 
 from common import FEATURES_DIR, MODELS_DIR, REPORTS_DIR, ROOT, write_json
-from train_rank_model import RETURN_COLUMN, TARGET_COLUMN, evaluate_ranked, feature_columns_for, make_dmatrix
+from train_rank_model import (
+    DEFAULT_EARLY_STOPPING_ROUNDS,
+    DEFAULT_NUM_BOOST_ROUND,
+    DEFAULT_RANK_PARAMS,
+    RETURN_COLUMN,
+    TARGET_COLUMN,
+    add_rank_hyperparameter_args,
+    evaluate_ranked,
+    feature_columns_for,
+    filter_by_symbol_history,
+    make_dmatrix,
+    rank_params_from_args,
+)
 
 try:
     import xgboost as xgb
@@ -25,6 +37,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--validation-days", type=int, default=126, help="Trading days per validation fold.")
     parser.add_argument("--embargo-days", type=int, default=14, help="Trading-date embargo around validation/test windows.")
     parser.add_argument("--min-train-days", type=int, default=756, help="Minimum expanding-window train size.")
+    parser.add_argument(
+        "--min-symbol-rows",
+        type=int,
+        default=0,
+        help="Drop symbols with fewer than this many feature-complete rows before walk-forward splitting.",
+    )
+    add_rank_hyperparameter_args(parser)
     return parser.parse_args()
 
 
@@ -54,27 +73,22 @@ def fold_slices(unique_dates: pd.DatetimeIndex, args: argparse.Namespace) -> lis
     return folds
 
 
-def train_fold(train: pd.DataFrame, validation: pd.DataFrame, feature_columns: list[str]) -> xgb.Booster:
+def train_fold(
+    train: pd.DataFrame,
+    validation: pd.DataFrame,
+    feature_columns: list[str],
+    params: dict | None = None,
+    num_boost_round: int = DEFAULT_NUM_BOOST_ROUND,
+    early_stopping_rounds: int = DEFAULT_EARLY_STOPPING_ROUNDS,
+) -> xgb.Booster:
     dtrain = make_dmatrix(train, feature_columns)
     dvalidation = make_dmatrix(validation, feature_columns)
-    params = {
-        "objective": "rank:ndcg",
-        "eval_metric": ["ndcg@25", "ndcg@50"],
-        "eta": 0.05,
-        "max_depth": 4,
-        "min_child_weight": 50,
-        "subsample": 0.8,
-        "colsample_bytree": 0.8,
-        "lambda": 2.0,
-        "alpha": 0.0,
-        "seed": 42,
-    }
     return xgb.train(
-        params=params,
+        params=params or DEFAULT_RANK_PARAMS,
         dtrain=dtrain,
-        num_boost_round=500,
+        num_boost_round=num_boost_round,
         evals=[(dtrain, "train"), (dvalidation, "validation")],
-        early_stopping_rounds=30,
+        early_stopping_rounds=early_stopping_rounds,
         verbose_eval=False,
     )
 
@@ -84,7 +98,9 @@ def main() -> None:
     dataset_path = FEATURES_DIR / args.dataset
     dataset = pd.read_csv(dataset_path, compression="gzip")
     dataset["date"] = pd.to_datetime(dataset["date"])
+    dataset, removed_symbols = filter_by_symbol_history(dataset, args.min_symbol_rows)
     feature_columns = feature_columns_for(args.dataset)
+    params = rank_params_from_args(args)
     unique_dates = pd.DatetimeIndex(sorted(dataset["date"].drop_duplicates()))
     folds = fold_slices(unique_dates, args)
     if not folds:
@@ -96,7 +112,14 @@ def main() -> None:
         train = dataset[dataset["date"].isin(fold["train_dates"])].copy()
         validation = dataset[dataset["date"].isin(fold["validation_dates"])].copy()
         test = dataset[dataset["date"].isin(fold["test_dates"])].copy()
-        booster = train_fold(train, validation, feature_columns)
+        booster = train_fold(
+            train,
+            validation,
+            feature_columns,
+            params=params,
+            num_boost_round=args.num_boost_round,
+            early_stopping_rounds=args.early_stopping_rounds,
+        )
 
         ordered_test = test.sort_values(["date", "symbol"]).reset_index(drop=True)
         dtest = xgb.DMatrix(ordered_test[feature_columns].to_numpy(dtype=float), feature_names=feature_columns)
@@ -147,8 +170,14 @@ def main() -> None:
         "test_days": args.test_days,
         "validation_days": args.validation_days,
         "embargo_days": args.embargo_days,
+        "min_symbol_rows": args.min_symbol_rows,
+        "removed_symbol_count": len(removed_symbols),
+        "removed_symbols": removed_symbols,
         "target_column": TARGET_COLUMN,
         "return_column": RETURN_COLUMN,
+        "params": params,
+        "num_boost_round": args.num_boost_round,
+        "early_stopping_rounds": args.early_stopping_rounds,
         "combined_test_metrics": evaluate_ranked(combined, "predicted_rank_score"),
         "folds": fold_reports,
     }

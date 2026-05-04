@@ -90,6 +90,21 @@ def dataset_report(dataset_path: Path) -> dict:
     )
 
     date_counts = dataset.groupby("date")["symbol"].nunique()
+    coverage = (
+        dataset.assign(date=pd.to_datetime(dataset["date"]))
+        .groupby(["symbol", "sector"])
+        .agg(rows=("date", "size"), start=("date", "min"), end=("date", "max"))
+        .reset_index()
+        .sort_values(["rows", "symbol"])
+    )
+    max_symbol_rows = int(coverage["rows"].max())
+    coverage["coverage_pct_of_max"] = coverage["rows"] / max_symbol_rows
+    coverage_thresholds = {}
+    for threshold in [252, 504, 756, 1008, 1260, 1512, 1764, 2016]:
+        coverage_thresholds[f"symbols_below_{threshold}_rows"] = int((coverage["rows"] < threshold).sum())
+    shortest_symbols = coverage.head(25).copy()
+    shortest_symbols["start"] = shortest_symbols["start"].dt.date.astype(str)
+    shortest_symbols["end"] = shortest_symbols["end"].dt.date.astype(str)
     split_rows = []
     dates = pd.to_datetime(dataset["date"])
     for name, start, end in [
@@ -125,6 +140,15 @@ def dataset_report(dataset_path: Path) -> dict:
         "start_date": str(dataset["date"].min()),
         "end_date": str(dataset["date"].max()),
         "feature_count": int(len(feature_columns)),
+        "symbol_coverage": {
+            "max_symbol_rows": max_symbol_rows,
+            "coverage_quantiles": {
+                str(key): float(value)
+                for key, value in coverage["coverage_pct_of_max"].quantile([0, 0.01, 0.05, 0.1, 0.25, 0.5, 1]).items()
+            },
+            "row_threshold_counts": coverage_thresholds,
+            "shortest_symbols": shortest_symbols.to_dict(orient="records"),
+        },
         "duplicate_date_symbol_rows": int(dataset.duplicated(["date", "symbol"]).sum()),
         "null_forward_return_rows": int(dataset["forward_return_14d"].isna().sum()),
         "null_spy_forward_return_rows": int(dataset["spy_forward_return_14d"].isna().sum()),

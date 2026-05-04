@@ -44,9 +44,65 @@ TARGET_COLUMNS = {
 
 NON_FEATURE_COLUMNS = IDENTITY_COLUMNS | TARGET_COLUMNS
 
+FEATURE_GROUP_PATTERNS = {
+    "volatility_risk": (
+        "volatility",
+        "downside_volatility",
+        "beta_60d",
+        "max_daily_return_20d",
+    ),
+    "liquidity": (
+        "volume",
+        "dollar_volume",
+        "amihud",
+    ),
+    "long_momentum": (
+        "ret_120d",
+        "momentum_126d",
+        "momentum_252d",
+    ),
+    "sector_relative": (
+        "_sector_pct_rank",
+        "_minus_sector_median",
+        "_vs_sector_etf",
+        "sector_ret_",
+        "sector_momentum_",
+        "sector_volatility_",
+        "sector_price_",
+        "sector_rsi_",
+        "price_vs_sector",
+        "rsi_vs_sector",
+    ),
+    "market_context": (
+        "spy_",
+        "breadth_",
+        "_vs_spy",
+    ),
+}
+
 
 def is_macro_feature(column: str) -> bool:
     return column.endswith("_level") or column.endswith("_chg_1") or column.endswith("_chg_5")
+
+
+def feature_matches_group(column: str, group: str) -> bool:
+    patterns = FEATURE_GROUP_PATTERNS[group]
+    return any(pattern in column for pattern in patterns)
+
+
+def drop_feature_groups(feature_columns: list[str], groups: list[str]) -> tuple[list[str], list[str]]:
+    unknown_groups = sorted(set(groups) - set(FEATURE_GROUP_PATTERNS))
+    if unknown_groups:
+        raise ValueError(f"Unknown feature groups: {unknown_groups}")
+
+    dropped = [
+        column
+        for column in feature_columns
+        if any(feature_matches_group(column, group) for group in groups)
+    ]
+    dropped_set = set(dropped)
+    kept = [column for column in feature_columns if column not in dropped_set]
+    return kept, dropped
 
 
 def feature_columns_for(dataset_name: str, features_dir: Path = FEATURES_DIR) -> list[str]:

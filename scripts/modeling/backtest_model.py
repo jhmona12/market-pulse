@@ -185,6 +185,61 @@ def selected_symbol_turnover(daily_symbols: list[set[str]]) -> float:
     return float(np.mean(turnovers)) if turnovers else float("nan")
 
 
+def symbols_from_csv(value: str) -> set[str]:
+    if not isinstance(value, str) or not value:
+        return set()
+    return {symbol for symbol in value.split(",") if symbol}
+
+
+def non_overlapping_offset_summary(daily: pd.DataFrame, horizon_days: int) -> dict:
+    ordered = daily.sort_values("date").reset_index(drop=True)
+    if ordered.empty or horizon_days <= 1:
+        return {}
+
+    offset_rows = []
+    for offset in range(min(horizon_days, len(ordered))):
+        sample = ordered.iloc[offset::horizon_days].copy()
+        if sample.empty:
+            continue
+        top_returns = sample["top_avg_cost_adjusted_return_14d"]
+        spread_returns = sample["top_minus_bottom_return_14d"]
+        selected_sets = [symbols_from_csv(value) for value in sample["top_symbols"].tolist()]
+        offset_rows.append(
+            {
+                "offset": offset,
+                "periods": int(len(sample)),
+                "start_date": sample["date"].min().date().isoformat(),
+                "end_date": sample["date"].max().date().isoformat(),
+                "avg_top_return_14d": float(top_returns.mean()),
+                "median_top_return_14d": float(top_returns.median()),
+                "positive_period_rate": float((top_returns > 0).mean()),
+                "avg_top_hit_rate": float(sample["top_hit_rate"].mean()),
+                "avg_top_minus_bottom_return_14d": float(spread_returns.mean()),
+                "cumulative_top_return": float((1 + top_returns).prod() - 1),
+                "cumulative_spread_return": float((1 + spread_returns).prod() - 1),
+                "max_drawdown_top_return": max_drawdown(top_returns),
+                "avg_turnover": selected_symbol_turnover(selected_sets),
+            }
+        )
+
+    offsets = pd.DataFrame(offset_rows)
+    return {
+        "offset_count": int(len(offsets)),
+        "avg_periods_per_offset": float(offsets["periods"].mean()),
+        "mean_top_return_14d": float(offsets["avg_top_return_14d"].mean()),
+        "median_top_return_14d": float(offsets["avg_top_return_14d"].median()),
+        "min_top_return_14d": float(offsets["avg_top_return_14d"].min()),
+        "max_top_return_14d": float(offsets["avg_top_return_14d"].max()),
+        "mean_top_hit_rate": float(offsets["avg_top_hit_rate"].mean()),
+        "mean_top_minus_bottom_return_14d": float(offsets["avg_top_minus_bottom_return_14d"].mean()),
+        "mean_cumulative_top_return": float(offsets["cumulative_top_return"].mean()),
+        "min_cumulative_top_return": float(offsets["cumulative_top_return"].min()),
+        "max_cumulative_top_return": float(offsets["cumulative_top_return"].max()),
+        "worst_offset_max_drawdown_top_return": float(offsets["max_drawdown_top_return"].min()),
+        "offsets": offset_rows,
+    }
+
+
 def evaluate_score(
     frame: pd.DataFrame,
     spec: ScoreSpec,
@@ -275,6 +330,7 @@ def evaluate_score(
         "approx_cumulative_top_return": float((1 + daily_equivalent).prod() - 1),
         "approx_cumulative_spread_return": float((1 + spread_daily_equivalent).prod() - 1),
         "approx_max_drawdown_top_return": max_drawdown(daily_equivalent),
+        "non_overlapping_offsets": non_overlapping_offset_summary(daily, horizon_days),
         "bucket_summary": bucket_summary,
     }
     return summary, daily, buckets
@@ -317,7 +373,10 @@ def main() -> None:
         "bucket_fraction": args.bucket_fraction,
         "return_column": return_column,
         "target_column": target_column,
-        "notes": "Daily returns are approximate because 14-day forward labels overlap across entry dates.",
+        "notes": (
+            "Daily rows use overlapping forward labels. non_overlapping_offsets evaluates every possible "
+            "14-trading-day rebalance offset separately to reduce overlap bias."
+        ),
         "scores": sorted(summaries, key=lambda item: item.get("avg_top_cost_adjusted_return_14d", -999), reverse=True),
     }
     write_json(summary_payload, REPORTS_DIR / f"{args.output_name}_summary.json")

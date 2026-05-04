@@ -19,6 +19,65 @@ except ModuleNotFoundError as error:  # pragma: no cover - handled at runtime
     ) from error
 
 
+DEFAULT_RANK_PARAMS = {
+    "objective": "rank:ndcg",
+    "eval_metric": ["ndcg@25", "ndcg@50"],
+    "eta": 0.04,
+    "max_depth": 3,
+    "min_child_weight": 80,
+    "subsample": 0.85,
+    "colsample_bytree": 0.8,
+    "lambda": 4.0,
+    "alpha": 0.0,
+    "seed": 42,
+}
+DEFAULT_NUM_BOOST_ROUND = 700
+DEFAULT_EARLY_STOPPING_ROUNDS = 40
+
+
+def add_rank_hyperparameter_args(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--eta", type=float, default=DEFAULT_RANK_PARAMS["eta"], help="XGBoost learning rate.")
+    parser.add_argument("--max-depth", type=int, default=DEFAULT_RANK_PARAMS["max_depth"], help="Maximum tree depth.")
+    parser.add_argument(
+        "--min-child-weight",
+        type=float,
+        default=DEFAULT_RANK_PARAMS["min_child_weight"],
+        help="Minimum child weight regularization.",
+    )
+    parser.add_argument("--subsample", type=float, default=DEFAULT_RANK_PARAMS["subsample"], help="Row subsample ratio.")
+    parser.add_argument(
+        "--colsample-bytree",
+        type=float,
+        default=DEFAULT_RANK_PARAMS["colsample_bytree"],
+        help="Column subsample ratio per tree.",
+    )
+    parser.add_argument("--lambda-reg", type=float, default=DEFAULT_RANK_PARAMS["lambda"], help="L2 regularization.")
+    parser.add_argument("--alpha", type=float, default=DEFAULT_RANK_PARAMS["alpha"], help="L1 regularization.")
+    parser.add_argument("--seed", type=int, default=DEFAULT_RANK_PARAMS["seed"], help="Random seed.")
+    parser.add_argument("--num-boost-round", type=int, default=DEFAULT_NUM_BOOST_ROUND, help="Maximum boosting rounds.")
+    parser.add_argument(
+        "--early-stopping-rounds",
+        type=int,
+        default=DEFAULT_EARLY_STOPPING_ROUNDS,
+        help="Validation rounds without improvement before stopping.",
+    )
+
+
+def rank_params_from_args(args: argparse.Namespace) -> dict:
+    return {
+        "objective": "rank:ndcg",
+        "eval_metric": ["ndcg@25", "ndcg@50"],
+        "eta": args.eta,
+        "max_depth": args.max_depth,
+        "min_child_weight": args.min_child_weight,
+        "subsample": args.subsample,
+        "colsample_bytree": args.colsample_bytree,
+        "lambda": args.lambda_reg,
+        "alpha": args.alpha,
+        "seed": args.seed,
+    }
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train an XGBoost learning-to-rank model for sector-neutral momentum selection.")
     parser.add_argument("--dataset", default="training_dataset.csv.gz", help="Dataset filename inside data/modeling/features.")
@@ -26,7 +85,34 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--test-days", type=int, default=252, help="Approximate number of trading days to reserve for test.")
     parser.add_argument("--validation-days", type=int, default=252, help="Approximate number of trading days to reserve for validation.")
     parser.add_argument("--embargo-days", type=int, default=14, help="Trading-date embargo between train/validation/test windows.")
+    parser.add_argument(
+        "--min-symbol-rows",
+        type=int,
+        default=0,
+        help="Drop symbols with fewer than this many feature-complete rows before splitting. Disabled by default.",
+    )
+    add_rank_hyperparameter_args(parser)
     return parser.parse_args()
+
+
+def filter_by_symbol_history(dataset: pd.DataFrame, min_symbol_rows: int) -> tuple[pd.DataFrame, list[dict]]:
+    if min_symbol_rows <= 0:
+        return dataset, []
+
+    coverage = (
+        dataset.groupby("symbol")
+        .agg(rows=("date", "size"), start=("date", "min"), end=("date", "max"))
+        .reset_index()
+    )
+    removed = coverage[coverage["rows"] < min_symbol_rows].sort_values(["rows", "symbol"]).copy()
+    keep_symbols = set(coverage.loc[coverage["rows"] >= min_symbol_rows, "symbol"])
+    filtered = dataset[dataset["symbol"].isin(keep_symbols)].copy()
+    removed_rows = removed.to_dict(orient="records")
+    for row in removed_rows:
+        row["rows"] = int(row["rows"])
+        row["start"] = row["start"].date().isoformat()
+        row["end"] = row["end"].date().isoformat()
+    return filtered, removed_rows
 
 
 def split_dates(dataset: pd.DataFrame, validation_days: int, test_days: int, embargo_days: int) -> tuple[pd.DatetimeIndex, pd.DatetimeIndex, pd.DatetimeIndex, dict]:
@@ -100,6 +186,7 @@ def main() -> None:
     dataset_path = FEATURES_DIR / args.dataset
     dataset = pd.read_csv(dataset_path, compression="gzip")
     dataset["date"] = pd.to_datetime(dataset["date"])
+    dataset, removed_symbols = filter_by_symbol_history(dataset, args.min_symbol_rows)
     feature_columns = feature_columns_for(args.dataset)
 
     train_dates, validation_dates, test_dates, split_metadata = split_dates(
@@ -115,24 +202,13 @@ def main() -> None:
     dtrain = make_dmatrix(train, feature_columns)
     dvalidation = make_dmatrix(validation, feature_columns)
 
-    params = {
-        "objective": "rank:ndcg",
-        "eval_metric": ["ndcg@25", "ndcg@50"],
-        "eta": 0.05,
-        "max_depth": 4,
-        "min_child_weight": 50,
-        "subsample": 0.8,
-        "colsample_bytree": 0.8,
-        "lambda": 2.0,
-        "alpha": 0.0,
-        "seed": 42,
-    }
+    params = rank_params_from_args(args)
     booster = xgb.train(
         params=params,
         dtrain=dtrain,
-        num_boost_round=500,
+        num_boost_round=args.num_boost_round,
         evals=[(dtrain, "train"), (dvalidation, "validation")],
-        early_stopping_rounds=30,
+        early_stopping_rounds=args.early_stopping_rounds,
         verbose_eval=False,
     )
 
@@ -167,6 +243,9 @@ def main() -> None:
         "train_rows": int(len(train)),
         "validation_rows": int(len(validation)),
         "test_rows": int(len(test)),
+        "min_symbol_rows": args.min_symbol_rows,
+        "removed_symbol_count": len(removed_symbols),
+        "removed_symbols": removed_symbols,
         "feature_count": len(feature_columns),
         "split": split_metadata,
         "target_column": TARGET_COLUMN,

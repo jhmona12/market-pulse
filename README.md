@@ -167,15 +167,119 @@ GitHub scheduled workflows may start several minutes late. Manual refreshes can 
 
 ## Modeling Pipeline
 
-The repo includes a separate Python modeling workflow for researching S&P 500 momentum signals.
+The repo includes a separate Python modeling workflow for researching S&P 500 momentum signals. It is local-only by default; raw history, model artifacts, predictions, and reports are ignored by git.
 
-Model targets:
+The current primary model is an XGBoost learning-to-rank model. It is designed to answer a daily portfolio-selection question: which current S&P 500 stocks look most likely to outperform their sector over the next 14 trading days?
 
-- Universe: current S&P 500 constituents only
-- History window: 10 years of cached daily price history
-- Legacy binary label: stock 14-trading-day return minus SPY return `> 0`
-- Rank label: daily `0-4` relevance grade based on next-close-entry 14-day sector-neutral return after costs
-- Meta-label: candidate-only momentum setup success based on sector-neutral return hurdle and adjusted-close drawdown
+### Label
+
+For every feature-complete stock/date row:
+
+- Entry is assumed at the next trading day's close, not the same-day close.
+- Exit is assumed 14 trading days later.
+- The stock's forward return is compared with the matching sector ETF's forward return.
+- A 15 bps round-trip cost is subtracted from the sector-neutral return.
+- Stocks are ranked within each date by that after-cost sector-neutral return.
+- The rank label is a daily `0-4` relevance grade: top decile `4`, next decile `3`, middle `2`, second-worst decile `1`, bottom decile `0`.
+
+In plain English, the model is not trying to forecast the exact stock price. It is trying to sort the daily universe so the top-ranked basket contains stocks with better near-term sector-relative momentum setups than the bottom-ranked basket.
+
+Legacy/research labels still exist for comparison:
+
+- `label_outperform_spy_14d`: stock 14-day return minus SPY return `> 0`.
+- `meta_label_momentum_success`: candidate-only success label using a return hurdle and drawdown floor.
+
+### Universe And Null Treatment
+
+- Universe: current S&P 500 constituents.
+- Price history: about 10 years of cached daily adjusted-close history from free public endpoints.
+- Short-history current constituents are kept by default once they have enough trailing data to compute every required feature and enough future data to compute the label.
+- Nulls are not imputed. Rows with missing required features, infinite values, or missing labels are dropped from the training dataset.
+- Macro/FRED observation-date fields are excluded by default because observation dates are not the same thing as market release dates.
+
+The current feature-complete dataset has `1,082,323` rows, `502` symbols, `156` features, zero feature null cells, and zero label mismatches. Most symbols have full coverage: `449` of `502` have more than 95% of the available post-feature history. The shortest histories are mostly spin-offs, IPOs, or newer S&P additions such as `SNDK`, `GEV`, `SOLV`, `VLTO`, `KVUE`, `GEHC`, `CEG`, `HOOD`, `APP`, and `COIN`.
+
+Minimum-history filters are available for research:
+
+```bash
+.venv-model/bin/python scripts/modeling/walk_forward_rank_model.py --min-symbol-rows 756
+```
+
+Recent sensitivity tests argued against removing short-history names by default:
+
+```text
+No minimum filter:     +2.75% top-decile return, 58.1% hit rate, +3.45% spread
+Minimum ~2 years:      +2.51% top-decile return, 56.6% hit rate, +2.86% spread
+Minimum ~3 years:      +2.31% top-decile return, 56.0% hit rate, +2.75% spread
+Minimum ~5 years:      +2.31% top-decile return, 56.3% hit rate, +2.93% spread
+Minimum ~7 years:      +2.18% top-decile return, 57.3% hit rate, +2.78% spread
+```
+
+### Features
+
+The model intentionally excludes article/news features for now. The current feature set focuses on price-derived and cross-sectional signals:
+
+- Momentum and trend: 20-day, 60-day, 120-day, skip-window 126-day and 252-day momentum, moving-average distance, and 52-week high/low distance.
+- Risk and volatility: 20-day and 60-day volatility, downside volatility, beta to SPY, max daily return, and volatility relative to sector/SPY.
+- Liquidity: volume ratios, dollar volume, and Amihud-style illiquidity.
+- Relative strength: stock returns versus SPY, sector ETF, sector median, and same-day cross-sectional ranks.
+- Market context: S&P breadth, SPY trend/volatility, sector ETF momentum, and sector ETF trend.
+
+Feature and target constants live in:
+
+```text
+scripts/modeling/schema.py
+```
+
+That file is the source of truth for label names, non-feature columns, feature groups, and feature-group ablation logic.
+
+### Evaluation
+
+The main evaluation is an embargoed walk-forward test:
+
+- 4 recent non-overlapping test folds.
+- 63 trading days per test fold.
+- 126 trading days for validation.
+- 14 trading-day embargo around validation/test windows.
+- Daily top-decile basket evaluation against sector-neutral after-cost 14-day returns.
+
+The current tuned rank model results:
+
+```text
+Top-decile sector-neutral 14-day return: +2.75%
+Top-decile hit rate:                     58.1%
+Top-minus-bottom spread:                 +3.45%
+```
+
+The backtest report also includes `non_overlapping_offsets`, which evaluates every possible 14-trading-day rebalance offset separately. This helps avoid over-reading overlapping daily forward labels. For the tuned model, the non-overlapping offset top-decile returns ranged from `+2.31%` to `+3.05%`, with a mean of `+2.75%`.
+
+### Ablation And Tuning
+
+Feature-group ablation showed that risk/volatility, liquidity, and market context are doing real work:
+
+```text
+Full tuned model:      +2.75% top-decile return
+No volatility/risk:    +1.60%
+No liquidity:          +2.43%
+No market context:     +2.53%
+No long momentum:      +2.70%
+No sector-relative:    +2.62%
+```
+
+The current default rank-model hyperparameters were selected from a compact walk-forward tuning pass. The winning direction was simpler and more regularized than the prior baseline:
+
+```text
+eta:                   0.04
+max_depth:             3
+min_child_weight:      80
+subsample:             0.85
+colsample_bytree:      0.80
+lambda:                4.0
+num_boost_round:       700
+early_stopping_rounds: 40
+```
+
+The tuning objective should remain practical, not purely statistical: prioritize top-decile sector-neutral return and top-minus-bottom spread in walk-forward tests, use hit rate as a sanity check, and confirm behavior with non-overlapping rebalance offsets. Future tuning should use a wider random or Bayesian search, but only after adding transaction-cost assumptions, position sizing, and portfolio-level risk controls.
 
 Modeling scripts:
 
@@ -189,6 +293,8 @@ scripts/modeling/train_meta_label_model.py Train the candidate-only momentum met
 scripts/modeling/walk_forward_rank_model.py Run embargoed walk-forward rank-model evaluation
 scripts/modeling/backtest_model.py         Compare model scores against baseline ranking strategies
 scripts/modeling/explain_model.py          Generate XGBoost SHAP-style contribution summaries
+scripts/modeling/feature_ablation_rank_model.py Run rank-model feature-group ablations
+scripts/modeling/tune_rank_model.py        Run compact walk-forward hyperparameter tuning presets
 scripts/modeling/run_model_pipeline.py     Run the full modeling pipeline
 scripts/modeling/setup_training_env.sh     Create a local training venv and install the OpenMP runtime
 scripts/modeling/requirements.txt          Python package requirements for training
@@ -217,11 +323,10 @@ Example workflow:
 /Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/fetch_training_data.py --years 10
 /Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/build_training_dataset.py
 .venv-model/bin/python scripts/modeling/data_quality_report.py
-.venv-model/bin/python scripts/modeling/train_xgboost_model.py
-.venv-model/bin/python scripts/modeling/backtest_model.py
-.venv-model/bin/python scripts/modeling/explain_model.py
 .venv-model/bin/python scripts/modeling/train_rank_model.py
 .venv-model/bin/python scripts/modeling/walk_forward_rank_model.py
+.venv-model/bin/python scripts/modeling/backtest_model.py --predictions xgboost_rank_sector14_walk_forward_test_predictions.csv --output-name xgboost_rank_sector14_walk_forward_backtest
+.venv-model/bin/python scripts/modeling/explain_model.py --model-name xgboost_rank_sector14
 ```
 
 After the raw cache exists, the venv can run the build, train, backtest, and explanation steps together:
@@ -236,37 +341,34 @@ To run the newer ranking and meta-label experiments:
 .venv-model/bin/python scripts/modeling/run_model_pipeline.py --skip-fetch --train-rank --train-meta --walk-forward-rank
 ```
 
-To test whether raw macro fields are swamping the cross-sectional stock signal:
+To run feature ablations:
 
 ```bash
-.venv-model/bin/python scripts/modeling/train_xgboost_model.py --model-name xgboost_spy14_no_macro --exclude-macro
-.venv-model/bin/python scripts/modeling/backtest_model.py --predictions xgboost_spy14_no_macro_test_predictions.csv --output-name xgboost_spy14_no_macro_backtest
+.venv-model/bin/python scripts/modeling/feature_ablation_rank_model.py --output-name xgboost_rank_sector14_feature_ablation
 ```
 
-To test whether extreme future-return observations are making the classifier brittle:
+To run compact hyperparameter tuning:
 
 ```bash
-.venv-model/bin/python scripts/modeling/train_xgboost_model.py --model-name xgboost_spy14_cap50 --train-excess-return-cap 0.50
-.venv-model/bin/python scripts/modeling/backtest_model.py --predictions xgboost_spy14_cap50_test_predictions.csv --output-name xgboost_spy14_cap50_backtest
+.venv-model/bin/python scripts/modeling/tune_rank_model.py --output-name xgboost_rank_sector14_tuning
 ```
-
-The current feature set is v1 and intentionally excludes article/news features. It focuses on:
-
-- Momentum and trend
-- Volume and volatility
-- Relative strength versus SPY
-- Sector-relative momentum and trend
-- Market breadth
-- Sector ETF context
-- Macro series when the FRED cache is available
-
-Backtest reports compare XGBoost predictions against simple momentum and sector-neutral baselines. The reports are intentionally local-only and are written to `data/modeling/reports/`.
 
 Raw FRED macro fields are excluded from the default training dataset because their observation dates are not the same thing as market release dates. They can be included for experimentation with:
 
 ```bash
 /Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/build_training_dataset.py --include-macro
 ```
+
+The older SPY-relative classifier is still available for research comparisons:
+
+```bash
+.venv-model/bin/python scripts/modeling/train_xgboost_model.py --model-name xgboost_spy14_no_macro --exclude-macro
+.venv-model/bin/python scripts/modeling/backtest_model.py --predictions xgboost_spy14_no_macro_test_predictions.csv --output-name xgboost_spy14_no_macro_backtest
+.venv-model/bin/python scripts/modeling/train_xgboost_model.py --model-name xgboost_spy14_cap50 --train-excess-return-cap 0.50
+.venv-model/bin/python scripts/modeling/backtest_model.py --predictions xgboost_spy14_cap50_test_predictions.csv --output-name xgboost_spy14_cap50_backtest
+```
+
+Backtest reports compare XGBoost predictions against simple momentum and sector-neutral baselines. The reports are intentionally local-only and are written to `data/modeling/reports/`.
 
 ## Project Structure
 
