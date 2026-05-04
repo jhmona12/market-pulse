@@ -7,6 +7,7 @@
     "dev": "python3 -m http.server 4173",
     "dev:local": "node scripts/local-dashboard-server.mjs",
     "refresh": "node scripts/update-data.mjs",
-    "refresh:sample": "MAX_TICKERS=80 node scripts/update-data.mjs"
+    "refresh:sample": "MAX_TICKERS=80 node scripts/update-data.mjs",
+    "configure:ticker-backend": "node scripts/configure-ticker-backend.mjs"
   }
 }

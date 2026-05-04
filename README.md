@@ -240,6 +240,21 @@ For public-site use, deploy the backend from this repo with the included `Docker
 
 If `TICKER_LAB_ACCESS_CODE` is set on the backend, the site shows an access-code field and sends that value in the `x-ticker-lab-token` header. This keeps the public page viewable while keeping model scoring private.
 
+Suggested backend deployment flow:
+
+1. Deploy the repo as a Docker web service using `render.yaml` or the `Dockerfile`.
+2. Set `TICKER_LAB_ACCESS_CODE` as a private environment variable in the hosting dashboard.
+3. After the host gives you a URL, update the public runtime config:
+
+```bash
+node scripts/configure-ticker-backend.mjs https://your-backend.example.com
+git add config/runtime.json
+git commit -m "Configure Ticker Lab backend"
+git push
+```
+
+Do not put the access code in `config/runtime.json`; that file is public because the browser has to read it.
+
 Important caveat: non-U.S. and exchange-suffix tickers may be less comparable to S&P 500 stocks because currency, trading calendar, market hours, and volume conventions can differ.
 
 ## Scheduled Refresh

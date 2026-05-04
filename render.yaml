@@ -3,6 +3,7 @@ services:
     name: market-pulse-ticker-lab
     env: docker
     autoDeploy: true
+    healthCheckPath: /api/ticker-lab/status
     envVars:
       - key: PORT
         value: 8080
