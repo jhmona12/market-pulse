@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 
 from common import FEATURES_DIR, MODELS_DIR, REPORTS_DIR, ROOT, write_json
+from schema import NON_FEATURE_COLUMNS
 
 try:
     import xgboost as xgb
@@ -14,30 +15,6 @@ except ModuleNotFoundError as error:  # pragma: no cover - handled at runtime
         "xgboost is not installed in the current Python environment. "
         "Run scripts/modeling/setup_training_env.sh before explaining a model."
     ) from error
-
-
-IDENTITY_COLUMNS = {
-    "date",
-    "symbol",
-    "sector",
-    "close",
-    "forward_return_14d",
-    "spy_forward_return_14d",
-    "excess_return_14d",
-    "forward_return_14d_next_close",
-    "sector_forward_return_14d_next_close",
-    "sector_neutral_forward_return_14d",
-    "sector_neutral_forward_return_14d_after_cost",
-    "max_drawdown_14d_next_close",
-    "sector_max_drawdown_14d_next_close",
-    "label_outperform_spy_14d",
-    "label_sector_neutral_positive_14d",
-    "label_sector_neutral_hurdle_14d",
-    "sector_neutral_forward_return_pct_rank",
-    "relevance_grade_sector_neutral_14d",
-    "candidate_momentum_setup",
-    "meta_label_momentum_success",
-}
 
 
 def parse_args() -> argparse.Namespace:
@@ -70,7 +47,7 @@ def main() -> None:
     feature_names = booster.feature_names
     if not feature_names:
         dataset_columns = pd.read_csv(FEATURES_DIR / args.dataset, compression="gzip", nrows=0).columns.tolist()
-        feature_names = [column for column in dataset_columns if column not in IDENTITY_COLUMNS]
+        feature_names = [column for column in dataset_columns if column not in NON_FEATURE_COLUMNS]
 
     frame = load_frame(args, feature_names)
     dmatrix = xgb.DMatrix(frame[feature_names].to_numpy(dtype=float), feature_names=feature_names)

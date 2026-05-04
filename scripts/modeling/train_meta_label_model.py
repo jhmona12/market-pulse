@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import argparse
-import json
 
 import numpy as np
 import pandas as pd
 
 from common import FEATURES_DIR, MODELS_DIR, REPORTS_DIR, ROOT, write_json
+from schema import META_TARGET_COLUMN as TARGET_COLUMN
+from schema import RANK_RETURN_COLUMN as RETURN_COLUMN
+from schema import feature_columns_for
 from train_xgboost_model import auc_score, log_loss
 
 try:
@@ -18,10 +20,6 @@ except ModuleNotFoundError as error:  # pragma: no cover - handled at runtime
     ) from error
 
 
-TARGET_COLUMN = "meta_label_momentum_success"
-RETURN_COLUMN = "sector_neutral_forward_return_14d_after_cost"
-
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train a candidate-only meta-label model for screened momentum setups.")
     parser.add_argument("--dataset", default="training_dataset.csv.gz", help="Dataset filename inside data/modeling/features.")
@@ -30,39 +28,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--validation-days", type=int, default=252, help="Approximate number of trading days to reserve for validation.")
     parser.add_argument("--embargo-days", type=int, default=14, help="Trading-date embargo between train/validation/test windows.")
     return parser.parse_args()
-
-
-def feature_columns_for(dataset_name: str) -> list[str]:
-    metadata_path = FEATURES_DIR / "training_dataset_metadata.json"
-    if metadata_path.exists() and dataset_name == "training_dataset.csv.gz":
-        with metadata_path.open() as handle:
-            metadata = json.load(handle)
-        if metadata.get("feature_columns"):
-            return list(metadata["feature_columns"])
-    frame = pd.read_csv(FEATURES_DIR / dataset_name, compression="gzip", nrows=0)
-    excluded = {
-        "date",
-        "symbol",
-        "sector",
-        "close",
-        "forward_return_14d",
-        "spy_forward_return_14d",
-        "excess_return_14d",
-        "forward_return_14d_next_close",
-        "sector_forward_return_14d_next_close",
-        "sector_neutral_forward_return_14d",
-        RETURN_COLUMN,
-        "max_drawdown_14d_next_close",
-        "sector_max_drawdown_14d_next_close",
-        "label_outperform_spy_14d",
-        "label_sector_neutral_positive_14d",
-        "label_sector_neutral_hurdle_14d",
-        "sector_neutral_forward_return_pct_rank",
-        "relevance_grade_sector_neutral_14d",
-        "candidate_momentum_setup",
-        TARGET_COLUMN,
-    }
-    return [column for column in frame.columns if column not in excluded]
 
 
 def split_dates(dataset: pd.DataFrame, validation_days: int, test_days: int, embargo_days: int) -> tuple[pd.DatetimeIndex, pd.DatetimeIndex, pd.DatetimeIndex, dict]:

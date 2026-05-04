@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 from common import FEATURES_DIR, MODELS_DIR, REPORTS_DIR, ROOT, write_json
+from schema import LEGACY_TARGET_COLUMN as TARGET_COLUMN
+from schema import feature_columns_for, is_macro_feature
 
 try:
     import xgboost as xgb
@@ -15,31 +16,6 @@ except ModuleNotFoundError as error:  # pragma: no cover - handled at runtime
         "xgboost is not installed in the current Python environment. "
         "Install it before running the training step."
     ) from error
-
-
-TARGET_COLUMN = "label_outperform_spy_14d"
-IDENTITY_COLUMNS = {
-    "date",
-    "symbol",
-    "sector",
-    "close",
-    "forward_return_14d",
-    "spy_forward_return_14d",
-    "excess_return_14d",
-    "forward_return_14d_next_close",
-    "sector_forward_return_14d_next_close",
-    "sector_neutral_forward_return_14d",
-    "sector_neutral_forward_return_14d_after_cost",
-    "max_drawdown_14d_next_close",
-    "sector_max_drawdown_14d_next_close",
-    TARGET_COLUMN,
-    "label_sector_neutral_positive_14d",
-    "label_sector_neutral_hurdle_14d",
-    "sector_neutral_forward_return_pct_rank",
-    "relevance_grade_sector_neutral_14d",
-    "candidate_momentum_setup",
-    "meta_label_momentum_success",
-}
 
 
 def parse_args() -> argparse.Namespace:
@@ -136,13 +112,9 @@ def main() -> None:
         train = train[train_keep].copy()
         validation = validation[validation_keep].copy()
 
-    feature_columns = [column for column in dataset.columns if column not in IDENTITY_COLUMNS]
+    feature_columns = feature_columns_for(args.dataset)
     if args.exclude_macro:
-        feature_columns = [
-            column
-            for column in feature_columns
-            if not (column.endswith("_level") or column.endswith("_chg_1") or column.endswith("_chg_5"))
-        ]
+        feature_columns = [column for column in feature_columns if not is_macro_feature(column)]
     x_train = train[feature_columns].to_numpy(dtype=float)
     x_validation = validation[feature_columns].to_numpy(dtype=float)
     x_test = test[feature_columns].to_numpy(dtype=float)

@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 
 from common import FEATURES_DIR, REPORTS_DIR, ROOT, write_json
+from schema import LEGACY_TARGET_COLUMN, RANK_RETURN_COLUMN, SECTOR_POSITIVE_TARGET_COLUMN
 
 
 @dataclass(frozen=True)
@@ -43,31 +44,58 @@ def load_backtest_frame(args: argparse.Namespace) -> pd.DataFrame:
             "forward_return_14d",
             "spy_forward_return_14d",
             "excess_return_14d",
-            "label_outperform_spy_14d",
+            LEGACY_TARGET_COLUMN,
             "forward_return_14d_next_close",
             "sector_forward_return_14d_next_close",
             "sector_neutral_forward_return_14d",
-            "sector_neutral_forward_return_14d_after_cost",
-            "label_sector_neutral_positive_14d",
+            RANK_RETURN_COLUMN,
+            SECTOR_POSITIVE_TARGET_COLUMN,
             "label_sector_neutral_hurdle_14d",
             "relevance_grade_sector_neutral_14d",
             "candidate_momentum_setup",
             "meta_label_momentum_success",
             "ret_20d",
             "ret_60d",
+            "ret_120d",
+            "momentum_126d_skip_10",
+            "momentum_252d_skip_20",
+            "ret_20d_vol_adj",
+            "ret_60d_vol_adj",
             "rel_ret_20d_vs_spy",
             "rel_ret_60d_vs_spy",
+            "idiosyncratic_ret_20d",
+            "idiosyncratic_ret_60d",
             "ret_20d_pct_rank",
             "ret_60d_pct_rank",
+            "ret_120d_pct_rank",
+            "momentum_126d_skip_10_pct_rank",
+            "momentum_252d_skip_20_pct_rank",
+            "ret_20d_vol_adj_pct_rank",
+            "ret_60d_vol_adj_pct_rank",
             "ret_20d_sector_pct_rank",
             "ret_60d_sector_pct_rank",
+            "ret_120d_sector_pct_rank",
+            "momentum_126d_skip_10_sector_pct_rank",
+            "momentum_252d_skip_20_sector_pct_rank",
+            "ret_20d_vol_adj_sector_pct_rank",
+            "ret_60d_vol_adj_sector_pct_rank",
             "ret_20d_minus_sector_median",
             "ret_60d_minus_sector_median",
+            "ret_120d_minus_sector_median",
+            "momentum_126d_skip_10_minus_sector_median",
+            "momentum_252d_skip_20_minus_sector_median",
+            "ret_20d_vol_adj_minus_sector_median",
+            "ret_60d_vol_adj_minus_sector_median",
             "rel_ret_20d_vs_sector_etf",
             "rel_ret_60d_vs_sector_etf",
+            "rel_ret_120d_vs_sector_etf",
+            "rel_momentum_126d_vs_sector_etf",
+            "rel_momentum_252d_vs_sector_etf",
             "technical_composite_score",
             "price_vs_sma_200",
             "distance_to_52w_high",
+            "log_dollar_volume_20d",
+            "amihud_20d",
             "volume_ratio_20",
         ]
         if column in dataset.columns
@@ -102,13 +130,20 @@ def available_score_specs(frame: pd.DataFrame) -> list[ScoreSpec]:
         )
     candidates.extend(
         [
-        ScoreSpec("momentum_60d", "ret_60d"),
-        ScoreSpec("momentum_20d", "ret_20d"),
-        ScoreSpec("relative_strength_60d_vs_spy", "rel_ret_60d_vs_spy"),
-        ScoreSpec("sector_neutral_60d_rank", "ret_60d_sector_pct_rank"),
-        ScoreSpec("sector_neutral_60d_spread", "ret_60d_minus_sector_median"),
-        ScoreSpec("relative_strength_60d_vs_sector_etf", "rel_ret_60d_vs_sector_etf"),
-        ScoreSpec("technical_composite", "technical_composite_score"),
+            ScoreSpec("momentum_60d", "ret_60d"),
+            ScoreSpec("momentum_20d", "ret_20d"),
+            ScoreSpec("momentum_120d", "ret_120d"),
+            ScoreSpec("momentum_126d_skip_10", "momentum_126d_skip_10"),
+            ScoreSpec("momentum_252d_skip_20", "momentum_252d_skip_20"),
+            ScoreSpec("risk_adjusted_momentum_60d", "ret_60d_vol_adj"),
+            ScoreSpec("relative_strength_60d_vs_spy", "rel_ret_60d_vs_spy"),
+            ScoreSpec("idiosyncratic_momentum_60d", "idiosyncratic_ret_60d"),
+            ScoreSpec("sector_neutral_60d_rank", "ret_60d_sector_pct_rank"),
+            ScoreSpec("sector_neutral_120d_rank", "ret_120d_sector_pct_rank"),
+            ScoreSpec("sector_neutral_skip_momentum_rank", "momentum_126d_skip_10_sector_pct_rank"),
+            ScoreSpec("sector_neutral_60d_spread", "ret_60d_minus_sector_median"),
+            ScoreSpec("relative_strength_60d_vs_sector_etf", "rel_ret_60d_vs_sector_etf"),
+            ScoreSpec("technical_composite", "technical_composite_score"),
         ]
     )
     return [spec for spec in candidates if spec.column in frame.columns and frame[spec.column].notna().any()]
@@ -117,17 +152,17 @@ def available_score_specs(frame: pd.DataFrame) -> list[ScoreSpec]:
 def choose_return_column(frame: pd.DataFrame, requested: str | None) -> str:
     if requested:
         return requested
-    if "sector_neutral_forward_return_14d_after_cost" in frame.columns:
-        return "sector_neutral_forward_return_14d_after_cost"
+    if RANK_RETURN_COLUMN in frame.columns:
+        return RANK_RETURN_COLUMN
     return "excess_return_14d"
 
 
 def choose_target_column(frame: pd.DataFrame, requested: str | None) -> str:
     if requested:
         return requested
-    if "label_sector_neutral_positive_14d" in frame.columns:
-        return "label_sector_neutral_positive_14d"
-    return "label_outperform_spy_14d"
+    if SECTOR_POSITIVE_TARGET_COLUMN in frame.columns:
+        return SECTOR_POSITIVE_TARGET_COLUMN
+    return LEGACY_TARGET_COLUMN
 
 
 def max_drawdown(returns: pd.Series) -> float:

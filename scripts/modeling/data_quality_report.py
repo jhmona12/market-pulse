@@ -7,30 +7,7 @@ import numpy as np
 import pandas as pd
 
 from common import FEATURES_DIR, PRICES_DIR, REFERENCE_DIR, REPORTS_DIR, ROOT, write_json
-
-
-IDENTITY_COLUMNS = {
-    "date",
-    "symbol",
-    "sector",
-    "close",
-    "forward_return_14d",
-    "spy_forward_return_14d",
-    "excess_return_14d",
-    "forward_return_14d_next_close",
-    "sector_forward_return_14d_next_close",
-    "sector_neutral_forward_return_14d",
-    "sector_neutral_forward_return_14d_after_cost",
-    "max_drawdown_14d_next_close",
-    "sector_max_drawdown_14d_next_close",
-    "label_outperform_spy_14d",
-    "label_sector_neutral_positive_14d",
-    "label_sector_neutral_hurdle_14d",
-    "sector_neutral_forward_return_pct_rank",
-    "relevance_grade_sector_neutral_14d",
-    "candidate_momentum_setup",
-    "meta_label_momentum_success",
-}
+from schema import NON_FEATURE_COLUMNS
 
 
 def parse_args() -> argparse.Namespace:
@@ -102,7 +79,7 @@ def dataset_report(dataset_path: Path) -> dict:
     constituents = pd.read_csv(REFERENCE_DIR / "sp500_constituents.csv")
     constituent_symbols = set(constituents["symbol"].dropna().astype(str))
     dataset_symbols = set(dataset["symbol"].dropna().astype(str))
-    feature_columns = [column for column in dataset.columns if column not in IDENTITY_COLUMNS]
+    feature_columns = [column for column in dataset.columns if column not in NON_FEATURE_COLUMNS]
     numeric_features = dataset[feature_columns].to_numpy(dtype=float)
     non_null_excess = dataset["excess_return_14d"].notna()
     label_mismatches = int(

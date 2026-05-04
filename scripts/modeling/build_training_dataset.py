@@ -1,15 +1,30 @@
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
-from common import FEATURES_DIR, MACRO_DIR, PRICES_DIR, REFERENCE_DIR, ROOT, SECTOR_ETFS, write_csv, write_json
+from common import FEATURES_DIR, MACRO_DIR, PRICES_DIR, REFERENCE_DIR, ROOT, SECTOR_ETFS, write_json
+from schema import (
+    LEGACY_TARGET_COLUMN,
+    META_TARGET_COLUMN,
+    RANK_RETURN_COLUMN,
+    RANK_TARGET_COLUMN,
+    SECTOR_HURDLE_TARGET_COLUMN,
+    SECTOR_POSITIVE_TARGET_COLUMN,
+    TARGET_HORIZON,
+)
 
 
-TARGET_HORIZON = 14
+def unique_columns(columns: list[str]) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for column in columns:
+        if column not in seen:
+            result.append(column)
+            seen.add(column)
+    return result
 
 
 def parse_args() -> argparse.Namespace:
@@ -59,7 +74,15 @@ def enrich_price_features(frame: pd.DataFrame) -> pd.DataFrame:
     frame["ret_10d"] = close.pct_change(10)
     frame["ret_20d"] = close.pct_change(20)
     frame["ret_60d"] = close.pct_change(60)
+    frame["ret_120d"] = close.pct_change(120)
     frame["volatility_20d"] = frame["ret_1d"].rolling(20).std()
+    frame["volatility_60d"] = frame["ret_1d"].rolling(60).std()
+    frame["downside_volatility_20d"] = frame["ret_1d"].clip(upper=0).rolling(20).std()
+    frame["downside_volatility_60d"] = frame["ret_1d"].clip(upper=0).rolling(60).std()
+    frame["max_daily_return_20d"] = frame["ret_1d"].rolling(20).max()
+    frame["ret_5d_reversal"] = -frame["ret_5d"]
+    frame["momentum_126d_skip_10"] = close.shift(10) / close.shift(126) - 1
+    frame["momentum_252d_skip_20"] = close.shift(20) / close.shift(252) - 1
     frame["sma_20"] = sma(close, 20)
     frame["sma_50"] = sma(close, 50)
     frame["sma_100"] = sma(close, 100)
@@ -72,9 +95,18 @@ def enrich_price_features(frame: pd.DataFrame) -> pd.DataFrame:
     frame["sma_50_vs_200"] = frame["sma_50"] / frame["sma_200"] - 1
     frame["rsi_14"] = rsi(close, 14)
     frame["avg_volume_20"] = volume.rolling(20).mean()
+    frame["avg_volume_60"] = volume.rolling(60).mean()
     frame["volume_ratio_20"] = volume / frame["avg_volume_20"].replace(0, np.nan)
+    frame["volume_ratio_60"] = volume / frame["avg_volume_60"].replace(0, np.nan)
+    frame["dollar_volume_20d"] = close * frame["avg_volume_20"]
+    frame["log_dollar_volume_20d"] = np.log1p(frame["dollar_volume_20d"])
+    frame["amihud_20d"] = (frame["ret_1d"].abs() / (close * volume).replace(0, np.nan)).rolling(20).mean()
+    frame["ret_20d_vol_adj"] = frame["ret_20d"] / frame["volatility_20d"].replace(0, np.nan)
+    frame["ret_60d_vol_adj"] = frame["ret_60d"] / frame["volatility_60d"].replace(0, np.nan)
     frame["high_252"] = close.rolling(252).max()
+    frame["low_252"] = close.rolling(252).min()
     frame["distance_to_52w_high"] = close / frame["high_252"] - 1
+    frame["distance_to_52w_low"] = close / frame["low_252"] - 1
     frame["forward_return_14d"] = close.shift(-TARGET_HORIZON) / close - 1
     entry_close = close.shift(-1)
     exit_close = close.shift(-(TARGET_HORIZON + 1))
@@ -120,7 +152,22 @@ def build_market_context(symbol_frames: dict[str, pd.DataFrame], constituents: p
     for symbol, frame in symbol_frames.items():
         if symbol in {"SPY", *SECTOR_ETFS}:
             continue
-        stock_frames.append(frame[["date", "symbol", "close", "ret_20d", "ret_60d", "price_vs_sma_50", "price_vs_sma_200"]].copy())
+        stock_frames.append(
+            frame[
+                [
+                    "date",
+                    "symbol",
+                    "close",
+                    "ret_20d",
+                    "ret_60d",
+                    "ret_120d",
+                    "volatility_20d",
+                    "volatility_60d",
+                    "price_vs_sma_50",
+                    "price_vs_sma_200",
+                ]
+            ].copy()
+        )
 
     combined = pd.concat(stock_frames, ignore_index=True)
     breadth = combined.assign(
@@ -134,6 +181,9 @@ def build_market_context(symbol_frames: dict[str, pd.DataFrame], constituents: p
             breadth_above_200=("above_200", "mean"),
             breadth_ret_20d_median=("ret_20d", "median"),
             breadth_ret_60d_median=("ret_60d", "median"),
+            breadth_ret_120d_median=("ret_120d", "median"),
+            breadth_volatility_20d_median=("volatility_20d", "median"),
+            breadth_volatility_60d_median=("volatility_60d", "median"),
         )
         .reset_index()
     )
@@ -145,6 +195,11 @@ def build_market_context(symbol_frames: dict[str, pd.DataFrame], constituents: p
                 "date",
                 "ret_20d",
                 "ret_60d",
+                "ret_120d",
+                "momentum_126d_skip_10",
+                "momentum_252d_skip_20",
+                "volatility_20d",
+                "volatility_60d",
                 "price_vs_sma_50",
                 "price_vs_sma_200",
                 "rsi_14",
@@ -156,6 +211,11 @@ def build_market_context(symbol_frames: dict[str, pd.DataFrame], constituents: p
             columns={
                 "ret_20d": "sector_ret_20d",
                 "ret_60d": "sector_ret_60d",
+                "ret_120d": "sector_ret_120d",
+                "momentum_126d_skip_10": "sector_momentum_126d_skip_10",
+                "momentum_252d_skip_20": "sector_momentum_252d_skip_20",
+                "volatility_20d": "sector_volatility_20d",
+                "volatility_60d": "sector_volatility_60d",
                 "price_vs_sma_50": "sector_price_vs_sma_50",
                 "price_vs_sma_200": "sector_price_vs_sma_200",
                 "rsi_14": "sector_rsi_14",
@@ -200,12 +260,30 @@ def main() -> None:
             continue
         symbol_frames[symbol] = enrich_price_features(load_price(symbol))
 
-    spy = symbol_frames["SPY"][["date", "forward_return_14d", "ret_20d", "ret_60d", "price_vs_sma_50", "price_vs_sma_200", "rsi_14"]].copy()
+    spy = symbol_frames["SPY"][
+        [
+            "date",
+            "forward_return_14d",
+            "ret_1d",
+            "ret_20d",
+            "ret_60d",
+            "ret_120d",
+            "volatility_20d",
+            "volatility_60d",
+            "price_vs_sma_50",
+            "price_vs_sma_200",
+            "rsi_14",
+        ]
+    ].copy()
     spy = spy.rename(
         columns={
             "forward_return_14d": "spy_forward_return_14d",
+            "ret_1d": "spy_ret_1d",
             "ret_20d": "spy_ret_20d",
             "ret_60d": "spy_ret_60d",
+            "ret_120d": "spy_ret_120d",
+            "volatility_20d": "spy_volatility_20d",
+            "volatility_60d": "spy_volatility_60d",
             "price_vs_sma_50": "spy_price_vs_sma_50",
             "price_vs_sma_200": "spy_price_vs_sma_200",
             "rsi_14": "spy_rsi_14",
@@ -229,63 +307,143 @@ def main() -> None:
         frame = frame.merge(sector_context, on=["date", "sector"], how="left")
         if not macro.empty:
             frame = frame.merge(macro, on="date", how="left")
+        spy_variance_60d = frame["spy_ret_1d"].rolling(60).var()
+        frame["beta_60d"] = frame["ret_1d"].rolling(60).cov(frame["spy_ret_1d"]) / spy_variance_60d.replace(0, np.nan)
         frame["excess_return_14d"] = frame["forward_return_14d"] - frame["spy_forward_return_14d"]
         frame["rel_ret_20d_vs_spy"] = frame["ret_20d"] - frame["spy_ret_20d"]
         frame["rel_ret_60d_vs_spy"] = frame["ret_60d"] - frame["spy_ret_60d"]
+        frame["rel_ret_120d_vs_spy"] = frame["ret_120d"] - frame["spy_ret_120d"]
         frame["rel_rsi_vs_spy"] = frame["rsi_14"] - frame["spy_rsi_14"]
+        frame["rel_volatility_20d_vs_spy"] = frame["volatility_20d"] - frame["spy_volatility_20d"]
+        frame["rel_volatility_60d_vs_spy"] = frame["volatility_60d"] - frame["spy_volatility_60d"]
+        frame["idiosyncratic_ret_20d"] = frame["ret_20d"] - frame["beta_60d"] * frame["spy_ret_20d"]
+        frame["idiosyncratic_ret_60d"] = frame["ret_60d"] - frame["beta_60d"] * frame["spy_ret_60d"]
         dataset_frames.append(frame)
 
     dataset = pd.concat(dataset_frames, ignore_index=True)
     dataset = dataset.sort_values(["date", "symbol"]).reset_index(drop=True)
 
     rank_base_columns = [
+        "ret_5d_reversal",
         "ret_20d",
         "ret_60d",
+        "ret_120d",
+        "momentum_126d_skip_10",
+        "momentum_252d_skip_20",
+        "ret_20d_vol_adj",
+        "ret_60d_vol_adj",
         "rsi_14",
         "volatility_20d",
+        "volatility_60d",
+        "downside_volatility_20d",
+        "downside_volatility_60d",
+        "max_daily_return_20d",
         "price_vs_sma_50",
         "price_vs_sma_200",
         "distance_to_52w_high",
+        "distance_to_52w_low",
         "volume_ratio_20",
+        "volume_ratio_60",
+        "log_dollar_volume_20d",
+        "amihud_20d",
+        "beta_60d",
         "rel_ret_20d_vs_spy",
         "rel_ret_60d_vs_spy",
+        "rel_ret_120d_vs_spy",
         "rel_rsi_vs_spy",
+        "rel_volatility_20d_vs_spy",
+        "rel_volatility_60d_vs_spy",
+        "idiosyncratic_ret_20d",
+        "idiosyncratic_ret_60d",
     ]
+    rank_features = []
     for column in rank_base_columns:
-        dataset[f"{column}_pct_rank"] = dataset.groupby("date")[column].rank(pct=True)
-        dataset[f"{column}_sector_pct_rank"] = dataset.groupby(["date", "sector"])[column].rank(pct=True)
+        rank_features.append(dataset.groupby("date")[column].rank(pct=True).rename(f"{column}_pct_rank"))
+        rank_features.append(
+            dataset.groupby(["date", "sector"])[column].rank(pct=True).rename(f"{column}_sector_pct_rank")
+        )
+    dataset = pd.concat([dataset, *rank_features], axis=1).copy()
 
-    sector_median_columns = ["ret_20d", "ret_60d", "rsi_14", "volatility_20d", "volume_ratio_20", "distance_to_52w_high"]
+    sector_median_columns = [
+        "ret_20d",
+        "ret_60d",
+        "ret_120d",
+        "momentum_126d_skip_10",
+        "momentum_252d_skip_20",
+        "ret_20d_vol_adj",
+        "ret_60d_vol_adj",
+        "rsi_14",
+        "volatility_20d",
+        "volatility_60d",
+        "downside_volatility_20d",
+        "downside_volatility_60d",
+        "max_daily_return_20d",
+        "volume_ratio_20",
+        "volume_ratio_60",
+        "distance_to_52w_high",
+        "distance_to_52w_low",
+        "beta_60d",
+        "idiosyncratic_ret_20d",
+        "idiosyncratic_ret_60d",
+    ]
+    sector_median_features = []
     for column in sector_median_columns:
         sector_median = dataset.groupby(["date", "sector"])[column].transform("median")
-        dataset[f"{column}_minus_sector_median"] = dataset[column] - sector_median
+        sector_median_features.append((dataset[column] - sector_median).rename(f"{column}_minus_sector_median"))
+    dataset = pd.concat([dataset, *sector_median_features], axis=1).copy()
 
-    dataset["rel_ret_20d_vs_sector_etf"] = dataset["ret_20d"] - dataset["sector_ret_20d"]
-    dataset["rel_ret_60d_vs_sector_etf"] = dataset["ret_60d"] - dataset["sector_ret_60d"]
-    dataset["price_vs_sector_sma_50"] = dataset["price_vs_sma_50"] - dataset["sector_price_vs_sma_50"]
-    dataset["price_vs_sector_sma_200"] = dataset["price_vs_sma_200"] - dataset["sector_price_vs_sma_200"]
-    dataset["rsi_vs_sector_etf"] = dataset["rsi_14"] - dataset["sector_rsi_14"]
-    dataset["sector_neutral_forward_return_14d"] = (
-        dataset["forward_return_14d_next_close"] - dataset["sector_forward_return_14d_next_close"]
+    derived_features = pd.DataFrame(
+        {
+            "rel_ret_20d_vs_sector_etf": dataset["ret_20d"] - dataset["sector_ret_20d"],
+            "rel_ret_60d_vs_sector_etf": dataset["ret_60d"] - dataset["sector_ret_60d"],
+            "rel_ret_120d_vs_sector_etf": dataset["ret_120d"] - dataset["sector_ret_120d"],
+            "rel_momentum_126d_vs_sector_etf": dataset["momentum_126d_skip_10"]
+            - dataset["sector_momentum_126d_skip_10"],
+            "rel_momentum_252d_vs_sector_etf": dataset["momentum_252d_skip_20"]
+            - dataset["sector_momentum_252d_skip_20"],
+            "volatility_20d_vs_sector_etf": dataset["volatility_20d"] - dataset["sector_volatility_20d"],
+            "volatility_60d_vs_sector_etf": dataset["volatility_60d"] - dataset["sector_volatility_60d"],
+            "price_vs_sector_sma_50": dataset["price_vs_sma_50"] - dataset["sector_price_vs_sma_50"],
+            "price_vs_sector_sma_200": dataset["price_vs_sma_200"] - dataset["sector_price_vs_sma_200"],
+            "rsi_vs_sector_etf": dataset["rsi_14"] - dataset["sector_rsi_14"],
+            "sector_neutral_forward_return_14d": dataset["forward_return_14d_next_close"]
+            - dataset["sector_forward_return_14d_next_close"],
+        },
+        index=dataset.index,
     )
-    dataset["sector_neutral_forward_return_14d_after_cost"] = dataset["sector_neutral_forward_return_14d"] - round_trip_cost
-    dataset["technical_composite_score"] = dataset[
+    derived_features[RANK_RETURN_COLUMN] = derived_features["sector_neutral_forward_return_14d"] - round_trip_cost
+    dataset = pd.concat([dataset, derived_features], axis=1).copy()
+    technical_composite_score = dataset[
         [
-            "ret_60d_pct_rank",
-            "price_vs_sma_200_pct_rank",
-            "rel_ret_60d_vs_spy_pct_rank",
             "ret_60d_sector_pct_rank",
+            "ret_120d_sector_pct_rank",
+            "momentum_126d_skip_10_sector_pct_rank",
+            "ret_60d_vol_adj_sector_pct_rank",
             "price_vs_sma_200_sector_pct_rank",
+            "distance_to_52w_high_sector_pct_rank",
+            "rel_ret_60d_vs_spy_pct_rank",
+            "idiosyncratic_ret_60d_sector_pct_rank",
         ]
-    ].mean(axis=1)
+    ].mean(axis=1).rename("technical_composite_score")
+    dataset = pd.concat([dataset, technical_composite_score], axis=1).copy()
 
-    feature_columns = [
+    raw_price_feature_columns = [
         "ret_1d",
         "ret_5d",
         "ret_10d",
         "ret_20d",
         "ret_60d",
+        "ret_120d",
+        "ret_5d_reversal",
+        "momentum_126d_skip_10",
+        "momentum_252d_skip_20",
         "volatility_20d",
+        "volatility_60d",
+        "downside_volatility_20d",
+        "downside_volatility_60d",
+        "max_daily_return_20d",
+        "ret_20d_vol_adj",
+        "ret_60d_vol_adj",
         "price_vs_sma_20",
         "price_vs_sma_50",
         "price_vs_sma_100",
@@ -294,65 +452,83 @@ def main() -> None:
         "sma_50_vs_200",
         "rsi_14",
         "volume_ratio_20",
+        "volume_ratio_60",
         "distance_to_52w_high",
+        "distance_to_52w_low",
+        "log_dollar_volume_20d",
+        "amihud_20d",
+        "beta_60d",
+        "idiosyncratic_ret_20d",
+        "idiosyncratic_ret_60d",
+    ]
+    market_context_feature_columns = [
         "spy_ret_20d",
         "spy_ret_60d",
+        "spy_ret_120d",
+        "spy_volatility_20d",
+        "spy_volatility_60d",
         "spy_price_vs_sma_50",
         "spy_price_vs_sma_200",
         "spy_rsi_14",
         "rel_ret_20d_vs_spy",
         "rel_ret_60d_vs_spy",
+        "rel_ret_120d_vs_spy",
         "rel_rsi_vs_spy",
+        "rel_volatility_20d_vs_spy",
+        "rel_volatility_60d_vs_spy",
         "breadth_above_50",
         "breadth_above_200",
         "breadth_ret_20d_median",
         "breadth_ret_60d_median",
+        "breadth_ret_120d_median",
+        "breadth_volatility_20d_median",
+        "breadth_volatility_60d_median",
+    ]
+    sector_context_feature_columns = [
         "sector_ret_20d",
         "sector_ret_60d",
+        "sector_ret_120d",
+        "sector_momentum_126d_skip_10",
+        "sector_momentum_252d_skip_20",
+        "sector_volatility_20d",
+        "sector_volatility_60d",
         "sector_price_vs_sma_50",
         "sector_price_vs_sma_200",
         "sector_rsi_14",
-        "ret_20d_pct_rank",
-        "ret_60d_pct_rank",
-        "rsi_14_pct_rank",
-        "volatility_20d_pct_rank",
-        "price_vs_sma_50_pct_rank",
-        "price_vs_sma_200_pct_rank",
-        "distance_to_52w_high_pct_rank",
-        "volume_ratio_20_pct_rank",
-        "rel_ret_20d_vs_spy_pct_rank",
-        "rel_ret_60d_vs_spy_pct_rank",
-        "rel_rsi_vs_spy_pct_rank",
-        "ret_20d_sector_pct_rank",
-        "ret_60d_sector_pct_rank",
-        "rsi_14_sector_pct_rank",
-        "volatility_20d_sector_pct_rank",
-        "price_vs_sma_50_sector_pct_rank",
-        "price_vs_sma_200_sector_pct_rank",
-        "distance_to_52w_high_sector_pct_rank",
-        "volume_ratio_20_sector_pct_rank",
-        "rel_ret_20d_vs_spy_sector_pct_rank",
-        "rel_ret_60d_vs_spy_sector_pct_rank",
-        "rel_rsi_vs_spy_sector_pct_rank",
-        "ret_20d_minus_sector_median",
-        "ret_60d_minus_sector_median",
-        "rsi_14_minus_sector_median",
-        "volatility_20d_minus_sector_median",
-        "volume_ratio_20_minus_sector_median",
-        "distance_to_52w_high_minus_sector_median",
+    ]
+    relative_sector_feature_columns = [
         "rel_ret_20d_vs_sector_etf",
         "rel_ret_60d_vs_sector_etf",
+        "rel_ret_120d_vs_sector_etf",
+        "rel_momentum_126d_vs_sector_etf",
+        "rel_momentum_252d_vs_sector_etf",
+        "volatility_20d_vs_sector_etf",
+        "volatility_60d_vs_sector_etf",
         "price_vs_sector_sma_50",
         "price_vs_sector_sma_200",
         "rsi_vs_sector_etf",
-        "technical_composite_score",
     ]
+    feature_columns = unique_columns(
+        [
+            *raw_price_feature_columns,
+            *market_context_feature_columns,
+            *sector_context_feature_columns,
+            *[f"{column}_pct_rank" for column in rank_base_columns],
+            *[f"{column}_sector_pct_rank" for column in rank_base_columns],
+            *[f"{column}_minus_sector_median" for column in sector_median_columns],
+            *relative_sector_feature_columns,
+            "technical_composite_score",
+        ]
+    )
     macro_feature_columns = [
         column
         for column in dataset.columns
         if column.endswith("_level") or column.endswith("_chg_1") or column.endswith("_chg_5")
     ]
     feature_columns.extend(column for column in macro_feature_columns if column not in feature_columns)
+    missing_feature_columns = [column for column in feature_columns if column not in dataset.columns]
+    if missing_feature_columns:
+        raise ValueError(f"Feature columns missing from dataset: {missing_feature_columns}")
 
     target_columns = [
         "forward_return_14d",
@@ -361,19 +537,20 @@ def main() -> None:
         "forward_return_14d_next_close",
         "sector_forward_return_14d_next_close",
         "sector_neutral_forward_return_14d",
-        "sector_neutral_forward_return_14d_after_cost",
+        RANK_RETURN_COLUMN,
         "max_drawdown_14d_next_close",
     ]
+    dataset = dataset.replace([np.inf, -np.inf], np.nan)
     dataset = dataset.dropna(subset=[*target_columns, *feature_columns])
-    dataset["label_outperform_spy_14d"] = (dataset["excess_return_14d"] > 0).astype(int)
-    dataset["label_sector_neutral_positive_14d"] = (dataset["sector_neutral_forward_return_14d_after_cost"] > 0).astype(int)
-    dataset["label_sector_neutral_hurdle_14d"] = (
-        dataset["sector_neutral_forward_return_14d_after_cost"] > args.meta_return_hurdle
+    dataset[LEGACY_TARGET_COLUMN] = (dataset["excess_return_14d"] > 0).astype(int)
+    dataset[SECTOR_POSITIVE_TARGET_COLUMN] = (dataset[RANK_RETURN_COLUMN] > 0).astype(int)
+    dataset[SECTOR_HURDLE_TARGET_COLUMN] = (
+        dataset[RANK_RETURN_COLUMN] > args.meta_return_hurdle
     ).astype(int)
     dataset["sector_neutral_forward_return_pct_rank"] = dataset.groupby("date")[
-        "sector_neutral_forward_return_14d_after_cost"
+        RANK_RETURN_COLUMN
     ].rank(pct=True)
-    dataset["relevance_grade_sector_neutral_14d"] = np.select(
+    dataset[RANK_TARGET_COLUMN] = np.select(
         [
             dataset["sector_neutral_forward_return_pct_rank"] >= 0.90,
             dataset["sector_neutral_forward_return_pct_rank"] >= 0.80,
@@ -387,15 +564,16 @@ def main() -> None:
         (dataset["technical_composite_score"] >= 0.75)
         & (dataset["ret_60d_minus_sector_median"] > 0)
         & (dataset["ret_60d_sector_pct_rank"] >= 0.70)
+        & (dataset["momentum_126d_skip_10_sector_pct_rank"] >= 0.65)
         & (dataset["price_vs_sma_50"] > 0)
         & (dataset["price_vs_sma_200"] > 0)
         & (dataset["rsi_14"] <= 78)
         & (dataset["volume_ratio_20"] >= 0.70)
     ).astype(int)
-    dataset["meta_label_momentum_success"] = np.where(
+    dataset[META_TARGET_COLUMN] = np.where(
         dataset["candidate_momentum_setup"].eq(1),
         (
-            (dataset["sector_neutral_forward_return_14d_after_cost"] > args.meta_return_hurdle)
+            (dataset[RANK_RETURN_COLUMN] > args.meta_return_hurdle)
             & (dataset["max_drawdown_14d_next_close"] > args.meta_drawdown_floor)
         ).astype(int),
         np.nan,
@@ -411,16 +589,16 @@ def main() -> None:
         "forward_return_14d_next_close",
         "sector_forward_return_14d_next_close",
         "sector_neutral_forward_return_14d",
-        "sector_neutral_forward_return_14d_after_cost",
+        RANK_RETURN_COLUMN,
         "max_drawdown_14d_next_close",
         "sector_max_drawdown_14d_next_close",
-        "label_outperform_spy_14d",
-        "label_sector_neutral_positive_14d",
-        "label_sector_neutral_hurdle_14d",
+        LEGACY_TARGET_COLUMN,
+        SECTOR_POSITIVE_TARGET_COLUMN,
+        SECTOR_HURDLE_TARGET_COLUMN,
         "sector_neutral_forward_return_pct_rank",
-        "relevance_grade_sector_neutral_14d",
+        RANK_TARGET_COLUMN,
         "candidate_momentum_setup",
-        "meta_label_momentum_success",
+        META_TARGET_COLUMN,
         *feature_columns,
     ]
     dataset = dataset[output_columns]
@@ -435,11 +613,11 @@ def main() -> None:
         "symbol_count": int(dataset["symbol"].nunique()),
         "start_date": str(dataset["date"].min().date()),
         "end_date": str(dataset["date"].max().date()),
-        "label_positive_rate": float(dataset["label_outperform_spy_14d"].mean()),
-        "sector_neutral_positive_rate": float(dataset["label_sector_neutral_positive_14d"].mean()),
-        "sector_neutral_hurdle_rate": float(dataset["label_sector_neutral_hurdle_14d"].mean()),
+        "label_positive_rate": float(dataset[LEGACY_TARGET_COLUMN].mean()),
+        "sector_neutral_positive_rate": float(dataset[SECTOR_POSITIVE_TARGET_COLUMN].mean()),
+        "sector_neutral_hurdle_rate": float(dataset[SECTOR_HURDLE_TARGET_COLUMN].mean()),
         "candidate_rows": int(dataset["candidate_momentum_setup"].sum()),
-        "candidate_success_rate": float(dataset.loc[dataset["candidate_momentum_setup"].eq(1), "meta_label_momentum_success"].mean()),
+        "candidate_success_rate": float(dataset.loc[dataset["candidate_momentum_setup"].eq(1), META_TARGET_COLUMN].mean()),
         "feature_columns": feature_columns,
         "include_macro": bool(args.include_macro),
         "target_horizon_days": TARGET_HORIZON,
