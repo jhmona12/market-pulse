@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from html import unescape
 from io import StringIO
 from pathlib import Path
 import json
+import re
 import time
 from typing import Iterable
 from urllib.error import HTTPError, URLError
@@ -103,6 +105,13 @@ def yahoo_symbol(symbol: str) -> str:
     return symbol.upper().replace(".", "-")
 
 
+def strip_html(value: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", value)
+    text = unescape(text)
+    text = re.sub(r"\[[^\]]+\]", "", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def fetch_yahoo_history(symbol: str, start_date: datetime, end_date: datetime) -> pd.DataFrame:
     period1 = int(start_date.timestamp())
     period2 = int(end_date.timestamp())
@@ -158,20 +167,29 @@ def fetch_fred_series(series_id: str) -> pd.DataFrame:
 
 def fetch_sp500_constituents() -> pd.DataFrame:
     html = fetch_text("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies")
-    tables = pd.read_html(StringIO(html))
-    if not tables:
-        raise ValueError("No tables found on Wikipedia S&P 500 page")
-    frame = tables[0].copy()
-    frame = frame.rename(
-        columns={
-            "Symbol": "symbol",
-            "Security": "name",
-            "GICS Sector": "sector",
-            "GICS Sub-Industry": "sub_industry",
-        }
-    )
-    keep = ["symbol", "name", "sector", "sub_industry"]
-    frame = frame[keep]
+    table_match = re.search(r"<table[^>]+id=[\"']constituents[\"'][\s\S]*?</table>", html, flags=re.IGNORECASE)
+    if table_match:
+        rows = re.findall(r"<tr[\s\S]*?</tr>", table_match.group(0), flags=re.IGNORECASE)
+        records = []
+        for row in rows[1:]:
+            cells = re.findall(r"<t[dh][^>]*>([\s\S]*?)</t[dh]>", row, flags=re.IGNORECASE)
+            if len(cells) < 4:
+                continue
+            records.append(
+                {
+                    "symbol": strip_html(cells[0]),
+                    "name": strip_html(cells[1]),
+                    "sector": strip_html(cells[2]),
+                    "sub_industry": strip_html(cells[3]),
+                }
+            )
+        if len(records) >= 400:
+            frame = pd.DataFrame(records)
+        else:
+            raise ValueError("Could not parse enough S&P 500 rows from Wikipedia constituents table")
+    else:
+        raise ValueError("No S&P 500 constituents table found on Wikipedia")
+
     frame["symbol"] = frame["symbol"].astype(str).str.strip()
     frame["name"] = frame["name"].astype(str).str.strip()
     frame["sector"] = frame["sector"].astype(str).str.strip()

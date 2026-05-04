@@ -661,6 +661,23 @@ li {
   flex: 0 0 auto;
 }
 
+.score span,
+.score small {
+  line-height: 1;
+}
+
+.score small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.model-score {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+  box-shadow: 0 0 22px rgba(79, 209, 197, 0.18);
+}
+
 .spark {
   width: 100%;
   height: 52px;

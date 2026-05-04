@@ -1,0 +1,162 @@
+{
+  "generatedAt": "2026-05-04T03:48:39.526805+00:00",
+  "sourceModel": "xgboost_rank_sector14_feature_v2_tuned_holdout",
+  "sourceReport": "data/modeling/reports/xgboost_rank_sector14_feature_v2_tuned_holdout_shap_summary.json",
+  "modelPath": "data/modeling/models/xgboost_rank_sector14_feature_v2_tuned_holdout.json",
+  "rowsExplained": 126289,
+  "featureCount": 156,
+  "method": "XGBoost pred_contribs SHAP-style margin contributions on holdout predictions.",
+  "notes": "Mean absolute SHAP ranks the features that most changed model scores in the holdout sample. Positive or negative mean values should be read as directional tendencies, not as standalone trading rules.",
+  "topFeatures": [
+    {
+      "feature": "volatility_60d_minus_sector_median",
+      "description": "60-day volatility compared with the stock's sector median",
+      "meanAbsShap": 0.185760959982872,
+      "meanShap": -0.14117151498794556,
+      "positiveShare": 0.16299123439096042,
+      "p05Shap": -0.21467630565166473,
+      "p50Shap": -0.19312387704849243,
+      "p95Shap": 0.1499568372964859
+    },
+    {
+      "feature": "volatility_60d_pct_rank",
+      "description": "60-day volatility rank across the current stock universe",
+      "meanAbsShap": 0.047398779541254044,
+      "meanShap": -0.033743299543857574,
+      "positiveShare": 0.19160813689236592,
+      "p05Shap": -0.06408249586820602,
+      "p50Shap": -0.040747255086898804,
+      "p95Shap": 0.039226364344358444
+    },
+    {
+      "feature": "downside_volatility_20d_pct_rank",
+      "description": "20-day downside-volatility rank across the current stock universe",
+      "meanAbsShap": 0.04644938185811043,
+      "meanShap": -0.030869942158460617,
+      "positiveShare": 0.25446396756645473,
+      "p05Shap": -0.06679100543260574,
+      "p50Shap": -0.052538104355335236,
+      "p95Shap": 0.03835766762495041
+    },
+    {
+      "feature": "amihud_20d_pct_rank",
+      "description": "20-day illiquidity rank across the current stock universe",
+      "meanAbsShap": 0.026929311454296112,
+      "meanShap": -0.01214162539690733,
+      "positiveShare": 0.1985366896562646,
+      "p05Shap": -0.03924572467803955,
+      "p50Shap": -0.02184581197798252,
+      "p95Shap": 0.03492046520113945
+    },
+    {
+      "feature": "distance_to_52w_low_pct_rank",
+      "description": "ranked distance from each stock's 52-week low",
+      "meanAbsShap": 0.018483879044651985,
+      "meanShap": -0.015368005260825157,
+      "positiveShare": 0.017950890418009485,
+      "p05Shap": -0.036856912076473236,
+      "p50Shap": -0.014645703136920929,
+      "p95Shap": -0.01108473725616932
+    },
+    {
+      "feature": "downside_volatility_60d_sector_pct_rank",
+      "description": "60-day downside-volatility rank within the stock's sector",
+      "meanAbsShap": 0.017335927113890648,
+      "meanShap": -0.015695402398705482,
+      "positiveShare": 0.07893007308633372,
+      "p05Shap": -0.039535537362098694,
+      "p50Shap": -0.01439494639635086,
+      "p95Shap": 0.010544917546212673
+    },
+    {
+      "feature": "breadth_ret_60d_median",
+      "description": "median 60-day return across the S&P 500 universe",
+      "meanAbsShap": 0.012568634934723377,
+      "meanShap": 0.002840013476088643,
+      "positiveShare": 0.9469866734236553,
+      "p05Shap": -0.0007569253793917596,
+      "p50Shap": 0.009375403635203838,
+      "p95Shap": 0.010938086546957493
+    },
+    {
+      "feature": "sma_50_vs_200",
+      "description": "50-day moving average compared with the 200-day moving average",
+      "meanAbsShap": 0.012471725232899189,
+      "meanShap": -0.0076478347182273865,
+      "positiveShare": 0.04823856392876656,
+      "p05Shap": -0.01497994177043438,
+      "p50Shap": -0.010167224332690239,
+      "p95Shap": -0.0027514686807990074
+    },
+    {
+      "feature": "rel_momentum_252d_vs_sector_etf",
+      "description": "12-month skip-window momentum versus the sector ETF",
+      "meanAbsShap": 0.012040534056723118,
+      "meanShap": -0.0051627010107040405,
+      "positiveShare": 0.31498388616585765,
+      "p05Shap": -0.0182290431112051,
+      "p50Shap": -0.0112750930711627,
+      "p95Shap": 0.0190228670835495
+    },
+    {
+      "feature": "idiosyncratic_ret_60d",
+      "description": "60-day stock return after adjusting for estimated SPY beta",
+      "meanAbsShap": 0.008897116407752037,
+      "meanShap": -0.0070624519139528275,
+      "positiveShare": 0.027619190903404096,
+      "p05Shap": -0.014939116314053535,
+      "p50Shap": -0.00682529853656888,
+      "p95Shap": -0.003388222074136138
+    },
+    {
+      "feature": "breadth_volatility_20d_median",
+      "description": "median 20-day volatility across the S&P 500 universe",
+      "meanAbsShap": 0.008592321537435055,
+      "meanShap": 0.001502391416579485,
+      "positiveShare": 0.3790433054343609,
+      "p05Shap": -0.007058646995574236,
+      "p50Shap": -0.005465600173920393,
+      "p95Shap": 0.016019506379961967
+    },
+    {
+      "feature": "sma_20_vs_50",
+      "description": "20-day moving average compared with the 50-day moving average",
+      "meanAbsShap": 0.008281359449028969,
+      "meanShap": -0.0020383531227707863,
+      "positiveShare": 0.5876996412989255,
+      "p05Shap": -0.022736066952347755,
+      "p50Shap": 0.003547484055161476,
+      "p95Shap": 0.010910145938396454
+    },
+    {
+      "feature": "momentum_252d_skip_20_sector_pct_rank",
+      "description": "12-month skip-window momentum rank within the stock's sector",
+      "meanAbsShap": 0.008230341598391533,
+      "meanShap": -0.006239369045943022,
+      "positiveShare": 0.03232268843683931,
+      "p05Shap": -0.014113832265138626,
+      "p50Shap": -0.007419269066303968,
+      "p95Shap": -0.004131870809942484
+    },
+    {
+      "feature": "downside_volatility_60d_pct_rank",
+      "description": "60-day downside-volatility rank across the current stock universe",
+      "meanAbsShap": 0.008170992136001587,
+      "meanShap": -0.006581852678209543,
+      "positiveShare": 0.09883679497026661,
+      "p05Shap": -0.013628057204186916,
+      "p50Shap": -0.00716102309525013,
+      "p95Shap": 0.008150189183652401
+    },
+    {
+      "feature": "spy_volatility_20d",
+      "description": "20-day SPY volatility backdrop",
+      "meanAbsShap": 0.007959255017340183,
+      "meanShap": -0.0011340873315930367,
+      "positiveShare": 0.13786632248255984,
+      "p05Shap": -0.008129660971462727,
+      "p50Shap": -0.0049260868690907955,
+      "p95Shap": 0.0439288392663002
+    }
+  ]
+}

@@ -8,12 +8,13 @@ The project is built to run cheaply with free data sources. It is not an intrada
 
 - Summarizes the current market setup in a daily read.
 - Screens S&P 500 constituents and a curated ETF universe for momentum setups.
+- Scores current S&P 500 stocks with a production XGBoost learning-to-rank model.
 - Tracks sector performance using major sector ETF proxies.
 - Pulls macro indicators from public FRED CSV endpoints.
 - Tracks upcoming macro events such as CPI, payrolls, GDP, and FOMC dates.
 - Ingests public research and commentary sources listed in `config/news-sources.md`.
 - Discovers recent articles from those source landing pages and prioritizes newer dated articles.
-- Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, and momentum data into structured research recommendations.
+- Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data into structured research recommendations.
 
 ## Live Site
 
@@ -65,12 +66,24 @@ The refresh script:
 - Fetches delayed/end-of-day chart history from Yahoo Finance's public chart endpoint
 - Pulls selected macro series from FRED
 - Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
+- Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
 - Writes the dashboard snapshot to `data/snapshot.json`
+
+To refresh model rankings before the dashboard snapshot:
+
+```bash
+.venv-model/bin/python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json
+node scripts/update-data.mjs
+```
+
+`data/model-rank-scores.json` is an intermediate file and is ignored by git. The generated `data/snapshot.json` contains the model rankings needed by the static site.
+
+Some current constituents may be fetched but not scored if they do not have enough clean trailing data to populate every required feature. The scorer records those symbols in the snapshot model metadata.
 
 For a faster test run:
 
 ```bash
-MAX_TICKERS=80 node scripts/update-data.mjs
+SKIP_AI=1 MAX_TICKERS=80 SNAPSHOT_OUTPUT=data/snapshot.dev.json node scripts/update-data.mjs
 ```
 
 Useful source-ingestion knobs:
@@ -83,6 +96,12 @@ SOURCE_ARTICLE_CANDIDATES=10
 ## AI Strategy Memo
 
 The AI layer is optional. If `OPENAI_API_KEY` is available, the refresh script calls the OpenAI Responses API and writes structured AI output into `data/snapshot.json`.
+
+The intended division of labor is:
+
+- The XGBoost rank model is the deterministic stock-selection engine.
+- The rules-based screener provides technical context, ETF confirmation, and fallback rankings.
+- The AI Strategy Memo explains the model-ranked candidates against the macro calendar and public source tape.
 
 Create a local `.env` file:
 
@@ -99,13 +118,14 @@ config/ai-recommendation-prompt.md
 
 The AI recommendation schema is intentionally constrained:
 
-- Recommendations must use symbols from the screened momentum universe.
+- When model candidates are available, recommendations must use symbols from the model-ranked candidate list.
 - Ticker spelling must match the supplied data.
+- Each recommendation includes model evidence such as rank, percentile, and model reasons.
 - Each recommendation must connect macro/publication evidence with technical momentum evidence.
 - Recommendations include setup, why-now, macro evidence, technical evidence, risk, and invalidation.
 - Source references use source IDs from the ingested article tape when article data is available.
 
-If no API key is configured, the dashboard still works with the rules-based Daily Read, Desk Calls, Momentum Book, Sector Performance, Macro Pulse, and Source Tape.
+If no API key is configured, the dashboard still works with the model-ranked Daily Read, Desk Calls, Momentum Book, Sector Performance, Macro Pulse, and Source Tape.
 
 AI usage estimates are written into `data/snapshot.json`; local usage logs are written to `data/usage-log.jsonl`, which is ignored by git.
 
@@ -159,6 +179,7 @@ It is configured to check daily around 5 PM Pacific. Because GitHub cron runs in
 
 When the refresh runs successfully, it:
 
+- Scores the current S&P 500 universe with the committed XGBoost rank model when dependencies and free data endpoints are available
 - Regenerates `data/snapshot.json`
 - Commits the updated snapshot back to `main` if it changed
 - Triggers a GitHub Pages redeploy through the repository's Pages workflow
@@ -167,7 +188,7 @@ GitHub scheduled workflows may start several minutes late. Manual refreshes can 
 
 ## Modeling Pipeline
 
-The repo includes a separate Python modeling workflow for researching S&P 500 momentum signals. It is local-only by default; raw history, model artifacts, predictions, and reports are ignored by git.
+The repo includes a separate Python modeling workflow for researching S&P 500 momentum signals. Raw history, research models, predictions, and reports are ignored by git. The production rank model and compact explainability artifact are exported separately into `models/rank/` so GitHub Actions and the static dashboard can use them.
 
 The current primary model is an XGBoost learning-to-rank model. It is designed to answer a daily portfolio-selection question: which current S&P 500 stocks look most likely to outperform their sector over the next 14 trading days?
 
@@ -183,6 +204,24 @@ For every feature-complete stock/date row:
 - The rank label is a daily `0-4` relevance grade: top decile `4`, next decile `3`, middle `2`, second-worst decile `1`, bottom decile `0`.
 
 In plain English, the model is not trying to forecast the exact stock price. It is trying to sort the daily universe so the top-ranked basket contains stocks with better near-term sector-relative momentum setups than the bottom-ranked basket.
+
+### Production Dashboard Artifacts
+
+The dashboard uses these committed artifacts:
+
+```text
+models/rank/xgboost_rank_sector14_tuned.json                 Production XGBoost rank model
+models/rank/xgboost_rank_sector14_tuned_metadata.json        Feature list, target, training window, and parameters
+models/rank/xgboost_rank_sector14_tuned_explainability.json  Compact SHAP-style feature explanation
+```
+
+The production model is exported from the feature-complete training dataset:
+
+```bash
+.venv-model/bin/python scripts/modeling/export_production_rank_model.py --num-boost-round 25
+```
+
+The current SHAP-style explainability artifact was generated from the tuned holdout model. It stores the highest-impact features by mean absolute contribution, which can be surfaced in the dashboard and AI prompt as model context.
 
 Legacy/research labels still exist for comparison:
 
@@ -225,13 +264,14 @@ The model intentionally excludes article/news features for now. The current feat
 - Relative strength: stock returns versus SPY, sector ETF, sector median, and same-day cross-sectional ranks.
 - Market context: S&P breadth, SPY trend/volatility, sector ETF momentum, and sector ETF trend.
 
-Feature and target constants live in:
+Feature and target definitions live in:
 
 ```text
-scripts/modeling/schema.py
+scripts/modeling/schema.py          Label names, non-feature columns, and ablation groups
+scripts/modeling/model_features.py  Shared train/live feature list and cross-sectional transforms
 ```
 
-That file is the source of truth for label names, non-feature columns, feature groups, and feature-group ablation logic.
+Keeping the shared model features in one module reduces train/live drift between the historical dataset builder and the daily scorer.
 
 ### Evaluation
 
@@ -287,12 +327,16 @@ Modeling scripts:
 scripts/modeling/fetch_training_data.py    Cache raw price and macro data locally
 scripts/modeling/build_training_dataset.py Build the labeled feature matrix
 scripts/modeling/data_quality_report.py    Audit labels, nulls, outliers, and raw price alignment
+scripts/modeling/model_features.py         Shared feature definitions for train/live scoring parity
 scripts/modeling/train_xgboost_model.py    Train the XGBoost classifier and save reports
 scripts/modeling/train_rank_model.py       Train the sector-neutral XGBoost learning-to-rank model
 scripts/modeling/train_meta_label_model.py Train the candidate-only momentum meta-label model
 scripts/modeling/walk_forward_rank_model.py Run embargoed walk-forward rank-model evaluation
 scripts/modeling/backtest_model.py         Compare model scores against baseline ranking strategies
 scripts/modeling/explain_model.py          Generate XGBoost SHAP-style contribution summaries
+scripts/modeling/export_model_explainability.py Export compact SHAP metadata for the app
+scripts/modeling/export_production_rank_model.py Export the committed production rank model
+scripts/modeling/score_live_rank_model.py  Score the latest S&P 500 universe for the dashboard
 scripts/modeling/feature_ablation_rank_model.py Run rank-model feature-group ablations
 scripts/modeling/tune_rank_model.py        Run compact walk-forward hyperparameter tuning presets
 scripts/modeling/run_model_pipeline.py     Run the full modeling pipeline
@@ -307,9 +351,10 @@ data/modeling/raw/                         Cached price and macro histories
 data/modeling/features/                    Labeled training dataset
 data/modeling/models/                      Saved trained model artifacts
 data/modeling/reports/                     Training reports and test predictions
+models/rank/                               Committed production model artifacts for the app
 ```
 
-The modeling cache is ignored by git so large raw history files and model artifacts stay local by default.
+The modeling cache is ignored by git so large raw history files and research artifacts stay local by default.
 
 Model environment setup:
 
@@ -351,6 +396,14 @@ To run compact hyperparameter tuning:
 
 ```bash
 .venv-model/bin/python scripts/modeling/tune_rank_model.py --output-name xgboost_rank_sector14_tuning
+```
+
+To refresh SHAP-style explainability for the tuned holdout model:
+
+```bash
+.venv-model/bin/python scripts/modeling/train_rank_model.py --model-name xgboost_rank_sector14_feature_v2_tuned_holdout
+.venv-model/bin/python scripts/modeling/explain_model.py --model-name xgboost_rank_sector14_feature_v2_tuned_holdout
+.venv-model/bin/python scripts/modeling/export_model_explainability.py
 ```
 
 Raw FRED macro fields are excluded from the default training dataset because their observation dates are not the same thing as market release dates. They can be included for experimentation with:

@@ -39,6 +39,21 @@ jobs:
         with:
           node-version: "24"
 
+      - name: Set up Python
+        if: steps.pacific_time.outputs.run_refresh == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install model scoring dependencies
+        if: steps.pacific_time.outputs.run_refresh == 'true'
+        run: python -m pip install -r scripts/modeling/requirements.txt
+
+      - name: Score XGBoost rank model
+        if: steps.pacific_time.outputs.run_refresh == 'true'
+        continue-on-error: true
+        run: python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json
+
       - name: Refresh snapshot
         if: steps.pacific_time.outputs.run_refresh == 'true'
         env:

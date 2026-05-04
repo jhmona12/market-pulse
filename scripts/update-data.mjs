@@ -6,10 +6,11 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const maxTickers = Number.parseInt(process.env.MAX_TICKERS || "0", 10);
 const articlesPerSource = Number.parseInt(process.env.SOURCE_ARTICLES_PER_SOURCE || "3", 10);
 const maxArticleCandidates = Number.parseInt(process.env.SOURCE_ARTICLE_CANDIDATES || "10", 10);
+const snapshotOutput = process.env.SNAPSHOT_OUTPUT || "data/snapshot.json";
 const today = new Date();
 const startDate = new Date(today);
 startDate.setDate(startDate.getDate() - 430);
-const defaultAiPrompt = `Write a concise hedge-fund-style morning strategy memo. Use only the supplied macro indicators, source summaries, upcoming events, rules-based desk calls, and momentum metrics. Treat every output as a research recommendation, not financial advice.`;
+const defaultAiPrompt = `Write a concise hedge-fund-style morning strategy memo. Use only the supplied macro indicators, source summaries, upcoming events, XGBoost model rankings, rules-based desk calls, and momentum metrics. Treat every output as a research recommendation, not financial advice.`;
 const defaultOpenAiModel = "gpt-5-nano";
 const modelPricingPerMillion = {
   "gpt-5": { input: 1.25, cachedInput: 0.125, output: 10 },
@@ -79,6 +80,90 @@ async function loadLocalEnv() {
   } catch {
     // .env is optional for this local-first prototype.
   }
+}
+
+function finiteNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function roundedNumber(value, digits = 2) {
+  const number = finiteNumber(value);
+  return number == null ? null : Number(number.toFixed(digits));
+}
+
+function hasModelRank(item) {
+  return Number.isFinite(Number(item?.modelRank));
+}
+
+async function loadModelRankings() {
+  try {
+    const text = await readFile(join(root, "data/model-rank-scores.json"), "utf8");
+    const payload = JSON.parse(text);
+    const rankings = (payload.rankings || []).filter((item) => item?.symbol);
+    return {
+      status: payload.status || "ready",
+      generatedAt: payload.generatedAt || null,
+      asOfDate: payload.asOfDate || null,
+      model: payload.model || null,
+      scoredCount: payload.scoredCount || rankings.length,
+      requestedSymbolCount: payload.requestedSymbolCount || rankings.length,
+      failedSymbolCount: payload.failedSymbolCount || 0,
+      unscoredSymbolCount: payload.unscoredSymbolCount || 0,
+      unscoredSymbols: payload.unscoredSymbols || [],
+      rankings,
+      bySymbol: new Map(rankings.map((item) => [item.symbol, item]))
+    };
+  } catch (error) {
+    return {
+      status: "missing",
+      error: error.message,
+      generatedAt: null,
+      asOfDate: null,
+      model: null,
+      scoredCount: 0,
+      requestedSymbolCount: 0,
+      failedSymbolCount: 0,
+      unscoredSymbolCount: 0,
+      unscoredSymbols: [],
+      rankings: [],
+      bySymbol: new Map()
+    };
+  }
+}
+
+async function loadModelExplainability() {
+  try {
+    const text = await readFile(join(root, "models/rank/xgboost_rank_sector14_tuned_explainability.json"), "utf8");
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+}
+
+function publicModelSummary(modelRankings, explainability) {
+  return {
+    status: modelRankings.status,
+    generatedAt: modelRankings.generatedAt,
+    asOfDate: modelRankings.asOfDate,
+    model: modelRankings.model,
+    scoredCount: modelRankings.scoredCount,
+    requestedSymbolCount: modelRankings.requestedSymbolCount,
+    failedSymbolCount: modelRankings.failedSymbolCount,
+    unscoredSymbolCount: modelRankings.unscoredSymbolCount,
+    unscoredSymbols: modelRankings.unscoredSymbols.slice(0, 25),
+    unavailableReason: modelRankings.status === "ready" ? null : modelRankings.error || null,
+    topRankings: modelRankings.rankings.slice(0, 12),
+    explainability: explainability
+      ? {
+          generatedAt: explainability.generatedAt,
+          sourceModel: explainability.sourceModel,
+          method: explainability.method,
+          notes: explainability.notes,
+          topFeatures: (explainability.topFeatures || []).slice(0, 10)
+        }
+      : null
+  };
 }
 
 function parseMarkdownSources(markdown) {
@@ -518,6 +603,48 @@ function computeSignal(item, history, spyReturn20 = 0) {
   };
 }
 
+function mergeModelScores(signals, modelRankings) {
+  if (modelRankings.status !== "ready" || !modelRankings.bySymbol.size) {
+    return signals.map((item) => ({ ...item, rulesScore: item.score })).sort((a, b) => b.score - a.score);
+  }
+
+  return signals
+    .map((item) => {
+      const model = modelRankings.bySymbol.get(item.symbol);
+      if (!model) return { ...item, rulesScore: item.score };
+
+      const modelPercentile = finiteNumber(model.modelPercentile);
+      const modelTags = [model.modelBucket, ...(model.modelReasons || []).slice(0, 2)].filter(Boolean);
+      return {
+        ...item,
+        rulesScore: item.score,
+        score: modelPercentile ?? item.score,
+        modelRank: finiteNumber(model.modelRank),
+        modelUniverseCount: finiteNumber(model.modelUniverseCount),
+        modelScore: finiteNumber(model.modelScore),
+        modelPercentile,
+        modelBucket: model.modelBucket || "Ranked",
+        modelReasons: model.modelReasons || [],
+        riskFlags: model.riskFlags || [],
+        modelAsOfDate: model.asOfDate || modelRankings.asOfDate,
+        return120: finiteNumber(model.return120),
+        relativeReturn60VsSpy: finiteNumber(model.relativeReturn60VsSpy),
+        sectorReturn60: finiteNumber(model.sectorReturn60),
+        volatility60d: finiteNumber(model.volatility60d),
+        volatility60dVsSector: finiteNumber(model.volatility60dVsSector),
+        distanceTo52wHigh: finiteNumber(model.distanceTo52wHigh),
+        tags: [...new Set([...(item.tags || []), ...modelTags])]
+      };
+    })
+    .sort((a, b) => {
+      const aModel = hasModelRank(a);
+      const bModel = hasModelRank(b);
+      if (aModel && bModel) return Number(a.modelRank) - Number(b.modelRank);
+      if (aModel !== bModel) return aModel ? -1 : 1;
+      return b.score - a.score;
+    });
+}
+
 function computeSectorPerformance(item, history, spyHistory) {
   const closes = history.map((row) => row.close);
   const spyCloses = spyHistory.map((row) => row.close);
@@ -591,14 +718,21 @@ async function fetchFredSeries(series) {
   }
 }
 
-function buildNote({ opportunities, macro, sources }) {
-  const leaders = opportunities.slice(0, 5);
+function buildNote({ opportunities, macro, sources, model }) {
+  const modelReady = model?.status === "ready" && model.scoredCount > 0;
+  const modelLeaders = opportunities.filter(hasModelRank);
+  const leaders = (modelReady ? modelLeaders : opportunities).slice(0, 5);
   const etfLeaders = opportunities.filter((item) => item.type === "etf").slice(0, 3);
   const broadTrend = opportunities.filter((item) => item.above50 && item.above200).length;
   const above50 = opportunities.filter((item) => item.above50).length;
   const above200 = opportunities.filter((item) => item.above200).length;
-  const extended = opportunities.filter((item) => item.score >= 70 && item.rsi14 > 76).length;
-  const cleanCandidates = opportunities.filter((item) => item.score >= 72 && item.above50 && item.above200 && item.rsi14 <= 76).length;
+  const topDecileLimit = modelReady ? Math.max(1, Math.ceil(model.scoredCount * 0.1)) : null;
+  const extended = modelReady
+    ? modelLeaders.filter((item) => item.modelRank <= topDecileLimit && item.rsi14 > 76).length
+    : opportunities.filter((item) => item.score >= 70 && item.rsi14 > 76).length;
+  const cleanCandidates = modelReady
+    ? modelLeaders.filter((item) => item.modelRank <= topDecileLimit && item.above50 && item.above200 && item.rsi14 <= 76).length
+    : opportunities.filter((item) => item.score >= 72 && item.above50 && item.above200 && item.rsi14 <= 76).length;
   const universeCount = opportunities.length || 1;
   const breadth = Math.round((broadTrend / universeCount) * 100);
   const above50Pct = Math.round((above50 / universeCount) * 100);
@@ -609,22 +743,36 @@ function buildNote({ opportunities, macro, sources }) {
   const upcomingEvents = calendar.filter((event) => new Date(`${event.date}T23:59:59`) >= new Date()).slice(0, 3);
   const leaderText = leaders.map((item) => item.symbol).join(", ") || "none";
   const etfText = etfLeaders.map((item) => item.symbol).join(", ") || "none";
-  const headline = `${breadth}% of screened names are above both 50-day and 200-day averages; top-ranked setups: ${leaderText}.`;
-  const body = `The daily setup is based on end-of-day data across ${universeCount} S&P 500 constituents and major ETFs. ${above50Pct}% are above the 50-day average, ${above200Pct}% are above the 200-day average, and ${breadth}% are above both. The highest-ranked opportunities are ${leaderText}. ETF confirmation leaders are ${etfText}. ${cleanCandidates} names pass the clean-candidate filter, while ${extended} high-scoring names have RSI above 76. ${sourceHits} public source pages were checked and ${articleHits} recent articles were ingested for the source tape.`;
+  const modelText = modelReady
+    ? `${model.scoredCount} S&P 500 names were scored by the XGBoost rank model as of ${model.asOfDate || "the latest available close"}`
+    : "The XGBoost rank model was not available for this refresh";
+  const headline = modelReady
+    ? `${modelText}; top model setups: ${leaderText}.`
+    : `${breadth}% of screened names are above both 50-day and 200-day averages; top-ranked setups: ${leaderText}.`;
+  const body = `The daily setup is based on end-of-day data across ${universeCount} S&P 500 constituents and major ETFs. ${modelText}. ${above50Pct}% are above the 50-day average, ${above200Pct}% are above the 200-day average, and ${breadth}% are above both. The highest-ranked opportunities are ${leaderText}. ETF confirmation leaders are ${etfText}. ${cleanCandidates} names pass the clean-candidate filter, while ${extended} ranked names have RSI above 76. ${sourceHits} public source pages were checked and ${articleHits} recent articles were ingested for the source tape.`;
 
   return {
     headline,
     body,
     changed: [
+      modelReady
+        ? `Model leader set: ${leaderText}; top-decile clean candidates: ${cleanCandidates}.`
+        : "Model rankings were unavailable, so the note used the rules-based momentum score.",
       `${breadth}% of screened instruments sit above both 50-day and 200-day moving averages.`,
       `${above50Pct}% are above the 50-day average and ${above200Pct}% are above the 200-day average.`,
-      leaders.length ? `Top score: ${leaders[0].symbol} at ${Math.round(leaders[0].score)} with ${leaders[0].tags.join(", ").toLowerCase() || "trend confirmation"}.` : "No ranked leaders were available.",
-      `${cleanCandidates} names pass the clean-candidate filter; ${extended} high-scoring names are above the RSI ceiling.`,
+      leaders.length && modelReady
+        ? `Top model rank: ${leaders[0].symbol} at #${leaders[0].modelRank} with ${(leaders[0].modelReasons || []).join("; ") || "available model evidence"}.`
+        : leaders.length
+          ? `Top score: ${leaders[0].symbol} at ${Math.round(leaders[0].score)} with ${leaders[0].tags.join(", ").toLowerCase() || "trend confirmation"}.`
+          : "No ranked leaders were available.",
+      `${cleanCandidates} names pass the clean-candidate filter; ${extended} ranked names are above the RSI ceiling.`,
       `${macro.filter((item) => item.value !== "n/a").length} macro series refreshed from free FRED endpoints.`,
       `${articleHits} recent article summaries were extracted from configured research and commentary sources.`
     ],
     watch: [
-      `${extended} screened names have score >= 70 and RSI above 76.`,
+      modelReady
+        ? `${extended} top-decile model names have RSI above 76.`
+        : `${extended} screened names have score >= 70 and RSI above 76.`,
       upcomingEvents.length ? `Next scheduled macro events: ${upcomingEvents.map((event) => `${event.event} on ${event.date}`).join("; ")}.` : "No upcoming macro events are currently listed in the local calendar.",
       `${failedSources} of ${sources.length} configured source pages failed the latest source check.`
     ]
@@ -632,6 +780,29 @@ function buildNote({ opportunities, macro, sources }) {
 }
 
 function buildRecommendations(opportunities) {
+  const modelCandidates = opportunities.filter(hasModelRank);
+  if (modelCandidates.length) {
+    const cleanModelCandidates = modelCandidates.filter((item) => item.above50 && item.above200 && item.rsi14 <= 76);
+    const watch = modelCandidates.find((item) => item.modelRank <= Math.ceil(modelCandidates.length * 0.2) && (!item.above50 || !item.above200 || item.rsi14 > 76));
+    const calls = cleanModelCandidates.slice(0, 4).map((item) => ({
+      label: item.modelBucket || "Model Ranked",
+      symbol: item.symbol,
+      title: `Rank #${item.modelRank} of ${item.modelUniverseCount}; ${formatNumber(item.modelPercentile)} percentile`,
+      rationale: `${item.symbol}: model score ${formatNumber(item.modelScore, 3)}; rules score ${formatNumber(item.rulesScore)}; ${item.above50 && item.above200 ? "above 50-day and 200-day averages" : "mixed trend alignment"}; 60-day relative return vs SPY ${formatPercent(item.relativeReturn60VsSpy)}; evidence: ${(item.modelReasons || []).join("; ") || "model rank and technical inputs"}.`
+    }));
+
+    if (watch) {
+      calls.push({
+        label: "Model Risk Check",
+        symbol: watch.symbol,
+        title: `Rank #${watch.modelRank}; ${watch.riskFlags?.[0] || "review setup"}`,
+        rationale: `${watch.symbol}: still ranks highly, but flags include ${(watch.riskFlags || []).join("; ") || "trend or RSI review"}; RSI ${Math.round(watch.rsi14)}; rules score ${formatNumber(watch.rulesScore)}.`
+      });
+    }
+
+    return calls.slice(0, 6);
+  }
+
   const cleanCandidates = opportunities.filter((item) => item.score >= 72 && item.above50 && item.above200 && item.rsi14 <= 76);
   const extended = opportunities.find((item) => item.score >= 72 && item.rsi14 > 76);
   const watch = opportunities.find((item) => item.score >= 62 && item.score < 72 && item.above50 && item.above200);
@@ -667,16 +838,16 @@ function fallbackAiRecommendations(reason) {
   return {
     status: reason,
     model: null,
-    headline: "AI macro and momentum synthesis is not configured yet.",
-    macroView: "The dashboard has rules-based recommendations today. Add OPENAI_API_KEY to .env and rerun the refresh to generate AI recommendations that connect macro context, public source summaries, and single-name momentum.",
+    headline: "AI macro and model synthesis is not configured yet.",
+    macroView: "The dashboard can still show model-ranked and rules-based recommendations. Add OPENAI_API_KEY to .env and rerun the refresh to generate AI recommendations that connect macro context, public source summaries, and the XGBoost single-name rank model.",
     recommendations: [],
     portfolioNotes: [
-      "Rules-based screening remains available without an API key.",
-      "The AI layer is designed to explain why a candidate matters now, what macro backdrop supports it, and what would invalidate it."
+      "Model-ranked and rules-based screening remain available without an API key.",
+      "The AI layer is designed to explain why a model candidate matters now, what macro backdrop supports it, and what would invalidate it."
     ],
     openQuestions: [
       "Which publications should be weighted most heavily?",
-      "Should the AI favor cleaner entries or more aggressive breakouts?"
+      "Should the AI favor the model's highest-ranked names or require cleaner trend confirmation?"
     ],
     sourceRefs: []
   };
@@ -741,14 +912,28 @@ function compactCandidate(item) {
     name: item.name,
     type: item.type,
     sector: item.sector,
-    score: Math.round(item.score),
-    close: Number(item.close?.toFixed?.(2) ?? item.close),
-    changePct: Number(item.changePct?.toFixed?.(2) ?? item.changePct),
-    return20: Number(item.return20?.toFixed?.(2) ?? item.return20),
-    return60: Number(item.return60?.toFixed?.(2) ?? item.return60),
-    relativeStrength: Number(item.relativeStrength?.toFixed?.(2) ?? item.relativeStrength),
-    rsi14: Math.round(item.rsi14),
-    volumeRatio: Number(item.volumeRatio?.toFixed?.(2) ?? item.volumeRatio),
+    score: roundedNumber(item.score, 1),
+    rulesScore: roundedNumber(item.rulesScore, 1),
+    modelRank: finiteNumber(item.modelRank),
+    modelUniverseCount: finiteNumber(item.modelUniverseCount),
+    modelScore: roundedNumber(item.modelScore, 6),
+    modelPercentile: roundedNumber(item.modelPercentile, 1),
+    modelBucket: item.modelBucket || null,
+    modelReasons: item.modelReasons || [],
+    riskFlags: item.riskFlags || [],
+    modelAsOfDate: item.modelAsOfDate || null,
+    close: roundedNumber(item.close, 2),
+    changePct: roundedNumber(item.changePct, 2),
+    return20: roundedNumber(item.return20, 2),
+    return60: roundedNumber(item.return60, 2),
+    return120: roundedNumber(item.return120, 2),
+    relativeStrength: roundedNumber(item.relativeStrength, 2),
+    relativeReturn60VsSpy: roundedNumber(item.relativeReturn60VsSpy, 2),
+    sectorReturn60: roundedNumber(item.sectorReturn60, 2),
+    volatility60d: roundedNumber(item.volatility60d, 4),
+    distanceTo52wHigh: roundedNumber(item.distanceTo52wHigh, 2),
+    rsi14: roundedNumber(item.rsi14, 0),
+    volumeRatio: roundedNumber(item.volumeRatio, 2),
     above50: item.above50,
     above100: item.above100,
     above200: item.above200,
@@ -757,11 +942,12 @@ function compactCandidate(item) {
   };
 }
 
-async function buildAiRecommendations({ opportunities, macro, calendar, sources, rulesRecommendations, sectorPerformance, promptText }) {
+async function buildAiRecommendations({ opportunities, macro, calendar, sources, rulesRecommendations, sectorPerformance, model: modelSummary, promptText }) {
   const apiKey = process.env.OPENAI_API_KEY;
+  if (process.env.SKIP_AI === "1") return fallbackAiRecommendations("skipped_by_env");
   if (!apiKey) return fallbackAiRecommendations("missing_api_key");
 
-  const model = process.env.OPENAI_MODEL || defaultOpenAiModel;
+  const aiModel = process.env.OPENAI_MODEL || defaultOpenAiModel;
   const sourceArticles = sortArticlesNewestFirst(
     sources
       .flatMap((source) => source.articles || [])
@@ -776,18 +962,24 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     summary,
     excerpt: excerpt?.slice(0, 1200) || ""
   }));
+  const modelCandidates = opportunities.filter(hasModelRank).slice(0, 30).map(compactCandidate);
   const validSymbols = [
-    ...new Set([
-      ...opportunities.slice(0, 40).map((item) => item.symbol),
-      ...opportunities.filter((item) => item.type === "etf").slice(0, 15).map((item) => item.symbol),
-      ...rulesRecommendations.map((item) => item.symbol)
-    ])
+    ...new Set(
+      modelCandidates.length
+        ? modelCandidates.map((item) => item.symbol)
+        : [
+            ...opportunities.slice(0, 40).map((item) => item.symbol),
+            ...opportunities.filter((item) => item.type === "etf").slice(0, 15).map((item) => item.symbol),
+            ...rulesRecommendations.map((item) => item.symbol)
+          ]
+    )
   ].filter(Boolean);
   const sourceRefSchema = sourceTape.length
     ? { type: "string", enum: sourceTape.map((source) => source.id) }
     : { type: "string" };
   const payload = {
     generatedAt: new Date().toISOString(),
+    model: modelSummary,
     macro,
     upcomingEvents: calendar.slice(0, 8),
     sourceTape,
@@ -813,6 +1005,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       above200,
       rsi14: Math.round(rsi14)
     })),
+    modelCandidates,
     topMomentum: opportunities.slice(0, 18).map(compactCandidate),
     extendedMomentum: opportunities
       .filter((item) => item.score >= 70 && item.rsi14 > 76)
@@ -826,7 +1019,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
   };
 
   const requestBody = {
-    model,
+    model: aiModel,
     instructions: promptText || defaultAiPrompt,
     input: [
       {
@@ -867,6 +1060,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
                   "rationale",
                   "macroLink",
                   "macroEvidence",
+                  "modelEvidence",
                   "technicalEvidence",
                   "momentumEvidence",
                   "risk",
@@ -882,6 +1076,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
                   rationale: { type: "string" },
                   macroLink: { type: "string" },
                   macroEvidence: { type: "string" },
+                  modelEvidence: { type: "string" },
                   technicalEvidence: { type: "string" },
                   momentumEvidence: { type: "string" },
                   risk: { type: "string" },
@@ -931,19 +1126,19 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     });
     const json = await response.json();
     if (!response.ok) throw new Error(json.error?.message || `${response.status} ${response.statusText}`);
-    const usage = estimateOpenAiCost(model, json.usage);
+    const usage = estimateOpenAiCost(aiModel, json.usage);
     const text = responseText(json);
     if (!text) throw new Error("OpenAI response did not include final text; try a larger max_output_tokens value or a lower reasoning effort.");
     const parsed = JSON.parse(text);
     await appendUsageLog({
       generatedAt: new Date().toISOString(),
       status: "ready",
-      model,
+      model: aiModel,
       usage
     });
     return {
       status: "ready",
-      model,
+      model: aiModel,
       usage,
       ...parsed
     };
@@ -951,14 +1146,14 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     await appendUsageLog({
       generatedAt: new Date().toISOString(),
       status: "ai_error",
-      model,
+      model: aiModel,
       error: error.message
     });
     return {
       ...fallbackAiRecommendations("ai_error"),
-      model,
+      model: aiModel,
       headline: "AI recommendation generation failed.",
-      macroView: `The rules-based dashboard still refreshed, but the AI call failed: ${error.message}`
+      macroView: `The deterministic dashboard still refreshed, but the AI call failed: ${error.message}`
     };
   }
 }
@@ -966,11 +1161,14 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
 async function main() {
   await loadLocalEnv();
 
-  const [sourceMarkdown, universeConfigText, aiPromptText] = await Promise.all([
+  const [sourceMarkdown, universeConfigText, aiPromptText, modelRankings, modelExplainability] = await Promise.all([
     readFile(join(root, "config/news-sources.md"), "utf8"),
     readFile(join(root, "config/universe.json"), "utf8"),
-    readFile(join(root, "config/ai-recommendation-prompt.md"), "utf8").catch(() => defaultAiPrompt)
+    readFile(join(root, "config/ai-recommendation-prompt.md"), "utf8").catch(() => defaultAiPrompt),
+    loadModelRankings(),
+    loadModelExplainability()
   ]);
+  const modelSummary = publicModelSummary(modelRankings, modelExplainability);
 
   const universeConfig = JSON.parse(universeConfigText);
   const markdownSources = parseMarkdownSources(sourceMarkdown);
@@ -1004,9 +1202,7 @@ async function main() {
     }
   });
 
-  const opportunities = signals
-    .filter(Boolean)
-    .sort((a, b) => b.score - a.score);
+  const opportunities = mergeModelScores(signals.filter(Boolean), modelRankings);
 
   const historyCache = new Map([["SPY", spyHistory]]);
 
@@ -1049,12 +1245,14 @@ async function main() {
     sources,
     rulesRecommendations,
     sectorPerformance,
+    model: modelSummary,
     promptText: aiPromptText
   });
 
   const snapshot = {
     generatedAt: new Date().toISOString(),
-    note: buildNote({ opportunities, macro, sources }),
+    model: modelSummary,
+    note: buildNote({ opportunities, macro, sources, model: modelSummary }),
     aiRecommendations,
     recommendations: rulesRecommendations,
     sectorPerformance,
@@ -1065,8 +1263,8 @@ async function main() {
     sources
   };
 
-  await writeFile(join(root, "data/snapshot.json"), `${JSON.stringify(snapshot, null, 2)}\n`);
-  console.log(`Wrote data/snapshot.json with ${opportunities.length} ranked instruments.`);
+  await writeFile(join(root, snapshotOutput), `${JSON.stringify(snapshot, null, 2)}\n`);
+  console.log(`Wrote ${snapshotOutput} with ${opportunities.length} ranked instruments.`);
 }
 
 export { checkSource, extractArticleCandidates, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };
