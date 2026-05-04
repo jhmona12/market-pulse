@@ -15,6 +15,11 @@ TARGET_HORIZON = 14
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a labeled training dataset for the Market Pulse XGBoost model.")
     parser.add_argument("--output-name", default="training_dataset.csv.gz", help="Name of the generated feature dataset.")
+    parser.add_argument(
+        "--include-macro",
+        action="store_true",
+        help="Include FRED macro observation-date features. Disabled by default to avoid release-date leakage.",
+    )
     return parser.parse_args()
 
 
@@ -181,7 +186,7 @@ def main() -> None:
         }
     )
 
-    macro = load_macro_features()
+    macro = load_macro_features() if args.include_macro else pd.DataFrame(columns=["date"])
     breadth, sector_context = build_market_context(symbol_frames, constituents)
     dataset_frames = []
     sector_lookup = constituents.set_index("symbol")["sector"].to_dict()
@@ -199,7 +204,6 @@ def main() -> None:
         if not macro.empty:
             frame = frame.merge(macro, on="date", how="left")
         frame["excess_return_14d"] = frame["forward_return_14d"] - frame["spy_forward_return_14d"]
-        frame["label_outperform_spy_14d"] = (frame["excess_return_14d"] > 0).astype(int)
         frame["rel_ret_20d_vs_spy"] = frame["ret_20d"] - frame["spy_ret_20d"]
         frame["rel_ret_60d_vs_spy"] = frame["ret_60d"] - frame["spy_ret_60d"]
         frame["rel_rsi_vs_spy"] = frame["rsi_14"] - frame["spy_rsi_14"]
@@ -320,7 +324,9 @@ def main() -> None:
     ]
     feature_columns.extend(column for column in macro_feature_columns if column not in feature_columns)
 
-    dataset = dataset.dropna(subset=["label_outperform_spy_14d", *feature_columns])
+    target_columns = ["forward_return_14d", "spy_forward_return_14d", "excess_return_14d"]
+    dataset = dataset.dropna(subset=[*target_columns, *feature_columns])
+    dataset["label_outperform_spy_14d"] = (dataset["excess_return_14d"] > 0).astype(int)
     output_columns = [
         "date",
         "symbol",
@@ -346,6 +352,7 @@ def main() -> None:
         "end_date": str(dataset["date"].max().date()),
         "label_positive_rate": float(dataset["label_outperform_spy_14d"].mean()),
         "feature_columns": feature_columns,
+        "include_macro": bool(args.include_macro),
         "target_horizon_days": TARGET_HORIZON,
     }
     write_json(metadata, FEATURES_DIR / "training_dataset_metadata.json")

@@ -180,6 +180,7 @@ Modeling scripts:
 ```text
 scripts/modeling/fetch_training_data.py    Cache raw price and macro data locally
 scripts/modeling/build_training_dataset.py Build the labeled feature matrix
+scripts/modeling/data_quality_report.py    Audit labels, nulls, outliers, and raw price alignment
 scripts/modeling/train_xgboost_model.py    Train the XGBoost classifier and save reports
 scripts/modeling/backtest_model.py         Compare model scores against baseline ranking strategies
 scripts/modeling/explain_model.py          Generate XGBoost SHAP-style contribution summaries
@@ -210,6 +211,7 @@ Example workflow:
 ```bash
 /Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/fetch_training_data.py --years 10
 /Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/build_training_dataset.py
+.venv-model/bin/python scripts/modeling/data_quality_report.py
 .venv-model/bin/python scripts/modeling/train_xgboost_model.py
 .venv-model/bin/python scripts/modeling/backtest_model.py
 .venv-model/bin/python scripts/modeling/explain_model.py
@@ -239,6 +241,12 @@ The current feature set is v1 and intentionally excludes article/news features. 
 - Macro series when the FRED cache is available
 
 Backtest reports compare XGBoost predictions against simple momentum and sector-neutral baselines. The reports are intentionally local-only and are written to `data/modeling/reports/`.
+
+Raw FRED macro fields are excluded from the default training dataset because their observation dates are not the same thing as market release dates. They can be included for experimentation with:
+
+```bash
+/Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/build_training_dataset.py --include-macro
+```
 
 ## Project Structure
 

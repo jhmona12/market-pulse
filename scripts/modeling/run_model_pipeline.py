@@ -18,7 +18,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--skip-train", action="store_true", help="Fetch data and build dataset without training.")
     parser.add_argument("--skip-backtest", action="store_true", help="Skip the post-training backtest report.")
     parser.add_argument("--skip-explain", action="store_true", help="Skip the post-training SHAP-style explanation report.")
-    parser.add_argument("--exclude-macro", action="store_true", help="Train without macro feature columns.")
+    parser.add_argument("--include-macro", action="store_true", help="Include FRED macro observation-date features in the dataset.")
+    parser.add_argument("--exclude-macro", action="store_true", help="Drop macro feature columns from the training matrix.")
+    parser.add_argument("--skip-quality-report", action="store_true", help="Skip data quality report generation.")
     return parser.parse_args()
 
 
@@ -31,7 +33,12 @@ def main() -> None:
     args = parse_args()
     if not args.skip_fetch:
         run_step("scripts/modeling/fetch_training_data.py", "--years", str(args.years))
-    run_step("scripts/modeling/build_training_dataset.py", "--output-name", args.dataset_name)
+    build_args = ["scripts/modeling/build_training_dataset.py", "--output-name", args.dataset_name]
+    if args.include_macro:
+        build_args.append("--include-macro")
+    run_step(*build_args)
+    if not args.skip_quality_report:
+        run_step("scripts/modeling/data_quality_report.py", "--dataset", args.dataset_name)
     if not args.skip_train:
         train_args = ["scripts/modeling/train_xgboost_model.py", "--dataset", args.dataset_name, "--model-name", args.model_name]
         if args.exclude_macro:
