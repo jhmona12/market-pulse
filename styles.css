@@ -541,7 +541,8 @@ li {
   text-transform: uppercase;
 }
 
-.ticker-lab-form textarea {
+.ticker-lab-form textarea,
+.ticker-lab-token {
   width: 100%;
   min-height: 108px;
   resize: vertical;
@@ -553,7 +554,14 @@ li {
   font: 0.95rem/1.45 var(--mono);
 }
 
-.ticker-lab-form textarea:focus {
+.ticker-lab-token {
+  min-height: 0;
+  height: 42px;
+  resize: none;
+}
+
+.ticker-lab-form textarea:focus,
+.ticker-lab-token:focus {
   border-color: rgba(57, 255, 136, 0.72);
   outline: none;
 }

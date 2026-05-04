@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Morning Desk</title>
-    <link rel="stylesheet" href="styles.css?v=20260504-ticker-lab" />
+    <link rel="stylesheet" href="styles.css?v=20260504-public-ticker-cache" />
   </head>
   <body>
     <main class="shell">
@@ -25,7 +25,7 @@
         <a href="#sector-performance">Sectors</a>
         <a href="#desk-calls">Desk Calls</a>
         <a href="#momentum-book">Momentum</a>
-        <a href="#ticker-lab" id="tickerLabNav" hidden>Ticker Lab</a>
+        <a href="#ticker-lab" id="tickerLabNav">Ticker Lab</a>
         <a href="#stay-away">Stay Away</a>
         <a href="#macro-calendar">Calendar</a>
         <a href="#macro-pulse">Macro</a>
@@ -98,7 +98,7 @@
           <div class="opportunity-list" id="opportunityList"></div>
         </article>
 
-        <article class="panel ticker-lab-panel" id="ticker-lab" hidden>
+        <article class="panel ticker-lab-panel" id="ticker-lab">
           <div class="panel-title">
             <span>Ticker Lab</span>
             <span id="tickerLabMeta">Local only</span>
@@ -106,9 +106,11 @@
           <form id="tickerLabForm" class="ticker-lab-form">
             <label for="tickerLabInput">Tickers</label>
             <textarea id="tickerLabInput" rows="4" placeholder="AAPL MSFT, TSM, 7203.T"></textarea>
+            <label for="tickerLabToken" id="tickerLabTokenLabel" hidden>Access Code</label>
+            <input id="tickerLabToken" class="ticker-lab-token" type="password" autocomplete="off" placeholder="Ticker Lab access code" hidden />
             <div class="ticker-lab-actions">
               <button class="text-button" type="submit" id="tickerLabSubmit">Score Tickers</button>
-              <span id="tickerLabStatus">Paste symbols separated by spaces, commas, or lines.</span>
+              <span id="tickerLabStatus">Connecting to Ticker Lab backend.</span>
             </div>
           </form>
           <div id="tickerLabResults" class="ticker-lab-results"></div>
@@ -150,6 +152,6 @@
       </section>
     </main>
 
-    <script type="module" src="app.js?v=20260504-ticker-lab"></script>
+    <script type="module" src="app.js?v=20260504-public-ticker-cache"></script>
   </body>
 </html>

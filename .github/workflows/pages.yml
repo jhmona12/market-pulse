@@ -27,9 +27,10 @@ jobs:
 
       - name: Prepare static site
         run: |
-          mkdir -p public/data
+          mkdir -p public/data public/config
           cp index.html styles.css app.js public/
           cp data/snapshot.json public/data/snapshot.json
+          cp config/runtime.json public/config/runtime.json
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

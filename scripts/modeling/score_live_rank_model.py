@@ -10,7 +10,15 @@ import pandas as pd
 
 from build_training_dataset import build_market_context, enrich_price_features, sector_name_for_etf
 from common import ROOT, SECTOR_ETFS, fetch_sp500_constituents, fetch_yahoo_history, run_config_for_years, write_json
-from model_features import add_cross_sectional_model_features, model_feature_columns
+from model_features import (
+    MARKET_CONTEXT_FEATURE_COLUMNS,
+    RANK_BASE_COLUMNS,
+    RAW_PRICE_FEATURE_COLUMNS,
+    SECTOR_CONTEXT_FEATURE_COLUMNS,
+    SECTOR_MEDIAN_COLUMNS,
+    add_cross_sectional_model_features,
+    model_feature_columns,
+)
 
 try:
     import xgboost as xgb
@@ -37,6 +45,16 @@ def parse_args() -> argparse.Namespace:
         "--focus-symbols",
         default="",
         help="Optional comma/space separated symbols to score against the S&P 500 reference universe.",
+    )
+    parser.add_argument(
+        "--reference-cache",
+        default="data/model-reference-cache.json",
+        help="Reusable S&P 500 reference cache path for fast focus-symbol scoring.",
+    )
+    parser.add_argument(
+        "--no-reference-cache",
+        action="store_true",
+        help="Ignore the reference cache and rebuild the full S&P 500 feature matrix.",
     )
     return parser.parse_args()
 
@@ -135,6 +153,45 @@ def build_spy_context(spy_frame: pd.DataFrame) -> pd.DataFrame:
     )
 
 
+def build_sector_context(symbol_frames: dict[str, pd.DataFrame]) -> pd.DataFrame:
+    sector_frames = []
+    for etf in SECTOR_ETFS:
+        frame = symbol_frames[etf][
+            [
+                "date",
+                "ret_20d",
+                "ret_60d",
+                "ret_120d",
+                "momentum_126d_skip_10",
+                "momentum_252d_skip_20",
+                "volatility_20d",
+                "volatility_60d",
+                "price_vs_sma_50",
+                "price_vs_sma_200",
+                "rsi_14",
+                "forward_return_14d_next_close",
+            ]
+        ].copy()
+        frame = frame.rename(
+            columns={
+                "ret_20d": "sector_ret_20d",
+                "ret_60d": "sector_ret_60d",
+                "ret_120d": "sector_ret_120d",
+                "momentum_126d_skip_10": "sector_momentum_126d_skip_10",
+                "momentum_252d_skip_20": "sector_momentum_252d_skip_20",
+                "volatility_20d": "sector_volatility_20d",
+                "volatility_60d": "sector_volatility_60d",
+                "price_vs_sma_50": "sector_price_vs_sma_50",
+                "price_vs_sma_200": "sector_price_vs_sma_200",
+                "rsi_14": "sector_rsi_14",
+                "forward_return_14d_next_close": "sector_forward_return_14d_next_close",
+            }
+        )
+        frame["sector"] = sector_name_for_etf(etf)
+        sector_frames.append(frame)
+    return pd.concat(sector_frames, ignore_index=True)
+
+
 def infer_sector_for_symbol(symbol: str, frame: pd.DataFrame, symbol_frames: dict[str, pd.DataFrame]) -> dict:
     stock_returns = frame[["date", "ret_1d"]].dropna().tail(252).rename(columns={"ret_1d": "stock_ret"})
     correlations = []
@@ -215,20 +272,13 @@ def append_focus_constituents(
     return constituents, sector_diagnostics
 
 
-def assemble_live_features(
+def build_base_feature_dataset(
     symbol_frames: dict[str, pd.DataFrame],
     constituents: pd.DataFrame,
-    reference_symbols: set[str] | None = None,
+    breadth: pd.DataFrame,
+    sector_context: pd.DataFrame,
+    spy: pd.DataFrame,
 ) -> pd.DataFrame:
-    spy = build_spy_context(symbol_frames["SPY"])
-    reference_symbols = reference_symbols or set(constituents["symbol"].astype(str))
-    reference_frames = {
-        symbol: frame
-        for symbol, frame in symbol_frames.items()
-        if symbol in reference_symbols or symbol in {"SPY", *SECTOR_ETFS}
-    }
-    reference_constituents = constituents[constituents["symbol"].isin(reference_symbols)].copy()
-    breadth, sector_context = build_market_context(reference_frames, reference_constituents)
     sector_lookup = constituents.set_index("symbol")["sector"].to_dict()
     dataset_frames = []
     for symbol in constituents["symbol"].tolist():
@@ -254,7 +304,24 @@ def assemble_live_features(
         frame["idiosyncratic_ret_60d"] = frame["ret_60d"] - frame["beta_60d"] * frame["spy_ret_60d"]
         dataset_frames.append(frame)
 
-    dataset = pd.concat(dataset_frames, ignore_index=True).sort_values(["date", "symbol"]).reset_index(drop=True)
+    return pd.concat(dataset_frames, ignore_index=True).sort_values(["date", "symbol"]).reset_index(drop=True)
+
+
+def assemble_live_features(
+    symbol_frames: dict[str, pd.DataFrame],
+    constituents: pd.DataFrame,
+    reference_symbols: set[str] | None = None,
+) -> pd.DataFrame:
+    spy = build_spy_context(symbol_frames["SPY"])
+    reference_symbols = reference_symbols or set(constituents["symbol"].astype(str))
+    reference_frames = {
+        symbol: frame
+        for symbol, frame in symbol_frames.items()
+        if symbol in reference_symbols or symbol in {"SPY", *SECTOR_ETFS}
+    }
+    reference_constituents = constituents[constituents["symbol"].isin(reference_symbols)].copy()
+    breadth, sector_context = build_market_context(reference_frames, reference_constituents)
+    dataset = build_base_feature_dataset(symbol_frames, constituents, breadth, sector_context, spy)
     dataset = add_cross_sectional_model_features(dataset, round_trip_cost=None)
     return dataset
 
@@ -303,6 +370,42 @@ def finite_or_none(value: object, digits: int | None = None) -> float | int | st
     return value
 
 
+def frame_records(frame: pd.DataFrame, columns: list[str] | None = None) -> list[dict]:
+    if columns is not None:
+        columns = [column for column in columns if column in frame.columns]
+        frame = frame[columns].copy()
+    else:
+        frame = frame.copy()
+    frame = frame.replace([np.inf, -np.inf], np.nan)
+    for column in frame.columns:
+        if pd.api.types.is_datetime64_any_dtype(frame[column]):
+            frame[column] = frame[column].dt.date.astype(str)
+    return json.loads(frame.to_json(orient="records"))
+
+
+def records_frame(records: list[dict]) -> pd.DataFrame:
+    frame = pd.DataFrame(records)
+    if "date" in frame.columns:
+        frame["date"] = pd.to_datetime(frame["date"])
+    numeric_exclusions = {"symbol", "name", "sector", "sub_industry", "sectorEtf", "sectorSource"}
+    for column in frame.columns:
+        if column not in numeric_exclusions and column != "date":
+            converted = pd.to_numeric(frame[column], errors="coerce")
+            if converted.notna().sum() == frame[column].notna().sum():
+                frame[column] = converted
+    return frame
+
+
+def unique_existing_columns(frame: pd.DataFrame, columns: list[str]) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for column in columns:
+        if column in frame.columns and column not in seen:
+            result.append(column)
+            seen.add(column)
+    return result
+
+
 def score_rows(dataset: pd.DataFrame, model_path: Path, feature_columns: list[str]) -> pd.DataFrame:
     latest_date = dataset["date"].max()
     latest = dataset[dataset["date"].eq(latest_date)].copy()
@@ -315,6 +418,94 @@ def score_rows(dataset: pd.DataFrame, model_path: Path, feature_columns: list[st
     latest["model_rank"] = np.arange(1, len(latest) + 1)
     latest["model_percentile"] = 100 * (1 - (latest["model_rank"] - 1) / max(1, len(latest) - 1))
     return latest
+
+
+def reference_cache_columns(base_dataset: pd.DataFrame) -> list[str]:
+    return unique_existing_columns(
+        base_dataset,
+        [
+            "date",
+            "symbol",
+            "name",
+            "sector",
+            "sub_industry",
+            "close",
+            "forward_return_14d",
+            "spy_forward_return_14d",
+            "excess_return_14d",
+            "forward_return_14d_next_close",
+            "sector_forward_return_14d_next_close",
+            *RAW_PRICE_FEATURE_COLUMNS,
+            *MARKET_CONTEXT_FEATURE_COLUMNS,
+            *SECTOR_CONTEXT_FEATURE_COLUMNS,
+            *RANK_BASE_COLUMNS,
+            *SECTOR_MEDIAN_COLUMNS,
+        ],
+    )
+
+
+def write_reference_cache(
+    cache_path: Path,
+    base_dataset: pd.DataFrame,
+    breadth: pd.DataFrame,
+    scored: pd.DataFrame,
+    constituents: pd.DataFrame,
+    reference_symbols: set[str],
+    metadata: dict,
+    model_name: str,
+    model_path: Path,
+    constituent_source: str,
+    name_lookup: dict[str, str],
+) -> None:
+    reference_scored = scored[scored["symbol"].isin(reference_symbols)].copy()
+    if reference_scored.empty:
+        return
+
+    latest_date = reference_scored["date"].max()
+    reference_base = base_dataset[
+        base_dataset["date"].eq(latest_date) & base_dataset["symbol"].isin(reference_symbols)
+    ].copy()
+    reference_base = reference_base.merge(
+        constituents[["symbol", "name", "sub_industry"]],
+        on="symbol",
+        how="left",
+    )
+    reference_scores = reference_scored[["symbol", "model_score", "model_rank", "model_percentile", "sector"]].copy()
+    reference_scores = reference_scores.rename(
+        columns={
+            "model_score": "modelScore",
+            "model_rank": "modelRank",
+            "model_percentile": "modelPercentile",
+        }
+    )
+    reference_scores["name"] = reference_scores["symbol"].map(name_lookup).fillna(reference_scores["symbol"])
+    reference_score_series = reference_scored["model_score"]
+    reference_rankings = [
+        row_payload(row, name_lookup, reference_scores=reference_score_series) for _, row in reference_scored.iterrows()
+    ]
+    payload = {
+        "status": "ready",
+        "generatedAt": pd.Timestamp.now("UTC").isoformat(),
+        "asOfDate": latest_date.date().isoformat(),
+        "referenceUniverse": "Current S&P 500",
+        "referenceUniverseCount": int(len(reference_score_series)),
+        "model": {
+            "name": model_name,
+            "path": str(model_path.relative_to(ROOT)),
+            "target": metadata.get("target_column"),
+            "returnColumn": metadata.get("return_column"),
+            "featureCount": len(metadata.get("feature_columns", [])),
+            "numBoostRound": metadata.get("num_boost_round"),
+            "trainingEndDate": metadata.get("training_end_date"),
+            "constituentSource": constituent_source,
+        },
+        "referenceRows": frame_records(reference_base, reference_cache_columns(reference_base)),
+        "breadthRows": frame_records(breadth),
+        "referenceScores": frame_records(reference_scores),
+        "referenceRankings": reference_rankings,
+    }
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    cache_path.write_text(json.dumps(payload, separators=(",", ":")) + "\n", encoding="utf-8")
 
 
 def sp500_comparison(row: pd.Series, reference_scores: pd.Series) -> dict:
@@ -371,7 +562,179 @@ def row_payload(
     }
     if reference_scores is not None:
         payload.update(sp500_comparison(row, reference_scores))
+    if "price_data_date" in row and pd.notna(row.get("price_data_date")):
+        price_data_date = row.get("price_data_date")
+        payload["priceDataDate"] = (
+            price_data_date.date().isoformat() if hasattr(price_data_date, "date") else str(price_data_date)
+        )
     return payload
+
+
+def load_reference_cache(path: Path) -> dict | None:
+    if not path.exists():
+        return None
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if payload.get("status") != "ready" or not payload.get("referenceRows") or not payload.get("referenceScores"):
+        return None
+    return payload
+
+
+def score_focus_with_reference_cache(
+    args: argparse.Namespace,
+    cache: dict,
+    model_path: Path,
+    metadata: dict,
+    feature_columns: list[str],
+    focus_symbols: list[str],
+) -> dict:
+    reference_rows = records_frame(cache.get("referenceRows", []))
+    breadth = records_frame(cache.get("breadthRows", []))
+    reference_scores_frame = records_frame(cache.get("referenceScores", []))
+    if reference_rows.empty or breadth.empty or reference_scores_frame.empty:
+        raise ValueError("reference cache is missing required rows")
+
+    reference_date = pd.to_datetime(cache.get("asOfDate") or reference_rows["date"].max())
+    reference_rows["date"] = reference_date
+    cached_rankings = {str(item["symbol"]): item for item in cache.get("referenceRankings", []) if item.get("symbol")}
+    reference_symbols = set(reference_rows["symbol"].astype(str))
+    cached_reference_scores = pd.to_numeric(reference_scores_frame["modelScore"], errors="coerce").dropna()
+
+    results = []
+    focus_unscored_symbols = []
+    external_focus = []
+    for symbol in focus_symbols:
+        if symbol in cached_rankings:
+            results.append(cached_rankings[symbol])
+        elif symbol in reference_symbols:
+            focus_unscored_symbols.append(symbol)
+        else:
+            external_focus.append(symbol)
+
+    failures: dict[str, str] = {}
+    sector_diagnostics: dict[str, dict] = {}
+    if external_focus:
+        required_symbols = list(dict.fromkeys([*external_focus, "SPY", *SECTOR_ETFS]))
+        symbol_frames, failures = fetch_symbol_frames(required_symbols, args.years, args.max_workers)
+        missing_context = [symbol for symbol in ["SPY", *SECTOR_ETFS] if symbol not in symbol_frames]
+        if missing_context:
+            raise ValueError(f"Missing required model context histories: {missing_context}")
+
+        additions = []
+        for symbol in external_focus:
+            frame = symbol_frames.get(symbol)
+            if frame is None:
+                continue
+            diagnostic = infer_sector_for_symbol(symbol, frame, symbol_frames)
+            sector_diagnostics[symbol] = diagnostic
+            additions.append(
+                {
+                    "symbol": symbol,
+                    "name": symbol,
+                    "sector": diagnostic["sector"],
+                    "sub_industry": "Focus ticker",
+                }
+            )
+
+        if additions:
+            external_constituents = pd.DataFrame(additions)
+            spy = build_spy_context(symbol_frames["SPY"])
+            sector_context = build_sector_context(symbol_frames)
+            focus_history = build_base_feature_dataset(
+                symbol_frames,
+                external_constituents,
+                breadth,
+                sector_context,
+                spy,
+            )
+            focus_history = focus_history[focus_history["date"].le(reference_date)].copy()
+            context_columns = [
+                column
+                for column in ("spy_ret_20d", "breadth_above_50", "sector_ret_20d")
+                if column in focus_history.columns
+            ]
+            focus_history = focus_history.dropna(subset=context_columns)
+            focus_latest = focus_history.sort_values(["symbol", "date"]).groupby("symbol", as_index=False).tail(1)
+            focus_latest["price_data_date"] = focus_latest["date"]
+            focus_latest["date"] = reference_date
+            focus_latest = focus_latest.merge(
+                external_constituents[["symbol", "name", "sub_industry"]],
+                on="symbol",
+                how="left",
+            )
+
+            combined = pd.concat([reference_rows, focus_latest], ignore_index=True, sort=False)
+            dataset = add_cross_sectional_model_features(combined, round_trip_cost=None)
+            missing_features = [column for column in feature_columns if column not in dataset.columns]
+            if missing_features:
+                raise ValueError(f"Cached feature matrix is missing model features: {missing_features}")
+            scored = score_rows(dataset, model_path, feature_columns)
+            scored["model_universe_count"] = len(scored)
+            scored_focus = scored[scored["symbol"].isin(external_focus)].copy()
+            reference_name_lookup = (
+                reference_rows.set_index("symbol")["name"].dropna().to_dict()
+                if "name" in reference_rows.columns
+                else {}
+            )
+            name_lookup = {**reference_name_lookup, **external_constituents.set_index("symbol")["name"].to_dict()}
+            results.extend(
+                row_payload(
+                    row,
+                    name_lookup,
+                    sector_diagnostics,
+                    reference_scores=cached_reference_scores,
+                )
+                for _, row in scored_focus.iterrows()
+            )
+            focus_unscored_symbols.extend(
+                sorted(set(external_focus) - set(scored_focus["symbol"].astype(str)) - set(failures))
+            )
+
+    results = sorted(results, key=lambda item: item.get("sp500Rank") or item.get("modelRank") or 999999)
+    focus_failures = {symbol: failures[symbol] for symbol in focus_symbols if symbol in failures}
+    notes = [
+        "Focus tickers are scored with the same production XGBoost rank model as the S&P 500 dashboard.",
+        f"S&P 500 reference scores come from the daily cache generated {cache.get('generatedAt', 'during the last full refresh')}.",
+        "The daily refresh rebuilds the full S&P 500 reference universe; on-demand scoring only fetches pasted non-reference tickers plus SPY and sector ETF context.",
+        "S&P 500 rank compares each focus ticker's model score against the cached current S&P 500 reference scores.",
+        "Non-S&P tickers are assigned a sector proxy using trailing daily-return correlation to SPDR sector ETFs.",
+        "International or exchange-suffix tickers may be less comparable because price currency, trading calendar, and volume conventions can differ from U.S. common stocks.",
+    ]
+    return {
+        "status": "ready",
+        "generatedAt": pd.Timestamp.now("UTC").isoformat(),
+        "asOfDate": cache.get("asOfDate"),
+        "model": cache.get(
+            "model",
+            {
+                "name": args.model_name,
+                "path": str(model_path.relative_to(ROOT)),
+                "target": metadata.get("target_column"),
+                "returnColumn": metadata.get("return_column"),
+                "featureCount": len(feature_columns),
+            },
+        ),
+        "scoredCount": len(results),
+        "requestedSymbolCount": len(focus_symbols),
+        "focusSymbols": focus_symbols,
+        "focusRankings": results,
+        "focusFailureCount": len(focus_failures),
+        "focusFailures": focus_failures,
+        "focusUnscoredSymbols": sorted(set(focus_unscored_symbols)),
+        "referenceUniverse": cache.get("referenceUniverse", "Current S&P 500"),
+        "referenceUniverseCount": int(cache.get("referenceUniverseCount") or len(cached_reference_scores)),
+        "referenceCache": {
+            "path": args.reference_cache,
+            "generatedAt": cache.get("generatedAt"),
+            "asOfDate": cache.get("asOfDate"),
+        },
+        "sectorDiagnostics": sector_diagnostics,
+        "methodologyNotes": notes,
+        "failedSymbolCount": len(failures),
+        "unscoredSymbolCount": len(focus_unscored_symbols),
+        "unscoredSymbols": sorted(set(focus_unscored_symbols)),
+        "failures": failures,
+        "rankings": results,
+    }
 
 
 def main() -> None:
@@ -383,6 +746,19 @@ def main() -> None:
     feature_columns = list(metadata["feature_columns"])
 
     focus_symbols = parse_focus_symbols(args.focus_symbols)
+    cache_path = ROOT / args.reference_cache
+    if focus_symbols and not args.no_reference_cache:
+        cache = load_reference_cache(cache_path)
+        if cache is not None:
+            try:
+                payload = score_focus_with_reference_cache(args, cache, model_path, metadata, feature_columns, focus_symbols)
+                output_path = ROOT / args.output
+                write_json(payload, output_path)
+                print(f"Wrote {len(payload['focusRankings'])} focus rankings using {cache_path.relative_to(ROOT)}")
+                return
+            except Exception as error:  # noqa: BLE001 - cache fallback should not block scoring
+                print(f"Reference cache unavailable; rebuilding full universe: {error}")
+
     constituents, constituent_source = load_constituents(args.max_symbols)
     reference_symbols = set(constituents["symbol"].astype(str))
     required_symbols = list(dict.fromkeys([*constituents["symbol"].tolist(), *focus_symbols, "SPY", *SECTOR_ETFS]))
@@ -392,7 +768,16 @@ def main() -> None:
         raise SystemExit(f"Missing required model context histories: {missing_context}")
 
     constituents, sector_diagnostics = append_focus_constituents(constituents, focus_symbols, symbol_frames)
-    dataset = assemble_live_features(symbol_frames, constituents, reference_symbols=reference_symbols)
+    spy = build_spy_context(symbol_frames["SPY"])
+    reference_frames = {
+        symbol: frame
+        for symbol, frame in symbol_frames.items()
+        if symbol in reference_symbols or symbol in {"SPY", *SECTOR_ETFS}
+    }
+    reference_constituents = constituents[constituents["symbol"].isin(reference_symbols)].copy()
+    breadth, sector_context = build_market_context(reference_frames, reference_constituents)
+    base_dataset = build_base_feature_dataset(symbol_frames, constituents, breadth, sector_context, spy)
+    dataset = add_cross_sectional_model_features(base_dataset, round_trip_cost=None)
     missing_features = [column for column in feature_columns if column not in dataset.columns]
     if missing_features:
         raise SystemExit(f"Live feature matrix is missing model features: {missing_features}")
@@ -451,6 +836,25 @@ def main() -> None:
     }
     output_path = ROOT / args.output
     write_json(payload, output_path)
+    should_write_cache = (
+        not args.no_reference_cache
+        and (args.max_symbols == 0 or args.reference_cache != "data/model-reference-cache.json")
+    )
+    if should_write_cache:
+        write_reference_cache(
+            cache_path,
+            base_dataset,
+            breadth,
+            scored,
+            constituents,
+            reference_symbols,
+            metadata,
+            args.model_name,
+            model_path,
+            constituent_source,
+            name_lookup,
+        )
+        print(f"Wrote S&P 500 reference cache to {cache_path.relative_to(ROOT)}")
     print(f"Wrote {len(rankings)} live model rankings to {output_path.relative_to(ROOT)}")
 
 

@@ -163,7 +163,10 @@ const fallbackSnapshot = {
 const state = {
   snapshot: fallbackSnapshot,
   tickerLab: {
-    enabled: false,
+    enabled: true,
+    apiReady: false,
+    apiBaseUrl: "",
+    requiresAccessCode: false,
     loading: false,
     status: "",
     result: null,
@@ -275,6 +278,15 @@ function parseTickerInput(value) {
         .filter((token) => /^[A-Z0-9][A-Z0-9.^=\-]{0,18}$/.test(token))
     )
   ].slice(0, state.tickerLab.maxTickers || 25);
+}
+
+function normalizeApiBaseUrl(value) {
+  return String(value || "").trim().replace(/\/+$/, "");
+}
+
+function tickerLabUrl(path) {
+  const baseUrl = normalizeApiBaseUrl(state.tickerLab.apiBaseUrl);
+  return `${baseUrl}${path}`;
 }
 
 function outlookForTicker(item) {
@@ -604,17 +616,33 @@ function renderTickerLab() {
   const nav = $("#tickerLabNav");
   if (!panel) return;
 
-  panel.hidden = !state.tickerLab.enabled;
-  if (nav) nav.hidden = !state.tickerLab.enabled;
-  if (!state.tickerLab.enabled) return;
+  panel.hidden = false;
+  if (nav) nav.hidden = false;
 
   const submit = $("#tickerLabSubmit");
   const status = $("#tickerLabStatus");
   const meta = $("#tickerLabMeta");
   const results = $("#tickerLabResults");
-  submit.disabled = state.tickerLab.loading;
-  meta.textContent = state.tickerLab.loading ? "Scoring model" : "Local only";
-  status.textContent = state.tickerLab.status || `Paste up to ${state.tickerLab.maxTickers} symbols separated by spaces, commas, or lines.`;
+  const tokenInput = $("#tickerLabToken");
+  const tokenLabel = $("#tickerLabTokenLabel");
+  const ready = state.tickerLab.apiReady;
+  submit.disabled = state.tickerLab.loading || !ready;
+  meta.textContent = state.tickerLab.loading
+    ? "Scoring model"
+    : ready
+      ? state.tickerLab.requiresAccessCode
+        ? "Private API"
+        : "Model API ready"
+      : "Backend offline";
+  if (tokenInput && tokenLabel) {
+    tokenInput.hidden = !state.tickerLab.requiresAccessCode;
+    tokenLabel.hidden = !state.tickerLab.requiresAccessCode;
+  }
+  status.textContent =
+    state.tickerLab.status ||
+    (ready
+      ? `Paste up to ${state.tickerLab.maxTickers} symbols separated by spaces, commas, or lines.`
+      : "Ticker Lab is visible here, but scoring needs the private model backend URL configured.");
   results.innerHTML = "";
 
   if (state.tickerLab.error) {
@@ -781,16 +809,39 @@ function wireControls() {
   on("#tickerLabForm", "submit", submitTickerLab);
 }
 
+async function loadRuntimeConfig() {
+  try {
+    const response = await fetch(`config/runtime.json?ts=${Date.now()}`);
+    if (response.ok) {
+      const payload = await response.json();
+      state.tickerLab.apiBaseUrl = normalizeApiBaseUrl(payload.tickerLabApiBaseUrl || "");
+    }
+  } catch (error) {
+    console.warn(error);
+  }
+  const localOverride = normalizeApiBaseUrl(localStorage.getItem("tickerLabApiBaseUrl") || "");
+  if (localOverride) state.tickerLab.apiBaseUrl = localOverride;
+}
+
 async function checkTickerLabAvailability() {
   try {
-    const response = await fetch(`/api/ticker-lab/status?ts=${Date.now()}`);
+    const response = await fetch(tickerLabUrl(`/api/ticker-lab/status?ts=${Date.now()}`));
     if (!response.ok) throw new Error("Ticker Lab API unavailable");
     const payload = await response.json();
     state.tickerLab.enabled = Boolean(payload.enabled);
+    state.tickerLab.apiReady = Boolean(payload.enabled);
+    state.tickerLab.requiresAccessCode = Boolean(payload.requiresAccessCode);
     state.tickerLab.maxTickers = payload.maxTickers || 25;
-    state.tickerLab.status = `Local model API ready. Paste up to ${state.tickerLab.maxTickers} symbols.`;
-  } catch {
-    state.tickerLab.enabled = false;
+    const cacheText = payload.referenceCache?.ready
+      ? ` Daily cache as of ${payload.referenceCache.asOfDate || "latest close"}.`
+      : " The first score may rebuild the reference cache.";
+    state.tickerLab.status = `Model API ready. Paste up to ${state.tickerLab.maxTickers} symbols.${cacheText}`;
+  } catch (error) {
+    state.tickerLab.enabled = true;
+    state.tickerLab.apiReady = false;
+    state.tickerLab.requiresAccessCode = false;
+    state.tickerLab.status = "Ticker Lab backend is not connected yet. Add the hosted API URL to config/runtime.json or run npm run dev:local.";
+    console.warn(error);
   }
   renderTickerLab();
 }
@@ -805,17 +856,26 @@ async function submitTickerLab(event) {
     renderTickerLab();
     return;
   }
+  if (!state.tickerLab.apiReady) {
+    state.tickerLab.error = "Ticker Lab backend is not connected yet.";
+    state.tickerLab.result = null;
+    renderTickerLab();
+    return;
+  }
 
   state.tickerLab.loading = true;
   state.tickerLab.error = null;
   state.tickerLab.result = null;
-  state.tickerLab.status = `Scoring ${tickers.join(", ")} against the S&P 500 reference universe. This can take about a minute.`;
+  state.tickerLab.status = `Scoring ${tickers.join(", ")} against the cached S&P 500 reference universe.`;
   renderTickerLab();
 
   try {
-    const response = await fetch("/api/ticker-lab/score", {
+    const token = $("#tickerLabToken")?.value?.trim();
+    const headers = { "content-type": "application/json" };
+    if (token) headers["x-ticker-lab-token"] = token;
+    const response = await fetch(tickerLabUrl("/api/ticker-lab/score"), {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers,
       body: JSON.stringify({ tickers })
     });
     const payload = await response.json();
@@ -845,4 +905,4 @@ async function loadSnapshot() {
 
 wireControls();
 loadSnapshot();
-checkTickerLabAvailability();
+loadRuntimeConfig().then(checkTickerLabAvailability);

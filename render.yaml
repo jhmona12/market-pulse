@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: market-pulse-ticker-lab
+    env: docker
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: TICKER_LAB_ACCESS_CODE
+        sync: false

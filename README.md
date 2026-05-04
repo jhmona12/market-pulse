@@ -29,6 +29,8 @@ https://jhmona12.github.io/market-pulse/
 
 The site reads from `data/snapshot.json`. When that file changes, the public page reflects the latest generated market snapshot after GitHub Pages redeploys.
 
+Ticker Lab is visible on the public page, but scoring requires a separate private model API because GitHub Pages can only serve static files. The browser reads the API base URL from `config/runtime.json`.
+
 ## Local Use
 
 This project has no required npm install step.
@@ -45,10 +47,16 @@ Then open:
 http://localhost:4173
 ```
 
-For the private local Ticker Lab, start the local API server instead:
+For the private Ticker Lab, start the local API server instead:
 
 ```bash
 npm run dev:local
+```
+
+Equivalent direct command:
+
+```bash
+node scripts/local-dashboard-server.mjs
 ```
 
 Then open:
@@ -57,7 +65,7 @@ Then open:
 http://localhost:4173
 ```
 
-The Ticker Lab section only appears when the local API is running. It is hidden on the public GitHub Pages site because GitHub Pages cannot run the local model API.
+The Ticker Lab section is always visible. It can score tickers when it can reach either the same-origin local API from `npm run dev:local` or a hosted backend configured in `config/runtime.json`.
 
 If port `4173` is already in use, choose another port:
 
@@ -84,6 +92,7 @@ The refresh script:
 - Pulls selected macro series from FRED
 - Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
+- Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
 - Enriches the top model candidates with company context from Nasdaq, company investor relations pages, and Yahoo Finance news RSS
 - Builds a lowest-ranked model book for the Stay Away section
 - Writes the dashboard snapshot to `data/snapshot.json`
@@ -95,7 +104,7 @@ To refresh model rankings before the dashboard snapshot:
 node scripts/update-data.mjs
 ```
 
-`data/model-rank-scores.json` is an intermediate file and is ignored by git. The generated `data/snapshot.json` contains the model rankings needed by the static site.
+`data/model-rank-scores.json` is an intermediate file and is ignored by git. The generated `data/snapshot.json` contains the model rankings needed by the static site. The generated `data/model-reference-cache.json` is intentionally committed because it gives the private Ticker Lab a fresh daily S&P 500 baseline without rebuilding the full universe on every pasted-ticker request.
 
 Some current constituents may be fetched but not scored if they do not have enough clean trailing data to populate every required feature. The scorer records those symbols in the snapshot model metadata.
 
@@ -195,9 +204,9 @@ The dashboard displays the top model-ranked and rules-confirmed momentum names d
 
 ## Private Ticker Lab
 
-Ticker Lab is a local-only workflow for scoring pasted tickers against the current S&P 500 reference universe.
+Ticker Lab scores pasted tickers against the current S&P 500 reference universe.
 
-When `npm run dev:local` is running, the dashboard shows a Ticker Lab section where you can paste symbols separated by spaces, commas, semicolons, or new lines. The browser sends those symbols to the local endpoint:
+The dashboard accepts symbols separated by spaces, commas, semicolons, tabs, or new lines. The browser sends the cleaned symbols to:
 
 ```text
 POST /api/ticker-lab/score
@@ -211,13 +220,25 @@ The local server runs:
 
 The scorer:
 
-- Fetches current S&P 500 price history, SPY, sector ETFs, and the pasted focus tickers
+- Uses `data/model-reference-cache.json` when available for the daily S&P 500 reference scores
+- Fetches pasted non-reference tickers plus SPY and sector ETFs for live focus-ticker context
+- Falls back to rebuilding the full S&P 500 reference universe if the cache is unavailable or invalid
 - Scores the focus tickers with the same production XGBoost rank model
 - Compares each focus ticker's model score against the S&P 500 reference scores
 - Returns S&P rank, percentile, model score, trend, RSI, relative return versus SPY, sector context, model reasons, and risk flags
 - Infers a sector proxy for non-S&P tickers using trailing return correlation to SPDR sector ETFs
 
-Ticker Lab output is written under `data/ticker-lab/`, which is ignored by git. The feature is structured so it can later be exposed publicly behind a real backend, but it is not available from the static GitHub Pages deployment.
+Ticker Lab output is written under `data/ticker-lab/`, which is ignored by git.
+
+For public-site use, deploy the backend from this repo with the included `Dockerfile` or `render.yaml`, then put the backend origin in:
+
+```json
+{
+  "tickerLabApiBaseUrl": "https://your-private-backend.example.com"
+}
+```
+
+If `TICKER_LAB_ACCESS_CODE` is set on the backend, the site shows an access-code field and sends that value in the `x-ticker-lab-token` header. This keeps the public page viewable while keeping model scoring private.
 
 Important caveat: non-U.S. and exchange-suffix tickers may be less comparable to S&P 500 stocks because currency, trading calendar, market hours, and volume conventions can differ.
 
@@ -234,8 +255,9 @@ It is configured to check daily around 5 PM Pacific. Because GitHub cron runs in
 When the refresh runs successfully, it:
 
 - Scores the current S&P 500 universe with the committed XGBoost rank model when dependencies and free data endpoints are available
+- Refreshes `data/model-reference-cache.json` for fast Ticker Lab scoring
 - Regenerates `data/snapshot.json`
-- Commits the updated snapshot back to `main` if it changed
+- Commits the updated snapshot and reference cache back to `main` if either changed
 - Triggers a GitHub Pages redeploy through the repository's Pages workflow
 
 GitHub scheduled workflows may start several minutes late. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
@@ -484,11 +506,15 @@ index.html                         Static dashboard shell
 styles.css                         Dashboard styling
 app.js                             Browser rendering logic
 scripts/update-data.mjs            Data refresh, source ingestion, screening, AI call
-scripts/local-dashboard-server.mjs Local-only static server and Ticker Lab API
+scripts/local-dashboard-server.mjs Static server and private Ticker Lab API
 config/news-sources.md             Editable public source registry
 config/universe.json               ETF and fallback universe configuration
 config/ai-recommendation-prompt.md AI memo prompt
+config/runtime.json                Public runtime config for optional hosted Ticker Lab API URL
 data/snapshot.json                 Generated dashboard data
+data/model-reference-cache.json    Generated daily S&P 500 model reference cache
+Dockerfile                         Container image for the private Ticker Lab backend
+render.yaml                        Render-style backend service blueprint
 .github/workflows/                 GitHub Pages and scheduled refresh workflows
 ```
 

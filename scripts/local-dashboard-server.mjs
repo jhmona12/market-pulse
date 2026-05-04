@@ -10,7 +10,9 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const port = Number.parseInt(process.env.PORT || "4173", 10);
 const python = process.env.MODEL_PYTHON || join(root, ".venv-model/bin/python");
 const outputDir = join(root, "data/ticker-lab");
+const referenceCachePath = join(root, "data/model-reference-cache.json");
 const maxTickers = Number.parseInt(process.env.TICKER_LAB_MAX_TICKERS || "25", 10);
+const accessCode = process.env.TICKER_LAB_ACCESS_CODE || "";
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -24,12 +26,27 @@ const mimeTypes = {
   ".ico": "image/x-icon"
 };
 
+function corsHeaders() {
+  return {
+    "access-control-allow-origin": "*",
+    "access-control-allow-methods": "GET,POST,OPTIONS",
+    "access-control-allow-headers": "content-type,x-ticker-lab-token",
+    "access-control-max-age": "86400"
+  };
+}
+
 function sendJson(response, statusCode, payload) {
   response.writeHead(statusCode, {
     "content-type": "application/json; charset=utf-8",
-    "cache-control": "no-store"
+    "cache-control": "no-store",
+    ...corsHeaders()
   });
   response.end(`${JSON.stringify(payload, null, 2)}\n`);
+}
+
+function authorized(request) {
+  if (!accessCode) return true;
+  return request.headers["x-ticker-lab-token"] === accessCode;
 }
 
 function cleanTickerInput(value) {
@@ -63,7 +80,9 @@ function runModelScore(tickers, outputPath) {
         "--focus-symbols",
         tickers.join(","),
         "--output",
-        relative(root, outputPath)
+        relative(root, outputPath),
+        "--reference-cache",
+        relative(root, referenceCachePath)
       ],
       { cwd: root, env: process.env }
     );
@@ -88,6 +107,14 @@ function runModelScore(tickers, outputPath) {
 
 async function scoreTickers(request, response) {
   try {
+    if (!authorized(request)) {
+      sendJson(response, 401, {
+        status: "error",
+        error: "Ticker Lab access code is required."
+      });
+      return;
+    }
+
     const rawBody = await readRequestBody(request);
     const body = rawBody ? JSON.parse(rawBody) : {};
     const tickers = cleanTickerInput(body.tickers || body.text);
@@ -154,12 +181,31 @@ async function serveStatic(request, response) {
 
 const server = createServer(async (request, response) => {
   const url = new URL(request.url || "/", `http://localhost:${port}`);
+  if (request.method === "OPTIONS") {
+    response.writeHead(204, corsHeaders());
+    response.end();
+    return;
+  }
   if (request.method === "GET" && url.pathname === "/api/ticker-lab/status") {
+    let referenceCache = { ready: false };
+    try {
+      const payload = JSON.parse(await readFile(referenceCachePath, "utf8"));
+      referenceCache = {
+        ready: payload.status === "ready",
+        generatedAt: payload.generatedAt,
+        asOfDate: payload.asOfDate,
+        referenceUniverseCount: payload.referenceUniverseCount
+      };
+    } catch {
+      referenceCache = { ready: false };
+    }
     sendJson(response, 200, {
       enabled: true,
-      privacy: "local_only",
+      privacy: accessCode ? "access_code_required" : "open_endpoint",
+      requiresAccessCode: Boolean(accessCode),
       maxTickers,
-      referenceUniverse: "Current S&P 500"
+      referenceUniverse: "Current S&P 500",
+      referenceCache
     });
     return;
   }
@@ -177,5 +223,5 @@ const server = createServer(async (request, response) => {
 
 server.listen(port, () => {
   console.log(`Market Pulse local server running at http://localhost:${port}`);
-  console.log("Ticker Lab API is local-only and is not available on GitHub Pages.");
+  console.log("Ticker Lab API is available at /api/ticker-lab/score.");
 });
