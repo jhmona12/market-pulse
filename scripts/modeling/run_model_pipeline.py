@@ -16,6 +16,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-name", default="xgboost_spy14", help="Base name for model outputs.")
     parser.add_argument("--skip-fetch", action="store_true", help="Reuse cached raw data and skip the fetch step.")
     parser.add_argument("--skip-train", action="store_true", help="Fetch data and build dataset without training.")
+    parser.add_argument("--train-rank", action="store_true", help="Train the sector-neutral learning-to-rank model.")
+    parser.add_argument("--train-meta", action="store_true", help="Train the candidate-only momentum meta-label model.")
+    parser.add_argument("--walk-forward-rank", action="store_true", help="Run embargoed walk-forward rank-model evaluation.")
     parser.add_argument("--skip-backtest", action="store_true", help="Skip the post-training backtest report.")
     parser.add_argument("--skip-explain", action="store_true", help="Skip the post-training SHAP-style explanation report.")
     parser.add_argument("--include-macro", action="store_true", help="Include FRED macro observation-date features in the dataset.")
@@ -59,6 +62,49 @@ def main() -> None:
             )
         if not args.skip_explain:
             run_step("scripts/modeling/explain_model.py", "--dataset", args.dataset_name, "--model-name", args.model_name)
+    if args.train_rank:
+        rank_name = "xgboost_rank_sector14"
+        run_step("scripts/modeling/train_rank_model.py", "--dataset", args.dataset_name, "--model-name", rank_name)
+        if not args.skip_backtest:
+            run_step(
+                "scripts/modeling/backtest_model.py",
+                "--dataset",
+                args.dataset_name,
+                "--predictions",
+                f"{rank_name}_test_predictions.csv",
+                "--output-name",
+                f"{rank_name}_backtest",
+            )
+    if args.train_meta:
+        meta_name = "xgboost_meta_momentum14"
+        run_step("scripts/modeling/train_meta_label_model.py", "--dataset", args.dataset_name, "--model-name", meta_name)
+        if not args.skip_backtest:
+            run_step(
+                "scripts/modeling/backtest_model.py",
+                "--dataset",
+                args.dataset_name,
+                "--predictions",
+                f"{meta_name}_test_predictions.csv",
+                "--output-name",
+                f"{meta_name}_backtest",
+                "--bucket-fraction",
+                "0.25",
+                "--target-column",
+                "meta_label_momentum_success",
+            )
+    if args.walk_forward_rank:
+        walk_name = "xgboost_rank_sector14_walk_forward"
+        run_step("scripts/modeling/walk_forward_rank_model.py", "--dataset", args.dataset_name, "--model-name", walk_name)
+        if not args.skip_backtest:
+            run_step(
+                "scripts/modeling/backtest_model.py",
+                "--dataset",
+                args.dataset_name,
+                "--predictions",
+                f"{walk_name}_test_predictions.csv",
+                "--output-name",
+                f"{walk_name}_backtest",
+            )
 
 
 if __name__ == "__main__":

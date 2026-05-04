@@ -17,7 +17,19 @@ IDENTITY_COLUMNS = {
     "forward_return_14d",
     "spy_forward_return_14d",
     "excess_return_14d",
+    "forward_return_14d_next_close",
+    "sector_forward_return_14d_next_close",
+    "sector_neutral_forward_return_14d",
+    "sector_neutral_forward_return_14d_after_cost",
+    "max_drawdown_14d_next_close",
+    "sector_max_drawdown_14d_next_close",
     "label_outperform_spy_14d",
+    "label_sector_neutral_positive_14d",
+    "label_sector_neutral_hurdle_14d",
+    "sector_neutral_forward_return_pct_rank",
+    "relevance_grade_sector_neutral_14d",
+    "candidate_momentum_setup",
+    "meta_label_momentum_success",
 }
 
 
@@ -140,6 +152,9 @@ def dataset_report(dataset_path: Path) -> dict:
         "null_forward_return_rows": int(dataset["forward_return_14d"].isna().sum()),
         "null_spy_forward_return_rows": int(dataset["spy_forward_return_14d"].isna().sum()),
         "null_excess_return_rows": int(dataset["excess_return_14d"].isna().sum()),
+        "null_next_close_forward_return_rows": int(dataset["forward_return_14d_next_close"].isna().sum()),
+        "null_sector_forward_return_rows": int(dataset["sector_forward_return_14d_next_close"].isna().sum()),
+        "null_sector_neutral_return_rows": int(dataset["sector_neutral_forward_return_14d_after_cost"].isna().sum()),
         "label_mismatches_on_non_null_excess": label_mismatches,
         "feature_null_cells": int(dataset[feature_columns].isna().sum().sum()),
         "feature_infinite_cells": int(np.isinf(numeric_features).sum()),
@@ -147,7 +162,12 @@ def dataset_report(dataset_path: Path) -> dict:
         "median_symbols_per_date": float(date_counts.median()),
         "max_symbols_per_date": int(date_counts.max()),
         "label_positive_rate": float(dataset["label_outperform_spy_14d"].mean()),
+        "sector_neutral_positive_rate": float(dataset["label_sector_neutral_positive_14d"].mean()),
+        "sector_neutral_hurdle_rate": float(dataset["label_sector_neutral_hurdle_14d"].mean()),
+        "candidate_rows": int(dataset["candidate_momentum_setup"].sum()),
+        "candidate_success_rate": float(dataset.loc[dataset["candidate_momentum_setup"].eq(1), "meta_label_momentum_success"].mean()),
         "abs_excess_return_gt_50pct_rows": int((dataset["excess_return_14d"].abs() > 0.5).sum()),
+        "abs_sector_neutral_return_gt_50pct_rows": int((dataset["sector_neutral_forward_return_14d_after_cost"].abs() > 0.5).sum()),
         "excess_return_quantiles": {
             str(key): float(value)
             for key, value in dataset["excess_return_14d"].quantile([0, 0.001, 0.01, 0.5, 0.99, 0.999, 1]).items()

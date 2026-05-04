@@ -26,7 +26,19 @@ IDENTITY_COLUMNS = {
     "forward_return_14d",
     "spy_forward_return_14d",
     "excess_return_14d",
+    "forward_return_14d_next_close",
+    "sector_forward_return_14d_next_close",
+    "sector_neutral_forward_return_14d",
+    "sector_neutral_forward_return_14d_after_cost",
+    "max_drawdown_14d_next_close",
+    "sector_max_drawdown_14d_next_close",
     TARGET_COLUMN,
+    "label_sector_neutral_positive_14d",
+    "label_sector_neutral_hurdle_14d",
+    "sector_neutral_forward_return_pct_rank",
+    "relevance_grade_sector_neutral_14d",
+    "candidate_momentum_setup",
+    "meta_label_momentum_success",
 }
 
 

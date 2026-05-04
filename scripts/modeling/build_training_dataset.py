@@ -15,6 +15,9 @@ TARGET_HORIZON = 14
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a labeled training dataset for the Market Pulse XGBoost model.")
     parser.add_argument("--output-name", default="training_dataset.csv.gz", help="Name of the generated feature dataset.")
+    parser.add_argument("--round-trip-cost-bps", type=float, default=15.0, help="Cost deducted from forward sector-neutral labels.")
+    parser.add_argument("--meta-return-hurdle", type=float, default=0.01, help="Minimum after-cost sector-neutral return for a successful setup.")
+    parser.add_argument("--meta-drawdown-floor", type=float, default=-0.02, help="Minimum acceptable adjusted-close drawdown for a successful setup.")
     parser.add_argument(
         "--include-macro",
         action="store_true",
@@ -73,6 +76,15 @@ def enrich_price_features(frame: pd.DataFrame) -> pd.DataFrame:
     frame["high_252"] = close.rolling(252).max()
     frame["distance_to_52w_high"] = close / frame["high_252"] - 1
     frame["forward_return_14d"] = close.shift(-TARGET_HORIZON) / close - 1
+    entry_close = close.shift(-1)
+    exit_close = close.shift(-(TARGET_HORIZON + 1))
+    frame["forward_return_14d_next_close"] = exit_close / entry_close - 1
+
+    future_path = pd.concat(
+        [close.shift(-offset).rename(offset) for offset in range(1, TARGET_HORIZON + 2)],
+        axis=1,
+    )
+    frame["max_drawdown_14d_next_close"] = future_path.div(entry_close, axis=0).sub(1).min(axis=1)
     return frame
 
 
@@ -128,7 +140,18 @@ def build_market_context(symbol_frames: dict[str, pd.DataFrame], constituents: p
 
     sector_frames = []
     for etf in SECTOR_ETFS:
-        frame = symbol_frames[etf][["date", "ret_20d", "ret_60d", "price_vs_sma_50", "price_vs_sma_200", "rsi_14"]].copy()
+        frame = symbol_frames[etf][
+            [
+                "date",
+                "ret_20d",
+                "ret_60d",
+                "price_vs_sma_50",
+                "price_vs_sma_200",
+                "rsi_14",
+                "forward_return_14d_next_close",
+                "max_drawdown_14d_next_close",
+            ]
+        ].copy()
         frame = frame.rename(
             columns={
                 "ret_20d": "sector_ret_20d",
@@ -136,6 +159,8 @@ def build_market_context(symbol_frames: dict[str, pd.DataFrame], constituents: p
                 "price_vs_sma_50": "sector_price_vs_sma_50",
                 "price_vs_sma_200": "sector_price_vs_sma_200",
                 "rsi_14": "sector_rsi_14",
+                "forward_return_14d_next_close": "sector_forward_return_14d_next_close",
+                "max_drawdown_14d_next_close": "sector_max_drawdown_14d_next_close",
             }
         )
         frame["sector"] = sector_name_for_etf(etf)
@@ -164,6 +189,7 @@ def sector_name_for_etf(symbol: str) -> str:
 
 def main() -> None:
     args = parse_args()
+    round_trip_cost = args.round_trip_cost_bps / 10000
     constituents = pd.read_csv(REFERENCE_DIR / "sp500_constituents.csv")
     constituents["symbol"] = constituents["symbol"].astype(str)
 
@@ -239,6 +265,10 @@ def main() -> None:
     dataset["price_vs_sector_sma_50"] = dataset["price_vs_sma_50"] - dataset["sector_price_vs_sma_50"]
     dataset["price_vs_sector_sma_200"] = dataset["price_vs_sma_200"] - dataset["sector_price_vs_sma_200"]
     dataset["rsi_vs_sector_etf"] = dataset["rsi_14"] - dataset["sector_rsi_14"]
+    dataset["sector_neutral_forward_return_14d"] = (
+        dataset["forward_return_14d_next_close"] - dataset["sector_forward_return_14d_next_close"]
+    )
+    dataset["sector_neutral_forward_return_14d_after_cost"] = dataset["sector_neutral_forward_return_14d"] - round_trip_cost
     dataset["technical_composite_score"] = dataset[
         [
             "ret_60d_pct_rank",
@@ -324,9 +354,52 @@ def main() -> None:
     ]
     feature_columns.extend(column for column in macro_feature_columns if column not in feature_columns)
 
-    target_columns = ["forward_return_14d", "spy_forward_return_14d", "excess_return_14d"]
+    target_columns = [
+        "forward_return_14d",
+        "spy_forward_return_14d",
+        "excess_return_14d",
+        "forward_return_14d_next_close",
+        "sector_forward_return_14d_next_close",
+        "sector_neutral_forward_return_14d",
+        "sector_neutral_forward_return_14d_after_cost",
+        "max_drawdown_14d_next_close",
+    ]
     dataset = dataset.dropna(subset=[*target_columns, *feature_columns])
     dataset["label_outperform_spy_14d"] = (dataset["excess_return_14d"] > 0).astype(int)
+    dataset["label_sector_neutral_positive_14d"] = (dataset["sector_neutral_forward_return_14d_after_cost"] > 0).astype(int)
+    dataset["label_sector_neutral_hurdle_14d"] = (
+        dataset["sector_neutral_forward_return_14d_after_cost"] > args.meta_return_hurdle
+    ).astype(int)
+    dataset["sector_neutral_forward_return_pct_rank"] = dataset.groupby("date")[
+        "sector_neutral_forward_return_14d_after_cost"
+    ].rank(pct=True)
+    dataset["relevance_grade_sector_neutral_14d"] = np.select(
+        [
+            dataset["sector_neutral_forward_return_pct_rank"] >= 0.90,
+            dataset["sector_neutral_forward_return_pct_rank"] >= 0.80,
+            dataset["sector_neutral_forward_return_pct_rank"] <= 0.10,
+            dataset["sector_neutral_forward_return_pct_rank"] <= 0.20,
+        ],
+        [4, 3, 0, 1],
+        default=2,
+    ).astype(int)
+    dataset["candidate_momentum_setup"] = (
+        (dataset["technical_composite_score"] >= 0.75)
+        & (dataset["ret_60d_minus_sector_median"] > 0)
+        & (dataset["ret_60d_sector_pct_rank"] >= 0.70)
+        & (dataset["price_vs_sma_50"] > 0)
+        & (dataset["price_vs_sma_200"] > 0)
+        & (dataset["rsi_14"] <= 78)
+        & (dataset["volume_ratio_20"] >= 0.70)
+    ).astype(int)
+    dataset["meta_label_momentum_success"] = np.where(
+        dataset["candidate_momentum_setup"].eq(1),
+        (
+            (dataset["sector_neutral_forward_return_14d_after_cost"] > args.meta_return_hurdle)
+            & (dataset["max_drawdown_14d_next_close"] > args.meta_drawdown_floor)
+        ).astype(int),
+        np.nan,
+    )
     output_columns = [
         "date",
         "symbol",
@@ -335,7 +408,19 @@ def main() -> None:
         "forward_return_14d",
         "spy_forward_return_14d",
         "excess_return_14d",
+        "forward_return_14d_next_close",
+        "sector_forward_return_14d_next_close",
+        "sector_neutral_forward_return_14d",
+        "sector_neutral_forward_return_14d_after_cost",
+        "max_drawdown_14d_next_close",
+        "sector_max_drawdown_14d_next_close",
         "label_outperform_spy_14d",
+        "label_sector_neutral_positive_14d",
+        "label_sector_neutral_hurdle_14d",
+        "sector_neutral_forward_return_pct_rank",
+        "relevance_grade_sector_neutral_14d",
+        "candidate_momentum_setup",
+        "meta_label_momentum_success",
         *feature_columns,
     ]
     dataset = dataset[output_columns]
@@ -351,9 +436,16 @@ def main() -> None:
         "start_date": str(dataset["date"].min().date()),
         "end_date": str(dataset["date"].max().date()),
         "label_positive_rate": float(dataset["label_outperform_spy_14d"].mean()),
+        "sector_neutral_positive_rate": float(dataset["label_sector_neutral_positive_14d"].mean()),
+        "sector_neutral_hurdle_rate": float(dataset["label_sector_neutral_hurdle_14d"].mean()),
+        "candidate_rows": int(dataset["candidate_momentum_setup"].sum()),
+        "candidate_success_rate": float(dataset.loc[dataset["candidate_momentum_setup"].eq(1), "meta_label_momentum_success"].mean()),
         "feature_columns": feature_columns,
         "include_macro": bool(args.include_macro),
         "target_horizon_days": TARGET_HORIZON,
+        "round_trip_cost_bps": args.round_trip_cost_bps,
+        "meta_return_hurdle": args.meta_return_hurdle,
+        "meta_drawdown_floor": args.meta_drawdown_floor,
     }
     write_json(metadata, FEATURES_DIR / "training_dataset_metadata.json")
     print(f"Wrote {len(dataset)} rows across {dataset['symbol'].nunique()} symbols to {output_path.relative_to(ROOT)}")

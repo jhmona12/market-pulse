@@ -9,9 +9,6 @@ import pandas as pd
 from common import FEATURES_DIR, REPORTS_DIR, ROOT, write_json
 
 
-TARGET_COLUMN = "label_outperform_spy_14d"
-
-
 @dataclass(frozen=True)
 class ScoreSpec:
     name: str
@@ -27,6 +24,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--horizon-days", type=int, default=14, help="Forward return horizon used by the label.")
     parser.add_argument("--cost-bps", type=float, default=15.0, help="Round-trip trading cost deducted from selected long baskets.")
     parser.add_argument("--bucket-fraction", type=float, default=0.1, help="Top and bottom bucket size.")
+    parser.add_argument("--return-column", default=None, help="Return column to evaluate. Defaults to sector-neutral after-cost return when available.")
+    parser.add_argument("--target-column", default=None, help="Binary hit-rate column. Defaults to sector-neutral positive label when available.")
     return parser.parse_args()
 
 
@@ -43,6 +42,17 @@ def load_backtest_frame(args: argparse.Namespace) -> pd.DataFrame:
             "symbol",
             "forward_return_14d",
             "spy_forward_return_14d",
+            "excess_return_14d",
+            "label_outperform_spy_14d",
+            "forward_return_14d_next_close",
+            "sector_forward_return_14d_next_close",
+            "sector_neutral_forward_return_14d",
+            "sector_neutral_forward_return_14d_after_cost",
+            "label_sector_neutral_positive_14d",
+            "label_sector_neutral_hurdle_14d",
+            "relevance_grade_sector_neutral_14d",
+            "candidate_momentum_setup",
+            "meta_label_momentum_success",
             "ret_20d",
             "ret_60d",
             "rel_ret_20d_vs_spy",
@@ -63,13 +73,35 @@ def load_backtest_frame(args: argparse.Namespace) -> pd.DataFrame:
         if column in dataset.columns
     ]
     frame = predictions.merge(dataset[keep_columns], on=["date", "symbol"], how="left", suffixes=("", "_feature"))
+    for column in list(frame.columns):
+        if column.endswith("_feature"):
+            base = column.removesuffix("_feature")
+            if base not in frame.columns:
+                frame[base] = frame[column]
+            else:
+                frame[base] = frame[base].combine_first(frame[column])
+            frame = frame.drop(columns=[column])
     return frame.sort_values(["date", "symbol"]).reset_index(drop=True)
 
 
 def available_score_specs(frame: pd.DataFrame) -> list[ScoreSpec]:
-    candidates = [
-        ScoreSpec("xgboost", "predicted_probability"),
-        ScoreSpec("xgboost_inverse", "predicted_probability", descending=False),
+    candidates = []
+    if "predicted_rank_score" in frame.columns and frame["predicted_rank_score"].notna().any():
+        candidates.extend(
+            [
+                ScoreSpec("rank_model", "predicted_rank_score"),
+                ScoreSpec("rank_model_inverse", "predicted_rank_score", descending=False),
+            ]
+        )
+    elif "predicted_probability" in frame.columns and frame["predicted_probability"].notna().any():
+        candidates.extend(
+            [
+                ScoreSpec("xgboost", "predicted_probability"),
+                ScoreSpec("xgboost_inverse", "predicted_probability", descending=False),
+            ]
+        )
+    candidates.extend(
+        [
         ScoreSpec("momentum_60d", "ret_60d"),
         ScoreSpec("momentum_20d", "ret_20d"),
         ScoreSpec("relative_strength_60d_vs_spy", "rel_ret_60d_vs_spy"),
@@ -77,8 +109,25 @@ def available_score_specs(frame: pd.DataFrame) -> list[ScoreSpec]:
         ScoreSpec("sector_neutral_60d_spread", "ret_60d_minus_sector_median"),
         ScoreSpec("relative_strength_60d_vs_sector_etf", "rel_ret_60d_vs_sector_etf"),
         ScoreSpec("technical_composite", "technical_composite_score"),
-    ]
+        ]
+    )
     return [spec for spec in candidates if spec.column in frame.columns and frame[spec.column].notna().any()]
+
+
+def choose_return_column(frame: pd.DataFrame, requested: str | None) -> str:
+    if requested:
+        return requested
+    if "sector_neutral_forward_return_14d_after_cost" in frame.columns:
+        return "sector_neutral_forward_return_14d_after_cost"
+    return "excess_return_14d"
+
+
+def choose_target_column(frame: pd.DataFrame, requested: str | None) -> str:
+    if requested:
+        return requested
+    if "label_sector_neutral_positive_14d" in frame.columns:
+        return "label_sector_neutral_positive_14d"
+    return "label_outperform_spy_14d"
 
 
 def max_drawdown(returns: pd.Series) -> float:
@@ -101,12 +150,21 @@ def selected_symbol_turnover(daily_symbols: list[set[str]]) -> float:
     return float(np.mean(turnovers)) if turnovers else float("nan")
 
 
-def evaluate_score(frame: pd.DataFrame, spec: ScoreSpec, bucket_fraction: float, cost_bps: float, horizon_days: int) -> tuple[dict, pd.DataFrame, pd.DataFrame]:
+def evaluate_score(
+    frame: pd.DataFrame,
+    spec: ScoreSpec,
+    bucket_fraction: float,
+    cost_bps: float,
+    horizon_days: int,
+    return_column: str,
+    target_column: str,
+) -> tuple[dict, pd.DataFrame, pd.DataFrame]:
     cost = cost_bps / 10000
+    cost_adjustment = 0.0 if "after_cost" in return_column else cost
     daily_rows = []
     selected_sets: list[set[str]] = []
 
-    for date, group in frame.dropna(subset=[spec.column, "excess_return_14d", TARGET_COLUMN]).groupby("date", sort=True):
+    for date, group in frame.dropna(subset=[spec.column, return_column, target_column]).groupby("date", sort=True):
         ranked = group.sort_values(spec.column, ascending=not spec.descending)
         bucket_count = max(1, int(np.ceil(len(ranked) * bucket_fraction)))
         top = ranked.head(bucket_count)
@@ -118,12 +176,12 @@ def evaluate_score(frame: pd.DataFrame, spec: ScoreSpec, bucket_fraction: float,
                 "score": spec.name,
                 "universe_count": int(len(ranked)),
                 "selected_count": int(len(top)),
-                "top_avg_excess_return_14d": float(top["excess_return_14d"].mean()),
-                "top_avg_cost_adjusted_excess_return_14d": float(top["excess_return_14d"].mean() - cost),
-                "top_hit_rate": float(top[TARGET_COLUMN].mean()),
-                "bottom_avg_excess_return_14d": float(bottom["excess_return_14d"].mean()),
-                "bottom_hit_rate": float(bottom[TARGET_COLUMN].mean()),
-                "top_minus_bottom_excess_return_14d": float(top["excess_return_14d"].mean() - bottom["excess_return_14d"].mean()),
+                "top_avg_return_14d": float(top[return_column].mean()),
+                "top_avg_cost_adjusted_return_14d": float(top[return_column].mean() - cost_adjustment),
+                "top_hit_rate": float(top[target_column].mean()),
+                "bottom_avg_return_14d": float(bottom[return_column].mean()),
+                "bottom_hit_rate": float(bottom[target_column].mean()),
+                "top_minus_bottom_return_14d": float(top[return_column].mean() - bottom[return_column].mean()),
                 "top_symbols": ",".join(top["symbol"].astype(str).tolist()),
             }
         )
@@ -132,11 +190,11 @@ def evaluate_score(frame: pd.DataFrame, spec: ScoreSpec, bucket_fraction: float,
     if daily.empty:
         return {"score": spec.name, "error": "No rows to evaluate."}, daily, pd.DataFrame()
 
-    daily_equivalent = (1 + daily["top_avg_cost_adjusted_excess_return_14d"]).clip(lower=0.01) ** (1 / horizon_days) - 1
-    spread_daily_equivalent = (1 + daily["top_minus_bottom_excess_return_14d"]).clip(lower=0.01) ** (1 / horizon_days) - 1
+    daily_equivalent = (1 + daily["top_avg_cost_adjusted_return_14d"]).clip(lower=0.01) ** (1 / horizon_days) - 1
+    spread_daily_equivalent = (1 + daily["top_minus_bottom_return_14d"]).clip(lower=0.01) ** (1 / horizon_days) - 1
 
     bucket_rows = []
-    for date, group in frame.dropna(subset=[spec.column, "excess_return_14d", TARGET_COLUMN]).groupby("date", sort=True):
+    for date, group in frame.dropna(subset=[spec.column, return_column, target_column]).groupby("date", sort=True):
         ranked = group.sort_values(spec.column, ascending=True)
         bucket_count = min(10, len(ranked))
         ranked = ranked.assign(bucket=pd.qcut(ranked[spec.column].rank(method="first"), bucket_count, labels=False) + 1)
@@ -148,8 +206,8 @@ def evaluate_score(frame: pd.DataFrame, spec: ScoreSpec, bucket_fraction: float,
                     "date": date,
                     "score": spec.name,
                     "bucket": int(bucket),
-                    "avg_excess_return_14d": float(bucket_frame["excess_return_14d"].mean()),
-                    "hit_rate": float(bucket_frame[TARGET_COLUMN].mean()),
+                    "avg_return_14d": float(bucket_frame[return_column].mean()),
+                    "hit_rate": float(bucket_frame[target_column].mean()),
                     "count": int(len(bucket_frame)),
                 }
             )
@@ -157,7 +215,7 @@ def evaluate_score(frame: pd.DataFrame, spec: ScoreSpec, bucket_fraction: float,
     bucket_summary = (
         buckets.groupby(["score", "bucket"])
         .agg(
-            avg_excess_return_14d=("avg_excess_return_14d", "mean"),
+            avg_return_14d=("avg_return_14d", "mean"),
             hit_rate=("hit_rate", "mean"),
             avg_count=("count", "mean"),
         )
@@ -171,17 +229,17 @@ def evaluate_score(frame: pd.DataFrame, spec: ScoreSpec, bucket_fraction: float,
         "dates": int(daily["date"].nunique()),
         "avg_universe_count": float(daily["universe_count"].mean()),
         "avg_selected_count": float(daily["selected_count"].mean()),
-        "avg_top_excess_return_14d": float(daily["top_avg_excess_return_14d"].mean()),
-        "median_top_excess_return_14d": float(daily["top_avg_excess_return_14d"].median()),
-        "avg_top_cost_adjusted_excess_return_14d": float(daily["top_avg_cost_adjusted_excess_return_14d"].mean()),
-        "positive_top_period_rate": float((daily["top_avg_excess_return_14d"] > 0).mean()),
+        "avg_top_return_14d": float(daily["top_avg_return_14d"].mean()),
+        "median_top_return_14d": float(daily["top_avg_return_14d"].median()),
+        "avg_top_cost_adjusted_return_14d": float(daily["top_avg_cost_adjusted_return_14d"].mean()),
+        "positive_top_period_rate": float((daily["top_avg_return_14d"] > 0).mean()),
         "avg_top_hit_rate": float(daily["top_hit_rate"].mean()),
-        "avg_bottom_excess_return_14d": float(daily["bottom_avg_excess_return_14d"].mean()),
-        "avg_top_minus_bottom_excess_return_14d": float(daily["top_minus_bottom_excess_return_14d"].mean()),
+        "avg_bottom_return_14d": float(daily["bottom_avg_return_14d"].mean()),
+        "avg_top_minus_bottom_return_14d": float(daily["top_minus_bottom_return_14d"].mean()),
         "avg_turnover": selected_symbol_turnover(selected_sets),
-        "approx_cumulative_top_excess_return": float((1 + daily_equivalent).prod() - 1),
+        "approx_cumulative_top_return": float((1 + daily_equivalent).prod() - 1),
         "approx_cumulative_spread_return": float((1 + spread_daily_equivalent).prod() - 1),
-        "approx_max_drawdown_top_excess": max_drawdown(daily_equivalent),
+        "approx_max_drawdown_top_return": max_drawdown(daily_equivalent),
         "bucket_summary": bucket_summary,
     }
     return summary, daily, buckets
@@ -190,6 +248,8 @@ def evaluate_score(frame: pd.DataFrame, spec: ScoreSpec, bucket_fraction: float,
 def main() -> None:
     args = parse_args()
     frame = load_backtest_frame(args)
+    return_column = choose_return_column(frame, args.return_column)
+    target_column = choose_target_column(frame, args.target_column)
     score_specs = available_score_specs(frame)
     if not score_specs:
         raise SystemExit("No score columns found for backtesting.")
@@ -198,7 +258,15 @@ def main() -> None:
     daily_frames = []
     bucket_frames = []
     for spec in score_specs:
-        summary, daily, buckets = evaluate_score(frame, spec, args.bucket_fraction, args.cost_bps, args.horizon_days)
+        summary, daily, buckets = evaluate_score(
+            frame,
+            spec,
+            args.bucket_fraction,
+            args.cost_bps,
+            args.horizon_days,
+            return_column,
+            target_column,
+        )
         summaries.append(summary)
         if not daily.empty:
             daily_frames.append(daily)
@@ -212,8 +280,10 @@ def main() -> None:
         "horizon_days": args.horizon_days,
         "cost_bps": args.cost_bps,
         "bucket_fraction": args.bucket_fraction,
+        "return_column": return_column,
+        "target_column": target_column,
         "notes": "Daily returns are approximate because 14-day forward labels overlap across entry dates.",
-        "scores": sorted(summaries, key=lambda item: item.get("avg_top_cost_adjusted_excess_return_14d", -999), reverse=True),
+        "scores": sorted(summaries, key=lambda item: item.get("avg_top_cost_adjusted_return_14d", -999), reverse=True),
     }
     write_json(summary_payload, REPORTS_DIR / f"{args.output_name}_summary.json")
 
@@ -225,8 +295,8 @@ def main() -> None:
     print(f"Wrote backtest summary to {(REPORTS_DIR / f'{args.output_name}_summary.json').relative_to(ROOT)}")
     for item in summary_payload["scores"]:
         print(
-            f"{item['score']}: top 14d excess {item['avg_top_excess_return_14d']:.4f}, "
-            f"hit rate {item['avg_top_hit_rate']:.3f}, spread {item['avg_top_minus_bottom_excess_return_14d']:.4f}"
+            f"{item['score']}: top 14d return {item['avg_top_return_14d']:.4f}, "
+            f"hit rate {item['avg_top_hit_rate']:.3f}, spread {item['avg_top_minus_bottom_return_14d']:.4f}"
         )
 
 

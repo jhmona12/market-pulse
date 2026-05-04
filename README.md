@@ -167,13 +167,15 @@ GitHub scheduled workflows may start several minutes late. Manual refreshes can 
 
 ## Modeling Pipeline
 
-The repo now includes a separate Python modeling workflow for training a directional classifier on the current S&P 500 universe.
+The repo includes a separate Python modeling workflow for researching S&P 500 momentum signals.
 
-Model target:
+Model targets:
 
-- Label: stock total return over the next 14 trading days minus SPY total return over the next 14 trading days `> 0`
 - Universe: current S&P 500 constituents only
 - History window: 10 years of cached daily price history
+- Legacy binary label: stock 14-trading-day return minus SPY return `> 0`
+- Rank label: daily `0-4` relevance grade based on next-close-entry 14-day sector-neutral return after costs
+- Meta-label: candidate-only momentum setup success based on sector-neutral return hurdle and adjusted-close drawdown
 
 Modeling scripts:
 
@@ -182,6 +184,9 @@ scripts/modeling/fetch_training_data.py    Cache raw price and macro data locall
 scripts/modeling/build_training_dataset.py Build the labeled feature matrix
 scripts/modeling/data_quality_report.py    Audit labels, nulls, outliers, and raw price alignment
 scripts/modeling/train_xgboost_model.py    Train the XGBoost classifier and save reports
+scripts/modeling/train_rank_model.py       Train the sector-neutral XGBoost learning-to-rank model
+scripts/modeling/train_meta_label_model.py Train the candidate-only momentum meta-label model
+scripts/modeling/walk_forward_rank_model.py Run embargoed walk-forward rank-model evaluation
 scripts/modeling/backtest_model.py         Compare model scores against baseline ranking strategies
 scripts/modeling/explain_model.py          Generate XGBoost SHAP-style contribution summaries
 scripts/modeling/run_model_pipeline.py     Run the full modeling pipeline
@@ -215,12 +220,20 @@ Example workflow:
 .venv-model/bin/python scripts/modeling/train_xgboost_model.py
 .venv-model/bin/python scripts/modeling/backtest_model.py
 .venv-model/bin/python scripts/modeling/explain_model.py
+.venv-model/bin/python scripts/modeling/train_rank_model.py
+.venv-model/bin/python scripts/modeling/walk_forward_rank_model.py
 ```
 
 After the raw cache exists, the venv can run the build, train, backtest, and explanation steps together:
 
 ```bash
 .venv-model/bin/python scripts/modeling/run_model_pipeline.py --skip-fetch
+```
+
+To run the newer ranking and meta-label experiments:
+
+```bash
+.venv-model/bin/python scripts/modeling/run_model_pipeline.py --skip-fetch --train-rank --train-meta --walk-forward-rank
 ```
 
 To test whether raw macro fields are swamping the cross-sectional stock signal:
