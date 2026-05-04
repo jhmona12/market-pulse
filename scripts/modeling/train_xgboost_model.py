@@ -36,6 +36,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-name", default="xgboost_spy14", help="Base name for model outputs.")
     parser.add_argument("--test-days", type=int, default=252, help="Approximate number of trading days to reserve for test.")
     parser.add_argument("--validation-days", type=int, default=252, help="Approximate number of trading days to reserve for validation.")
+    parser.add_argument("--exclude-macro", action="store_true", help="Drop raw macro feature columns from the training matrix.")
     return parser.parse_args()
 
 
@@ -64,6 +65,30 @@ def top_bucket_excess_return(frame: pd.DataFrame, probability_column: str, fract
     return float(ranked["excess_return_14d"].mean())
 
 
+def date_balanced_bucket_metrics(frame: pd.DataFrame, probability_column: str, fraction: float = 0.1) -> dict[str, float]:
+    daily_rows = []
+    for _, group in frame.groupby("date", sort=True):
+        ranked = group.sort_values(probability_column, ascending=False)
+        threshold_count = max(1, int(np.ceil(len(ranked) * fraction)))
+        top = ranked.head(threshold_count)
+        bottom = ranked.tail(threshold_count)
+        daily_rows.append(
+            {
+                "top_excess": top["excess_return_14d"].mean(),
+                "top_hit_rate": top[TARGET_COLUMN].mean(),
+                "bottom_excess": bottom["excess_return_14d"].mean(),
+                "spread": top["excess_return_14d"].mean() - bottom["excess_return_14d"].mean(),
+            }
+        )
+    daily = pd.DataFrame(daily_rows)
+    return {
+        "top_decile_average_excess_return_14d": float(daily["top_excess"].mean()),
+        "top_decile_hit_rate": float(daily["top_hit_rate"].mean()),
+        "bottom_decile_average_excess_return_14d": float(daily["bottom_excess"].mean()),
+        "top_minus_bottom_decile_excess_return_14d": float(daily["spread"].mean()),
+    }
+
+
 def split_dates(dataset: pd.DataFrame, validation_days: int, test_days: int) -> tuple[pd.Timestamp, pd.Timestamp]:
     unique_dates = sorted(dataset["date"].drop_duplicates())
     if len(unique_dates) <= validation_days + test_days + 10:
@@ -85,6 +110,12 @@ def main() -> None:
     test = dataset[dataset["date"] >= test_start].copy()
 
     feature_columns = [column for column in dataset.columns if column not in IDENTITY_COLUMNS]
+    if args.exclude_macro:
+        feature_columns = [
+            column
+            for column in feature_columns
+            if not (column.endswith("_level") or column.endswith("_chg_1") or column.endswith("_chg_5"))
+        ]
     x_train = train[feature_columns].to_numpy(dtype=float)
     x_validation = validation[feature_columns].to_numpy(dtype=float)
     x_test = test[feature_columns].to_numpy(dtype=float)
@@ -122,17 +153,19 @@ def main() -> None:
     validation["predicted_probability"] = validation_prob
     test["predicted_probability"] = test_prob
 
+    date_balanced_metrics = date_balanced_bucket_metrics(test, "predicted_probability", 0.1)
     test_metrics = {
         "auc": auc_score(y_test, test_prob),
         "log_loss": log_loss(y_test, test_prob),
         "accuracy_at_0_5": float(((test_prob >= 0.5).astype(int) == y_test).mean()),
         "positive_rate": float(y_test.mean()),
         "average_excess_return_14d": float(test["excess_return_14d"].mean()),
-        "top_decile_average_excess_return_14d": top_bucket_excess_return(test, "predicted_probability", 0.1),
-        "top_quintile_average_excess_return_14d": top_bucket_excess_return(test, "predicted_probability", 0.2),
-        "bottom_decile_average_excess_return_14d": float(
-            test.sort_values("predicted_probability", ascending=True).head(max(1, int(len(test) * 0.1)))["excess_return_14d"].mean()
-        ),
+        "top_decile_average_excess_return_14d": date_balanced_metrics["top_decile_average_excess_return_14d"],
+        "top_decile_hit_rate": date_balanced_metrics["top_decile_hit_rate"],
+        "bottom_decile_average_excess_return_14d": date_balanced_metrics["bottom_decile_average_excess_return_14d"],
+        "top_minus_bottom_decile_excess_return_14d": date_balanced_metrics["top_minus_bottom_decile_excess_return_14d"],
+        "global_top_decile_average_excess_return_14d": top_bucket_excess_return(test, "predicted_probability", 0.1),
+        "global_top_quintile_average_excess_return_14d": top_bucket_excess_return(test, "predicted_probability", 0.2),
         "prediction_excess_return_correlation": float(test["predicted_probability"].corr(test["excess_return_14d"])),
         "prediction_label_correlation": float(test["predicted_probability"].corr(test[TARGET_COLUMN])),
     }
@@ -163,6 +196,7 @@ def main() -> None:
         "validation_start": validation_start.date().isoformat(),
         "test_start": test_start.date().isoformat(),
         "feature_count": len(feature_columns),
+        "exclude_macro": bool(args.exclude_macro),
         "best_iteration": int(booster.best_iteration),
         "params": params,
         "validation_metrics": validation_metrics,
@@ -171,7 +205,10 @@ def main() -> None:
     }
     write_json(report, REPORTS_DIR / f"{args.model_name}_report.json")
     print(f"Saved model to {model_base.with_suffix('.json').relative_to(ROOT)}")
-    print(f"Test AUC: {test_metrics['auc']:.4f} | Top decile average excess return: {test_metrics['top_decile_average_excess_return_14d']:.4f}")
+    print(
+        f"Test AUC: {test_metrics['auc']:.4f} | "
+        f"Date-balanced top decile average excess return: {test_metrics['top_decile_average_excess_return_14d']:.4f}"
+    )
 
 
 if __name__ == "__main__":

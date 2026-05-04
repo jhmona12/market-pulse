@@ -211,6 +211,8 @@ def main() -> None:
     rank_base_columns = [
         "ret_20d",
         "ret_60d",
+        "rsi_14",
+        "volatility_20d",
         "price_vs_sma_50",
         "price_vs_sma_200",
         "distance_to_52w_high",
@@ -221,6 +223,27 @@ def main() -> None:
     ]
     for column in rank_base_columns:
         dataset[f"{column}_pct_rank"] = dataset.groupby("date")[column].rank(pct=True)
+        dataset[f"{column}_sector_pct_rank"] = dataset.groupby(["date", "sector"])[column].rank(pct=True)
+
+    sector_median_columns = ["ret_20d", "ret_60d", "rsi_14", "volatility_20d", "volume_ratio_20", "distance_to_52w_high"]
+    for column in sector_median_columns:
+        sector_median = dataset.groupby(["date", "sector"])[column].transform("median")
+        dataset[f"{column}_minus_sector_median"] = dataset[column] - sector_median
+
+    dataset["rel_ret_20d_vs_sector_etf"] = dataset["ret_20d"] - dataset["sector_ret_20d"]
+    dataset["rel_ret_60d_vs_sector_etf"] = dataset["ret_60d"] - dataset["sector_ret_60d"]
+    dataset["price_vs_sector_sma_50"] = dataset["price_vs_sma_50"] - dataset["sector_price_vs_sma_50"]
+    dataset["price_vs_sector_sma_200"] = dataset["price_vs_sma_200"] - dataset["sector_price_vs_sma_200"]
+    dataset["rsi_vs_sector_etf"] = dataset["rsi_14"] - dataset["sector_rsi_14"]
+    dataset["technical_composite_score"] = dataset[
+        [
+            "ret_60d_pct_rank",
+            "price_vs_sma_200_pct_rank",
+            "rel_ret_60d_vs_spy_pct_rank",
+            "ret_60d_sector_pct_rank",
+            "price_vs_sma_200_sector_pct_rank",
+        ]
+    ].mean(axis=1)
 
     feature_columns = [
         "ret_1d",
@@ -257,6 +280,8 @@ def main() -> None:
         "sector_rsi_14",
         "ret_20d_pct_rank",
         "ret_60d_pct_rank",
+        "rsi_14_pct_rank",
+        "volatility_20d_pct_rank",
         "price_vs_sma_50_pct_rank",
         "price_vs_sma_200_pct_rank",
         "distance_to_52w_high_pct_rank",
@@ -264,6 +289,29 @@ def main() -> None:
         "rel_ret_20d_vs_spy_pct_rank",
         "rel_ret_60d_vs_spy_pct_rank",
         "rel_rsi_vs_spy_pct_rank",
+        "ret_20d_sector_pct_rank",
+        "ret_60d_sector_pct_rank",
+        "rsi_14_sector_pct_rank",
+        "volatility_20d_sector_pct_rank",
+        "price_vs_sma_50_sector_pct_rank",
+        "price_vs_sma_200_sector_pct_rank",
+        "distance_to_52w_high_sector_pct_rank",
+        "volume_ratio_20_sector_pct_rank",
+        "rel_ret_20d_vs_spy_sector_pct_rank",
+        "rel_ret_60d_vs_spy_sector_pct_rank",
+        "rel_rsi_vs_spy_sector_pct_rank",
+        "ret_20d_minus_sector_median",
+        "ret_60d_minus_sector_median",
+        "rsi_14_minus_sector_median",
+        "volatility_20d_minus_sector_median",
+        "volume_ratio_20_minus_sector_median",
+        "distance_to_52w_high_minus_sector_median",
+        "rel_ret_20d_vs_sector_etf",
+        "rel_ret_60d_vs_sector_etf",
+        "price_vs_sector_sma_50",
+        "price_vs_sector_sma_200",
+        "rsi_vs_sector_etf",
+        "technical_composite_score",
     ]
     macro_feature_columns = [
         column

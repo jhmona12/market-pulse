@@ -181,6 +181,8 @@ Modeling scripts:
 scripts/modeling/fetch_training_data.py    Cache raw price and macro data locally
 scripts/modeling/build_training_dataset.py Build the labeled feature matrix
 scripts/modeling/train_xgboost_model.py    Train the XGBoost classifier and save reports
+scripts/modeling/backtest_model.py         Compare model scores against baseline ranking strategies
+scripts/modeling/explain_model.py          Generate XGBoost SHAP-style contribution summaries
 scripts/modeling/run_model_pipeline.py     Run the full modeling pipeline
 scripts/modeling/setup_training_env.sh     Create a local training venv and install the OpenMP runtime
 scripts/modeling/requirements.txt          Python package requirements for training
@@ -209,6 +211,21 @@ Example workflow:
 /Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/fetch_training_data.py --years 10
 /Users/harrisonmona/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/modeling/build_training_dataset.py
 .venv-model/bin/python scripts/modeling/train_xgboost_model.py
+.venv-model/bin/python scripts/modeling/backtest_model.py
+.venv-model/bin/python scripts/modeling/explain_model.py
+```
+
+After the raw cache exists, the venv can run the build, train, backtest, and explanation steps together:
+
+```bash
+.venv-model/bin/python scripts/modeling/run_model_pipeline.py --skip-fetch
+```
+
+To test whether raw macro fields are swamping the cross-sectional stock signal:
+
+```bash
+.venv-model/bin/python scripts/modeling/train_xgboost_model.py --model-name xgboost_spy14_no_macro --exclude-macro
+.venv-model/bin/python scripts/modeling/backtest_model.py --predictions xgboost_spy14_no_macro_test_predictions.csv --output-name xgboost_spy14_no_macro_backtest
 ```
 
 The current feature set is v1 and intentionally excludes article/news features. It focuses on:
@@ -216,9 +233,12 @@ The current feature set is v1 and intentionally excludes article/news features. 
 - Momentum and trend
 - Volume and volatility
 - Relative strength versus SPY
+- Sector-relative momentum and trend
 - Market breadth
 - Sector ETF context
 - Macro series when the FRED cache is available
+
+Backtest reports compare XGBoost predictions against simple momentum and sector-neutral baselines. The reports are intentionally local-only and are written to `data/modeling/reports/`.
 
 ## Project Structure
 
