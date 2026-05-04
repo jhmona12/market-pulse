@@ -11,7 +11,7 @@ const snapshotOutput = process.env.SNAPSHOT_OUTPUT || "data/snapshot.json";
 const today = new Date();
 const startDate = new Date(today);
 startDate.setDate(startDate.getDate() - 430);
-const defaultAiPrompt = `Write a concise hedge-fund-style morning strategy memo. Use only the supplied macro indicators, source summaries, upcoming events, XGBoost model rankings, rules-based desk calls, and momentum metrics. Treat every output as a research recommendation, not financial advice.`;
+const defaultAiPrompt = `Write a concise hedge-fund-style morning strategy memo. Use only the supplied macro indicators, source summaries, current-event drivers, upcoming events, XGBoost model rankings, rules-based desk calls, momentum metrics, and lowest-ranked avoid candidates. Treat every output as a research recommendation, not financial advice.`;
 const defaultOpenAiModel = "gpt-5-nano";
 const modelPricingPerMillion = {
   "gpt-5": { input: 1.25, cachedInput: 0.125, output: 10 },
@@ -111,6 +111,21 @@ function finiteNumber(value) {
 function roundedNumber(value, digits = 2) {
   const number = finiteNumber(value);
   return number == null ? null : Number(number.toFixed(digits));
+}
+
+function parseLargeNumber(value) {
+  if (value == null) return null;
+  const number = Number(String(value).replace(/[$,\s]/g, ""));
+  return Number.isFinite(number) ? number : null;
+}
+
+function formatMarketCap(value) {
+  const number = parseLargeNumber(value);
+  if (number == null) return null;
+  if (number >= 1_000_000_000_000) return `$${(number / 1_000_000_000_000).toFixed(2)}T`;
+  if (number >= 1_000_000_000) return `$${(number / 1_000_000_000).toFixed(1)}B`;
+  if (number >= 1_000_000) return `$${(number / 1_000_000).toFixed(1)}M`;
+  return `$${number.toLocaleString("en-US")}`;
 }
 
 function hasModelRank(item) {
@@ -799,7 +814,17 @@ function cleanDailyReadText(value) {
     .replace(/\s*\/\s*/g, " / ")
     .replace(/RSI \/ volatility/gi, "RSI and volatility")
     .replace(/volume \/ trend/gi, "volume or trend")
+    .replace(/weak-mauge/gi, "weak")
+    .replace(/drawdowns risk/gi, "drawdown risk")
     .replace(/\b([A-Z]{2,5}) \/ ([A-Z]{2,5})\b/g, "$1 and $2")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function cleanMemoText(value) {
+  return cleanDailyReadText(value)
+    .replace(/\bnot provided\b/gi, "")
+    .replace(/\branked low\b/gi, "ranked near the bottom of the model book")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -948,6 +973,89 @@ function buildRecommendations(opportunities) {
   return calls.slice(0, 6);
 }
 
+function bottomModelCandidates(opportunities, limit = 12) {
+  return opportunities
+    .filter((item) => item.type === "stock" && hasModelRank(item))
+    .sort((a, b) => Number(b.modelRank) - Number(a.modelRank))
+    .slice(0, limit);
+}
+
+function bottomModelSectorClusters(opportunities, limit = 4) {
+  const ranked = opportunities
+    .filter((item) => item.type === "stock" && hasModelRank(item))
+    .sort((a, b) => Number(b.modelRank) - Number(a.modelRank));
+  const bottomWindow = ranked.slice(0, Math.max(25, Math.ceil(ranked.length * 0.15)));
+  const sectors = new Map();
+  bottomWindow.forEach((item) => {
+    const sector = item.sector || "Unknown";
+    const entry = sectors.get(sector) || { sector, count: 0, examples: [] };
+    entry.count += 1;
+    if (entry.examples.length < 4) entry.examples.push(item.symbol);
+    sectors.set(sector, entry);
+  });
+  return [...sectors.values()]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit)
+    .map((entry) => ({
+      ...entry,
+      rationale: `${entry.count} of the weakest model-ranked names are in ${entry.sector}; examples include ${entry.examples.join(", ")}.`
+    }));
+}
+
+function buildAvoidList(opportunities, aiRecommendations) {
+  const bottomCompanies = bottomModelCandidates(opportunities, 10);
+  if (!bottomCompanies.length) {
+    return {
+      status: "missing_model",
+      summary: "Stay-away candidates require a current model-ranking file; none was available for this snapshot.",
+      sectors: [],
+      companies: []
+    };
+  }
+
+  const sectors = bottomModelSectorClusters(opportunities, 4);
+  const worst = bottomCompanies.slice(0, 8).map((item) => ({
+    symbol: item.symbol,
+    name: item.name,
+    sector: item.sector,
+    modelRank: finiteNumber(item.modelRank),
+    modelUniverseCount: finiteNumber(item.modelUniverseCount),
+    modelPercentile: roundedNumber(item.modelPercentile, 1),
+    rulesScore: roundedNumber(item.rulesScore, 1),
+    relativeReturn60VsSpy: roundedNumber(item.relativeReturn60VsSpy, 2),
+    rsi14: roundedNumber(item.rsi14, 0),
+    above50: item.above50,
+    above200: item.above200,
+    riskFlags: item.riskFlags || [],
+    modelEvidence: `${item.symbol} ranks #${item.modelRank} of ${item.modelUniverseCount || "the scored universe"} with ${formatPercent(item.relativeReturn60VsSpy)} 60-day relative return versus SPY, rules score ${formatNumber(item.rulesScore)}, and ${item.above50 && item.above200 ? "positive" : "weak or mixed"} trend alignment.`,
+    rationale: `${item.symbol} sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves.`
+  }));
+
+  const aiAvoid = aiRecommendations?.status === "ready" ? aiRecommendations.avoidList : null;
+  const aiSectors = new Map((aiAvoid?.sectors || []).map((item) => [item.sector, item]));
+  const aiCompanies = new Map((aiAvoid?.companies || []).map((item) => [item.symbol, item]));
+  const aiSummary = cleanMemoText(aiAvoid?.summary);
+
+  return {
+    status: "ready",
+    summary:
+      aiSummary ||
+      `Avoid list is driven by the bottom of the XGBoost rank model: ${worst.map((item) => item.symbol).slice(0, 5).join(", ")} are the weakest current long candidates, with sector pressure most visible in ${sectors.map((item) => item.sector).slice(0, 2).join(" and ")}.`,
+    sectors: sectors.map((item) => ({
+      ...item,
+      rationale: cleanMemoText(aiSectors.get(item.sector)?.rationale) || item.rationale
+    })),
+    companies: worst.map((item) => {
+      const aiItem = aiCompanies.get(item.symbol);
+      return {
+        ...item,
+        rationale: cleanMemoText(aiItem?.rationale) || item.rationale,
+        modelEvidence: item.modelEvidence
+      };
+    })
+  };
+}
+
 function fallbackAiRecommendations(reason) {
   return {
     status: reason,
@@ -964,6 +1072,11 @@ function fallbackAiRecommendations(reason) {
       "Which publications should be weighted most heavily?",
       "Should the AI favor the model's highest-ranked names or require cleaner trend confirmation?"
     ],
+    avoidList: {
+      summary: "The stay-away list is generated deterministically from the lowest-ranked model names when the model snapshot is available.",
+      sectors: [],
+      companies: []
+    },
     sourceRefs: []
   };
 }
@@ -1131,6 +1244,19 @@ function companyOverviewSummary(context) {
   return description.length > 320 ? `${description.slice(0, 317).trim()}...` : description;
 }
 
+function marketCapFromSummary(summary, symbol) {
+  const raw = nasdaqValue(summary?.data?.summaryData?.MarketCap);
+  const value = parseLargeNumber(raw);
+  const text = formatMarketCap(value);
+  if (!text) return null;
+  return {
+    value,
+    text,
+    sourceName: "Nasdaq quote summary",
+    sourceUrl: `https://www.nasdaq.com/market-activity/stocks/${symbol.toLowerCase()}`
+  };
+}
+
 function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRefs) {
   const bySymbol = new Map(companyContexts.map((context) => [context.symbol, context]));
   const validRefSet = new Set(validSourceRefs);
@@ -1141,12 +1267,14 @@ function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRe
     const sourceRefs = [
       ...(recommendation.sourceRefs || []),
       context.investorRelations?.id,
+      context.marketCap?.sourceId,
       context.earnings?.sourceId
     ].filter((ref, index, refs) => ref && validRefSet.has(ref) && refs.indexOf(ref) === index);
 
     return {
       ...recommendation,
       companyOverview: companyOverviewSummary(context) || recommendation.companyOverview || "",
+      marketCap: context.marketCap?.text || recommendation.marketCap || "",
       earningsContext: context.earnings?.summary || recommendation.earningsContext || "",
       sourceRefs
     };
@@ -1224,10 +1352,11 @@ async function fetchInvestorRelationsContext(symbol, companyUrl) {
 }
 
 async function fetchNasdaqCompanyContext(symbol) {
-  const [profile, surprise, eps] = await Promise.all([
+  const [profile, surprise, eps, summary] = await Promise.all([
     fetchJson(`https://api.nasdaq.com/api/company/${encodeURIComponent(symbol)}/company-profile`, { timeout: 12000 }).catch(() => null),
     fetchJson(`https://api.nasdaq.com/api/company/${encodeURIComponent(symbol)}/earnings-surprise`, { timeout: 12000 }).catch(() => null),
-    fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/eps?assetclass=stocks`, { timeout: 12000 }).catch(() => null)
+    fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/eps?assetclass=stocks`, { timeout: 12000 }).catch(() => null),
+    fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/summary?assetclass=stocks`, { timeout: 12000 }).catch(() => null)
   ]);
 
   const profileData = profile?.data || {};
@@ -1242,6 +1371,7 @@ async function fetchNasdaqCompanyContext(symbol) {
     companyUrl: cleanCompanyUrl(nasdaqValue(profileData.CompanyUrl)),
     industry: nasdaqValue(profileData.Industry),
     sector: nasdaqValue(profileData.Sector),
+    marketCap: marketCapFromSummary(summary, symbol),
     earnings: {
       lastReportedDate: normalizeDate(lastReport?.dateReported),
       lastReportedDateText: lastReport?.dateReported || null,
@@ -1295,6 +1425,15 @@ async function fetchCompanyContext(candidate, index) {
       sourceName: nasdaq.earnings.sourceName
     });
   }
+  if (nasdaq.marketCap?.sourceUrl) {
+    sources.push({
+      id: `${sourcePrefix}-MARKETCAP`,
+      type: "market_data",
+      title: `${symbol} quote summary`,
+      url: nasdaq.marketCap.sourceUrl,
+      sourceName: nasdaq.marketCap.sourceName
+    });
+  }
   news.forEach((item, newsIndex) => {
     sources.push({
       id: `${sourcePrefix}-N${newsIndex + 1}`,
@@ -1323,6 +1462,13 @@ async function fetchCompanyContext(candidate, index) {
     companyUrl: nasdaq.companyUrl,
     industry: nasdaq.industry,
     sector: candidate.sector || nasdaq.sector,
+    marketCap: nasdaq.marketCap
+      ? {
+          ...nasdaq.marketCap,
+          sourceId: `${sourcePrefix}-MARKETCAP`
+        }
+      : null,
+    marketCapText: nasdaq.marketCap?.text || null,
     investorRelations: investorRelations
       ? {
           id: `${sourcePrefix}-IR`,
@@ -1384,6 +1530,8 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     excerpt: excerpt?.slice(0, 1200) || ""
   }));
   const modelCandidates = opportunities.filter(hasModelRank).slice(0, 30).map(compactCandidate);
+  const avoidCandidates = bottomModelCandidates(opportunities, 16).map(compactCandidate);
+  const avoidSectors = bottomModelSectorClusters(opportunities, 5);
   const companyContexts = await buildCompanyContexts(modelCandidates);
   const validSymbols = [
     ...new Set(
@@ -1403,6 +1551,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
   const sourceRefSchema = sourceRefIds.length
     ? { type: "string", enum: sourceRefIds }
     : { type: "string" };
+  const validAvoidSymbols = avoidCandidates.map((item) => item.symbol).filter(Boolean);
   const payload = {
     generatedAt: new Date().toISOString(),
     model: modelSummary,
@@ -1434,6 +1583,8 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       rsi14: Math.round(rsi14)
     })),
     modelCandidates,
+    avoidCandidates,
+    avoidSectors,
     topMomentum: opportunities.slice(0, 18).map(compactCandidate),
     extendedMomentum: opportunities
       .filter((item) => item.score >= 70 && item.rsi14 > 76)
@@ -1468,7 +1619,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
         schema: {
           type: "object",
           additionalProperties: false,
-          required: ["headline", "macroView", "dailyRead", "recommendations", "portfolioNotes", "openQuestions", "sourceRefs"],
+          required: ["headline", "macroView", "dailyRead", "recommendations", "avoidList", "portfolioNotes", "openQuestions", "sourceRefs"],
           properties: {
             headline: { type: "string" },
             macroView: { type: "string" },
@@ -1508,6 +1659,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
                   "whyNow",
                   "rationale",
                   "companyOverview",
+                  "marketCap",
                   "earningsContext",
                   "recentNews",
                   "macroLink",
@@ -1527,6 +1679,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
                   whyNow: { type: "string" },
                   rationale: { type: "string" },
                   companyOverview: { type: "string" },
+                  marketCap: { type: "string" },
                   earningsContext: { type: "string" },
                   recentNews: { type: "string" },
                   macroLink: { type: "string" },
@@ -1541,6 +1694,41 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
                     minItems: sourceRefIds.length ? 1 : 0,
                     maxItems: 6,
                     items: sourceRefSchema
+                  }
+                }
+              }
+            },
+            avoidList: {
+              type: "object",
+              additionalProperties: false,
+              required: ["summary", "sectors", "companies"],
+              properties: {
+                summary: { type: "string" },
+                sectors: {
+                  type: "array",
+                  maxItems: 4,
+                  items: {
+                    type: "object",
+                    additionalProperties: false,
+                    required: ["sector", "rationale"],
+                    properties: {
+                      sector: { type: "string" },
+                      rationale: { type: "string" }
+                    }
+                  }
+                },
+                companies: {
+                  type: "array",
+                  maxItems: 8,
+                  items: {
+                    type: "object",
+                    additionalProperties: false,
+                    required: ["symbol", "rationale", "modelEvidence"],
+                    properties: {
+                      symbol: validAvoidSymbols.length ? { type: "string", enum: validAvoidSymbols } : { type: "string" },
+                      rationale: { type: "string" },
+                      modelEvidence: { type: "string" }
+                    }
                   }
                 }
               }
@@ -1704,6 +1892,7 @@ async function main() {
     model: modelSummary,
     promptText: aiPromptText
   });
+  const avoidList = buildAvoidList(opportunities, aiRecommendations);
 
   const snapshot = {
     generatedAt: new Date().toISOString(),
@@ -1718,6 +1907,7 @@ async function main() {
       aiRecommendations
     }),
     aiRecommendations,
+    avoidList,
     recommendations: rulesRecommendations,
     sectorPerformance,
     marketStrip,

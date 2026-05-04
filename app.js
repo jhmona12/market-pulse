@@ -81,6 +81,12 @@ const fallbackSnapshot = {
     ],
     sourceRefs: []
   },
+  avoidList: {
+    status: "fallback",
+    summary: "Stay-away candidates are generated from the lowest-ranked model names once the daily snapshot is available.",
+    sectors: [],
+    companies: []
+  },
   opportunities: [
     {
       symbol: "NVDA",
@@ -155,34 +161,10 @@ const fallbackSnapshot = {
 };
 
 const state = {
-  snapshot: fallbackSnapshot,
-  signalSetupOpen: false,
-  filters: {
-    minScore: 58,
-    rsiMax: 76,
-    requireAbove50: true,
-    requireAbove200: true,
-    requireVolume: false,
-    universe: "all"
-  }
+  snapshot: fallbackSnapshot
 };
 
 const $ = (selector) => document.querySelector(selector);
-
-function setValue(selector, value) {
-  const element = $(selector);
-  if (element) element.value = value;
-}
-
-function setChecked(selector, value) {
-  const element = $(selector);
-  if (element) element.checked = value;
-}
-
-function setText(selector, value) {
-  const element = $(selector);
-  if (element) element.textContent = value;
-}
 
 function on(selector, eventName, handler) {
   const element = $(selector);
@@ -267,16 +249,6 @@ function sparkline(values) {
   `;
 }
 
-function passesFilters(item) {
-  if (item.score < state.filters.minScore) return false;
-  if (item.rsi14 > state.filters.rsiMax) return false;
-  if (state.filters.requireAbove50 && !item.above50) return false;
-  if (state.filters.requireAbove200 && !item.above200) return false;
-  if (state.filters.requireVolume && Number(item.volumeRatio || 0) < 1.1) return false;
-  if (state.filters.universe !== "all" && item.type !== state.filters.universe) return false;
-  return true;
-}
-
 function renderMarketStrip() {
   const strip = $("#marketStrip");
   strip.innerHTML = "";
@@ -348,6 +320,7 @@ function renderAiRecommendations() {
       const setup = item.setup || item.rationale || "";
       const whyNow = item.whyNow || item.macroLink || "";
       const companyOverview = item.companyOverview || "";
+      const marketCap = item.marketCap || item.marketCapText || "";
       const earningsContext = item.earningsContext || "";
       const recentNews = item.recentNews || "";
       const macroEvidence = item.macroEvidence || item.macroLink || "";
@@ -364,9 +337,10 @@ function renderAiRecommendations() {
         </header>
         <p>${esc(setup)}</p>
         ${
-          companyOverview || earningsContext || recentNews
+          companyOverview || marketCap || earningsContext || recentNews
             ? `<div class="company-context">
                 ${companyOverview ? `<small><strong>Company:</strong> ${esc(companyOverview)}</small>` : ""}
+                ${marketCap ? `<small><strong>Market Cap:</strong> ${esc(marketCap)}</small>` : ""}
                 ${earningsContext ? `<small><strong>Earnings:</strong> ${esc(earningsContext)}</small>` : ""}
                 ${recentNews ? `<small><strong>News:</strong> ${esc(recentNews)}</small>` : ""}
               </div>`
@@ -387,6 +361,57 @@ function renderAiRecommendations() {
 
   renderList($("#aiPortfolioNotes"), ai.portfolioNotes || []);
   renderList($("#aiOpenQuestions"), ai.openQuestions || []);
+}
+
+function renderAvoidList() {
+  const avoid = state.snapshot.avoidList || fallbackSnapshot.avoidList;
+  const sectorsTarget = $("#avoidSectors");
+  const companiesTarget = $("#avoidList");
+  $("#avoidSummary").textContent = avoid.summary || "Lowest-ranked model names are unavailable in this snapshot.";
+  sectorsTarget.innerHTML = "";
+  companiesTarget.innerHTML = "";
+
+  const sectors = avoid.sectors || [];
+  if (sectors.length) {
+    sectors.slice(0, 4).forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "avoid-sector";
+      const examples = item.examples?.length ? `Examples: ${item.examples.join(", ")}` : "";
+      card.innerHTML = `
+        <span>${esc(item.count != null ? `${item.count} bottom names` : "Bottom-ranked cluster")}</span>
+        <strong>${esc(item.sector || "Sector review")}</strong>
+        <p>${esc(item.rationale || examples)}</p>
+      `;
+      sectorsTarget.appendChild(card);
+    });
+  }
+
+  const companies = avoid.companies || [];
+  if (!companies.length) {
+    companiesTarget.innerHTML = `<div class="empty-state">Run the model refresh to populate lowest-ranked companies.</div>`;
+    return;
+  }
+
+  companies.slice(0, 8).forEach((item) => {
+    const card = document.createElement("article");
+    card.className = "avoid-card";
+    const meta = [item.sector, item.marketCap].filter(Boolean).join(" · ");
+    const evidence = item.modelEvidence || item.rationale || item.reason || "Lowest-ranked by the model.";
+    const risk = Array.isArray(item.riskFlags) ? item.riskFlags.join("; ") : item.risk || item.riskFlags || "";
+    card.innerHTML = `
+      <header>
+        <div>
+          <strong>${esc(item.symbol)}</strong>
+          <span>${esc(item.name || meta || "Model-ranked company")}</span>
+        </div>
+        <span class="avoid-rank">#${esc(item.modelRank || "-")}</span>
+      </header>
+      ${meta ? `<small>${esc(meta)}</small>` : ""}
+      <p>${esc(evidence)}</p>
+      ${risk ? `<small><strong>Risk flags:</strong> ${esc(risk)}</small>` : ""}
+    `;
+    companiesTarget.appendChild(card);
+  });
 }
 
 function renderSectorPerformance() {
@@ -435,7 +460,6 @@ function renderSectorPerformance() {
 function renderOpportunities() {
   const list = $("#opportunityList");
   const matches = [...state.snapshot.opportunities]
-    .filter(passesFilters)
     .sort((a, b) => {
       const aModel = hasModelRank(a);
       const bModel = hasModelRank(b);
@@ -453,7 +477,7 @@ function renderOpportunities() {
   list.innerHTML = "";
 
   if (!matches.length) {
-    list.innerHTML = `<div class="empty-state">No names passed the current setup.</div>`;
+    list.innerHTML = `<div class="empty-state">No momentum names are available in this snapshot.</div>`;
     return;
   }
 
@@ -566,20 +590,10 @@ function renderSources() {
 }
 
 function render() {
-  setValue("#minScore", state.filters.minScore);
-  setText("#minScoreValue", state.filters.minScore);
-  setValue("#rsiMax", state.filters.rsiMax);
-  setText("#rsiMaxValue", state.filters.rsiMax);
-  setChecked("#requireAbove50", state.filters.requireAbove50);
-  setChecked("#requireAbove200", state.filters.requireAbove200);
-  setChecked("#requireVolume", state.filters.requireVolume);
-  setValue("#universeSelect", state.filters.universe);
-  const modal = $("#signalSetupModal");
-  if (modal) modal.hidden = !state.signalSetupOpen;
-
   renderNote();
   renderMarketStrip();
   renderAiRecommendations();
+  renderAvoidList();
   renderSectorPerformance();
   renderRecommendations();
   renderOpportunities();
@@ -588,61 +602,7 @@ function render() {
   renderSources();
 }
 
-function openSignalSetup() {
-  state.signalSetupOpen = true;
-  render();
-}
-
-function closeSignalSetup() {
-  state.signalSetupOpen = false;
-  render();
-  $("#openSignalSetup")?.focus({ preventScroll: true });
-}
-
 function wireControls() {
-  on("#minScore", "input", (event) => {
-    state.filters.minScore = Number(event.target.value);
-    render();
-  });
-  on("#rsiMax", "input", (event) => {
-    state.filters.rsiMax = Number(event.target.value);
-    render();
-  });
-  on("#requireAbove50", "change", (event) => {
-    state.filters.requireAbove50 = event.target.checked;
-    render();
-  });
-  on("#requireAbove200", "change", (event) => {
-    state.filters.requireAbove200 = event.target.checked;
-    render();
-  });
-  on("#requireVolume", "change", (event) => {
-    state.filters.requireVolume = event.target.checked;
-    render();
-  });
-  on("#universeSelect", "change", (event) => {
-    state.filters.universe = event.target.value;
-    render();
-  });
-  on("#resetFilters", "click", () => {
-    state.filters = {
-      minScore: 58,
-      rsiMax: 76,
-      requireAbove50: true,
-      requireAbove200: true,
-      requireVolume: false,
-      universe: "all"
-    };
-    render();
-  });
-  on("#openSignalSetup", "click", openSignalSetup);
-  on("#closeSignalSetup", "click", closeSignalSetup);
-  on("#signalSetupModal", "click", (event) => {
-    if (event.target.id === "signalSetupModal") closeSignalSetup();
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && state.signalSetupOpen) closeSignalSetup();
-  });
   on("#refreshView", "click", loadSnapshot);
 }
 

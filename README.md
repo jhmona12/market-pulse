@@ -15,8 +15,9 @@ The project is built to run cheaply with free data sources. It is not an intrada
 - Ingests public research and commentary sources listed in `config/news-sources.md`.
 - Discovers recent articles from those source landing pages and prioritizes newer dated articles.
 - Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data into structured research recommendations.
-- Enriches model candidates with company descriptions, investor relations links, earnings context, and recent ticker-specific news where free sources are available.
+- Enriches model candidates with company descriptions, market caps, investor relations links, earnings context, and recent ticker-specific news where free sources are available.
 - Uses AI to draft the Daily Read executive snapshot, with deterministic model, sector, macro, and source-tape metrics as guardrails and fallback.
+- Shows a Stay Away section based on the lowest-ranked model names and weakest sector clusters, framed as risk control rather than short-sale advice.
 
 ## Live Site
 
@@ -70,6 +71,7 @@ The refresh script:
 - Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
 - Enriches the top model candidates with company context from Nasdaq, company investor relations pages, and Yahoo Finance news RSS
+- Builds a lowest-ranked model book for the Stay Away section
 - Writes the dashboard snapshot to `data/snapshot.json`
 
 To refresh model rankings before the dashboard snapshot:
@@ -107,6 +109,7 @@ The intended division of labor is:
 - The rules-based screener provides technical context, ETF confirmation, and fallback rankings.
 - The AI Strategy Memo explains the model-ranked candidates against the macro calendar and public source tape.
 - The Daily Read is AI-written when available, but it is anchored to deterministic facts and falls back to a rules-based executive snapshot if the AI call fails.
+- The Stay Away section is seeded deterministically from the lowest-ranked model names; AI may add concise commentary, but it cannot choose symbols outside that supplied avoid-candidate list.
 
 Create a local `.env` file:
 
@@ -126,10 +129,12 @@ The AI recommendation schema is intentionally constrained:
 - When model candidates are available, recommendations must use symbols from the model-ranked candidate list.
 - Ticker spelling must match the supplied data.
 - Each recommendation includes model evidence such as rank, percentile, and model reasons.
-- Each recommendation includes a short company overview, earnings context, and a recent-news/catalyst read when company context is available.
+- Each recommendation includes a short company overview, market cap, earnings context, and a recent-news/catalyst read when company context is available.
 - The AI prompt tells the model to prefer investor relations pages as the primary company source, use Nasdaq for earnings data when dates are machine-readable, and avoid overstating news causality.
+- The prompt tells the model to surface source-mentioned current events such as geopolitical conflict, oil shocks, sanctions, shipping disruption, elections, policy shifts, credit stress, and central-bank communication when those events are relevant to market behavior.
 - Each recommendation must connect macro/publication evidence with technical momentum evidence.
 - Recommendations include setup, why-now, macro evidence, technical evidence, risk, and invalidation.
+- The Stay Away output must use only supplied lowest-ranked model names, preserve metric-specific model evidence, and explain what would need to improve before those names deserve fresh long exposure.
 - Source references use source IDs from the ingested article tape when article data is available.
 
 If no API key is configured, the dashboard still works with the model-ranked Daily Read, Desk Calls, Momentum Book, Sector Performance, Macro Pulse, and Source Tape.
@@ -172,7 +177,7 @@ The screener ranks S&P 500 stocks and selected ETFs using end-of-day technical m
 - Volume versus 20-day average
 - Proximity to recent highs
 
-The dashboard exposes configurable signal settings in the UI, including minimum score, RSI ceiling, trend requirements, volume confirmation, and universe selection.
+The dashboard displays the top model-ranked and rules-confirmed momentum names directly. Screening thresholds live in the refresh code/model pipeline rather than in a floating UI control.
 
 ## Scheduled Refresh
 
