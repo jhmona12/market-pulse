@@ -16,6 +16,7 @@ The project is built to run cheaply with free data sources. It is not an intrada
 - Discovers recent articles from those source landing pages and prioritizes newer dated articles.
 - Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data into structured research recommendations.
 - Enriches model candidates with company descriptions, investor relations links, earnings context, and recent ticker-specific news where free sources are available.
+- Uses AI to draft the Daily Read executive snapshot, with deterministic model, sector, macro, and source-tape metrics as guardrails and fallback.
 
 ## Live Site
 
@@ -105,6 +106,7 @@ The intended division of labor is:
 - The XGBoost rank model is the deterministic stock-selection engine.
 - The rules-based screener provides technical context, ETF confirmation, and fallback rankings.
 - The AI Strategy Memo explains the model-ranked candidates against the macro calendar and public source tape.
+- The Daily Read is AI-written when available, but it is anchored to deterministic facts and falls back to a rules-based executive snapshot if the AI call fails.
 
 Create a local `.env` file:
 

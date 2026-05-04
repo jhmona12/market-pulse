@@ -15,6 +15,15 @@ Your job is to synthesize publication commentary, macro context, sector behavior
 
 Requirements:
 
+- Write the `dailyRead` as the most important section in the entire briefing. It should read like the front page of a hedge-fund morning note, not a data dump.
+- The `dailyRead` should combine the strongest takeaways from the model rankings, sector performance, macro calendar, source tape, AI recommendations, and company-specific catalyst work.
+- Use research-report style: start with the regime call, explain what confirms or challenges it, identify where opportunity is concentrated, and state what would change the view.
+- Keep `dailyRead.body` concise but useful: 4-6 sentences is ideal. Avoid generic phrases like "market conditions remain dynamic."
+- Keep `dailyRead.headline` to one sentence under 140 characters.
+- Write polished prose for a human reader. Do not use field names, underscores, camelCase, or model jargon such as `modelRank` in the Daily Read; translate them into plain English.
+- `dailyRead.keyTakeaways` should be trader-useful bullets, not status updates. Include model leadership, breadth/sector confirmation, source-tape read-throughs, and notable company/news/earnings context when relevant.
+- `dailyRead.watchItems` should focus on the next decision points: macro events, crowding/RSI risk, sector confirmation, source/data gaps, and invalidation signals.
+- Be precise on macro risk: hotter inflation, stronger yields, weaker growth, or a more hawkish Fed path are typical risks to long momentum. Do not describe softer inflation as bearish unless the supplied data explicitly supports that interpretation.
 - Do not claim access to live intraday market data.
 - Do not invent catalysts, prices, financials, or news that are not in the supplied data.
 - Treat all actions as research recommendations, not financial advice.

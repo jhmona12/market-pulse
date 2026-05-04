@@ -739,7 +739,86 @@ async function fetchFredSeries(series) {
   }
 }
 
-function buildNote({ opportunities, macro, sources, model }) {
+function firstSentence(text, maxLength = 240) {
+  if (!text) return "";
+  const clean = String(text).replace(/\s+/g, " ").trim();
+  const sentence = clean.match(/^.*?[.!?](?:\s|$)/)?.[0]?.trim() || clean;
+  return sentence.length > maxLength ? `${sentence.slice(0, maxLength - 3).trim()}...` : sentence;
+}
+
+function articleBriefs(sources, limit = 3) {
+  return sortArticlesNewestFirst(
+    sources
+      .flatMap((source) => (source.articles || []).map((article) => ({ ...article, sourceName: article.sourceName || source.name })))
+      .filter((article) => article.title && article.url)
+      .filter((article) => !/(pardon our interruption|privacy|terms|sign in|login|subscribe)/i.test(`${article.title} ${article.summary || ""}`))
+  )
+    .slice(0, limit)
+    .map((article) => `${article.sourceName}: ${article.title}`);
+}
+
+function topSectorText(sectorPerformance) {
+  const leaders = (sectorPerformance || []).slice(0, 3);
+  if (!leaders.length) return "sector confirmation is unavailable";
+  return leaders
+    .map((item) => `${item.sector} ${formatPercent(item.change30d)} over 30D${Number(item.relative30d) >= 0 ? `, ${formatPercent(item.relative30d)} vs SPY` : ""}`)
+    .join("; ");
+}
+
+function dominantModelSectorText(modelLeaders) {
+  const counts = new Map();
+  modelLeaders.slice(0, 25).forEach((item) => counts.set(item.sector, (counts.get(item.sector) || 0) + 1));
+  const [sector, count] = [...counts.entries()].sort((a, b) => b[1] - a[1])[0] || [];
+  return sector ? `${count} of the top 25 model-ranked stocks are in ${sector}` : "model leadership is not concentrated enough to call a dominant sector";
+}
+
+function boundedList(items, fallback, limit = 6) {
+  const clean = (items || []).map((item) => String(item || "").trim()).filter(Boolean);
+  return clean.length ? clean.slice(0, limit) : fallback.slice(0, limit);
+}
+
+function cleanDailyReadText(value) {
+  return String(value || "")
+    .replace(/[‑–—]/g, "-")
+    .replaceAll("XGBoost_ranked", "XGBoost-ranked")
+    .replaceAll("modelRank", "model rank")
+    .replaceAll("14d", "14-day")
+    .replace(/AI-dense/gi, "AI-focused")
+    .replace(/duration\/breathing risk/gi, "duration-sensitive risk assets")
+    .replace(/\b([A-Z]{2,5})\/\1-linked\b/g, "$1-linked")
+    .replace(/high breadth in XLK/gi, "strength in XLK")
+    .replace(/model relevance degrades/gi, "top-ranked names lose price or volume confirmation")
+    .replace(/sharp macro turn lower in growth \/ inflation data/gi, "weaker growth data, hotter inflation, or higher yields")
+    .replace(/Earnings context solidify through/gi, "Earnings context is supported by")
+    .replace(/a weaker growth data/gi, "weaker growth data")
+    .replace(/hotter inflation, or higher yields or/gi, "hotter inflation, higher yields, or")
+    .replace(/volume deteriorations/gi, "volume deterioration")
+    .replace(/Volume weakness/g, "volume weakness")
+    .replace(/\bSatS\b/g, "SATS")
+    .replace(/\(\s+/g, "(")
+    .replace(/\s*\/\s*/g, " / ")
+    .replace(/RSI \/ volatility/gi, "RSI and volatility")
+    .replace(/volume \/ trend/gi, "volume or trend")
+    .replace(/\b([A-Z]{2,5}) \/ ([A-Z]{2,5})\b/g, "$1 and $2")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function usableDailyReadItem(value) {
+  return !/(no names lack|no data gaps|all data complete|no .* unavailable)/i.test(value);
+}
+
+function cleanDailyRead(dailyRead) {
+  if (!dailyRead) return null;
+  return {
+    headline: firstSentence(cleanDailyReadText(dailyRead.headline), 150),
+    body: cleanDailyReadText(dailyRead.body),
+    keyTakeaways: (dailyRead.keyTakeaways || []).map(cleanDailyReadText).filter(Boolean).filter(usableDailyReadItem),
+    watchItems: (dailyRead.watchItems || []).map(cleanDailyReadText).filter(Boolean).filter(usableDailyReadItem)
+  };
+}
+
+function buildNote({ opportunities, macro, sources, model, sectorPerformance, rulesRecommendations, aiRecommendations }) {
   const modelReady = model?.status === "ready" && model.scoredCount > 0;
   const modelLeaders = opportunities.filter(hasModelRank);
   const leaders = (modelReady ? modelLeaders : opportunities).slice(0, 5);
@@ -764,39 +843,53 @@ function buildNote({ opportunities, macro, sources, model }) {
   const upcomingEvents = calendar.filter((event) => new Date(`${event.date}T23:59:59`) >= new Date()).slice(0, 3);
   const leaderText = leaders.map((item) => item.symbol).join(", ") || "none";
   const etfText = etfLeaders.map((item) => item.symbol).join(", ") || "none";
+  const topSector = sectorPerformance?.[0];
+  const modelSectorText = dominantModelSectorText(modelLeaders);
+  const sourceBriefs = articleBriefs(sources, 3);
+  const aiFocus = aiRecommendations?.status === "ready"
+    ? firstSentence(aiRecommendations.headline || aiRecommendations.macroView)
+    : "";
+  const aiSymbols = (aiRecommendations?.recommendations || []).slice(0, 4).map((item) => item.symbol).filter(Boolean).join(", ");
   const modelText = modelReady
     ? `${model.scoredCount} S&P 500 names were scored by the XGBoost rank model as of ${model.asOfDate || "the latest available close"}`
     : "The XGBoost rank model was not available for this refresh";
-  const headline = modelReady
-    ? `${modelText}; top model setups: ${leaderText}.`
-    : `${breadth}% of screened names are above both 50-day and 200-day averages; top-ranked setups: ${leaderText}.`;
-  const body = `The daily setup is based on end-of-day data across ${universeCount} S&P 500 constituents and major ETFs. ${modelText}. ${above50Pct}% are above the 50-day average, ${above200Pct}% are above the 200-day average, and ${breadth}% are above both. The highest-ranked opportunities are ${leaderText}. ETF confirmation leaders are ${etfText}. ${cleanCandidates} names pass the clean-candidate filter, while ${extended} ranked names have RSI above 76. ${sourceHits} public source pages were checked and ${articleHits} recent articles were ingested for the source tape.`;
+  const regime = breadth >= 55
+    ? "Risk appetite is broad"
+    : breadth >= 40
+      ? "Risk appetite is constructive but selective"
+      : "Risk appetite is narrow";
+  const fallbackHeadline = modelReady
+    ? `${regime}; model leadership is clustered in ${leaderText}, with ${topSector?.sector || "sector"} confirmation.`
+    : `${regime}; rules-based momentum leaders are ${leaderText}.`;
+  const fallbackBody = `${regime}: ${above50Pct}% of the screened universe is above the 50-day average, ${above200Pct}% is above the 200-day, and ${breadth}% clears both trend lines. ${modelText}; the cleanest top-decile setup count is ${cleanCandidates}, while ${extended} top-ranked names are already RSI-extended. Sector confirmation is led by ${topSectorText(sectorPerformance)}. The AI memo is focused on ${aiSymbols || leaderText}${aiFocus ? `, with the note that ${aiFocus.charAt(0).toLowerCase()}${aiFocus.slice(1)}` : ""}. Source tape coverage is ${sourceHits}/${sources.length} pages live with ${articleHits} recent articles, so treat source conclusions as useful but incomplete when a publisher blocks scraping.`;
+  const fallbackChanged = [
+    modelReady
+      ? `Model book: ${leaderText} lead ${model.scoredCount} scored S&P 500 names; ${modelSectorText}.`
+      : "Model rankings were unavailable, so the read used the rules-based momentum score.",
+    `Market breadth: ${above50Pct}% above the 50-day, ${above200Pct}% above the 200-day, and ${breadth}% above both, which keeps the setup ${breadth >= 40 ? "tradable" : "fragile"}.`,
+    `Sector tape: ${topSectorText(sectorPerformance)}.`,
+    rulesRecommendations?.length
+      ? `Desk call summary: ${rulesRecommendations.slice(0, 4).map((item) => `${item.symbol} (${item.label})`).join(", ")}.`
+      : "Desk call summary was unavailable in this snapshot.",
+    aiFocus ? `AI memo: ${aiFocus}` : "AI memo was unavailable, so this read is based on deterministic model, macro, sector, and source data.",
+    sourceBriefs.length ? `Research tape: ${sourceBriefs.join(" | ")}.` : "Research tape: no high-quality article briefs were extracted from the configured source pages."
+  ];
+  const fallbackWatch = [
+    upcomingEvents.length ? `Macro risk: ${upcomingEvents.map((event) => `${event.event} on ${event.date}`).join("; ")}.` : "No upcoming macro events are currently listed in the local calendar.",
+    modelReady
+      ? `Momentum risk: ${extended} top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.`
+      : `Momentum risk: ${extended} screened names have score >= 70 and RSI above 76.`,
+    `Confirmation check: ETF leaders are ${etfText}; if they roll over while single-name ranks stay high, reduce confidence in the long book.`,
+    `${failedSources} of ${sources.length} configured source pages failed the latest check; blocked or stale sources should not drive the call.`
+  ];
+  const aiDailyRead = aiRecommendations?.status === "ready" ? cleanDailyRead(aiRecommendations.dailyRead) : null;
 
   return {
-    headline,
-    body,
-    changed: [
-      modelReady
-        ? `Model leader set: ${leaderText}; top-decile clean candidates: ${cleanCandidates}.`
-        : "Model rankings were unavailable, so the note used the rules-based momentum score.",
-      `${breadth}% of screened instruments sit above both 50-day and 200-day moving averages.`,
-      `${above50Pct}% are above the 50-day average and ${above200Pct}% are above the 200-day average.`,
-      leaders.length && modelReady
-        ? `Top model rank: ${leaders[0].symbol} at #${leaders[0].modelRank} with ${(leaders[0].modelReasons || []).join("; ") || "available model evidence"}.`
-        : leaders.length
-          ? `Top score: ${leaders[0].symbol} at ${Math.round(leaders[0].score)} with ${leaders[0].tags.join(", ").toLowerCase() || "trend confirmation"}.`
-          : "No ranked leaders were available.",
-      `${cleanCandidates} names pass the clean-candidate filter; ${extended} ranked names are above the RSI ceiling.`,
-      `${macro.filter((item) => item.value !== "n/a").length} macro series refreshed from free FRED endpoints.`,
-      `${articleHits} recent article summaries were extracted from configured research and commentary sources.`
-    ],
-    watch: [
-      modelReady
-        ? `${extended} top-decile model names have RSI above 76.`
-        : `${extended} screened names have score >= 70 and RSI above 76.`,
-      upcomingEvents.length ? `Next scheduled macro events: ${upcomingEvents.map((event) => `${event.event} on ${event.date}`).join("; ")}.` : "No upcoming macro events are currently listed in the local calendar.",
-      `${failedSources} of ${sources.length} configured source pages failed the latest source check.`
-    ]
+    headline: aiDailyRead?.headline || fallbackHeadline,
+    body: aiDailyRead?.body || fallbackBody,
+    changed: boundedList([...(aiDailyRead?.keyTakeaways || []).slice(0, 4), ...fallbackChanged], fallbackChanged, 6),
+    watch: boundedList([...(aiDailyRead?.watchItems || []).slice(0, 3), ...fallbackWatch], fallbackWatch, 5),
+    generatedBy: aiDailyRead ? "ai_with_fact_guardrails" : "deterministic"
   };
 }
 
@@ -861,6 +954,7 @@ function fallbackAiRecommendations(reason) {
     model: null,
     headline: "AI macro and model synthesis is not configured yet.",
     macroView: "The dashboard can still show model-ranked and rules-based recommendations. Add OPENAI_API_KEY to .env and rerun the refresh to generate AI recommendations that connect macro context, public source summaries, and the XGBoost single-name rank model.",
+    dailyRead: null,
     recommendations: [],
     portfolioNotes: [
       "Model-ranked and rules-based screening remain available without an API key.",
@@ -1374,10 +1468,31 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
         schema: {
           type: "object",
           additionalProperties: false,
-          required: ["headline", "macroView", "recommendations", "portfolioNotes", "openQuestions", "sourceRefs"],
+          required: ["headline", "macroView", "dailyRead", "recommendations", "portfolioNotes", "openQuestions", "sourceRefs"],
           properties: {
             headline: { type: "string" },
             macroView: { type: "string" },
+            dailyRead: {
+              type: "object",
+              additionalProperties: false,
+              required: ["headline", "body", "keyTakeaways", "watchItems"],
+              properties: {
+                headline: { type: "string" },
+                body: { type: "string" },
+                keyTakeaways: {
+                  type: "array",
+                  minItems: 4,
+                  maxItems: 6,
+                  items: { type: "string" }
+                },
+                watchItems: {
+                  type: "array",
+                  minItems: 3,
+                  maxItems: 5,
+                  items: { type: "string" }
+                }
+              }
+            },
             recommendations: {
               type: "array",
               minItems: 3,
@@ -1593,7 +1708,15 @@ async function main() {
   const snapshot = {
     generatedAt: new Date().toISOString(),
     model: modelSummary,
-    note: buildNote({ opportunities, macro, sources, model: modelSummary }),
+    note: buildNote({
+      opportunities,
+      macro,
+      sources,
+      model: modelSummary,
+      sectorPerformance,
+      rulesRecommendations,
+      aiRecommendations
+    }),
     aiRecommendations,
     recommendations: rulesRecommendations,
     sectorPerformance,
