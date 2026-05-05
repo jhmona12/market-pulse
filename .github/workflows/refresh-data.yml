@@ -3,11 +3,11 @@ name: Refresh Market Data
 on:
   schedule:
     # GitHub cron runs in UTC and can be delayed after the scheduled slot.
-    # These two slots cover 5:07 PM Pacific across daylight saving time.
+    # These two slots cover 5:22 PM Pacific across daylight saving time.
     # The gate below evaluates the intended scheduled slot, not the delayed
     # runner start time, so late GitHub scheduling does not skip the refresh.
-    - cron: "7 0 * * *"
-    - cron: "7 1 * * *"
+    - cron: "22 0 * * *"
+    - cron: "22 1 * * *"
   workflow_dispatch:
 
 permissions:
@@ -37,13 +37,13 @@ jobs:
           fi
 
           case "$SCHEDULE" in
-            "7 0 * * *")
+            "22 0 * * *")
               scheduled_hour=0
-              scheduled_minute=7
+              scheduled_minute=22
               ;;
-            "7 1 * * *")
+            "22 1 * * *")
               scheduled_hour=1
-              scheduled_minute=7
+              scheduled_minute=22
               ;;
             *)
               echo "run_refresh=false" >> "$GITHUB_OUTPUT"
