@@ -3,11 +3,13 @@ name: Refresh Market Data
 on:
   schedule:
     # GitHub cron runs in UTC and can be delayed after the scheduled slot.
-    # These two slots cover 7:07 AM Pacific across daylight saving time.
+    # These slots cover 7:00 AM and 5:00 PM Pacific across daylight saving time.
     # The gate below evaluates the intended scheduled slot, not the delayed
     # runner start time, so late GitHub scheduling does not skip the refresh.
-    - cron: "7 14 * * *"
-    - cron: "7 15 * * *"
+    - cron: "0 14 * * *"
+    - cron: "0 15 * * *"
+    - cron: "0 0 * * *"
+    - cron: "0 1 * * *"
   workflow_dispatch:
 
 permissions:
@@ -50,13 +52,21 @@ jobs:
           fi
 
           case "$SCHEDULE" in
-            "7 14 * * *")
+            "0 14 * * *")
               scheduled_hour=14
-              scheduled_minute=7
+              scheduled_minute=0
               ;;
-            "7 15 * * *")
+            "0 15 * * *")
               scheduled_hour=15
-              scheduled_minute=7
+              scheduled_minute=0
+              ;;
+            "0 0 * * *")
+              scheduled_hour=0
+              scheduled_minute=0
+              ;;
+            "0 1 * * *")
+              scheduled_hour=1
+              scheduled_minute=0
               ;;
             *)
               echo "run_refresh=false" >> "$GITHUB_OUTPUT"
@@ -88,7 +98,7 @@ jobs:
           print(f"scheduled_pacific={scheduled_pacific.isoformat()}")
           print(f"actual_start_utc={actual_utc.isoformat()}")
           print(f"schedule_delay_minutes={delay_minutes}")
-          print(f"run_refresh={'true' if scheduled_pacific.hour == 7 else 'false'}")
+          print(f"run_refresh={'true' if scheduled_pacific.hour in (7, 17) else 'false'}")
           PY
 
           cat /tmp/pacific-window.env
@@ -101,7 +111,7 @@ jobs:
           } >> "$GITHUB_ENV"
 
           if ! grep -q '^run_refresh=true$' /tmp/pacific-window.env; then
-            echo "Skipping refresh because this scheduled slot is not 7 AM Pacific."
+            echo "Skipping refresh because this scheduled slot is not 7 AM or 5 PM Pacific."
           fi
 
       - name: Set up Node
