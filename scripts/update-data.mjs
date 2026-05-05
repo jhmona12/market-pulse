@@ -588,6 +588,7 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
         modelUniverseCount: finiteNumber(item.modelUniverseCount),
         modelScore: finiteNumber(item.modelScore),
         modelPercentile: roundedNumber(item.modelPercentile, 1),
+        beta60d: roundedNumber(signal?.beta60d ?? item.beta60d, 2),
         ytdReturn: roundedNumber(signal?.ytdReturn, 2),
         trailingReturnLabel,
         trailingReturn: roundedNumber(trailingReturn, 2),
@@ -611,6 +612,7 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
       "marketCap",
       "modelScore",
       "modelPercentile",
+      "beta60d",
       "ytdReturn",
       "trailingReturn"
     ],
@@ -714,7 +716,33 @@ function crossedAbove(values, shortPeriod, longPeriod, lookback = 12) {
   return false;
 }
 
-function computeSignal(item, history, spyReturn20 = 0) {
+function betaToBenchmark(history, benchmarkHistory, period = 60) {
+  if (!benchmarkHistory?.length || history.length < period + 1) return null;
+  const benchmarkByDate = new Map(benchmarkHistory.map((row) => [row.date, row.close]));
+  const pairs = [];
+  for (let index = 1; index < history.length; index += 1) {
+    const row = history[index];
+    const previousRow = history[index - 1];
+    const benchmarkClose = benchmarkByDate.get(row.date);
+    const previousBenchmarkClose = benchmarkByDate.get(previousRow.date);
+    if (![row.close, previousRow.close, benchmarkClose, previousBenchmarkClose].every(Number.isFinite)) continue;
+    if (!previousRow.close || !previousBenchmarkClose) continue;
+    pairs.push({
+      assetReturn: row.close / previousRow.close - 1,
+      benchmarkReturn: benchmarkClose / previousBenchmarkClose - 1
+    });
+  }
+
+  const window = pairs.slice(-period);
+  if (window.length < Math.min(40, period)) return null;
+  const meanAsset = window.reduce((sum, item) => sum + item.assetReturn, 0) / window.length;
+  const meanBenchmark = window.reduce((sum, item) => sum + item.benchmarkReturn, 0) / window.length;
+  const covariance = window.reduce((sum, item) => sum + (item.assetReturn - meanAsset) * (item.benchmarkReturn - meanBenchmark), 0);
+  const variance = window.reduce((sum, item) => sum + (item.benchmarkReturn - meanBenchmark) ** 2, 0);
+  return variance ? covariance / variance : null;
+}
+
+function computeSignal(item, history, spyReturn20 = 0, spyHistory = null) {
   const closes = history.map((row) => row.close);
   const volumes = history.map((row) => row.volume || 0);
   const close = closes.at(-1);
@@ -731,6 +759,7 @@ function computeSignal(item, history, spyReturn20 = 0) {
   const return30 = percentChange(close, closes.at(-31));
   const return60 = percentChange(close, closes.at(-61));
   const ytdReturn = percentChange(close, ytdBase);
+  const beta60d = item.symbol === "SPY" ? 1 : betaToBenchmark(history, spyHistory, 60);
   const relativeStrength = return20 - spyReturn20;
   const avgVolume20 = sma(volumes, 20) || 1;
   const volumeRatio = (volumes.at(-1) || avgVolume20) / avgVolume20;
@@ -775,6 +804,7 @@ function computeSignal(item, history, spyReturn20 = 0) {
     return30,
     return60,
     ytdReturn,
+    beta60d,
     above50,
     above100,
     above200,
@@ -1986,7 +2016,7 @@ async function main() {
       if (index > 0 && index % 50 === 0) console.log(`...${index}/${universe.length}`);
       const history = item.symbol === "SPY" ? spyHistory : await fetchHistory(item.symbol);
       await sleep(20);
-      return computeSignal(item, history, spyReturn20);
+      return computeSignal(item, history, spyReturn20, spyHistory);
     } catch (error) {
       return null;
     }
@@ -2009,7 +2039,7 @@ async function main() {
       const metadata = etfs.find((item) => item.symbol === symbol) || { symbol, name: symbol };
       const history = await fetchHistory(symbol);
       historyCache.set(symbol, history);
-      return computeSignal(metadata, history, spyReturn20);
+      return computeSignal(metadata, history, spyReturn20, spyHistory);
     })
   ).map((item) => ({
     symbol: item.symbol,

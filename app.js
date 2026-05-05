@@ -755,7 +755,7 @@ function renderTickerLab() {
 
 function scorebookSortValue(row, key) {
   const value = row?.[key];
-  if (["modelRank", "marketCapValue", "modelScore", "modelPercentile", "ytdReturn", "trailingReturn"].includes(key)) {
+  if (["modelRank", "marketCapValue", "modelScore", "modelPercentile", "beta60d", "ytdReturn", "trailingReturn"].includes(key)) {
     return Number.isFinite(Number(value)) ? Number(value) : null;
   }
   return String(value || "").toLowerCase();
@@ -829,7 +829,7 @@ function renderScoreboard() {
   if (!rows.length) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="9">${state.scorebook.status === "ready" ? "No rows match the current filter." : "Run the daily refresh to populate the model scoreboard."}</td>
+        <td colspan="10">${state.scorebook.status === "ready" ? "No rows match the current filter." : "Run the daily refresh to populate the model scoreboard."}</td>
       </tr>
     `;
     return;
@@ -847,6 +847,7 @@ function renderScoreboard() {
           <td>${esc(displayMarketCap(row.marketCapValue, row.marketCap))}</td>
           <td>${esc(displayScore(row.modelScore))}</td>
           <td>${Number.isFinite(Number(row.modelPercentile)) ? `${Number(row.modelPercentile).toFixed(1)}%` : "n/a"}</td>
+          <td>${Number.isFinite(Number(row.beta60d)) ? Number(row.beta60d).toFixed(2) : "n/a"}</td>
           <td class="${returnClass(row.ytdReturn)}">${esc(displayPct(row.ytdReturn))}</td>
           <td class="${returnClass(row.trailingReturn)}"><span>${esc(displayPct(row.trailingReturn))}</span><small>${esc(trailingLabel)}</small></td>
         </tr>
