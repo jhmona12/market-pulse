@@ -132,7 +132,6 @@ jobs:
 
       - name: Score XGBoost rank model
         if: steps.pacific_time.outputs.run_refresh == 'true'
-        continue-on-error: true
         run: python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json
 
       - name: Refresh snapshot

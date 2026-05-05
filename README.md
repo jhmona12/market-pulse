@@ -1,8 +1,47 @@
 # Market Pulse
 
-Market Pulse is a static market research dashboard for a once-daily, end-of-day review. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note.
+Market Pulse is a static market research dashboard for scheduled personal market reviews. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note, with refreshes configured for 7 AM and 5 PM Pacific.
 
 The project is built to run cheaply with free data sources. It is not an intraday trading terminal and it is not financial advice.
+
+## How It Works
+
+```mermaid
+flowchart TD
+  schedule[".github/workflows/refresh-data.yml<br/>Scheduled 7 AM + 5 PM PT"] --> scorer["scripts/modeling/score_live_rank_model.py<br/>Scores current S&P 500 with XGBoost"]
+
+  modelFiles["models/rank/*<br/>Production model, metadata, explainability"] --> scorer
+  universe["config/universe.json<br/>ETF universe and fallback stocks"] --> scorer
+  scorer --> modelScores["data/model-rank-scores.json<br/>Intermediate model rankings, ignored by git"]
+  scorer --> referenceCache["data/model-reference-cache.json<br/>Daily S&P 500 reference cache"]
+
+  schedule --> refresh["scripts/update-data.mjs<br/>Builds the market briefing"]
+  newsSources["config/news-sources.md<br/>Research and news source registry"] --> refresh
+  aiPrompt["config/ai-recommendation-prompt.md<br/>AI memo instructions"] --> refresh
+  universe --> refresh
+  modelScores --> refresh
+  referenceCache --> refresh
+  freeData["Free public data<br/>Yahoo Finance charts, FRED CSVs, source landing pages"] --> refresh
+
+  refresh --> snapshot["data/snapshot.json<br/>Briefing, daily read, AI memo, sectors, macro, source tape"]
+  refresh --> scorebook["data/model-scorebook.json<br/>Full SP 500 Model Scoreboard"]
+  refresh --> marketCaps["data/market-cap-cache.json<br/>Reusable market-cap lookups"]
+  schedule --> refreshStatus["data/refresh-status.json<br/>Last run status, delay, model date, row counts"]
+
+  snapshot --> pages["GitHub Pages static site"]
+  scorebook --> pages
+  refreshStatus --> pages
+  appFiles["index.html + app.js + styles.css<br/>Browser dashboard UI"] --> pages
+  runtime["config/runtime.json<br/>Optional private Ticker Lab backend URL"] --> pages
+  pages --> browser["Laptop or mobile browser<br/>Briefing + SP 500 Model Scoreboard"]
+
+  browser -. optional private scoring .-> tickerUi["Ticker Lab tab"]
+  tickerUi -. POST /api/ticker-lab/score .-> backend["scripts/local-dashboard-server.mjs<br/>Local or hosted private API"]
+  backend --> scorer
+  referenceCache --> backend
+  backend --> tickerOutput["data/ticker-lab/*<br/>Private ticker scoring output, ignored by git"]
+  tickerOutput --> tickerUi
+```
 
 ## What It Does
 
@@ -12,7 +51,7 @@ The project is built to run cheaply with free data sources. It is not an intrada
 - Publishes a full S&P 500 Model Scoreboard tab with every scored company ranked from highest model score to lowest.
 - Tracks sector performance using major sector ETF proxies.
 - Pulls macro indicators from public FRED CSV endpoints.
-- Tracks upcoming macro events such as CPI, payrolls, GDP, and FOMC dates.
+- Tracks a configured macro calendar for market-moving events such as CPI, payrolls, GDP, and FOMC dates.
 - Ingests public research and commentary sources listed in `config/news-sources.md`.
 - Discovers recent articles from those source landing pages and prioritizes newer dated articles.
 - Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data into structured research recommendations.
@@ -68,10 +107,16 @@ http://localhost:4173
 
 The Ticker Lab section is always visible. It can score tickers when it can reach either the same-origin local API from `npm run dev:local` or a hosted backend configured in `config/runtime.json`.
 
-If port `4173` is already in use, choose another port:
+If port `4173` is already in use for the static server, choose another port:
 
 ```bash
 python3 -m http.server 4174
+```
+
+For the local Ticker Lab API, set `PORT`:
+
+```bash
+PORT=4174 npm run dev:local
 ```
 
 ## Refreshing Data
@@ -231,7 +276,7 @@ The scorer:
 - Returns S&P rank, percentile, model score, trend, RSI, relative return versus SPY, sector context, model reasons, and risk flags
 - Infers a sector proxy for non-S&P tickers using trailing return correlation to SPDR sector ETFs
 
-Ticker Lab output is written under `data/ticker-lab/`, which is ignored by git.
+Ticker Lab output is written under `data/ticker-lab/`, which is ignored by git and blocked from static web serving by the local/backend server.
 
 For public-site use, deploy the backend from this repo with the included `Dockerfile` or `render.yaml`, then put the backend origin in:
 
@@ -268,7 +313,7 @@ The repository includes a GitHub Actions workflow at:
 .github/workflows/refresh-data.yml
 ```
 
-It is configured to refresh daily at 7 AM Pacific and 5 PM Pacific. Because GitHub cron runs in UTC, the workflow schedules `14:00` and `15:00` UTC for the morning slot, plus `00:00` and `01:00` UTC for the evening slot. It only runs the slot whose intended scheduled time maps to either `07:00` or `17:00` in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
+It is configured to refresh twice daily at 7 AM Pacific and 5 PM Pacific. Because GitHub cron runs in UTC, the workflow schedules `14:00` and `15:00` UTC for the morning slot, plus `00:00` and `01:00` UTC for the evening slot. It only runs the slot whose intended scheduled time maps to either `07:00` or `17:00` in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
 
 When the refresh runs successfully, it:
 
@@ -279,6 +324,8 @@ When the refresh runs successfully, it:
 - Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, model date, and row counts
 - Commits the updated snapshot, scorebook, refresh status, market-cap cache, and reference cache back to `main` if any changed
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
+
+If model scoring fails, the workflow writes a failure status and deploys that diagnostic file with the last available dashboard data instead of silently publishing a model-less "success" snapshot.
 
 GitHub scheduled workflows may start late; GitHub does not guarantee exact cron start time. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
 
@@ -423,6 +470,8 @@ num_boost_round:       700
 early_stopping_rounds: 40
 ```
 
+`num_boost_round: 700` is the walk-forward training cap used with early stopping. The committed production model is exported separately with `25` boosting rounds, as recorded in `models/rank/xgboost_rank_sector14_tuned_metadata.json`.
+
 The tuning objective should remain practical, not purely statistical: prioritize top-decile sector-neutral return and top-minus-bottom spread in walk-forward tests, use hit rate as a sanity check, and confirm behavior with non-overlapping rebalance offsets. Future tuning should use a wider random or Bayesian search, but only after adding transaction-cost assumptions, position sizing, and portfolio-level risk controls.
 
 Modeling scripts:
@@ -552,7 +601,8 @@ render.yaml                        Render-style backend service blueprint
 ## Limitations
 
 - Data is free, delayed, and best-effort.
-- The dashboard is designed for once-daily research, not intraday execution.
+- The dashboard is designed for scheduled research, not intraday execution.
+- The macro calendar is currently a maintained list in `scripts/update-data.mjs`; it should be refreshed as future official dates are released.
 - Public websites may change markup, block automated requests, or omit publication dates.
 - Yahoo Finance and other free endpoints are not a licensed market data feed.
 - AI output should be treated as research synthesis, not trading advice.

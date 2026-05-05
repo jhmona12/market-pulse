@@ -1,12 +1,12 @@
 import { createReadStream } from "node:fs";
 import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
-import { dirname, extname, join, normalize, relative, resolve } from "node:path";
+import { dirname, extname, join, relative, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const root = resolve(dirname(dirname(fileURLToPath(import.meta.url))));
 const port = Number.parseInt(process.env.PORT || "4173", 10);
 const python = process.env.MODEL_PYTHON || join(root, ".venv-model/bin/python");
 const outputDir = join(root, "data/ticker-lab");
@@ -25,6 +25,16 @@ const mimeTypes = {
   ".jpeg": "image/jpeg",
   ".ico": "image/x-icon"
 };
+
+const publicStaticFiles = new Set([
+  "index.html",
+  "app.js",
+  "styles.css",
+  "config/runtime.json",
+  "data/snapshot.json",
+  "data/model-scorebook.json",
+  "data/refresh-status.json"
+]);
 
 function corsHeaders() {
   return {
@@ -159,8 +169,9 @@ async function scoreTickers(request, response) {
 async function serveStatic(request, response) {
   const url = new URL(request.url || "/", `http://localhost:${port}`);
   const pathname = decodeURIComponent(url.pathname === "/" ? "/index.html" : url.pathname);
-  const filePath = normalize(join(root, pathname));
-  if (!filePath.startsWith(root)) {
+  const filePath = resolve(root, `.${pathname}`);
+  const relativePath = relative(root, filePath).replaceAll("\\", "/");
+  if (relativePath.startsWith("../") || relativePath === ".." || !publicStaticFiles.has(relativePath)) {
     response.writeHead(403);
     response.end("Forbidden");
     return;
