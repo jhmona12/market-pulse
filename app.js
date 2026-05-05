@@ -755,7 +755,9 @@ function renderTickerLab() {
 
 function scorebookSortValue(row, key) {
   const value = row?.[key];
-  if (["modelRank", "marketCapValue", "modelScore", "modelPercentile", "beta60d", "ytdReturn", "trailingReturn"].includes(key)) {
+  if (
+    ["modelRank", "marketCapValue", "modelScore", "modelPercentile", "beta60d", "return7", "return14", "return30", "return60", "return90", "ytdReturn"].includes(key)
+  ) {
     return Number.isFinite(Number(value)) ? Number(value) : null;
   }
   return String(value || "").toLowerCase();
@@ -829,16 +831,15 @@ function renderScoreboard() {
   if (!rows.length) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="10">${state.scorebook.status === "ready" ? "No rows match the current filter." : "Run the daily refresh to populate the model scoreboard."}</td>
+        <td colspan="14">${state.scorebook.status === "ready" ? "No rows match the current filter." : "Run the daily refresh to populate the model scoreboard."}</td>
       </tr>
     `;
     return;
   }
 
   tbody.innerHTML = rows
-    .map((row) => {
-      const trailingLabel = row.trailingReturnLabel || "Trailing";
-      return `
+    .map(
+      (row) => `
         <tr>
           <td><span class="score-rank">#${esc(row.modelRank || "-")}</span></td>
           <td><strong>${esc(row.symbol)}</strong><span>${esc(row.sector || "Unclassified")}</span></td>
@@ -848,11 +849,15 @@ function renderScoreboard() {
           <td>${esc(displayScore(row.modelScore))}</td>
           <td>${Number.isFinite(Number(row.modelPercentile)) ? `${Number(row.modelPercentile).toFixed(1)}%` : "n/a"}</td>
           <td>${Number.isFinite(Number(row.beta60d)) ? Number(row.beta60d).toFixed(2) : "n/a"}</td>
+          <td class="${returnClass(row.return7)}">${esc(displayPct(row.return7))}</td>
+          <td class="${returnClass(row.return14)}">${esc(displayPct(row.return14))}</td>
+          <td class="${returnClass(row.return30)}">${esc(displayPct(row.return30))}</td>
+          <td class="${returnClass(row.return60)}">${esc(displayPct(row.return60))}</td>
+          <td class="${returnClass(row.return90)}">${esc(displayPct(row.return90))}</td>
           <td class="${returnClass(row.ytdReturn)}">${esc(displayPct(row.ytdReturn))}</td>
-          <td class="${returnClass(row.trailingReturn)}"><span>${esc(displayPct(row.trailingReturn))}</span><small>${esc(trailingLabel)}</small></td>
         </tr>
-      `;
-    })
+      `
+    )
     .join("");
 }
 

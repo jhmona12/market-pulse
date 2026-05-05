@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Morning Desk</title>
-    <link rel="stylesheet" href="styles.css?v=20260505-scoreboard-beta" />
+    <link rel="stylesheet" href="styles.css?v=20260505-scoreboard-returns" />
   </head>
   <body>
     <main class="shell">
@@ -188,13 +188,17 @@
                   <th><button type="button" data-score-sort="modelScore">Model Score</button></th>
                   <th><button type="button" data-score-sort="modelPercentile">Percentile</button></th>
                   <th><button type="button" data-score-sort="beta60d">Beta</button></th>
+                  <th><button type="button" data-score-sort="return7">7D</button></th>
+                  <th><button type="button" data-score-sort="return14">14D</button></th>
+                  <th><button type="button" data-score-sort="return30">30D</button></th>
+                  <th><button type="button" data-score-sort="return60">60D</button></th>
+                  <th><button type="button" data-score-sort="return90">90D</button></th>
                   <th><button type="button" data-score-sort="ytdReturn">YTD</button></th>
-                  <th><button type="button" data-score-sort="trailingReturn">Trailing</button></th>
                 </tr>
               </thead>
               <tbody id="scoreboardRows">
                 <tr>
-                  <td colspan="10">Loading model scoreboard.</td>
+                  <td colspan="14">Loading model scoreboard.</td>
                 </tr>
               </tbody>
             </table>
@@ -203,6 +207,6 @@
       </section>
     </main>
 
-    <script type="module" src="app.js?v=20260505-scoreboard-beta"></script>
+    <script type="module" src="app.js?v=20260505-scoreboard-returns"></script>
   </body>
 </html>

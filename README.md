@@ -94,7 +94,7 @@ The refresh script:
 - Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
 - Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
-- Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, 60-day beta to SPY, YTD return, and the best available trailing return metric
+- Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, 60-day beta to SPY, trailing 7D, 14D, 30D, 60D, 90D returns, and YTD return
 - Updates `data/market-cap-cache.json` from free public quote data and reuses recent values to keep the daily job reliable
 - Enriches the top model candidates with company context from Nasdaq, company investor relations pages, and Yahoo Finance news RSS
 - Builds a lowest-ranked model book for the Stay Away section

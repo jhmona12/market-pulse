@@ -573,8 +573,6 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
       const metadata = stockMetadata.get(item.symbol) || {};
       const marketCap = marketCapCache.bySymbol.get(item.symbol) || null;
       const signal = signalsBySymbol.get(item.symbol) || null;
-      const trailingReturn = finiteNumber(signal?.return30) ?? finiteNumber(item.return20);
-      const trailingReturnLabel = signal?.return30 == null ? "20D Return" : "30D Return";
       return {
         symbol: item.symbol,
         name: item.name || metadata.name || item.symbol,
@@ -589,10 +587,12 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
         modelScore: finiteNumber(item.modelScore),
         modelPercentile: roundedNumber(item.modelPercentile, 1),
         beta60d: roundedNumber(signal?.beta60d ?? item.beta60d, 2),
+        return7: roundedNumber(signal?.return7, 2),
+        return14: roundedNumber(signal?.return14, 2),
+        return30: roundedNumber(signal?.return30 ?? item.return20, 2),
+        return60: roundedNumber(signal?.return60 ?? item.return60, 2),
+        return90: roundedNumber(signal?.return90, 2),
         ytdReturn: roundedNumber(signal?.ytdReturn, 2),
-        trailingReturnLabel,
-        trailingReturn: roundedNumber(trailingReturn, 2),
-        return60: roundedNumber(item.return60, 2),
         asOfDate: item.asOfDate || modelRankings.asOfDate || null
       };
     })
@@ -613,10 +613,14 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
       "modelScore",
       "modelPercentile",
       "beta60d",
-      "ytdReturn",
-      "trailingReturn"
+      "return7",
+      "return14",
+      "return30",
+      "return60",
+      "return90",
+      "ytdReturn"
     ],
-    returnNotes: "Trailing return uses the refresh price history's 30-trading-day return when available, with the model output's 20-trading-day return as a fallback.",
+    returnNotes: "Return columns use adjusted-close price history and trailing trading-day windows: 7D, 14D, 30D, 60D, 90D, then YTD.",
     rows
   };
 }
@@ -755,9 +759,12 @@ function computeSignal(item, history, spyReturn20 = 0, spyHistory = null) {
   const ma100 = sma(closes, 100);
   const ma200 = sma(closes, 200);
   const rsi14 = rsi(closes);
+  const return7 = percentChange(close, closes.at(-8));
+  const return14 = percentChange(close, closes.at(-15));
   const return20 = percentChange(close, closes.at(-21));
   const return30 = percentChange(close, closes.at(-31));
   const return60 = percentChange(close, closes.at(-61));
+  const return90 = percentChange(close, closes.at(-91));
   const ytdReturn = percentChange(close, ytdBase);
   const beta60d = item.symbol === "SPY" ? 1 : betaToBenchmark(history, spyHistory, 60);
   const relativeStrength = return20 - spyReturn20;
@@ -800,9 +807,12 @@ function computeSignal(item, history, spyReturn20 = 0, spyHistory = null) {
     changePct: percentChange(close, prevClose),
     rsi14,
     volumeRatio,
+    return7,
+    return14,
     return20,
     return30,
     return60,
+    return90,
     ytdReturn,
     beta60d,
     above50,
