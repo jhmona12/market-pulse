@@ -265,7 +265,7 @@ The repository includes a GitHub Actions workflow at:
 .github/workflows/refresh-data.yml
 ```
 
-It is configured to refresh daily at 5:22 PM Pacific. Because GitHub cron runs in UTC, the workflow schedules both `00:22` and `01:22` UTC slots and only runs the slot whose intended scheduled time maps to `17:22` in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
+It is configured to refresh daily just after 7 AM Pacific. Because GitHub cron runs in UTC, the workflow schedules both `14:07` and `15:07` UTC slots and only runs the slot whose intended scheduled time maps to `07:07` in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
 
 When the refresh runs successfully, it:
 

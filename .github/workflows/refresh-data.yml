@@ -3,11 +3,11 @@ name: Refresh Market Data
 on:
   schedule:
     # GitHub cron runs in UTC and can be delayed after the scheduled slot.
-    # These two slots cover 5:22 PM Pacific across daylight saving time.
+    # These two slots cover 7:07 AM Pacific across daylight saving time.
     # The gate below evaluates the intended scheduled slot, not the delayed
     # runner start time, so late GitHub scheduling does not skip the refresh.
-    - cron: "22 0 * * *"
-    - cron: "22 1 * * *"
+    - cron: "7 14 * * *"
+    - cron: "7 15 * * *"
   workflow_dispatch:
 
 permissions:
@@ -37,13 +37,13 @@ jobs:
           fi
 
           case "$SCHEDULE" in
-            "22 0 * * *")
-              scheduled_hour=0
-              scheduled_minute=22
+            "7 14 * * *")
+              scheduled_hour=14
+              scheduled_minute=7
               ;;
-            "22 1 * * *")
-              scheduled_hour=1
-              scheduled_minute=22
+            "7 15 * * *")
+              scheduled_hour=15
+              scheduled_minute=7
               ;;
             *)
               echo "run_refresh=false" >> "$GITHUB_OUTPUT"
@@ -71,14 +71,14 @@ jobs:
           scheduled_pacific = scheduled_utc.astimezone(ZoneInfo("America/Los_Angeles"))
           print(f"scheduled_utc={scheduled_utc.isoformat()}")
           print(f"scheduled_pacific={scheduled_pacific.isoformat()}")
-          print(f"run_refresh={'true' if scheduled_pacific.hour == 17 else 'false'}")
+          print(f"run_refresh={'true' if scheduled_pacific.hour == 7 else 'false'}")
           PY
 
           cat /tmp/pacific-window.env
           cat /tmp/pacific-window.env >> "$GITHUB_OUTPUT"
 
           if ! grep -q '^run_refresh=true$' /tmp/pacific-window.env; then
-            echo "Skipping refresh because this scheduled slot is not 5 PM Pacific."
+            echo "Skipping refresh because this scheduled slot is not 7 AM Pacific."
           fi
 
       - name: Set up Node
