@@ -8,6 +8,8 @@ const articlesPerSource = Number.parseInt(process.env.SOURCE_ARTICLES_PER_SOURCE
 const maxArticleCandidates = Number.parseInt(process.env.SOURCE_ARTICLE_CANDIDATES || "10", 10);
 const companyContextCount = Number.parseInt(process.env.COMPANY_CONTEXT_COUNT || "12", 10);
 const snapshotOutput = process.env.SNAPSHOT_OUTPUT || "data/snapshot.json";
+const scorebookOutput = process.env.SCOREBOOK_OUTPUT || "data/model-scorebook.json";
+const marketCapCacheMaxAgeHours = Number.parseFloat(process.env.MARKET_CAP_CACHE_MAX_AGE_HOURS || "18");
 const today = new Date();
 const startDate = new Date(today);
 startDate.setDate(startDate.getDate() - 430);
@@ -200,6 +202,19 @@ function publicModelSummary(modelRankings, explainability) {
         }
       : null
   };
+}
+
+function constituentMetadataBySymbol(stocks) {
+  return new Map(
+    (stocks || []).map((item) => [
+      item.symbol,
+      {
+        name: item.name,
+        sector: item.sector,
+        industry: item.subIndustry || item.sub_industry || item.industry || null
+      }
+    ])
+  );
 }
 
 function parseMarkdownSources(markdown) {
@@ -474,10 +489,134 @@ async function fetchSp500Constituents() {
         symbol: cells[0],
         name: cells[1],
         sector: cells[2],
+        subIndustry: cells[3],
         type: "stock"
       };
     })
     .filter((item) => item.symbol && item.name);
+}
+
+async function loadMarketCapCache() {
+  try {
+    const text = await readFile(join(root, "data/market-cap-cache.json"), "utf8");
+    const payload = JSON.parse(text);
+    return {
+      generatedAt: payload.generatedAt || null,
+      bySymbol: new Map(Object.entries(payload.bySymbol || {}))
+    };
+  } catch {
+    return { generatedAt: null, bySymbol: new Map() };
+  }
+}
+
+async function writeMarketCapCache(cache) {
+  const bySymbol = Object.fromEntries([...cache.bySymbol.entries()].sort(([a], [b]) => a.localeCompare(b)));
+  await writeFile(
+    join(root, "data/market-cap-cache.json"),
+    `${JSON.stringify({ generatedAt: new Date().toISOString(), bySymbol }, null, 2)}\n`
+  );
+}
+
+async function fetchMarketCap(symbol) {
+  const summary = await fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/summary?assetclass=stocks`, {
+    timeout: 12000
+  });
+  const marketCap = marketCapFromSummary(summary, symbol);
+  if (!marketCap) throw new Error("market cap unavailable");
+  return {
+    value: marketCap.value,
+    text: marketCap.text,
+    sourceName: marketCap.sourceName,
+    sourceUrl: marketCap.sourceUrl,
+    fetchedAt: new Date().toISOString()
+  };
+}
+
+function isMarketCapCacheFresh(entry) {
+  if (!entry?.fetchedAt || !Number.isFinite(marketCapCacheMaxAgeHours) || marketCapCacheMaxAgeHours <= 0) return false;
+  const fetchedAt = new Date(entry.fetchedAt).getTime();
+  if (!Number.isFinite(fetchedAt)) return false;
+  return Date.now() - fetchedAt < marketCapCacheMaxAgeHours * 60 * 60 * 1000;
+}
+
+async function enrichMarketCaps(symbols, existingCache) {
+  const cache = {
+    generatedAt: existingCache.generatedAt,
+    bySymbol: new Map(existingCache.bySymbol)
+  };
+  const uniqueSymbols = [...new Set(symbols.filter(Boolean))];
+  const staleSymbols = uniqueSymbols.filter((symbol) => !isMarketCapCacheFresh(cache.bySymbol.get(symbol)));
+  await mapLimit(staleSymbols, 5, async (symbol) => {
+    try {
+      const marketCap = await fetchMarketCap(symbol);
+      cache.bySymbol.set(symbol, marketCap);
+      await sleep(15);
+    } catch {
+      if (!cache.bySymbol.has(symbol)) {
+        cache.bySymbol.set(symbol, {
+          value: null,
+          text: null,
+          sourceName: "Unavailable",
+          sourceUrl: null,
+          fetchedAt: null
+        });
+      }
+    }
+  });
+  return cache;
+}
+
+function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, signalsBySymbol }) {
+  const rankings = modelRankings.status === "ready" ? modelRankings.rankings : [];
+  const rows = rankings
+    .map((item) => {
+      const metadata = stockMetadata.get(item.symbol) || {};
+      const marketCap = marketCapCache.bySymbol.get(item.symbol) || null;
+      const signal = signalsBySymbol.get(item.symbol) || null;
+      const trailingReturn = finiteNumber(signal?.return30) ?? finiteNumber(item.return20);
+      const trailingReturnLabel = signal?.return30 == null ? "20D Return" : "30D Return";
+      return {
+        symbol: item.symbol,
+        name: item.name || metadata.name || item.symbol,
+        sector: item.sector || metadata.sector || null,
+        industry: metadata.industry || null,
+        marketCap: marketCap?.text || null,
+        marketCapValue: finiteNumber(marketCap?.value),
+        marketCapSource: marketCap?.sourceName || null,
+        marketCapFetchedAt: marketCap?.fetchedAt || null,
+        modelRank: finiteNumber(item.modelRank),
+        modelUniverseCount: finiteNumber(item.modelUniverseCount),
+        modelScore: finiteNumber(item.modelScore),
+        modelPercentile: roundedNumber(item.modelPercentile, 1),
+        ytdReturn: roundedNumber(signal?.ytdReturn, 2),
+        trailingReturnLabel,
+        trailingReturn: roundedNumber(trailingReturn, 2),
+        return60: roundedNumber(item.return60, 2),
+        asOfDate: item.asOfDate || modelRankings.asOfDate || null
+      };
+    })
+    .sort((a, b) => Number(b.modelScore ?? -Infinity) - Number(a.modelScore ?? -Infinity));
+
+  return {
+    generatedAt: new Date().toISOString(),
+    asOfDate: modelRankings.asOfDate || null,
+    status: modelRankings.status,
+    rowCount: rows.length,
+    model: modelRankings.model,
+    columns: [
+      "symbol",
+      "name",
+      "sector",
+      "industry",
+      "marketCap",
+      "modelScore",
+      "modelPercentile",
+      "ytdReturn",
+      "trailingReturn"
+    ],
+    returnNotes: "Trailing return uses the refresh price history's 30-trading-day return when available, with the model output's 20-trading-day return as a fallback.",
+    rows
+  };
 }
 
 function yahooSymbol(symbol) {
@@ -580,13 +719,18 @@ function computeSignal(item, history, spyReturn20 = 0) {
   const volumes = history.map((row) => row.volume || 0);
   const close = closes.at(-1);
   const prevClose = closes.at(-2);
+  const latestDate = history.at(-1)?.date || today.toISOString().slice(0, 10);
+  const ytdIndex = history.findIndex((row) => row.date >= `${latestDate.slice(0, 4)}-01-01`);
+  const ytdBase = ytdIndex >= 0 ? closes[ytdIndex] : closes[0];
   const ma20 = sma(closes, 20);
   const ma50 = sma(closes, 50);
   const ma100 = sma(closes, 100);
   const ma200 = sma(closes, 200);
   const rsi14 = rsi(closes);
   const return20 = percentChange(close, closes.at(-21));
+  const return30 = percentChange(close, closes.at(-31));
   const return60 = percentChange(close, closes.at(-61));
+  const ytdReturn = percentChange(close, ytdBase);
   const relativeStrength = return20 - spyReturn20;
   const avgVolume20 = sma(volumes, 20) || 1;
   const volumeRatio = (volumes.at(-1) || avgVolume20) / avgVolume20;
@@ -628,7 +772,9 @@ function computeSignal(item, history, spyReturn20 = 0) {
     rsi14,
     volumeRatio,
     return20,
+    return30,
     return60,
+    ytdReturn,
     above50,
     above100,
     above200,
@@ -1847,6 +1993,11 @@ async function main() {
   });
 
   const opportunities = mergeModelScores(signals.filter(Boolean), modelRankings);
+  const signalsBySymbol = new Map(signals.filter(Boolean).map((item) => [item.symbol, item]));
+  const stockMetadata = constituentMetadataBySymbol(stocks);
+  const marketCapCachePromise = loadMarketCapCache().then((cache) =>
+    modelRankings.status === "ready" ? enrichMarketCaps(modelRankings.rankings.map((item) => item.symbol), cache) : cache
+  );
 
   const historyCache = new Map([["SPY", spyHistory]]);
 
@@ -1893,6 +2044,14 @@ async function main() {
     promptText: aiPromptText
   });
   const avoidList = buildAvoidList(opportunities, aiRecommendations);
+  const marketCapCache = await marketCapCachePromise;
+  if (modelRankings.status === "ready") await writeMarketCapCache(marketCapCache);
+  const modelScorebook = buildModelScorebook({
+    modelRankings,
+    stockMetadata,
+    marketCapCache,
+    signalsBySymbol
+  });
 
   const snapshot = {
     generatedAt: new Date().toISOString(),
@@ -1917,8 +2076,12 @@ async function main() {
     sources
   };
 
-  await writeFile(join(root, snapshotOutput), `${JSON.stringify(snapshot, null, 2)}\n`);
+  await Promise.all([
+    writeFile(join(root, snapshotOutput), `${JSON.stringify(snapshot, null, 2)}\n`),
+    writeFile(join(root, scorebookOutput), `${JSON.stringify(modelScorebook, null, 2)}\n`)
+  ]);
   console.log(`Wrote ${snapshotOutput} with ${opportunities.length} ranked instruments.`);
+  console.log(`Wrote ${scorebookOutput} with ${modelScorebook.rowCount} model-scored rows.`);
 }
 
 export { checkSource, extractArticleCandidates, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };

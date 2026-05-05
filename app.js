@@ -162,6 +162,19 @@ const fallbackSnapshot = {
 
 const state = {
   snapshot: fallbackSnapshot,
+  activeView: "briefing",
+  scorebook: {
+    status: "loading",
+    generatedAt: null,
+    asOfDate: null,
+    rows: [],
+    rowCount: 0,
+    returnNotes: "",
+    query: "",
+    sector: "",
+    sortKey: "modelScore",
+    sortDirection: "desc"
+  },
   tickerLab: {
     enabled: true,
     apiReady: false,
@@ -203,16 +216,42 @@ function formatDate(value) {
 
 function formatShortDate(value) {
   if (!value) return "Date unavailable";
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(String(value)) ? new Date(`${value}T12:00:00`) : new Date(value);
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric"
-  }).format(new Date(value));
+  }).format(date);
 }
 
 function pct(value) {
   const number = Number(value || 0);
   return `${number >= 0 ? "+" : ""}${number.toFixed(2)}%`;
+}
+
+function displayPct(value) {
+  if (!Number.isFinite(Number(value))) return "n/a";
+  return pct(value);
+}
+
+function displayScore(value) {
+  if (!Number.isFinite(Number(value))) return "n/a";
+  return Number(value).toFixed(6);
+}
+
+function displayMarketCap(value, fallbackText) {
+  if (fallbackText) return fallbackText;
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "n/a";
+  if (number >= 1_000_000_000_000) return `$${(number / 1_000_000_000_000).toFixed(2)}T`;
+  if (number >= 1_000_000_000) return `$${(number / 1_000_000_000).toFixed(1)}B`;
+  if (number >= 1_000_000) return `$${(number / 1_000_000).toFixed(1)}M`;
+  return `$${number.toLocaleString("en-US")}`;
+}
+
+function returnClass(value) {
+  if (!Number.isFinite(Number(value))) return "";
+  return Number(value) < 0 ? "negative" : "positive";
 }
 
 function hasModelRank(item) {
@@ -714,6 +753,108 @@ function renderTickerLab() {
   }
 }
 
+function scorebookSortValue(row, key) {
+  const value = row?.[key];
+  if (["modelRank", "marketCapValue", "modelScore", "modelPercentile", "ytdReturn", "trailingReturn"].includes(key)) {
+    return Number.isFinite(Number(value)) ? Number(value) : null;
+  }
+  return String(value || "").toLowerCase();
+}
+
+function compareScorebookRows(a, b) {
+  const { sortKey, sortDirection } = state.scorebook;
+  const direction = sortDirection === "asc" ? 1 : -1;
+  const aValue = scorebookSortValue(a, sortKey);
+  const bValue = scorebookSortValue(b, sortKey);
+  if (aValue == null && bValue == null) return String(a.symbol).localeCompare(String(b.symbol));
+  if (aValue == null) return 1;
+  if (bValue == null) return -1;
+  if (typeof aValue === "number" && typeof bValue === "number") {
+    if (aValue !== bValue) return (aValue - bValue) * direction;
+  } else {
+    const comparison = String(aValue).localeCompare(String(bValue));
+    if (comparison !== 0) return comparison * direction;
+  }
+  return Number(a.modelRank || 9999) - Number(b.modelRank || 9999);
+}
+
+function filteredScorebookRows() {
+  const query = state.scorebook.query.trim().toLowerCase();
+  const sector = state.scorebook.sector;
+  return (state.scorebook.rows || [])
+    .filter((row) => !sector || row.sector === sector)
+    .filter((row) => {
+      if (!query) return true;
+      return [row.symbol, row.name, row.sector, row.industry].some((value) => String(value || "").toLowerCase().includes(query));
+    })
+    .sort(compareScorebookRows);
+}
+
+function renderScorebookSectorOptions() {
+  const select = $("#scoreboardSector");
+  if (!select) return;
+  const sectors = [...new Set((state.scorebook.rows || []).map((row) => row.sector).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const signature = sectors.join("|");
+  if (select.dataset.signature === signature) return;
+  select.dataset.signature = signature;
+  select.innerHTML = `<option value="">All sectors</option>${sectors.map((sector) => `<option value="${esc(sector)}">${esc(sector)}</option>`).join("")}`;
+  select.value = state.scorebook.sector;
+}
+
+function renderScorebookSortState() {
+  document.querySelectorAll("[data-score-sort]").forEach((button) => {
+    const active = button.dataset.scoreSort === state.scorebook.sortKey;
+    button.classList.toggle("active", active);
+    button.dataset.direction = active ? state.scorebook.sortDirection : "";
+  });
+}
+
+function renderScoreboard() {
+  const tbody = $("#scoreboardRows");
+  const meta = $("#scoreboardMeta");
+  if (!tbody || !meta) return;
+
+  renderScorebookSectorOptions();
+  renderScorebookSortState();
+
+  const rows = filteredScorebookRows();
+  const total = state.scorebook.rowCount || state.scorebook.rows.length;
+  const asOf = state.scorebook.asOfDate ? formatShortDate(state.scorebook.asOfDate) : "latest close";
+  const notes = state.scorebook.returnNotes ? ` · ${state.scorebook.returnNotes}` : "";
+  meta.textContent =
+    state.scorebook.status === "ready"
+      ? `${rows.length}/${total} rows · as of ${asOf}${notes}`
+      : "Model scoreboard unavailable";
+
+  if (!rows.length) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="9">${state.scorebook.status === "ready" ? "No rows match the current filter." : "Run the daily refresh to populate the model scoreboard."}</td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = rows
+    .map((row) => {
+      const trailingLabel = row.trailingReturnLabel || "Trailing";
+      return `
+        <tr>
+          <td><span class="score-rank">#${esc(row.modelRank || "-")}</span></td>
+          <td><strong>${esc(row.symbol)}</strong><span>${esc(row.sector || "Unclassified")}</span></td>
+          <td>${esc(row.name || row.symbol)}</td>
+          <td>${esc(row.industry || "n/a")}</td>
+          <td>${esc(displayMarketCap(row.marketCapValue, row.marketCap))}</td>
+          <td>${esc(displayScore(row.modelScore))}</td>
+          <td>${Number.isFinite(Number(row.modelPercentile)) ? `${Number(row.modelPercentile).toFixed(1)}%` : "n/a"}</td>
+          <td class="${returnClass(row.ytdReturn)}">${esc(displayPct(row.ytdReturn))}</td>
+          <td class="${returnClass(row.trailingReturn)}"><span>${esc(displayPct(row.trailingReturn))}</span><small>${esc(trailingLabel)}</small></td>
+        </tr>
+      `;
+    })
+    .join("");
+}
+
 function renderCalendar() {
   const target = $("#calendarList");
   target.innerHTML = "";
@@ -802,11 +943,58 @@ function render() {
   renderCalendar();
   renderMacro();
   renderSources();
+  renderScoreboard();
+}
+
+function setActiveView(view) {
+  state.activeView = view === "scoreboard" ? "scoreboard" : "briefing";
+  const briefing = $("#briefingView");
+  const scoreboard = $("#scoreboardView");
+  if (briefing) {
+    briefing.hidden = state.activeView !== "briefing";
+    briefing.classList.toggle("active", state.activeView === "briefing");
+  }
+  if (scoreboard) {
+    scoreboard.hidden = state.activeView !== "scoreboard";
+    scoreboard.classList.toggle("active", state.activeView === "scoreboard");
+  }
+  document.querySelectorAll("[data-view-target]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.viewTarget === state.activeView);
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  renderScoreboard();
+}
+
+function setScorebookSort(key) {
+  if (state.scorebook.sortKey === key) {
+    state.scorebook.sortDirection = state.scorebook.sortDirection === "asc" ? "desc" : "asc";
+  } else {
+    state.scorebook.sortKey = key;
+    state.scorebook.sortDirection = ["modelRank", "symbol", "name", "industry"].includes(key) ? "asc" : "desc";
+  }
+  renderScoreboard();
 }
 
 function wireControls() {
-  on("#refreshView", "click", loadSnapshot);
+  on("#refreshView", "click", () => {
+    loadSnapshot();
+    loadScorebook();
+  });
   on("#tickerLabForm", "submit", submitTickerLab);
+  on("#scoreboardSearch", "input", (event) => {
+    state.scorebook.query = event.target.value || "";
+    renderScoreboard();
+  });
+  on("#scoreboardSector", "change", (event) => {
+    state.scorebook.sector = event.target.value || "";
+    renderScoreboard();
+  });
+  document.querySelectorAll("[data-view-target]").forEach((button) => {
+    button.addEventListener("click", () => setActiveView(button.dataset.viewTarget));
+  });
+  document.querySelectorAll("[data-score-sort]").forEach((button) => {
+    button.addEventListener("click", () => setScorebookSort(button.dataset.scoreSort));
+  });
 }
 
 async function loadRuntimeConfig() {
@@ -903,6 +1091,35 @@ async function loadSnapshot() {
   render();
 }
 
+async function loadScorebook() {
+  try {
+    const response = await fetch(`data/model-scorebook.json?ts=${Date.now()}`);
+    if (!response.ok) throw new Error(`Scoreboard unavailable: ${response.status}`);
+    const payload = await response.json();
+    state.scorebook = {
+      ...state.scorebook,
+      status: payload.status || "ready",
+      generatedAt: payload.generatedAt || null,
+      asOfDate: payload.asOfDate || null,
+      rows: payload.rows || [],
+      rowCount: payload.rowCount || payload.rows?.length || 0,
+      model: payload.model || null,
+      returnNotes: payload.returnNotes || ""
+    };
+  } catch (error) {
+    console.warn(error);
+    state.scorebook = {
+      ...state.scorebook,
+      status: "missing",
+      rows: [],
+      rowCount: 0,
+      returnNotes: ""
+    };
+  }
+  renderScoreboard();
+}
+
 wireControls();
 loadSnapshot();
+loadScorebook();
 loadRuntimeConfig().then(checkTickerLabAvailability);

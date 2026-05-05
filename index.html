@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Morning Desk</title>
-    <link rel="stylesheet" href="styles.css?v=20260504-public-ticker-cache" />
+    <link rel="stylesheet" href="styles.css?v=20260505-scoreboard" />
   </head>
   <body>
     <main class="shell">
@@ -19,139 +19,189 @@
         </div>
       </header>
 
-      <nav class="jump-nav" aria-label="Report sections">
-        <a href="#daily-read">Daily Read</a>
-        <a href="#ai-memo">AI Memo</a>
-        <a href="#sector-performance">Sectors</a>
-        <a href="#desk-calls">Desk Calls</a>
-        <a href="#momentum-book">Momentum</a>
-        <a href="#ticker-lab" id="tickerLabNav">Ticker Lab</a>
-        <a href="#stay-away">Stay Away</a>
-        <a href="#macro-calendar">Calendar</a>
-        <a href="#macro-pulse">Macro</a>
-        <a href="#source-tape-section">Sources</a>
+      <nav class="view-tabs" aria-label="Dashboard views">
+        <button class="view-tab active" type="button" data-view-target="briefing">Briefing</button>
+        <button class="view-tab" type="button" data-view-target="scoreboard">SP 500 Model Scoreboard</button>
       </nav>
 
-      <section class="market-strip" id="marketStrip" aria-label="Market index strip"></section>
+      <div class="view-panel active" id="briefingView">
+        <nav class="jump-nav" aria-label="Report sections">
+          <a href="#daily-read">Daily Read</a>
+          <a href="#ai-memo">AI Memo</a>
+          <a href="#sector-performance">Sectors</a>
+          <a href="#desk-calls">Desk Calls</a>
+          <a href="#momentum-book">Momentum</a>
+          <a href="#ticker-lab" id="tickerLabNav">Ticker Lab</a>
+          <a href="#stay-away">Stay Away</a>
+          <a href="#macro-calendar">Calendar</a>
+          <a href="#macro-pulse">Macro</a>
+          <a href="#source-tape-section">Sources</a>
+        </nav>
 
-      <section class="grid">
-        <article class="panel note-panel" id="daily-read">
-          <div class="panel-title">
-            <span>Daily Read</span>
-            <button class="icon-button" id="refreshView" title="Reload snapshot" aria-label="Reload snapshot">↻</button>
-          </div>
-          <h2 id="noteHeadline">Loading the tape</h2>
-          <p id="noteBody"></p>
-          <div class="note-columns">
-            <div>
-              <h3>Key Takeaways</h3>
-              <ul id="changedList"></ul>
+        <section class="market-strip" id="marketStrip" aria-label="Market index strip"></section>
+
+        <section class="grid">
+          <article class="panel note-panel" id="daily-read">
+            <div class="panel-title">
+              <span>Daily Read</span>
+              <button class="icon-button" id="refreshView" title="Reload snapshot" aria-label="Reload snapshot">↻</button>
             </div>
-            <div>
-              <h3>Watch Next</h3>
-              <ul id="watchList"></ul>
+            <h2 id="noteHeadline">Loading the tape</h2>
+            <p id="noteBody"></p>
+            <div class="note-columns">
+              <div>
+                <h3>Key Takeaways</h3>
+                <ul id="changedList"></ul>
+              </div>
+              <div>
+                <h3>Watch Next</h3>
+                <ul id="watchList"></ul>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="panel ai-panel" id="ai-memo">
-          <div class="panel-title">
-            <span>AI Strategy Memo</span>
-            <span id="aiMeta">Macro + momentum</span>
-          </div>
-          <h2 id="aiHeadline">Waiting for AI synthesis</h2>
-          <p id="aiMacroView"></p>
-          <div class="ai-recs" id="aiRecommendationList"></div>
-          <div class="ai-notes">
-            <div>
-              <h3>Portfolio Notes</h3>
-              <ul id="aiPortfolioNotes"></ul>
+          <article class="panel ai-panel" id="ai-memo">
+            <div class="panel-title">
+              <span>AI Strategy Memo</span>
+              <span id="aiMeta">Macro + momentum</span>
             </div>
-            <div>
-              <h3>Open Questions</h3>
-              <ul id="aiOpenQuestions"></ul>
+            <h2 id="aiHeadline">Waiting for AI synthesis</h2>
+            <p id="aiMacroView"></p>
+            <div class="ai-recs" id="aiRecommendationList"></div>
+            <div class="ai-notes">
+              <div>
+                <h3>Portfolio Notes</h3>
+                <ul id="aiPortfolioNotes"></ul>
+              </div>
+              <div>
+                <h3>Open Questions</h3>
+                <ul id="aiOpenQuestions"></ul>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="panel sector-panel" id="sector-performance">
-          <div class="panel-title">
-            <span>Sector Performance</span>
-            <span>SPDR ETF proxies</span>
-          </div>
-          <div class="sector-grid" id="sectorGrid"></div>
-        </article>
-
-        <article class="panel recommendations-panel" id="desk-calls">
-          <div class="panel-title">
-            <span>Desk Calls</span>
-            <span>Research actions</span>
-          </div>
-          <div class="recommendation-list" id="recommendationList"></div>
-        </article>
-
-        <article class="panel opportunities-panel" id="momentum-book">
-          <div class="panel-title">
-            <span>Momentum Book</span>
-            <span id="bookMeta">End-of-day</span>
-          </div>
-          <div class="opportunity-list" id="opportunityList"></div>
-        </article>
-
-        <article class="panel ticker-lab-panel" id="ticker-lab">
-          <div class="panel-title">
-            <span>Ticker Lab</span>
-            <span id="tickerLabMeta">Local only</span>
-          </div>
-          <form id="tickerLabForm" class="ticker-lab-form">
-            <label for="tickerLabInput">Tickers</label>
-            <textarea id="tickerLabInput" rows="4" placeholder="AAPL MSFT, TSM, 7203.T"></textarea>
-            <label for="tickerLabToken" id="tickerLabTokenLabel" hidden>Access Code</label>
-            <input id="tickerLabToken" class="ticker-lab-token" type="password" autocomplete="off" placeholder="Ticker Lab access code" hidden />
-            <div class="ticker-lab-actions">
-              <button class="text-button" type="submit" id="tickerLabSubmit">Score Tickers</button>
-              <span id="tickerLabStatus">Connecting to Ticker Lab backend.</span>
+          <article class="panel sector-panel" id="sector-performance">
+            <div class="panel-title">
+              <span>Sector Performance</span>
+              <span>SPDR ETF proxies</span>
             </div>
-          </form>
-          <div id="tickerLabResults" class="ticker-lab-results"></div>
-        </article>
+            <div class="sector-grid" id="sectorGrid"></div>
+          </article>
 
-        <article class="panel avoid-panel" id="stay-away">
-          <div class="panel-title">
-            <span>Stay Away</span>
-            <span>Lowest model ranks</span>
-          </div>
-          <p id="avoidSummary" class="section-summary"></p>
-          <div class="avoid-sector-list" id="avoidSectors"></div>
-          <div class="avoid-list" id="avoidList"></div>
-        </article>
+          <article class="panel recommendations-panel" id="desk-calls">
+            <div class="panel-title">
+              <span>Desk Calls</span>
+              <span>Research actions</span>
+            </div>
+            <div class="recommendation-list" id="recommendationList"></div>
+          </article>
 
-        <article class="panel calendar-panel" id="macro-calendar">
-          <div class="panel-title">
-            <span>Macro Calendar</span>
-            <span>Market movers</span>
-          </div>
-          <div id="calendarList" class="calendar-list"></div>
-        </article>
+          <article class="panel opportunities-panel" id="momentum-book">
+            <div class="panel-title">
+              <span>Momentum Book</span>
+              <span id="bookMeta">End-of-day</span>
+            </div>
+            <div class="opportunity-list" id="opportunityList"></div>
+          </article>
 
-        <article class="panel macro-panel" id="macro-pulse">
-          <div class="panel-title">
-            <span>Macro Pulse</span>
-            <span>FRED + official releases</span>
-          </div>
-          <div id="macroGrid" class="macro-grid"></div>
-        </article>
+          <article class="panel ticker-lab-panel" id="ticker-lab">
+            <div class="panel-title">
+              <span>Ticker Lab</span>
+              <span id="tickerLabMeta">Local only</span>
+            </div>
+            <form id="tickerLabForm" class="ticker-lab-form">
+              <label for="tickerLabInput">Tickers</label>
+              <textarea id="tickerLabInput" rows="4" placeholder="AAPL MSFT, TSM, 7203.T"></textarea>
+              <label for="tickerLabToken" id="tickerLabTokenLabel" hidden>Access Code</label>
+              <input id="tickerLabToken" class="ticker-lab-token" type="password" autocomplete="off" placeholder="Ticker Lab access code" hidden />
+              <div class="ticker-lab-actions">
+                <button class="text-button" type="submit" id="tickerLabSubmit">Score Tickers</button>
+                <span id="tickerLabStatus">Connecting to Ticker Lab backend.</span>
+              </div>
+            </form>
+            <div id="tickerLabResults" class="ticker-lab-results"></div>
+          </article>
 
-        <article class="panel source-panel" id="source-tape-section">
+          <article class="panel avoid-panel" id="stay-away">
+            <div class="panel-title">
+              <span>Stay Away</span>
+              <span>Lowest model ranks</span>
+            </div>
+            <p id="avoidSummary" class="section-summary"></p>
+            <div class="avoid-sector-list" id="avoidSectors"></div>
+            <div class="avoid-list" id="avoidList"></div>
+          </article>
+
+          <article class="panel calendar-panel" id="macro-calendar">
+            <div class="panel-title">
+              <span>Macro Calendar</span>
+              <span>Market movers</span>
+            </div>
+            <div id="calendarList" class="calendar-list"></div>
+          </article>
+
+          <article class="panel macro-panel" id="macro-pulse">
+            <div class="panel-title">
+              <span>Macro Pulse</span>
+              <span>FRED + official releases</span>
+            </div>
+            <div id="macroGrid" class="macro-grid"></div>
+          </article>
+
+          <article class="panel source-panel" id="source-tape-section">
+            <div class="panel-title">
+              <span>Source Tape</span>
+              <span id="sourceCount">0 sources</span>
+            </div>
+            <div id="sourceTape" class="source-tape"></div>
+          </article>
+        </section>
+      </div>
+
+      <section class="view-panel scoreboard-view" id="scoreboardView" hidden>
+        <article class="panel scoreboard-panel">
           <div class="panel-title">
-            <span>Source Tape</span>
-            <span id="sourceCount">0 sources</span>
+            <span>SP 500 Model Scoreboard</span>
+            <span id="scoreboardMeta">Loading model rows</span>
           </div>
-          <div id="sourceTape" class="source-tape"></div>
+          <div class="scoreboard-controls">
+            <label class="scoreboard-search">
+              <span>Search</span>
+              <input id="scoreboardSearch" type="search" placeholder="Ticker, company, sector, industry" autocomplete="off" />
+            </label>
+            <label class="scoreboard-sector">
+              <span>Sector</span>
+              <select id="scoreboardSector">
+                <option value="">All sectors</option>
+              </select>
+            </label>
+          </div>
+          <div class="scoreboard-table-wrap">
+            <table class="scoreboard-table">
+              <thead>
+                <tr>
+                  <th><button type="button" data-score-sort="modelRank">Rank</button></th>
+                  <th><button type="button" data-score-sort="symbol">Ticker</button></th>
+                  <th><button type="button" data-score-sort="name">Company</button></th>
+                  <th><button type="button" data-score-sort="industry">Industry</button></th>
+                  <th><button type="button" data-score-sort="marketCapValue">Market Cap</button></th>
+                  <th><button type="button" data-score-sort="modelScore">Model Score</button></th>
+                  <th><button type="button" data-score-sort="modelPercentile">Percentile</button></th>
+                  <th><button type="button" data-score-sort="ytdReturn">YTD</button></th>
+                  <th><button type="button" data-score-sort="trailingReturn">Trailing</button></th>
+                </tr>
+              </thead>
+              <tbody id="scoreboardRows">
+                <tr>
+                  <td colspan="9">Loading model scoreboard.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </article>
       </section>
     </main>
 
-    <script type="module" src="app.js?v=20260504-public-ticker-cache"></script>
+    <script type="module" src="app.js?v=20260505-scoreboard"></script>
   </body>
 </html>

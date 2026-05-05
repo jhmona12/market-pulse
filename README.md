@@ -9,6 +9,7 @@ The project is built to run cheaply with free data sources. It is not an intrada
 - Summarizes the current market setup in a daily read.
 - Screens S&P 500 constituents and a curated ETF universe for momentum setups.
 - Scores current S&P 500 stocks with a production XGBoost learning-to-rank model.
+- Publishes a full S&P 500 Model Scoreboard tab with every scored company ranked from highest model score to lowest.
 - Tracks sector performance using major sector ETF proxies.
 - Pulls macro indicators from public FRED CSV endpoints.
 - Tracks upcoming macro events such as CPI, payrolls, GDP, and FOMC dates.
@@ -27,7 +28,7 @@ The dashboard is designed to be published as a static GitHub Pages site:
 https://jhmona12.github.io/market-pulse/
 ```
 
-The site reads from `data/snapshot.json`. When that file changes, the public page reflects the latest generated market snapshot after GitHub Pages redeploys.
+The site reads from `data/snapshot.json` for the briefing and `data/model-scorebook.json` for the full S&P 500 Model Scoreboard. When those files change, the public page reflects the latest generated market snapshot after GitHub Pages redeploys.
 
 Ticker Lab is visible on the public page, but scoring requires a separate private model API because GitHub Pages can only serve static files. The browser reads the API base URL from `config/runtime.json`.
 
@@ -93,6 +94,8 @@ The refresh script:
 - Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
 - Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
+- Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, YTD return, and the best available trailing return metric
+- Updates `data/market-cap-cache.json` from free public quote data and reuses recent values to keep the daily job reliable
 - Enriches the top model candidates with company context from Nasdaq, company investor relations pages, and Yahoo Finance news RSS
 - Builds a lowest-ranked model book for the Stay Away section
 - Writes the dashboard snapshot to `data/snapshot.json`
@@ -104,7 +107,7 @@ To refresh model rankings before the dashboard snapshot:
 node scripts/update-data.mjs
 ```
 
-`data/model-rank-scores.json` is an intermediate file and is ignored by git. The generated `data/snapshot.json` contains the model rankings needed by the static site. The generated `data/model-reference-cache.json` is intentionally committed because it gives the private Ticker Lab a fresh daily S&P 500 baseline without rebuilding the full universe on every pasted-ticker request.
+`data/model-rank-scores.json` is an intermediate file and is ignored by git. The generated `data/snapshot.json` contains the briefing data needed by the static site. The generated `data/model-scorebook.json` powers the public scoreboard tab. The generated `data/model-reference-cache.json` is intentionally committed because it gives the private Ticker Lab a fresh daily S&P 500 baseline without rebuilding the full universe on every pasted-ticker request.
 
 Some current constituents may be fetched but not scored if they do not have enough clean trailing data to populate every required feature. The scorer records those symbols in the snapshot model metadata.
 
@@ -272,7 +275,8 @@ When the refresh runs successfully, it:
 - Scores the current S&P 500 universe with the committed XGBoost rank model when dependencies and free data endpoints are available
 - Refreshes `data/model-reference-cache.json` for fast Ticker Lab scoring
 - Regenerates `data/snapshot.json`
-- Commits the updated snapshot and reference cache back to `main` if either changed
+- Regenerates `data/model-scorebook.json` and `data/market-cap-cache.json`
+- Commits the updated snapshot, scorebook, market-cap cache, and reference cache back to `main` if any changed
 - Triggers a GitHub Pages redeploy through the repository's Pages workflow
 
 GitHub scheduled workflows may start late. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
@@ -527,7 +531,9 @@ config/universe.json               ETF and fallback universe configuration
 config/ai-recommendation-prompt.md AI memo prompt
 config/runtime.json                Public runtime config for optional hosted Ticker Lab API URL
 data/snapshot.json                 Generated dashboard data
+data/model-scorebook.json          Generated full S&P 500 model scoreboard
 data/model-reference-cache.json    Generated daily S&P 500 model reference cache
+data/market-cap-cache.json         Generated market-cap lookup cache for scorebook rows
 Dockerfile                         Container image for the private Ticker Lab backend
 render.yaml                        Render-style backend service blueprint
 .github/workflows/                 GitHub Pages and scheduled refresh workflows

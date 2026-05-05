@@ -54,14 +54,16 @@ body::before {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
 button,
 a,
 select,
-input {
+input,
+textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -183,6 +185,47 @@ h3 {
   color: var(--accent);
   background: rgba(57, 255, 136, 0.08);
   outline: none;
+}
+
+.view-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.view-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.view-tab {
+  flex: 0 0 auto;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0 13px;
+  color: var(--muted);
+  background: rgba(7, 16, 12, 0.86);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.view-tab:hover,
+.view-tab:focus-visible,
+.view-tab.active {
+  border-color: rgba(57, 255, 136, 0.62);
+  color: var(--accent);
+  background: rgba(57, 255, 136, 0.08);
+  outline: none;
+}
+
+.view-panel[hidden] {
+  display: none;
 }
 
 .market-strip {
@@ -882,6 +925,147 @@ li {
   background: rgba(79, 216, 255, 0.035);
 }
 
+.scoreboard-view {
+  margin-top: 14px;
+}
+
+.scoreboard-panel {
+  min-height: 72vh;
+}
+
+.scoreboard-controls {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(180px, 280px);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.scoreboard-controls label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.scoreboard-controls input,
+.scoreboard-controls select {
+  min-height: 42px;
+  width: 100%;
+  border: 1px solid rgba(79, 216, 255, 0.2);
+  border-radius: 5px;
+  color: var(--ink);
+  background: rgba(3, 8, 6, 0.9);
+  padding: 0 11px;
+  font-family: var(--mono);
+  outline: none;
+}
+
+.scoreboard-controls input:focus,
+.scoreboard-controls select:focus {
+  border-color: rgba(57, 255, 136, 0.72);
+}
+
+.scoreboard-table-wrap {
+  width: 100%;
+  max-height: 72vh;
+  overflow: auto;
+  border: 1px solid rgba(57, 255, 136, 0.14);
+  border-radius: 5px;
+  background: rgba(3, 8, 6, 0.72);
+}
+
+.scoreboard-table {
+  width: 100%;
+  min-width: 1120px;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.scoreboard-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 1px solid rgba(57, 255, 136, 0.22);
+  background: rgba(5, 8, 7, 0.96);
+  text-align: left;
+}
+
+.scoreboard-table th button {
+  width: 100%;
+  min-height: 40px;
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.scoreboard-table th button:hover,
+.scoreboard-table th button:focus-visible,
+.scoreboard-table th button.active {
+  color: var(--accent);
+  outline: none;
+}
+
+.scoreboard-table th button.active::after {
+  content: attr(data-direction);
+  margin-left: 6px;
+  color: var(--accent-2);
+  font-size: 0.62rem;
+}
+
+.scoreboard-table td,
+.scoreboard-table th {
+  padding: 9px 10px;
+  border-right: 1px solid rgba(57, 255, 136, 0.08);
+}
+
+.scoreboard-table td {
+  border-bottom: 1px solid rgba(57, 255, 136, 0.08);
+  color: #d7eadf;
+  vertical-align: top;
+}
+
+.scoreboard-table tr:hover td {
+  background: rgba(57, 255, 136, 0.045);
+}
+
+.scoreboard-table td strong,
+.scoreboard-table td span,
+.scoreboard-table td small {
+  display: block;
+}
+
+.scoreboard-table td strong,
+.score-rank {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.scoreboard-table td span,
+.scoreboard-table td small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.scoreboard-table .positive {
+  color: var(--good);
+}
+
+.scoreboard-table .negative {
+  color: var(--danger);
+}
+
 @media (max-width: 1100px) {
   .sector-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -914,6 +1098,10 @@ li {
   .jump-nav a {
     min-height: 42px;
     padding-inline: 12px;
+  }
+
+  .scoreboard-controls {
+    grid-template-columns: 1fr;
   }
 
   .market-strip {
