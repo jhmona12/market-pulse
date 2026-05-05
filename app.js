@@ -606,7 +606,6 @@ function renderOpportunities() {
     })
     .slice(0, 18);
 
-  $("#signalCount").textContent = `${matches.length} signal${matches.length === 1 ? "" : "s"}`;
   $("#bookMeta").textContent =
     state.snapshot.model?.status === "ready"
       ? `${state.snapshot.model.scoredCount} model-scored · ${state.snapshot.opportunities.length} screened`
