@@ -265,7 +265,7 @@ The repository includes a GitHub Actions workflow at:
 .github/workflows/refresh-data.yml
 ```
 
-It is configured to check daily around 5 PM Pacific. Because GitHub cron runs in UTC, the workflow checks both `00:00` and `01:00` UTC and only runs the refresh when the current `America/Los_Angeles` hour is `17`.
+It is configured to refresh daily just after 5 PM Pacific. Because GitHub cron runs in UTC, the workflow schedules both `00:07` and `01:07` UTC slots and only runs the slot whose intended scheduled time maps to `17:07` in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
 
 When the refresh runs successfully, it:
 
@@ -275,7 +275,7 @@ When the refresh runs successfully, it:
 - Commits the updated snapshot and reference cache back to `main` if either changed
 - Triggers a GitHub Pages redeploy through the repository's Pages workflow
 
-GitHub scheduled workflows may start several minutes late. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
+GitHub scheduled workflows may start late. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
 
 ## Modeling Pipeline
 
