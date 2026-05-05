@@ -12,6 +12,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: refresh-market-data
@@ -19,6 +21,9 @@ concurrency:
 
 jobs:
   refresh:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -33,6 +38,14 @@ jobs:
             echo "run_refresh=true" >> "$GITHUB_OUTPUT"
             echo "scheduled_utc=manual" >> "$GITHUB_OUTPUT"
             echo "scheduled_pacific=manual" >> "$GITHUB_OUTPUT"
+            echo "actual_start_utc=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"
+            echo "schedule_delay_minutes=0" >> "$GITHUB_OUTPUT"
+            {
+              echo "SCHEDULED_UTC=manual"
+              echo "SCHEDULED_PACIFIC=manual"
+              echo "ACTUAL_START_UTC=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+              echo "SCHEDULE_DELAY_MINUTES=0"
+            } >> "$GITHUB_ENV"
             exit 0
           fi
 
@@ -59,7 +72,8 @@ jobs:
 
           scheduled_hour = int(sys.argv[1])
           scheduled_minute = int(sys.argv[2])
-          today = datetime.now(timezone.utc).date()
+          actual_utc = datetime.now(timezone.utc)
+          today = actual_utc.date()
           scheduled_utc = datetime(
               today.year,
               today.month,
@@ -69,13 +83,22 @@ jobs:
               tzinfo=timezone.utc,
           )
           scheduled_pacific = scheduled_utc.astimezone(ZoneInfo("America/Los_Angeles"))
+          delay_minutes = round((actual_utc - scheduled_utc).total_seconds() / 60)
           print(f"scheduled_utc={scheduled_utc.isoformat()}")
           print(f"scheduled_pacific={scheduled_pacific.isoformat()}")
+          print(f"actual_start_utc={actual_utc.isoformat()}")
+          print(f"schedule_delay_minutes={delay_minutes}")
           print(f"run_refresh={'true' if scheduled_pacific.hour == 7 else 'false'}")
           PY
 
           cat /tmp/pacific-window.env
           cat /tmp/pacific-window.env >> "$GITHUB_OUTPUT"
+          {
+            grep '^scheduled_utc=' /tmp/pacific-window.env | sed 's/^scheduled_utc=/SCHEDULED_UTC=/'
+            grep '^scheduled_pacific=' /tmp/pacific-window.env | sed 's/^scheduled_pacific=/SCHEDULED_PACIFIC=/'
+            grep '^actual_start_utc=' /tmp/pacific-window.env | sed 's/^actual_start_utc=/ACTUAL_START_UTC=/'
+            grep '^schedule_delay_minutes=' /tmp/pacific-window.env | sed 's/^schedule_delay_minutes=/SCHEDULE_DELAY_MINUTES=/'
+          } >> "$GITHUB_ENV"
 
           if ! grep -q '^run_refresh=true$' /tmp/pacific-window.env; then
             echo "Skipping refresh because this scheduled slot is not 7 AM Pacific."
@@ -109,15 +132,48 @@ jobs:
           OPENAI_MODEL: gpt-5-nano
         run: node scripts/update-data.mjs
 
-      - name: Commit updated snapshot
-        if: steps.pacific_time.outputs.run_refresh == 'true'
+      - name: Write successful refresh status
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true'
+        run: node scripts/write-refresh-status.mjs success "Refresh completed and generated dashboard artifacts."
+
+      - name: Write failed refresh status
+        if: failure() && steps.pacific_time.outputs.run_refresh == 'true'
+        run: node scripts/write-refresh-status.mjs failure "Refresh workflow failed before completion; inspect the linked GitHub Actions run."
+
+      - name: Commit refresh outputs
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/snapshot.json data/model-scorebook.json data/model-reference-cache.json data/market-cap-cache.json
+          git add data/snapshot.json data/model-scorebook.json data/model-reference-cache.json data/market-cap-cache.json data/refresh-status.json
           if git diff --cached --quiet; then
-            echo "No snapshot changes to commit."
+            echo "No refresh output changes to commit."
           else
             git commit -m "Refresh market snapshot"
             git push
           fi
+
+      - name: Prepare static site
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        run: |
+          mkdir -p public/data public/config
+          cp index.html styles.css app.js public/
+          cp data/snapshot.json public/data/snapshot.json
+          cp data/model-scorebook.json public/data/model-scorebook.json
+          cp data/refresh-status.json public/data/refresh-status.json
+          cp config/runtime.json public/config/runtime.json
+
+      - name: Configure Pages
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy Pages
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

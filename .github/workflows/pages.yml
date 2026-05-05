@@ -31,6 +31,9 @@ jobs:
           cp index.html styles.css app.js public/
           cp data/snapshot.json public/data/snapshot.json
           cp data/model-scorebook.json public/data/model-scorebook.json
+          if [ -f data/refresh-status.json ]; then
+            cp data/refresh-status.json public/data/refresh-status.json
+          fi
           cp config/runtime.json public/config/runtime.json
 
       - name: Configure Pages

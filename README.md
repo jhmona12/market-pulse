@@ -276,10 +276,19 @@ When the refresh runs successfully, it:
 - Refreshes `data/model-reference-cache.json` for fast Ticker Lab scoring
 - Regenerates `data/snapshot.json`
 - Regenerates `data/model-scorebook.json` and `data/market-cap-cache.json`
-- Commits the updated snapshot, scorebook, market-cap cache, and reference cache back to `main` if any changed
-- Triggers a GitHub Pages redeploy through the repository's Pages workflow
+- Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, model date, and row counts
+- Commits the updated snapshot, scorebook, refresh status, market-cap cache, and reference cache back to `main` if any changed
+- Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
 
-GitHub scheduled workflows may start late. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
+GitHub scheduled workflows may start late; GitHub does not guarantee exact cron start time. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
+
+Diagnostic status is published at:
+
+```text
+https://jhmona12.github.io/market-pulse/data/refresh-status.json
+```
+
+Important implementation note: pushes made by GitHub's default `GITHUB_TOKEN` do not trigger other workflows. The refresh workflow therefore performs its own Pages deployment after writing data. The separate Pages workflow remains useful for normal human-authored pushes.
 
 ## Modeling Pipeline
 
@@ -534,6 +543,7 @@ data/snapshot.json                 Generated dashboard data
 data/model-scorebook.json          Generated full S&P 500 model scoreboard
 data/model-reference-cache.json    Generated daily S&P 500 model reference cache
 data/market-cap-cache.json         Generated market-cap lookup cache for scorebook rows
+data/refresh-status.json           Generated refresh diagnostics and last-run health status
 Dockerfile                         Container image for the private Ticker Lab backend
 render.yaml                        Render-style backend service blueprint
 .github/workflows/                 GitHub Pages and scheduled refresh workflows
