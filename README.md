@@ -1,6 +1,6 @@
 # Market Pulse
 
-Market Pulse is a static market research dashboard for scheduled personal market reviews. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note, with refreshes configured for 7 AM and 5 PM Pacific.
+Market Pulse is a static market research dashboard for scheduled personal market reviews. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note, with refreshes configured shortly after 7 AM and 5 PM Pacific.
 
 The project is built to run cheaply with free data sources. It is not an intraday trading terminal and it is not financial advice.
 
@@ -8,7 +8,7 @@ The project is built to run cheaply with free data sources. It is not an intrada
 
 ```mermaid
 flowchart TD
-  schedule[".github/workflows/refresh-data.yml<br/>Scheduled 7 AM + 5 PM PT"] --> scorer["scripts/modeling/score_live_rank_model.py<br/>Scores current S&P 500 with XGBoost"]
+  schedule[".github/workflows/refresh-data.yml<br/>Scheduled shortly after 7 AM + 5 PM PT"] --> scorer["scripts/modeling/score_live_rank_model.py<br/>Scores current S&P 500 with XGBoost"]
 
   modelFiles["models/rank/*<br/>Production model, metadata, explainability"] --> scorer
   universe["config/universe.json<br/>ETF universe and fallback stocks"] --> scorer
@@ -313,7 +313,9 @@ The repository includes a GitHub Actions workflow at:
 .github/workflows/refresh-data.yml
 ```
 
-It is configured to refresh twice daily at 7 AM Pacific and 5 PM Pacific. Because GitHub cron runs in UTC, the workflow schedules `14:00` and `15:00` UTC for the morning slot, plus `00:00` and `01:00` UTC for the evening slot. It only runs the slot whose intended scheduled time maps to either `07:00` or `17:00` in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
+It is configured to refresh twice daily shortly after 7 AM Pacific and 5 PM Pacific. Because GitHub cron runs in UTC, the workflow schedules `14:11` and `15:11` UTC for the morning slot, plus `00:11` and `01:11` UTC for the evening slot. It only runs the slot whose intended scheduled time maps to either `07:11` or `17:11` in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
+
+The schedule intentionally avoids minute `0`. GitHub documents that scheduled workflows may be delayed during high-load periods, especially at the start of every hour, and that queued scheduled jobs can be dropped. Running at minute `11` lowers that risk while keeping the refresh close to the requested 7 AM and 5 PM Pacific review times.
 
 When the refresh runs successfully, it:
 
