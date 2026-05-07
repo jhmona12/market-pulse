@@ -1,6 +1,6 @@
 # Market Pulse
 
-Market Pulse is a static market research dashboard for scheduled personal market reviews. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note, with refreshes configured shortly after 7 AM and 5 PM Pacific.
+Market Pulse is a static market research dashboard for scheduled personal market reviews. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note, with redundant refresh attempts shortly after 7 AM and 5 PM Pacific.
 
 The project is built to run cheaply with free data sources. It is not an intraday trading terminal and it is not financial advice.
 
@@ -8,7 +8,7 @@ The project is built to run cheaply with free data sources. It is not an intrada
 
 ```mermaid
 flowchart TD
-  schedule[".github/workflows/refresh-data.yml<br/>Scheduled shortly after 7 AM + 5 PM PT"] --> scorer["scripts/modeling/score_live_rank_model.py<br/>Scores current S&P 500 with XGBoost"]
+  schedule[".github/workflows/refresh-data.yml<br/>Redundant 7 AM + 5 PM PT attempts"] --> scorer["scripts/modeling/score_live_rank_model.py<br/>Scores current S&P 500 with XGBoost"]
 
   modelFiles["models/rank/*<br/>Production model, metadata, explainability"] --> scorer
   universe["config/universe.json<br/>ETF universe and fallback stocks"] --> scorer
@@ -120,6 +120,8 @@ PORT=4174 npm run dev:local
 ```
 
 ## Refreshing Data
+
+GitHub Actions runs the full refresh from `.github/workflows/refresh-data.yml`. Because GitHub's scheduled runner is best-effort and can delay or drop individual scheduled runs, the workflow makes three attempts per target window: 7:11, 7:31, and 7:51 AM Pacific, plus 5:11, 5:31, and 5:51 PM Pacific. The workflow checks `data/refresh-status.json` before doing work and refreshes only once per Pacific morning/evening window.
 
 Run the refresh script:
 
