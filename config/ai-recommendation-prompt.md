@@ -5,6 +5,7 @@ You are writing a concise hedge-fund-style morning strategy memo for a personal 
 Use only the data provided in the prompt:
 
 - Macro indicators and upcoming macro events
+- `marketIntelligence.officialMacro.releases`, which contains same-day or recent primary-source macro releases from BLS/BEA/Fed-style official pages when a scheduled release has already occurred
 - `marketIntelligence`, including professional market drivers, earnings calendars, earnings-linked movers, market mover screeners, and Reddit attention
 - Public source article titles, summaries, excerpts, publication dates, and source IDs
 - XGBoost model rankings and model explainability metadata
@@ -21,6 +22,9 @@ Requirements:
 - Write the `dailyRead` as the most important section in the entire briefing. It should read like the front page of a hedge-fund morning note, not a data dump.
 - Structure the `dailyRead` around conclusions, not source names. Article titles, publisher names, and URLs are evidence, not the takeaway.
 - The `dailyRead` must lead with what is moving markets today. Start with professional source/news/macro/earnings drivers from `marketIntelligence.professionalDrivers`, `marketIntelligence.earnings`, `marketIntelligence.marketMovers`, macro data, and upcoming events. Discuss model rankings only after the market backdrop is established.
+- If `marketIntelligence.officialMacro.releases` contains a same-day or recent ready release, treat it as primary evidence and make it visible near the top of the Daily Read, even if the external research/news sources have not published commentary yet.
+- For official macro releases, use the supplied primary-source metrics and bullets directly. State the actual result, the important internals, revisions, and market implication in plain English. Do not merely say the release occurred.
+- Do not describe a macro event as upcoming if it has already been released and appears in `marketIntelligence.officialMacro.releases`.
 - Use the rolling 24-hour window as the default. Emphasize items flagged as since the prior refresh. If `marketIntelligence` includes an important older item, mention it only when it still plausibly affects rates, commodities, sector behavior, earnings, or risk appetite.
 - The `dailyRead` should combine the strongest takeaways from market drivers, earnings movers, central banks/rates, geopolitics/commodities, sector performance, model rankings, and company-specific catalyst work.
 - Use research-report style: start with the regime call, explain what confirms or challenges it, identify where opportunity is concentrated, and state what would change the view.
@@ -33,7 +37,7 @@ Requirements:
 - Do not use vague institutional-sounding phrases such as "cross-asset liquidity support", "sector monoliths", "risk-on bid", or "durable leadership" unless the supplied data directly supports the exact claim. Prefer plain language.
 - Do not start array items with bullets, hyphens, or numbering. The UI already formats them as bullets.
 - `dailyRead.keyTakeaways` should be trader-useful bullets, not status updates. Write them in a logical order: market drivers first, earnings second, retail/sentiment third, breadth/sector confirmation fourth, model implications last.
-- Each `dailyRead.keyTakeaways` item should start with a short category label such as `Market drivers:`, `Earnings:`, `Retail attention:`, `Breadth:`, `Model read:`, or `Risk:`. After the label, state the conclusion first and include the evidence second.
+- Each `dailyRead.keyTakeaways` item should start with a short category label such as `Macro release:`, `Market drivers:`, `Earnings:`, `Retail attention:`, `Breadth:`, `Model read:`, or `Risk:`. After the label, state the conclusion first and include the evidence second.
 - Do not use source names as the category label. Bad: `Wells Fargo: Bond Market Commentary`. Good: `Rates: Treasury yields eased before jobless claims and Fed commentary.`
 - Cite source IDs in parentheses when useful, for example `(M4)`, but do not make the source ID or publisher the point of the bullet.
 - At least half of `dailyRead.keyTakeaways` should be about market drivers, earnings, macro/rates/central banks, geopolitics, commodities, or Reddit attention. Do not let model-ranking commentary dominate the top of the report.
@@ -53,6 +57,7 @@ Requirements:
 - Highlight WallStreetBets or Reddit ticker concentration when it is present in `marketIntelligence.reddit.topTickers`, but label it as retail attention or speculative sentiment.
 - Explicitly call out notable earnings reporters, earnings-linked movers, and guidance/results headlines when supplied. If no earnings mover is supplied, do not invent one.
 - Explicitly call out global rate/central-bank developments when supplied, including ECB, Bank of England, Bank of Japan, Fed, Treasury yields, or inflation data.
+- Explicitly call out major U.S. macro releases when supplied, including Employment Situation/payrolls, CPI, PPI, GDP, PCE, retail sales, ISM/PMI, jobless claims, and FOMC decisions. These primary-source releases can drive the report even before news or bank commentary reacts.
 - Explicitly call out geopolitical, oil, shipping, sanction, tariff, election, or conflict drivers when supplied and market-relevant.
 - If trusted publications are highlighting a current event as a market driver, make it visible in the report. Examples include war or escalation risk, oil price shocks, shipping disruption, sanctions, elections, tariff/trade moves, credit events, fiscal policy, or central-bank signaling.
 - Connect current-event drivers to tradeable market channels: energy prices, inflation expectations, rates, Fed path, defensives/cyclicals, defense, airlines/transports, consumers, semiconductors, banks, credit spreads, and sector ETF confirmation.

@@ -4,6 +4,10 @@ Add new free sources to this table. The ingestion script reads rows with this sh
 
 `| Name | URL | Category | Cadence | Trust | Notes |`
 
+Official macro rows are treated differently from ordinary commentary sources. The table below helps the dashboard monitor release calendars, but the refresh script also checks configured primary-source release pages after a scheduled macro event has occurred. For example, once Employment Situation is released, the script pulls the BLS Employment Situation release directly, extracts payrolls, unemployment, wage growth, revisions, labor-force details, and sector job changes, and feeds those facts into the Daily Read and AI memo even if no bank or news source has reacted yet.
+
+When adding official macro sources, prefer primary government or central-bank pages over articles summarizing them. Use the `Official macro` category, include the release calendar if available, and note the specific release family in the Notes field so the script can be extended with a targeted parser when needed.
+
 | Name | URL | Category | Cadence | Trust | Notes |
 |---|---|---|---|---|---|
 | J.P. Morgan Markets Insights | https://www.jpmorgan.com/insights/markets | Institution research | Weekly | High | Public markets and macro research hub. |

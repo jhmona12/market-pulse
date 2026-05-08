@@ -284,7 +284,18 @@ function sortedSourceArticles() {
 }
 
 function sourceRefMap() {
-  return new Map(sortedSourceArticles().map((article, index) => [`S${index + 1}`, article]));
+  const map = new Map(sortedSourceArticles().map((article, index) => [`S${index + 1}`, article]));
+  (state.snapshot.marketIntelligence?.officialMacro?.releases || []).forEach((release) => {
+    if (!release.id) return;
+    map.set(release.id, {
+      sourceName: release.sourceName,
+      title: release.title || release.event,
+      url: release.sourceUrl,
+      publishedAt: release.publishedAt || release.releaseAt,
+      summary: release.marketRead
+    });
+  });
+  return map;
 }
 
 function compactSourceName(value) {
@@ -300,6 +311,12 @@ function sourceRefLabel(ref, symbol, researchSources) {
   if (research) {
     const article = researchSources.get(ref);
     return compactSourceName(article?.sourceName) || `Research Source ${research[1]}`;
+  }
+
+  const officialMacro = String(ref).match(/^O(\d+)$/);
+  if (officialMacro) {
+    const release = researchSources.get(ref);
+    return compactSourceName(release?.sourceName) || `Official Macro ${officialMacro[1]}`;
   }
 
   const companyRef = String(ref).match(/^C\d+-(N\d+|IR|MARKETCAP|EARNINGS)$/);
@@ -443,7 +460,17 @@ function renderIntelStack(target, items, emptyText, renderer) {
 
 function renderMarketIntelligence() {
   const intel = state.snapshot.marketIntelligence || fallbackSnapshot.marketIntelligence;
-  const drivers = (intel.professionalDrivers || []).slice(0, 5);
+  const officialMacro = (intel.officialMacro?.releases || [])
+    .filter((item) => item.status === "ready")
+    .slice(0, 3)
+    .map((item) => ({
+      ...item,
+      title: item.title || item.event,
+      url: item.sourceUrl,
+      freshness: "Official macro release",
+      summary: item.marketRead
+    }));
+  const drivers = [...officialMacro, ...(intel.professionalDrivers || [])].slice(0, 5);
   const earningsMovers = (intel.earnings?.earningsMovers || []).slice(0, 5);
   const redditTickers = (intel.reddit?.topTickers || []).slice(0, 5);
 

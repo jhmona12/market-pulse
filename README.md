@@ -52,6 +52,7 @@ flowchart TD
 - Tracks sector performance using major sector ETF proxies.
 - Pulls macro indicators from public FRED CSV endpoints.
 - Tracks a configured macro calendar for market-moving events such as CPI, payrolls, GDP, and FOMC dates.
+- After a scheduled official macro release has occurred, pulls the primary release page directly when a parser is configured. Employment Situation, CPI, PPI, GDP, and Personal Income/PCE pages are seeded, with the BLS Employment Situation parser extracting payrolls, unemployment, wages, revisions, participation, and sector job changes.
 - Ingests public research and commentary sources listed in `config/news-sources.md`.
 - Discovers recent articles from source landing pages and RSS feeds, prioritizes newer dated articles, and builds a top-of-report market intelligence tape.
 - Tracks professional market drivers, earnings calendars, earnings-linked daily movers, Yahoo Finance mover screens, and Reddit ticker attention as separate inputs.
@@ -145,6 +146,7 @@ The refresh script:
 - Adds ETFs from `config/universe.json`
 - Fetches delayed/end-of-day chart history from Yahoo Finance's public chart endpoint
 - Pulls selected macro series from FRED
+- Pulls same-day or recent official macro releases from primary-source pages once scheduled releases have occurred
 - Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
 - Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
@@ -188,6 +190,7 @@ The intended division of labor is:
 - The XGBoost rank model is the deterministic stock-selection engine.
 - The rules-based screener provides technical context, ETF confirmation, and fallback rankings.
 - The AI Strategy Memo explains the model-ranked candidates against the macro calendar and public source tape.
+- Same-day official macro releases are fed into the AI context separately from the future calendar, so a released payrolls/CPI/PPI/GDP/PCE report can drive the Daily Read before research publications have reacted.
 - The Daily Read is AI-written when available, but it is anchored to deterministic facts and falls back to a rules-based executive snapshot if the AI call fails.
 - The Daily Read is deterministic by default so the top of the report stays tightly grounded in the source tape, earnings movers, Reddit attention, macro calendar, and model facts. Set `AI_DAILY_READ=1` to let AI write the Daily Read when its output passes local fact-language guardrails.
 - The Deeper Read section asks the AI to choose the most interesting non-obvious source analysis from the last 7 days, explain the second-order market implication, and avoid repeating sources used in the prior refresh when enough alternatives exist. Rotation memory is stored in `data/deeper-read-history.json`.
@@ -214,6 +217,7 @@ The AI recommendation schema is intentionally constrained:
 - Each recommendation includes a short company overview, market cap, earnings context, and a recent-news/catalyst read when company context is available.
 - The AI prompt tells the model to prefer investor relations pages as the primary company source, use Nasdaq for earnings data when dates are machine-readable, and avoid overstating news causality.
 - The prompt tells the model to surface source-mentioned current events such as geopolitical conflict, oil shocks, sanctions, shipping disruption, elections, policy shifts, credit stress, and central-bank communication when those events are relevant to market behavior.
+- The prompt tells the model to prioritize primary-source macro releases over commentary when the official release has already occurred, including the actual result, revisions, internals, and market implication.
 - Each recommendation must connect macro/publication evidence with technical momentum evidence.
 - Recommendations include setup, why-now, macro evidence, technical evidence, risk, and invalidation.
 - The Stay Away output must use only supplied lowest-ranked model names, preserve metric-specific model evidence, and explain what would need to improve before those names deserve fresh long exposure.

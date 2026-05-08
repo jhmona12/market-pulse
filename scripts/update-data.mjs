@@ -22,6 +22,7 @@ const scorebookOutput = process.env.SCOREBOOK_OUTPUT || "data/model-scorebook.js
 const marketCapCacheMaxAgeHours = Number.parseFloat(process.env.MARKET_CAP_CACHE_MAX_AGE_HOURS || "18");
 const deeperReadLookbackDays = Number.parseFloat(process.env.DEEPER_READ_LOOKBACK_DAYS || "7");
 const deeperReadCandidateLimit = Number.parseInt(process.env.DEEPER_READ_CANDIDATE_LIMIT || "14", 10);
+const macroReleaseLookbackHours = Number.parseFloat(process.env.MACRO_RELEASE_LOOKBACK_HOURS || "96");
 const deeperReadHistoryPath = "data/deeper-read-history.json";
 const today = new Date();
 const startDate = new Date(today);
@@ -56,6 +57,49 @@ const calendar = [
   { date: "2026-06-05", time: "8:30 AM ET", event: "Employment Situation", source: "BLS", importance: "High" },
   { date: "2026-06-17", time: "2:00 PM ET", event: "FOMC Rate Decision", source: "Federal Reserve", importance: "High" },
   { date: "2026-07-29", time: "2:00 PM ET", event: "FOMC Rate Decision", source: "Federal Reserve", importance: "High" }
+];
+
+const officialMacroReleaseSpecs = [
+  {
+    source: "BLS",
+    eventPattern: /Employment Situation/i,
+    releaseName: "Employment Situation",
+    sourceName: "BLS Employment Situation",
+    sourceUrl: "https://www.bls.gov/news.release/empsit.nr0.htm",
+    parser: parseBlsEmploymentSituationRelease
+  },
+  {
+    source: "BLS",
+    eventPattern: /Consumer Price Index/i,
+    releaseName: "Consumer Price Index",
+    sourceName: "BLS Consumer Price Index",
+    sourceUrl: "https://www.bls.gov/news.release/cpi.nr0.htm",
+    parser: parseGenericOfficialMacroRelease
+  },
+  {
+    source: "BLS",
+    eventPattern: /Producer Price Index/i,
+    releaseName: "Producer Price Index",
+    sourceName: "BLS Producer Price Index",
+    sourceUrl: "https://www.bls.gov/news.release/ppi.nr0.htm",
+    parser: parseGenericOfficialMacroRelease
+  },
+  {
+    source: "BEA",
+    eventPattern: /GDP/i,
+    releaseName: "Gross Domestic Product",
+    sourceName: "BEA Gross Domestic Product",
+    sourceUrl: "https://www.bea.gov/data/gdp/gross-domestic-product",
+    parser: parseGenericOfficialMacroRelease
+  },
+  {
+    source: "BEA",
+    eventPattern: /Personal Income|Outlays|PCE/i,
+    releaseName: "Personal Income and Outlays",
+    sourceName: "BEA Personal Income and Outlays",
+    sourceUrl: "https://www.bea.gov/products/personal-income-outlays",
+    parser: parseGenericOfficialMacroRelease
+  }
 ];
 
 const redditSources = [
@@ -120,6 +164,79 @@ function offsetDateKey(dateKey, offsetDays) {
   const date = new Date(`${dateKey}T12:00:00Z`);
   date.setUTCDate(date.getUTCDate() + offsetDays);
   return date.toISOString().slice(0, 10);
+}
+
+function parseClockTime(timeText) {
+  const match = String(timeText || "").match(/\b(\d{1,2})(?::(\d{2}))?\s*(AM|PM)\b/i);
+  if (!match) return null;
+  let hour = Number.parseInt(match[1], 10);
+  const minute = Number.parseInt(match[2] || "0", 10);
+  const meridiem = match[3].toUpperCase();
+  if (meridiem === "PM" && hour !== 12) hour += 12;
+  if (meridiem === "AM" && hour === 12) hour = 0;
+  if (!Number.isFinite(hour) || !Number.isFinite(minute)) return null;
+  return { hour, minute };
+}
+
+function timeZoneOffsetMinutes(date, timeZone) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    timeZoneName: "shortOffset",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23"
+  }).formatToParts(date);
+  const offsetText = parts.find((part) => part.type === "timeZoneName")?.value || "GMT";
+  if (offsetText === "GMT") return 0;
+  const match = offsetText.match(/GMT([+-])(\d{1,2})(?::?(\d{2}))?/i);
+  if (!match) return 0;
+  const sign = match[1] === "-" ? -1 : 1;
+  const hours = Number.parseInt(match[2], 10);
+  const minutes = Number.parseInt(match[3] || "0", 10);
+  return sign * (hours * 60 + minutes);
+}
+
+function zonedDateTimeToUtc(dateKey, timeText, timeZone = "America/New_York") {
+  const clock = parseClockTime(timeText);
+  const dateMatch = String(dateKey || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!clock || !dateMatch) return null;
+  const [, year, month, day] = dateMatch.map(Number);
+  let utc = new Date(Date.UTC(year, month - 1, day, clock.hour, clock.minute));
+  for (let index = 0; index < 3; index += 1) {
+    const offset = timeZoneOffsetMinutes(utc, timeZone);
+    utc = new Date(Date.UTC(year, month - 1, day, clock.hour, clock.minute) - offset * 60 * 1000);
+  }
+  return utc;
+}
+
+function calendarEventReleaseAt(event) {
+  if (!event?.date || !event?.time) return null;
+  return zonedDateTimeToUtc(event.date, event.time, "America/New_York");
+}
+
+function calendarEventAgeHours(event, now = new Date()) {
+  const releaseAt = calendarEventReleaseAt(event);
+  if (!releaseAt) return null;
+  return (now.getTime() - releaseAt.getTime()) / (60 * 60 * 1000);
+}
+
+function isCalendarEventDue(event, now = new Date()) {
+  const ageHours = calendarEventAgeHours(event, now);
+  return ageHours != null && ageHours >= 0;
+}
+
+function upcomingMacroEvents(events, now = new Date()) {
+  return (events || [])
+    .filter((event) => {
+      const releaseAt = calendarEventReleaseAt(event);
+      if (releaseAt) return releaseAt.getTime() > now.getTime();
+      return new Date(`${event.date}T23:59:59`).getTime() >= now.getTime();
+    })
+    .slice(0, 8);
 }
 
 function sleep(ms) {
@@ -600,6 +717,191 @@ function visibleTextFromHtml(html) {
     .replace(/<footer[\s\S]*?<\/footer>/gi, " ")
     .replace(/<header[\s\S]*?<\/header>/gi, " ");
   return stripTags(withoutNoise).replace(/\s+/g, " ").trim();
+}
+
+function cleanReleaseSentence(value) {
+  return String(value || "")
+    .replace(/\s+/g, " ")
+    .replace(/\s+\(See table[^)]*\)/gi, "")
+    .trim();
+}
+
+function sentenceMatch(text, regex) {
+  return cleanReleaseSentence(text.match(regex)?.[0] || "");
+}
+
+function releaseSentenceStarting(text, startRegex, maxLength = 360) {
+  const match = text.match(startRegex);
+  if (!match || match.index == null) return "";
+  const slice = text.slice(match.index, match.index + maxLength);
+  const boundary = slice.search(/\.(?=\s+[A-Z(]|$)/);
+  return cleanReleaseSentence(boundary >= 0 ? slice.slice(0, boundary + 1) : slice);
+}
+
+function releasedPeriodFromText(text, fallback = "") {
+  return (
+    text.match(/\bTHE EMPLOYMENT SITUATION\s+--\s+([A-Z]+\s+20\d{2})/i)?.[1] ||
+    text.match(/\b(Consumer Price Index|Producer Price Index|Personal Income and Outlays|GDP)[^\n.]*?,?\s+((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?|First|Second|Third|Fourth|1st|2nd|3rd|4th)[^,.]{0,40}20\d{2})/i)?.[2] ||
+    fallback
+  );
+}
+
+function parseBlsEmploymentSituationRelease(html, event, spec) {
+  const text = visibleTextFromHtml(html);
+  const title = "Employment Situation";
+  const period = releasedPeriodFromText(text, event?.date || "");
+  const payrollSentence =
+    sentenceMatch(text, /Total nonfarm payroll employment[\s\S]{0,360}?reported today\./i) ||
+    releaseSentenceStarting(text, /Total nonfarm payroll employment/i, 360);
+  const householdSentence =
+    sentenceMatch(text, /The unemployment rate[\s\S]{0,320}?over the year\./i) ||
+    releaseSentenceStarting(text, /The unemployment rate/i, 300);
+  const participationSentence = releaseSentenceStarting(text, /Both the labor force participation rate/i, 320);
+  const partTimeSentence = releaseSentenceStarting(text, /The number of people employed part time for economic reasons/i, 300);
+  const earningsSentence =
+    sentenceMatch(text, /In April, average hourly earnings[\s\S]{0,360}?Over the year, average hourly earnings have increased by\s+[\d.]+\s+percent\./i) ||
+    releaseSentenceStarting(text, /In April, average hourly earnings/i, 260) ||
+    releaseSentenceStarting(text, /average hourly earnings/i, 260);
+  const workweekSentence = releaseSentenceStarting(text, /The average workweek/i, 220);
+  const revisionSentence = sentenceMatch(text, /The change in total nonfarm payroll employment[\s\S]{0,420}?previously reported\./i);
+  const industrySentences = [
+    sentenceMatch(text, /In April, health care[\s\S]{0,180}?\./i),
+    sentenceMatch(text, /Transportation and warehousing employment[\s\S]{0,220}?\./i),
+    sentenceMatch(text, /Retail trade added[\s\S]{0,220}?\./i),
+    sentenceMatch(text, /Federal government employment[\s\S]{0,220}?\./i),
+    sentenceMatch(text, /Employment in information[\s\S]{0,220}?\./i)
+  ].filter(Boolean);
+
+  const bullets = [
+    payrollSentence,
+    householdSentence,
+    participationSentence,
+    partTimeSentence,
+    earningsSentence,
+    revisionSentence
+  ].filter(Boolean);
+  const payrollValue = text.match(/employment edged up by ([\d,]+) in April/i)?.[1] || text.match(/employment increased by ([\d,]+) in/i)?.[1] || null;
+  const unemploymentRate = text.match(/unemployment rate was\s+(?:unchanged\s+)?at\s+([\d.]+)\s+percent/i)?.[1] || null;
+  const participationRate = text.match(/labor force participation rate,\s+at\s+([\d.]+)\s+percent/i)?.[1] || null;
+  const averageHourlyEarningsMoM = text.match(/average hourly earnings[\s\S]{0,80}?rose by [^,]+,\s+or\s+([\d.]+)\s+percent/i)?.[1] || null;
+  const averageHourlyEarningsYoY = text.match(/Over the year, average hourly earnings have increased by\s+([\d.]+)\s+percent/i)?.[1] || null;
+
+  const payrollClause = payrollValue ? `Payrolls rose ${payrollValue}` : firstSentence(payrollSentence, 110);
+  const unemploymentClause = unemploymentRate ? `unemployment held at ${unemploymentRate}%` : firstSentence(householdSentence, 110);
+  const earningsClause = averageHourlyEarningsMoM && averageHourlyEarningsYoY
+    ? `wages rose ${averageHourlyEarningsMoM}% month over month and ${averageHourlyEarningsYoY}% year over year`
+    : firstSentence(earningsSentence, 130);
+
+  return {
+    title,
+    event: event.event,
+    period,
+    sourceName: spec.sourceName,
+    sourceUrl: spec.sourceUrl,
+    publishedAt: calendarEventReleaseAt(event)?.toISOString() || new Date().toISOString(),
+    summary: [payrollSentence, householdSentence, earningsSentence].filter(Boolean).join(" "),
+    marketRead: `${payrollClause}; ${unemploymentClause}; ${earningsClause}.`,
+    metrics: {
+      payrollsChange: payrollValue ? Number(payrollValue.replace(/,/g, "")) : null,
+      unemploymentRate: unemploymentRate == null ? null : Number(unemploymentRate),
+      laborForceParticipationRate: participationRate == null ? null : Number(participationRate),
+      averageHourlyEarningsMoM: averageHourlyEarningsMoM == null ? null : Number(averageHourlyEarningsMoM),
+      averageHourlyEarningsYoY: averageHourlyEarningsYoY == null ? null : Number(averageHourlyEarningsYoY)
+    },
+    bullets,
+    industryDetails: industrySentences,
+    revisions: revisionSentence,
+    themes: ["Macro and growth", "Rates and central banks"],
+    importance: "High"
+  };
+}
+
+function parseGenericOfficialMacroRelease(html, event, spec) {
+  const text = visibleTextFromHtml(html);
+  const title = titleFromHtml(html, spec.releaseName);
+  const period = releasedPeriodFromText(text, event?.date || "");
+  const releaseAnchor = text.search(new RegExp(spec.releaseName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"));
+  const body = releaseAnchor >= 0 ? text.slice(releaseAnchor) : text;
+  const sentences = (body.match(/[^.!?]+[.!?]/g) || [])
+    .map(cleanReleaseSentence)
+    .filter((sentence) => sentence.length > 45)
+    .filter((sentence) => !/(subscribe|release calendar|technical information|media contact|table of contents)/i.test(sentence))
+    .slice(0, 6);
+  return {
+    title,
+    event: event.event,
+    period,
+    sourceName: spec.sourceName,
+    sourceUrl: spec.sourceUrl,
+    publishedAt: calendarEventReleaseAt(event)?.toISOString() || publishedDateFromHtml(html) || new Date().toISOString(),
+    summary: sentences.slice(0, 3).join(" "),
+    marketRead: firstSentence(sentences.join(" "), 260),
+    metrics: {},
+    bullets: sentences.slice(0, 5),
+    industryDetails: [],
+    revisions: null,
+    themes: classifyMarketThemes(`${title} ${sentences.join(" ")}`),
+    importance: event.importance || "High"
+  };
+}
+
+function officialReleaseSpecForEvent(event) {
+  return officialMacroReleaseSpecs.find((spec) => {
+    if (spec.source && event.source && spec.source.toLowerCase() !== event.source.toLowerCase()) return false;
+    return spec.eventPattern.test(event.event || "");
+  });
+}
+
+async function fetchOfficialMacroRelease(event, index) {
+  const spec = officialReleaseSpecForEvent(event);
+  if (!spec) return null;
+  try {
+    const html = await fetchText(spec.sourceUrl, { timeout: 12000, retries: 2 });
+    const release = spec.parser(html, event, spec);
+    return {
+      id: `O${index + 1}`,
+      status: "ready",
+      date: event.date,
+      releaseTime: event.time,
+      releaseAt: calendarEventReleaseAt(event)?.toISOString() || null,
+      ageHours: roundedNumber(calendarEventAgeHours(event), 1),
+      source: event.source,
+      ...release
+    };
+  } catch (error) {
+    return {
+      id: `O${index + 1}`,
+      status: "error",
+      date: event.date,
+      releaseTime: event.time,
+      releaseAt: calendarEventReleaseAt(event)?.toISOString() || null,
+      source: event.source,
+      event: event.event,
+      sourceName: spec.sourceName,
+      sourceUrl: spec.sourceUrl,
+      error: error.message,
+      marketRead: `${event.event} was due, but the official release could not be fetched: ${error.message}`,
+      bullets: [],
+      themes: ["Macro and growth"],
+      importance: event.importance || "High"
+    };
+  }
+}
+
+async function fetchOfficialMacroReleases(calendarItems, now = new Date()) {
+  const dueEvents = (calendarItems || [])
+    .filter((event) => officialReleaseSpecForEvent(event))
+    .map((event) => ({ event, ageHours: calendarEventAgeHours(event, now) }))
+    .filter((item) => item.ageHours != null && item.ageHours >= 0 && item.ageHours <= macroReleaseLookbackHours)
+    .sort((a, b) => a.ageHours - b.ageHours)
+    .map((item) => item.event);
+
+  const releases = (await mapLimit(dueEvents, 3, fetchOfficialMacroRelease)).filter(Boolean);
+  return {
+    generatedAt: new Date().toISOString(),
+    lookbackHours: macroReleaseLookbackHours,
+    releases
+  };
 }
 
 function sameHostOrSubdomain(sourceHost, candidateHost) {
@@ -1717,9 +2019,15 @@ function buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols }) 
     .map((item, index) => ({ ...item, id: `M${index + 1}` }));
 }
 
-function buildMarketDriverSummary(drivers, earningsTape, redditTape) {
+function buildMarketDriverSummary(drivers, earningsTape, redditTape, officialMacroReleases = []) {
   const pieces = [];
   const used = new Set();
+  officialMacroReleases
+    .filter((release) => release.status === "ready")
+    .slice(0, 3)
+    .forEach((release) => {
+      pieces.push(`Macro release: ${release.marketRead}${release.id ? ` (${release.id})` : ""}`);
+    });
   const priorityThemes = ["Geopolitics and policy", "Rates and central banks", "Commodities and energy", "Macro and growth", "Earnings", "AI and semis", "Credit and liquidity"];
   priorityThemes.forEach((theme) => {
     const driver = drivers
@@ -1773,11 +2081,13 @@ function headlineTheme(theme) {
   return theme || "Market drivers";
 }
 
-function buildMarketIntelligence({ sources, earningsTape, redditTape, marketMovers, previousRefreshStatus, knownSymbols, marketDataStatus }) {
+function buildMarketIntelligence({ sources, earningsTape, redditTape, marketMovers, previousRefreshStatus, knownSymbols, marketDataStatus, officialMacro }) {
   const previousRefreshAt = previousRefreshStatus?.snapshotGeneratedAt || previousRefreshStatus?.generatedAt || null;
   const drivers = buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols });
+  const officialMacroReleases = officialMacro?.releases || [];
   const themeCounts = new Map();
   drivers.forEach((driver) => driver.themes.forEach((theme) => themeCounts.set(theme, (themeCounts.get(theme) || 0) + 1)));
+  officialMacroReleases.forEach((release) => (release.themes || []).forEach((theme) => themeCounts.set(theme, (themeCounts.get(theme) || 0) + 1)));
   const topThemes = [...themeCounts.entries()]
     .sort((a, b) => b[1] - a[1])
     .slice(0, 6)
@@ -1797,6 +2107,11 @@ function buildMarketIntelligence({ sources, earningsTape, redditTape, marketMove
       previousRefreshAt
     },
     marketDataStatus,
+    officialMacro: {
+      generatedAt: officialMacro?.generatedAt || null,
+      lookbackHours: officialMacro?.lookbackHours || macroReleaseLookbackHours,
+      releases: officialMacroReleases
+    },
     sourceHealth,
     professionalDrivers: drivers.slice(0, 18),
     topThemes,
@@ -1810,7 +2125,7 @@ function buildMarketIntelligence({ sources, earningsTape, redditTape, marketMove
       mostActive: (marketMovers.mostActive || []).slice(0, 12),
       errors: marketMovers.errors || []
     },
-    briefingBullets: buildMarketDriverSummary(drivers, earningsTape, redditTape)
+    briefingBullets: buildMarketDriverSummary(drivers, earningsTape, redditTape, officialMacroReleases)
   };
 }
 
@@ -1901,7 +2216,7 @@ function cleanDailyRead(dailyRead) {
   };
 }
 
-function buildNote({ opportunities, macro, sources, model, sectorPerformance, rulesRecommendations, aiRecommendations, marketIntelligence }) {
+function buildNote({ opportunities, macro, calendar, sources, model, sectorPerformance, rulesRecommendations, aiRecommendations, marketIntelligence }) {
   const modelReady = model?.status === "ready" && model.scoredCount > 0;
   const modelLeaders = opportunities.filter(hasModelRank);
   const leaders = (modelReady ? modelLeaders : opportunities).slice(0, 5);
@@ -1923,7 +2238,7 @@ function buildNote({ opportunities, macro, sources, model, sectorPerformance, ru
   const sourceHits = sources.filter((source) => source.ok).length;
   const failedSources = sources.length - sourceHits;
   const articleHits = sources.reduce((total, source) => total + (source.articles?.length || 0), 0);
-  const upcomingEvents = calendar.filter((event) => new Date(`${event.date}T23:59:59`) >= new Date()).slice(0, 3);
+  const upcomingEvents = (calendar || []).slice(0, 3);
   const leaderText = leaders.map((item) => item.symbol).join(", ") || "none";
   const etfText = etfLeaders.map((item) => item.symbol).join(", ") || "none";
   const topSector = sectorPerformance?.[0];
@@ -1931,6 +2246,8 @@ function buildNote({ opportunities, macro, sources, model, sectorPerformance, ru
   const sourceBriefs = articleBriefs(sources, 3);
   const marketBullets = marketIntelligence?.briefingBullets || [];
   const topDrivers = marketIntelligence?.professionalDrivers || [];
+  const officialMacroReleases = marketIntelligence?.officialMacro?.releases || [];
+  const latestOfficialMacro = officialMacroReleases.find((release) => release.status === "ready");
   const earningsMovers = marketIntelligence?.earnings?.earningsMovers || [];
   const redditTickers = marketIntelligence?.reddit?.topTickers || [];
   const aiFocus = aiRecommendations?.status === "ready"
@@ -1948,12 +2265,19 @@ function buildNote({ opportunities, macro, sources, model, sectorPerformance, ru
   const fallbackHeadline = modelReady
     ? `${regime}; model leadership is clustered in ${leaderText}, with ${topSector?.sector || "sector"} confirmation.`
     : `${regime}; rules-based momentum leaders are ${leaderText}.`;
-  const intelligenceHeadline = topDrivers.length
-    ? `${headlineTheme(primaryTheme(topDrivers[0].themes))} frames today's market read.`
-    : fallbackHeadline;
-  const driverLead = topDrivers.length
-    ? `The most relevant market drivers are ${[...new Set(topDrivers.slice(0, 5).map((driver) => headlineTheme(primaryTheme(driver.themes)).toLowerCase()))].slice(0, 3).join(", ")}.`
-    : "The current market-driver read is thin because few configured sources yielded current dated articles.";
+  const intelligenceHeadline = latestOfficialMacro
+    ? `${latestOfficialMacro.title || latestOfficialMacro.event} frames today's market read.`
+    : topDrivers.length
+      ? `${headlineTheme(primaryTheme(topDrivers[0].themes))} frames today's market read.`
+      : fallbackHeadline;
+  const macroReleaseLead = latestOfficialMacro
+    ? `The primary macro release is ${latestOfficialMacro.title || latestOfficialMacro.event}: ${latestOfficialMacro.marketRead}`
+    : "";
+  const driverLead = macroReleaseLead
+    ? macroReleaseLead
+    : topDrivers.length
+      ? `The most relevant market drivers are ${[...new Set(topDrivers.slice(0, 5).map((driver) => headlineTheme(primaryTheme(driver.themes)).toLowerCase()))].slice(0, 3).join(", ")}.`
+      : "The current market-driver read is thin because few configured sources yielded current dated articles.";
   const earningsLead = earningsMovers.length
     ? `Earnings dispersion is visible in ${earningsMovers.slice(0, 3).map((item) => `${item.symbol} ${formatPercent(item.changePct)}`).join(", ")}.`
     : "No large Yahoo mover matched the Nasdaq earnings calendar in this refresh.";
@@ -1961,10 +2285,17 @@ function buildNote({ opportunities, macro, sources, model, sectorPerformance, ru
     ? `Retail attention is concentrated in ${redditTickers.slice(0, 4).map((item) => item.symbol).join(", ")}; treat that as sentiment, not verified news.`
     : "Reddit attention data was unavailable or did not produce clean ticker concentration.";
   const fallbackBody = `${regime}. ${driverLead} ${earningsLead} ${redditLead} The model read is secondary confirmation, with leadership concentrated in ${leaderText}.`;
+  const macroReleaseBullets = officialMacroReleases
+    .filter((release) => release.status === "ready")
+    .slice(0, 3)
+    .map((release) => `Macro release: ${release.marketRead}${release.id ? ` (${release.id})` : ""}`);
   const earningsBullet = marketBullets.find((item) => item.startsWith("Earnings movers:"));
   const retailBullet = marketBullets.find((item) => item.startsWith("Retail attention:"));
-  const driverBullets = marketBullets.filter((item) => !item.startsWith("Earnings movers:") && !item.startsWith("Retail attention:")).slice(0, 2);
+  const driverBullets = marketBullets
+    .filter((item) => !item.startsWith("Macro release:") && !item.startsWith("Earnings movers:") && !item.startsWith("Retail attention:"))
+    .slice(0, 2);
   const fallbackChanged = [
+    ...macroReleaseBullets,
     ...driverBullets,
     earningsBullet,
     retailBullet,
@@ -2837,7 +3168,19 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     )
   ].filter(Boolean);
   const companySourceRefs = companyContexts.flatMap((context) => context.sources || []);
-  const sourceRefIds = [...sourceTape.map((source) => source.id), ...companySourceRefs.map((source) => source.id)];
+  const officialMacroSourceRefs = (marketIntelligence?.officialMacro?.releases || []).map((release) => ({
+    id: release.id,
+    title: release.title || release.event,
+    url: release.sourceUrl,
+    sourceName: release.sourceName,
+    publishedAt: release.publishedAt || release.releaseAt,
+    summary: release.marketRead
+  }));
+  const sourceRefIds = [
+    ...sourceTape.map((source) => source.id),
+    ...officialMacroSourceRefs.map((source) => source.id),
+    ...companySourceRefs.map((source) => source.id)
+  ].filter(Boolean);
   const sourceRefSchema = sourceRefIds.length
     ? { type: "string", enum: sourceRefIds }
     : { type: "string" };
@@ -2853,6 +3196,11 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       sourceHealth: marketIntelligence?.sourceHealth || null,
       topThemes: marketIntelligence?.topThemes || [],
       professionalDrivers: (marketIntelligence?.professionalDrivers || []).slice(0, 12),
+      officialMacro: {
+        generatedAt: marketIntelligence?.officialMacro?.generatedAt || null,
+        lookbackHours: marketIntelligence?.officialMacro?.lookbackHours || macroReleaseLookbackHours,
+        releases: (marketIntelligence?.officialMacro?.releases || []).slice(0, 6)
+      },
       earnings: {
         dates: marketIntelligence?.earnings?.dates || [],
         calendars: (marketIntelligence?.earnings?.calendars || []).map((item) => ({
@@ -2879,6 +3227,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       }
     },
     sourceTape,
+    officialMacroSourceRefs,
     companyContexts,
     companySourceRefs,
     sourceStatus: sources.map(({ name, url, category, trust, ok, articleCount, summary }) => ({
@@ -3193,6 +3542,7 @@ async function main() {
   );
   const redditTapePromise = fetchRedditTape(knownSymbols);
   const marketMoversPromise = fetchMarketMovers();
+  const officialMacroPromise = fetchOfficialMacroReleases(calendar);
 
   console.log(`Screening ${universe.length} instruments...`);
 
@@ -3269,13 +3619,15 @@ async function main() {
   );
 
   console.log("Refreshing macro, source, Reddit, and market-mover tapes...");
-  const [macro, sources, redditTape, marketMovers] = await Promise.all([
+  const [macro, sources, redditTape, marketMovers, officialMacro] = await Promise.all([
     mapLimit(macroSeries, 4, fetchFredSeries),
     checkedSourcesPromise,
     redditTapePromise,
-    marketMoversPromise
+    marketMoversPromise,
+    officialMacroPromise
   ]);
   console.log(`Source tape checked: ${sources.filter((source) => source.ok).length}/${sources.length} live.`);
+  console.log(`Official macro releases captured: ${(officialMacro.releases || []).filter((release) => release.status === "ready").length}/${(officialMacro.releases || []).length}.`);
   const earningsTape = await buildEarningsTape({ sources, marketMovers, knownSymbols });
   console.log(`Earnings tape built: ${(earningsTape.earningsMovers || []).length} earnings-linked movers.`);
   const marketIntelligence = buildMarketIntelligence({
@@ -3285,10 +3637,11 @@ async function main() {
     marketMovers,
     previousRefreshStatus,
     knownSymbols,
-    marketDataStatus
+    marketDataStatus,
+    officialMacro
   });
   console.log(`Market intelligence built: ${(marketIntelligence.professionalDrivers || []).length} professional drivers.`);
-  const upcomingCalendar = calendar.filter((event) => new Date(`${event.date}T23:59:59`) >= new Date()).slice(0, 8);
+  const upcomingCalendar = upcomingMacroEvents(calendar);
   const rulesRecommendations = buildRecommendations(opportunities);
   const aiRecommendations = await buildAiRecommendations({
     opportunities,
@@ -3319,6 +3672,7 @@ async function main() {
     note: buildNote({
       opportunities,
       macro,
+      calendar: upcomingCalendar,
       sources,
       model: modelSummary,
       sectorPerformance,
@@ -3348,7 +3702,7 @@ async function main() {
   console.log(`Wrote ${scorebookOutput} with ${modelScorebook.rowCount} model-scored rows.`);
 }
 
-export { checkSource, extractArticleCandidates, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };
+export { checkSource, extractArticleCandidates, fetchOfficialMacroReleases, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch((error) => {
