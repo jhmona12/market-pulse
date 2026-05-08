@@ -1484,7 +1484,13 @@ async function fetchFredSeries(series) {
 function firstSentence(text, maxLength = 240) {
   if (!text) return "";
   const clean = String(text).replace(/\s+/g, " ").trim();
-  const sentence = clean.match(/^.*?[.!?](?:\s|$)/)?.[0]?.trim() || clean;
+  const parts = clean.match(/.*?[.!?](?:\s|$)/g) || [];
+  let sentence = "";
+  for (const part of parts) {
+    sentence = `${sentence} ${part.trim()}`.trim();
+    if (sentence.length >= 60 && !/\b(?:U\.S|U\.K|E\.U|Inc|Ltd|Co|Corp)\.$/.test(sentence)) break;
+  }
+  if (!sentence) sentence = clean;
   return sentence.length > maxLength ? `${sentence.slice(0, maxLength - 3).trim()}...` : sentence;
 }
 
@@ -1497,6 +1503,58 @@ function articleBriefs(sources, limit = 3) {
   )
     .slice(0, limit)
     .map((article) => `${article.sourceName}: ${article.title}`);
+}
+
+function isGenericArticleText(value) {
+  const text = String(value || "").trim();
+  return /^(read our latest market commentary|stock market news, commentary|bond market updates|learn about the bond market|public .* research|where thought finds leadership|markets and economy|stock market news|bond market commentary)\b/i.test(text);
+}
+
+function cleanArticleConclusion(value, title = "") {
+  let text = cleanDailyReadText(value)
+    .replace(/Yes A checkmark with a circle around it close/gi, " ")
+    .replace(/\bclose\s+(?=[A-Z])/g, "")
+    .replace(/\b(data|war|rally|update)\s+(Over in|Stock futures|Earnings season|Investors|The oil)\b/g, "$1. $2")
+    .replace(/\s+/g, " ")
+    .trim();
+  const cleanTitle = cleanDailyReadText(title);
+  if (cleanTitle && text.toLowerCase().startsWith(cleanTitle.toLowerCase())) {
+    text = text.slice(cleanTitle.length).trim();
+  }
+  return text;
+}
+
+function excerptConclusion(excerpt, title = "", maxLength = 240) {
+  const text = cleanArticleConclusion(excerpt, title);
+  if (!text) return "";
+  const keyPoints = text.match(/\bKey Points\s+(.{40,700})/i)?.[1];
+  if (keyPoints) return firstSentence(keyPoints, maxLength);
+
+  const headlineMatch = text.match(/\b(Headlines Take a Backseat to Fundamentals in Rally.{20,400})/i)?.[1];
+  if (headlineMatch) return firstSentence(headlineMatch, maxLength);
+
+  const dateMatch = text.match(/\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+\d{1,2},\s+20\d{2}\b/i);
+  if (dateMatch) {
+    let tail = text.slice(dateMatch.index + dateMatch[0].length).trim();
+    tail = tail.replace(/^DJIA:.*?(?=\b(?:Stocks|Stock futures|Treasury|Yields|Oil|Markets|Investors)\b)/i, "");
+    tail = tail.replace(/^Article\s+\|\s+/i, "");
+    if (tail.length > 40) return firstSentence(tail, maxLength);
+  }
+
+  return firstSentence(text, maxLength);
+}
+
+function articleConclusion(article, maxLength = 240) {
+  const title = article?.title || "";
+  const summary = cleanArticleConclusion(article?.summary || "", title);
+  const excerpt = cleanArticleConclusion(article?.excerpt || "", title);
+  const extracted = excerptConclusion(article?.excerpt || "", title, maxLength);
+  const summaryUsable = summary && !isGenericArticleText(summary) && summary.length >= 45;
+  const candidates = [summary, excerpt, title]
+    .map((item) => cleanArticleConclusion(item, title))
+    .filter(Boolean);
+  const preferred = summaryUsable ? summary : extracted || candidates.find((item) => !isGenericArticleText(item)) || candidates[0] || title;
+  return firstSentence(preferred, maxLength);
 }
 
 function sourceTrustScore(trust) {
@@ -1579,7 +1637,8 @@ function buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols }) 
         trust: source.trust,
         url: article.url,
         publishedAt: article.publishedAt,
-        summary: article.summary || firstSentence(article.excerpt, 260),
+        summary: articleConclusion(article, 320),
+        excerpt: article.excerpt || "",
         themes: ranked.themes,
         freshness: ranked.sincePrevious ? "Since prior refresh" : ranked.ageHours <= marketIntelFreshHours ? "Last 24 hours" : "Important older item",
         ageHours: ranked.ageHours,
@@ -1598,16 +1657,51 @@ function buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols }) 
 
 function buildMarketDriverSummary(drivers, earningsTape, redditTape) {
   const pieces = [];
-  drivers.slice(0, 5).forEach((driver) => {
-    pieces.push(`${driver.themes[0]}: ${driver.title} (${driver.sourceName})`);
+  const used = new Set();
+  const priorityThemes = ["Geopolitics and policy", "Rates and central banks", "Commodities and energy", "Macro and growth", "Earnings", "AI and semis", "Credit and liquidity"];
+  priorityThemes.forEach((theme) => {
+    const driver = drivers
+      .filter((item) => !used.has(item.id) && (item.themes || []).includes(theme))
+      .sort((a, b) => driverThemeFit(b, theme) - driverThemeFit(a, theme))[0];
+    if (!driver) return;
+    used.add(driver.id);
+    pieces.push(`${theme}: ${driver.summary}${driver.id ? ` (${driver.id})` : ""}`);
   });
-  (earningsTape.earningsMovers || []).slice(0, 3).forEach((mover) => {
-    pieces.push(`Earnings mover: ${mover.symbol} ${formatPercent(mover.changePct)} (${mover.name})`);
-  });
-  (redditTape.topTickers || []).slice(0, 3).forEach((ticker) => {
-    pieces.push(`Retail attention: ${ticker.symbol} across ${ticker.subreddits.join(", ")}`);
-  });
+  if (earningsTape.earningsMovers?.length) {
+    pieces.push(`Earnings movers: ${earningsTape.earningsMovers.slice(0, 3).map((mover) => `${mover.symbol} ${formatPercent(mover.changePct)}`).join(", ")} show where post-results dispersion is largest.`);
+  }
+  if (redditTape.topTickers?.length) {
+    pieces.push(`Retail attention: ${redditTape.topTickers.slice(0, 4).map((ticker) => ticker.symbol).join(", ")} are drawing the most Reddit ticker concentration; treat this as sentiment, not verified news.`);
+  }
   return pieces.slice(0, 10);
+}
+
+function driverThemeFit(driver, theme) {
+  const title = String(driver.title || "");
+  const summary = String(driver.summary || "");
+  const text = `${title} ${summary} ${driver.excerpt || ""}`.toLowerCase();
+  const themeTests = {
+    "Geopolitics and policy": /\b(iran|israel|ukraine|russia|china|taiwan|war|conflict|hormuz|sanction|tariff|trade|ceasefire)\b/i,
+    "Rates and central banks": /\b(yield|treasury|fed|fomc|rate|rates|powell|ecb|boe|boj|inflation|cpi|pce)\b/i,
+    "Commodities and energy": /\b(oil|crude|brent|wti|hormuz|energy|natural gas|gold|silver|copper)\b/i,
+    "Macro and growth": /\b(gdp|jobs|payroll|claims|unemployment|pmi|ism|growth|consumer|productivity)\b/i,
+    Earnings: /\b(earnings|results|revenue|guidance|eps|margin|beat|miss)\b/i,
+    "AI and semis": /\b(ai|semiconductor|semis|chip|gpu|data center)\b/i,
+    "Credit and liquidity": /\b(credit|spread|liquidity|funding|default|high yield)\b/i
+  };
+  let score = Number(driver.score) || 0;
+  if (themeTests[theme]?.test(text)) score += 20;
+  if (themeTests[theme]?.test(`${title} ${summary}`)) score += 35;
+  if (!isGenericArticleText(driver.summary)) score += 8;
+  if (isGenericArticleText(driver.title)) score -= 10;
+  if (isGenericArticleText(driver.summary)) score -= 12;
+  if (driver.freshness === "Since prior refresh") score += 6;
+  return score;
+}
+
+function primaryTheme(themes = []) {
+  const priorityThemes = ["Geopolitics and policy", "Rates and central banks", "Commodities and energy", "Macro and growth", "Earnings", "AI and semis", "Credit and liquidity", "Market color"];
+  return priorityThemes.find((theme) => themes.includes(theme)) || themes[0] || "Market drivers";
 }
 
 function headlineTheme(theme) {
@@ -1793,24 +1887,29 @@ function buildNote({ opportunities, macro, sources, model, sectorPerformance, ru
     ? `${regime}; model leadership is clustered in ${leaderText}, with ${topSector?.sector || "sector"} confirmation.`
     : `${regime}; rules-based momentum leaders are ${leaderText}.`;
   const intelligenceHeadline = topDrivers.length
-    ? `${headlineTheme(topDrivers[0].themes[0])} leads the 24-hour tape; earnings movers and retail attention frame the risk map.`
+    ? `${headlineTheme(primaryTheme(topDrivers[0].themes))} frames today's market read.`
     : fallbackHeadline;
   const driverLead = topDrivers.length
-    ? `The fresh market tape is led by ${topDrivers.slice(0, 3).map((driver) => `${driver.title} (${driver.sourceName})`).join("; ")}.`
-    : "The fresh market-driver tape is thin because several source pages did not yield current dated articles.";
+    ? `The most relevant market drivers are ${[...new Set(topDrivers.slice(0, 5).map((driver) => headlineTheme(primaryTheme(driver.themes)).toLowerCase()))].slice(0, 3).join(", ")}.`
+    : "The current market-driver read is thin because few configured sources yielded current dated articles.";
   const earningsLead = earningsMovers.length
-    ? `Earnings-linked movers include ${earningsMovers.slice(0, 3).map((item) => `${item.symbol} ${formatPercent(item.changePct)}`).join(", ")}.`
+    ? `Earnings dispersion is visible in ${earningsMovers.slice(0, 3).map((item) => `${item.symbol} ${formatPercent(item.changePct)}`).join(", ")}.`
     : "No large Yahoo mover matched the Nasdaq earnings calendar in this refresh.";
   const redditLead = redditTickers.length
     ? `Retail attention is concentrated in ${redditTickers.slice(0, 4).map((item) => item.symbol).join(", ")}; treat that as sentiment, not verified news.`
     : "Reddit attention data was unavailable or did not produce clean ticker concentration.";
-  const fallbackBody = `${driverLead} ${earningsLead} ${redditLead} Against that backdrop, ${regime.toLowerCase()}: ${above50Pct}% of the screened universe is above the 50-day average, ${above200Pct}% is above the 200-day, and ${breadth}% clears both trend lines. ${modelText}; the model leaders are ${leaderText}, while sector confirmation is led by ${topSectorText(sectorPerformance)}. Source tape coverage is ${sourceHits}/${sources.length} pages live with ${articleHits} recent articles, so blocked or stale publishers should not drive the call.`;
+  const fallbackBody = `${regime}. ${driverLead} ${earningsLead} ${redditLead} The model read is secondary confirmation, with leadership concentrated in ${leaderText}.`;
+  const earningsBullet = marketBullets.find((item) => item.startsWith("Earnings movers:"));
+  const retailBullet = marketBullets.find((item) => item.startsWith("Retail attention:"));
+  const driverBullets = marketBullets.filter((item) => !item.startsWith("Earnings movers:") && !item.startsWith("Retail attention:")).slice(0, 2);
   const fallbackChanged = [
+    ...driverBullets,
+    earningsBullet,
+    retailBullet,
+    `Breadth: ${above50Pct}% of the screened universe is above the 50-day average, ${above200Pct}% is above the 200-day, and ${breadth}% clears both trend lines.`,
     modelReady
-      ? `Model book: ${leaderText} lead ${model.scoredCount} scored S&P 500 names; ${modelSectorText}.`
+      ? `Model read: ${leaderText} lead ${model.scoredCount} scored S&P 500 names; ${modelSectorText}; sector confirmation is ${topSectorText(sectorPerformance)}.`
       : "Model rankings were unavailable, so the read used the rules-based momentum score.",
-    `Market breadth: ${above50Pct}% above the 50-day, ${above200Pct}% above the 200-day, and ${breadth}% above both, which keeps the setup ${breadth >= 40 ? "tradable" : "fragile"}.`,
-    `Sector tape: ${topSectorText(sectorPerformance)}.`,
     rulesRecommendations?.length
       ? `Desk call summary: ${rulesRecommendations.slice(0, 4).map((item) => `${item.symbol} (${item.label})`).join(", ")}.`
       : "Desk call summary was unavailable in this snapshot.",
@@ -1831,7 +1930,7 @@ function buildNote({ opportunities, macro, sources, model, sectorPerformance, ru
   return {
     headline: aiDailyRead?.headline || intelligenceHeadline,
     body: aiDailyRead?.body || fallbackBody,
-    changed: boundedList([...marketBullets.slice(0, 3), ...(aiDailyRead?.keyTakeaways || []).slice(0, 4), ...fallbackChanged], fallbackChanged, 6),
+    changed: boundedList([...(aiDailyRead?.keyTakeaways || []).slice(0, 4), ...fallbackChanged], fallbackChanged, 6),
     watch: boundedList([...(aiDailyRead?.watchItems || []).slice(0, 3), ...fallbackWatch], fallbackWatch, 5),
     generatedBy: aiDailyRead ? "ai_with_fact_guardrails" : cleanedAiDailyRead ? "deterministic_ai_daily_read_rejected" : "deterministic"
   };

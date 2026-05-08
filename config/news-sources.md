@@ -25,6 +25,8 @@ Add new free sources to this table. The ingestion script reads rows with this sh
 | BEA News Release Schedule | https://www.bea.gov/news/schedule | Official macro | Scheduled | Very high | GDP, PCE, income, and trade data. |
 | FRED Releases | https://fred.stlouisfed.org/releases | Official macro | Scheduled | Very high | St. Louis Fed release directory. |
 | SEC Current Reports | https://www.sec.gov/edgar/search/#/category=custom&forms=8-K | Filings | Continuous | Very high | Company current reports and catalysts. |
+| Axios Markets RSS | https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en | News RSS | Daily | Medium | Google News RSS scoped to Axios Markets coverage; used because direct Axios newsletter pages may block automated checks. |
+| Axios Macro RSS | https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en | News RSS | Daily | Medium | Google News RSS scoped to Axios Macro coverage; used because direct Axios newsletter pages may block automated checks. |
 | CNBC Markets | https://www.cnbc.com/markets/ | News | Continuous | Medium | Public market news page; respect site terms. |
 | CNBC Top News RSS | https://www.cnbc.com/id/100003114/device/rss/rss.html | News RSS | Continuous | Medium | Structured CNBC top business and market news feed. |
 | CNBC Earnings RSS | https://www.cnbc.com/id/15839135/device/rss/rss.html | News RSS | Continuous | Medium | Structured CNBC earnings news feed. |

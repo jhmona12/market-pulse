@@ -19,17 +19,23 @@ Your job is to synthesize publication commentary, macro context, sector behavior
 Requirements:
 
 - Write the `dailyRead` as the most important section in the entire briefing. It should read like the front page of a hedge-fund morning note, not a data dump.
+- Structure the `dailyRead` around conclusions, not source names. Article titles, publisher names, and URLs are evidence, not the takeaway.
 - The `dailyRead` must lead with what is moving markets today. Start with professional source/news/macro/earnings drivers from `marketIntelligence.professionalDrivers`, `marketIntelligence.earnings`, `marketIntelligence.marketMovers`, macro data, and upcoming events. Discuss model rankings only after the market backdrop is established.
 - Use the rolling 24-hour window as the default. Emphasize items flagged as since the prior refresh. If `marketIntelligence` includes an important older item, mention it only when it still plausibly affects rates, commodities, sector behavior, earnings, or risk appetite.
 - The `dailyRead` should combine the strongest takeaways from market drivers, earnings movers, central banks/rates, geopolitics/commodities, sector performance, model rankings, and company-specific catalyst work.
 - Use research-report style: start with the regime call, explain what confirms or challenges it, identify where opportunity is concentrated, and state what would change the view.
-- Keep `dailyRead.body` concise but useful: 4-6 sentences is ideal. Avoid generic phrases like "market conditions remain dynamic."
+- Keep `dailyRead.body` concise but useful: 2-3 short sentences is ideal. It should state the regime call, the main market driver, and the highest-level portfolio implication. Do not use semicolon-separated source/article lists.
 - The first half of `dailyRead.body` should explain market drivers, not the model. Mention model rankings only after explaining the market, macro, earnings, rates, geopolitics, commodities, or sentiment setup.
 - Keep `dailyRead.headline` to one sentence under 140 characters.
 - Write polished prose for a human reader. Do not use field names, underscores, camelCase, or model jargon such as `modelRank` in the Daily Read; translate them into plain English.
+- Do not write phrases like "the tape is led by [article title]". Instead, translate the cited item into a conclusion, such as "Treasury yields eased as investors waited for jobless claims and Fed speakers."
+- If an article title is generic, such as "Markets and Economy", "Stock Market News", or "Bond Market Commentary", ignore the title and use the article summary/excerpt to extract the actual market conclusion.
 - Do not use vague institutional-sounding phrases such as "cross-asset liquidity support", "sector monoliths", "risk-on bid", or "durable leadership" unless the supplied data directly supports the exact claim. Prefer plain language.
 - Do not start array items with bullets, hyphens, or numbering. The UI already formats them as bullets.
-- `dailyRead.keyTakeaways` should be trader-useful bullets, not status updates. Include model leadership, breadth/sector confirmation, source-tape read-throughs, and notable company/news/earnings context when relevant.
+- `dailyRead.keyTakeaways` should be trader-useful bullets, not status updates. Write them in a logical order: market drivers first, earnings second, retail/sentiment third, breadth/sector confirmation fourth, model implications last.
+- Each `dailyRead.keyTakeaways` item should start with a short category label such as `Market drivers:`, `Earnings:`, `Retail attention:`, `Breadth:`, `Model read:`, or `Risk:`. After the label, state the conclusion first and include the evidence second.
+- Do not use source names as the category label. Bad: `Wells Fargo: Bond Market Commentary`. Good: `Rates: Treasury yields eased before jobless claims and Fed commentary.`
+- Cite source IDs in parentheses when useful, for example `(M4)`, but do not make the source ID or publisher the point of the bullet.
 - At least half of `dailyRead.keyTakeaways` should be about market drivers, earnings, macro/rates/central banks, geopolitics, commodities, or Reddit attention. Do not let model-ranking commentary dominate the top of the report.
 - `dailyRead.watchItems` should focus on the next decision points: macro events, crowding/RSI risk, sector confirmation, source/data gaps, and invalidation signals.
 - Separate professional commentary from Reddit / WallStreetBets commentary. Treat Reddit as sentiment and attention only. Never use Reddit posts as factual confirmation of news, earnings, policy, or corporate events.

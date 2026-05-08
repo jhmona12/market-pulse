@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-08T04:13:43.177Z",
+  "generatedAt": "2026-05-08T04:36:03.108Z",
   "model": {
     "status": "ready",
     "generatedAt": "2026-05-08T03:05:41.169627+00:00",
@@ -571,21 +571,21 @@
     }
   },
   "note": {
-    "headline": "Earnings leads the 24-hour tape; earnings movers and retail attention frame the risk map.",
-    "body": "The fresh market tape is led by Bond Market Commentary | Wells Fargo Investment Institute (Wells Fargo Advisors Stock Market News); Markets and Economy (Schwab Weekly Market Outlook); Stock Market News | Wells Fargo Investment Institute (Wells Fargo Advisors Stock Market News). Earnings-linked movers include FLNC +39.90%, XMTR +39.18%, FSLY -38.23%. Retail attention is concentrated in AMD, INTC, SPY, NVDA; treat that as sentiment, not verified news. Against that backdrop, risk appetite is constructive but selective: 55% of the screened universe is above the 50-day average, 59% is above the 200-day, and 43% clears both trend lines. 502 S&P 500 names were scored by the XGBoost rank model as of 2026-05-07; the model leaders are LITE, SATS, SNDK, MU, STX, while sector confirmation is led by Technology +24.08% over 30D, +12.70% vs SPY; Real Estate +10.26% over 30D; Consumer Discretionary +8.26% over 30D. Source tape coverage is 24/24 pages live with 25 recent articles, so blocked or stale publishers should not drive the call.",
+    "headline": "Geopolitical and policy risk frames today's market read.",
+    "body": "Risk appetite is constructive but selective. The most relevant market drivers are geopolitical and policy risk. Earnings dispersion is visible in FLNC +39.90%, XMTR +39.18%, FSLY -38.23%. Retail attention is concentrated in AMD, INTC, SPY, NVDA; treat that as sentiment, not verified news. The model read is secondary confirmation, with leadership concentrated in LITE, SATS, SNDK, MU, STX.",
     "changed": [
-      "Earnings: Bond Market Commentary | Wells Fargo Investment Institute (Wells Fargo Advisors Stock Market News)",
-      "Earnings: Markets and Economy (Schwab Weekly Market Outlook)",
-      "Earnings: Stock Market News | Wells Fargo Investment Institute (Wells Fargo Advisors Stock Market News)",
-      "Model book: LITE, SATS, SNDK, MU, STX lead 502 scored S&P 500 names; 13 of the top 25 model-ranked stocks are in Information Technology.",
-      "Market breadth: 55% above the 50-day, 59% above the 200-day, and 43% above both, which keeps the setup tradable.",
-      "Sector tape: Technology +24.08% over 30D, +12.70% vs SPY; Real Estate +10.26% over 30D; Consumer Discretionary +8.26% over 30D."
+      "Geopolitics and policy: On Thursday, the U.S. and Iran opened fire in the Strait of Hormuz, with each side claiming the other initiated the attack. (M4)",
+      "Rates and central banks: Yields lower before initial claims data. Over in bond land, Treasury yields are lower before the opening bell Thursday as markets continue to await news on a potential end to the Iran war. (M1)",
+      "Earnings movers: FLNC +39.90%, XMTR +39.18%, FSLY -38.23% show where post-results dispersion is largest.",
+      "Retail attention: AMD, INTC, SPY, NVDA are drawing the most Reddit ticker concentration; treat this as sentiment, not verified news.",
+      "Breadth: 55% of the screened universe is above the 50-day average, 59% is above the 200-day, and 43% clears both trend lines.",
+      "Model read: LITE, SATS, SNDK, MU, STX lead 502 scored S&P 500 names; 13 of the top 25 model-ranked stocks are in Information Technology; sector confirmation is Technology +24.08% over 30D, +12.70% vs SPY; Real Estate +10.26% over 30D; Consumer Discretionary +8.26% over 30D."
     ],
     "watch": [
       "Macro risk: Employment Situation on 2026-05-08; Consumer Price Index on 2026-05-13; Producer Price Index on 2026-05-14.",
       "Momentum risk: 10 top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.",
       "Confirmation check: ETF leaders are EEM, XLK, IVV; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
-      "0 of 24 configured source pages failed the latest check; blocked or stale sources should not drive the call."
+      "0 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
     ],
     "generatedBy": "deterministic"
   },
@@ -594,38 +594,38 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 75670,
+      "inputTokens": 90959,
       "cachedInputTokens": 0,
-      "outputTokens": 2351,
+      "outputTokens": 2430,
       "reasoningTokens": 0,
-      "totalTokens": 78021,
-      "estimatedCostUsd": 0.004724,
+      "totalTokens": 93389,
+      "estimatedCostUsd": 0.00552,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
         "output": 0.4
       }
     },
-    "companyContextCount": 4,
-    "headline": "AI-driven momentum leaders ride sector tilt as Iran tensions fuel energy and tech unwind",
-    "macroView": "Global rates steady with a hawkish tilt still possible; 10Y at 4.36% and 2Y at 3.87% alongside flat Fed funds; CPI and PPI due later this month keep inflation risk in focus. Crude and energy equities remain under elevated scrutiny as U.S.-Iran tensions flare in Hormuz, with oil prices resilient to supply disruption. Markets are tracking earnings risk from hyperscalers and semiconductor names while big tech and AI infrastructure names show durable momentum in the 14-day window. FOMC rate decision looming mid-June heightens sensitivity to growth/inflation data, while EU/UK policy signals stay in the background. Near-term risk is a hawkish re-pricing of the path for policy and higher real yields if energy supply concerns persist.",
+    "companyContextCount": 12,
+    "headline": "Tech leadership leads a high-conviction, momentum‑driven rally with energy/geopolitics keeping macro headwinds in focus",
+    "macroView": "Rates remain volatile as oil disruptions from Hormuz Iran clash escalate energy concerns; Treasury yields edged lower earlier but Fed path remains uncertain. Upcoming CPI and PCE data (May 13–14) loom as key tests for inflation trajectory and rate expectations. Equity breadth shows mixed leadership with tech and AI hardware names leading, while financials and some defensive sectors lag.",
     "dailyRead": {
-      "headline": "AI momentum leaders power higher in tech while energy/geo-political shocks test risk appetite",
-      "body": "The backdrop centers on resilient risk assets in technology and AI infrastructure amid elevated energy/geo-political risk from Iran-U.S. tensions in Hormuz, with oil rally dynamics supporting energy-linked cyclicals. Market movers show long-horizon momentum and sector leadership in LITE, SNDK, SATS, and MU, all within the top decile of the XGBoost model and trading above 50/200-day trend lines, though MU carries RSI 82 signaling caution. Earnings news remains a mix: CoreWeave and Coinbase headlines shape risk tone, while Nvidia-Iren style AI partnerships bolster demand for AI hardware suppliers. With 24-hour context and a 96-hour lookback, the regime remains: selective long exposure in tech hardware names paired with disciplined risk checks on RSI and sector volatility; the macro story supports continued energy-inflation linkage to rates, but a hawkish Fed path could temper momentum. A potential inflection would come from clearer inflation signals or a cooling in oil markets, which would tighten energy risk and relieve pressure on capex-heavy tech earnings.",
+      "headline": "Tech leadership drives momentum; macro risks centered on oil, rates, and Iran tensions",
+      "body": "Markets are leaning constructive as long‑duration tech momentum and AI hardware names push ahead of sector peers, aided by favorable 120‑day momentum signals and above‑trend price action. The Iran/Iraq Hormuz flare and oil tightness keep inflation and rate expectations on edge, with energy and industrials showing mixed responses to supply constraints. The strongest model signals today favor Lumentum, Sandisk, EchoStar, and Micron as the top 4 names, implying continued demand for high‑quality, liquid AI infrastructure plays, but RSI warnings in MU and INTC merit risk controls. A Fed/ECB rate stance remains awaited, with upcoming CPI (May 13) and PPI (May 14) data likely to reprice rate path and equity volatility. Net, the regime remains higher for longer growth with selective tech leadership; the main portfolio read is to maintain exposure to secular AI/semis winners while limiting crowded, overbought names and watching for a rate‑driven shift in breadth.",
       "keyTakeaways": [
-        "Leadership signal intact: LITE, SNDK, SATS, MU occupy top model ranks, showing broad sector tech leadership.",
-        "Momentum breadth: multiple mega-cap tech hardware players exhibit fresh cross and volume support.",
-        "Earnings/stock news read-through: CoreWeave guidance, Coinbase results, and Cloudflare layoff news act as earnings/structural risk flags.",
-        "Geopolitics/energy channel: Hormuz tensions keep oil buoyant; energy supply disruptions feed inflation and rate-risk dynamics.",
-        "Reddit sentiment is skewed toward meme-driven, high-beta names; still, model evidence remains focused on fundamental momentum and liquidity.",
-        "Company context updates: Lumentum (IR news) and MU (earnings history, May 2026) reinforce near-term catalysts."
+        "Market drivers: Oil supply disruption and Hormuz conflicts keep energy inflation risks elevated; global bond yields modestly lower ahead of US data, implying wary risk appetite.",
+        " ",
+        "Earnings: AI/tech hardware names delivering strong momentum; Micron and Sandisk show the strongest sector tilt within IT; expect continued focus on memory and storage as AI compute demand remains robust (MU, SNDK, LITE, INTC).",
+        " ",
+        "Retail attention: Reddit momentum names cluster around MU, AMD, MU, CVNA; sentiment remains bullish for semis and AI infra, but warnings on RSI overextension.",
+        " "
       ],
       "watchItems": [
-        "Macro data: upcoming CPI (May 13) and PPI (May 14) to test inflation path.",
-        "FOMC rate decision on June 17; monitor for signals impacting tech capex and longer-duration yields.",
-        "Geopolitics: Hormuz developments; oil price trajectory as a key risk to rates and equities.",
-        "Earnings cadence: watch MU, SNDK, and others for guidance; note earnings calendars for May 6-8 window.",
-        "Reddit attention vs realized fundamentals: note retail chatter on MU, AMD, NVDA but rely on model/evidence for trades."
+        "Macro data risk: CPI/Producer Prices next week; any signs of hotter inflation could pressure tech leadership.",
+        "Sector confirmation: monitor XLK and semis group performance for breadth signals.",
+        "Earnings catalysts: watch for next reports from LITE, MU, INTC, STX; confirm guidance vs expectations.",
+        "Data gaps: next earnings dates for LITE (last May 5), MU (last Mar 18) and INTC (last Apr 23).",
+        "Invalidation: if 60d RSI in top names remains elevated and price makes new lows, tighten risk controls."
       ]
     },
     "recommendations": [
@@ -633,20 +633,20 @@
         "symbol": "LITE",
         "action": "Long",
         "conviction": "High",
-        "setup": "Long-horizon momentum ahead of sector median; above 200d trend; 60d return vs SPY +53%",
-        "whyNow": "Front-of-mind AI infrastructure suppliers benefit from AI expenditure and data-center buildouts amid solid 60-120d momentum.",
-        "rationale": "Lumentum is leader in photonics for data-center networks; top-ranked model with strong sector leadership and liquidity.",
+        "setup": "Strong long‑horizon momentum, above‑trend, liquid.",
+        "whyNow": "Top decile model rank; 120d return leadership; near 52‑week high; 60d returns up vs SPY; RSI not overbought (50).",
+        "rationale": "Long‑horizon momentum ahead of sector median; above 200d trend; liquid vs universe.",
         "companyOverview": "Lumentum (NASDAQ: LITE) is a global leader in optical and photonic technologies that power the networks and infrastructure behind AI, cloud computing, and next-generation communications. Built on decades of photonics innovation, Lumentum delivers high-performance lasers, modules, and optical subsystems that enable s...",
         "marketCap": "$63.7B",
         "earningsContext": "Last reported 2026-05-05 for the Mar 2026 fiscal quarter; EPS 1.88 versus consensus 1.81; surprise 3.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 2.18.",
-        "recentNews": "LITE Q3 FY2026 results highlighted margin expansion and strong mix.",
-        "macroLink": "C1-MARKETCAP",
-        "macroEvidence": "Macro context supports continued capex in AI hardware; energy shock risk remains elevated.",
-        "modelEvidence": "Rank 1, percentile 100; features show long-horizon momentum and top-sector 120d return; RSI 50; above-50/200dma; liquidity favorable.",
-        "technicalEvidence": "Near 52-week high negated; distance to high -10.25%; volume up vs average 1.26x.",
-        "momentumEvidence": "Top momentum cluster within information technology; breadth across LITE/SNDK, MU, STX.",
-        "risk": "Above-sector volatility; no near-term price shock signals.",
-        "invalidation": "If 50d/200d trends break or RSI sustains above 70 with widening volatility.",
+        "recentNews": "Q3 FY2026 results beat; margin expansion driven by mix and pricing.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 1; percentile 100; feature influence: volatility vs sector median, momentum breadth.",
+        "technicalEvidence": "Above 50 and 200d moving averages; distance to 52w high: -10%.",
+        "momentumEvidence": "Top Sector 120d return rank; long‑horizon momentum; high liquidity.",
+        "risk": "Above‑sector volatility; no obvious near‑term catalysts to reverse.",
+        "invalidation": "Price breaks below 50‑day moving average with deteriorating breadth.",
         "sourceRefs": [
           "C1-IR",
           "C1-EARNINGS",
@@ -654,155 +654,200 @@
         ]
       },
       {
-        "symbol": "SNDK",
-        "action": "Long",
-        "conviction": "High",
-        "setup": "Momentum leader; within 8% of 52w high; above 50d/200d averages; RSI high but not extreme",
-        "whyNow": "Storage and NAND demand underpin data-center storage assets; AI memory demand supports Sandisk position.",
-        "rationale": "Sandisk is a large-cap memory solutions provider with strong 120d return and beating SPY signals.",
-        "companyOverview": "Sandisk is a leading developer, manufacturer and provider of data storage devices and solutions based on NAND flash technology. With a differentiated innovation engine driving advancements in storage and semiconductor technologies, our broad and ever-expanding portfolio delivers powerful flash storage solutions for...",
-        "marketCap": "$198.4B",
-        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 31.81.",
-        "recentNews": "Sandisk earnings beat with 63.87% surprise in Q3 FY2026 results.",
-        "macroLink": "C3-MARKETCAP",
-        "macroEvidence": "Tech hardware demand supported by data-center AI workloads; no immediate macro negatives.",
-        "modelEvidence": "Rank 3, percentile 99.6; long-horizon momentum; within 8% of 52w high; RSI 75; volume supportive.",
-        "technicalEvidence": "RSI not overbought; near highs; strong 60/120d momentum.",
-        "momentumEvidence": "Major trend with volume support.",
-        "risk": "Above-sector volatility; keep position size moderate near high RSI.",
-        "invalidation": "If 60d/120d momentum fades and price breaks 52w high clearly.",
-        "sourceRefs": [
-          "C3-IR",
-          "C3-EARNINGS",
-          "C3-MARKETCAP"
-        ]
-      },
-      {
         "symbol": "SATS",
         "action": "Long",
         "conviction": "High",
-        "setup": "Top sector momentum; long-horizon momentum; near 52w high proximity",
-        "whyNow": "Satellite/telecom infrastructure demand remains robust; sector leadership in CS through 60d momentum.",
-        "rationale": "EchoStar shows strong 120d momentum; liquidity favorable but watch volume confirmation.",
+        "setup": "Momentum leader in Communications; above 50d/200d MA.",
+        "whyNow": "Model rank 2; strong momentum, top sector performance, near highs; RSI 39 suggests headroom.",
+        "rationale": "Long horizon momentum, top sector 120d rank; liquid.",
         "companyOverview": "EchoStar Corporation (Nasdaq: SATS) is a premier provider of technology, networking services, television entertainment and connectivity, offering consumer, enterprise, operator and government solutions worldwide under its EchoStar®, Boost Mobile®, Sling TV, DISH TV, Hughes®, HughesNet®, HughesON, and JUPITER brands....",
         "marketCap": "$35.4B",
         "earningsContext": "Last reported 2026-03-02 for the Dec 2025 fiscal quarter; EPS -1.03 versus consensus -0.85; surprise -21.18%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Mar 2026 with consensus -0.87.",
-        "recentNews": "IR and earnings track; space/communication momentum.",
-        "macroLink": "C2-MARKETCAP",
-        "macroEvidence": "Geopolitical risk supports energy/tech demand interplay; not a direct earnings catalyst.",
-        "modelEvidence": "Rank 2, percentile 99.8; long-horizon momentum; above 200d trend; RSI 39; low volume risk flagged.",
-        "technicalEvidence": "Price near 52w high; 60d volatility modest.",
-        "momentumEvidence": "Top-Decile momentum and liquidity in sector.",
-        "risk": "Above-sector volatility; weak volume confirmation.",
-        "invalidation": "If volume deteriorates or 52w high is tested decisively to the downside.",
+        "recentNews": "Q4 2025 earnings; investor relations focus on long‑cycle monetization.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 2; percentile 99.8; features: momentum breadth, sector leadership.",
+        "technicalEvidence": "Near 52w high, bullish trend.",
+        "momentumEvidence": "Momentum leadership in IT/COMM telecom; volume not consistently confirming.",
+        "risk": "Volatility above sector; volume confirmation weak.",
+        "invalidation": "Weakening momentum with price below 50d MA or volume deterioration.",
         "sourceRefs": [
           "C2-IR",
-          "C2-MARKETCAP",
-          "C2-EARNINGS"
+          "C2-EARNINGS",
+          "C2-MARKETCAP"
+        ]
+      },
+      {
+        "symbol": "SNDK",
+        "action": "Long",
+        "conviction": "High",
+        "setup": "Near‑high, strong momentum; 60d/120d gains,”fresh cross” in some momentum signals.",
+        "whyNow": "Rank 3; 60d SPY relative return 141%; Top sector 120d rank; near 52w high.",
+        "rationale": "Continued long‑horizon momentum in IT storage; near highs. ",
+        "companyOverview": "Sandisk is a leading developer, manufacturer and provider of data storage devices and solutions based on NAND flash technology. With a differentiated innovation engine driving advancements in storage and semiconductor technologies, our broad and ever-expanding portfolio delivers powerful flash storage solutions for...",
+        "marketCap": "$198.4B",
+        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 31.81.",
+        "recentNews": "Q3 FY2026 beat; strong 63.87% surprise.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 3; percentile 99.6; top features: momentum, 120d rank, near high.",
+        "technicalEvidence": "Above 50/200d, near highs, RSI 75.",
+        "momentumEvidence": "Beating SPY; strong volume signals.",
+        "risk": "High; above‑sector volatility.",
+        "invalidation": "Break below 50d MA with negative breadth.",
+        "sourceRefs": [
+          "C3-EARNINGS",
+          "C3-MARKETCAP",
+          "C3-IR"
         ]
       },
       {
         "symbol": "MU",
-        "action": "Long/Watchful",
-        "conviction": "Medium",
-        "setup": "High momentum, RSI stretched; above-60d trend; 120d momentum strong",
-        "whyNow": "Memory suppliers benefit from AI compute and data-center expansion; risk flag RSI 82.",
-        "rationale": "MU ranks high but RSI at 82; above-60d/200d trends; AI memory cycle supports upside; monitoring risk.",
+        "action": "Watchlist",
+        "conviction": "High",
+        "setup": "Very strong momentum; RSI 82 warns of overbought; still high momentum signals.",
+        "whyNow": "Rank 4; top decile momentum, near highs; 60d/120d returns solid; RSI extended (82) and volatility high.",
+        "rationale": "AI hardware/semis leadership; confirm with price action.",
         "companyOverview": "Micron Technology, Inc., is an industry leader in innovative memory and storage solutions, transforming how the world uses information to enrich life for all. With a relentless focus on our customers, technology leadership, and manufacturing and operational excellence, Micron delivers a rich portfolio of high-perfor...",
         "marketCap": "$729.2B",
         "earningsContext": "Last reported 2026-03-18 for the Feb 2026 fiscal quarter; EPS 12.08 versus consensus 8.64; surprise 39.81%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as May 2026 with consensus 18.97.",
-        "recentNews": "Strong earnings surprise; AI memory cycle persists.",
-        "macroLink": "C4-MARKETCAP",
-        "macroEvidence": "AI and semiconductors continue to drive demand; supply/demand tightness remains.",
-        "modelEvidence": "Rank 4, percentile 99.4; RSI extended; recent cross; fresh momentum signals.",
-        "technicalEvidence": "RSI 82; distance to 52w high -2.99; volume up 1.12x.",
-        "momentumEvidence": "Fresh cross; near highs; top sector momentum.",
-        "risk": "RSI overbought; above-sector volatility; potential pullback risk.",
-        "invalidation": "If RSI remains >70 with negative price action or momentum deteriorates.",
+        "recentNews": "Q1 2026 beat; AI/semis demand; price momentum.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 4; percentile 99.4; top features include RSI overextension, breadth.",
+        "technicalEvidence": "RSI elevated; price near highs; fresh cross.",
+        "momentumEvidence": "Strong sector momentum; volume supportive.",
+        "risk": "RSI extended; above‑sector volatility.",
+        "invalidation": "RSI retreat below 70; breadth deteriorates.",
         "sourceRefs": [
-          "C4-IR",
           "C4-EARNINGS",
-          "C4-MARKETCAP"
+          "C4-MARKETCAP",
+          "C4-IR"
+        ]
+      },
+      {
+        "symbol": "STX",
+        "action": "Long",
+        "conviction": "High",
+        "setup": "Strong momentum; RSI 85 warns; near 52w high; sector IT leadership.",
+        "whyNow": "Rank 5; top decile momentum; near highs; high returns 60d/120d.",
+        "rationale": "Beating SPY; volume signals supportive.",
+        "companyOverview": "Seagate (NASDAQ: STX) is a pioneer in mass-capacity data storage, accelerating ability to harness the full value of data. Our portfolio of advanced storage solutions helps hyperscale cloud providers, enterprises, and consumers protect, create and manage the data that powers their transformation and growth. For more...",
+        "marketCap": "$171.9B",
+        "earningsContext": "Last reported 2026-04-28 for the Mar 2026 fiscal quarter; EPS 3.92 versus consensus 3.26; surprise 20.25%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 4.83.",
+        "recentNews": "Q4 2025 results beat; solid storage demand.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 5; percentile 99.2; momentum.",
+        "technicalEvidence": "Above 50d/200d; RSI 85.",
+        "momentumEvidence": "Top sector momentum; near highs.",
+        "risk": "RSI overbought; volatility",
+        "invalidation": "Break below 50d MA or deteriorating breadth.",
+        "sourceRefs": [
+          "C5-EARNINGS",
+          "C5-MARKETCAP",
+          "C5-IR"
+        ]
+      },
+      {
+        "symbol": "WDC",
+        "action": "Long",
+        "conviction": "High",
+        "setup": "IT hardware momentum; RSI 78; above 200d trend.",
+        "whyNow": "Rank 6; momentum leadership; near highs; solid 60d/120d returns vs SPY.",
+        "rationale": "Storage infra beneficiaries; AI compute.",
+        "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to enable reliable storage solutions that are proven and trusted at sca...",
+        "marketCap": "$159.9B",
+        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 2.62 versus consensus 2.28; surprise 14.91%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 3.16.",
+        "recentNews": "Q3 FY2026 results; solid demand.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 6; percentile 99; momentum signals.",
+        "technicalEvidence": "RSI high but not extreme; near highs.",
+        "momentumEvidence": "Beating SPY; volume supportive.",
+        "risk": "RSI extended; volatility",
+        "invalidation": "Break below key moving averages.",
+        "sourceRefs": [
+          "C6-EARNINGS",
+          "C6-MARKETCAP",
+          "C6-IR"
         ]
       }
     ],
     "avoidList": {
-      "summary": "Avoid crowded financials and some consumer staples/utilities names that shown weak, low-momentum signal in the 14d window; RSI extremes and high volatility flagged in MU caution.",
+      "summary": "Avoid crowded grow/financials where model rank is weak and macro risk is high; focus on AI/semis leaders with solid momentum but watch RSI.",
       "sectors": [
         {
           "sector": "Financials",
-          "rationale": "18 of the weakest model names are in Financials, signaling risk of crowding and potential drawdowns there."
-        },
-        {
-          "sector": "Consumer Staples",
-          "rationale": "11 weak names; digesting higher rates with uneven margins."
-        },
-        {
-          "sector": "Utilities",
-          "rationale": "11 weak names; risk-off if yields rise."
+          "rationale": "Most weak model names concentrated there."
         }
       ],
       "companies": [
         {
           "symbol": "MCD",
-          "rationale": "Low momentum, high dispersion; weak vols; below-50/200d trend.",
-          "modelEvidence": "Ranked; RSI 20; volume not supportive."
+          "rationale": "Ranked low; weak momentum signals; below 50/200d trend.",
+          "modelEvidence": "Rank 502; negative momentum; low RSI 20."
         },
         {
           "symbol": "MDT",
-          "rationale": "Low momentum; RSI 24; downside risk in health care space.",
-          "modelEvidence": "Ranked; RSI low; volatility structure weak."
+          "rationale": "Low momentum; negative RSI; below 50d trend.",
+          "modelEvidence": "Rank 501; RSI 24."
         },
         {
-          "symbol": "MDLZ",
-          "rationale": "Low momentum; RSI 74 with weak volume confirmation.",
-          "modelEvidence": "Ranked; volatility patterns not supportive."
+          "symbol": "MA",
+          "rationale": "Multiple weak signals; liquidity but momentum deteriorating.",
+          "modelEvidence": "Rank 495; RSI low 40s."
         }
       ]
     },
     "portfolioNotes": [
-      "Reddit attention points include MU and MU-related chatter; long with caution.",
-      "Key macro and earnings catalysts align with model leadership in tech hardware and AI infrastructure; keep risk controls.",
-      "Be patient with MU entry due to RSI, monitor for a pause in momentum to avoid overbought conditions."
+      "Model-led names dominate, but risk controls needed on RSI and volatility.",
+      "openQuestions':['What is next for energy in Hormuz?','Upcoming CPI/PPI impact on rate path?'],",
+      "sourceRefsAddresses[]",
+      "riskFlagsForModelQuality\":[]",
+      "sourceTapeNotes\":\"Macro and earnings tapes present strong IT leadership; energy shock risk persists.\"},"
     ],
     "openQuestions": [
-      "Will CPI/PPI data corroborate the inflation path?",
-      "Can energy supply disruption ease without derailing risk assets?",
-      "Are earnings loud enough to sustain upside in Sandisk and LITE into next quarter?"
+      "What is the next catalysts for LITE, MU, and SNDK?",
+      "Are there signs of breadth fatigue in XLK?",
+      "What is the next major earnings catalyst in IT hardware?"
     ],
     "sourceRefs": [
       "S1",
       "S2",
       "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8",
       "S9",
-      "C1-EARNINGS",
-      "C3-EARNINGS",
-      "C4-EARNINGS",
-      "S13",
+      "S10",
+      "S11",
       "S12"
     ]
   },
   "marketDataStatus": {
     "status": "cached_technical_tape",
     "message": "Fresh Yahoo chart history failed (USE_CACHED_TECHNICALS=1); reused the prior end-of-day technical tape while refreshing news, earnings, Reddit, AI, and model context.",
-    "cachedSnapshotGeneratedAt": "2026-05-08T04:12:19.467Z"
+    "cachedSnapshotGeneratedAt": "2026-05-08T04:33:17.112Z"
   },
   "marketIntelligence": {
-    "generatedAt": "2026-05-08T04:13:02.736Z",
+    "generatedAt": "2026-05-08T04:35:15.953Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-05-08T04:12:19.467Z"
+      "previousRefreshAt": "2026-05-08T04:13:43.177Z"
     },
     "marketDataStatus": {
       "status": "cached_technical_tape",
       "message": "Fresh Yahoo chart history failed (USE_CACHED_TECHNICALS=1); reused the prior end-of-day technical tape while refreshing news, earnings, Reddit, AI, and model context.",
-      "cachedSnapshotGeneratedAt": "2026-05-08T04:12:19.467Z"
+      "cachedSnapshotGeneratedAt": "2026-05-08T04:33:17.112Z"
     },
     "sourceHealth": {
-      "checked": 24,
-      "live": 24,
+      "checked": 26,
+      "live": 26,
       "blockedOrFailed": []
     },
     "professionalDrivers": [
@@ -814,7 +859,8 @@
         "trust": "High",
         "url": "https://www.wellsfargoadvisors.com/research-analysis/commentary/bond-market-commentary.htm?linknav=topnav:ourInsights:marketCommentary:bondMarket",
         "publishedAt": "2026-05-07T07:00:00.000Z",
-        "summary": "Bond Market Updates from Wells Fargo Investment Institute covering bond market news, data and outlook on a daily basis. Learn about the bond market today.",
+        "summary": "Yields lower before initial claims data. Over in bond land, Treasury yields are lower before the opening bell Thursday as markets continue to await news on a potential end to the Iran war.",
+        "excerpt": "Bond Market Commentary | Wells Fargo Investment Institute Yes A checkmark with a circle around it close Bond Market Commentary Updates on bond market data, news, and activity each day. May 7, 2026 Yields lower before initial claims data Over in bond land, Treasury yields are lower before the opening bell Thursday as markets continue to await news on a potential end to the Iran war. Investors are also anticipating today’s economic releases, including weekly initial and continuing jobless claims, March consumer credit, and preliminary first-quarter data on nonfarm productivity and unit labor costs, along with a slew of Federal Reserve (Fed) commentary. As of 6:53 AM ET, the yield on the 10-year note is decreasing two basis points (0.02%) to 4.33%, while the 30-year bond yield is falling one basis point (0.01%) to 4.93%. The yield on the two-year note, which is more sensitive to changes in monetary policy, is down two basis points (0.02%) to 3.85%. Treasury yields were lower on Wednesday following optimism over the potential for a U.S.-Iran peace deal. The ADP National Employment Report showed private payroll growth for April of 109,000, short of expectations. The yield on the 10-year note was down seven basis points (0.07%) to 4.35%, while the 30-year bond yield fell five basis points (0.05%) to 4.94%. The yield on the two-year note decreased seven basis points (0.07%) to 3.87%. On the data front, the Challenger Report for April showed job cuts rising more than expected, though still down 20.9% year-over-year (YOY) compared to prior month’s sharp decline of 78.0%. Preliminary first-quarter nonfarm productivity growth is expected to come in at 0.6% quarter-over-quarter (QOQ), versus the prior quarter’s increase of 1.8%, while unit labor costs are forecasted to have increas",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -823,7 +869,7 @@
           "Credit and liquidity"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 21.2,
+        "ageHours": 21.6,
         "score": 78,
         "tickers": []
       },
@@ -835,7 +881,8 @@
         "trust": "High",
         "url": "https://www.schwab.com/learn/topic/markets-and-economy/1",
         "publishedAt": "2026-05-07T07:00:00.000Z",
-        "summary": "Read our latest market commentary on of-the-moment trends so you can make informed investment decisions",
+        "summary": "Headlines Take a Backseat to Fundamentals in Rally Earnings season brought a reminder that fundamentals are more important than headlines.",
+        "excerpt": "Markets and Economy | Charles Schwab Markets and Economy Read our latest market commentary on of-the-moment trends so you can make informed investment decisions Search Learn Headlines Take a Backseat to Fundamentals in Rally Earnings season brought a reminder that fundamentals are more important than headlines. What should savvy investors be watching as we head into summer? Podcast | May 7, 2026 Today's Options Market Update Article | May 7, 2026 U.S. No Safe Haven from Oil Spike, Drivers Learn Article | May 7, 2026 Market Snapshot | May 2026 Video | May 7, 2026 As Jobs Report Looms, Market Visits McDonald's Podcast | May 7, 2026 Looking to the Futures Article | May 7, 2026 Stocks Flat, Yields and Oil Down on Data, War News Article | May 7, 2026 Jobs Data, Disney Awaited After New Record Highs Podcast | May 6, 2026 First Quarter 2026 Earnings: Feelin' Alright Article | May 6, 2026 Jobs Data Parade Starts as Middle East Fears Rise Podcast | May 5, 2026 Explore more topics The information provided here is for general informational purposes only and is not intended to be a substitute for specific individualized tax, legal or investment planning advice. Where specific advice is necessary or appropriate, consult with a qualified tax advisor, CPA, financial planner or investment manager. Investing involves risk, including loss of principal. Hedging and protective strategies generally involve additional costs and do not assure a profit or guarantee against loss. Options carry a high level of risk and are not suitable for all investors. Certain requirements must be met to trade options through Schwab. Please read the options disclosure document titled \" Characteristics and Risks of Standardized Options \" before considering any option transaction. Supporting documentation for an",
         "themes": [
           "Earnings",
           "Geopolitics and policy",
@@ -843,7 +890,7 @@
           "Macro and growth"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 21.2,
+        "ageHours": 21.6,
         "score": 78,
         "tickers": []
       },
@@ -855,7 +902,8 @@
         "trust": "High",
         "url": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm?linknav=topnav:ourInsights:marketCommentary:stockMarket",
         "publishedAt": "2026-05-07T07:00:00.000Z",
-        "summary": "Stock market news, commentary, data, market activity and economic reports covering Nasdaq Composite, S&P and Dow Jones updated three times daily.",
+        "summary": "Stocks higher before initial claims data. Stock futures are mostly higher Thursday morning as markets continue to await news on a potential end to the Iran war.",
+        "excerpt": "Stock Market News | Wells Fargo Investment Institute Yes A checkmark with a circle around it close Stock Market News Our market analysts keep you updated on the latest market trends including stock market data, news, market activity, and economic reports in the daily stock market commentary. Opening Comment — Thursday, May 07, 2026 DJIA: 49,910.59, up 612.34 S&P 500: 7,365.12, up 105.90 NASDAQ: 25,838.94, up 512.81 Stocks higher before initial claims data Stock futures are mostly higher Thursday morning as markets continue to await news on a potential end to the Iran war. Investors are also anticipating today’s economic releases, including weekly initial and continuing jobless claims, March consumer credit, and preliminary first-quarter data on nonfarm productivity and unit labor costs, along with a slew of Federal Reserve (Fed) commentary. As of 7:20 AM ET, the Dow and the S&P 500 Index are both rising 0.1%. The Nasdaq 100 is little changed relative to fair value on the GLOBEX. U.S. equities were higher on Wednesday following optimism over the potential for a U.S.-Iran peace deal. The ADP National Employment Report showed private payroll growth for April of 109,000, short of expectations. The Dow was up 1.2%, while the tech-heavy Nasdaq Composite rose 2.0% and hit a new record closing level of 25838.94. The S&P 500 increased 1.5% and set a new record closing level of 7365.12, with nine of 11 sectors finishing in positive territory. The Industrials sector was the top performer, rising 2.6%, while the Energy sector was the bottom performer, falling 4.1%. On the data front, the Challenger Report for April showed job cuts rising more than expected, though still down 20.9% year-over-year (YOY) compared to prior month’s sharp decline of 78.0%. Preliminary first-quarter nonfa",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -865,7 +913,7 @@
           "Credit and liquidity"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 21.2,
+        "ageHours": 21.6,
         "score": 70,
         "tickers": []
       },
@@ -878,12 +926,13 @@
         "url": "https://www.cnbc.com/2026/05/08/cnbc-daily-open-us-iran-fire-hormuz-ceasefire-oil-markets.html",
         "publishedAt": "2026-05-08T01:26:40.000Z",
         "summary": "On Thursday, the U.S. and Iran opened fire in the Strait of Hormuz, with each side claiming the other initiated the attack.",
+        "excerpt": "CNBC Daily Open: Who shot first? Hormuz heats again as ceasefire and oil markets in peril Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points The U.S. and Iran opened fire in the Strait of Hormuz, with each side claiming the other initiated the attack. U.S. President Donald Trump insisted the ceasefire between Washington and Tehran remains in effect. Shell CEO Wael Sawan warns the oil market is facing a shortage of 1 billion barrels of oil. The rally in gold and silver could resume if a U.S.-Iran peace settlement is reached. Cloudflare shares tumbled 18% after the company announced that it was laying off one-fifth of its workforce. In this article .SPX Follow your favorite stocks CREATE FREE ACCOUNT U.S. President Donald Trump sits at a table monitoring military operations during Operation Epic Fury against Iran, with U.S. flags visible behind him, in Washington, United States, on March 2, 2026. The White House via X | Anadolu | Getty Images Hello, this is Hui Jie writing to you from Singapore. Welcome to another edition of CNBC's Daily Open. Less than 24 hours after I wrote that peace could be on the horizon, Washington and Tehran were back exchanging fire. Predicting the trajectory of this conflict is beginning to feel like a roulette with missiles. So the question now is simple: Who shot first? What you need to know today The stop-start nature of the Iran war means that any attempt to project the conflict's trajectory usually ends in failure. On Thursday, the U.S. and Iran opened fire in the Strait of Hormuz , with each side accusing the other of initiating the attack. Besides the escalation, U.S. President Donald Trump insisted the ceasefire between Washington and Tehran remained intact, even as he c",
         "themes": [
           "Geopolitics and policy",
           "Commodities and energy"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 2.8,
+        "ageHours": 3.1,
         "score": 70,
         "tickers": []
       },
@@ -896,12 +945,13 @@
         "url": "https://www.cnbc.com/2026/05/08/asia-pacific-today-updates-nikkei-225-kospi-sensex-asi-hang-seng-csi-300.html",
         "publishedAt": "2026-05-07T23:47:32.000Z",
         "summary": "Asia-Pacific markets open lower Friday, as concerns grew over renewed hostilities between Iran and the U.S. amid a fragile ceasefire.",
+        "excerpt": "Asia-Pacific today: Nikkei 225, Hang Seng, Kospi, Sensex, CSI 300 Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Asia markets fell as U.S.-Iran tensions unsettled investors. U.S. and Iran traded fire in the Strait of Hormuz, with each side claiming the other initiated the attack. U.S. tech weakness weighed on Wall Street despite the Nasdaq’s record. In this article @CL.1 @LCO.1 @SP.1 @ND.1 @DJ.1 Follow your favorite stocks CREATE FREE ACCOUNT Offshore vessel 'Zakher Duty' at the Port of Fujairah, as the U.S.-Israel conflict with Iran limits marine traffic in the Strait of Hormuz, in Fujairah, United Arab Emirates, May 6, 2026. Amr Alfiky | Reuters Asia-Pacific markets traded lower Friday, as concerns grew over renewed hostilities between Iran and the U.S. amid a fragile ceasefire. The U.S. and Iran traded fire in the Strait of Hormuz , with each side claiming the other initiated the attack. Despite the escalation, President Donald Trump insisted that the ceasefire remains in effect, saying the strikes are \"just a love tap\" during a call with an ABC News reporter later Thursday. Trump later claimed in a subsequent Truth Social post that the U.S. \"completely destroyed\" the Iranians involved in the exchange, which he said included small boats and drones that \"dropped ever so beautifully down to the Ocean, very much like a butterfly dropping to its grave!\" He reiterated that Iran will face further attacks if they do not agree to a nuclear deal. \"Just like we knocked them out again today, we'll knock them out a lot harder, and a lot more violently, in the future, if they don't get their Deal signed, FAST!\" Trump wrote. Oil futures pared early gains. The West Texas Intermediate futures for June was 0.81% ",
         "themes": [
           "Geopolitics and policy",
           "Commodities and energy"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 4.4,
+        "ageHours": 4.8,
         "score": 70,
         "tickers": []
       },
@@ -914,13 +964,14 @@
         "url": "https://www.cnbc.com/2026/05/07/shell-ceo-iran-war-oil-lost-shortage.html",
         "publishedAt": "2026-05-07T19:16:04.000Z",
         "summary": "The oil market hopes the U.S. and Iran will strike a deal that could reopen the Strait of Hormuz and restore energy shipments.",
+        "excerpt": "Shell CEO says oil market is short 1 billion barrels due to Iran war Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Shell CEO Wael Sawan said it will take a long time to recover the supply lost due to the Iran war. Demand for jet fuel in the airline industry has been curtailed around 5%, Sawan said. Oil executives have warned it will take weeks to months for oil flows to normalize and that fuel shortages could hit some countries this summer. In this article SHEL Follow your favorite stocks CREATE FREE ACCOUNT watch now VIDEO 3:01 03:01 Shell CEO on Iran: You're seeing the hard reality of taking 12% of the world's crude off the market Money Movers The oil market faces a shortage of nearly 1 billion barrels that will only get worse every day the conflict in the Middle East drags on, Shell CEO Wael Sawan told investors Thursday. \"The hard facts are we have dug ourselves a hole of close to a billion barrels of crude shortage at the moment, either because of locked in barrels or unproduced barrels,\" Sawan said during the London-headquartered oil producer's first-quarter earnings call. \"And of course, that hole is deepening every single day, so the journey back will be a long one,\" Sawan said. To put that number in context, the entire world consumes about 100 million barrels of oil every day, according to data from OPEC. Halliburton also estimates that oil production lost due to the war is trending toward a billion barrels, CEO Jeffrey Miller said on the oil field service company's April 21 earnings call. \"Recovery of oil and gas production and inventories will not be a quick or simple process,\" Miller said. Small consumption decline Demand destruction due to lost oil supplies have been modest so far, Saw",
         "themes": [
           "Earnings",
           "Geopolitics and policy",
           "Commodities and energy"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 8.9,
+        "ageHours": 9.3,
         "score": 70,
         "tickers": []
       },
@@ -933,12 +984,13 @@
         "url": "https://www.cnbc.com/2026/05/08/oil-prices-today-wti-brent-us-iran-fire-war-hormuz-ceasefire.html",
         "publishedAt": "2026-05-08T03:57:41.000Z",
         "summary": "The U.S. and Iran exchanged fire in the Strait of Hormuz, raising fresh fears that the fragile ceasefire between the two countries was unraveling.",
+        "excerpt": "The U.S. and Iran exchanged fire in the Strait of Hormuz, raising fresh fears that the fragile ceasefire between the two countries was unraveling.",
         "themes": [
           "Geopolitics and policy",
           "Commodities and energy"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 0.3,
+        "ageHours": 0.6,
         "score": 70,
         "tickers": []
       },
@@ -951,12 +1003,13 @@
         "url": "https://www.cnbc.com/2026/05/07/cloudflare-net-q1-2026-stock-earnings-layoffs.html",
         "publishedAt": "2026-05-07T22:19:17.000Z",
         "summary": "The cloud provider announced it is laying off 20% of its workforce as agentic artificial intelligence \"fundamentally changes\" the company's work.",
+        "excerpt": "The cloud provider announced it is laying off 20% of its workforce as agentic artificial intelligence \"fundamentally changes\" the company's work.",
         "themes": [
           "Earnings",
           "AI and semis"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 5.9,
+        "ageHours": 6.3,
         "score": 70,
         "tickers": []
       },
@@ -969,12 +1022,13 @@
         "url": "https://www.marketwatch.com/story/oil-futures-rise-after-u-s-iran-trade-fire-stock-futures-quiet-after-court-rejects-trumps-tariffs-4ee86b13?mod=mw_rss_topstories",
         "publishedAt": "2026-05-08T02:57:00.000Z",
         "summary": "Oil futures moved higher late Thursday while stock-index futures were little changed after the U.S. and Iran exchanged fire in the Persian Gulf, and after a federal court struck down President Donald Trump’s backup tariff plan.",
+        "excerpt": "Oil futures moved higher late Thursday while stock-index futures were little changed after the U.S. and Iran exchanged fire in the Persian Gulf, and after a federal court struck down President Donald Trump’s backup tariff plan.",
         "themes": [
           "Geopolitics and policy",
           "Commodities and energy"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 1.3,
+        "ageHours": 1.6,
         "score": 70,
         "tickers": []
       },
@@ -986,7 +1040,8 @@
         "trust": "High",
         "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
         "publishedAt": "2026-05-04T07:00:00.000Z",
-        "summary": "Navigating stock and other investment volatility can be difficult. Here is what to know to manage market volatility.",
+        "summary": "Navigating stock and other investment volatility can be difficult.",
+        "excerpt": "Market volatility: Investing strategies for volatile markets | Fidelity Market Insights 6 habits of successful investors Sticking to a plan, even in challenging times, can help you now and in the future. 6 low-risk investments for yield seekers Keep your goals, risk tolerance, and time horizon in mind. Finding opportunities amid market volatility Surprising areas where Fidelity managers have found ideas. Filter {{contentType.contentType}} , {{contentType.count}} items Show all Latest market insights Advance slider to the left Advance slider to the right Market Roundup: May 4, 2026 Our pros' weekly take on the markets and economy S&P 500 closes its best month since 2020 Stock market update: May 1, 2026 Inflation is flaring: Could rate hikes be ahead? This inflation spike isn’t a repeat of 2022—but it rhymes. 3 surprising clues markets may be ignoring The pullback has created unusual potential opportunity. Investors should take note. Why stocks have been surprisingly resilient Strong earnings growth helps offset oil shock jitters. Are energy stocks just getting started? The Iran conflict’s impact on oil prices could persist after the hostilities end. A game plan for market corrections While disconcerting, occasional market downturns are normal occurrences. How will we know we're in a recession? It involves several different factors. Inflation is flaring: Could rate hikes be ahead? This inflation spike isn’t a repeat of 2022—but it rhymes. 5 takeaways from the recent volatility Stocks, oil, and sector leadership could take unexpected turns. 7 biggest mistakes investors are making now When the news cycle feels unsteady, it's easy to lose your footing. Can the housing market finally rebound? Fidelity leaders answer common questions about mortgage rates, home pricing, and inv",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -995,7 +1050,7 @@
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 93.2,
+        "ageHours": 93.6,
         "score": 62,
         "tickers": []
       },
@@ -1008,11 +1063,12 @@
         "url": "https://www.cnbc.com/2026/05/08/iran-focus-at-trump-xi-summit-may-delay-progress-on-tariffs-rare-earths.html",
         "publishedAt": "2026-05-08T00:56:49.000Z",
         "summary": "Thanks to the Iran war, big issues for U.S. businesses like rare earths and supply chains may take a back seat on the agenda for the Trump-Xi summit.",
+        "excerpt": "Thanks to the Iran war, big issues for U.S. businesses like rare earths and supply chains may take a back seat on the agenda for the Trump-Xi summit.",
         "themes": [
           "Geopolitics and policy"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 3.3,
+        "ageHours": 3.6,
         "score": 62,
         "tickers": []
       },
@@ -1025,13 +1081,14 @@
         "url": "https://www.cnbc.com/2026/05/07/coreweave-crwv-q1-earnings-report-2026.html",
         "publishedAt": "2026-05-07T23:38:14.000Z",
         "summary": "CoreWeave has been raising debt to finance its data center buildout, and S&P has boosted the company's credit rating.",
+        "excerpt": "CoreWeave has been raising debt to finance its data center buildout, and S&P has boosted the company's credit rating.",
         "themes": [
           "Earnings",
           "Credit and liquidity",
           "AI and semis"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 4.6,
+        "ageHours": 5,
         "score": 62,
         "tickers": []
       },
@@ -1043,12 +1100,13 @@
         "trust": "Medium",
         "url": "https://www.cnbc.com/2026/05/07/coinbase-coin-earnings-q1-2026.html",
         "publishedAt": "2026-05-07T23:28:00.000Z",
-        "summary": "Crypto trading platform Coinbase reported a surprise first-quarter loss and weaker-than-estimated revenue after the market close Thursday.",
+        "summary": "Crypto trading platform Coinbase reported a surprise first-quarter loss and weaker-than-estimated revenue after the market Thursday.",
+        "excerpt": "Crypto trading platform Coinbase reported a surprise first-quarter loss and weaker-than-estimated revenue after the market close Thursday.",
         "themes": [
           "Earnings"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 4.8,
+        "ageHours": 5.1,
         "score": 62,
         "tickers": []
       },
@@ -1061,12 +1119,13 @@
         "url": "https://www.marketwatch.com/story/irens-stock-soars-as-a-major-nvidia-investment-overshadows-revenue-shortfall-c286cdb8?mod=mw_rss_topstories",
         "publishedAt": "2026-05-08T00:30:00.000Z",
         "summary": "Nvidia is taking a major stake in Iren to build out a 5-gigawatt global footprint for its AI factory ambitions",
+        "excerpt": "Nvidia is taking a major stake in Iren to build out a 5-gigawatt global footprint for its AI factory ambitions",
         "themes": [
           "Earnings",
           "AI and semis"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 3.7,
+        "ageHours": 4.1,
         "score": 62,
         "tickers": []
       },
@@ -1079,12 +1138,13 @@
         "url": "https://www.raymondjames.com/commentary-and-insights/markets-investing/2026/05/06/the-markets-cultural-headwaters",
         "publishedAt": "2026-05-06T10:29:00.000Z",
         "summary": "How Baby Boomers and Millennials shaped, and are shaped by, their economies.",
+        "excerpt": "The market’s cultural headwaters Skip to content Share: The market’s cultural headwaters Markets & Investing How Baby Boomers and Millennials shaped, and are shaped by, their economies. The generational divide is a part of the human condition &ndash; and the investor condition. It&rsquo;s not just that one group has more experience than the other, or that one is more eager to make its own way, but that both groups can learn totally different lessons from the same event. We can look at the Great Recession as a fork in the road, leading to some interesting generational differences among investors. Baby Boomers, whose generation began in 1946, experienced the 2008-2009 crash in their mid-40s to mid-60s; those ages when retirement discussions start to get serious. They saw the value of the US stock market, in which they were heavily invested, drop by 40%. Many older members of their cohort delayed retirement until the dust settled and it took roughly six years for the S&P 500 to reach pre-crash values. The Millennial generation &ndash; the oldest of whom were born in 1981 &ndash; were just arriving to the job market as the Great Recession caused the unemployment rate to spike to 10%. Many were forced to delay the hallmarks of American adulthood &ndash; marriage, families and homeownership &ndash; and then were not heavily invested enough to enjoy the market bounce that followed. Both generations then witnessed the longest sustained bull market in history. Many Baby Boomers were able to make up for lost time. Millennials have remained a step behind. The lessons both cohorts brought out of that same moment couldn&rsquo;t be more different. How Baby Boomers are shaping the market With the US national debt approaching $40 trillion, how long the country can keep relying on borro",
         "themes": [
           "Rates and central banks",
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 41.7,
+        "ageHours": 42.1,
         "score": 54,
         "tickers": []
       },
@@ -1097,11 +1157,12 @@
         "url": "https://www.marketwatch.com/story/cloudflare-to-cut-20-of-staff-in-a-big-bet-on-ai-investors-arent-sold-501d4aa3?mod=mw_rss_topstories",
         "publishedAt": "2026-05-08T00:32:00.000Z",
         "summary": "The company’s stock falls as co-founders say the layoffs are “not a cost-cutting exercise.”",
+        "excerpt": "The company’s stock falls as co-founders say the layoffs are “not a cost-cutting exercise.”",
         "themes": [
           "AI and semis"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 3.7,
+        "ageHours": 4.1,
         "score": 48,
         "tickers": []
       },
@@ -1113,7 +1174,8 @@
         "trust": "High",
         "url": "https://www.schwab.com/learn/story/stock-market-update-open",
         "publishedAt": "2026-05-07T07:00:00.000Z",
-        "summary": "Learn what's trending before the opening bell with Schwab's market open report. Find out about macroeconomic reports, company earnings, and other events.",
+        "summary": "Learn what's trending before the opening bell with Schwab's market open report.",
+        "excerpt": "Schwab Market Update | Charles Schwab Search Learn Markets and Economy Stocks Flat, Yields and Oil Down on Data, War News After the blistering mid-week rally, stocks flattened early amid a host of data and earnings and as investors remain hopeful peace talks can resume. Oil and yields both retreated. May 7, 2026 • Joe Mazzola Published as of: May 7, 2026, 9:27 a.m. ET Listen to this article Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,365.12 +105.90 +1.46% Dow Jones Industrial Average ® 49,910.59 +612.34 +1.24% Nasdaq Composite ® 25,838.94 +512.84 +2.02% 10-year Treasury yield 4.32% -0.03 -- U.S. Dollar Index 97.85 -0.17 -0.18% Cboe Volatility Index ® 17.35 -0.04 -0.23% WTI Crude Oil $90.32 -$4.76 -5.01% Bitcoin $81,400 -$335 0.41% Disclosure (Thursday market open) Wall Street took an early breather from its rapid, record-breaking mid-week rally. Major indexes flattened and crude slipped more than 5% as the U.S. awaited a response from Iran to its latest proposal ahead of possible talks. In a data appetizer to Friday's main course of nonfarm payrolls , April job cuts climbed sharply, but that apparently didn't stop people from having a bite at McDonald's (MCD), which reported strong quarterly results. Though the conflict remains central, focus shifts Friday to April nonfarm payrolls , due at 8:30 a.m. ET. The average analyst estimate for new jobs has slipped over the course of the week and the unemployment rate is expected to stay at 4.3%. \"The labor market has been showing some signs of stabilization, so Friday's report will be closely watched ",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -1122,7 +1184,7 @@
           "Macro and growth"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 21.2,
+        "ageHours": 21.6,
         "score": 38,
         "tickers": []
       },
@@ -1135,6 +1197,7 @@
         "url": "https://www.schwab.com/learn/story/looking-to-futures",
         "publishedAt": "2026-05-07T07:00:00.000Z",
         "summary": "News never sleeps and neither do the futures markets. Get the latest developments and analysis of what is impacting the futures markets.",
+        "excerpt": "A Look at What's Impacting Futures Markets | Charles Schwab Search Learn Futures Looking to the Futures Silver futures extend gains as sector demand for the commodity increases Silver Futures for the July expiration (/SIN26) were up 5% in early trading as the Dollar Index ($DXY) tested recent lows. May 7, 2026 • Quin B. Fields As the equity markets push all time highs seeking to put the Iran War in the rearview there has been a shift back towards U.S. economic growth and investment. Net inflows in passively managed index funds continue to increase from the prior month and specific sectors such as technology, industrials, and energy have seen significant capital deployment. As the growth story comes back into play, commodity demand is on the rise. Silver is one such commodity that is heavily used in technology and sub-categories of the energy sector. Due to its electrical conductivity and optical reflectivity, it is widely used in electrical devices, smartphones, and data servers. We’ve seen historic investment in AI data centers totaling roughly 350 billion during 2025 from Amazon, Google, Microsoft, and Meta. These four “hyperscalers” are projected to push that number in 2026 to a record estimated capex spend of 700 billion. Additionally, we’ve seen a short-term surge in photovoltaics technology or solar power as last week a federal court blocked the Trump Administration’s policies restricting wind and solar permitting. A federal court granted a preliminary injunction barring the U.S. government from enforcing five agency actions that had effectively stalled federal permitting for wind and solar projects nationwide. Photovoltaics rank second in terms of total consumption and demand for silver behind technology. Copper (/HG) is the only acceptable substitute for silver ",
         "themes": [
           "Geopolitics and policy",
           "Commodities and energy",
@@ -1142,7 +1205,7 @@
           "AI and semis"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 21.2,
+        "ageHours": 21.6,
         "score": 30,
         "tickers": []
       }
@@ -1175,7 +1238,7 @@
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-05-08T04:13:02.733Z",
+      "generatedAt": "2026-05-08T04:35:15.946Z",
       "dates": [
         "2026-05-06",
         "2026-05-07",
@@ -3070,7 +3133,7 @@
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-05-08T04:12:53.083Z",
+      "generatedAt": "2026-05-08T04:35:04.623Z",
       "sourceNote": "Public Reddit JSON endpoints; use as sentiment and attention only, not verified news.",
       "subreddits": [
         {
@@ -3113,8 +3176,8 @@
         {
           "symbol": "AMD",
           "mentions": 8,
-          "score": 16164,
-          "comments": 1597,
+          "score": 16211,
+          "comments": 1601,
           "subreddits": [
             "wallstreetbets",
             "stocks",
@@ -3125,32 +3188,32 @@
             {
               "title": "AMD +$9.5M",
               "subreddit": "wallstreetbets",
-              "score": 12344,
-              "comments": 691,
+              "score": 12363,
+              "comments": 693,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5e9yr/amd_95m/"
             },
             {
               "title": "I hear that everyone’s a millionaire now - $2M",
               "subreddit": "wallstreetbets",
-              "score": 2260,
+              "score": 2266,
               "comments": 302,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5wklp/i_hear_that_everyones_a_millionaire_now_2m/"
             },
             {
               "title": "AMD’s stock soars as data center revenue jumps 57%",
               "subreddit": "stocks",
-              "score": 938,
+              "score": 943,
               "comments": 365,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t4uv3g/amds_stock_soars_as_data_center_revenue_jumps_57/"
             }
           ],
-          "attentionScore": 483.13000000000005
+          "attentionScore": 484.27000000000004
         },
         {
           "symbol": "INTC",
           "mentions": 6,
-          "score": 973,
-          "comments": 426,
+          "score": 998,
+          "comments": 427,
           "subreddits": [
             "wallstreetbets",
             "stocks",
@@ -3161,32 +3224,32 @@
             {
               "title": "Intel trading at a ~119x forward P/E and nobody is talking about this",
               "subreddit": "stocks",
-              "score": 644,
+              "score": 642,
               "comments": 251,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t5hxu0/intel_trading_at_a_119x_forward_pe_and_nobody_is/"
             },
             {
               "title": "My friends and family can never know (My portfolio)😔✊",
               "subreddit": "wallstreetbets",
-              "score": 123,
-              "comments": 42,
+              "score": 147,
+              "comments": 43,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6tt8l/my_friends_and_family_can_never_know_my_portfolio/"
             },
             {
               "title": "INTC gain",
               "subreddit": "wallstreetbets",
-              "score": 144,
+              "score": 148,
               "comments": 18,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6h848/intc_gain/"
             }
           ],
-          "attentionScore": 100.76
+          "attentionScore": 101.31
         },
         {
           "symbol": "SPY",
           "mentions": 8,
-          "score": 392,
-          "comments": 169,
+          "score": 394,
+          "comments": 170,
           "subreddits": [
             "wallstreetbets",
             "investing",
@@ -3203,25 +3266,25 @@
             {
               "title": "$2,000 &gt; $12,000 &gt; $3,000. SPY 0DTEs will always be my drug",
               "subreddit": "wallstreetbets",
-              "score": 151,
-              "comments": 44,
+              "score": 149,
+              "comments": 45,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6q05q/2000_12000_3000_spy_0dtes_will_always_be_my_drug/"
             },
             {
               "title": "My best trade of the year: SPY +254%",
               "subreddit": "wallstreetbets",
-              "score": 64,
+              "score": 68,
               "comments": 14,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6g5ru/my_best_trade_of_the_year_spy_254/"
             }
           ],
-          "attentionScore": 96.29
+          "attentionScore": 96.38
         },
         {
           "symbol": "NVDA",
           "mentions": 6,
-          "score": 679,
-          "comments": 381,
+          "score": 676,
+          "comments": 382,
           "subreddits": [
             "stocks",
             "investing",
@@ -3232,31 +3295,31 @@
             {
               "title": "Why do we chase 10x underdogs instead of proven winners for 1x or 2x upside? $GOOGL, $AMZN, $NVDA",
               "subreddit": "stocks",
-              "score": 499,
+              "score": 498,
               "comments": 280,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t509id/why_do_we_chase_10x_underdogs_instead_of_proven/"
             },
             {
               "title": "NVIDIA and IREN Announce Strategic Partnership to Accelerate Deployment of up to 5 Gigawatts of AI Infrastructure, IREN +25% AH",
               "subreddit": "stocks",
-              "score": 98,
+              "score": 100,
               "comments": 15,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t6mty3/nvidia_and_iren_announce_strategic_partnership_to/"
             },
             {
               "title": "Is there a reason Qualcomm went from 125 to 220 in a week? No one uses them for AI, edge computing, soon Apple will not use their modems",
               "subreddit": "investing",
-              "score": 55,
-              "comments": 49,
+              "score": 53,
+              "comments": 50,
               "permalink": "https://www.reddit.com/r/investing/comments/1t6kzo2/is_there_a_reason_qualcomm_went_from_125_to_220/"
             }
           ],
-          "attentionScore": 92.63
+          "attentionScore": 92.62
         },
         {
           "symbol": "MU",
           "mentions": 3,
-          "score": 2310,
+          "score": 2311,
           "comments": 317,
           "subreddits": [
             "wallstreetbets",
@@ -3266,32 +3329,32 @@
             {
               "title": "I hear that everyone’s a millionaire now - $2M",
               "subreddit": "wallstreetbets",
-              "score": 2260,
+              "score": 2266,
               "comments": 302,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5wklp/i_hear_that_everyones_a_millionaire_now_2m/"
             },
             {
               "title": "Saucy MU gains. My biggest hit yet. Rolled into longer expiry. 800 by EOM.",
               "subreddit": "wallstreetbets",
-              "score": 41,
+              "score": 39,
               "comments": 8,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6jswm/saucy_mu_gains_my_biggest_hit_yet_rolled_into/"
             },
             {
               "title": "Current memory semiconductor sector sentiment: Value disconnect between MU and peer AI stocks",
               "subreddit": "investing",
-              "score": 9,
+              "score": 6,
               "comments": 7,
               "permalink": "https://www.reddit.com/r/investing/comments/1t6dbs4/current_memory_semiconductor_sector_sentiment/"
             }
           ],
-          "attentionScore": 92.05000000000001
+          "attentionScore": 92.07
         },
         {
           "symbol": "HOOD",
           "mentions": 2,
-          "score": 2383,
-          "comments": 344,
+          "score": 2413,
+          "comments": 345,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -3299,24 +3362,24 @@
             {
               "title": "I hear that everyone’s a millionaire now - $2M",
               "subreddit": "wallstreetbets",
-              "score": 2260,
+              "score": 2266,
               "comments": 302,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5wklp/i_hear_that_everyones_a_millionaire_now_2m/"
             },
             {
               "title": "My friends and family can never know (My portfolio)😔✊",
               "subreddit": "wallstreetbets",
-              "score": 123,
-              "comments": 42,
+              "score": 147,
+              "comments": 43,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6tt8l/my_friends_and_family_can_never_know_my_portfolio/"
             }
           ],
-          "attentionScore": 84.86
+          "attentionScore": 85.50999999999999
         },
         {
           "symbol": "UBER",
           "mentions": 2,
-          "score": 2266,
+          "score": 2272,
           "comments": 338,
           "subreddits": [
             "wallstreetbets",
@@ -3326,7 +3389,7 @@
             {
               "title": "I hear that everyone’s a millionaire now - $2M",
               "subreddit": "wallstreetbets",
-              "score": 2260,
+              "score": 2266,
               "comments": 302,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5wklp/i_hear_that_everyones_a_millionaire_now_2m/"
             },
@@ -3338,12 +3401,12 @@
               "permalink": "https://www.reddit.com/r/stocks/comments/1t6dzpv/uber_as_an_autonomous_vehicles_play_or_physical/"
             }
           ],
-          "attentionScore": 82.22
+          "attentionScore": 82.34
         },
         {
           "symbol": "GOOG",
           "mentions": 1,
-          "score": 2260,
+          "score": 2266,
           "comments": 302,
           "subreddits": [
             "wallstreetbets"
@@ -3352,17 +3415,17 @@
             {
               "title": "I hear that everyone’s a millionaire now - $2M",
               "subreddit": "wallstreetbets",
-              "score": 2260,
+              "score": 2266,
               "comments": 302,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5wklp/i_hear_that_everyones_a_millionaire_now_2m/"
             }
           ],
-          "attentionScore": 70.30000000000001
+          "attentionScore": 70.42
         },
         {
           "symbol": "CNC",
           "mentions": 1,
-          "score": 2260,
+          "score": 2266,
           "comments": 302,
           "subreddits": [
             "wallstreetbets"
@@ -3371,17 +3434,17 @@
             {
               "title": "I hear that everyone’s a millionaire now - $2M",
               "subreddit": "wallstreetbets",
-              "score": 2260,
+              "score": 2266,
               "comments": 302,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5wklp/i_hear_that_everyones_a_millionaire_now_2m/"
             }
           ],
-          "attentionScore": 70.30000000000001
+          "attentionScore": 70.42
         },
         {
           "symbol": "VOO",
           "mentions": 4,
-          "score": 364,
+          "score": 365,
           "comments": 284,
           "subreddits": [
             "stocks",
@@ -3391,7 +3454,7 @@
             {
               "title": "Do you think tech will outperform the market over the next 30+ years",
               "subreddit": "investing",
-              "score": 170,
+              "score": 173,
               "comments": 168,
               "permalink": "https://www.reddit.com/r/investing/comments/1t5owxh/do_you_think_tech_will_outperform_the_market_over/"
             },
@@ -3405,17 +3468,17 @@
             {
               "title": "Anyone know of an AI Energy and Infrastructure ETF - minus semiconductor?",
               "subreddit": "stocks",
-              "score": 22,
+              "score": 20,
               "comments": 13,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t6gjp7/anyone_know_of_an_ai_energy_and_infrastructure/"
             }
           ],
-          "attentionScore": 61.480000000000004
+          "attentionScore": 61.5
         },
         {
           "symbol": "NET",
           "mentions": 1,
-          "score": 1747,
+          "score": 1754,
           "comments": 138,
           "subreddits": [
             "wallstreetbets"
@@ -3424,17 +3487,17 @@
             {
               "title": "I DECLARE BANKRUPCY...ON AWS MARKETSHARE - STOCK MIKE",
               "subreddit": "wallstreetbets",
-              "score": 1747,
+              "score": 1754,
               "comments": 138,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5ylt8/i_declare_bankrupcyon_aws_marketshare_stock_mike/"
             }
           ],
-          "attentionScore": 51.839999999999996
+          "attentionScore": 51.98
         },
         {
           "symbol": "ON",
           "mentions": 1,
-          "score": 1747,
+          "score": 1754,
           "comments": 138,
           "subreddits": [
             "wallstreetbets"
@@ -3443,18 +3506,18 @@
             {
               "title": "I DECLARE BANKRUPCY...ON AWS MARKETSHARE - STOCK MIKE",
               "subreddit": "wallstreetbets",
-              "score": 1747,
+              "score": 1754,
               "comments": 138,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5ylt8/i_declare_bankrupcyon_aws_marketshare_stock_mike/"
             }
           ],
-          "attentionScore": 51.839999999999996
+          "attentionScore": 51.98
         },
         {
           "symbol": "AMZN",
           "mentions": 2,
-          "score": 622,
-          "comments": 322,
+          "score": 645,
+          "comments": 323,
           "subreddits": [
             "wallstreetbets",
             "stocks"
@@ -3463,25 +3526,25 @@
             {
               "title": "Why do we chase 10x underdogs instead of proven winners for 1x or 2x upside? $GOOGL, $AMZN, $NVDA",
               "subreddit": "stocks",
-              "score": 499,
+              "score": 498,
               "comments": 280,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t509id/why_do_we_chase_10x_underdogs_instead_of_proven/"
             },
             {
               "title": "My friends and family can never know (My portfolio)😔✊",
               "subreddit": "wallstreetbets",
-              "score": 123,
-              "comments": 42,
+              "score": 147,
+              "comments": 43,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6tt8l/my_friends_and_family_can_never_know_my_portfolio/"
             }
           ],
-          "attentionScore": 48.54
+          "attentionScore": 49.05
         },
         {
           "symbol": "DTE",
           "mentions": 4,
-          "score": 38,
-          "comments": 41,
+          "score": 39,
+          "comments": 43,
           "subreddits": [
             "options"
           ],
@@ -3489,7 +3552,7 @@
             {
               "title": "Selling Bull Put Spread on boring stocks.",
               "subreddit": "options",
-              "score": 26,
+              "score": 27,
               "comments": 36,
               "permalink": "https://www.reddit.com/r/options/comments/1t4pjca/selling_bull_put_spread_on_boring_stocks/"
             },
@@ -3497,7 +3560,7 @@
               "title": "My 8-14 DTE trades hit 92% win rate. My 15-21 DTE trades hit 56%. Here's 9 months of my data.",
               "subreddit": "options",
               "score": 9,
-              "comments": 2,
+              "comments": 4,
               "permalink": "https://www.reddit.com/r/options/comments/1t6thlp/my_814_dte_trades_hit_92_win_rate_my_1521_dte/"
             },
             {
@@ -3508,7 +3571,7 @@
               "permalink": "https://www.reddit.com/r/options/comments/1t6b1yw/ic_setups/"
             }
           ],
-          "attentionScore": 42.809999999999995
+          "attentionScore": 42.93
         },
         {
           "symbol": "QQQ",
@@ -3554,7 +3617,7 @@
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t674od/daily_discussion_thread_for_may_07_2026/",
           "createdAt": "2026-05-07T11:00:53.000Z",
           "score": 212,
-          "comments": 13264,
+          "comments": 13265,
           "upvoteRatio": 0.94,
           "flair": "Daily Discussion",
           "tickers": []
@@ -3567,7 +3630,7 @@
           "url": "https://i.redd.it/ewl9gslthkzg1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5mwm9/market_after_you_sell/",
           "createdAt": "2026-05-06T19:19:23.000Z",
-          "score": 23787,
+          "score": 23817,
           "comments": 475,
           "upvoteRatio": 0.97,
           "flair": "Meme",
@@ -3581,8 +3644,8 @@
           "url": "https://www.reddit.com/r/wallstreetbets/comments/1t6lkym/what_are_your_moves_tomorrow_may_08_2026/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6lkym/what_are_your_moves_tomorrow_may_08_2026/",
           "createdAt": "2026-05-07T19:57:09.000Z",
-          "score": 217,
-          "comments": 7171,
+          "score": 225,
+          "comments": 7336,
           "upvoteRatio": 0.93,
           "flair": "Daily Discussion",
           "tickers": []
@@ -3595,8 +3658,8 @@
           "url": "https://i.redd.it/7an08b600jzg1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5e9yr/amd_95m/",
           "createdAt": "2026-05-06T14:17:44.000Z",
-          "score": 12344,
-          "comments": 691,
+          "score": 12363,
+          "comments": 693,
           "upvoteRatio": 0.95,
           "flair": "Gain",
           "tickers": [
@@ -3611,8 +3674,8 @@
           "url": "https://i.redd.it/9g751aicwrzg1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6m1sm/from_50k_to_1_million_trading_shares_no_options/",
           "createdAt": "2026-05-07T20:13:16.000Z",
-          "score": 6778,
-          "comments": 591,
+          "score": 7013,
+          "comments": 603,
           "upvoteRatio": 0.89,
           "flair": "Gain",
           "tickers": []
@@ -3625,8 +3688,8 @@
           "url": "https://www.justice.gov/usao-ma/pr/thirty-individuals-charged-global-insider-trading-scheme-netting-tens-millions-illicit",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5lnzc/thirty_individuals_charged_in_global_insider/",
           "createdAt": "2026-05-06T18:35:32.000Z",
-          "score": 6754,
-          "comments": 311,
+          "score": 6758,
+          "comments": 312,
           "upvoteRatio": 0.99,
           "flair": "News",
           "tickers": []
@@ -3639,7 +3702,7 @@
           "url": "https://i.redd.it/u4t6vmhm9kyg1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t1013n/weekly_earnings_thread_54_58/",
           "createdAt": "2026-05-01T17:29:18.000Z",
-          "score": 218,
+          "score": 220,
           "comments": 1898,
           "upvoteRatio": 0.97,
           "flair": "Earnings Thread",
@@ -3653,8 +3716,8 @@
           "url": "https://www.cnbc.com/2026/05/07/iran-war-hormuz-strait-ceasefire-trump.html?__source=iosappshare%7Ccom.google.chrome.ios.OpenExtension",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6p6zz/us_and_iran_trade_fire_in_strait_of_hormuz_each/",
           "createdAt": "2026-05-07T22:11:07.000Z",
-          "score": 2828,
-          "comments": 286,
+          "score": 2875,
+          "comments": 288,
           "upvoteRatio": 0.99,
           "flair": "News",
           "tickers": []
@@ -3667,7 +3730,7 @@
           "url": "https://www.reddit.com/r/stocks/comments/1t52g9z/nobody_is_even_fearing_a_correction/",
           "permalink": "https://www.reddit.com/r/stocks/comments/1t52g9z/nobody_is_even_fearing_a_correction/",
           "createdAt": "2026-05-06T04:22:34.000Z",
-          "score": 1337,
+          "score": 1339,
           "comments": 773,
           "upvoteRatio": 0.84,
           "flair": "Crystal Ball Post",
@@ -3681,7 +3744,7 @@
           "url": "https://www.reddit.com/gallery/1t5wklp",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5wklp/i_hear_that_everyones_a_millionaire_now_2m/",
           "createdAt": "2026-05-07T01:41:30.000Z",
-          "score": 2260,
+          "score": 2266,
           "comments": 302,
           "upvoteRatio": 0.92,
           "flair": "Gain",
@@ -3702,8 +3765,8 @@
           "url": "https://www.reuters.com/world/us-trade-court-rules-against-trumps-10-global-tariff-2026-05-07/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6nqpx/new_york_may_7_reuters_the_us_trade_court_on/",
           "createdAt": "2026-05-07T21:14:28.000Z",
-          "score": 2490,
-          "comments": 93,
+          "score": 2536,
+          "comments": 94,
           "upvoteRatio": 0.98,
           "flair": "News",
           "tickers": []
@@ -3716,7 +3779,7 @@
           "url": "https://www.reuters.com/sustainability/boards-policy-regulation/spacex-ipo-gives-musk-sweeping-power-curbs-shareholder-rights-2026-05-06/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5semc/reuters_spacex_ipo_gives_musk_sweeping_power_and/",
           "createdAt": "2026-05-06T22:41:11.000Z",
-          "score": 2059,
+          "score": 2058,
           "comments": 255,
           "upvoteRatio": 0.97,
           "flair": "News",
@@ -3730,7 +3793,7 @@
           "url": "https://i.redd.it/0khlstciumzg1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5ylt8/i_declare_bankrupcyon_aws_marketshare_stock_mike/",
           "createdAt": "2026-05-07T03:14:14.000Z",
-          "score": 1747,
+          "score": 1754,
           "comments": 138,
           "upvoteRatio": 0.98,
           "flair": "Meme",
@@ -3747,7 +3810,7 @@
           "url": "https://www.reddit.com/r/investing/comments/1t4i4pz/jet_fuel_shortages_incoming_a_slow_motion_car/",
           "permalink": "https://www.reddit.com/r/investing/comments/1t4i4pz/jet_fuel_shortages_incoming_a_slow_motion_car/",
           "createdAt": "2026-05-05T15:04:54.000Z",
-          "score": 1517,
+          "score": 1508,
           "comments": 215,
           "upvoteRatio": 0.95,
           "flair": null,
@@ -3761,24 +3824,24 @@
           "url": "https://www.reddit.com/r/wallstreetbets/comments/1t5wjr5/took_10_years_but_i_did_it/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t5wjr5/took_10_years_but_i_did_it/",
           "createdAt": "2026-05-07T01:40:30.000Z",
-          "score": 1687,
+          "score": 1680,
           "comments": 126,
           "upvoteRatio": 0.96,
           "flair": "Gain",
           "tickers": []
         },
         {
-          "id": "1t5ock5",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "Unbreakable Stock Market",
-          "url": "https://www.reddit.com/r/stocks/comments/1t5ock5/unbreakable_stock_market/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1t5ock5/unbreakable_stock_market/",
-          "createdAt": "2026-05-06T20:10:03.000Z",
-          "score": 899,
-          "comments": 468,
-          "upvoteRatio": 0.85,
-          "flair": "Crystal Ball Post",
+          "id": "1t6sao4",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Pope Leo wearing Nike. Is this a sign from God?",
+          "url": "https://i.redd.it/dyqqc01y4tzg1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t6sao4/pope_leo_wearing_nike_is_this_a_sign_from_god/",
+          "createdAt": "2026-05-08T00:23:15.000Z",
+          "score": 1598,
+          "comments": 142,
+          "upvoteRatio": 0.96,
+          "flair": "Meme",
           "tickers": []
         }
       ]
@@ -4191,21 +4254,19 @@
       "errors": []
     },
     "briefingBullets": [
-      "Earnings: Bond Market Commentary | Wells Fargo Investment Institute (Wells Fargo Advisors Stock Market News)",
-      "Earnings: Markets and Economy (Schwab Weekly Market Outlook)",
-      "Earnings: Stock Market News | Wells Fargo Investment Institute (Wells Fargo Advisors Stock Market News)",
-      "Geopolitics and policy: CNBC Daily Open: Who shot first? Hormuz heats again as ceasefire and oil markets in peril (CNBC Markets)",
-      "Geopolitics and policy: Asia-Pacific markets fall as renewed U.S.-Iran clashes keep investors on edge (CNBC Markets)",
-      "Earnings mover: FLNC +39.90% (Fluence Energy, Inc.)",
-      "Earnings mover: XMTR +39.18% (Xometry, Inc.)",
-      "Earnings mover: FSLY -38.23% (Fastly, Inc.)",
-      "Retail attention: AMD across wallstreetbets, stocks, investing, options",
-      "Retail attention: INTC across wallstreetbets, stocks, SecurityAnalysis, options"
+      "Geopolitics and policy: On Thursday, the U.S. and Iran opened fire in the Strait of Hormuz, with each side claiming the other initiated the attack. (M4)",
+      "Rates and central banks: Yields lower before initial claims data. Over in bond land, Treasury yields are lower before the opening bell Thursday as markets continue to await news on a potential end to the Iran war. (M1)",
+      "Commodities and energy: The oil market hopes the U.S. and Iran will strike a deal that could reopen the Strait of Hormuz and restore energy shipments. (M6)",
+      "Macro and growth: Stocks higher before initial claims data. Stock futures are mostly higher Thursday morning as markets continue to await news on a potential end to the Iran war. (M3)",
+      "Earnings: The cloud provider announced it is laying off 20% of its workforce as agentic artificial intelligence \"fundamentally changes\" the company's work. (M8)",
+      "AI and semis: CoreWeave has been raising debt to finance its data center buildout, and S&P has boosted the company's credit rating. (M12)",
+      "Earnings movers: FLNC +39.90%, XMTR +39.18%, FSLY -38.23% show where post-results dispersion is largest.",
+      "Retail attention: AMD, INTC, SPY, NVDA are drawing the most Reddit ticker concentration; treat this as sentiment, not verified news."
     ]
   },
   "avoidList": {
     "status": "ready",
-    "summary": "Avoid crowded financials and some consumer staples / utilities names that shown weak, low-momentum signal in the 14-day window; RSI extremes and high volatility flagged in MU caution.",
+    "summary": "Avoid crowded grow / financials where model rank is weak and macro risk is high; focus on AI / semis leaders with solid momentum but watch RSI.",
     "sectors": [
       {
         "sector": "Financials",
@@ -4216,7 +4277,7 @@
           "L",
           "KEY"
         ],
-        "rationale": "18 of the weakest model names are in Financials, signaling risk of crowding and potential drawdowns there."
+        "rationale": "Most weak model names concentrated there."
       },
       {
         "sector": "Consumer Staples",
@@ -4227,7 +4288,7 @@
           "KR",
           "KO"
         ],
-        "rationale": "11 weak names; digesting higher rates with uneven margins."
+        "rationale": "11 of the weakest model-ranked names are in Consumer Staples; examples include MDLZ, KVUE, KR, KO."
       },
       {
         "sector": "Utilities",
@@ -4238,7 +4299,7 @@
           "PEG",
           "PCG"
         ],
-        "rationale": "11 weak names; risk-off if yields rise."
+        "rationale": "11 of the weakest model-ranked names are in Utilities; examples include AWK, LNT, PEG, PCG."
       },
       {
         "sector": "Industrials",
@@ -4270,7 +4331,7 @@
           "Below 200d trend"
         ],
         "modelEvidence": "MCD ranks #502 of 502 with -18.47% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
-        "rationale": "Low momentum, high dispersion; weak vols; below-50 / 200d trend."
+        "rationale": "ranked near the bottom of the model book; weak momentum signals; below 50 / 200d trend."
       },
       {
         "symbol": "MDT",
@@ -4289,7 +4350,7 @@
           "Below 200d trend"
         ],
         "modelEvidence": "MDT ranks #501 of 502 with -28.49% 60-day relative return versus SPY, rules score 0.2, and weak or mixed trend alignment.",
-        "rationale": "Low momentum; RSI 24; downside risk in health care space."
+        "rationale": "Low momentum; negative RSI; below 50d trend."
       },
       {
         "symbol": "MDLZ",
@@ -4307,7 +4368,7 @@
           "Weak volume confirmation"
         ],
         "modelEvidence": "MDLZ ranks #500 of 502 with -4.03% 60-day relative return versus SPY, rules score 0.4, and positive trend alignment.",
-        "rationale": "Low momentum; RSI 74 with weak volume confirmation."
+        "rationale": "MDLZ sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves."
       },
       {
         "symbol": "MCK",
@@ -4397,7 +4458,7 @@
           "Below 200d trend"
         ],
         "modelEvidence": "MA ranks #495 of 502 with -13.13% 60-day relative return versus SPY, rules score 1.4, and weak or mixed trend alignment.",
-        "rationale": "MA sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves."
+        "rationale": "Multiple weak signals; liquidity but momentum deteriorating."
       }
     ]
   },
@@ -52254,6 +52315,88 @@
       "summary": "No recent dated articles found in the last 30 days.",
       "articles": [],
       "articleCount": 0,
+      "ok": true
+    },
+    {
+      "name": "Axios Markets RSS",
+      "url": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en",
+      "category": "News RSS",
+      "cadence": "Daily",
+      "trust": "Medium",
+      "notes": "Google News RSS scoped to Axios Markets coverage; used because direct Axios newsletter pages may block automated checks.",
+      "title": "\"\"Axios Markets\" when:30d\" - Google News",
+      "summary": "Google News",
+      "articles": [
+        {
+          "sourceName": "Axios Markets RSS",
+          "title": "U.S. has a natural gas glut even amid an energy crisis - Axios",
+          "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9wc2gwVkRzeVFhT01Pa3pCZ1plaUtvUlNKTnh5RHd4TnFkWmFfVTJnWXJGNTFOU19ZMUZvTXVVNHpibjdWUHJoOE1qUWZGeE9QbHFlZkMyNjF3UHlPcWZpTjg5VHhJTG85OW13?oc=5",
+          "publishedAt": "2026-04-30T11:05:03.000Z",
+          "summary": "<a href=\"https://news.google.com/rss/articles/CBMia0FVX3lxTE9wc2gwVkRzeVFhT01Pa3pCZ1plaUtvUlNKTnh5RHd4TnFkWmFfVTJnWXJGNTFOU19ZMUZvTXVVNHpibjdWUHJoOE1qUWZGeE9QbHFlZkMyNjF3UHlPcWZpTjg5VHhJTG85OW13?oc=5\" target=\"_blank\">U.S. has a natural gas glut even amid an energy crisis</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "excerpt": "<a href=\"https://news.google.com/rss/articles/CBMia0FVX3lxTE9wc2gwVkRzeVFhT01Pa3pCZ1plaUtvUlNKTnh5RHd4TnFkWmFfVTJnWXJGNTFOU19ZMUZvTXVVNHpibjdWUHJoOE1qUWZGeE9QbHFlZkMyNjF3UHlPcWZpTjg5VHhJTG85OW13?oc=5\" target=\"_blank\">U.S. has a natural gas glut even amid an energy crisis</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Markets RSS",
+          "title": "Oil prices and stocks are going their own way - Axios",
+          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1vdVZPYnR2dTVvUDQ4dHFUOENTZDJiYkZsVUVSeU5JZ2NEdHdHODdPenlwM2dKeUtuZ21ZWElLc21DV2FDekh5UUNWMmpSaVFOdkNHSTZKVGxRbV9HaVZGVXU3WU8?oc=5",
+          "publishedAt": "2026-04-23T07:00:00.000Z",
+          "summary": "<a href=\"https://news.google.com/rss/articles/CBMiZEFVX3lxTE1vdVZPYnR2dTVvUDQ4dHFUOENTZDJiYkZsVUVSeU5JZ2NEdHdHODdPenlwM2dKeUtuZ21ZWElLc21DV2FDekh5UUNWMmpSaVFOdkNHSTZKVGxRbV9HaVZGVXU3WU8?oc=5\" target=\"_blank\">Oil prices and stocks are going their own way</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "excerpt": "<a href=\"https://news.google.com/rss/articles/CBMiZEFVX3lxTE1vdVZPYnR2dTVvUDQ4dHFUOENTZDJiYkZsVUVSeU5JZ2NEdHdHODdPenlwM2dKeUtuZ21ZWElLc21DV2FDekh5UUNWMmpSaVFOdkNHSTZKVGxRbV9HaVZGVXU3WU8?oc=5\" target=\"_blank\">Oil prices and stocks are going their own way</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Markets RSS",
+          "title": "The AI trade is back on - Axios",
+          "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5JWl9rYXQ0NnZQWFdnWjYydDNXVjQtc21SVGtXWUVIUlhONHJ4eVBYYnU5ZnNTQzduYXlLdzFUVFRIZWljUGR5QkRYdWM1ZnIybjd4bDlEUERlM0JTTEZwdUtucks2Tk1F?oc=5",
+          "publishedAt": "2026-04-22T07:00:00.000Z",
+          "summary": "<a href=\"https://news.google.com/rss/articles/CBMiaEFVX3lxTE5JWl9rYXQ0NnZQWFdnWjYydDNXVjQtc21SVGtXWUVIUlhONHJ4eVBYYnU5ZnNTQzduYXlLdzFUVFRIZWljUGR5QkRYdWM1ZnIybjd4bDlEUERlM0JTTEZwdUtucks2Tk1F?oc=5\" target=\"_blank\">The AI trade is back on</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "excerpt": "<a href=\"https://news.google.com/rss/articles/CBMiaEFVX3lxTE5JWl9rYXQ0NnZQWFdnWjYydDNXVjQtc21SVGtXWUVIUlhONHJ4eVBYYnU5ZnNTQzduYXlLdzFUVFRIZWljUGR5QkRYdWM1ZnIybjd4bDlEUERlM0JTTEZwdUtucks2Tk1F?oc=5\" target=\"_blank\">The AI trade is back on</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        }
+      ],
+      "articleCount": 3,
+      "ok": true
+    },
+    {
+      "name": "Axios Macro RSS",
+      "url": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en",
+      "category": "News RSS",
+      "cadence": "Daily",
+      "trust": "Medium",
+      "notes": "Google News RSS scoped to Axios Macro coverage; used because direct Axios newsletter pages may block automated checks.",
+      "title": "\"\"Axios Macro\" when:30d\" - Google News",
+      "summary": "Google News",
+      "articles": [
+        {
+          "sourceName": "Axios Macro RSS",
+          "title": "What is, and isn't, worrying about 100% debt to GDP - Axios",
+          "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBHel9tV0FWamJ6eTI3M1lObFhvWk1VWkZaZ1JQblVUVm1GaVR6a1k4R0stSVcwN05tRHh0RlBzZEZDZzJiZlFvOUZiNnRHb2RZdEc5TjFDTlRkVTJwYzF2ejdNQUxBTzJIVmk2N1NoZw?oc=5",
+          "publishedAt": "2026-05-04T16:01:53.000Z",
+          "summary": "<a href=\"https://news.google.com/rss/articles/CBMib0FVX3lxTFBHel9tV0FWamJ6eTI3M1lObFhvWk1VWkZaZ1JQblVUVm1GaVR6a1k4R0stSVcwN05tRHh0RlBzZEZDZzJiZlFvOUZiNnRHb2RZdEc5TjFDTlRkVTJwYzF2ejdNQUxBTzJIVmk2N1NoZw?oc=5\" target=\"_blank\">What is, and isn't, worrying about 100% debt to GDP</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "excerpt": "<a href=\"https://news.google.com/rss/articles/CBMib0FVX3lxTFBHel9tV0FWamJ6eTI3M1lObFhvWk1VWkZaZ1JQblVUVm1GaVR6a1k4R0stSVcwN05tRHh0RlBzZEZDZzJiZlFvOUZiNnRHb2RZdEc5TjFDTlRkVTJwYzF2ejdNQUxBTzJIVmk2N1NoZw?oc=5\" target=\"_blank\">What is, and isn't, worrying about 100% debt to GDP</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Macro RSS",
+          "title": "K-shaped economy is real, per New York Fed research - Axios",
+          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1JbzNGTmNDZmZ1a3BrdTN0RC1aTkFqSjkzTVdBVzEzR1JlZEpKdlQtVjhDRUhCLWwxdlQtYS1iV0taRFU4V1AtRUJwb3R6bkVyM1J6Smt5TU9ZRWR5ZVlhQ0pvMlRrb1pIVWU2WUhTc3cwZFhF?oc=5",
+          "publishedAt": "2026-05-01T19:49:24.000Z",
+          "summary": "<a href=\"https://news.google.com/rss/articles/CBMidEFVX3lxTE1JbzNGTmNDZmZ1a3BrdTN0RC1aTkFqSjkzTVdBVzEzR1JlZEpKdlQtVjhDRUhCLWwxdlQtYS1iV0taRFU4V1AtRUJwb3R6bkVyM1J6Smt5TU9ZRWR5ZVlhQ0pvMlRrb1pIVWU2WUhTc3cwZFhF?oc=5\" target=\"_blank\">K-shaped economy is real, per New York Fed research</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "excerpt": "<a href=\"https://news.google.com/rss/articles/CBMidEFVX3lxTE1JbzNGTmNDZmZ1a3BrdTN0RC1aTkFqSjkzTVdBVzEzR1JlZEpKdlQtVjhDRUhCLWwxdlQtYS1iV0taRFU4V1AtRUJwb3R6bkVyM1J6Smt5TU9ZRWR5ZVlhQ0pvMlRrb1pIVWU2WUhTc3cwZFhF?oc=5\" target=\"_blank\">K-shaped economy is real, per New York Fed research</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Macro RSS",
+          "title": "Kevin Warsh's challenges become clear after Fed chair Powell's last hurrah - Axios",
+          "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5WclhFWGJoNUZTSFliUWtHTW1meTNvTm5td0djYkU5cnA2MlF0cF9pRFEzRmpNY3NDX1JHcXlHOTFqRkdfM3MxeTlyUkoxUS1DbE1TclpLX3hHYTluQ0gzZ1VCTlJnQQ?oc=5",
+          "publishedAt": "2026-04-30T19:13:30.000Z",
+          "summary": "<a href=\"https://news.google.com/rss/articles/CBMiZkFVX3lxTE5WclhFWGJoNUZTSFliUWtHTW1meTNvTm5td0djYkU5cnA2MlF0cF9pRFEzRmpNY3NDX1JHcXlHOTFqRkdfM3MxeTlyUkoxUS1DbE1TclpLX3hHYTluQ0gzZ1VCTlJnQQ?oc=5\" target=\"_blank\">Kevin Warsh's challenges become clear after Fed chair Powell's last hurrah</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "excerpt": "<a href=\"https://news.google.com/rss/articles/CBMiZkFVX3lxTE5WclhFWGJoNUZTSFliUWtHTW1meTNvTm5td0djYkU5cnA2MlF0cF9pRFEzRmpNY3NDX1JHcXlHOTFqRkdfM3MxeTlyUkoxUS1DbE1TclpLX3hHYTluQ0gzZ1VCTlJnQQ?oc=5\" target=\"_blank\">Kevin Warsh's challenges become clear after Fed chair Powell's last hurrah</a>  <font color=\"#6f6f6f\">Axios</font>",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        }
+      ],
+      "articleCount": 3,
       "ok": true
     },
     {
