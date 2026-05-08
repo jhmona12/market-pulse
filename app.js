@@ -21,6 +21,11 @@ const fallbackSnapshot = {
       "Check the browser console if the dashboard continues to show fallback data."
     ]
   },
+  marketIntelligence: {
+    professionalDrivers: [],
+    earnings: { earningsMovers: [] },
+    reddit: { topTickers: [] }
+  },
   marketStrip: [
     { symbol: "SPY", label: "S&P 500", price: 520.12, changePct: 0.42 },
     { symbol: "QQQ", label: "Nasdaq 100", price: 442.33, changePct: 0.68 },
@@ -404,8 +409,70 @@ function renderNote() {
   $("#asOfDate").textContent = `As of ${formatDate(state.snapshot.generatedAt)}`;
   $("#noteHeadline").textContent = note.headline;
   $("#noteBody").textContent = note.body;
+  renderMarketIntelligence();
   renderList($("#changedList"), note.changed || []);
   renderList($("#watchList"), note.watch || []);
+}
+
+function intelItemLink(item, title) {
+  const safeTitle = esc(title || item.title || item.symbol || "Market item");
+  return item.url
+    ? `<a href="${esc(item.url)}" target="_blank" rel="noreferrer">${safeTitle}</a>`
+    : `<strong>${safeTitle}</strong>`;
+}
+
+function renderIntelStack(target, items, emptyText, renderer) {
+  target.innerHTML = "";
+  if (!items.length) {
+    target.innerHTML = `<div class="empty-state">${esc(emptyText)}</div>`;
+    return;
+  }
+  items.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = "intel-item";
+    card.innerHTML = renderer(item);
+    target.appendChild(card);
+  });
+}
+
+function renderMarketIntelligence() {
+  const intel = state.snapshot.marketIntelligence || fallbackSnapshot.marketIntelligence;
+  const drivers = (intel.professionalDrivers || []).slice(0, 5);
+  const earningsMovers = (intel.earnings?.earningsMovers || []).slice(0, 5);
+  const redditTickers = (intel.reddit?.topTickers || []).slice(0, 5);
+
+  renderIntelStack(
+    $("#marketDriverList"),
+    drivers,
+    "No fresh professional market-driver items were extracted in this snapshot.",
+    (item) => `
+      ${intelItemLink(item)}
+      <span>${esc((item.themes || []).slice(0, 2).join(" / ") || "Market driver")} · ${esc(item.sourceName || "")}</span>
+      <small>${esc(item.freshness || "")}${item.publishedAt ? ` · ${esc(formatShortDate(item.publishedAt))}` : ""}</small>
+    `
+  );
+
+  renderIntelStack(
+    $("#earningsMoverList"),
+    earningsMovers,
+    "No large daily mover matched the earnings calendar in this snapshot.",
+    (item) => `
+      ${intelItemLink(item, `${item.symbol} ${pct(item.changePct)}`)}
+      <span>${esc(item.name || "")}</span>
+      <small>${esc(item.moverBucket || "mover")} · ${esc(item.sourceName || "Nasdaq / Yahoo Finance")}</small>
+    `
+  );
+
+  renderIntelStack(
+    $("#redditAttentionList"),
+    redditTickers,
+    "No clean Reddit ticker concentration was extracted in this snapshot.",
+    (item) => `
+      <strong>${esc(item.symbol)}</strong>
+      <span>${esc(item.mentions || 0)} mentions · ${esc(item.comments || 0)} comments · ${esc((item.subreddits || []).join(", "))}</span>
+      <small>Retail sentiment only; not verified news.</small>
+    `
+  );
 }
 
 function renderRecommendations() {

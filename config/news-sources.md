@@ -13,16 +13,29 @@ Add new free sources to this table. The ingestion script reads rows with this sh
 | Wells Fargo Advisors Stock Market News | https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm | Institution research | Weekly | High | Public stock market commentary; replaces retired investment-institute URL. |
 | Merrill Capital Market Outlook | https://www.ml.com/capital-market-outlook.html | Institution research | Weekly | High | Public Merrill / Bank of America capital markets outlook. |
 | Bank of America Institute | https://institute.bankofamerica.com/ | Institution research | Weekly | High | Public consumer, macro, and market research. |
-| Highland Associates Research | https://regions.com/wealth-management/institutional-services/highland-associates/research/ | Institution research | Weekly | Medium high | Public Highland Associates market commentary; legacy URL redirects here. |
+| Highland Associates Weekly Market Commentary | https://highlandassoc.com/our-research/weekly-market-commentary/ | Institution research | Weekly | Medium high | Public Highland Associates weekly market commentary; redirects to the current Regions-hosted page. |
 | RBC Wealth Management Jamie Sodhi Blog | https://wmc.rbcwealthmanagement.com/jamie-sodhi | Advisor commentary | Periodic | Medium | Public RBC Wealth Management advisor market blog; submitted URL redirects here. |
 | RG Wealth Financial Insights | https://rgwealth.com/financial-insights/ | Advisor commentary | Periodic | Medium | Public financial insights page; may block automated source checks. |
-| LPL Research | https://www.lpl.com/research/research-team/lpl-research.html | Institution research | Weekly | High | Public LPL Research hub; may block automated source checks. |
+| LPL Weekly Market Commentary | https://www.lpl.com/research/weekly-market-commentary.html | Institution research | Weekly | High | Public LPL weekly market commentary page; preferred over the broader research hub for dated articles. |
+| LPL Macro Market Movers Blog | https://www.lpl.com/research/blog.html | Institution research | Weekly | High | Public LPL blog with market, macro, earnings, geopolitics, and weekly performance notes. |
 | Raymond James Commentary And Insights | https://www.raymondjames.com/commentary-and-insights | Institution research | Periodic | High | Public market commentary and insights hub; site may intermittently reject automated checks. |
+| Schwab Weekly Market Outlook | https://www.schwab.com/learn/story/weekly-market-outlook | Institution research | Weekly | High | Public weekly market outlook covering earnings, Fed, rates, economic data, and sector setup. |
+| Fidelity Market Insights | https://www.fidelity.com/viewpoints/market-and-economic-insights | Institution research | Periodic | High | Public Fidelity market and economic insights hub. |
+| State Street Global Advisors Insights | https://www.ssga.com/us/en/intermediary/insights | Institution research | Periodic | High | Public SPDR / State Street macro, ETF, and market insights. |
+| Morgan Stanley Ideas | https://www.morganstanley.com/ideas | Institution research | Periodic | High | Public Morgan Stanley Ideas hub for markets, macro, thematic, and policy commentary. |
 | Federal Reserve Press Releases | https://www.federalreserve.gov/newsevents/pressreleases.htm | Official macro | As released | Very high | FOMC and regulatory releases. |
 | FOMC Calendars | https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm | Official macro | Scheduled | Very high | Rate decision schedule and materials. |
+| ECB Monetary Policy Decisions | https://www.ecb.europa.eu/press/govcdec/mopo/html/index.en.html | Official macro | As released | Very high | European Central Bank policy decisions and statements. |
+| Bank of England Monetary Policy Summary | https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/monetary-policy-summary-and-minutes | Official macro | As released | Very high | Bank of England policy decisions, summaries, and minutes. |
+| U.S. Treasury Press Releases | https://home.treasury.gov/news/press-releases | Official macro | As released | Very high | Treasury refunding, sanctions, borrowing, and policy releases. |
+| EIA Today In Energy | https://www.eia.gov/todayinenergy/ | Official macro | Daily | Very high | Energy market and oil/gas context from the U.S. Energy Information Administration. |
 | BLS Economic News Releases | https://www.bls.gov/schedule/news_release/ | Official macro | Scheduled | Very high | CPI, payrolls, unemployment, PPI, and labor releases. |
 | BEA News Release Schedule | https://www.bea.gov/news/schedule | Official macro | Scheduled | Very high | GDP, PCE, income, and trade data. |
 | FRED Releases | https://fred.stlouisfed.org/releases | Official macro | Scheduled | Very high | St. Louis Fed release directory. |
 | SEC Current Reports | https://www.sec.gov/edgar/search/#/category=custom&forms=8-K | Filings | Continuous | Very high | Company current reports and catalysts. |
 | CNBC Markets | https://www.cnbc.com/markets/ | News | Continuous | Medium | Public market news page; respect site terms. |
+| CNBC Top News RSS | https://www.cnbc.com/id/100003114/device/rss/rss.html | News RSS | Continuous | Medium | Structured CNBC top business and market news feed. |
+| CNBC Earnings RSS | https://www.cnbc.com/id/15839135/device/rss/rss.html | News RSS | Continuous | Medium | Structured CNBC earnings news feed. |
+| MarketWatch Top Stories RSS | https://feeds.content.dowjones.io/public/rss/mw_topstories | News RSS | Continuous | Medium | Structured MarketWatch top stories feed. |
+| MarketWatch MarketPulse RSS | https://feeds.content.dowjones.io/public/rss/mw_marketpulse | News RSS | Continuous | Medium | Structured MarketWatch MarketPulse feed for fast market headlines. |
 | Yahoo Finance News | https://finance.yahoo.com/news/ | News | Continuous | Medium | Public finance news page; respect site terms. |

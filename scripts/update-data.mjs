@@ -5,8 +5,17 @@ import { fileURLToPath } from "node:url";
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const maxTickers = Number.parseInt(process.env.MAX_TICKERS || "0", 10);
 const articlesPerSource = Number.parseInt(process.env.SOURCE_ARTICLES_PER_SOURCE || "3", 10);
-const maxArticleCandidates = Number.parseInt(process.env.SOURCE_ARTICLE_CANDIDATES || "10", 10);
+const maxArticleCandidates = Number.parseInt(process.env.SOURCE_ARTICLE_CANDIDATES || "6", 10);
 const companyContextCount = Number.parseInt(process.env.COMPANY_CONTEXT_COUNT || "12", 10);
+const marketIntelArticleLimit = Number.parseInt(process.env.MARKET_INTEL_ARTICLE_LIMIT || "48", 10);
+const marketIntelFreshHours = Number.parseFloat(process.env.MARKET_INTEL_FRESH_HOURS || "24");
+const marketIntelImportantHours = Number.parseFloat(process.env.MARKET_INTEL_IMPORTANT_HOURS || "96");
+const redditPostLimit = Number.parseInt(process.env.REDDIT_POST_LIMIT || "40", 10);
+const historyConcurrency = Number.parseInt(process.env.HISTORY_CONCURRENCY || "4", 10);
+const marketCapFetchLimit = Number.parseInt(process.env.MARKET_CAP_FETCH_LIMIT || "60", 10);
+const openAiTimeoutMs = Number.parseInt(process.env.OPENAI_TIMEOUT_MS || "90000", 10);
+const useCachedTechnicals = process.env.USE_CACHED_TECHNICALS === "1";
+const skipReddit = process.env.SKIP_REDDIT === "1";
 const snapshotOutput = process.env.SNAPSHOT_OUTPUT || "data/snapshot.json";
 const scorebookOutput = process.env.SCOREBOOK_OUTPUT || "data/model-scorebook.json";
 const marketCapCacheMaxAgeHours = Number.parseFloat(process.env.MARKET_CAP_CACHE_MAX_AGE_HOURS || "18");
@@ -45,50 +54,201 @@ const calendar = [
   { date: "2026-07-29", time: "2:00 PM ET", event: "FOMC Rate Decision", source: "Federal Reserve", importance: "High" }
 ];
 
+const redditSources = [
+  { subreddit: "wallstreetbets", segment: "Retail momentum" },
+  { subreddit: "stocks", segment: "Retail investing" },
+  { subreddit: "investing", segment: "Retail investing" },
+  { subreddit: "SecurityAnalysis", segment: "Fundamental research" },
+  { subreddit: "options", segment: "Options sentiment" }
+];
+
+const tickerStopWords = new Set([
+  "A",
+  "AI",
+  "ALL",
+  "AM",
+  "ATH",
+  "CEO",
+  "CFO",
+  "CPI",
+  "DD",
+  "EPS",
+  "ETF",
+  "FBI",
+  "FDA",
+  "FOMC",
+  "GDP",
+  "IPO",
+  "IRS",
+  "IT",
+  "JOB",
+  "LOL",
+  "M",
+  "MAGA",
+  "NYSE",
+  "OP",
+  "OTM",
+  "PCE",
+  "PM",
+  "PUT",
+  "SEC",
+  "USA",
+  "USD",
+  "YOLO"
+]);
+
 function ymd(date) {
   return date.toISOString().slice(0, 10).replaceAll("-", "");
+}
+
+function dateKeyInTimeZone(date = new Date(), timeZone = "America/Los_Angeles") {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(date);
+  const byType = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${byType.year}-${byType.month}-${byType.day}`;
+}
+
+function offsetDateKey(dateKey, offsetDays) {
+  const date = new Date(`${dateKey}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + offsetDays);
+  return date.toISOString().slice(0, 10);
 }
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function retryableHttpStatus(status) {
+  return [408, 429, 500, 502, 503, 504].includes(status);
+}
+
+function retryDelayMs(attempt) {
+  return 2500 * 2 ** attempt + Math.round(Math.random() * 700);
+}
+
 async function fetchText(url, options = {}) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), options.timeout || 14000);
-  try {
-    const response = await fetch(url, {
-      signal: controller.signal,
-      headers: {
-        "user-agent": "MorningDesk/0.1 personal research dashboard; contact=local",
-        accept: "text/html,application/xhtml+xml,application/xml,text/csv,text/plain;q=0.9,*/*;q=0.8"
+  const retries = options.retries ?? 5;
+  let lastError;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), options.timeout || 14000);
+    try {
+      const response = await fetch(url, {
+        signal: controller.signal,
+        headers: {
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36 MarketPulse/0.1",
+          accept: "text/html,application/xhtml+xml,application/xml,text/csv,text/plain;q=0.9,*/*;q=0.8",
+          "accept-language": "en-US,en;q=0.9"
+        }
+      });
+      if (!response.ok) {
+        lastError = new Error(`${response.status} ${response.statusText}`);
+        if (retryableHttpStatus(response.status) && attempt < retries) {
+          clearTimeout(timeout);
+          await sleep(retryDelayMs(attempt));
+          continue;
+        }
+        throw lastError;
       }
-    });
-    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-    return await response.text();
-  } finally {
-    clearTimeout(timeout);
+      return await response.text();
+    } catch (error) {
+      lastError = error;
+      if (attempt < retries) {
+        clearTimeout(timeout);
+        await sleep(retryDelayMs(attempt));
+        continue;
+      }
+      throw lastError;
+    } finally {
+      clearTimeout(timeout);
+    }
   }
+  throw lastError;
 }
 
 async function fetchJson(url, options = {}) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), options.timeout || 14000);
-  try {
-    const response = await fetch(url, {
-      signal: controller.signal,
-      headers: {
-        "user-agent": "Mozilla/5.0 MarketPulse/0.1 personal research dashboard",
-        accept: "application/json,text/plain,*/*",
-        origin: "https://www.nasdaq.com",
-        referer: "https://www.nasdaq.com/"
+  const retries = options.retries ?? 5;
+  let lastError;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), options.timeout || 14000);
+    try {
+      const response = await fetch(url, {
+        signal: controller.signal,
+        headers: {
+          "user-agent": "Mozilla/5.0 MarketPulse/0.1 personal research dashboard",
+          accept: "application/json,text/plain,*/*",
+          origin: "https://www.nasdaq.com",
+          referer: "https://www.nasdaq.com/"
+        }
+      });
+      if (!response.ok) {
+        lastError = new Error(`${response.status} ${response.statusText}`);
+        if (retryableHttpStatus(response.status) && attempt < retries) {
+          clearTimeout(timeout);
+          await sleep(retryDelayMs(attempt));
+          continue;
+        }
+        throw lastError;
       }
-    });
-    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-    return await response.json();
-  } finally {
-    clearTimeout(timeout);
+      return await response.json();
+    } catch (error) {
+      lastError = error;
+      if (attempt < retries) {
+        clearTimeout(timeout);
+        await sleep(retryDelayMs(attempt));
+        continue;
+      }
+      throw lastError;
+    } finally {
+      clearTimeout(timeout);
+    }
   }
+  throw lastError;
+}
+
+async function fetchPublicJson(url, options = {}) {
+  const retries = options.retries ?? 5;
+  let lastError;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), options.timeout || 14000);
+    try {
+      const response = await fetch(url, {
+        signal: controller.signal,
+        headers: {
+          "user-agent": options.userAgent || "Mozilla/5.0 MarketPulse/0.1 personal research dashboard",
+          accept: "application/json,text/plain,*/*",
+          ...(options.headers || {})
+        }
+      });
+      if (!response.ok) {
+        lastError = new Error(`${response.status} ${response.statusText}`);
+        if (retryableHttpStatus(response.status) && attempt < retries) {
+          clearTimeout(timeout);
+          await sleep(retryDelayMs(attempt));
+          continue;
+        }
+        throw lastError;
+      }
+      return await response.json();
+    } catch (error) {
+      lastError = error;
+      if (attempt < retries) {
+        clearTimeout(timeout);
+        await sleep(retryDelayMs(attempt));
+        continue;
+      }
+      throw lastError;
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+  throw lastError;
 }
 
 async function loadLocalEnv() {
@@ -179,6 +339,24 @@ async function loadModelExplainability() {
   }
 }
 
+async function loadPreviousRefreshStatus() {
+  try {
+    const text = await readFile(join(root, "data/refresh-status.json"), "utf8");
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+}
+
+async function loadExistingSnapshot() {
+  try {
+    const text = await readFile(join(root, "data/snapshot.json"), "utf8");
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+}
+
 function publicModelSummary(modelRankings, explainability) {
   return {
     status: modelRankings.status,
@@ -236,7 +414,9 @@ function decodeHtml(value) {
       .replaceAll("&#39;", "'")
       .replaceAll("&nbsp;", " ")
       .replaceAll("&lt;", "<")
-      .replaceAll("&gt;", ">");
+      .replaceAll("&gt;", ">")
+      .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(Number.parseInt(hex, 16)))
+      .replace(/&#(\d+);/g, (_, value) => String.fromCodePoint(Number.parseInt(value, 10)));
     if (next === decoded) break;
     decoded = next;
   }
@@ -245,6 +425,37 @@ function decodeHtml(value) {
 
 function stripTags(value) {
   return decodeHtml(value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+}
+
+function stripCdata(value) {
+  return String(value || "")
+    .replace(/^<!\[CDATA\[/, "")
+    .replace(/\]\]>$/, "")
+    .trim();
+}
+
+function xmlText(block, tagNames) {
+  const names = Array.isArray(tagNames) ? tagNames : [tagNames];
+  for (const name of names) {
+    const match = block.match(new RegExp(`<${name}\\b[^>]*>([\\s\\S]*?)<\\/${name}>`, "i"));
+    if (match) return stripTags(stripCdata(match[1]));
+  }
+  return "";
+}
+
+function xmlRaw(block, tagNames) {
+  const names = Array.isArray(tagNames) ? tagNames : [tagNames];
+  for (const name of names) {
+    const match = block.match(new RegExp(`<${name}\\b[^>]*>([\\s\\S]*?)<\\/${name}>`, "i"));
+    if (match) return stripCdata(match[1]);
+  }
+  return "";
+}
+
+function xmlLink(block) {
+  const atomLink = block.match(/<link\b[^>]*href=["']([^"']+)["'][^>]*>/i)?.[1];
+  if (atomLink) return decodeHtml(atomLink);
+  return xmlText(block, "link");
 }
 
 function attrValue(tag, name) {
@@ -280,6 +491,49 @@ function summaryFromHtml(html, fallback) {
       html.match(/<p[^>]*>([\s\S]*?)<\/p>/i)?.[1] ||
       fallback
   ).slice(0, 320);
+}
+
+function looksLikeFeed(text) {
+  return /<(rss|feed)\b/i.test(text) || /<item\b[\s\S]*<\/item>/i.test(text) || /<entry\b[\s\S]*<\/entry>/i.test(text);
+}
+
+function titleFromFeed(feed, fallback) {
+  return xmlText(feed, "title") || fallback;
+}
+
+function summaryFromFeed(feed, fallback) {
+  return xmlText(feed, ["description", "subtitle", "summary"])?.slice(0, 320) || fallback;
+}
+
+function extractFeedItems(feed, source) {
+  if (!looksLikeFeed(feed)) return [];
+  const blocks = [
+    ...[...feed.matchAll(/<item\b[\s\S]*?<\/item>/gi)].map((match) => match[0]),
+    ...[...feed.matchAll(/<entry\b[\s\S]*?<\/entry>/gi)].map((match) => match[0])
+  ];
+
+  return blocks
+    .map((block) => {
+      let url = xmlLink(block) || source.url;
+      try {
+        url = new URL(url, source.url).href;
+      } catch {
+        url = source.url;
+      }
+      const rawSummary = xmlRaw(block, ["description", "summary", "content:encoded", "content"]);
+      const summary = stripTags(rawSummary || source.notes).slice(0, 420);
+      const excerpt = stripTags(rawSummary || block).slice(0, 1800);
+      return {
+        sourceName: source.name,
+        title: xmlText(block, "title").slice(0, 180),
+        url,
+        publishedAt: normalizeDate(xmlText(block, ["pubDate", "published", "updated", "dc:date"])),
+        summary,
+        excerpt,
+        discoveredFrom: source.url
+      };
+    })
+    .filter((article) => article.title && article.url);
 }
 
 function extractJsonLdDates(html) {
@@ -395,7 +649,7 @@ function extractArticleCandidates(html, source) {
 }
 
 async function fetchArticle(source, candidate) {
-  const html = await fetchText(candidate.url, { timeout: 14000 });
+  const html = await fetchText(candidate.url, { timeout: 9000, retries: 1 });
   const text = visibleTextFromHtml(html);
   const title = titleFromHtml(html, candidate.linkText || source.name);
   const summary = summaryFromHtml(html, source.notes);
@@ -423,7 +677,19 @@ function sortArticlesNewestFirst(articles) {
 
 async function checkSource(source) {
   try {
-    const html = await fetchText(source.url, { timeout: 12000 });
+    const html = await fetchText(source.url, { timeout: 9000, retries: 1 });
+    if (looksLikeFeed(html)) {
+      const feedArticles = sortArticlesNewestFirst(extractFeedItems(html, source)).slice(0, articlesPerSource);
+      return {
+        ...source,
+        title: titleFromFeed(html, source.name),
+        summary: summaryFromFeed(html, source.notes),
+        articles: feedArticles,
+        articleCount: feedArticles.length,
+        ok: true
+      };
+    }
+
     const title = titleFromHtml(html, source.name);
     const summary = summaryFromHtml(html, source.notes);
     const landingArticle = {
@@ -519,7 +785,8 @@ async function writeMarketCapCache(cache) {
 
 async function fetchMarketCap(symbol) {
   const summary = await fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/summary?assetclass=stocks`, {
-    timeout: 12000
+    timeout: 8000,
+    retries: 1
   });
   const marketCap = marketCapFromSummary(summary, symbol);
   if (!marketCap) throw new Error("market cap unavailable");
@@ -545,8 +812,12 @@ async function enrichMarketCaps(symbols, existingCache) {
     bySymbol: new Map(existingCache.bySymbol)
   };
   const uniqueSymbols = [...new Set(symbols.filter(Boolean))];
-  const staleSymbols = uniqueSymbols.filter((symbol) => !isMarketCapCacheFresh(cache.bySymbol.get(symbol)));
-  await mapLimit(staleSymbols, 5, async (symbol) => {
+  const missingSymbols = uniqueSymbols.filter((symbol) => !cache.bySymbol.has(symbol) || cache.bySymbol.get(symbol)?.text == null);
+  const staleExistingSymbols = uniqueSymbols.filter(
+    (symbol) => cache.bySymbol.has(symbol) && cache.bySymbol.get(symbol)?.text != null && !isMarketCapCacheFresh(cache.bySymbol.get(symbol))
+  );
+  const staleSymbols = [...missingSymbols, ...staleExistingSymbols].slice(0, Math.max(0, marketCapFetchLimit));
+  await mapLimit(staleSymbols, 4, async (symbol) => {
     try {
       const marketCap = await fetchMarketCap(symbol);
       cache.bySymbol.set(symbol, marketCap);
@@ -564,6 +835,261 @@ async function enrichMarketCaps(symbols, existingCache) {
     }
   });
   return cache;
+}
+
+async function fetchYahooScreener(scrId, label, count = 25) {
+  const url = `https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=${encodeURIComponent(scrId)}&count=${count}`;
+  try {
+    const payload = await fetchPublicJson(url, { timeout: 9000, retries: 1 });
+    const quotes = payload.finance?.result?.[0]?.quotes || [];
+    return {
+      status: "ready",
+      label,
+      scrId,
+      rows: quotes.map((quote) => ({
+        symbol: quote.symbol,
+        name: quote.shortName || quote.longName || quote.displayName || quote.symbol,
+        price: finiteNumber(quote.regularMarketPrice),
+        changePct: roundedNumber(quote.regularMarketChangePercent, 2),
+        change: roundedNumber(quote.regularMarketChange, 2),
+        volume: finiteNumber(quote.regularMarketVolume),
+        marketCap: finiteNumber(quote.marketCap),
+        sourceName: "Yahoo Finance screener",
+        sourceUrl: `https://finance.yahoo.com/markets/stocks/${scrId.replaceAll("_", "-").toLowerCase()}/`
+      }))
+    };
+  } catch (error) {
+    return { status: "error", label, scrId, error: error.message, rows: [] };
+  }
+}
+
+async function fetchMarketMovers() {
+  const [gainers, losers, mostActive] = await Promise.all([
+    fetchYahooScreener("day_gainers", "Day gainers", 30),
+    fetchYahooScreener("day_losers", "Day losers", 30),
+    fetchYahooScreener("most_actives", "Most active", 30)
+  ]);
+  return {
+    generatedAt: new Date().toISOString(),
+    source: "Yahoo Finance predefined screeners",
+    gainers: gainers.rows,
+    losers: losers.rows,
+    mostActive: mostActive.rows,
+    status: [gainers, losers, mostActive].some((item) => item.status === "ready") ? "ready" : "error",
+    errors: [gainers, losers, mostActive].filter((item) => item.status !== "ready").map((item) => `${item.label}: ${item.error}`)
+  };
+}
+
+async function fetchNasdaqEarningsCalendar(dateKey) {
+  const url = `https://api.nasdaq.com/api/calendar/earnings?date=${dateKey}`;
+  try {
+    const payload = await fetchJson(url, { timeout: 9000, retries: 1 });
+    const rows = (payload.data?.rows || []).map((row) => ({
+      date: dateKey,
+      symbol: row.symbol,
+      name: row.name,
+      time: row.time,
+      marketCap: row.marketCap,
+      fiscalQuarterEnding: row.fiscalQuarterEnding,
+      epsForecast: row.epsForecast,
+      noOfEsts: row.noOfEsts,
+      lastYearReportDate: row.lastYearRptDt,
+      lastYearEps: row.lastYearEPS,
+      sourceName: "Nasdaq earnings calendar",
+      sourceUrl: `https://www.nasdaq.com/market-activity/earnings?date=${dateKey}`
+    }));
+    return {
+      status: "ready",
+      date: dateKey,
+      asOf: payload.data?.asOf || dateKey,
+      rows
+    };
+  } catch (error) {
+    return { status: "error", date: dateKey, error: error.message, rows: [] };
+  }
+}
+
+function normalizeTickerSymbol(symbol) {
+  return String(symbol || "").toUpperCase().replaceAll("-", ".").trim();
+}
+
+function mentionKey(symbol) {
+  return normalizeTickerSymbol(symbol).replace(/[^A-Z0-9.]/g, "");
+}
+
+function extractTickersFromText(text, knownSymbols = new Set()) {
+  const clean = String(text || "");
+  const tickers = new Set();
+  for (const match of clean.matchAll(/\$([A-Z][A-Z0-9.-]{0,7})\b/g)) {
+    const symbol = mentionKey(match[1]);
+    if (symbol.length >= 1 && symbol.length <= 6 && !tickerStopWords.has(symbol)) tickers.add(symbol);
+  }
+  for (const match of clean.matchAll(/\b[A-Z]{2,5}(?:\.[A-Z])?\b/g)) {
+    const symbol = mentionKey(match[0]);
+    if (tickerStopWords.has(symbol)) continue;
+    if (knownSymbols.has(symbol)) tickers.add(symbol);
+  }
+  return [...tickers];
+}
+
+async function buildEarningsTape({ sources, marketMovers, knownSymbols }) {
+  const pacificToday = dateKeyInTimeZone(new Date(), "America/Los_Angeles");
+  const dates = [offsetDateKey(pacificToday, -1), pacificToday, offsetDateKey(pacificToday, 1)];
+  const calendars = await mapLimit(dates, 2, fetchNasdaqEarningsCalendar);
+  const calendarRows = calendars.flatMap((calendarItem) => calendarItem.rows || []);
+  const earningsSymbols = new Set(calendarRows.map((row) => normalizeTickerSymbol(row.symbol)).filter(Boolean));
+  const moverRows = [
+    ...(marketMovers.gainers || []).map((row) => ({ ...row, moverBucket: "gainer" })),
+    ...(marketMovers.losers || []).map((row) => ({ ...row, moverBucket: "loser" })),
+    ...(marketMovers.mostActive || []).map((row) => ({ ...row, moverBucket: "most_active" }))
+  ];
+  const uniqueMoverRows = [...new Map(moverRows.map((row) => [normalizeTickerSymbol(row.symbol), row])).values()];
+  const earningsMovers = uniqueMoverRows
+    .filter((row) => earningsSymbols.has(normalizeTickerSymbol(row.symbol)))
+    .sort((a, b) => Math.abs(Number(b.changePct || 0)) - Math.abs(Number(a.changePct || 0)))
+    .slice(0, 12);
+
+  const articleHeadlines = sortArticlesNewestFirst(
+    sources
+      .flatMap((source) => (source.articles || []).map((article) => ({ ...article, sourceName: article.sourceName || source.name })))
+      .filter((article) => /(earnings|results|revenue|guidance|profit|eps|quarter|reports?)/i.test(`${article.title} ${article.summary || ""} ${article.excerpt || ""}`))
+  )
+    .slice(0, 12)
+    .map((article, index) => ({
+      id: `E${index + 1}`,
+      title: article.title,
+      sourceName: article.sourceName,
+      url: article.url,
+      publishedAt: article.publishedAt,
+      summary: article.summary,
+      tickers: extractTickersFromText(`${article.title} ${article.summary || ""}`, knownSymbols).slice(0, 8)
+    }));
+
+  return {
+    status: calendars.some((item) => item.status === "ready") ? "ready" : "error",
+    generatedAt: new Date().toISOString(),
+    dates,
+    calendars: calendars.map(({ date, asOf, status, error, rows }) => ({
+      date,
+      asOf,
+      status,
+      error: error || null,
+      rowCount: rows?.length || 0,
+      rows: (rows || []).slice(0, 40)
+    })),
+    earningsMovers,
+    articleHeadlines,
+    sourceNote: "Nasdaq earnings calendar plus Yahoo Finance daily mover screeners and earnings-related article headlines."
+  };
+}
+
+async function fetchRedditListing(subreddit, sort = "hot", limit = redditPostLimit) {
+  const url = `https://www.reddit.com/r/${encodeURIComponent(subreddit)}/${sort}.json?limit=${limit}`;
+  const payload = await fetchPublicJson(url, {
+    timeout: 12000,
+    retries: 1,
+    userAgent: "MarketPulse/0.1 personal research dashboard reddit sentiment reader"
+  });
+  return (payload.data?.children || []).map((child) => child.data).filter(Boolean);
+}
+
+async function fetchRedditTape(knownSymbols) {
+  if (skipReddit) {
+    return {
+      status: "skipped",
+      generatedAt: new Date().toISOString(),
+      sourceNote: "Reddit ingestion skipped by SKIP_REDDIT=1.",
+      topTickers: [],
+      topPosts: [],
+      subreddits: []
+    };
+  }
+
+  const results = await mapLimit(redditSources, 2, async (source) => {
+    try {
+      const posts = await fetchRedditListing(source.subreddit, "hot", redditPostLimit);
+      return {
+        ...source,
+        status: "ready",
+        posts: posts.map((post) => {
+          const title = post.title || "";
+          const selftext = post.selftext || "";
+          return {
+            id: post.id,
+            subreddit: source.subreddit,
+            segment: source.segment,
+            title,
+            url: post.url_overridden_by_dest || `https://www.reddit.com${post.permalink}`,
+            permalink: `https://www.reddit.com${post.permalink}`,
+            createdAt: post.created_utc ? new Date(post.created_utc * 1000).toISOString() : null,
+            score: finiteNumber(post.score) || 0,
+            comments: finiteNumber(post.num_comments) || 0,
+            upvoteRatio: finiteNumber(post.upvote_ratio),
+            flair: post.link_flair_text || null,
+            tickers: extractTickersFromText(`${title} ${selftext.slice(0, 500)}`, knownSymbols)
+          };
+        })
+      };
+    } catch (error) {
+      return { ...source, status: "error", error: error.message, posts: [] };
+    }
+  });
+
+  const posts = results.flatMap((result) => result.posts || []);
+  const tickerScores = new Map();
+  posts.forEach((post) => {
+    post.tickers.forEach((symbol) => {
+      const existing = tickerScores.get(symbol) || {
+        symbol,
+        mentions: 0,
+        score: 0,
+        comments: 0,
+        subreddits: new Set(),
+        posts: []
+      };
+      existing.mentions += 1;
+      existing.score += post.score || 0;
+      existing.comments += post.comments || 0;
+      existing.subreddits.add(post.subreddit);
+      existing.posts.push({
+        title: post.title,
+        subreddit: post.subreddit,
+        score: post.score,
+        comments: post.comments,
+        permalink: post.permalink
+      });
+      tickerScores.set(symbol, existing);
+    });
+  });
+
+  const topTickers = [...tickerScores.values()]
+    .map((item) => ({
+      ...item,
+      subreddits: [...item.subreddits],
+      posts: item.posts.sort((a, b) => (b.score + b.comments) - (a.score + a.comments)).slice(0, 3),
+      attentionScore: item.mentions * 10 + item.score * 0.02 + item.comments * 0.05
+    }))
+    .sort((a, b) => b.attentionScore - a.attentionScore)
+    .slice(0, 15);
+
+  const topPosts = posts
+    .sort((a, b) => (b.score + b.comments * 2) - (a.score + a.comments * 2))
+    .slice(0, 16);
+
+  return {
+    status: results.some((result) => result.status === "ready") ? "ready" : "error",
+    generatedAt: new Date().toISOString(),
+    sourceNote: "Public Reddit JSON endpoints; use as sentiment and attention only, not verified news.",
+    subreddits: results.map(({ subreddit, segment, status, error, posts }) => ({
+      subreddit,
+      segment,
+      status,
+      error: error || null,
+      postCount: posts?.length || 0
+    })),
+    topTickers,
+    topPosts
+  };
 }
 
 function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, signalsBySymbol }) {
@@ -958,6 +1484,165 @@ function articleBriefs(sources, limit = 3) {
     .map((article) => `${article.sourceName}: ${article.title}`);
 }
 
+function sourceTrustScore(trust) {
+  const value = String(trust || "").toLowerCase();
+  if (value.includes("very high")) return 5;
+  if (value.includes("high")) return 4;
+  if (value.includes("medium high")) return 3.5;
+  if (value.includes("medium")) return 3;
+  return 2;
+}
+
+function articleAgeHours(publishedAt, now = new Date()) {
+  const time = new Date(publishedAt || 0).getTime();
+  if (!Number.isFinite(time) || time <= 0) return null;
+  return (now.getTime() - time) / (60 * 60 * 1000);
+}
+
+function classifyMarketThemes(text) {
+  const haystack = String(text || "").toLowerCase();
+  const themes = [];
+  const tests = [
+    ["Earnings", /\b(earnings|results|revenue|guidance|profit|eps|quarter|margin|beat|miss)\b/],
+    ["Rates and central banks", /\b(fed|fomc|powell|rate|rates|yield|treasury|bond|ecb|lagarde|bank of england|boe|boj|central bank|monetary policy|inflation|cpi|pce)\b/],
+    ["Geopolitics and policy", /\b(iran|israel|ukraine|russia|china|taiwan|war|conflict|geopolitical|sanction|tariff|trade|election|congress|white house|hormuz)\b/],
+    ["Commodities and energy", /\b(oil|crude|brent|wti|gasoline|opec|energy|natural gas|gold|copper|commodity|commodities)\b/],
+    ["Macro and growth", /\b(gdp|payroll|jobs|unemployment|claims|retail sales|consumer|pmi|ism|growth|recession|soft landing|hard landing)\b/],
+    ["Credit and liquidity", /\b(credit|spread|spreads|liquidity|funding|default|high yield|investment grade|bank stress|refunding|treasury borrowing)\b/],
+    ["AI and semis", /\b(ai|artificial intelligence|semiconductor|semis|chips|gpu|data center|datacenter)\b/]
+  ];
+  tests.forEach(([theme, regex]) => {
+    if (regex.test(haystack)) themes.push(theme);
+  });
+  return themes.length ? themes : ["Market color"];
+}
+
+function articleImportanceScore(article, source, previousRefreshAt, now = new Date()) {
+  const text = `${article.title} ${article.summary || ""} ${article.excerpt || ""}`;
+  const age = articleAgeHours(article.publishedAt, now);
+  const sincePrevious = previousRefreshAt && article.publishedAt && new Date(article.publishedAt) > new Date(previousRefreshAt);
+  const themes = classifyMarketThemes(text);
+  let score = sourceTrustScore(source.trust) * 8;
+  if (sincePrevious) score += 30;
+  if (age != null && age <= marketIntelFreshHours) score += 24;
+  else if (age != null && age <= marketIntelImportantHours) score += 8;
+  if (themes.some((theme) => ["Earnings", "Rates and central banks", "Geopolitics and policy", "Commodities and energy"].includes(theme))) score += 14;
+  if (/breaking|daily open|market pulse|stock market today|before the bell|after hours|wall street|yields?|oil|earnings|central bank/i.test(text)) score += 8;
+  if (!article.publishedAt) score -= 12;
+  if (/(pardon our interruption|privacy|terms|sign in|login|subscribe)/i.test(text)) score -= 40;
+  return { score, themes, sincePrevious, ageHours: age == null ? null : roundedNumber(age, 1) };
+}
+
+function flattenSourceArticles(sources) {
+  return sources.flatMap((source) =>
+    (source.articles || []).map((article) => ({
+      ...article,
+      sourceName: article.sourceName || source.name,
+      sourceCategory: source.category,
+      trust: source.trust,
+      sourceOk: source.ok
+    }))
+  );
+}
+
+function buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols }) {
+  const now = new Date();
+  const byUrl = new Map();
+  sources.forEach((source) => {
+    (source.articles || []).forEach((article) => {
+      if (!article.title || !article.url) return;
+      const ranked = articleImportanceScore(article, source, previousRefreshAt, now);
+      const keepFresh = ranked.sincePrevious || (ranked.ageHours != null && ranked.ageHours <= marketIntelFreshHours);
+      const keepImportant = ranked.ageHours != null && ranked.ageHours <= marketIntelImportantHours && ranked.score >= 44;
+      if (!keepFresh && !keepImportant) return;
+      const existing = byUrl.get(article.url);
+      const candidate = {
+        id: null,
+        title: article.title,
+        sourceName: article.sourceName || source.name,
+        sourceCategory: source.category,
+        trust: source.trust,
+        url: article.url,
+        publishedAt: article.publishedAt,
+        summary: article.summary || firstSentence(article.excerpt, 260),
+        themes: ranked.themes,
+        freshness: ranked.sincePrevious ? "Since prior refresh" : ranked.ageHours <= marketIntelFreshHours ? "Last 24 hours" : "Important older item",
+        ageHours: ranked.ageHours,
+        score: roundedNumber(ranked.score, 1),
+        tickers: extractTickersFromText(`${article.title} ${article.summary || ""}`, knownSymbols).slice(0, 8)
+      };
+      if (!existing || candidate.score > existing.score) byUrl.set(article.url, candidate);
+    });
+  });
+
+  return [...byUrl.values()]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, marketIntelArticleLimit)
+    .map((item, index) => ({ ...item, id: `M${index + 1}` }));
+}
+
+function buildMarketDriverSummary(drivers, earningsTape, redditTape) {
+  const pieces = [];
+  drivers.slice(0, 5).forEach((driver) => {
+    pieces.push(`${driver.themes[0]}: ${driver.title} (${driver.sourceName})`);
+  });
+  (earningsTape.earningsMovers || []).slice(0, 3).forEach((mover) => {
+    pieces.push(`Earnings mover: ${mover.symbol} ${formatPercent(mover.changePct)} (${mover.name})`);
+  });
+  (redditTape.topTickers || []).slice(0, 3).forEach((ticker) => {
+    pieces.push(`Retail attention: ${ticker.symbol} across ${ticker.subreddits.join(", ")}`);
+  });
+  return pieces.slice(0, 10);
+}
+
+function headlineTheme(theme) {
+  if (theme === "Geopolitics and policy") return "Geopolitical and policy risk";
+  if (theme === "Commodities and energy") return "Energy and commodity risk";
+  if (theme === "Rates and central banks") return "Rates and central banks";
+  return theme || "Market drivers";
+}
+
+function buildMarketIntelligence({ sources, earningsTape, redditTape, marketMovers, previousRefreshStatus, knownSymbols, marketDataStatus }) {
+  const previousRefreshAt = previousRefreshStatus?.snapshotGeneratedAt || previousRefreshStatus?.generatedAt || null;
+  const drivers = buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols });
+  const themeCounts = new Map();
+  drivers.forEach((driver) => driver.themes.forEach((theme) => themeCounts.set(theme, (themeCounts.get(theme) || 0) + 1)));
+  const topThemes = [...themeCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([theme, count]) => ({ theme, count }));
+  const sourceHealth = {
+    checked: sources.length,
+    live: sources.filter((source) => source.ok).length,
+    blockedOrFailed: sources.filter((source) => !source.ok).map((source) => ({ name: source.name, reason: source.summary }))
+  };
+
+  return {
+    generatedAt: new Date().toISOString(),
+    window: {
+      mode: "rolling_24h_with_important_older_context",
+      freshHours: marketIntelFreshHours,
+      importantLookbackHours: marketIntelImportantHours,
+      previousRefreshAt
+    },
+    marketDataStatus,
+    sourceHealth,
+    professionalDrivers: drivers.slice(0, 18),
+    topThemes,
+    earnings: earningsTape,
+    reddit: redditTape,
+    marketMovers: {
+      source: marketMovers.source,
+      status: marketMovers.status,
+      gainers: (marketMovers.gainers || []).slice(0, 12),
+      losers: (marketMovers.losers || []).slice(0, 12),
+      mostActive: (marketMovers.mostActive || []).slice(0, 12),
+      errors: marketMovers.errors || []
+    },
+    briefingBullets: buildMarketDriverSummary(drivers, earningsTape, redditTape)
+  };
+}
+
 function topSectorText(sectorPerformance) {
   const leaders = (sectorPerformance || []).slice(0, 3);
   if (!leaders.length) return "sector confirmation is unavailable";
@@ -980,6 +1665,7 @@ function boundedList(items, fallback, limit = 6) {
 
 function cleanDailyReadText(value) {
   return String(value || "")
+    .replace(/^\s*[-•]\s+/, "")
     .replace(/[‑–—]/g, "-")
     .replaceAll("XGBoost_ranked", "XGBoost-ranked")
     .replaceAll("modelRank", "model rank")
@@ -1019,6 +1705,21 @@ function usableDailyReadItem(value) {
   return !/(no names lack|no data gaps|all data complete|no .* unavailable)/i.test(value);
 }
 
+function dailyReadPassesFactGuardrails(dailyRead) {
+  const text = [
+    dailyRead?.headline,
+    dailyRead?.body,
+    ...(dailyRead?.keyTakeaways || []),
+    ...(dailyRead?.watchItems || [])
+  ]
+    .join(" ")
+    .trim();
+  if (!text) return false;
+  if (/forward return|SHAP|cross-asset liquidity|sector monolith|risk-on bid|свеж/i.test(text)) return false;
+  if (/[\u0400-\u04FF]/.test(text)) return false;
+  return true;
+}
+
 function cleanDailyRead(dailyRead) {
   if (!dailyRead) return null;
   return {
@@ -1029,7 +1730,7 @@ function cleanDailyRead(dailyRead) {
   };
 }
 
-function buildNote({ opportunities, macro, sources, model, sectorPerformance, rulesRecommendations, aiRecommendations }) {
+function buildNote({ opportunities, macro, sources, model, sectorPerformance, rulesRecommendations, aiRecommendations, marketIntelligence }) {
   const modelReady = model?.status === "ready" && model.scoredCount > 0;
   const modelLeaders = opportunities.filter(hasModelRank);
   const leaders = (modelReady ? modelLeaders : opportunities).slice(0, 5);
@@ -1057,6 +1758,10 @@ function buildNote({ opportunities, macro, sources, model, sectorPerformance, ru
   const topSector = sectorPerformance?.[0];
   const modelSectorText = dominantModelSectorText(modelLeaders);
   const sourceBriefs = articleBriefs(sources, 3);
+  const marketBullets = marketIntelligence?.briefingBullets || [];
+  const topDrivers = marketIntelligence?.professionalDrivers || [];
+  const earningsMovers = marketIntelligence?.earnings?.earningsMovers || [];
+  const redditTickers = marketIntelligence?.reddit?.topTickers || [];
   const aiFocus = aiRecommendations?.status === "ready"
     ? firstSentence(aiRecommendations.headline || aiRecommendations.macroView)
     : "";
@@ -1072,7 +1777,19 @@ function buildNote({ opportunities, macro, sources, model, sectorPerformance, ru
   const fallbackHeadline = modelReady
     ? `${regime}; model leadership is clustered in ${leaderText}, with ${topSector?.sector || "sector"} confirmation.`
     : `${regime}; rules-based momentum leaders are ${leaderText}.`;
-  const fallbackBody = `${regime}: ${above50Pct}% of the screened universe is above the 50-day average, ${above200Pct}% is above the 200-day, and ${breadth}% clears both trend lines. ${modelText}; the cleanest top-decile setup count is ${cleanCandidates}, while ${extended} top-ranked names are already RSI-extended. Sector confirmation is led by ${topSectorText(sectorPerformance)}. The AI memo is focused on ${aiSymbols || leaderText}${aiFocus ? `, with the note that ${aiFocus.charAt(0).toLowerCase()}${aiFocus.slice(1)}` : ""}. Source tape coverage is ${sourceHits}/${sources.length} pages live with ${articleHits} recent articles, so treat source conclusions as useful but incomplete when a publisher blocks scraping.`;
+  const intelligenceHeadline = topDrivers.length
+    ? `${headlineTheme(topDrivers[0].themes[0])} leads the 24-hour tape; earnings movers and retail attention frame the risk map.`
+    : fallbackHeadline;
+  const driverLead = topDrivers.length
+    ? `The fresh market tape is led by ${topDrivers.slice(0, 3).map((driver) => `${driver.title} (${driver.sourceName})`).join("; ")}.`
+    : "The fresh market-driver tape is thin because several source pages did not yield current dated articles.";
+  const earningsLead = earningsMovers.length
+    ? `Earnings-linked movers include ${earningsMovers.slice(0, 3).map((item) => `${item.symbol} ${formatPercent(item.changePct)}`).join(", ")}.`
+    : "No large Yahoo mover matched the Nasdaq earnings calendar in this refresh.";
+  const redditLead = redditTickers.length
+    ? `Retail attention is concentrated in ${redditTickers.slice(0, 4).map((item) => item.symbol).join(", ")}; treat that as sentiment, not verified news.`
+    : "Reddit attention data was unavailable or did not produce clean ticker concentration.";
+  const fallbackBody = `${driverLead} ${earningsLead} ${redditLead} Against that backdrop, ${regime.toLowerCase()}: ${above50Pct}% of the screened universe is above the 50-day average, ${above200Pct}% is above the 200-day, and ${breadth}% clears both trend lines. ${modelText}; the model leaders are ${leaderText}, while sector confirmation is led by ${topSectorText(sectorPerformance)}. Source tape coverage is ${sourceHits}/${sources.length} pages live with ${articleHits} recent articles, so blocked or stale publishers should not drive the call.`;
   const fallbackChanged = [
     modelReady
       ? `Model book: ${leaderText} lead ${model.scoredCount} scored S&P 500 names; ${modelSectorText}.`
@@ -1093,14 +1810,15 @@ function buildNote({ opportunities, macro, sources, model, sectorPerformance, ru
     `Confirmation check: ETF leaders are ${etfText}; if they roll over while single-name ranks stay high, reduce confidence in the long book.`,
     `${failedSources} of ${sources.length} configured source pages failed the latest check; blocked or stale sources should not drive the call.`
   ];
-  const aiDailyRead = aiRecommendations?.status === "ready" ? cleanDailyRead(aiRecommendations.dailyRead) : null;
+  const cleanedAiDailyRead = process.env.AI_DAILY_READ === "1" && aiRecommendations?.status === "ready" ? cleanDailyRead(aiRecommendations.dailyRead) : null;
+  const aiDailyRead = process.env.AI_DAILY_READ === "1" && dailyReadPassesFactGuardrails(cleanedAiDailyRead) ? cleanedAiDailyRead : null;
 
   return {
-    headline: aiDailyRead?.headline || fallbackHeadline,
+    headline: aiDailyRead?.headline || intelligenceHeadline,
     body: aiDailyRead?.body || fallbackBody,
-    changed: boundedList([...(aiDailyRead?.keyTakeaways || []).slice(0, 4), ...fallbackChanged], fallbackChanged, 6),
+    changed: boundedList([...marketBullets.slice(0, 3), ...(aiDailyRead?.keyTakeaways || []).slice(0, 4), ...fallbackChanged], fallbackChanged, 6),
     watch: boundedList([...(aiDailyRead?.watchItems || []).slice(0, 3), ...fallbackWatch], fallbackWatch, 5),
-    generatedBy: aiDailyRead ? "ai_with_fact_guardrails" : "deterministic"
+    generatedBy: aiDailyRead ? "ai_with_fact_guardrails" : cleanedAiDailyRead ? "deterministic_ai_daily_read_rejected" : "deterministic"
   };
 }
 
@@ -1479,7 +2197,7 @@ async function discoverInvestorRelationsUrl(companyUrl) {
 
   try {
     const base = new URL(cleaned);
-    const html = await fetchText(base.href, { timeout: 9000 });
+    const html = await fetchText(base.href, { timeout: 7000, retries: 1 });
     for (const match of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
       const href = attrValue(match[1], "href");
       const label = stripTags(match[2]);
@@ -1517,7 +2235,7 @@ async function fetchInvestorRelationsContext(symbol, companyUrl) {
   if (!investorUrl) return null;
 
   try {
-    const html = await fetchText(investorUrl, { timeout: 12000 });
+    const html = await fetchText(investorUrl, { timeout: 7000, retries: 1 });
     return {
       id: `${symbol}-IR`,
       type: "investor_relations",
@@ -1539,10 +2257,10 @@ async function fetchInvestorRelationsContext(symbol, companyUrl) {
 
 async function fetchNasdaqCompanyContext(symbol) {
   const [profile, surprise, eps, summary] = await Promise.all([
-    fetchJson(`https://api.nasdaq.com/api/company/${encodeURIComponent(symbol)}/company-profile`, { timeout: 12000 }).catch(() => null),
-    fetchJson(`https://api.nasdaq.com/api/company/${encodeURIComponent(symbol)}/earnings-surprise`, { timeout: 12000 }).catch(() => null),
-    fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/eps?assetclass=stocks`, { timeout: 12000 }).catch(() => null),
-    fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/summary?assetclass=stocks`, { timeout: 12000 }).catch(() => null)
+    fetchJson(`https://api.nasdaq.com/api/company/${encodeURIComponent(symbol)}/company-profile`, { timeout: 8000, retries: 1 }).catch(() => null),
+    fetchJson(`https://api.nasdaq.com/api/company/${encodeURIComponent(symbol)}/earnings-surprise`, { timeout: 8000, retries: 1 }).catch(() => null),
+    fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/eps?assetclass=stocks`, { timeout: 8000, retries: 1 }).catch(() => null),
+    fetchJson(`https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/summary?assetclass=stocks`, { timeout: 8000, retries: 1 }).catch(() => null)
   ]);
 
   const profileData = profile?.data || {};
@@ -1577,7 +2295,7 @@ async function fetchNasdaqCompanyContext(symbol) {
 
 async function fetchCompanyNews(symbol) {
   try {
-    const xml = await fetchText(`https://feeds.finance.yahoo.com/rss/2.0/headline?s=${encodeURIComponent(symbol)}&region=US&lang=en-US`, { timeout: 12000 });
+    const xml = await fetchText(`https://feeds.finance.yahoo.com/rss/2.0/headline?s=${encodeURIComponent(symbol)}&region=US&lang=en-US`, { timeout: 8000, retries: 1 });
     return parseYahooRssItems(xml, symbol).slice(0, 5);
   } catch {
     return [];
@@ -1695,17 +2413,18 @@ async function buildCompanyContexts(candidates) {
   return contexts.filter(Boolean);
 }
 
-async function buildAiRecommendations({ opportunities, macro, calendar, sources, rulesRecommendations, sectorPerformance, model: modelSummary, promptText }) {
+async function buildAiRecommendations({ opportunities, macro, calendar, sources, rulesRecommendations, sectorPerformance, model: modelSummary, marketIntelligence, promptText }) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (process.env.SKIP_AI === "1") return fallbackAiRecommendations("skipped_by_env");
   if (!apiKey) return fallbackAiRecommendations("missing_api_key");
 
+  console.log("Building AI recommendation context...");
   const aiModel = process.env.OPENAI_MODEL || defaultOpenAiModel;
   const sourceArticles = sortArticlesNewestFirst(
     sources
       .flatMap((source) => source.articles || [])
       .filter((article) => article.title && article.url)
-  ).slice(0, 36);
+  ).slice(0, 28);
   const sourceTape = sourceArticles.map(({ sourceName, title, url, publishedAt, summary, excerpt }, index) => ({
     id: `S${index + 1}`,
     sourceName,
@@ -1713,12 +2432,13 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     url,
     publishedAt,
     summary,
-    excerpt: excerpt?.slice(0, 1200) || ""
+    excerpt: excerpt?.slice(0, 700) || ""
   }));
   const modelCandidates = opportunities.filter(hasModelRank).slice(0, 30).map(compactCandidate);
   const avoidCandidates = bottomModelCandidates(opportunities, 16).map(compactCandidate);
   const avoidSectors = bottomModelSectorClusters(opportunities, 5);
   const companyContexts = await buildCompanyContexts(modelCandidates);
+  console.log(`Built ${companyContexts.length} company contexts for AI memo.`);
   const validSymbols = [
     ...new Set(
       companyContexts.length
@@ -1743,6 +2463,37 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     model: modelSummary,
     macro,
     upcomingEvents: calendar.slice(0, 8),
+    marketIntelligence: {
+      window: marketIntelligence?.window || null,
+      marketDataStatus: marketIntelligence?.marketDataStatus || null,
+      sourceHealth: marketIntelligence?.sourceHealth || null,
+      topThemes: marketIntelligence?.topThemes || [],
+      professionalDrivers: (marketIntelligence?.professionalDrivers || []).slice(0, 12),
+      earnings: {
+        dates: marketIntelligence?.earnings?.dates || [],
+        calendars: (marketIntelligence?.earnings?.calendars || []).map((item) => ({
+          date: item.date,
+          asOf: item.asOf,
+          status: item.status,
+          rowCount: item.rowCount,
+          rows: (item.rows || []).slice(0, 18)
+        })),
+        earningsMovers: (marketIntelligence?.earnings?.earningsMovers || []).slice(0, 10),
+        articleHeadlines: (marketIntelligence?.earnings?.articleHeadlines || []).slice(0, 10)
+      },
+      reddit: {
+        status: marketIntelligence?.reddit?.status || "missing",
+        sourceNote: marketIntelligence?.reddit?.sourceNote || "",
+        subreddits: marketIntelligence?.reddit?.subreddits || [],
+        topTickers: (marketIntelligence?.reddit?.topTickers || []).slice(0, 12),
+        topPosts: (marketIntelligence?.reddit?.topPosts || []).slice(0, 10)
+      },
+      marketMovers: {
+        gainers: (marketIntelligence?.marketMovers?.gainers || []).slice(0, 8),
+        losers: (marketIntelligence?.marketMovers?.losers || []).slice(0, 8),
+        mostActive: (marketIntelligence?.marketMovers?.mostActive || []).slice(0, 8)
+      }
+    },
     sourceTape,
     companyContexts,
     companySourceRefs,
@@ -1941,38 +2692,48 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       }
     },
     reasoning: { effort: "minimal" },
-    max_output_tokens: 8000
+    max_output_tokens: 6500
   };
 
   try {
+    console.log(`Calling OpenAI ${aiModel} for strategy memo...`);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), openAiTimeoutMs);
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
+      signal: controller.signal,
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify(requestBody)
     });
-    const json = await response.json();
-    if (!response.ok) throw new Error(json.error?.message || `${response.status} ${response.statusText}`);
-    const usage = estimateOpenAiCost(aiModel, json.usage);
-    const text = responseText(json);
-    if (!text) throw new Error("OpenAI response did not include final text; try a larger max_output_tokens value or a lower reasoning effort.");
-    const parsed = normalizeAiRecommendationContext(JSON.parse(text), companyContexts, sourceRefIds);
-    await appendUsageLog({
-      generatedAt: new Date().toISOString(),
-      status: "ready",
-      model: aiModel,
-      usage
-    });
-    return {
-      status: "ready",
-      model: aiModel,
-      usage,
-      companyContextCount: companyContexts.length,
-      ...parsed
-    };
+    try {
+      const json = await response.json();
+      if (!response.ok) throw new Error(json.error?.message || `${response.status} ${response.statusText}`);
+      const usage = estimateOpenAiCost(aiModel, json.usage);
+      const text = responseText(json);
+      if (!text) throw new Error("OpenAI response did not include final text; try a larger max_output_tokens value or a lower reasoning effort.");
+      const parsed = normalizeAiRecommendationContext(JSON.parse(text), companyContexts, sourceRefIds);
+      await appendUsageLog({
+        generatedAt: new Date().toISOString(),
+        status: "ready",
+        model: aiModel,
+        usage
+      });
+      console.log("AI strategy memo generated.");
+      return {
+        status: "ready",
+        model: aiModel,
+        usage,
+        companyContextCount: companyContexts.length,
+        ...parsed
+      };
+    } finally {
+      clearTimeout(timeout);
+    }
   } catch (error) {
+    console.warn(`AI strategy memo unavailable: ${error.message}`);
     await appendUsageLog({
       generatedAt: new Date().toISOString(),
       status: "ai_error",
@@ -1991,12 +2752,13 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
 async function main() {
   await loadLocalEnv();
 
-  const [sourceMarkdown, universeConfigText, aiPromptText, modelRankings, modelExplainability] = await Promise.all([
+  const [sourceMarkdown, universeConfigText, aiPromptText, modelRankings, modelExplainability, previousRefreshStatus] = await Promise.all([
     readFile(join(root, "config/news-sources.md"), "utf8"),
     readFile(join(root, "config/universe.json"), "utf8"),
     readFile(join(root, "config/ai-recommendation-prompt.md"), "utf8").catch(() => defaultAiPrompt),
     loadModelRankings(),
-    loadModelExplainability()
+    loadModelExplainability(),
+    loadPreviousRefreshStatus()
   ]);
   const modelSummary = publicModelSummary(modelRankings, modelExplainability);
 
@@ -2014,63 +2776,124 @@ async function main() {
   const etfs = universeConfig.etfs.map((item) => ({ ...item, type: "etf", sector: item.assetClass }));
   let universe = [...stocks, ...etfs];
   if (maxTickers > 0) universe = universe.slice(0, maxTickers);
+  const knownSymbols = new Set(
+    [
+      ...universe.map((item) => item.symbol),
+      ...modelRankings.rankings.map((item) => item.symbol),
+      "SPY",
+      "QQQ",
+      "IWM",
+      "TLT",
+      "GLD",
+      "HYG",
+      "GME",
+      "OKLO",
+      "CRCL",
+      "SOXX",
+      "URA",
+      "SLV",
+      "ASML"
+    ]
+      .map(mentionKey)
+      .filter(Boolean)
+  );
+  const redditTapePromise = fetchRedditTape(knownSymbols);
+  const marketMoversPromise = fetchMarketMovers();
 
   console.log(`Screening ${universe.length} instruments...`);
 
-  const spyHistory = await fetchHistory("SPY");
-  const spyCloses = spyHistory.map((row) => row.close);
-  const spyReturn20 = percentChange(spyCloses.at(-1), spyCloses.at(-21));
+  let opportunities;
+  let signalsBySymbol;
+  let marketStrip;
+  let sectorPerformance;
+  let marketDataStatus = { status: "fresh", message: "Fresh end-of-day chart history was fetched for this refresh." };
 
-  const signals = await mapLimit(universe, 10, async (item, index) => {
-    try {
-      if (index > 0 && index % 50 === 0) console.log(`...${index}/${universe.length}`);
-      const history = item.symbol === "SPY" ? spyHistory : await fetchHistory(item.symbol);
-      await sleep(20);
-      return computeSignal(item, history, spyReturn20, spyHistory);
-    } catch (error) {
-      return null;
-    }
-  });
+  try {
+    if (useCachedTechnicals) throw new Error("USE_CACHED_TECHNICALS=1");
+    const spyHistory = await fetchHistory("SPY");
+    const spyCloses = spyHistory.map((row) => row.close);
+    const spyReturn20 = percentChange(spyCloses.at(-1), spyCloses.at(-21));
 
-  const opportunities = mergeModelScores(signals.filter(Boolean), modelRankings);
-  const signalsBySymbol = new Map(signals.filter(Boolean).map((item) => [item.symbol, item]));
+    const signals = await mapLimit(universe, Math.max(1, historyConcurrency), async (item, index) => {
+      try {
+        if (index > 0 && index % 50 === 0) console.log(`...${index}/${universe.length}`);
+        const history = item.symbol === "SPY" ? spyHistory : await fetchHistory(item.symbol);
+        await sleep(20);
+        return computeSignal(item, history, spyReturn20, spyHistory);
+      } catch (error) {
+        return null;
+      }
+    });
+
+    opportunities = mergeModelScores(signals.filter(Boolean), modelRankings);
+    signalsBySymbol = new Map(signals.filter(Boolean).map((item) => [item.symbol, item]));
+
+    const historyCache = new Map([["SPY", spyHistory]]);
+    const marketSymbols = ["SPY", "QQQ", "IWM", "TLT", "GLD", "HYG"];
+    marketStrip = (
+      await mapLimit(marketSymbols, 4, async (symbol) => {
+        const existing = opportunities.find((item) => item.symbol === symbol);
+        if (existing) return existing;
+        const metadata = etfs.find((item) => item.symbol === symbol) || { symbol, name: symbol };
+        const history = await fetchHistory(symbol);
+        historyCache.set(symbol, history);
+        return computeSignal(metadata, history, spyReturn20, spyHistory);
+      })
+    ).map((item) => ({
+      symbol: item.symbol,
+      label: item.name.replace(/ ETF| Trust| Fund/g, ""),
+      price: item.close,
+      changePct: item.changePct
+    }));
+
+    const sectorEtfs = universeConfig.sectorEtfs || [];
+    sectorPerformance = (
+      await mapLimit(sectorEtfs, 4, async (item) => {
+        const history = historyCache.get(item.symbol) || await fetchHistory(item.symbol);
+        historyCache.set(item.symbol, history);
+        return computeSectorPerformance(item, history, spyHistory);
+      })
+    ).sort((a, b) => b.change30d - a.change30d);
+  } catch (error) {
+    const existingSnapshot = await loadExistingSnapshot();
+    if (!existingSnapshot?.opportunities?.length) throw error;
+    console.warn(`Using cached technical tape because fresh chart history failed: ${error.message}`);
+    opportunities = mergeModelScores(existingSnapshot.opportunities, modelRankings);
+    signalsBySymbol = new Map(opportunities.map((item) => [item.symbol, item]));
+    marketStrip = existingSnapshot.marketStrip || [];
+    sectorPerformance = existingSnapshot.sectorPerformance || [];
+    marketDataStatus = {
+      status: "cached_technical_tape",
+      message: `Fresh Yahoo chart history failed (${error.message}); reused the prior end-of-day technical tape while refreshing news, earnings, Reddit, AI, and model context.`,
+      cachedSnapshotGeneratedAt: existingSnapshot.generatedAt || null
+    };
+  }
+
   const stockMetadata = constituentMetadataBySymbol(stocks);
   const marketCapCachePromise = loadMarketCapCache().then((cache) =>
     modelRankings.status === "ready" ? enrichMarketCaps(modelRankings.rankings.map((item) => item.symbol), cache) : cache
   );
 
-  const historyCache = new Map([["SPY", spyHistory]]);
-
-  const marketSymbols = ["SPY", "QQQ", "IWM", "TLT", "GLD", "HYG"];
-  const marketStrip = (
-    await mapLimit(marketSymbols, 4, async (symbol) => {
-      const existing = opportunities.find((item) => item.symbol === symbol);
-      if (existing) return existing;
-      const metadata = etfs.find((item) => item.symbol === symbol) || { symbol, name: symbol };
-      const history = await fetchHistory(symbol);
-      historyCache.set(symbol, history);
-      return computeSignal(metadata, history, spyReturn20, spyHistory);
-    })
-  ).map((item) => ({
-    symbol: item.symbol,
-    label: item.name.replace(/ ETF| Trust| Fund/g, ""),
-    price: item.close,
-    changePct: item.changePct
-  }));
-
-  const sectorEtfs = universeConfig.sectorEtfs || [];
-  const sectorPerformance = (
-    await mapLimit(sectorEtfs, 4, async (item) => {
-      const history = historyCache.get(item.symbol) || await fetchHistory(item.symbol);
-      historyCache.set(item.symbol, history);
-      return computeSectorPerformance(item, history, spyHistory);
-    })
-  ).sort((a, b) => b.change30d - a.change30d);
-
-  const [macro, sources] = await Promise.all([
+  console.log("Refreshing macro, source, Reddit, and market-mover tapes...");
+  const [macro, sources, redditTape, marketMovers] = await Promise.all([
     mapLimit(macroSeries, 4, fetchFredSeries),
-    checkedSourcesPromise
+    checkedSourcesPromise,
+    redditTapePromise,
+    marketMoversPromise
   ]);
+  console.log(`Source tape checked: ${sources.filter((source) => source.ok).length}/${sources.length} live.`);
+  const earningsTape = await buildEarningsTape({ sources, marketMovers, knownSymbols });
+  console.log(`Earnings tape built: ${(earningsTape.earningsMovers || []).length} earnings-linked movers.`);
+  const marketIntelligence = buildMarketIntelligence({
+    sources,
+    earningsTape,
+    redditTape,
+    marketMovers,
+    previousRefreshStatus,
+    knownSymbols,
+    marketDataStatus
+  });
+  console.log(`Market intelligence built: ${(marketIntelligence.professionalDrivers || []).length} professional drivers.`);
   const upcomingCalendar = calendar.filter((event) => new Date(`${event.date}T23:59:59`) >= new Date()).slice(0, 8);
   const rulesRecommendations = buildRecommendations(opportunities);
   const aiRecommendations = await buildAiRecommendations({
@@ -2081,10 +2904,13 @@ async function main() {
     rulesRecommendations,
     sectorPerformance,
     model: modelSummary,
+    marketIntelligence,
     promptText: aiPromptText
   });
   const avoidList = buildAvoidList(opportunities, aiRecommendations);
+  console.log("Waiting for market-cap cache refresh...");
   const marketCapCache = await marketCapCachePromise;
+  console.log("Market-cap cache ready.");
   if (modelRankings.status === "ready") await writeMarketCapCache(marketCapCache);
   const modelScorebook = buildModelScorebook({
     modelRankings,
@@ -2103,9 +2929,12 @@ async function main() {
       model: modelSummary,
       sectorPerformance,
       rulesRecommendations,
-      aiRecommendations
+      aiRecommendations,
+      marketIntelligence
     }),
     aiRecommendations,
+    marketDataStatus,
+    marketIntelligence,
     avoidList,
     recommendations: rulesRecommendations,
     sectorPerformance,

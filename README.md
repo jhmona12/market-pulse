@@ -53,7 +53,8 @@ flowchart TD
 - Pulls macro indicators from public FRED CSV endpoints.
 - Tracks a configured macro calendar for market-moving events such as CPI, payrolls, GDP, and FOMC dates.
 - Ingests public research and commentary sources listed in `config/news-sources.md`.
-- Discovers recent articles from those source landing pages and prioritizes newer dated articles.
+- Discovers recent articles from source landing pages and RSS feeds, prioritizes newer dated articles, and builds a top-of-report market intelligence tape.
+- Tracks professional market drivers, earnings calendars, earnings-linked daily movers, Yahoo Finance mover screens, and Reddit ticker attention as separate inputs.
 - Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data into structured research recommendations.
 - Enriches model candidates with company descriptions, market caps, investor relations links, earnings context, and recent ticker-specific news where free sources are available.
 - Uses AI to draft the Daily Read executive snapshot, with deterministic model, sector, macro, and source-tape metrics as guardrails and fallback.
@@ -134,6 +135,10 @@ The refresh script:
 - Reads source URLs from `config/news-sources.md`
 - Fetches source landing pages and discovers likely research/commentary articles
 - Extracts article titles, summaries, excerpts, and publication dates when available
+- Parses RSS feeds when a source exposes cleaner structured headlines than a static landing page
+- Builds `marketIntelligence` with rolling 24-hour professional drivers, important older context, earnings movers, market movers, and Reddit sentiment
+- Treats Reddit / WallStreetBets as attention and sentiment only, separated from professional commentary
+- Falls back to the prior end-of-day technical tape when Yahoo chart history is temporarily rate-limited, while still refreshing sources, earnings, Reddit, model context, and AI synthesis
 - Pulls S&P 500 constituents from Wikipedia when available
 - Adds ETFs from `config/universe.json`
 - Fetches delayed/end-of-day chart history from Yahoo Finance's public chart endpoint
@@ -182,6 +187,7 @@ The intended division of labor is:
 - The rules-based screener provides technical context, ETF confirmation, and fallback rankings.
 - The AI Strategy Memo explains the model-ranked candidates against the macro calendar and public source tape.
 - The Daily Read is AI-written when available, but it is anchored to deterministic facts and falls back to a rules-based executive snapshot if the AI call fails.
+- The Daily Read is deterministic by default so the top of the report stays tightly grounded in the source tape, earnings movers, Reddit attention, macro calendar, and model facts. Set `AI_DAILY_READ=1` to let AI write the Daily Read when its output passes local fact-language guardrails.
 - The Stay Away section is seeded deterministically from the lowest-ranked model names; AI may add concise commentary, but it cannot choose symbols outside that supplied avoid-candidate list.
 
 Create a local `.env` file:
