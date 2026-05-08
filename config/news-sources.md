@@ -6,18 +6,10 @@ Add new free sources to this table. The ingestion script reads rows with this sh
 
 | Name | URL | Category | Cadence | Trust | Notes |
 |---|---|---|---|---|---|
-| BlackRock Insights | https://www.blackrock.com/us/individual/insights | Institution research | Weekly | High | Public macro and market views. |
-| BlackRock Investment Institute Weekly Commentary | https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary | Institution research | Weekly | High | Public BII weekly market and macro commentary. |
-| BlackRock Market Insights | https://www.blackrock.com/us/financial-professionals/insights | Institution research | Weekly | High | Advisor-oriented market commentary. |
 | J.P. Morgan Markets Insights | https://www.jpmorgan.com/insights/markets | Institution research | Weekly | High | Public markets and macro research hub. |
 | Wells Fargo Advisors Stock Market News | https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm | Institution research | Weekly | High | Public stock market commentary; replaces retired investment-institute URL. |
 | Merrill Capital Market Outlook | https://www.ml.com/capital-market-outlook.html | Institution research | Weekly | High | Public Merrill / Bank of America capital markets outlook. |
 | Bank of America Institute | https://institute.bankofamerica.com/ | Institution research | Weekly | High | Public consumer, macro, and market research. |
-| Highland Associates Weekly Market Commentary | https://highlandassoc.com/our-research/weekly-market-commentary/ | Institution research | Weekly | Medium high | Public Highland Associates weekly market commentary; redirects to the current Regions-hosted page. |
-| RBC Wealth Management Jamie Sodhi Blog | https://wmc.rbcwealthmanagement.com/jamie-sodhi | Advisor commentary | Periodic | Medium | Public RBC Wealth Management advisor market blog; submitted URL redirects here. |
-| RG Wealth Financial Insights | https://rgwealth.com/financial-insights/ | Advisor commentary | Periodic | Medium | Public financial insights page; may block automated source checks. |
-| LPL Weekly Market Commentary | https://www.lpl.com/research/weekly-market-commentary.html | Institution research | Weekly | High | Public LPL weekly market commentary page; preferred over the broader research hub for dated articles. |
-| LPL Macro Market Movers Blog | https://www.lpl.com/research/blog.html | Institution research | Weekly | High | Public LPL blog with market, macro, earnings, geopolitics, and weekly performance notes. |
 | Raymond James Commentary And Insights | https://www.raymondjames.com/commentary-and-insights | Institution research | Periodic | High | Public market commentary and insights hub; site may intermittently reject automated checks. |
 | Schwab Weekly Market Outlook | https://www.schwab.com/learn/story/weekly-market-outlook | Institution research | Weekly | High | Public weekly market outlook covering earnings, Fed, rates, economic data, and sector setup. |
 | Fidelity Market Insights | https://www.fidelity.com/viewpoints/market-and-economic-insights | Institution research | Periodic | High | Public Fidelity market and economic insights hub. |
@@ -37,5 +29,4 @@ Add new free sources to this table. The ingestion script reads rows with this sh
 | CNBC Top News RSS | https://www.cnbc.com/id/100003114/device/rss/rss.html | News RSS | Continuous | Medium | Structured CNBC top business and market news feed. |
 | CNBC Earnings RSS | https://www.cnbc.com/id/15839135/device/rss/rss.html | News RSS | Continuous | Medium | Structured CNBC earnings news feed. |
 | MarketWatch Top Stories RSS | https://feeds.content.dowjones.io/public/rss/mw_topstories | News RSS | Continuous | Medium | Structured MarketWatch top stories feed. |
-| MarketWatch MarketPulse RSS | https://feeds.content.dowjones.io/public/rss/mw_marketpulse | News RSS | Continuous | Medium | Structured MarketWatch MarketPulse feed for fast market headlines. |
 | Yahoo Finance News | https://finance.yahoo.com/news/ | News | Continuous | Medium | Public finance news page; respect site terms. |

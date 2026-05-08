@@ -136,6 +136,7 @@ The refresh script:
 - Fetches source landing pages and discovers likely research/commentary articles
 - Extracts article titles, summaries, excerpts, and publication dates when available
 - Parses RSS feeds when a source exposes cleaner structured headlines than a static landing page
+- Requires source articles to have a publication date within the freshness window, 30 days by default, before they can appear in the Source Tape or feed the AI/source briefing
 - Builds `marketIntelligence` with rolling 24-hour professional drivers, important older context, earnings movers, market movers, and Reddit sentiment
 - Treats Reddit / WallStreetBets as attention and sentiment only, separated from professional commentary
 - Falls back to the prior end-of-day technical tape when Yahoo chart history is temporarily rate-limited, while still refreshing sources, earnings, Reddit, model context, and AI synthesis

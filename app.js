@@ -961,13 +961,14 @@ function renderMacro() {
 
 function renderSources() {
   const sourceTape = $("#sourceTape");
-  const sources = state.snapshot.sources || [];
+  const allSources = state.snapshot.sources || [];
+  const sources = allSources.filter((source) => source.ok && (source.articles || []).length);
   const articleCount = sources.reduce((total, source) => total + (source.articles?.length || 0), 0);
-  $("#sourceCount").textContent = `${sources.length} sources · ${articleCount} articles`;
+  $("#sourceCount").textContent = `${sources.length}/${allSources.length} sources · ${articleCount} recent articles`;
   sourceTape.innerHTML = "";
 
   if (!sources.length) {
-    sourceTape.innerHTML = `<div class="empty-state">Run the refresh script to populate publication checks.</div>`;
+    sourceTape.innerHTML = `<div class="empty-state">No recent dated source articles passed the freshness filter in this snapshot.</div>`;
     return;
   }
 

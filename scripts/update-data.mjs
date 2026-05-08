@@ -6,6 +6,7 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const maxTickers = Number.parseInt(process.env.MAX_TICKERS || "0", 10);
 const articlesPerSource = Number.parseInt(process.env.SOURCE_ARTICLES_PER_SOURCE || "3", 10);
 const maxArticleCandidates = Number.parseInt(process.env.SOURCE_ARTICLE_CANDIDATES || "6", 10);
+const sourceMaxArticleAgeDays = Number.parseFloat(process.env.SOURCE_MAX_ARTICLE_AGE_DAYS || "30");
 const companyContextCount = Number.parseInt(process.env.COMPANY_CONTEXT_COUNT || "12", 10);
 const marketIntelArticleLimit = Number.parseInt(process.env.MARKET_INTEL_ARTICLE_LIMIT || "48", 10);
 const marketIntelFreshHours = Number.parseFloat(process.env.MARKET_INTEL_FRESH_HOURS || "24");
@@ -675,15 +676,35 @@ function sortArticlesNewestFirst(articles) {
   });
 }
 
+function isUsableSourceArticle(article, maxAgeDays = sourceMaxArticleAgeDays) {
+  if (!article?.title || !article?.url || !article?.publishedAt) return false;
+  const text = `${article.title} ${article.summary || ""}`;
+  if (/(pardon our interruption|access denied|privacy|terms|sign in|login|subscribe)/i.test(text)) return false;
+  if (/^(papers|browse research papers|financial market infrastructure supervision|economic news releases|press releases)$/i.test(article.title.trim())) return false;
+  const publishedAt = new Date(article.publishedAt).getTime();
+  if (!Number.isFinite(publishedAt)) return false;
+  if (!Number.isFinite(maxAgeDays) || maxAgeDays <= 0) return true;
+  if (Date.now() - publishedAt > maxAgeDays * 24 * 60 * 60 * 1000) return false;
+  const themes = classifyMarketThemes(text);
+  if (themes.some((theme) => theme !== "Market color")) return true;
+  return /\b(market|markets|stock|stocks|bond|bonds|yield|yields|rate|rates|fed|fomc|inflation|cpi|pce|gdp|payroll|jobs|oil|energy|earnings|outlook|commentary|economy|economic|consumer|credit|tariff|trade|semiconductor|ai)\b/i.test(text);
+}
+
+function recentSourceArticles(articles, limit = articlesPerSource) {
+  return sortArticlesNewestFirst((articles || []).filter((article) => isUsableSourceArticle(article))).slice(0, limit);
+}
+
 async function checkSource(source) {
   try {
     const html = await fetchText(source.url, { timeout: 9000, retries: 1 });
     if (looksLikeFeed(html)) {
-      const feedArticles = sortArticlesNewestFirst(extractFeedItems(html, source)).slice(0, articlesPerSource);
+      const feedArticles = recentSourceArticles(extractFeedItems(html, source), articlesPerSource);
       return {
         ...source,
         title: titleFromFeed(html, source.name),
-        summary: summaryFromFeed(html, source.notes),
+        summary: feedArticles.length
+          ? summaryFromFeed(html, source.notes)
+          : `No recent dated articles found in the last ${sourceMaxArticleAgeDays} days.`,
         articles: feedArticles,
         articleCount: feedArticles.length,
         ok: true
@@ -714,17 +735,11 @@ async function checkSource(source) {
       if (!article.url || articlesByUrl.has(article.url)) return;
       articlesByUrl.set(article.url, article);
     });
-    const sortedArticles = sortArticlesNewestFirst([...articlesByUrl.values()]);
-    const datedArticles = sortedArticles.filter((article) => article.publishedAt);
-    const articles = (
-      datedArticles.length
-        ? [...datedArticles, ...sortedArticles.filter((article) => !article.publishedAt && article.url === source.url)]
-        : sortedArticles
-    ).slice(0, articlesPerSource);
+    const articles = recentSourceArticles([...articlesByUrl.values()], articlesPerSource);
     return {
       ...source,
       title,
-      summary,
+      summary: articles.length ? summary : `No recent dated articles found in the last ${sourceMaxArticleAgeDays} days.`,
       articles,
       articleCount: articles.length,
       ok: true
