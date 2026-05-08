@@ -320,7 +320,14 @@ h3 {
   min-height: 360px;
 }
 
-.note-panel p,
+.note-panel p {
+  max-width: none;
+  width: 100%;
+  color: #d4e8dd;
+  font-size: 1.04rem;
+  line-height: 1.55;
+}
+
 .ai-panel p {
   max-width: 920px;
   color: #d4e8dd;

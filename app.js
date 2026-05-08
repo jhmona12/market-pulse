@@ -1049,10 +1049,6 @@ function setScorebookSort(key) {
 }
 
 function wireControls() {
-  on("#refreshView", "click", () => {
-    loadSnapshot();
-    loadScorebook();
-  });
   on("#tickerLabForm", "submit", submitTickerLab);
   on("#scoreboardSearch", "input", (event) => {
     state.scorebook.query = event.target.value || "";
