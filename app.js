@@ -357,6 +357,8 @@ function tickerLabUrl(path) {
 }
 
 function outlookForTicker(item) {
+  if (item.setupType === "model_rebound_watch") return "Rebound Watch";
+  if (item.setupTags?.includes("Not Momentum Confirmed")) return "Not Momentum";
   const percentile = Number(item.sp500Percentile ?? item.modelPercentile ?? 0);
   const riskCount = item.riskFlags?.length || 0;
   if (percentile >= 80 && riskCount <= 1 && item.above50 && item.above200) return "Favorable";
@@ -368,7 +370,13 @@ function tickerNarrative(item) {
   const rank = item.sp500Rank ? `#${item.sp500Rank} of ${item.sp500UniverseCount}` : `#${item.modelRank} of ${item.modelUniverseCount}`;
   const trend = item.above50 && item.above200 ? "above both 50-day and 200-day trend lines" : item.above200 ? "above the 200-day trend line but missing shorter-term confirmation" : "below at least one major trend line";
   const relative = Number.isFinite(Number(item.relativeReturn60VsSpy)) ? `${pct(item.relativeReturn60VsSpy)} over 60 days versus SPY` : "relative-strength data is unavailable";
-  return `${item.symbol} ranks ${rank} versus the S&P 500 reference universe, with ${relative}; it is ${trend}.`;
+  const activation = Number.isFinite(Number(item.reboundActivationPrice))
+    ? ` Rebound activation requires a close above ${money(item.reboundActivationPrice)} within ${item.reboundActivationWindowDays || 5} trading days.`
+    : "";
+  const setup = item.setupType === "model_rebound_watch"
+    ? " This is a model rebound watch, not a confirmed momentum setup."
+    : "";
+  return `${item.symbol} ranks ${rank} versus the S&P 500 reference universe, with ${relative}; it is ${trend}.${setup}${activation}`;
 }
 
 function money(value) {
@@ -607,6 +615,7 @@ function renderAiRecommendations() {
       const modelEvidence = item.modelEvidence || "";
       const technicalEvidence = item.technicalEvidence || item.momentumEvidence || "";
       const invalidation = item.invalidation || "";
+      const setupTags = Array.isArray(item.setupTags) ? item.setupTags : [];
       const refLabels = sourceRefLabels(item.sourceRefs, item.symbol, researchSources);
       card.innerHTML = `
         <header>
@@ -617,6 +626,7 @@ function renderAiRecommendations() {
           <span class="conviction">${esc(item.conviction || "Review")}</span>
         </header>
         <p>${esc(setup)}</p>
+        ${setupTags.length ? `<div class="tags">${setupTags.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>` : ""}
         ${
           companyOverview || marketCap || earningsContext || recentNews
             ? `<div class="company-context">
@@ -765,11 +775,12 @@ function renderOpportunities() {
     const article = document.createElement("article");
     article.className = "opportunity";
     const modelRanked = hasModelRank(item);
-    const badges = [
+    const badges = [...new Set([
+      ...(item.setupTags || []),
       ...(modelRanked ? item.modelReasons || [] : []),
       ...(item.tags || []),
       ...(item.riskFlags || [])
-    ].slice(0, 6);
+    ])].slice(0, 6);
     article.innerHTML = `
       <div class="opp-head">
         <div>
@@ -785,7 +796,7 @@ function renderOpportunities() {
         <div><span>Close</span><strong>${money(item.close)}</strong></div>
         <div><span>${modelRanked ? "60D vs SPY" : "20D return"}</span><strong>${pct(modelRanked ? item.relativeReturn60VsSpy : item.return20)}</strong></div>
         <div><span>RSI 14</span><strong>${Number(item.rsi14 || 0).toFixed(0)}</strong></div>
-        <div><span>${modelRanked ? "Rules" : "Volume"}</span><strong>${modelRanked ? Math.round(item.rulesScore || 0) : `${Number(item.volumeRatio || 0).toFixed(2)}x`}</strong></div>
+        <div><span>${Number.isFinite(Number(item.reboundActivationPrice)) ? "Activation" : modelRanked ? "Rules" : "Volume"}</span><strong>${Number.isFinite(Number(item.reboundActivationPrice)) ? money(item.reboundActivationPrice) : modelRanked ? Math.round(item.rulesScore || 0) : `${Number(item.volumeRatio || 0).toFixed(2)}x`}</strong></div>
       </div>
       <div class="tags">${badges.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>
     `;
@@ -881,7 +892,8 @@ function renderTickerLab() {
       </div>
       <small><strong>Sector context:</strong> ${esc(sectorNote)}</small>
       <small><strong>Model score:</strong> ${Number(item.modelScore || 0).toFixed(6)} · <strong>Close:</strong> ${money(item.close)}</small>
-      ${item.modelReasons?.length ? `<div class="tags">${item.modelReasons.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>` : ""}
+      ${Number.isFinite(Number(item.reboundActivationPrice)) ? `<small><strong>Rebound activation:</strong> close above ${money(item.reboundActivationPrice)} within ${esc(item.reboundActivationWindowDays || 5)} trading days.</small>` : ""}
+      ${[...(item.setupTags || []), ...(item.modelReasons || [])].length ? `<div class="tags">${[...(item.setupTags || []), ...(item.modelReasons || [])].map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>` : ""}
       ${item.riskFlags?.length ? `<small><strong>Risk flags:</strong> ${esc(item.riskFlags.join("; "))}</small>` : ""}
     `;
     grid.appendChild(card);
@@ -930,7 +942,7 @@ function filteredScorebookRows() {
     .filter((row) => !sector || row.sector === sector)
     .filter((row) => {
       if (!query) return true;
-      return [row.symbol, row.name, row.sector, row.industry].some((value) => String(value || "").toLowerCase().includes(query));
+      return [row.symbol, row.name, row.sector, row.industry, ...(row.setupTags || [])].some((value) => String(value || "").toLowerCase().includes(query));
     })
     .sort(compareScorebookRows);
 }
@@ -985,7 +997,12 @@ function renderScoreboard() {
       (row) => `
         <tr>
           <td><span class="score-rank">#${esc(row.modelRank || "-")}</span></td>
-          <td><strong>${esc(row.symbol)}</strong><span>${esc(row.sector || "Unclassified")}</span></td>
+          <td>
+            <strong>${esc(row.symbol)}</strong>
+            <span>${esc(row.sector || "Unclassified")}</span>
+            ${row.setupTags?.length ? `<small class="scoreboard-setup">${esc(row.setupTags[0])}</small>` : ""}
+            ${Number.isFinite(Number(row.reboundActivationPrice)) ? `<small class="scoreboard-activation">Activation ${money(row.reboundActivationPrice)}</small>` : ""}
+          </td>
           <td>${esc(row.name || row.symbol)}</td>
           <td>${esc(row.industry || "n/a")}</td>
           <td>${esc(displayMarketCap(row.marketCapValue, row.marketCap))}</td>

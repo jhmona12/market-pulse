@@ -49,6 +49,8 @@ flowchart TD
 - Screens S&P 500 constituents and a curated ETF universe for momentum setups.
 - Scores current S&P 500 stocks with a production XGBoost learning-to-rank model.
 - Publishes a full S&P 500 Model Scoreboard tab with every scored company ranked from highest model score to lowest.
+- Tags top-ranked names by setup type, separating clean momentum from model-ranked rebound watches that are not yet momentum-confirmed.
+- Shows a volatility-adjusted rebound activation price for high-ranked broken-trend names when the model likes the setup but price action still needs confirmation.
 - Tracks sector performance using major sector ETF proxies.
 - Pulls macro indicators from public FRED CSV endpoints.
 - Tracks a configured macro calendar for market-moving events such as CPI, payrolls, GDP, and FOMC dates.
@@ -149,6 +151,8 @@ The refresh script:
 - Pulls same-day or recent official macro releases from primary-source pages once scheduled releases have occurred
 - Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
+- Adds setup tags from the model scorer, including `Momentum Confirmed`, `Model Rebound Watch`, and `Not Momentum Confirmed`
+- Adds a rebound activation price for qualifying rebound-watch names, calculated as current close plus `0.75 x 20-day realized daily volatility`
 - Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
 - Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, 60-day beta to SPY, trailing 7D, 14D, 30D, 60D, 90D returns, and YTD return
 - Updates `data/market-cap-cache.json` from free public quote data and reuses recent values to keep the daily job reliable
@@ -264,6 +268,32 @@ The screener ranks S&P 500 stocks and selected ETFs using end-of-day technical m
 - Proximity to recent highs
 
 The dashboard displays the top model-ranked and rules-confirmed momentum names directly. Screening thresholds live in the refresh code/model pipeline rather than in a floating UI control.
+
+### Rebound Watch Tags
+
+The XGBoost model can rank a company highly even when its chart is not a clean momentum setup. For example, a stock may be deeply oversold, volatile, and below major moving averages, but still show an attractive short-term sector-relative rebound profile.
+
+To avoid confusing those names with true momentum, the scorer classifies setups:
+
+- `Momentum Confirmed`: top-decile model rank, above the 50D and 200D moving averages, positive 20D and 60D returns, and RSI not extended.
+- `Model Rebound Watch`: top-decile model rank, below the 50D and 200D moving averages, and negative 20D and 60D returns.
+- `Not Momentum Confirmed`: high model rank with mixed or weak trend confirmation.
+
+For `Model Rebound Watch` names, the dashboard shows an activation level:
+
+```text
+activation price = current close x (1 + 0.75 x 20D realized daily volatility)
+activation window = 5 trading days
+confirmation = close above the activation price
+```
+
+This is an activation price, not a guaranteed buy price. If the stock does not close above that level within the window, the setup should be refreshed and reassessed.
+
+The supporting research and backtest are documented in:
+
+```text
+docs/rebound-activation-research.md
+```
 
 ## Private Ticker Lab
 
@@ -510,6 +540,7 @@ scripts/modeling/export_production_rank_model.py Export the committed production
 scripts/modeling/score_live_rank_model.py  Score the latest S&P 500 universe for the dashboard
 scripts/modeling/feature_ablation_rank_model.py Run rank-model feature-group ablations
 scripts/modeling/tune_rank_model.py        Run compact walk-forward hyperparameter tuning presets
+scripts/modeling/backtest_rebound_activation.py Backtest activation rules for model-ranked rebound watches
 scripts/modeling/run_model_pipeline.py     Run the full modeling pipeline
 scripts/modeling/setup_training_env.sh     Create a local training venv and install the OpenMP runtime
 scripts/modeling/requirements.txt          Python package requirements for training

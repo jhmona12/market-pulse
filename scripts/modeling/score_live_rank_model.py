@@ -31,6 +31,8 @@ except ModuleNotFoundError as error:  # pragma: no cover - handled at runtime
 
 MODEL_DIR = ROOT / "models" / "rank"
 DEFAULT_MODEL_NAME = "xgboost_rank_sector14_tuned"
+REBOUND_ACTIVATION_VOL_MULTIPLE = 0.75
+REBOUND_ACTIVATION_WINDOW_DAYS = 5
 
 
 def parse_args() -> argparse.Namespace:
@@ -358,6 +360,77 @@ def risk_flags(row: pd.Series) -> list[str]:
     return flags[:4]
 
 
+def is_top_decile(row: pd.Series) -> bool:
+    rank = int(row.get("model_rank", 999999))
+    universe_count = int(row.get("model_universe_count", 0))
+    return universe_count > 0 and rank <= max(1, int(np.ceil(universe_count * 0.1)))
+
+
+def is_momentum_confirmed(row: pd.Series) -> bool:
+    return (
+        is_top_decile(row)
+        and row.get("price_vs_sma_50", 0) > 0
+        and row.get("price_vs_sma_200", 0) > 0
+        and row.get("ret_20d", 0) > 0
+        and row.get("ret_60d", 0) > 0
+        and row.get("rsi_14", 0) <= 76
+    )
+
+
+def is_rebound_watch(row: pd.Series) -> bool:
+    return (
+        is_top_decile(row)
+        and row.get("price_vs_sma_50", 0) < 0
+        and row.get("price_vs_sma_200", 0) < 0
+        and row.get("ret_20d", 0) < 0
+        and row.get("ret_60d", 0) < 0
+    )
+
+
+def setup_type(row: pd.Series) -> str:
+    if is_momentum_confirmed(row):
+        return "momentum_confirmed"
+    if is_rebound_watch(row):
+        return "model_rebound_watch"
+    if is_top_decile(row) and (row.get("price_vs_sma_50", 0) < 0 or row.get("price_vs_sma_200", 0) < 0):
+        return "model_ranked_not_momentum_confirmed"
+    return "model_ranked"
+
+
+def setup_tags(row: pd.Series) -> list[str]:
+    kind = setup_type(row)
+    if kind == "momentum_confirmed":
+        return ["Momentum Confirmed"]
+    if kind == "model_rebound_watch":
+        return ["Model Rebound Watch", "Not Momentum Confirmed", "Activation Pending"]
+    if kind == "model_ranked_not_momentum_confirmed":
+        return ["Not Momentum Confirmed"]
+    return []
+
+
+def rebound_activation(row: pd.Series) -> dict:
+    if not is_rebound_watch(row):
+        return {}
+    close = row.get("close")
+    volatility_20d = row.get("volatility_20d")
+    if close is None or volatility_20d is None:
+        return {}
+    close = float(close)
+    volatility_20d = float(volatility_20d)
+    if not np.isfinite(close) or not np.isfinite(volatility_20d) or close <= 0 or volatility_20d <= 0:
+        return {}
+    activation_pct = REBOUND_ACTIVATION_VOL_MULTIPLE * volatility_20d
+    activation_price = close * (1 + activation_pct)
+    return {
+        "reboundActivationPrice": finite_or_none(activation_price, 2),
+        "reboundActivationPct": finite_or_none(activation_pct * 100, 2),
+        "reboundActivationVolMultiple": REBOUND_ACTIVATION_VOL_MULTIPLE,
+        "reboundActivationWindowDays": REBOUND_ACTIVATION_WINDOW_DAYS,
+        "reboundActivationRule": "Close above current close plus 0.75x 20-day realized daily volatility within 5 trading days.",
+        "volatility20d": finite_or_none(volatility_20d, 4),
+    }
+
+
 def finite_or_none(value: object, digits: int | None = None) -> float | int | str | None:
     if value is None:
         return None
@@ -542,6 +615,8 @@ def row_payload(
         "modelBucket": bucket,
         "modelReasons": reason_tags(row),
         "riskFlags": risk_flags(row),
+        "setupType": setup_type(row),
+        "setupTags": setup_tags(row),
         "asOfDate": row["date"].date().isoformat(),
         "close": finite_or_none(row.get("close"), 2),
         "rsi14": finite_or_none(row.get("rsi_14"), 1),
@@ -560,6 +635,7 @@ def row_payload(
         "sectorCorrelation": diagnostic.get("sectorCorrelation"),
         "sectorCorrelationObservations": diagnostic.get("sectorCorrelationObservations"),
     }
+    payload.update(rebound_activation(row))
     if reference_scores is not None:
         payload.update(sp500_comparison(row, reference_scores))
     if "price_data_date" in row and pd.notna(row.get("price_data_date")):
@@ -836,10 +912,7 @@ def main() -> None:
     }
     output_path = ROOT / args.output
     write_json(payload, output_path)
-    should_write_cache = (
-        not args.no_reference_cache
-        and (args.max_symbols == 0 or args.reference_cache != "data/model-reference-cache.json")
-    )
+    should_write_cache = args.max_symbols == 0 or args.reference_cache != "data/model-reference-cache.json"
     if should_write_cache:
         write_reference_cache(
             cache_path,

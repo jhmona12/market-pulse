@@ -84,6 +84,9 @@ Requirements:
 - Be careful with causality: say "likely catalyst", "appears tied to", or "possible driver" unless the supplied source explicitly states the news caused the move.
 - A basic web/news search may be represented by supplied `companyContexts.news`; prioritize the most logical, recent, ticker-specific articles over generic market commentary.
 - Include the model rank, percentile, supplied `modelReasons`, and supplied `riskFlags` in `modelEvidence`.
+- Respect supplied `setupTags` and `setupType`. If a candidate is tagged `Model Rebound Watch` or `Not Momentum Confirmed`, do not describe it as a clean momentum setup.
+- For `Model Rebound Watch` names, explain that the model likes the risk/reward but price trend has not confirmed. If `reboundActivationPrice` is supplied, call it an activation level requiring a close above that price within the supplied window, not a guaranteed buy price.
+- Do not recommend a rebound-watch name as a current momentum buy unless the supplied metrics show the activation condition has already been met. Use language such as "watch for confirmation" or "requires activation" when appropriate.
 - Write the `avoidList` as a research risk-control section. Use only `avoidCandidates` for company names and `avoidSectors` for sector commentary.
 - Do not frame the `avoidList` as short-sale advice. Frame it as places to avoid fresh long exposure, reduce confidence, or require stronger confirmation before acting.
 - In `avoidList.summary`, explain the common thread across the weakest model names and connect it to any relevant macro, source-tape, current-event, or sector evidence.

@@ -1432,6 +1432,11 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
         modelUniverseCount: finiteNumber(item.modelUniverseCount),
         modelScore: finiteNumber(item.modelScore),
         modelPercentile: roundedNumber(item.modelPercentile, 1),
+        setupType: item.setupType || null,
+        setupTags: item.setupTags || [],
+        reboundActivationPrice: finiteNumber(item.reboundActivationPrice),
+        reboundActivationPct: roundedNumber(item.reboundActivationPct, 2),
+        reboundActivationWindowDays: finiteNumber(item.reboundActivationWindowDays),
         beta60d: roundedNumber(signal?.beta60d ?? item.beta60d, 2),
         return7: roundedNumber(signal?.return7, 2),
         return14: roundedNumber(signal?.return14, 2),
@@ -1458,6 +1463,9 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
       "marketCap",
       "modelScore",
       "modelPercentile",
+      "setupType",
+      "setupTags",
+      "reboundActivationPrice",
       "beta60d",
       "return7",
       "return14",
@@ -1682,7 +1690,11 @@ function mergeModelScores(signals, modelRankings) {
       if (!model) return { ...item, rulesScore: item.score };
 
       const modelPercentile = finiteNumber(model.modelPercentile);
-      const modelTags = [model.modelBucket, ...(model.modelReasons || []).slice(0, 2)].filter(Boolean);
+      const modelTags = [
+        ...(model.setupTags || []),
+        model.modelBucket,
+        ...(model.modelReasons || []).slice(0, 2)
+      ].filter(Boolean);
       return {
         ...item,
         rulesScore: item.score,
@@ -1694,7 +1706,20 @@ function mergeModelScores(signals, modelRankings) {
         modelBucket: model.modelBucket || "Ranked",
         modelReasons: model.modelReasons || [],
         riskFlags: model.riskFlags || [],
+        setupType: model.setupType || null,
+        setupTags: model.setupTags || [],
+        reboundActivationPrice: finiteNumber(model.reboundActivationPrice),
+        reboundActivationPct: finiteNumber(model.reboundActivationPct),
+        reboundActivationVolMultiple: finiteNumber(model.reboundActivationVolMultiple),
+        reboundActivationWindowDays: finiteNumber(model.reboundActivationWindowDays),
+        reboundActivationRule: model.reboundActivationRule || null,
         modelAsOfDate: model.asOfDate || modelRankings.asOfDate,
+        close: finiteNumber(model.close) ?? item.close,
+        rsi14: finiteNumber(model.rsi14) ?? item.rsi14,
+        return20: finiteNumber(model.return20) ?? item.return20,
+        return60: finiteNumber(model.return60) ?? item.return60,
+        above50: typeof model.above50 === "boolean" ? model.above50 : item.above50,
+        above200: typeof model.above200 === "boolean" ? model.above200 : item.above200,
         return120: finiteNumber(model.return120),
         relativeReturn60VsSpy: finiteNumber(model.relativeReturn60VsSpy),
         sectorReturn60: finiteNumber(model.sectorReturn60),
@@ -2342,11 +2367,14 @@ function buildRecommendations(opportunities) {
     }));
 
     if (watch) {
+      const activation = watch.reboundActivationPrice
+        ? `; rebound activation requires a close above $${Number(watch.reboundActivationPrice).toFixed(2)} within ${watch.reboundActivationWindowDays || 5} trading days`
+        : "";
       calls.push({
-        label: "Model Risk Check",
+        label: watch.setupType === "model_rebound_watch" ? "Model Rebound Watch" : "Model Risk Check",
         symbol: watch.symbol,
         title: `Rank #${watch.modelRank}; ${watch.riskFlags?.[0] || "review setup"}`,
-        rationale: `${watch.symbol}: still ranks highly, but flags include ${(watch.riskFlags || []).join("; ") || "trend or RSI review"}; RSI ${Math.round(watch.rsi14)}; rules score ${formatNumber(watch.rulesScore)}.`
+        rationale: `${watch.symbol}: still ranks highly, but it is not momentum-confirmed. Flags include ${(watch.riskFlags || []).join("; ") || "trend or RSI review"}; RSI ${Math.round(watch.rsi14)}; rules score ${formatNumber(watch.rulesScore)}${activation}.`
       });
     }
 
@@ -2594,6 +2622,13 @@ function compactCandidate(item) {
     modelBucket: item.modelBucket || null,
     modelReasons: item.modelReasons || [],
     riskFlags: item.riskFlags || [],
+    setupType: item.setupType || null,
+    setupTags: item.setupTags || [],
+    reboundActivationPrice: roundedNumber(item.reboundActivationPrice, 2),
+    reboundActivationPct: roundedNumber(item.reboundActivationPct, 2),
+    reboundActivationVolMultiple: roundedNumber(item.reboundActivationVolMultiple, 2),
+    reboundActivationWindowDays: finiteNumber(item.reboundActivationWindowDays),
+    reboundActivationRule: item.reboundActivationRule || null,
     modelAsOfDate: item.modelAsOfDate || null,
     close: roundedNumber(item.close, 2),
     changePct: roundedNumber(item.changePct, 2),
