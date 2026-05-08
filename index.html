@@ -26,6 +26,7 @@
       <div class="view-panel active" id="briefingView">
         <nav class="jump-nav" aria-label="Report sections">
           <a href="#daily-read">Daily Read</a>
+          <a href="#deeper-read">Deeper Read</a>
           <a href="#ai-memo">AI Memo</a>
           <a href="#sector-performance">Sectors</a>
           <a href="#desk-calls">Desk Calls</a>
@@ -70,6 +71,15 @@
                 <ul id="watchList"></ul>
               </div>
             </div>
+          </article>
+
+          <article class="panel deeper-read-panel" id="deeper-read">
+            <div class="panel-title">
+              <span>Deeper Read</span>
+              <span id="deeperReadMeta">Last 7 days</span>
+            </div>
+            <p id="deeperReadSummary"></p>
+            <div class="deeper-read-grid" id="deeperReadList"></div>
           </article>
 
           <article class="panel ai-panel" id="ai-memo">

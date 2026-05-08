@@ -766,6 +766,101 @@ li {
   gap: 6px;
 }
 
+.deeper-read-panel {
+  grid-column: 1 / -1;
+}
+
+.deeper-read-panel > p {
+  max-width: 980px;
+  margin: 0;
+  color: #d4e8dd;
+  font-size: 1.02rem;
+  line-height: 1.48;
+}
+
+.deeper-read-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.deeper-card {
+  display: grid;
+  gap: 12px;
+  min-height: 280px;
+  padding: 14px;
+  border: 1px solid rgba(79, 216, 255, 0.18);
+  background:
+    linear-gradient(145deg, rgba(57, 255, 136, 0.055), transparent 46%),
+    rgba(3, 12, 8, 0.72);
+}
+
+.deeper-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.deeper-card header div {
+  display: grid;
+  gap: 5px;
+}
+
+.deeper-card a,
+.deeper-card header span {
+  color: var(--accent-2);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.deeper-card a:hover,
+.deeper-card a:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+
+.deeper-card strong {
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.25;
+}
+
+.deeper-card em {
+  width: fit-content;
+  border: 1px solid rgba(242, 193, 78, 0.32);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--accent-3);
+  background: rgba(242, 193, 78, 0.08);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.deeper-card p {
+  margin: 0;
+  color: #e5f8ed;
+  font-size: 0.96rem;
+  line-height: 1.42;
+}
+
+.deeper-card-body {
+  display: grid;
+  gap: 7px;
+}
+
+.deeper-card small {
+  color: var(--muted);
+  line-height: 1.36;
+}
+
 .source-ref-row {
   display: flex;
   flex-wrap: wrap;
@@ -1118,6 +1213,7 @@ li {
 }
 
 @media (max-width: 1100px) {
+  .deeper-read-grid,
   .sector-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1168,6 +1264,7 @@ li {
 	  .ai-recs,
 	  .avoid-list,
 	  .avoid-sector-list,
+	  .deeper-read-grid,
 	  .ticker-result-grid,
 	  .recommendation-list {
 	    grid-template-columns: 1fr;

@@ -20,6 +20,9 @@ const skipReddit = process.env.SKIP_REDDIT === "1";
 const snapshotOutput = process.env.SNAPSHOT_OUTPUT || "data/snapshot.json";
 const scorebookOutput = process.env.SCOREBOOK_OUTPUT || "data/model-scorebook.json";
 const marketCapCacheMaxAgeHours = Number.parseFloat(process.env.MARKET_CAP_CACHE_MAX_AGE_HOURS || "18");
+const deeperReadLookbackDays = Number.parseFloat(process.env.DEEPER_READ_LOOKBACK_DAYS || "7");
+const deeperReadCandidateLimit = Number.parseInt(process.env.DEEPER_READ_CANDIDATE_LIMIT || "14", 10);
+const deeperReadHistoryPath = "data/deeper-read-history.json";
 const today = new Date();
 const startDate = new Date(today);
 startDate.setDate(startDate.getDate() - 430);
@@ -522,8 +525,8 @@ function extractFeedItems(feed, source) {
         url = source.url;
       }
       const rawSummary = xmlRaw(block, ["description", "summary", "content:encoded", "content"]);
-      const summary = stripTags(rawSummary || source.notes).slice(0, 420);
-      const excerpt = stripTags(rawSummary || block).slice(0, 1800);
+      const summary = stripTags(decodeHtml(rawSummary || source.notes)).slice(0, 420);
+      const excerpt = stripTags(decodeHtml(rawSummary || block)).slice(0, 1800);
       return {
         sourceName: source.name,
         title: xmlText(block, "title").slice(0, 180),
@@ -1557,6 +1560,65 @@ function articleConclusion(article, maxLength = 240) {
   return firstSentence(preferred, maxLength);
 }
 
+function deeperReadInterestingness(article) {
+  const text = `${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`;
+  const sourceName = String(article.sourceName || "");
+  let score = 0;
+  score += sourceTrustScore(article.trust) * 6;
+  if (/\b(why it matters|bottom line|between the lines|zoom out|big picture|variant|contrarian|surprising|overlooked|underappreciated|second-order|structural|regime|cycle|risk map|trade[- ]off)\b/i.test(text)) score += 18;
+  if (/\b(debt to gdp|k-shaped|productivity|supply chain|ai trade|tariff|tariffs|energy crisis|inflation expectations|credit|liquidity|consumer stress|capital spending|capex|hard assets|cultural headwaters|baby boomers|millennials|volatility strategies)\b/i.test(text)) score += 18;
+  if (/\b(how|why|could|might|isn't|is not|what to watch|read-through|implication)\b/i.test(article.title || "")) score += 8;
+  if (/\b(Axios Macro|Axios Markets|Raymond James|Fidelity|Morgan Stanley|J\\.P\\. Morgan|Bank of America Institute|State Street|Merrill|Schwab)\b/i.test(sourceName)) score += 14;
+  if (/\b(daily open|stock market news|market update|top stories|earnings rss|before the bell|opening comment|live updates|stock futures|oil futures rise|asia-pacific markets fall)\b/i.test(`${article.title || ""} ${sourceName}`)) score -= 34;
+  if (/\b(CNBC Top News RSS|CNBC Markets|MarketWatch Top Stories RSS)\b/i.test(sourceName)) score -= 18;
+  const age = articleAgeHours(article.publishedAt);
+  if (age != null) score += Math.max(0, 10 - age / 24);
+  return roundedNumber(score, 1);
+}
+
+function isDeeperReadAnalyticalCandidate(article) {
+  const text = `${article.sourceName || ""} ${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`;
+  if (/\b(daily open|stock market news|market update|top stories|earnings rss|before the bell|opening comment|live updates|stock futures|oil futures rise|asia-pacific markets fall)\b/i.test(text)) return false;
+  if (/\b(Axios Macro|Axios Markets|Raymond James|Fidelity|Morgan Stanley|J\\.P\\. Morgan|Bank of America Institute|State Street|Merrill|Schwab)\b/i.test(article.sourceName || "")) return true;
+  return /\b(why it matters|bottom line|between the lines|zoom out|big picture|what is|what isn't|how|why|k-shaped|debt to gdp|productivity|supply chain|ai trade|tariff|energy crisis|consumer stress|capital spending|capex|hard assets|cultural headwaters|volatility strategies|underappreciated|overlooked)\b/i.test(text);
+}
+
+function buildDeeperReadCandidates(sourceTape, history = {}) {
+  const recentSources = new Set((history.lastCards || []).map((card) => card.sourceName).filter(Boolean));
+  const recentUrls = new Set((history.lastCards || []).map((card) => card.url).filter(Boolean));
+  const maxAgeHours = deeperReadLookbackDays * 24;
+  const scored = sourceTape
+    .map((article) => {
+      const ageHours = articleAgeHours(article.publishedAt);
+      return {
+        sourceRef: article.id,
+        sourceName: article.sourceName,
+        title: article.title,
+        url: article.url,
+        publishedAt: article.publishedAt,
+        summary: article.summary,
+        themes: article.themes || classifyMarketThemes(`${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`),
+        ageHours: ageHours == null ? null : roundedNumber(ageHours, 1),
+        recentlyUsedSource: recentSources.has(article.sourceName),
+        recentlyUsedUrl: recentUrls.has(article.url),
+        qualityScore: deeperReadInterestingness(article)
+      };
+    })
+    .filter((item) => item.publishedAt && item.ageHours != null && item.ageHours <= maxAgeHours)
+    .filter((item) => !/(pardon our interruption|privacy|terms|sign in|login|subscribe)/i.test(`${item.title || ""} ${item.summary || ""}`))
+    .filter(isDeeperReadAnalyticalCandidate)
+    .sort((a, b) => b.qualityScore - a.qualityScore);
+
+  const bySource = new Map();
+  scored.forEach((item) => {
+    if (!bySource.has(item.sourceName)) bySource.set(item.sourceName, item);
+  });
+  const uniqueBySource = [...bySource.values()];
+  const rotated = uniqueBySource.filter((item) => !item.recentlyUsedSource && !item.recentlyUsedUrl);
+  const selectedPool = rotated.length >= 3 ? rotated : uniqueBySource;
+  return selectedPool.slice(0, deeperReadCandidateLimit);
+}
+
 function sourceTrustScore(trust) {
   const value = String(trust || "").toLowerCase();
   if (value.includes("very high")) return 5;
@@ -2081,6 +2143,12 @@ function fallbackAiRecommendations(reason) {
     headline: "AI macro and model synthesis is not configured yet.",
     macroView: "The dashboard can still show model-ranked and rules-based recommendations. Add OPENAI_API_KEY to .env and rerun the refresh to generate AI recommendations that connect macro context, public source summaries, and the XGBoost single-name rank model.",
     dailyRead: null,
+    deeperRead: {
+      status: "unavailable",
+      lookbackDays: deeperReadLookbackDays,
+      summary: "Deeper Read is generated by the AI layer when OPENAI_API_KEY is configured.",
+      cards: []
+    },
     recommendations: [],
     portfolioNotes: [
       "Model-ranked and rules-based screening remain available without an API key.",
@@ -2150,6 +2218,34 @@ function estimateOpenAiCost(model, usage = {}) {
 async function appendUsageLog(entry) {
   await mkdir(join(root, "data"), { recursive: true });
   await appendFile(join(root, "data/usage-log.jsonl"), `${JSON.stringify(entry)}\n`);
+}
+
+async function loadDeeperReadHistory() {
+  try {
+    return JSON.parse(await readFile(join(root, deeperReadHistoryPath), "utf8"));
+  } catch {
+    return { generatedAt: null, lastCards: [], runs: [] };
+  }
+}
+
+async function writeDeeperReadHistory(deeperRead, previousHistory = {}) {
+  const cards = (deeperRead?.cards || []).filter((card) => card.sourceRef || card.url || card.sourceName);
+  if (!cards.length) return;
+  await mkdir(join(root, "data"), { recursive: true });
+  const run = {
+    generatedAt: new Date().toISOString(),
+    cards: cards.map((card) => ({
+      sourceRef: card.sourceRef || null,
+      sourceName: card.sourceName || null,
+      title: card.title || null,
+      url: card.url || null
+    }))
+  };
+  const runs = [run, ...(previousHistory.runs || [])].slice(0, 12);
+  await writeFile(
+    join(root, deeperReadHistoryPath),
+    `${JSON.stringify({ generatedAt: run.generatedAt, lastCards: run.cards, runs }, null, 2)}\n`
+  );
 }
 
 function compactCandidate(item) {
@@ -2275,7 +2371,44 @@ function marketCapFromSummary(summary, symbol) {
   };
 }
 
-function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRefs) {
+function normalizeDeeperReadPayload(deeperRead, sourceTape = [], validSourceRefs = []) {
+  const validRefSet = new Set(validSourceRefs);
+  const sourceRefsById = new Map(sourceTape.map((source) => [source.id, source]));
+  const deeperCards = (deeperRead?.cards || [])
+    .map((card) => {
+      const source = sourceRefsById.get(card.sourceRef);
+      const sourceName = source?.sourceName || card.sourceName || "";
+      return {
+        ...card,
+        sourceName,
+        title: source?.title || card.title || "",
+        url: source?.url || card.url || "",
+        publishedAt: source?.publishedAt || card.publishedAt || null,
+        thesis: cleanMemoText(card.thesis),
+        whyItMatters: cleanMemoText(card.whyItMatters),
+        marketReadThrough: cleanMemoText(card.marketReadThrough),
+        variantAngle: cleanMemoText(card.variantAngle),
+        sourceRefs: card.sourceRef ? [card.sourceRef] : []
+      };
+    })
+    .filter((card) => card.sourceRef && validRefSet.has(card.sourceRef));
+  const seenSources = new Set();
+  const uniqueDeeperCards = [];
+  deeperCards.forEach((card) => {
+    const key = card.sourceName || card.sourceRef;
+    if (seenSources.has(key)) return;
+    seenSources.add(key);
+    uniqueDeeperCards.push(card);
+  });
+  return {
+    status: uniqueDeeperCards.length ? deeperRead?.status || "ready" : "thin",
+    lookbackDays: deeperReadLookbackDays,
+    summary: cleanMemoText(deeperRead?.summary) || "No differentiated source analysis cleared the quality filter in this refresh.",
+    cards: uniqueDeeperCards.slice(0, 5)
+  };
+}
+
+function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRefs, sourceTape = []) {
   const bySymbol = new Map(companyContexts.map((context) => [context.symbol, context]));
   const validRefSet = new Set(validSourceRefs);
   const recommendations = (parsed.recommendations || []).map((recommendation) => {
@@ -2297,7 +2430,8 @@ function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRe
       sourceRefs
     };
   });
-  return { ...parsed, recommendations };
+  const deeperRead = normalizeDeeperReadPayload(parsed.deeperRead, sourceTape, validSourceRefs);
+  return { ...parsed, deeperRead, recommendations };
 }
 
 function likelyIrLink(anchorText, href) {
@@ -2527,6 +2661,131 @@ async function buildCompanyContexts(candidates) {
   return contexts.filter(Boolean);
 }
 
+async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sourceRefIds, history }) {
+  if (!apiKey || !candidates.length) {
+    return {
+      status: "thin",
+      lookbackDays: deeperReadLookbackDays,
+      summary: "No differentiated source candidates were available for Deeper Read.",
+      cards: []
+    };
+  }
+
+  const candidateRefs = candidates.map((candidate) => candidate.sourceRef).filter(Boolean);
+  const requestBody = {
+    model: aiModel,
+    instructions: [
+      "You write the Deeper Read section for a hedge-fund-style market dashboard.",
+      "Use only the supplied article candidates from the last 7 days.",
+      "Do not mention the stock model, XGBoost, model ranks, or momentum leaders. This section is source analysis only.",
+      "Choose the most differentiated analytical angles, not generic recaps of stocks, oil, or futures moving.",
+      "Avoid repeating sources marked recentlyUsedSource unless there are too few good alternatives.",
+      "Return concise but thoughtful cards with thesis, why it matters, market read-through, and the variant angle."
+    ].join(" "),
+    input: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "input_text",
+            text: `Create Deeper Read from these candidates only:\n${JSON.stringify({
+              lookbackDays: deeperReadLookbackDays,
+              previousRefreshSources: (history.lastCards || []).map((card) => card.sourceName).filter(Boolean),
+              candidates
+            }, null, 2)}`
+          }
+        ]
+      }
+    ],
+    text: {
+      format: {
+        type: "json_schema",
+        name: "deeper_read",
+        strict: true,
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["status", "lookbackDays", "summary", "cards"],
+          properties: {
+            status: { type: "string", enum: ["ready", "thin", "unavailable"] },
+            lookbackDays: { type: "number" },
+            summary: { type: "string" },
+            cards: {
+              type: "array",
+              minItems: 0,
+              maxItems: 5,
+              items: {
+                type: "object",
+                additionalProperties: false,
+                required: ["sourceRef", "sourceName", "title", "thesis", "whyItMatters", "marketReadThrough", "variantAngle", "confidence"],
+                properties: {
+                  sourceRef: candidateRefs.length ? { type: "string", enum: candidateRefs } : { type: "string" },
+                  sourceName: { type: "string" },
+                  title: { type: "string" },
+                  thesis: { type: "string" },
+                  whyItMatters: { type: "string" },
+                  marketReadThrough: { type: "string" },
+                  variantAngle: { type: "string" },
+                  confidence: { type: "string", enum: ["High", "Medium", "Low"] }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    reasoning: { effort: "minimal" },
+    max_output_tokens: 2500
+  };
+
+  try {
+    console.log(`Calling OpenAI ${aiModel} for Deeper Read...`);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), openAiTimeoutMs);
+    const response = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      signal: controller.signal,
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${apiKey}`
+      },
+      body: JSON.stringify(requestBody)
+    });
+    try {
+      const json = await response.json();
+      if (!response.ok) throw new Error(json.error?.message || `${response.status} ${response.statusText}`);
+      const usage = estimateOpenAiCost(aiModel, json.usage);
+      const text = responseText(json);
+      if (!text) throw new Error("OpenAI response did not include Deeper Read text.");
+      await appendUsageLog({
+        generatedAt: new Date().toISOString(),
+        status: "deeper_read_ready",
+        model: aiModel,
+        usage
+      });
+      const parsed = normalizeDeeperReadPayload(JSON.parse(text), sourceTape, sourceRefIds);
+      console.log(`Deeper Read generated with ${parsed.cards.length} cards.`);
+      return parsed;
+    } finally {
+      clearTimeout(timeout);
+    }
+  } catch (error) {
+    console.warn(`Deeper Read unavailable: ${error.message}`);
+    await appendUsageLog({
+      generatedAt: new Date().toISOString(),
+      status: "deeper_read_error",
+      model: aiModel,
+      error: error.message
+    });
+    return {
+      status: "unavailable",
+      lookbackDays: deeperReadLookbackDays,
+      summary: `Deeper Read failed during this refresh: ${error.message}`,
+      cards: []
+    };
+  }
+}
+
 async function buildAiRecommendations({ opportunities, macro, calendar, sources, rulesRecommendations, sectorPerformance, model: modelSummary, marketIntelligence, promptText }) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (process.env.SKIP_AI === "1") return fallbackAiRecommendations("skipped_by_env");
@@ -2534,20 +2793,31 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
 
   console.log("Building AI recommendation context...");
   const aiModel = process.env.OPENAI_MODEL || defaultOpenAiModel;
+  const deeperReadHistory = await loadDeeperReadHistory();
   const sourceArticles = sortArticlesNewestFirst(
     sources
-      .flatMap((source) => source.articles || [])
+      .flatMap((source) =>
+        (source.articles || []).map((article) => ({
+          ...article,
+          sourceName: article.sourceName || source.name,
+          sourceCategory: source.category,
+          trust: source.trust
+        }))
+      )
       .filter((article) => article.title && article.url)
-  ).slice(0, 28);
-  const sourceTape = sourceArticles.map(({ sourceName, title, url, publishedAt, summary, excerpt }, index) => ({
+  ).slice(0, 36);
+  const sourceTape = sourceArticles.map(({ sourceName, sourceCategory, trust, title, url, publishedAt, summary, excerpt }, index) => ({
     id: `S${index + 1}`,
     sourceName,
+    sourceCategory,
+    trust,
     title,
     url,
     publishedAt,
     summary,
-    excerpt: excerpt?.slice(0, 700) || ""
+    excerpt: excerpt?.slice(0, 900) || ""
   }));
+  const deeperReadCandidates = buildDeeperReadCandidates(sourceTape, deeperReadHistory);
   const modelCandidates = opportunities.filter(hasModelRank).slice(0, 30).map(compactCandidate);
   const avoidCandidates = bottomModelCandidates(opportunities, 16).map(compactCandidate);
   const avoidSectors = bottomModelSectorClusters(opportunities, 5);
@@ -2806,7 +3076,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       }
     },
     reasoning: { effort: "minimal" },
-    max_output_tokens: 6500
+    max_output_tokens: 7600
   };
 
   try {
@@ -2828,7 +3098,17 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       const usage = estimateOpenAiCost(aiModel, json.usage);
       const text = responseText(json);
       if (!text) throw new Error("OpenAI response did not include final text; try a larger max_output_tokens value or a lower reasoning effort.");
-      const parsed = normalizeAiRecommendationContext(JSON.parse(text), companyContexts, sourceRefIds);
+      const parsed = normalizeAiRecommendationContext(JSON.parse(text), companyContexts, sourceRefIds, sourceTape);
+      const deeperRead = await buildAiDeeperRead({
+        apiKey,
+        aiModel,
+        candidates: deeperReadCandidates,
+        sourceTape,
+        sourceRefIds,
+        history: deeperReadHistory
+      });
+      parsed.deeperRead = deeperRead.cards.length ? deeperRead : parsed.deeperRead;
+      await writeDeeperReadHistory(parsed.deeperRead, deeperReadHistory);
       await appendUsageLog({
         generatedAt: new Date().toISOString(),
         status: "ready",
@@ -3047,6 +3327,7 @@ async function main() {
       marketIntelligence
     }),
     aiRecommendations,
+    deeperRead: aiRecommendations.deeperRead || fallbackAiRecommendations("missing_deeper_read").deeperRead,
     marketDataStatus,
     marketIntelligence,
     avoidList,

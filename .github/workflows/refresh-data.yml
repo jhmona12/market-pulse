@@ -244,7 +244,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/snapshot.json data/model-scorebook.json data/model-reference-cache.json data/market-cap-cache.json data/refresh-status.json
+          git add data/snapshot.json data/model-scorebook.json data/model-reference-cache.json data/market-cap-cache.json data/deeper-read-history.json data/refresh-status.json
           if git diff --cached --quiet; then
             echo "No refresh output changes to commit."
           else

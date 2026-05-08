@@ -38,6 +38,17 @@ Requirements:
 - Cite source IDs in parentheses when useful, for example `(M4)`, but do not make the source ID or publisher the point of the bullet.
 - At least half of `dailyRead.keyTakeaways` should be about market drivers, earnings, macro/rates/central banks, geopolitics, commodities, or Reddit attention. Do not let model-ranking commentary dominate the top of the report.
 - `dailyRead.watchItems` should focus on the next decision points: macro events, crowding/RSI risk, sector confirmation, source/data gaps, and invalidation signals.
+- Write `deeperRead` as a separate section from the Daily Read. This section is for thoughtful, second-order analysis from the source tape, not breaking-news recaps.
+- For `deeperRead`, use only `deeperRead.candidates` supplied in the prompt and stay inside the last 7 days unless the candidate object itself is supplied.
+- Choose quality over quantity for `deeperRead.cards`. Return 2-5 cards when the tape has enough interesting candidates; return fewer if the available candidates are generic.
+- Prioritize pieces with a differentiated analytical angle: second-order implications, underappreciated risks, structural changes, policy/trade-offs, market internals, capital allocation, credit/liquidity, consumer behavior, supply chains, energy, AI infrastructure, or regime shifts.
+- Do not use `deeperRead` for generic market recaps, simple "stocks rose/fell" articles, or articles that only restate what happened that day.
+- Do not repeat source names in `deeperRead.cards` unless the candidate pool is too thin. Avoid candidates marked as recently used when there are enough good alternatives.
+- Each `deeperRead.cards` item should make the insight stand out: `thesis` states the unique idea, `whyItMatters` explains the second-order implication, `marketReadThrough` names the sectors/factors/tickers most affected, and `variantAngle` explains what makes the piece different from consensus daily coverage.
+- Use the sourceRef from the selected candidate. Do not cite a source that is not in `deeperRead.candidates`.
+- Keep `deeperRead.summary` focused on the selected source perspectives only. Do not summarize the XGBoost model, model leaders, or momentum book in this section unless a selected source candidate directly discusses those same companies or sectors.
+- In `deeperRead.cards`, avoid generic phrases like "momentum remains robust" unless the selected source itself is making that deeper argument. This section should feel like smart source analysis, not another model recap.
+- Do not mention internal mechanics such as candidate pools, quality filters, source rotation, or previously used sources in `deeperRead.summary` or cards.
 - Separate professional commentary from Reddit / WallStreetBets commentary. Treat Reddit as sentiment and attention only. Never use Reddit posts as factual confirmation of news, earnings, policy, or corporate events.
 - Highlight WallStreetBets or Reddit ticker concentration when it is present in `marketIntelligence.reddit.topTickers`, but label it as retail attention or speculative sentiment.
 - Explicitly call out notable earnings reporters, earnings-linked movers, and guidance/results headlines when supplied. If no earnings mover is supplied, do not invent one.

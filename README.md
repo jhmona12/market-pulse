@@ -56,6 +56,7 @@ flowchart TD
 - Discovers recent articles from source landing pages and RSS feeds, prioritizes newer dated articles, and builds a top-of-report market intelligence tape.
 - Tracks professional market drivers, earnings calendars, earnings-linked daily movers, Yahoo Finance mover screens, and Reddit ticker attention as separate inputs.
 - Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data into structured research recommendations.
+- Adds a Deeper Read section that uses AI to surface differentiated, thought-provoking source analysis from the last 7 days rather than generic daily market recaps.
 - Enriches model candidates with company descriptions, market caps, investor relations links, earnings context, and recent ticker-specific news where free sources are available.
 - Uses AI to draft the Daily Read executive snapshot, with deterministic model, sector, macro, and source-tape metrics as guardrails and fallback.
 - Shows a Stay Away section based on the lowest-ranked model names and weakest sector clusters, framed as risk control rather than short-sale advice.
@@ -189,6 +190,7 @@ The intended division of labor is:
 - The AI Strategy Memo explains the model-ranked candidates against the macro calendar and public source tape.
 - The Daily Read is AI-written when available, but it is anchored to deterministic facts and falls back to a rules-based executive snapshot if the AI call fails.
 - The Daily Read is deterministic by default so the top of the report stays tightly grounded in the source tape, earnings movers, Reddit attention, macro calendar, and model facts. Set `AI_DAILY_READ=1` to let AI write the Daily Read when its output passes local fact-language guardrails.
+- The Deeper Read section asks the AI to choose the most interesting non-obvious source analysis from the last 7 days, explain the second-order market implication, and avoid repeating sources used in the prior refresh when enough alternatives exist. Rotation memory is stored in `data/deeper-read-history.json`.
 - The Stay Away section is seeded deterministically from the lowest-ranked model names; AI may add concise commentary, but it cannot choose symbols outside that supplied avoid-candidate list.
 
 Create a local `.env` file:
@@ -332,6 +334,7 @@ When the refresh runs successfully, it:
 - Refreshes `data/model-reference-cache.json` for fast Ticker Lab scoring
 - Regenerates `data/snapshot.json`
 - Regenerates `data/model-scorebook.json` and `data/market-cap-cache.json`
+- Updates `data/deeper-read-history.json` so the next AI Deeper Read can avoid repeating the same source mix when enough alternatives exist
 - Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, model date, and row counts
 - Commits the updated snapshot, scorebook, refresh status, market-cap cache, and reference cache back to `main` if any changed
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
