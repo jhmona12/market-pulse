@@ -44,8 +44,15 @@ const payload = {
   refreshTargetWindow: process.env.REFRESH_TARGET_WINDOW || null,
   skipReason: process.env.REFRESH_SKIP_REASON || null,
   snapshotGeneratedAt: snapshot?.generatedAt || null,
+  modelStatus: snapshot?.model?.status || scorebook?.status || null,
   modelAsOfDate: snapshot?.model?.asOfDate || scorebook?.asOfDate || null,
+  modelExpectedAsOfDate: snapshot?.model?.expectedAsOfDate || null,
   modelScoredCount: finiteNumber(snapshot?.model?.scoredCount ?? scorebook?.rowCount),
+  modelScoringOutcome: process.env.MODEL_SCORING_OUTCOME || null,
+  marketDataStatus: snapshot?.marketDataStatus?.status || scorebook?.marketDataStatus?.status || null,
+  marketDataAsOfDate: snapshot?.marketDataStatus?.asOfDate || scorebook?.marketDataStatus?.asOfDate || null,
+  expectedMarketDataDate: snapshot?.marketDataStatus?.expectedAsOfDate || scorebook?.marketDataStatus?.expectedAsOfDate || null,
+  staleDataReused: snapshot?.marketDataStatus?.staleDataReused ?? scorebook?.marketDataStatus?.staleDataReused ?? null,
   scorebookRows: finiteNumber(scorebook?.rowCount),
   opportunities: finiteNumber(snapshot?.opportunities?.length)
 };

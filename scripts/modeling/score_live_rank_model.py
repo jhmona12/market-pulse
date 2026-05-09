@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import date, datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import numpy as np
 import pandas as pd
@@ -33,6 +36,36 @@ MODEL_DIR = ROOT / "models" / "rank"
 DEFAULT_MODEL_NAME = "xgboost_rank_sector14_tuned"
 REBOUND_ACTIVATION_VOL_MULTIPLE = 0.75
 REBOUND_ACTIVATION_WINDOW_DAYS = 5
+PACIFIC = ZoneInfo("America/Los_Angeles")
+
+
+def previous_business_date(value: date) -> date:
+    candidate = value - timedelta(days=1)
+    while candidate.weekday() >= 5:
+        candidate -= timedelta(days=1)
+    return candidate
+
+
+def latest_expected_market_data_date(now: datetime | None = None) -> date:
+    override = os.environ.get("EXPECTED_MARKET_DATA_DATE", "").strip()
+    if override:
+        return date.fromisoformat(override)
+    now_pt = (now or datetime.now(PACIFIC)).astimezone(PACIFIC)
+    today_pt = now_pt.date()
+    if today_pt.weekday() >= 5:
+        return previous_business_date(today_pt)
+    return today_pt if now_pt.hour >= 14 else previous_business_date(today_pt)
+
+
+def assert_fresh_as_of(as_of: object, source: str) -> None:
+    if os.environ.get("ALLOW_STALE_MODEL_DATA") == "1":
+        return
+    if as_of is None:
+        raise ValueError(f"{source} has no as-of date; refusing to use it for model scoring")
+    as_of_date = pd.to_datetime(as_of).date()
+    expected = latest_expected_market_data_date()
+    if as_of_date < expected:
+        raise ValueError(f"{source} is stale: as-of {as_of_date.isoformat()}, expected {expected.isoformat()}")
 
 
 def parse_args() -> argparse.Namespace:
@@ -652,6 +685,11 @@ def load_reference_cache(path: Path) -> dict | None:
     payload = json.loads(path.read_text(encoding="utf-8"))
     if payload.get("status") != "ready" or not payload.get("referenceRows") or not payload.get("referenceScores"):
         return None
+    try:
+        assert_fresh_as_of(payload.get("asOfDate"), "S&P 500 reference cache")
+    except ValueError as error:
+        print(f"Reference cache unavailable; {error}")
+        return None
     return payload
 
 
@@ -699,6 +737,13 @@ def score_focus_with_reference_cache(
         for symbol in external_focus:
             frame = symbol_frames.get(symbol)
             if frame is None:
+                continue
+            latest_price_date = frame["date"].max().date()
+            if latest_price_date < reference_date.date():
+                failures[symbol] = (
+                    f"stale price history: latest {latest_price_date.isoformat()}, "
+                    f"expected {reference_date.date().isoformat()}"
+                )
                 continue
             diagnostic = infer_sector_for_symbol(symbol, frame, symbol_frames)
             sector_diagnostics[symbol] = diagnostic
@@ -860,6 +905,11 @@ def main() -> None:
 
     scored = score_rows(dataset, model_path, feature_columns)
     scored["model_universe_count"] = len(scored)
+    latest_date = scored["date"].max().date().isoformat() if not scored.empty else None
+    try:
+        assert_fresh_as_of(latest_date, "live model rankings")
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
     name_lookup = constituents.set_index("symbol")["name"].to_dict()
     reference_scores = scored[scored["symbol"].isin(reference_symbols)]["model_score"]
     rankings = [row_payload(row, name_lookup, sector_diagnostics) for _, row in scored.iterrows()]
@@ -868,7 +918,6 @@ def main() -> None:
         row_payload(row, name_lookup, sector_diagnostics, reference_scores=reference_scores)
         for _, row in focus_scored.iterrows()
     ]
-    latest_date = scored["date"].max().date().isoformat() if not scored.empty else None
     scored_symbols = set(scored["symbol"].astype(str))
     unscored_symbols = sorted(set(constituents["symbol"].astype(str)) - scored_symbols - set(failures))
     focus_failures = {symbol: failures[symbol] for symbol in focus_symbols if symbol in failures}

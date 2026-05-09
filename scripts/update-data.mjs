@@ -15,7 +15,9 @@ const redditPostLimit = Number.parseInt(process.env.REDDIT_POST_LIMIT || "40", 1
 const historyConcurrency = Number.parseInt(process.env.HISTORY_CONCURRENCY || "4", 10);
 const marketCapFetchLimit = Number.parseInt(process.env.MARKET_CAP_FETCH_LIMIT || "60", 10);
 const openAiTimeoutMs = Number.parseInt(process.env.OPENAI_TIMEOUT_MS || "90000", 10);
-const useCachedTechnicals = process.env.USE_CACHED_TECHNICALS === "1";
+const forceTechnicalDataUnavailable = process.env.FORCE_TECHNICAL_DATA_UNAVAILABLE === "1" || process.env.USE_CACHED_TECHNICALS === "1";
+const allowStaleModelData = process.env.ALLOW_STALE_MODEL_DATA === "1";
+const expectedMarketDataDate = process.env.EXPECTED_MARKET_DATA_DATE || "";
 const skipReddit = process.env.SKIP_REDDIT === "1";
 const snapshotOutput = process.env.SNAPSHOT_OUTPUT || "data/snapshot.json";
 const scorebookOutput = process.env.SCOREBOOK_OUTPUT || "data/model-scorebook.json";
@@ -415,15 +417,72 @@ function hasModelRank(item) {
   return Number.isFinite(Number(item?.modelRank));
 }
 
+function pacificDateParts(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    weekday: "short",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    hourCycle: "h23"
+  }).formatToParts(date);
+  const byType = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return {
+    isoDate: `${byType.year}-${byType.month}-${byType.day}`,
+    weekday: byType.weekday,
+    hour: Number(byType.hour)
+  };
+}
+
+function previousBusinessDate(isoDate) {
+  const date = new Date(`${isoDate}T12:00:00Z`);
+  do {
+    date.setUTCDate(date.getUTCDate() - 1);
+  } while ([0, 6].includes(date.getUTCDay()));
+  return date.toISOString().slice(0, 10);
+}
+
+function latestExpectedMarketDataDate(date = new Date()) {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(expectedMarketDataDate)) return expectedMarketDataDate;
+  const pacific = pacificDateParts(date);
+  if (pacific.weekday === "Sat" || pacific.weekday === "Sun") return previousBusinessDate(pacific.isoDate);
+  return pacific.hour >= 14 ? pacific.isoDate : previousBusinessDate(pacific.isoDate);
+}
+
 async function loadModelRankings() {
   try {
     const text = await readFile(join(root, "data/model-rank-scores.json"), "utf8");
     const payload = JSON.parse(text);
     const rankings = (payload.rankings || []).filter((item) => item?.symbol);
+    const expectedAsOfDate = latestExpectedMarketDataDate();
+    if (
+      payload.status === "ready"
+      && payload.asOfDate
+      && payload.asOfDate < expectedAsOfDate
+      && !allowStaleModelData
+    ) {
+      return {
+        status: "stale",
+        error: `Model rankings are stale: as-of ${payload.asOfDate}, expected ${expectedAsOfDate}. Stale model data was not used.`,
+        generatedAt: payload.generatedAt || null,
+        asOfDate: payload.asOfDate || null,
+        expectedAsOfDate,
+        model: payload.model || null,
+        scoredCount: 0,
+        requestedSymbolCount: payload.requestedSymbolCount || rankings.length,
+        failedSymbolCount: payload.failedSymbolCount || 0,
+        unscoredSymbolCount: payload.unscoredSymbolCount || 0,
+        unscoredSymbols: payload.unscoredSymbols || [],
+        rankings: [],
+        bySymbol: new Map()
+      };
+    }
     return {
       status: payload.status || "ready",
       generatedAt: payload.generatedAt || null,
       asOfDate: payload.asOfDate || null,
+      expectedAsOfDate,
       model: payload.model || null,
       scoredCount: payload.scoredCount || rankings.length,
       requestedSymbolCount: payload.requestedSymbolCount || rankings.length,
@@ -439,6 +498,7 @@ async function loadModelRankings() {
       error: error.message,
       generatedAt: null,
       asOfDate: null,
+      expectedAsOfDate: latestExpectedMarketDataDate(),
       model: null,
       scoredCount: 0,
       requestedSymbolCount: 0,
@@ -469,20 +529,13 @@ async function loadPreviousRefreshStatus() {
   }
 }
 
-async function loadExistingSnapshot() {
-  try {
-    const text = await readFile(join(root, "data/snapshot.json"), "utf8");
-    return JSON.parse(text);
-  } catch {
-    return null;
-  }
-}
-
 function publicModelSummary(modelRankings, explainability) {
   return {
     status: modelRankings.status,
     generatedAt: modelRankings.generatedAt,
     asOfDate: modelRankings.asOfDate,
+    expectedAsOfDate: modelRankings.expectedAsOfDate,
+    isStale: modelRankings.status === "stale",
     model: modelRankings.model,
     scoredCount: modelRankings.scoredCount,
     requestedSymbolCount: modelRankings.requestedSymbolCount,
@@ -1412,8 +1465,9 @@ async function fetchRedditTape(knownSymbols) {
   };
 }
 
-function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, signalsBySymbol }) {
+function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, signalsBySymbol, marketDataStatus }) {
   const rankings = modelRankings.status === "ready" ? modelRankings.rankings : [];
+  const returnStatus = marketDataStatus?.status === "fresh" ? "fresh" : "unavailable";
   const rows = rankings
     .map((item) => {
       const metadata = stockMetadata.get(item.symbol) || {};
@@ -1440,8 +1494,8 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
         beta60d: roundedNumber(signal?.beta60d ?? item.beta60d, 2),
         return7: roundedNumber(signal?.return7, 2),
         return14: roundedNumber(signal?.return14, 2),
-        return30: roundedNumber(signal?.return30 ?? item.return20, 2),
-        return60: roundedNumber(signal?.return60 ?? item.return60, 2),
+        return30: roundedNumber(signal?.return30, 2),
+        return60: roundedNumber(signal?.return60, 2),
         return90: roundedNumber(signal?.return90, 2),
         ytdReturn: roundedNumber(signal?.ytdReturn, 2),
         asOfDate: item.asOfDate || modelRankings.asOfDate || null
@@ -1453,6 +1507,8 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
     generatedAt: new Date().toISOString(),
     asOfDate: modelRankings.asOfDate || null,
     status: modelRankings.status,
+    marketDataStatus: marketDataStatus || null,
+    trailingReturnStatus: returnStatus,
     rowCount: rows.length,
     model: modelRankings.model,
     columns: [
@@ -1474,7 +1530,9 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
       "return90",
       "ytdReturn"
     ],
-    returnNotes: "Return columns use adjusted-close price history and trailing trading-day windows: 7D, 14D, 30D, 60D, 90D, then YTD.",
+    returnNotes: returnStatus === "fresh"
+      ? "Return columns use fresh adjusted-close price history and calendar lookbacks: 7D, 14D, 30D, 60D, 90D, then YTD. If the exact calendar date was not a trading day, the prior available trading close is used."
+      : "Fresh price history was unavailable; stale cached returns were not reused, so trailing return columns are intentionally blank until the next successful price refresh.",
     rows
   };
 }
@@ -1536,13 +1594,34 @@ function percentChange(now, before) {
   return ((now - before) / before) * 100;
 }
 
+function trailingCalendarReturn(history, days) {
+  if (!history.length) return null;
+  const latest = history.at(-1);
+  const latestClose = latest?.close;
+  if (!Number.isFinite(Number(latestClose)) || !latest?.date) return null;
+  const target = new Date(`${latest.date}T12:00:00Z`);
+  target.setUTCDate(target.getUTCDate() - days);
+  const targetIso = target.toISOString().slice(0, 10);
+  const base = [...history].reverse().find((row) => row.date <= targetIso && Number.isFinite(Number(row.close)));
+  return base ? percentChange(latestClose, base.close) : null;
+}
+
+function assertFreshHistory(symbol, history, expectedAsOfDate) {
+  const latestDate = history.at(-1)?.date || null;
+  if (!latestDate || latestDate < expectedAsOfDate) {
+    throw new Error(`${symbol} chart history is stale: latest ${latestDate || "none"}, expected ${expectedAsOfDate}`);
+  }
+}
+
 function formatPercent(value) {
-  const number = Number(value || 0);
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "n/a";
   return `${number >= 0 ? "+" : ""}${number.toFixed(2)}%`;
 }
 
 function formatNumber(value, decimals = 1) {
-  return Number(value || 0).toFixed(decimals);
+  const number = Number(value);
+  return Number.isFinite(number) ? number.toFixed(decimals) : "n/a";
 }
 
 function rsi(values, period = 14) {
@@ -1613,12 +1692,12 @@ function computeSignal(item, history, spyReturn20 = 0, spyHistory = null) {
   const ma100 = sma(closes, 100);
   const ma200 = sma(closes, 200);
   const rsi14 = rsi(closes);
-  const return7 = percentChange(close, closes.at(-8));
-  const return14 = percentChange(close, closes.at(-15));
+  const return7 = trailingCalendarReturn(history, 7);
+  const return14 = trailingCalendarReturn(history, 14);
   const return20 = percentChange(close, closes.at(-21));
-  const return30 = percentChange(close, closes.at(-31));
-  const return60 = percentChange(close, closes.at(-61));
-  const return90 = percentChange(close, closes.at(-91));
+  const return30 = trailingCalendarReturn(history, 30);
+  const return60 = trailingCalendarReturn(history, 60);
+  const return90 = trailingCalendarReturn(history, 90);
   const ytdReturn = percentChange(close, ytdBase);
   const beta60d = item.symbol === "SPY" ? 1 : betaToBenchmark(history, spyHistory, 60);
   const relativeStrength = return20 - spyReturn20;
@@ -1736,6 +1815,67 @@ function mergeModelScores(signals, modelRankings) {
       if (aModel !== bModel) return aModel ? -1 : 1;
       return b.score - a.score;
     });
+}
+
+function modelOnlyOpportunities(modelRankings, stockMetadata = new Map()) {
+  if (modelRankings.status !== "ready" || !modelRankings.rankings.length) return [];
+  return modelRankings.rankings.map((item) => {
+    const metadata = stockMetadata.get(item.symbol) || {};
+    const modelPercentile = finiteNumber(item.modelPercentile);
+    const modelTags = [
+      ...(item.setupTags || []),
+      item.modelBucket,
+      ...(item.modelReasons || []).slice(0, 2)
+    ].filter(Boolean);
+    return {
+      symbol: item.symbol,
+      name: item.name || metadata.name || item.symbol,
+      type: "stock",
+      sector: item.sector || metadata.sector || "Unclassified",
+      score: modelPercentile ?? 0,
+      close: finiteNumber(item.close),
+      changePct: null,
+      rsi14: finiteNumber(item.rsi14),
+      volumeRatio: null,
+      return7: null,
+      return14: null,
+      return20: finiteNumber(item.return20),
+      return30: null,
+      return60: finiteNumber(item.return60),
+      return90: null,
+      ytdReturn: null,
+      beta60d: null,
+      above50: typeof item.above50 === "boolean" ? item.above50 : null,
+      above100: null,
+      above200: typeof item.above200 === "boolean" ? item.above200 : null,
+      recentCross: false,
+      relativeStrength: null,
+      history: [],
+      tags: [...new Set(modelTags)],
+      rulesScore: null,
+      modelRank: finiteNumber(item.modelRank),
+      modelUniverseCount: finiteNumber(item.modelUniverseCount),
+      modelScore: finiteNumber(item.modelScore),
+      modelPercentile,
+      modelBucket: item.modelBucket || "Ranked",
+      modelReasons: item.modelReasons || [],
+      riskFlags: item.riskFlags || [],
+      setupType: item.setupType || null,
+      setupTags: item.setupTags || [],
+      reboundActivationPrice: finiteNumber(item.reboundActivationPrice),
+      reboundActivationPct: finiteNumber(item.reboundActivationPct),
+      reboundActivationVolMultiple: finiteNumber(item.reboundActivationVolMultiple),
+      reboundActivationWindowDays: finiteNumber(item.reboundActivationWindowDays),
+      reboundActivationRule: item.reboundActivationRule || null,
+      modelAsOfDate: item.asOfDate || modelRankings.asOfDate,
+      return120: finiteNumber(item.return120),
+      relativeReturn60VsSpy: finiteNumber(item.relativeReturn60VsSpy),
+      sectorReturn60: finiteNumber(item.sectorReturn60),
+      volatility60d: finiteNumber(item.volatility60d),
+      volatility60dVsSector: finiteNumber(item.volatility60dVsSector),
+      distanceTo52wHigh: finiteNumber(item.distanceTo52wHigh)
+    };
+  });
 }
 
 function computeSectorPerformance(item, history, spyHistory) {
@@ -2275,6 +2415,8 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
   const latestOfficialMacro = officialMacroReleases.find((release) => release.status === "ready");
   const earningsMovers = marketIntelligence?.earnings?.earningsMovers || [];
   const redditTickers = marketIntelligence?.reddit?.topTickers || [];
+  const technicalsFresh = marketIntelligence?.marketDataStatus?.status === "fresh";
+  const technicalStatusMessage = marketIntelligence?.marketDataStatus?.message || "Fresh price and technical data is unavailable.";
   const aiFocus = aiRecommendations?.status === "ready"
     ? firstSentence(aiRecommendations.headline || aiRecommendations.macroView)
     : "";
@@ -2282,12 +2424,16 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
   const modelText = modelReady
     ? `${model.scoredCount} S&P 500 names were scored by the XGBoost rank model as of ${model.asOfDate || "the latest available close"}`
     : "The XGBoost rank model was not available for this refresh";
-  const regime = breadth >= 55
-    ? "Risk appetite is broad"
-    : breadth >= 40
-      ? "Risk appetite is constructive but selective"
-      : "Risk appetite is narrow";
-  const fallbackHeadline = modelReady
+  const regime = !technicalsFresh
+    ? "Fresh technical data is unavailable"
+    : breadth >= 55
+      ? "Risk appetite is broad"
+      : breadth >= 40
+        ? "Risk appetite is constructive but selective"
+        : "Risk appetite is narrow";
+  const fallbackHeadline = !technicalsFresh
+    ? "Fresh technical data is unavailable; use macro, news, and model context with caution."
+    : modelReady
     ? `${regime}; model leadership is clustered in ${leaderText}, with ${topSector?.sector || "sector"} confirmation.`
     : `${regime}; rules-based momentum leaders are ${leaderText}.`;
   const intelligenceHeadline = latestOfficialMacro
@@ -2309,7 +2455,9 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
   const redditLead = redditTickers.length
     ? `Retail attention is concentrated in ${redditTickers.slice(0, 4).map((item) => item.symbol).join(", ")}; treat that as sentiment, not verified news.`
     : "Reddit attention data was unavailable or did not produce clean ticker concentration.";
-  const fallbackBody = `${regime}. ${driverLead} ${earningsLead} ${redditLead} The model read is secondary confirmation, with leadership concentrated in ${leaderText}.`;
+  const fallbackBody = !technicalsFresh
+    ? `${driverLead} ${earningsLead} ${redditLead} ${technicalStatusMessage} ${modelReady ? `The eligible model context still points to ${leaderText}, but trailing return, breadth, and sector-tile data should not be treated as current.` : "Model-ranked single-name context is unavailable, so do not rely on stale ranks."}`
+    : `${regime}. ${driverLead} ${earningsLead} ${redditLead} The model read is secondary confirmation, with leadership concentrated in ${leaderText}.`;
   const macroReleaseBullets = officialMacroReleases
     .filter((release) => release.status === "ready")
     .slice(0, 3)
@@ -2324,7 +2472,9 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
     ...driverBullets,
     earningsBullet,
     retailBullet,
-    `Breadth: ${above50Pct}% of the screened universe is above the 50-day average, ${above200Pct}% is above the 200-day, and ${breadth}% clears both trend lines.`,
+    technicalsFresh
+      ? `Breadth: ${above50Pct}% of the screened universe is above the 50-day average, ${above200Pct}% is above the 200-day, and ${breadth}% clears both trend lines.`
+      : `Data freshness: ${technicalStatusMessage}`,
     modelReady
       ? `Model read: ${leaderText} lead ${model.scoredCount} scored S&P 500 names; ${modelSectorText}; sector confirmation is ${topSectorText(sectorPerformance)}.`
       : "Model rankings were unavailable, so the read used the rules-based momentum score.",
@@ -2339,7 +2489,9 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
     modelReady
       ? `Momentum risk: ${extended} top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.`
       : `Momentum risk: ${extended} screened names have score >= 70 and RSI above 76.`,
-    `Confirmation check: ETF leaders are ${etfText}; if they roll over while single-name ranks stay high, reduce confidence in the long book.`,
+    technicalsFresh
+      ? `Confirmation check: ETF leaders are ${etfText}; if they roll over while single-name ranks stay high, reduce confidence in the long book.`
+      : "Data check: restore fresh Yahoo chart history before relying on trailing returns, sector tiles, breadth, or moving-average status.",
     `${failedSources} of ${sources.length} configured source pages failed the latest check; blocked or stale sources should not drive the call.`
   ];
   const cleanedAiDailyRead = process.env.AI_DAILY_READ === "1" && aiRecommendations?.status === "ready" ? cleanDailyRead(aiRecommendations.dailyRead) : null;
@@ -3581,22 +3733,36 @@ async function main() {
 
   console.log(`Screening ${universe.length} instruments...`);
 
+  const stockMetadata = constituentMetadataBySymbol(stocks);
+  const expectedTechnicalAsOfDate = latestExpectedMarketDataDate();
   let opportunities;
   let signalsBySymbol;
   let marketStrip;
   let sectorPerformance;
-  let marketDataStatus = { status: "fresh", message: "Fresh end-of-day chart history was fetched for this refresh." };
+  let marketDataStatus = {
+    status: "fresh",
+    message: "Fresh end-of-day chart history was fetched for this refresh.",
+    expectedAsOfDate: expectedTechnicalAsOfDate,
+    staleDataReused: false
+  };
 
   try {
-    if (useCachedTechnicals) throw new Error("USE_CACHED_TECHNICALS=1");
+    if (forceTechnicalDataUnavailable) throw new Error("Fresh technical data disabled by environment");
     const spyHistory = await fetchHistory("SPY");
+    assertFreshHistory("SPY", spyHistory, expectedTechnicalAsOfDate);
     const spyCloses = spyHistory.map((row) => row.close);
     const spyReturn20 = percentChange(spyCloses.at(-1), spyCloses.at(-21));
+    marketDataStatus = {
+      ...marketDataStatus,
+      asOfDate: spyHistory.at(-1)?.date || null,
+      message: `Fresh end-of-day chart history was fetched through ${spyHistory.at(-1)?.date || "the latest close"}.`
+    };
 
     const signals = await mapLimit(universe, Math.max(1, historyConcurrency), async (item, index) => {
       try {
         if (index > 0 && index % 50 === 0) console.log(`...${index}/${universe.length}`);
         const history = item.symbol === "SPY" ? spyHistory : await fetchHistory(item.symbol);
+        assertFreshHistory(item.symbol, history, expectedTechnicalAsOfDate);
         await sleep(20);
         return computeSignal(item, history, spyReturn20, spyHistory);
       } catch (error) {
@@ -3615,6 +3781,7 @@ async function main() {
         if (existing) return existing;
         const metadata = etfs.find((item) => item.symbol === symbol) || { symbol, name: symbol };
         const history = await fetchHistory(symbol);
+        assertFreshHistory(symbol, history, expectedTechnicalAsOfDate);
         historyCache.set(symbol, history);
         return computeSignal(metadata, history, spyReturn20, spyHistory);
       })
@@ -3629,26 +3796,26 @@ async function main() {
     sectorPerformance = (
       await mapLimit(sectorEtfs, 4, async (item) => {
         const history = historyCache.get(item.symbol) || await fetchHistory(item.symbol);
+        assertFreshHistory(item.symbol, history, expectedTechnicalAsOfDate);
         historyCache.set(item.symbol, history);
         return computeSectorPerformance(item, history, spyHistory);
       })
     ).sort((a, b) => b.change30d - a.change30d);
   } catch (error) {
-    const existingSnapshot = await loadExistingSnapshot();
-    if (!existingSnapshot?.opportunities?.length) throw error;
-    console.warn(`Using cached technical tape because fresh chart history failed: ${error.message}`);
-    opportunities = mergeModelScores(existingSnapshot.opportunities, modelRankings);
-    signalsBySymbol = new Map(opportunities.map((item) => [item.symbol, item]));
-    marketStrip = existingSnapshot.marketStrip || [];
-    sectorPerformance = existingSnapshot.sectorPerformance || [];
+    console.warn(`Fresh technical tape unavailable; stale cached technicals will not be reused: ${error.message}`);
+    opportunities = modelOnlyOpportunities(modelRankings, stockMetadata);
+    signalsBySymbol = new Map();
+    marketStrip = [];
+    sectorPerformance = [];
     marketDataStatus = {
-      status: "cached_technical_tape",
-      message: `Fresh Yahoo chart history failed (${error.message}); reused the prior end-of-day technical tape while refreshing news, earnings, Reddit, AI, and model context.`,
-      cachedSnapshotGeneratedAt: existingSnapshot.generatedAt || null
+      status: "unavailable",
+      message: `Fresh Yahoo chart history failed (${error.message}); stale cached technical values were not reused. Trailing return columns and sector tiles are unavailable until a successful fresh price refresh.`,
+      expectedAsOfDate: expectedTechnicalAsOfDate,
+      asOfDate: null,
+      staleDataReused: false
     };
   }
 
-  const stockMetadata = constituentMetadataBySymbol(stocks);
   const marketCapCachePromise = loadMarketCapCache().then((cache) =>
     modelRankings.status === "ready" ? enrichMarketCaps(modelRankings.rankings.map((item) => item.symbol), cache) : cache
   );
@@ -3698,7 +3865,8 @@ async function main() {
     modelRankings,
     stockMetadata,
     marketCapCache,
-    signalsBySymbol
+    signalsBySymbol,
+    marketDataStatus
   });
 
   const snapshot = {

@@ -221,7 +221,9 @@ jobs:
         run: python -m pip install -r scripts/modeling/requirements.txt
 
       - name: Score XGBoost rank model
+        id: score_model
         if: steps.pacific_time.outputs.run_refresh == 'true'
+        continue-on-error: true
         run: python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json
 
       - name: Refresh snapshot
@@ -229,11 +231,14 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5-nano
+          MODEL_SCORING_OUTCOME: ${{ steps.score_model.outcome }}
         run: node scripts/update-data.mjs
 
       - name: Write successful refresh status
         if: success() && steps.pacific_time.outputs.run_refresh == 'true'
-        run: node scripts/write-refresh-status.mjs success "Refresh completed and generated dashboard artifacts."
+        env:
+          MODEL_SCORING_OUTCOME: ${{ steps.score_model.outcome }}
+        run: node scripts/write-refresh-status.mjs success "Refresh completed and generated dashboard artifacts. Check modelStatus and marketDataStatus for freshness guardrails."
 
       - name: Write failed refresh status
         if: failure() && steps.pacific_time.outputs.run_refresh == 'true'

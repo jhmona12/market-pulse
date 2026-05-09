@@ -64,7 +64,8 @@ Requirements:
 - Do not mention a current event just because it is globally important. Mention it only when the supplied source tape, macro data, or price/sector behavior supports market relevance.
 - Be precise on macro risk: hotter inflation, stronger yields, weaker growth, or a more hawkish Fed path are typical risks to long momentum. Do not describe softer inflation as bearish unless the supplied data explicitly supports that interpretation.
 - Do not claim access to live intraday market data.
-- If `marketIntelligence.marketDataStatus.status` says the technical tape is cached, explicitly avoid implying that price/technical data changed during this refresh. The news, earnings, Reddit, macro, and AI narrative may still be fresh.
+- If `marketIntelligence.marketDataStatus.status` is not `fresh`, explicitly state that fresh price/technical data is unavailable and that stale cached technical values were not reused. Do not cite trailing returns, sector tiles, breadth, or moving-average status as current when the supplied status says they are unavailable.
+- If the supplied model status is `stale`, `missing`, or otherwise not `ready`, do not make single-name model recommendations. State that stale model rankings were not used.
 - Do not invent catalysts, prices, financials, or news that are not in the supplied data.
 - Do not infer liquidity, positioning, crowding, or causality unless those terms appear in supplied source text or are directly supported by supplied metrics.
 - Every specific factual statement in the Daily Read must be traceable to supplied source text, macro/market data, earnings data, market mover data, or model/technical data. If the supplied tape is thin, say that instead of filling gaps.

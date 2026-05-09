@@ -328,6 +328,31 @@ h3 {
   line-height: 1.55;
 }
 
+.data-status-banner {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(242, 193, 78, 0.46);
+  border-left: 3px solid var(--accent-3);
+  border-radius: 5px;
+  color: #ffe6a6;
+  background:
+    linear-gradient(90deg, rgba(242, 193, 78, 0.12), rgba(7, 16, 12, 0.92)),
+    rgba(3, 8, 6, 0.88);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.data-status-banner[hidden] {
+  display: none;
+}
+
+.data-status-banner span {
+  display: block;
+}
+
 .ai-panel p {
   max-width: 920px;
   color: #d4e8dd;

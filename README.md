@@ -63,6 +63,7 @@ flowchart TD
 - Enriches model candidates with company descriptions, market caps, investor relations links, earnings context, and recent ticker-specific news where free sources are available.
 - Uses AI to draft the Daily Read executive snapshot, with deterministic model, sector, macro, and source-tape metrics as guardrails and fallback.
 - Shows a Stay Away section based on the lowest-ranked model names and weakest sector clusters, framed as risk control rather than short-sale advice.
+- Refuses to silently reuse stale model rankings or stale technical tape; the dashboard shows a visible data-status warning when fresh model or price data is unavailable.
 
 ## Live Site
 
@@ -75,6 +76,17 @@ https://jhmona12.github.io/market-pulse/
 The site reads from `data/snapshot.json` for the briefing and `data/model-scorebook.json` for the full S&P 500 Model Scoreboard. When those files change, the public page reflects the latest generated market snapshot after GitHub Pages redeploys.
 
 Ticker Lab is visible on the public page, but scoring requires a separate private model API because GitHub Pages can only serve static files. The browser reads the API base URL from `config/runtime.json`.
+
+## Freshness Guardrails
+
+Market Pulse is designed to fail visibly rather than publish stale data as if it were current.
+
+- The model scorer checks the latest price date before writing live ranks. By default, after 2 PM Pacific on a weekday it expects that trading day's close; before then it expects the prior business day; on weekends it expects the prior Friday. Set `EXPECTED_MARKET_DATA_DATE=YYYY-MM-DD` only when you intentionally need to override the expected close date.
+- `scripts/update-data.mjs` rejects stale `data/model-rank-scores.json` unless `ALLOW_STALE_MODEL_DATA=1` is explicitly set. If model data is stale or missing, model-ranked single-name recommendations are not generated from it.
+- Fresh Yahoo chart history must be available through the expected close date before technical metrics are shown. If Yahoo is rate-limited or returns an old close, the dashboard does not reuse the prior snapshot's technical tape.
+- When fresh price history is unavailable, the dashboard keeps news, macro, Reddit, earnings, and model context flowing where possible, but trailing return columns, sector tiles, and other technical fields are marked unavailable instead of showing stale values.
+- The public dashboard includes a warning banner when price/technical data or model rankings are stale, missing, or unavailable.
+- The private Ticker Lab refuses stale S&P 500 reference caches and rejects external tickers whose fetched price history is older than the current reference date.
 
 ## Local Use
 
@@ -143,7 +155,7 @@ The refresh script:
 - Requires source articles to have a publication date within the freshness window, 30 days by default, before they can appear in the Source Tape or feed the AI/source briefing
 - Builds `marketIntelligence` with rolling 24-hour professional drivers, important older context, earnings movers, market movers, and Reddit sentiment
 - Treats Reddit / WallStreetBets as attention and sentiment only, separated from professional commentary
-- Falls back to the prior end-of-day technical tape when Yahoo chart history is temporarily rate-limited, while still refreshing sources, earnings, Reddit, model context, and AI synthesis
+- Does not reuse the prior end-of-day technical tape when Yahoo chart history is temporarily rate-limited; stale technical values are left unavailable while sources, earnings, Reddit, macro, and eligible model context continue to refresh
 - Pulls S&P 500 constituents from Wikipedia when available
 - Adds ETFs from `config/universe.json`
 - Fetches delayed/end-of-day chart history from Yahoo Finance's public chart endpoint
@@ -154,7 +166,7 @@ The refresh script:
 - Adds setup tags from the model scorer, including `Momentum Confirmed`, `Model Rebound Watch`, and `Not Momentum Confirmed`
 - Adds a rebound activation price for qualifying rebound-watch names, calculated as current close plus `0.75 x 20-day realized daily volatility`
 - Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
-- Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, 60-day beta to SPY, trailing 7D, 14D, 30D, 60D, 90D returns, and YTD return
+- Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, 60-day beta to SPY, trailing 7D, 14D, 30D, 60D, 90D calendar-lookback returns, and YTD return when fresh price history is available
 - Updates `data/market-cap-cache.json` from free public quote data and reuses recent values to keep the daily job reliable
 - Enriches the top model candidates with company context from Nasdaq, company investor relations pages, and Yahoo Finance news RSS
 - Builds a lowest-ranked model book for the Stay Away section

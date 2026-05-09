@@ -21,6 +21,11 @@ const fallbackSnapshot = {
       "Check the browser console if the dashboard continues to show fallback data."
     ]
   },
+  marketDataStatus: {
+    status: "fallback",
+    message: "Fallback sample data is displayed because a current snapshot was not loaded.",
+    staleDataReused: false
+  },
   marketIntelligence: {
     professionalDrivers: [],
     earnings: { earningsMovers: [] },
@@ -440,9 +445,30 @@ function renderNote() {
   $("#asOfDate").textContent = `As of ${formatDate(state.snapshot.generatedAt)}`;
   $("#noteHeadline").textContent = note.headline;
   $("#noteBody").textContent = note.body;
+  renderDataStatusBanner();
   renderMarketIntelligence();
   renderList($("#changedList"), note.changed || []);
   renderList($("#watchList"), note.watch || []);
+}
+
+function renderDataStatusBanner() {
+  const banner = $("#dataStatusBanner");
+  if (!banner) return;
+  const messages = [];
+  const marketStatus = state.snapshot.marketDataStatus;
+  const model = state.snapshot.model || {};
+
+  if (marketStatus?.status && marketStatus.status !== "fresh") {
+    messages.push(marketStatus.message || "Fresh price and technical data is unavailable; stale cached technical data is not shown.");
+  }
+  if (model.isStale) {
+    messages.push(`Model rankings are stale: as of ${model.asOfDate || "unknown"}, expected ${model.expectedAsOfDate || "current market date"}. Stale model ranks were not used.`);
+  } else if (model.status && model.status !== "ready") {
+    messages.push(model.unavailableReason || "Model rankings are unavailable for this snapshot.");
+  }
+
+  banner.hidden = messages.length === 0;
+  banner.innerHTML = messages.map((message) => `<span>${esc(message)}</span>`).join("");
 }
 
 function intelItemLink(item, title) {

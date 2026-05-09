@@ -8,6 +8,8 @@ Official macro rows are treated differently from ordinary commentary sources. Th
 
 When adding official macro sources, prefer primary government or central-bank pages over articles summarizing them. Use the `Official macro` category, include the release calendar if available, and note the specific release family in the Notes field so the script can be extended with a targeted parser when needed.
 
+Freshness rule: stale source items should not drive the briefing. Ordinary article/commentary items must have a recent publication date inside the configured freshness window before they can appear in the Source Tape or influence the Daily Read. Official macro releases should be tied to the actual release timestamp, not the observation period. If a landing page is live but only exposes stale or undated items, the script should treat it as source coverage, not current evidence.
+
 | Name | URL | Category | Cadence | Trust | Notes |
 |---|---|---|---|---|---|
 | J.P. Morgan Markets Insights | https://www.jpmorgan.com/insights/markets | Institution research | Weekly | High | Public markets and macro research hub. |
