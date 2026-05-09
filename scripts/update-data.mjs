@@ -14,7 +14,7 @@ const marketIntelImportantHours = Number.parseFloat(process.env.MARKET_INTEL_IMP
 const redditPostLimit = Number.parseInt(process.env.REDDIT_POST_LIMIT || "40", 10);
 const historyConcurrency = Number.parseInt(process.env.HISTORY_CONCURRENCY || "4", 10);
 const marketCapFetchLimit = Number.parseInt(process.env.MARKET_CAP_FETCH_LIMIT || "60", 10);
-const openAiTimeoutMs = Number.parseInt(process.env.OPENAI_TIMEOUT_MS || "90000", 10);
+const openAiTimeoutMs = Number.parseInt(process.env.OPENAI_TIMEOUT_MS || "180000", 10);
 const forceTechnicalDataUnavailable = process.env.FORCE_TECHNICAL_DATA_UNAVAILABLE === "1" || process.env.USE_CACHED_TECHNICALS === "1";
 const allowStaleModelData = process.env.ALLOW_STALE_MODEL_DATA === "1";
 const expectedMarketDataDate = process.env.EXPECTED_MARKET_DATA_DATE || "";
@@ -474,6 +474,9 @@ async function loadModelRankings() {
         failedSymbolCount: payload.failedSymbolCount || 0,
         unscoredSymbolCount: payload.unscoredSymbolCount || 0,
         unscoredSymbols: payload.unscoredSymbols || [],
+        technicalTape: null,
+        marketRows: [],
+        sectorRows: [],
         rankings: [],
         bySymbol: new Map()
       };
@@ -489,6 +492,9 @@ async function loadModelRankings() {
       failedSymbolCount: payload.failedSymbolCount || 0,
       unscoredSymbolCount: payload.unscoredSymbolCount || 0,
       unscoredSymbols: payload.unscoredSymbols || [],
+      technicalTape: payload.technicalTape || null,
+      marketRows: payload.marketRows || [],
+      sectorRows: payload.sectorRows || [],
       rankings,
       bySymbol: new Map(rankings.map((item) => [item.symbol, item]))
     };
@@ -505,6 +511,9 @@ async function loadModelRankings() {
       failedSymbolCount: 0,
       unscoredSymbolCount: 0,
       unscoredSymbols: [],
+      technicalTape: null,
+      marketRows: [],
+      sectorRows: [],
       rankings: [],
       bySymbol: new Map()
     };
@@ -542,6 +551,7 @@ function publicModelSummary(modelRankings, explainability) {
     failedSymbolCount: modelRankings.failedSymbolCount,
     unscoredSymbolCount: modelRankings.unscoredSymbolCount,
     unscoredSymbols: modelRankings.unscoredSymbols.slice(0, 25),
+    technicalTape: modelRankings.technicalTape,
     unavailableReason: modelRankings.status === "ready" ? null : modelRankings.error || null,
     topRankings: modelRankings.rankings.slice(0, 12),
     explainability: explainability
@@ -1468,6 +1478,7 @@ async function fetchRedditTape(knownSymbols) {
 function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, signalsBySymbol, marketDataStatus }) {
   const rankings = modelRankings.status === "ready" ? modelRankings.rankings : [];
   const returnStatus = marketDataStatus?.status === "fresh" ? "fresh" : "unavailable";
+  const useTechnicalReturns = returnStatus === "fresh";
   const rows = rankings
     .map((item) => {
       const metadata = stockMetadata.get(item.symbol) || {};
@@ -1491,13 +1502,13 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
         reboundActivationPrice: finiteNumber(item.reboundActivationPrice),
         reboundActivationPct: roundedNumber(item.reboundActivationPct, 2),
         reboundActivationWindowDays: finiteNumber(item.reboundActivationWindowDays),
-        beta60d: roundedNumber(signal?.beta60d ?? item.beta60d, 2),
-        return7: roundedNumber(signal?.return7, 2),
-        return14: roundedNumber(signal?.return14, 2),
-        return30: roundedNumber(signal?.return30, 2),
-        return60: roundedNumber(signal?.return60, 2),
-        return90: roundedNumber(signal?.return90, 2),
-        ytdReturn: roundedNumber(signal?.ytdReturn, 2),
+        beta60d: useTechnicalReturns ? roundedNumber(signal?.beta60d ?? item.beta60d, 2) : null,
+        return7: useTechnicalReturns ? roundedNumber(signal?.return7 ?? item.return7, 2) : null,
+        return14: useTechnicalReturns ? roundedNumber(signal?.return14 ?? item.return14, 2) : null,
+        return30: useTechnicalReturns ? roundedNumber(signal?.return30 ?? item.return30, 2) : null,
+        return60: useTechnicalReturns ? roundedNumber(signal?.return60 ?? item.return60, 2) : null,
+        return90: useTechnicalReturns ? roundedNumber(signal?.return90 ?? item.return90, 2) : null,
+        ytdReturn: useTechnicalReturns ? roundedNumber(signal?.ytdReturn ?? item.ytdReturn, 2) : null,
         asOfDate: item.asOfDate || modelRankings.asOfDate || null
       };
     })
@@ -1834,23 +1845,23 @@ function modelOnlyOpportunities(modelRankings, stockMetadata = new Map()) {
       sector: item.sector || metadata.sector || "Unclassified",
       score: modelPercentile ?? 0,
       close: finiteNumber(item.close),
-      changePct: null,
+      changePct: finiteNumber(item.changePct),
       rsi14: finiteNumber(item.rsi14),
-      volumeRatio: null,
-      return7: null,
-      return14: null,
+      volumeRatio: finiteNumber(item.volumeRatio),
+      return7: finiteNumber(item.return7),
+      return14: finiteNumber(item.return14),
       return20: finiteNumber(item.return20),
-      return30: null,
+      return30: finiteNumber(item.return30),
       return60: finiteNumber(item.return60),
-      return90: null,
-      ytdReturn: null,
-      beta60d: null,
+      return90: finiteNumber(item.return90),
+      ytdReturn: finiteNumber(item.ytdReturn),
+      beta60d: finiteNumber(item.beta60d),
       above50: typeof item.above50 === "boolean" ? item.above50 : null,
-      above100: null,
+      above100: typeof item.above100 === "boolean" ? item.above100 : null,
       above200: typeof item.above200 === "boolean" ? item.above200 : null,
       recentCross: false,
-      relativeStrength: null,
-      history: [],
+      relativeStrength: finiteNumber(item.relativeReturn20VsSpy),
+      history: item.history || [],
       tags: [...new Set(modelTags)],
       rulesScore: null,
       modelRank: finiteNumber(item.modelRank),
@@ -1876,6 +1887,73 @@ function modelOnlyOpportunities(modelRankings, stockMetadata = new Map()) {
       distanceTo52wHigh: finiteNumber(item.distanceTo52wHigh)
     };
   });
+}
+
+function hasFreshModelTechnicalTape(modelRankings, expectedAsOfDate) {
+  return (
+    modelRankings.status === "ready"
+    && modelRankings.technicalTape?.status === "ready"
+    && modelRankings.technicalTape?.asOfDate
+    && modelRankings.technicalTape.asOfDate >= expectedAsOfDate
+  );
+}
+
+function technicalRowScore(row) {
+  let score = 42;
+  const return30 = finiteNumber(row.return30 ?? row.change30d);
+  const return60 = finiteNumber(row.return60 ?? row.change60d);
+  const rsi14 = finiteNumber(row.rsi14);
+  if (row.above50) score += 12;
+  if (row.above200) score += 14;
+  if (return30 != null && return30 > 0) score += Math.min(14, return30);
+  if (return60 != null && return60 > 0) score += Math.min(10, return60 / 2);
+  if (rsi14 != null && rsi14 >= 50 && rsi14 <= 76) score += 8;
+  return Math.max(0, Math.min(100, score));
+}
+
+function technicalRowOpportunity(row, etfMetadata = new Map()) {
+  const metadata = etfMetadata.get(row.symbol) || {};
+  return {
+    symbol: row.symbol,
+    name: row.name || metadata.name || row.label || row.symbol,
+    type: "etf",
+    sector: row.sector || metadata.sector || metadata.assetClass || "ETF",
+    score: technicalRowScore(row),
+    close: finiteNumber(row.close ?? row.price),
+    changePct: finiteNumber(row.changePct ?? row.change1d),
+    rsi14: finiteNumber(row.rsi14),
+    volumeRatio: null,
+    return7: finiteNumber(row.return7 ?? row.change5d),
+    return14: finiteNumber(row.return14),
+    return20: finiteNumber(row.return20 ?? row.change30d),
+    return30: finiteNumber(row.return30 ?? row.change30d),
+    return60: finiteNumber(row.return60 ?? row.change60d),
+    return90: finiteNumber(row.return90 ?? row.change90d),
+    ytdReturn: finiteNumber(row.ytdReturn ?? row.ytd),
+    beta60d: finiteNumber(row.beta60d),
+    above50: row.above50,
+    above100: row.above100,
+    above200: row.above200,
+    recentCross: false,
+    relativeStrength: finiteNumber(row.relative30d),
+    history: row.history || [],
+    tags: [
+      row.above50 && row.above200 ? "ETF trend" : "ETF watch",
+      Number(row.relative30d) >= 0 ? "Beating SPY" : null
+    ].filter(Boolean)
+  };
+}
+
+function modelTechnicalOpportunities(modelRankings, stockMetadata, etfs) {
+  const opportunities = modelOnlyOpportunities(modelRankings, stockMetadata);
+  const seen = new Set(opportunities.map((item) => item.symbol));
+  const etfMetadata = new Map((etfs || []).map((item) => [item.symbol, item]));
+  [...(modelRankings.marketRows || []), ...(modelRankings.sectorRows || [])].forEach((row) => {
+    if (!row?.symbol || seen.has(row.symbol)) return;
+    opportunities.push(technicalRowOpportunity(row, etfMetadata));
+    seen.add(row.symbol);
+  });
+  return opportunities;
 }
 
 function computeSectorPerformance(item, history, spyHistory) {
@@ -2084,6 +2162,33 @@ function buildDeeperReadCandidates(sourceTape, history = {}) {
   const rotated = uniqueBySource.filter((item) => !item.recentlyUsedSource && !item.recentlyUsedUrl);
   const selectedPool = rotated.length >= 3 ? rotated : uniqueBySource;
   return selectedPool.slice(0, deeperReadCandidateLimit);
+}
+
+function deterministicDeeperRead(candidates = [], reason = "AI Deeper Read was unavailable for this refresh.") {
+  const cards = candidates.slice(0, 4).map((candidate) => {
+    const summary = articleBrief({ title: candidate.title, summary: candidate.summary }, 260);
+    const themes = (candidate.themes || []).slice(0, 2).join(" and ") || "market structure";
+    return {
+      sourceRef: candidate.sourceRef || null,
+      sourceName: candidate.sourceName || "Source",
+      title: candidate.title || "Research angle",
+      url: candidate.url || null,
+      publishedAt: candidate.publishedAt || null,
+      thesis: summary || candidate.title || "This source raises a differentiated market question worth reviewing.",
+      whyItMatters: `The angle is tied to ${themes}, so it can affect sector leadership, factor rotation, or risk appetite beyond the headline move.`,
+      marketReadThrough: (candidate.themes || []).length ? `Primary read-through: ${candidate.themes.slice(0, 3).join(", ")}.` : "Review the source for second-order market read-throughs.",
+      variantAngle: "Selected by the deterministic source-quality filter because the AI layer was unavailable.",
+      confidence: Number(candidate.qualityScore) >= 40 ? "High" : "Medium"
+    };
+  });
+  return {
+    status: cards.length ? "ready" : "thin",
+    lookbackDays: deeperReadLookbackDays,
+    summary: cards.length
+      ? `AI Deeper Read was unavailable, so these are the highest-quality differentiated source angles selected deterministically. ${reason}`
+      : `No differentiated source candidates cleared the Deeper Read filter. ${reason}`,
+    cards
+  };
 }
 
 function sourceTrustScore(trust) {
@@ -2678,6 +2783,38 @@ function fallbackAiRecommendations(reason) {
   };
 }
 
+function deterministicRecommendationFallback(modelCandidates = [], rulesRecommendations = [], marketIntelligence = null) {
+  const ruleBySymbol = new Map((rulesRecommendations || []).map((item) => [item.symbol, item]));
+  const driver = (marketIntelligence?.briefingBullets || [])[0] || (marketIntelligence?.professionalDrivers || [])[0]?.summary || "Current macro and source context is available in the Daily Read.";
+  const candidates = modelCandidates.length
+    ? modelCandidates.slice(0, 4)
+    : (rulesRecommendations || []).slice(0, 4).map((item) => ({ symbol: item.symbol, name: item.symbol, score: null, modelRank: null, modelPercentile: null, modelReasons: [], riskFlags: [], setupTags: [] }));
+  return candidates.map((candidate) => {
+    const rule = ruleBySymbol.get(candidate.symbol);
+    const setupTags = candidate.setupTags || [];
+    return {
+      symbol: candidate.symbol,
+      action: candidate.setupType === "model_rebound_watch" ? "Watch for activation" : "Research long setup",
+      conviction: candidate.setupType === "momentum_confirmed" ? "Medium" : "Review",
+      setup: rule?.rationale || `${candidate.symbol} ranks highly in the model book and should be reviewed against the macro tape before any trade decision.`,
+      whyNow: firstSentence(driver, 220),
+      rationale: rule?.rationale || `${candidate.symbol} is a top model candidate with ${formatPercent(candidate.relativeReturn60VsSpy)} 60-day relative return versus SPY.`,
+      companyOverview: "",
+      marketCap: candidate.marketCap || "",
+      earningsContext: "",
+      recentNews: "No AI company-news synthesis was available during this refresh.",
+      macroLink: firstSentence(driver, 220),
+      macroEvidence: firstSentence(driver, 220),
+      modelEvidence: `Rank ${candidate.modelRank || "n/a"} of ${candidate.modelUniverseCount || "the scored universe"}; percentile ${formatNumber(candidate.modelPercentile)}; reasons: ${(candidate.modelReasons || []).join("; ") || "model score and technical inputs"}.`,
+      technicalEvidence: `Close ${formatNumber(candidate.close, 2)}; 7D ${formatPercent(candidate.return7)}; 30D ${formatPercent(candidate.return30)}; 60D vs SPY ${formatPercent(candidate.relativeReturn60VsSpy)}; RSI ${formatNumber(candidate.rsi14, 0)}.`,
+      momentumEvidence: `${setupTags.length ? setupTags.join("; ") : "Review trend confirmation"}; risk flags: ${(candidate.riskFlags || []).join("; ") || "none supplied"}.`,
+      risk: (candidate.riskFlags || []).join("; ") || "Requires confirmation from source tape and risk controls.",
+      invalidation: "Downgrade if the name loses trend confirmation, the model rank falls materially, or the macro/source backdrop turns against the setup.",
+      sourceRefs: []
+    };
+  });
+}
+
 function responseText(payload) {
   if (payload.output_text) return payload.output_text;
   return (payload.output || [])
@@ -3181,12 +3318,7 @@ async function buildCompanyContexts(candidates) {
 
 async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sourceRefIds, history }) {
   if (!apiKey || !candidates.length) {
-    return {
-      status: "thin",
-      lookbackDays: deeperReadLookbackDays,
-      summary: "No differentiated source candidates were available for Deeper Read.",
-      cards: []
-    };
+    return deterministicDeeperRead(candidates, !apiKey ? "OPENAI_API_KEY was not configured." : "No differentiated source candidates were available.");
   }
 
   const candidateRefs = candidates.map((candidate) => candidate.sourceRef).filter(Boolean);
@@ -3295,12 +3427,7 @@ async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sour
       model: aiModel,
       error: error.message
     });
-    return {
-      status: "unavailable",
-      lookbackDays: deeperReadLookbackDays,
-      summary: `Deeper Read failed during this refresh: ${error.message}`,
-      cards: []
-    };
+    return deterministicDeeperRead(candidates, `Deeper Read AI call failed: ${error.message}`);
   }
 }
 
@@ -3673,8 +3800,18 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     return {
       ...fallbackAiRecommendations("ai_error"),
       model: aiModel,
-      headline: "AI recommendation generation failed.",
-      macroView: `The deterministic dashboard still refreshed, but the AI call failed: ${error.message}`
+      headline: "Deterministic strategy fallback is showing because AI synthesis failed.",
+      macroView: `The deterministic dashboard refreshed with current model, macro, source, earnings, and Reddit inputs. The AI call failed: ${error.message}`,
+      recommendations: deterministicRecommendationFallback(modelCandidates, rulesRecommendations, marketIntelligence),
+      deeperRead: deterministicDeeperRead(deeperReadCandidates, `Strategy memo AI call failed: ${error.message}`),
+      portfolioNotes: [
+        "Use the Daily Read, Desk Calls, Momentum Book, and Model Scoreboard as the primary refreshed outputs for this run.",
+        "AI narrative synthesis failed, so company-specific recommendations are deterministic summaries of model and rules-based candidates."
+      ],
+      openQuestions: [
+        "Retry the AI call if a narrative recommendation layer is required for this refresh.",
+        "Review the model candidates against the market-driver and source-tape sections before acting."
+      ]
     };
   }
 }
@@ -3746,7 +3883,25 @@ async function main() {
     staleDataReused: false
   };
 
-  try {
+  if (hasFreshModelTechnicalTape(modelRankings, expectedTechnicalAsOfDate)) {
+    opportunities = modelTechnicalOpportunities(modelRankings, stockMetadata, etfs);
+    signalsBySymbol = new Map(opportunities.map((item) => [item.symbol, item]));
+    marketStrip = (modelRankings.marketRows || []).slice(0, 6).map((item) => ({
+      symbol: item.symbol,
+      label: item.label || item.name || item.symbol,
+      price: item.price ?? item.close,
+      changePct: item.changePct
+    }));
+    sectorPerformance = modelRankings.sectorRows || [];
+    marketDataStatus = {
+      status: "fresh",
+      source: modelRankings.technicalTape.source || "model_scorer_yahoo_history",
+      message: `Fresh end-of-day technical tape was reused from the model scoring pass through ${modelRankings.technicalTape.asOfDate}.`,
+      expectedAsOfDate: expectedTechnicalAsOfDate,
+      asOfDate: modelRankings.technicalTape.asOfDate,
+      staleDataReused: false
+    };
+  } else try {
     if (forceTechnicalDataUnavailable) throw new Error("Fresh technical data disabled by environment");
     const spyHistory = await fetchHistory("SPY");
     assertFreshHistory("SPY", spyHistory, expectedTechnicalAsOfDate);
@@ -3803,10 +3958,15 @@ async function main() {
     ).sort((a, b) => b.change30d - a.change30d);
   } catch (error) {
     console.warn(`Fresh technical tape unavailable; stale cached technicals will not be reused: ${error.message}`);
-    opportunities = modelOnlyOpportunities(modelRankings, stockMetadata);
+    opportunities = modelTechnicalOpportunities(modelRankings, stockMetadata, etfs);
     signalsBySymbol = new Map();
-    marketStrip = [];
-    sectorPerformance = [];
+    marketStrip = (modelRankings.marketRows || []).slice(0, 6).map((item) => ({
+      symbol: item.symbol,
+      label: item.label || item.name || item.symbol,
+      price: item.price ?? item.close,
+      changePct: item.changePct
+    }));
+    sectorPerformance = modelRankings.sectorRows || [];
     marketDataStatus = {
       status: "unavailable",
       message: `Fresh Yahoo chart history failed (${error.message}); stale cached technical values were not reused. Trailing return columns and sector tiles are unavailable until a successful fresh price refresh.`,

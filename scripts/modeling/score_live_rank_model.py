@@ -37,6 +37,15 @@ DEFAULT_MODEL_NAME = "xgboost_rank_sector14_tuned"
 REBOUND_ACTIVATION_VOL_MULTIPLE = 0.75
 REBOUND_ACTIVATION_WINDOW_DAYS = 5
 PACIFIC = ZoneInfo("America/Los_Angeles")
+MARKET_STRIP_SYMBOLS = ("SPY", "QQQ", "IWM", "TLT", "GLD", "HYG")
+MARKET_STRIP_LABELS = {
+    "SPY": "S&P 500",
+    "QQQ": "Nasdaq 100",
+    "IWM": "Russell 2000",
+    "TLT": "20Y Treasury",
+    "GLD": "Gold",
+    "HYG": "High Yield",
+}
 
 
 def previous_business_date(value: date) -> date:
@@ -307,6 +316,150 @@ def append_focus_constituents(
     return constituents, sector_diagnostics
 
 
+def pct_change(current: object, base: object) -> float | None:
+    current_number = float(current) if current is not None else np.nan
+    base_number = float(base) if base is not None else np.nan
+    if not np.isfinite(current_number) or not np.isfinite(base_number) or base_number == 0:
+        return None
+    return (current_number / base_number - 1) * 100
+
+
+def trailing_calendar_return(frame: pd.DataFrame, days: int) -> float | None:
+    clean = frame.dropna(subset=["date", "close"]).sort_values("date")
+    if clean.empty:
+        return None
+    latest = clean.iloc[-1]
+    target_date = latest["date"] - pd.Timedelta(days=days)
+    base = clean[clean["date"].le(target_date)]
+    if base.empty:
+        return None
+    return pct_change(latest["close"], base.iloc[-1]["close"])
+
+
+def beta_to_benchmark(frame: pd.DataFrame, benchmark: pd.DataFrame, period: int = 60) -> float | None:
+    if frame.empty or benchmark.empty:
+        return None
+    asset = frame[["date", "close"]].dropna().sort_values("date").copy()
+    bench = benchmark[["date", "close"]].dropna().sort_values("date").copy()
+    asset["asset_return"] = asset["close"].pct_change()
+    bench["benchmark_return"] = bench["close"].pct_change()
+    pairs = asset[["date", "asset_return"]].merge(bench[["date", "benchmark_return"]], on="date", how="inner").dropna()
+    window = pairs.tail(period)
+    if len(window) < min(40, period):
+        return None
+    variance = window["benchmark_return"].var()
+    if not np.isfinite(variance) or variance == 0:
+        return None
+    return window["asset_return"].cov(window["benchmark_return"]) / variance
+
+
+def dashboard_metrics_for_frame(symbol: str, frame: pd.DataFrame, benchmark: pd.DataFrame | None = None) -> dict:
+    clean = frame.dropna(subset=["date", "close"]).sort_values("date")
+    if clean.empty:
+        return {}
+    latest = clean.iloc[-1]
+    latest_date = latest["date"]
+    latest_close = latest["close"]
+    first_ytd = clean[clean["date"].ge(pd.Timestamp(year=latest_date.year, month=1, day=1))]
+    ytd_base = first_ytd.iloc[0]["close"] if not first_ytd.empty else clean.iloc[0]["close"]
+    volume = pd.to_numeric(clean.get("volume", pd.Series(dtype=float)), errors="coerce")
+    avg_volume_20 = volume.tail(20).mean() if len(volume) else np.nan
+    beta_60d = 1.0 if symbol == "SPY" else beta_to_benchmark(clean, benchmark) if benchmark is not None else None
+    return {
+        "priceDataDate": latest_date.date().isoformat(),
+        "close": finite_or_none(latest_close, 2),
+        "changePct": finite_or_none(pct_change(latest_close, clean.iloc[-2]["close"] if len(clean) > 1 else None), 2),
+        "return7": finite_or_none(trailing_calendar_return(clean, 7), 2),
+        "return14": finite_or_none(trailing_calendar_return(clean, 14), 2),
+        "return30": finite_or_none(trailing_calendar_return(clean, 30), 2),
+        "return60": finite_or_none(trailing_calendar_return(clean, 60), 2),
+        "return90": finite_or_none(trailing_calendar_return(clean, 90), 2),
+        "ytdReturn": finite_or_none(pct_change(latest_close, ytd_base), 2),
+        "beta60d": finite_or_none(beta_60d, 2),
+        "rsi14": finite_or_none(latest.get("rsi_14"), 1),
+        "volumeRatio": finite_or_none(float(latest.get("volume", np.nan)) / avg_volume_20 if avg_volume_20 else None, 2),
+        "above50": bool(latest.get("price_vs_sma_50", np.nan) > 0),
+        "above100": bool(latest.get("price_vs_sma_100", np.nan) > 0),
+        "above200": bool(latest.get("price_vs_sma_200", np.nan) > 0),
+        "history": [finite_or_none(value, 2) for value in clean["close"].tail(36).tolist()],
+        "technicalSource": "model_scorer_yahoo_history",
+    }
+
+
+def build_dashboard_metrics(symbol_frames: dict[str, pd.DataFrame]) -> dict[str, dict]:
+    benchmark = symbol_frames.get("SPY")
+    return {
+        symbol: dashboard_metrics_for_frame(symbol, frame, benchmark)
+        for symbol, frame in symbol_frames.items()
+        if frame is not None and not frame.empty
+    }
+
+
+def build_market_rows(symbol_frames: dict[str, pd.DataFrame], dashboard_metrics: dict[str, dict]) -> list[dict]:
+    rows = []
+    for symbol in MARKET_STRIP_SYMBOLS:
+        metrics = dashboard_metrics.get(symbol)
+        if not metrics:
+            continue
+        rows.append(
+            {
+                "symbol": symbol,
+                "label": MARKET_STRIP_LABELS.get(symbol, symbol),
+                "name": MARKET_STRIP_LABELS.get(symbol, symbol),
+                "price": metrics.get("close"),
+                "close": metrics.get("close"),
+                "changePct": metrics.get("changePct"),
+                "return7": metrics.get("return7"),
+                "return14": metrics.get("return14"),
+                "return30": metrics.get("return30"),
+                "return60": metrics.get("return60"),
+                "return90": metrics.get("return90"),
+                "ytdReturn": metrics.get("ytdReturn"),
+                "beta60d": metrics.get("beta60d"),
+                "above50": metrics.get("above50"),
+                "above100": metrics.get("above100"),
+                "above200": metrics.get("above200"),
+                "rsi14": metrics.get("rsi14"),
+                "history": metrics.get("history", []),
+                "date": metrics.get("priceDataDate"),
+                "source": metrics.get("technicalSource"),
+            }
+        )
+    return rows
+
+
+def build_sector_rows(dashboard_metrics: dict[str, dict]) -> list[dict]:
+    spy_return_30 = dashboard_metrics.get("SPY", {}).get("return30")
+    rows = []
+    for etf in SECTOR_ETFS:
+        metrics = dashboard_metrics.get(etf)
+        if not metrics:
+            continue
+        return_30 = metrics.get("return30")
+        rows.append(
+            {
+                "sector": sector_name_for_etf(etf),
+                "symbol": etf,
+                "name": f"{sector_name_for_etf(etf)} Select Sector SPDR Fund",
+                "date": metrics.get("priceDataDate"),
+                "close": metrics.get("close"),
+                "change1d": metrics.get("changePct"),
+                "change5d": metrics.get("return7"),
+                "change30d": return_30,
+                "change60d": metrics.get("return60"),
+                "change90d": metrics.get("return90"),
+                "ytd": metrics.get("ytdReturn"),
+                "relative30d": finite_or_none(return_30 - spy_return_30, 2) if return_30 is not None and spy_return_30 is not None else None,
+                "above50": metrics.get("above50"),
+                "above200": metrics.get("above200"),
+                "rsi14": metrics.get("rsi14"),
+                "history": metrics.get("history", []),
+                "source": metrics.get("technicalSource"),
+            }
+        )
+    return sorted(rows, key=lambda item: item.get("change30d") if item.get("change30d") is not None else -999, reverse=True)
+
+
 def build_base_feature_dataset(
     symbol_frames: dict[str, pd.DataFrame],
     constituents: pd.DataFrame,
@@ -562,6 +715,9 @@ def write_reference_cache(
     model_path: Path,
     constituent_source: str,
     name_lookup: dict[str, str],
+    dashboard_metrics: dict[str, dict],
+    market_rows: list[dict],
+    sector_rows: list[dict],
 ) -> None:
     reference_scored = scored[scored["symbol"].isin(reference_symbols)].copy()
     if reference_scored.empty:
@@ -587,7 +743,8 @@ def write_reference_cache(
     reference_scores["name"] = reference_scores["symbol"].map(name_lookup).fillna(reference_scores["symbol"])
     reference_score_series = reference_scored["model_score"]
     reference_rankings = [
-        row_payload(row, name_lookup, reference_scores=reference_score_series) for _, row in reference_scored.iterrows()
+        row_payload(row, name_lookup, reference_scores=reference_score_series, dashboard_metrics=dashboard_metrics)
+        for _, row in reference_scored.iterrows()
     ]
     payload = {
         "status": "ready",
@@ -609,6 +766,8 @@ def write_reference_cache(
         "breadthRows": frame_records(breadth),
         "referenceScores": frame_records(reference_scores),
         "referenceRankings": reference_rankings,
+        "marketRows": market_rows,
+        "sectorRows": sector_rows,
     }
     cache_path.parent.mkdir(parents=True, exist_ok=True)
     cache_path.write_text(json.dumps(payload, separators=(",", ":")) + "\n", encoding="utf-8")
@@ -632,14 +791,17 @@ def row_payload(
     name_lookup: dict[str, str],
     sector_diagnostics: dict[str, dict] | None = None,
     reference_scores: pd.Series | None = None,
+    dashboard_metrics: dict[str, dict] | None = None,
 ) -> dict:
     rank = int(row["model_rank"])
     universe_count = int(row["model_universe_count"])
     bucket = "Top Decile" if rank <= max(1, int(np.ceil(universe_count * 0.1))) else "Top Quintile" if rank <= max(1, int(np.ceil(universe_count * 0.2))) else "Ranked"
     diagnostic = (sector_diagnostics or {}).get(str(row["symbol"]), {})
+    symbol = str(row["symbol"])
+    metrics = (dashboard_metrics or {}).get(symbol, {})
     payload = {
-        "symbol": row["symbol"],
-        "name": name_lookup.get(row["symbol"], row["symbol"]),
+        "symbol": symbol,
+        "name": name_lookup.get(symbol, symbol),
         "sector": row["sector"],
         "modelRank": rank,
         "modelUniverseCount": universe_count,
@@ -653,10 +815,12 @@ def row_payload(
         "asOfDate": row["date"].date().isoformat(),
         "close": finite_or_none(row.get("close"), 2),
         "rsi14": finite_or_none(row.get("rsi_14"), 1),
+        "beta60d": finite_or_none(row.get("beta_60d"), 2),
         "return20": finite_or_none(row.get("ret_20d", 0) * 100, 2),
         "return60": finite_or_none(row.get("ret_60d", 0) * 100, 2),
         "return120": finite_or_none(row.get("ret_120d", 0) * 100, 2),
         "relativeReturn60VsSpy": finite_or_none(row.get("rel_ret_60d_vs_spy", 0) * 100, 2),
+        "relativeReturn20VsSpy": finite_or_none(row.get("rel_ret_20d_vs_spy", 0) * 100, 2),
         "sectorReturn60": finite_or_none(row.get("sector_ret_60d", 0) * 100, 2),
         "volatility60d": finite_or_none(row.get("volatility_60d"), 4),
         "volatility60dVsSector": finite_or_none(row.get("volatility_60d_minus_sector_median"), 4),
@@ -668,6 +832,7 @@ def row_payload(
         "sectorCorrelation": diagnostic.get("sectorCorrelation"),
         "sectorCorrelationObservations": diagnostic.get("sectorCorrelationObservations"),
     }
+    payload.update({key: value for key, value in metrics.items() if value is not None})
     payload.update(rebound_activation(row))
     if reference_scores is not None:
         payload.update(sp500_comparison(row, reference_scores))
@@ -726,12 +891,14 @@ def score_focus_with_reference_cache(
 
     failures: dict[str, str] = {}
     sector_diagnostics: dict[str, dict] = {}
+    dashboard_metrics: dict[str, dict] = {}
     if external_focus:
         required_symbols = list(dict.fromkeys([*external_focus, "SPY", *SECTOR_ETFS]))
         symbol_frames, failures = fetch_symbol_frames(required_symbols, args.years, args.max_workers)
         missing_context = [symbol for symbol in ["SPY", *SECTOR_ETFS] if symbol not in symbol_frames]
         if missing_context:
             raise ValueError(f"Missing required model context histories: {missing_context}")
+        dashboard_metrics = build_dashboard_metrics(symbol_frames)
 
         additions = []
         for symbol in external_focus:
@@ -803,6 +970,7 @@ def score_focus_with_reference_cache(
                     name_lookup,
                     sector_diagnostics,
                     reference_scores=cached_reference_scores,
+                    dashboard_metrics=dashboard_metrics,
                 )
                 for _, row in scored_focus.iterrows()
             )
@@ -843,6 +1011,14 @@ def score_focus_with_reference_cache(
         "focusUnscoredSymbols": sorted(set(focus_unscored_symbols)),
         "referenceUniverse": cache.get("referenceUniverse", "Current S&P 500"),
         "referenceUniverseCount": int(cache.get("referenceUniverseCount") or len(cached_reference_scores)),
+        "technicalTape": {
+            "status": "ready",
+            "source": "model_reference_cache",
+            "asOfDate": cache.get("asOfDate"),
+            "expectedAsOfDate": latest_expected_market_data_date().isoformat(),
+        },
+        "marketRows": cache.get("marketRows", []),
+        "sectorRows": cache.get("sectorRows", []),
         "referenceCache": {
             "path": args.reference_cache,
             "generatedAt": cache.get("generatedAt"),
@@ -882,12 +1058,15 @@ def main() -> None:
 
     constituents, constituent_source = load_constituents(args.max_symbols)
     reference_symbols = set(constituents["symbol"].astype(str))
-    required_symbols = list(dict.fromkeys([*constituents["symbol"].tolist(), *focus_symbols, "SPY", *SECTOR_ETFS]))
+    required_symbols = list(dict.fromkeys([*constituents["symbol"].tolist(), *focus_symbols, "SPY", *SECTOR_ETFS, *MARKET_STRIP_SYMBOLS]))
     symbol_frames, failures = fetch_symbol_frames(required_symbols, args.years, args.max_workers)
     missing_context = [symbol for symbol in ["SPY", *SECTOR_ETFS] if symbol not in symbol_frames]
     if missing_context:
         raise SystemExit(f"Missing required model context histories: {missing_context}")
 
+    dashboard_metrics = build_dashboard_metrics(symbol_frames)
+    market_rows = build_market_rows(symbol_frames, dashboard_metrics)
+    sector_rows = build_sector_rows(dashboard_metrics)
     constituents, sector_diagnostics = append_focus_constituents(constituents, focus_symbols, symbol_frames)
     spy = build_spy_context(symbol_frames["SPY"])
     reference_frames = {
@@ -912,10 +1091,10 @@ def main() -> None:
         raise SystemExit(str(error)) from error
     name_lookup = constituents.set_index("symbol")["name"].to_dict()
     reference_scores = scored[scored["symbol"].isin(reference_symbols)]["model_score"]
-    rankings = [row_payload(row, name_lookup, sector_diagnostics) for _, row in scored.iterrows()]
+    rankings = [row_payload(row, name_lookup, sector_diagnostics, dashboard_metrics=dashboard_metrics) for _, row in scored.iterrows()]
     focus_scored = scored[scored["symbol"].isin(focus_symbols)].copy()
     focus_rankings = [
-        row_payload(row, name_lookup, sector_diagnostics, reference_scores=reference_scores)
+        row_payload(row, name_lookup, sector_diagnostics, reference_scores=reference_scores, dashboard_metrics=dashboard_metrics)
         for _, row in focus_scored.iterrows()
     ]
     scored_symbols = set(scored["symbol"].astype(str))
@@ -946,6 +1125,14 @@ def main() -> None:
         "focusUnscoredSymbols": focus_unscored_symbols,
         "referenceUniverse": "Current S&P 500",
         "referenceUniverseCount": int(len(reference_scores)),
+        "technicalTape": {
+            "status": "ready",
+            "source": "model_scorer_yahoo_history",
+            "asOfDate": latest_date,
+            "expectedAsOfDate": latest_expected_market_data_date().isoformat(),
+        },
+        "marketRows": market_rows,
+        "sectorRows": sector_rows,
         "sectorDiagnostics": {symbol: sector_diagnostics.get(symbol) for symbol in focus_symbols if symbol in sector_diagnostics},
         "methodologyNotes": [
             "Focus tickers are scored with the same production XGBoost rank model as the S&P 500 dashboard.",
@@ -975,6 +1162,9 @@ def main() -> None:
             model_path,
             constituent_source,
             name_lookup,
+            dashboard_metrics,
+            market_rows,
+            sector_rows,
         )
         print(f"Wrote S&P 500 reference cache to {cache_path.relative_to(ROOT)}")
     print(f"Wrote {len(rankings)} live model rankings to {output_path.relative_to(ROOT)}")

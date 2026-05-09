@@ -241,7 +241,8 @@ function formatShortDate(value) {
 }
 
 function pct(value) {
-  const number = Number(value || 0);
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "n/a";
   return `${number >= 0 ? "+" : ""}${number.toFixed(2)}%`;
 }
 
@@ -822,7 +823,7 @@ function renderOpportunities() {
         <div><span>Close</span><strong>${money(item.close)}</strong></div>
         <div><span>${modelRanked ? "60D vs SPY" : "20D return"}</span><strong>${pct(modelRanked ? item.relativeReturn60VsSpy : item.return20)}</strong></div>
         <div><span>RSI 14</span><strong>${Number(item.rsi14 || 0).toFixed(0)}</strong></div>
-        <div><span>${Number.isFinite(Number(item.reboundActivationPrice)) ? "Activation" : modelRanked ? "Rules" : "Volume"}</span><strong>${Number.isFinite(Number(item.reboundActivationPrice)) ? money(item.reboundActivationPrice) : modelRanked ? Math.round(item.rulesScore || 0) : `${Number(item.volumeRatio || 0).toFixed(2)}x`}</strong></div>
+        <div><span>${Number.isFinite(Number(item.reboundActivationPrice)) ? "Activation" : modelRanked ? "Rules" : "Volume"}</span><strong>${Number.isFinite(Number(item.reboundActivationPrice)) ? money(item.reboundActivationPrice) : modelRanked ? Number.isFinite(Number(item.rulesScore)) ? Math.round(item.rulesScore) : "Model" : Number.isFinite(Number(item.volumeRatio)) ? `${Number(item.volumeRatio).toFixed(2)}x` : "n/a"}</strong></div>
       </div>
       <div class="tags">${badges.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>
     `;
