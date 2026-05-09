@@ -390,7 +390,7 @@ function tickerNarrative(item) {
   const rank = item.sp500Rank ? `#${item.sp500Rank} of ${item.sp500UniverseCount}` : `#${item.modelRank} of ${item.modelUniverseCount}`;
   const trend = item.above50 && item.above200 ? "above both 50-day and 200-day trend lines" : item.above200 ? "above the 200-day trend line but missing shorter-term confirmation" : "below at least one major trend line";
   const relative = Number.isFinite(Number(item.relativeReturn60VsSpy)) ? `${pct(item.relativeReturn60VsSpy)} over 60 days versus SPY` : "relative-strength data is unavailable";
-  const activation = Number.isFinite(Number(item.reboundActivationPrice))
+  const activation = item.setupType === "model_rebound_watch" && hasNumericValue(item.reboundActivationPrice)
     ? ` Rebound activation requires a close above ${money(item.reboundActivationPrice)} within ${item.reboundActivationWindowDays || 5} trading days.`
     : "";
   const setup = item.setupType === "model_rebound_watch"
@@ -406,6 +406,31 @@ function money(value) {
     currency: "USD",
     maximumFractionDigits: Number(value) > 100 ? 2 : 2
   });
+}
+
+function hasNumericValue(value) {
+  return value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value));
+}
+
+function stopSellForSymbol(symbol) {
+  const direct = (state.snapshot.recommendations || []).find((item) => item.symbol === symbol && hasNumericValue(item.stopSellPrice));
+  if (direct) return direct;
+  return (state.snapshot.opportunities || []).find(
+    (item) => item.symbol === symbol && hasNumericValue(item.stopSellPrice)
+  );
+}
+
+function stopSellChip(item) {
+  const stop = hasNumericValue(item?.stopSellPrice) ? item : stopSellForSymbol(item?.symbol);
+  if (!stop || !hasNumericValue(stop.stopSellPrice)) return "";
+  const distance = hasNumericValue(stop.stopSellDistancePct) ? ` · ${pct(stop.stopSellDistancePct)}` : "";
+  return `<span class="stop-chip" title="Exit on end-of-day close below stop">Stop: ${money(stop.stopSellPrice)}${distance}</span>`;
+}
+
+function activationChip(item) {
+  if (item?.setupType !== "model_rebound_watch" || !hasNumericValue(item.reboundActivationPrice)) return "";
+  const windowDays = item.reboundActivationWindowDays || 5;
+  return `<span class="stop-chip activation-chip" title="Requires an end-of-day close above this level within ${esc(windowDays)} trading days">Activation: ${money(item.reboundActivationPrice)}</span>`;
 }
 
 function renderList(target, items) {
@@ -618,6 +643,7 @@ function renderRecommendations() {
     card.innerHTML = `
       <span class="rec-label ${labelClass}">${esc(item.label)}</span>
       <strong>${esc(item.symbol)} · ${esc(item.title)}</strong>
+      ${stopSellChip(item)}
       <p>${esc(item.rationale)}</p>
     `;
     list.appendChild(card);
@@ -832,12 +858,12 @@ function renderOpportunities() {
           ${modelRanked ? `<span>#${esc(item.modelRank)}</span><small>${Number(item.modelPercentile || 0).toFixed(0)}%</small>` : Math.round(item.score)}
         </div>
       </div>
+      <div class="setup-chips">${stopSellChip(item)}${activationChip(item)}</div>
       ${sparkline(item.history || [])}
       <div class="signal-grid">
         <div><span>Close</span><strong>${money(item.close)}</strong></div>
         <div><span>${modelRanked ? "60D vs SPY" : "20D return"}</span><strong>${pct(modelRanked ? item.relativeReturn60VsSpy : item.return20)}</strong></div>
         <div><span>RSI 14</span><strong>${Number(item.rsi14 || 0).toFixed(0)}</strong></div>
-        <div><span>${Number.isFinite(Number(item.reboundActivationPrice)) ? "Activation" : modelRanked ? "Rules" : "Volume"}</span><strong>${Number.isFinite(Number(item.reboundActivationPrice)) ? money(item.reboundActivationPrice) : modelRanked ? Number.isFinite(Number(item.rulesScore)) ? Math.round(item.rulesScore) : "Model" : Number.isFinite(Number(item.volumeRatio)) ? `${Number(item.volumeRatio).toFixed(2)}x` : "n/a"}</strong></div>
       </div>
       <div class="tags">${badges.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>
     `;
@@ -924,6 +950,7 @@ function renderTickerLab() {
         </div>
         <span class="conviction">${esc(outlook)}</span>
       </header>
+      <div class="setup-chips">${activationChip(item)}</div>
       <p>${esc(tickerNarrative(item))}</p>
       <div class="signal-grid">
         <div><span>S&P rank</span><strong>#${esc(item.sp500Rank || item.modelRank)} / ${esc(item.sp500UniverseCount || item.modelUniverseCount)}</strong></div>
@@ -933,7 +960,6 @@ function renderTickerLab() {
       </div>
       <small><strong>Sector context:</strong> ${esc(sectorNote)}</small>
       <small><strong>Model score:</strong> ${Number(item.modelScore || 0).toFixed(6)} · <strong>Close:</strong> ${money(item.close)}</small>
-      ${Number.isFinite(Number(item.reboundActivationPrice)) ? `<small><strong>Rebound activation:</strong> close above ${money(item.reboundActivationPrice)} within ${esc(item.reboundActivationWindowDays || 5)} trading days.</small>` : ""}
       ${[...(item.setupTags || []), ...(item.modelReasons || [])].length ? `<div class="tags">${[...(item.setupTags || []), ...(item.modelReasons || [])].map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>` : ""}
       ${item.riskFlags?.length ? `<small><strong>Risk flags:</strong> ${esc(item.riskFlags.join("; "))}</small>` : ""}
     `;
@@ -1042,7 +1068,8 @@ function renderScoreboard() {
             <strong>${esc(row.symbol)}</strong>
             <span>${esc(row.sector || "Unclassified")}</span>
             ${row.setupTags?.length ? `<small class="scoreboard-setup">${esc(row.setupTags[0])}</small>` : ""}
-            ${Number.isFinite(Number(row.reboundActivationPrice)) ? `<small class="scoreboard-activation">Activation ${money(row.reboundActivationPrice)}</small>` : ""}
+            ${row.setupType === "model_rebound_watch" && hasNumericValue(row.reboundActivationPrice) ? `<small class="scoreboard-activation">Activation ${money(row.reboundActivationPrice)}</small>` : ""}
+            ${hasNumericValue(row.stopSellPrice) ? `<small class="scoreboard-activation stop-cell">Stop ${money(row.stopSellPrice)}</small>` : ""}
           </td>
           <td>${esc(row.name || row.symbol)}</td>
           <td>${esc(row.industry || "n/a")}</td>

@@ -36,6 +36,10 @@ MODEL_DIR = ROOT / "models" / "rank"
 DEFAULT_MODEL_NAME = "xgboost_rank_sector14_tuned"
 REBOUND_ACTIVATION_VOL_MULTIPLE = 0.75
 REBOUND_ACTIVATION_WINDOW_DAYS = 5
+STOP_ATR_DAYS = 20
+STOP_CHANDELIER_DAYS = 22
+STOP_SUPPORT_DAYS = 20
+STOP_TREND_DAYS = 50
 PACIFIC = ZoneInfo("America/Los_Angeles")
 MARKET_STRIP_SYMBOLS = ("SPY", "QQQ", "IWM", "TLT", "GLD", "HYG")
 MARKET_STRIP_LABELS = {
@@ -83,7 +87,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-name", default=DEFAULT_MODEL_NAME, help="Base model artifact name.")
     parser.add_argument("--output", default="data/model-rank-scores.json", help="Output JSON path.")
     parser.add_argument("--years", type=int, default=3, help="Trailing years of daily history to fetch for live features.")
-    parser.add_argument("--max-workers", type=int, default=8, help="Concurrent Yahoo history fetch workers.")
+    parser.add_argument("--max-workers", type=int, default=4, help="Concurrent Yahoo history fetch workers.")
     parser.add_argument("--max-symbols", type=int, default=0, help="Optional development cap for stock symbols.")
     parser.add_argument(
         "--focus-symbols",
@@ -353,6 +357,71 @@ def beta_to_benchmark(frame: pd.DataFrame, benchmark: pd.DataFrame, period: int 
     return window["asset_return"].cov(window["benchmark_return"]) / variance
 
 
+def average_true_range(clean: pd.DataFrame, period: int) -> float | None:
+    if len(clean) < period + 1:
+        return None
+    previous_close = clean["close"].shift(1)
+    ranges = pd.concat(
+        [
+            clean["high"] - clean["low"],
+            (clean["high"] - previous_close).abs(),
+            (clean["low"] - previous_close).abs(),
+        ],
+        axis=1,
+    ).max(axis=1)
+    window = pd.to_numeric(ranges, errors="coerce").dropna().tail(period)
+    if len(window) != period:
+        return None
+    value = float(window.mean())
+    return value if np.isfinite(value) and value > 0 else None
+
+
+def stop_sell_signal_for_frame(frame: pd.DataFrame) -> dict:
+    clean = frame.dropna(subset=["date", "high", "low", "close"]).sort_values("date").copy()
+    if len(clean) < STOP_TREND_DAYS:
+        return {}
+    for column in ("high", "low", "close"):
+        clean[column] = pd.to_numeric(clean[column], errors="coerce")
+    clean = clean.dropna(subset=["high", "low", "close"])
+    if len(clean) < STOP_TREND_DAYS:
+        return {}
+
+    close = float(clean.iloc[-1]["close"])
+    atr20 = average_true_range(clean, STOP_ATR_DAYS)
+    atr22 = average_true_range(clean, STOP_CHANDELIER_DAYS)
+    high22 = float(clean["high"].tail(STOP_CHANDELIER_DAYS).max())
+    low20 = float(clean["low"].tail(STOP_SUPPORT_DAYS).min())
+    ma50 = float(clean["close"].tail(STOP_TREND_DAYS).mean())
+    if atr20 is None or atr22 is None:
+        return {}
+    if not all(np.isfinite(value) for value in (close, atr20, atr22, high22, low20, ma50)) or close <= 0:
+        return {}
+
+    chandelier_stop = high22 - 3.0 * atr22
+    trend_stop = ma50 - 0.5 * atr20
+    support_stop = low20 - 0.25 * atr20
+    lower_bound = close - 4.0 * atr20
+    upper_bound = close - 1.5 * atr20
+    raw_stop = max(chandelier_stop, trend_stop, support_stop)
+    stop_sell_price = min(max(raw_stop, lower_bound), upper_bound)
+    stop_sell_distance_pct = (stop_sell_price / close - 1.0) * 100
+
+    return {
+        "stopSellPrice": finite_or_none(stop_sell_price, 2),
+        "stopSellDistancePct": finite_or_none(stop_sell_distance_pct, 2),
+        "stopSellAtr20": finite_or_none(atr20, 2),
+        "stopSellRule": "Exit on close below stop",
+        "stopSellBasis": "balanced_atr_chandelier",
+        "stopSellComponents": {
+            "chandelierStop": finite_or_none(chandelier_stop, 2),
+            "trendStop": finite_or_none(trend_stop, 2),
+            "supportStop": finite_or_none(support_stop, 2),
+            "lowerBound": finite_or_none(lower_bound, 2),
+            "upperBound": finite_or_none(upper_bound, 2),
+        },
+    }
+
+
 def dashboard_metrics_for_frame(symbol: str, frame: pd.DataFrame, benchmark: pd.DataFrame | None = None) -> dict:
     clean = frame.dropna(subset=["date", "close"]).sort_values("date")
     if clean.empty:
@@ -382,6 +451,7 @@ def dashboard_metrics_for_frame(symbol: str, frame: pd.DataFrame, benchmark: pd.
         "above100": bool(latest.get("price_vs_sma_100", np.nan) > 0),
         "above200": bool(latest.get("price_vs_sma_200", np.nan) > 0),
         "history": [finite_or_none(value, 2) for value in clean["close"].tail(36).tolist()],
+        "stopSellSignal": stop_sell_signal_for_frame(frame),
         "technicalSource": "model_scorer_yahoo_history",
     }
 
@@ -559,7 +629,6 @@ def is_momentum_confirmed(row: pd.Series) -> bool:
         and row.get("price_vs_sma_200", 0) > 0
         and row.get("ret_20d", 0) > 0
         and row.get("ret_60d", 0) > 0
-        and row.get("rsi_14", 0) <= 76
     )
 
 
@@ -592,6 +661,10 @@ def setup_tags(row: pd.Series) -> list[str]:
     if kind == "model_ranked_not_momentum_confirmed":
         return ["Not Momentum Confirmed"]
     return []
+
+
+def should_surface_stop_sell(setup: str) -> bool:
+    return setup in {"momentum_confirmed", "model_rebound_watch", "model_ranked_not_momentum_confirmed"}
 
 
 def rebound_activation(row: pd.Series) -> dict:
@@ -799,6 +872,7 @@ def row_payload(
     diagnostic = (sector_diagnostics or {}).get(str(row["symbol"]), {})
     symbol = str(row["symbol"])
     metrics = (dashboard_metrics or {}).get(symbol, {})
+    setup = setup_type(row)
     payload = {
         "symbol": symbol,
         "name": name_lookup.get(symbol, symbol),
@@ -810,7 +884,7 @@ def row_payload(
         "modelBucket": bucket,
         "modelReasons": reason_tags(row),
         "riskFlags": risk_flags(row),
-        "setupType": setup_type(row),
+        "setupType": setup,
         "setupTags": setup_tags(row),
         "asOfDate": row["date"].date().isoformat(),
         "close": finite_or_none(row.get("close"), 2),
@@ -832,8 +906,11 @@ def row_payload(
         "sectorCorrelation": diagnostic.get("sectorCorrelation"),
         "sectorCorrelationObservations": diagnostic.get("sectorCorrelationObservations"),
     }
-    payload.update({key: value for key, value in metrics.items() if value is not None})
+    payload.update({key: value for key, value in metrics.items() if value is not None and key != "stopSellSignal"})
     payload.update(rebound_activation(row))
+    if should_surface_stop_sell(setup):
+        stop_sell_signal = metrics.get("stopSellSignal") or {}
+        payload.update({key: value for key, value in stop_sell_signal.items() if value is not None})
     if reference_scores is not None:
         payload.update(sp500_comparison(row, reference_scores))
     if "price_data_date" in row and pd.notna(row.get("price_data_date")):

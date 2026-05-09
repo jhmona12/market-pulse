@@ -130,17 +130,37 @@ def fetch_yahoo_history(symbol: str, start_date: datetime, end_date: datetime) -
 
     rows = []
     for index, stamp in enumerate(timestamps):
-        close = adjusted[index] if index < len(adjusted) else quote_data.get("close", [None])[index]
+        raw_close_values = quote_data.get("close", [])
+        raw_close = raw_close_values[index] if index < len(raw_close_values) else None
+        close = adjusted[index] if index < len(adjusted) else raw_close
         if close is None:
             continue
+
+        adjustment_factor = 1.0
+        try:
+            if raw_close is not None and float(raw_close) != 0:
+                adjustment_factor = float(close) / float(raw_close)
+        except (TypeError, ValueError):
+            adjustment_factor = 1.0
+
+        def adjusted_value(field: str) -> float | int | None:
+            values = quote_data.get(field, [])
+            raw_value = values[index] if index < len(values) else None
+            if raw_value is None:
+                return None
+            try:
+                return float(raw_value) * adjustment_factor
+            except (TypeError, ValueError):
+                return raw_value
+
         rows.append(
             {
                 "date": datetime.fromtimestamp(stamp, tz=timezone.utc).date().isoformat(),
-                "open": quote_data.get("open", [None])[index],
-                "high": quote_data.get("high", [None])[index],
-                "low": quote_data.get("low", [None])[index],
+                "open": adjusted_value("open"),
+                "high": adjusted_value("high"),
+                "low": adjusted_value("low"),
                 "close": close,
-                "volume": quote_data.get("volume", [None])[index],
+                "volume": quote_data.get("volume", [None])[index] if index < len(quote_data.get("volume", [])) else None,
             }
         )
     return pd.DataFrame(rows)

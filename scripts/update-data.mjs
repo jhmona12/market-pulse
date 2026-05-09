@@ -394,6 +394,20 @@ function finiteNumber(value) {
   return Number.isFinite(number) ? number : null;
 }
 
+function optionalNumber(value) {
+  if (value === null || value === undefined || value === "") return null;
+  return finiteNumber(value);
+}
+
+function optionalRoundedNumber(value, digits = 2) {
+  const number = optionalNumber(value);
+  return number == null ? null : Number(number.toFixed(digits));
+}
+
+function shouldSurfaceStopSell(item = {}) {
+  return ["momentum_confirmed", "model_rebound_watch", "model_ranked_not_momentum_confirmed"].includes(item.setupType);
+}
+
 function roundedNumber(value, digits = 2) {
   const number = finiteNumber(value);
   return number == null ? null : Number(number.toFixed(digits));
@@ -1512,6 +1526,10 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
         reboundActivationPrice: finiteNumber(item.reboundActivationPrice),
         reboundActivationPct: roundedNumber(item.reboundActivationPct, 2),
         reboundActivationWindowDays: finiteNumber(item.reboundActivationWindowDays),
+        stopSellPrice: shouldSurfaceStopSell(item) ? optionalNumber(item.stopSellPrice) : null,
+        stopSellDistancePct: shouldSurfaceStopSell(item) ? optionalRoundedNumber(item.stopSellDistancePct, 2) : null,
+        stopSellRule: shouldSurfaceStopSell(item) ? item.stopSellRule || null : null,
+        stopSellBasis: shouldSurfaceStopSell(item) ? item.stopSellBasis || null : null,
         beta60d: useTechnicalReturns ? roundedNumber(signal?.beta60d ?? item.beta60d, 2) : null,
         return7: useTechnicalReturns ? roundedNumber(signal?.return7 ?? item.return7, 2) : null,
         return14: useTechnicalReturns ? roundedNumber(signal?.return14 ?? item.return14, 2) : null,
@@ -1543,6 +1561,7 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
       "setupType",
       "setupTags",
       "reboundActivationPrice",
+      "stopSellPrice",
       "beta60d",
       "return7",
       "return14",
@@ -1748,23 +1767,31 @@ function parseCsv(csv) {
     .filter((row) => Number.isFinite(row.close));
 }
 
-async function fetchHistory(symbol) {
+async function fetchHistory(symbol, options = {}) {
   const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(yahooSymbol(symbol))}?range=18mo&interval=1d&events=history`;
-  const text = await fetchText(url, { timeout: 12000 });
+  const text = await fetchText(url, { timeout: options.timeout || 12000, retries: options.retries ?? 5 });
   const payload = JSON.parse(text);
   const result = payload.chart?.result?.[0];
   const timestamps = result?.timestamp || [];
   const quote = result?.indicators?.quote?.[0] || {};
   const adjusted = result?.indicators?.adjclose?.[0]?.adjclose || quote.close || [];
   const rows = timestamps
-    .map((timestamp, index) => ({
-      date: new Date(timestamp * 1000).toISOString().slice(0, 10),
-      open: quote.open?.[index],
-      high: quote.high?.[index],
-      low: quote.low?.[index],
-      close: adjusted[index] ?? quote.close?.[index],
-      volume: quote.volume?.[index]
-    }))
+    .map((timestamp, index) => {
+      const rawClose = quote.close?.[index];
+      const close = adjusted[index] ?? rawClose;
+      const adjustmentFactor = Number.isFinite(Number(rawClose)) && Number(rawClose) !== 0 && Number.isFinite(Number(close))
+        ? Number(close) / Number(rawClose)
+        : 1;
+      return {
+        date: new Date(timestamp * 1000).toISOString().slice(0, 10),
+        open: Number.isFinite(Number(quote.open?.[index])) ? Number(quote.open?.[index]) * adjustmentFactor : quote.open?.[index],
+        high: Number.isFinite(Number(quote.high?.[index])) ? Number(quote.high?.[index]) * adjustmentFactor : quote.high?.[index],
+        low: Number.isFinite(Number(quote.low?.[index])) ? Number(quote.low?.[index]) * adjustmentFactor : quote.low?.[index],
+        close,
+        rawClose,
+        volume: quote.volume?.[index]
+      };
+    })
     .filter((row) => Number.isFinite(row.close));
   if (rows.length < 205) throw new Error(`Not enough history for ${symbol}`);
   return rows;
@@ -1774,6 +1801,75 @@ function sma(values, period, end = values.length) {
   if (end < period) return null;
   const slice = values.slice(end - period, end);
   return slice.reduce((sum, value) => sum + value, 0) / period;
+}
+
+function rollingMax(values, period, end = values.length) {
+  if (end < period) return null;
+  const slice = values.slice(end - period, end).filter((value) => Number.isFinite(Number(value)));
+  return slice.length === period ? Math.max(...slice) : null;
+}
+
+function rollingMin(values, period, end = values.length) {
+  if (end < period) return null;
+  const slice = values.slice(end - period, end).filter((value) => Number.isFinite(Number(value)));
+  return slice.length === period ? Math.min(...slice) : null;
+}
+
+function trueRanges(history) {
+  return history.map((row, index) => {
+    const high = Number(row.high);
+    const low = Number(row.low);
+    const previousClose = Number(history[index - 1]?.close);
+    if (!Number.isFinite(high) || !Number.isFinite(low)) return null;
+    if (!Number.isFinite(previousClose)) return high - low;
+    return Math.max(high - low, Math.abs(high - previousClose), Math.abs(low - previousClose));
+  });
+}
+
+function averageTrueRange(history, period = 20, end = history.length) {
+  if (end < period) return null;
+  const ranges = trueRanges(history).slice(end - period, end).filter((value) => Number.isFinite(Number(value)));
+  if (ranges.length !== period) return null;
+  return ranges.reduce((sum, value) => sum + value, 0) / period;
+}
+
+function buildStopSellSignal(history) {
+  if (history.length < 60) return null;
+  const end = history.length;
+  const close = Number(history.at(-1)?.close);
+  const highs = history.map((row) => Number(row.high));
+  const lows = history.map((row) => Number(row.low));
+  const closes = history.map((row) => Number(row.close));
+  const atr20 = averageTrueRange(history, 20, end);
+  const atr22 = averageTrueRange(history, 22, end);
+  const high22 = rollingMax(highs, 22, end);
+  const low20 = rollingMin(lows, 20, end);
+  const ma50 = sma(closes, 50, end);
+  if (![close, atr20, atr22, high22, low20, ma50].every(Number.isFinite) || atr20 <= 0 || atr22 <= 0) return null;
+
+  const chandelierStop = high22 - 3 * atr22;
+  const trendStop = ma50 - 0.5 * atr20;
+  const supportStop = low20 - 0.25 * atr20;
+  const lowerBound = close - 4 * atr20;
+  const upperBound = close - 1.5 * atr20;
+  const rawStop = Math.max(chandelierStop, trendStop, supportStop);
+  const stopSellPrice = Math.min(Math.max(rawStop, lowerBound), upperBound);
+  const stopSellDistancePct = ((stopSellPrice - close) / close) * 100;
+
+  return {
+    stopSellPrice: roundedNumber(stopSellPrice, 2),
+    stopSellDistancePct: roundedNumber(stopSellDistancePct, 2),
+    stopSellAtr20: roundedNumber(atr20, 2),
+    stopSellRule: "Exit on close below stop",
+    stopSellBasis: "balanced_atr_chandelier",
+    stopSellComponents: {
+      chandelierStop: roundedNumber(chandelierStop, 2),
+      trendStop: roundedNumber(trendStop, 2),
+      supportStop: roundedNumber(supportStop, 2),
+      lowerBound: roundedNumber(lowerBound, 2),
+      upperBound: roundedNumber(upperBound, 2)
+    }
+  };
 }
 
 function percentChange(now, before) {
@@ -1895,6 +1991,7 @@ function computeSignal(item, history, spyReturn20 = 0, spyHistory = null) {
   const above200 = close > ma200;
   const recentCross = crossedAbove(closes, 20, 50) || crossedAbove(closes, 50, 200, 20);
   const nearHigh = close / Math.max(...closes.slice(-252)) > 0.92;
+  const stopSell = buildStopSellSignal(history);
 
   let score = 0;
   if (close > ma20) score += 12;
@@ -1935,6 +2032,12 @@ function computeSignal(item, history, spyReturn20 = 0, spyHistory = null) {
     return90,
     ytdReturn,
     beta60d,
+    stopSellPrice: stopSell?.stopSellPrice ?? null,
+    stopSellDistancePct: stopSell?.stopSellDistancePct ?? null,
+    stopSellAtr20: stopSell?.stopSellAtr20 ?? null,
+    stopSellRule: stopSell?.stopSellRule ?? null,
+    stopSellBasis: stopSell?.stopSellBasis ?? null,
+    stopSellComponents: stopSell?.stopSellComponents ?? null,
     above50,
     above100,
     above200,
@@ -1979,6 +2082,12 @@ function mergeModelScores(signals, modelRankings) {
         reboundActivationVolMultiple: finiteNumber(model.reboundActivationVolMultiple),
         reboundActivationWindowDays: finiteNumber(model.reboundActivationWindowDays),
         reboundActivationRule: model.reboundActivationRule || null,
+        stopSellPrice: finiteNumber(model.stopSellPrice) ?? item.stopSellPrice,
+        stopSellDistancePct: finiteNumber(model.stopSellDistancePct) ?? item.stopSellDistancePct,
+        stopSellAtr20: finiteNumber(model.stopSellAtr20) ?? item.stopSellAtr20,
+        stopSellRule: model.stopSellRule || item.stopSellRule,
+        stopSellBasis: model.stopSellBasis || item.stopSellBasis,
+        stopSellComponents: model.stopSellComponents || item.stopSellComponents,
         modelAsOfDate: model.asOfDate || modelRankings.asOfDate,
         close: finiteNumber(model.close) ?? item.close,
         rsi14: finiteNumber(model.rsi14) ?? item.rsi14,
@@ -2054,6 +2163,12 @@ function modelOnlyOpportunities(modelRankings, stockMetadata = new Map()) {
       reboundActivationVolMultiple: finiteNumber(item.reboundActivationVolMultiple),
       reboundActivationWindowDays: finiteNumber(item.reboundActivationWindowDays),
       reboundActivationRule: item.reboundActivationRule || null,
+      stopSellPrice: finiteNumber(item.stopSellPrice),
+      stopSellDistancePct: finiteNumber(item.stopSellDistancePct),
+      stopSellAtr20: finiteNumber(item.stopSellAtr20),
+      stopSellRule: item.stopSellRule || null,
+      stopSellBasis: item.stopSellBasis || null,
+      stopSellComponents: item.stopSellComponents || null,
       modelAsOfDate: item.asOfDate || modelRankings.asOfDate,
       return120: finiteNumber(item.return120),
       relativeReturn60VsSpy: finiteNumber(item.relativeReturn60VsSpy),
@@ -2675,7 +2790,7 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
     ? modelLeaders.filter((item) => item.modelRank <= topDecileLimit && item.rsi14 > 76).length
     : opportunities.filter((item) => item.score >= 70 && item.rsi14 > 76).length;
   const cleanCandidates = modelReady
-    ? modelLeaders.filter((item) => item.modelRank <= topDecileLimit && item.above50 && item.above200 && item.rsi14 <= 76).length
+    ? modelLeaders.filter((item) => item.setupType === "momentum_confirmed").length
     : opportunities.filter((item) => item.score >= 72 && item.above50 && item.above200 && item.rsi14 <= 76).length;
   const universeCount = opportunities.length || 1;
   const breadth = Math.round((broadTrend / universeCount) * 100);
@@ -2790,13 +2905,13 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
 function buildRecommendations(opportunities) {
   const modelCandidates = opportunities.filter(hasModelRank);
   if (modelCandidates.length) {
-    const cleanModelCandidates = modelCandidates.filter((item) => item.above50 && item.above200 && item.rsi14 <= 76);
-    const watch = modelCandidates.find((item) => item.modelRank <= Math.ceil(modelCandidates.length * 0.2) && (!item.above50 || !item.above200 || item.rsi14 > 76));
+    const cleanModelCandidates = modelCandidates.filter((item) => item.setupType === "momentum_confirmed");
+    const watch = modelCandidates.find((item) => item.modelRank <= Math.ceil(modelCandidates.length * 0.2) && item.setupType !== "momentum_confirmed");
     const calls = cleanModelCandidates.slice(0, 4).map((item) => ({
       label: item.modelBucket || "Model Ranked",
       symbol: item.symbol,
       title: `Rank #${item.modelRank} of ${item.modelUniverseCount}; ${formatNumber(item.modelPercentile)} percentile`,
-      rationale: `${item.symbol}: model score ${formatNumber(item.modelScore, 3)}; rules score ${formatNumber(item.rulesScore)}; ${item.above50 && item.above200 ? "above 50-day and 200-day averages" : "mixed trend alignment"}; 60-day relative return vs SPY ${formatPercent(item.relativeReturn60VsSpy)}; evidence: ${(item.modelReasons || []).join("; ") || "model rank and technical inputs"}.`
+      rationale: `${item.symbol}: model score ${formatNumber(item.modelScore, 3)}; rules score ${formatNumber(item.rulesScore)}; ${item.above50 && item.above200 ? "above 50-day and 200-day averages" : "mixed trend alignment"}; 60-day relative return vs SPY ${formatPercent(item.relativeReturn60VsSpy)}; evidence: ${(item.modelReasons || []).join("; ") || "model rank and technical inputs"}.`,
     }));
 
     if (watch) {

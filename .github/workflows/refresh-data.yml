@@ -224,7 +224,7 @@ jobs:
         id: score_model
         if: steps.pacific_time.outputs.run_refresh == 'true'
         continue-on-error: true
-        run: python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json
+        run: python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json --max-workers 4
 
       - name: Refresh snapshot
         if: steps.pacific_time.outputs.run_refresh == 'true'
