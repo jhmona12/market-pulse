@@ -21,6 +21,7 @@ const expectedMarketDataDate = process.env.EXPECTED_MARKET_DATA_DATE || "";
 const skipReddit = process.env.SKIP_REDDIT === "1";
 const snapshotOutput = process.env.SNAPSHOT_OUTPUT || "data/snapshot.json";
 const scorebookOutput = process.env.SCOREBOOK_OUTPUT || "data/model-scorebook.json";
+const monitoringOutput = process.env.MONITORING_OUTPUT || "data/model-monitoring.json";
 const marketCapCacheMaxAgeHours = Number.parseFloat(process.env.MARKET_CAP_CACHE_MAX_AGE_HOURS || "18");
 const deeperReadLookbackDays = Number.parseFloat(process.env.DEEPER_READ_LOOKBACK_DAYS || "7");
 const deeperReadCandidateLimit = Number.parseInt(process.env.DEEPER_READ_CANDIDATE_LIMIT || "14", 10);
@@ -535,6 +536,15 @@ async function loadPreviousRefreshStatus() {
     return JSON.parse(text);
   } catch {
     return null;
+  }
+}
+
+async function loadPreviousModelMonitoring() {
+  try {
+    const text = await readFile(join(root, monitoringOutput), "utf8");
+    return JSON.parse(text);
+  } catch {
+    return { generatedAt: null, history: [] };
   }
 }
 
@@ -1545,6 +1555,172 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
       ? "Return columns use fresh adjusted-close price history and calendar lookbacks: 7D, 14D, 30D, 60D, 90D, then YTD. If the exact calendar date was not a trading day, the prior available trading close is used."
       : "Fresh price history was unavailable; stale cached returns were not reused, so trailing return columns are intentionally blank until the next successful price refresh.",
     rows
+  };
+}
+
+function monitoringNumber(value) {
+  if (value === null || value === undefined || value === "") return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function modelDecile(rank, rowCount) {
+  const numericRank = monitoringNumber(rank);
+  const numericCount = monitoringNumber(rowCount);
+  if (!Number.isFinite(numericRank) || !Number.isFinite(numericCount) || numericCount <= 0) return null;
+  return Math.max(1, Math.min(10, Math.ceil((numericRank / numericCount) * 10)));
+}
+
+function compactMonitoringRow(row) {
+  return {
+    symbol: row.symbol,
+    name: row.name || row.symbol,
+    sector: row.sector || null,
+    industry: row.industry || null,
+    marketCap: row.marketCap || null,
+    marketCapValue: monitoringNumber(row.marketCapValue),
+    modelRank: monitoringNumber(row.modelRank),
+    modelScore: monitoringNumber(row.modelScore),
+    modelPercentile: roundedNumber(row.modelPercentile, 1),
+    setupType: row.setupType || null,
+    setupTags: row.setupTags || [],
+    beta60d: monitoringNumber(row.beta60d),
+    return7: monitoringNumber(row.return7),
+    return14: monitoringNumber(row.return14),
+    return30: monitoringNumber(row.return30),
+    return60: monitoringNumber(row.return60),
+    return90: monitoringNumber(row.return90),
+    ytdReturn: monitoringNumber(row.ytdReturn),
+    asOfDate: row.asOfDate || null
+  };
+}
+
+function compactMonitoringHistoryRow(row) {
+  return {
+    symbol: row.symbol,
+    name: row.name || row.symbol,
+    sector: row.sector || null,
+    industry: row.industry || null,
+    modelRank: monitoringNumber(row.modelRank),
+    modelScore: monitoringNumber(row.modelScore),
+    modelPercentile: roundedNumber(row.modelPercentile, 1),
+    setupType: row.setupType || null,
+    setupTags: row.setupTags || [],
+    modelDecile: monitoringNumber(row.modelDecile),
+    asOfDate: row.asOfDate || null
+  };
+}
+
+function monitoringRankMap(snapshot) {
+  return new Map((snapshot?.rows || []).map((row) => [row.symbol, row]));
+}
+
+function rankChange(previousRank, currentRank) {
+  const previous = monitoringNumber(previousRank);
+  const current = monitoringNumber(currentRank);
+  if (!Number.isFinite(previous) || !Number.isFinite(current)) return null;
+  return previous - current;
+}
+
+function topDecileStatus({ row, priorRow, lookbackRow, priorCutoff, hasPriorSnapshot }) {
+  if (!priorRow) return hasPriorSnapshot ? "New Coverage" : "Baseline Top Decile";
+  const priorRank = monitoringNumber(priorRow.modelRank);
+  const currentRank = monitoringNumber(row.modelRank);
+  const oneRunChange = rankChange(priorRank, currentRank);
+  const lookbackChange = rankChange(lookbackRow?.modelRank, currentRank);
+  if (!Number.isFinite(priorRank)) return "New Coverage";
+  if (priorRank > priorCutoff) return "New Top-Decile Entrant";
+  if (Number.isFinite(lookbackChange) && lookbackChange >= 50) return "Major Rank Upgrade";
+  if (Number.isFinite(oneRunChange) && oneRunChange >= 25) return "Rank Upgrade";
+  return "Held Top Decile";
+}
+
+function buildModelMonitoring({ modelScorebook, previousMonitoring }) {
+  const rows = modelScorebook.status === "ready" ? modelScorebook.rows || [] : [];
+  const rowCount = rows.length;
+  const topDecileCutoff = rowCount ? Math.ceil(rowCount * 0.1) : 0;
+  const generatedAt = new Date().toISOString();
+  const asOfDate = modelScorebook.asOfDate || null;
+  const currentRows = rows
+    .map(compactMonitoringRow)
+    .map((row) => ({
+      ...row,
+      modelDecile: modelDecile(row.modelRank, rowCount)
+    }))
+    .sort((a, b) => Number(a.modelRank || 9999) - Number(b.modelRank || 9999));
+
+  const currentSnapshot = {
+    generatedAt,
+    asOfDate,
+    rowCount,
+    topDecileCutoff,
+    rows: currentRows.map(compactMonitoringHistoryRow)
+  };
+  const priorHistory = Array.isArray(previousMonitoring?.history) ? previousMonitoring.history : [];
+  const distinctPriorHistory = priorHistory.filter((snapshot) => snapshot?.asOfDate && snapshot.asOfDate !== asOfDate);
+  const priorSnapshot = distinctPriorHistory[0] || null;
+  const lookbackSnapshot = distinctPriorHistory[4] || distinctPriorHistory[distinctPriorHistory.length - 1] || null;
+  const priorRows = monitoringRankMap(priorSnapshot);
+  const lookbackRows = monitoringRankMap(lookbackSnapshot);
+  const priorCutoff = priorSnapshot?.topDecileCutoff || Math.ceil((priorSnapshot?.rowCount || rowCount || 0) * 0.1);
+
+  const currentTopDecile = currentRows
+    .filter((row) => Number.isFinite(Number(row.modelRank)) && Number(row.modelRank) <= topDecileCutoff)
+    .map((row) => {
+      const priorRow = priorRows.get(row.symbol);
+      const lookbackRow = lookbackRows.get(row.symbol);
+      const previousRank = monitoringNumber(priorRow?.modelRank);
+      const lookbackRank = monitoringNumber(lookbackRow?.modelRank);
+      const oneRunRankChange = rankChange(previousRank, row.modelRank);
+      const lookbackRankChange = rankChange(lookbackRank, row.modelRank);
+      const status = topDecileStatus({ row, priorRow, lookbackRow, priorCutoff, hasPriorSnapshot: Boolean(priorSnapshot) });
+      return {
+        ...row,
+        previousRank,
+        previousDecile: modelDecile(previousRank, priorSnapshot?.rowCount || rowCount),
+        oneRunRankChange,
+        lookbackRank,
+        lookbackRankChange,
+        status
+      };
+    });
+
+  const recentEntrants = priorSnapshot
+    ? currentTopDecile
+        .filter((row) => row.status !== "Held Top Decile")
+        .sort((a, b) => {
+          const aJump = Number(a.lookbackRankChange ?? a.oneRunRankChange ?? -Infinity);
+          const bJump = Number(b.lookbackRankChange ?? b.oneRunRankChange ?? -Infinity);
+          if (a.status === "New Top-Decile Entrant" && b.status !== "New Top-Decile Entrant") return -1;
+          if (b.status === "New Top-Decile Entrant" && a.status !== "New Top-Decile Entrant") return 1;
+          return bJump - aJump;
+        })
+        .slice(0, 20)
+    : [];
+
+  const history = [currentSnapshot, ...priorHistory.filter((snapshot) => snapshot?.asOfDate !== asOfDate)].slice(0, 30);
+
+  return {
+    generatedAt,
+    asOfDate,
+    status: modelScorebook.status,
+    source: scorebookOutput,
+    model: modelScorebook.model || null,
+    rowCount,
+    topDecileCutoff,
+    topDecileCount: currentTopDecile.length,
+    recentEntrantCount: recentEntrants.length,
+    trailingReturnStatus: modelScorebook.trailingReturnStatus || "unavailable",
+    marketDataStatus: modelScorebook.marketDataStatus || null,
+    currentTopDecile,
+    recentEntrants,
+    history,
+    methodology: [
+      "Top decile means model rank is inside the best 10% of the current scored S&P 500 reference universe.",
+      "A new entrant is a current top-decile name that was outside the top decile in the prior distinct refresh.",
+      "Rank upgrades flag names that stayed in the top decile but improved at least 25 rank slots since the prior distinct refresh or 50 rank slots over the available multi-refresh lookback.",
+      "The first generated monitoring snapshot is a baseline; entrant tracking begins once at least one prior distinct refresh exists."
+    ]
   };
 }
 
@@ -3819,13 +3995,14 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
 async function main() {
   await loadLocalEnv();
 
-  const [sourceMarkdown, universeConfigText, aiPromptText, modelRankings, modelExplainability, previousRefreshStatus] = await Promise.all([
+  const [sourceMarkdown, universeConfigText, aiPromptText, modelRankings, modelExplainability, previousRefreshStatus, previousModelMonitoring] = await Promise.all([
     readFile(join(root, "config/news-sources.md"), "utf8"),
     readFile(join(root, "config/universe.json"), "utf8"),
     readFile(join(root, "config/ai-recommendation-prompt.md"), "utf8").catch(() => defaultAiPrompt),
     loadModelRankings(),
     loadModelExplainability(),
-    loadPreviousRefreshStatus()
+    loadPreviousRefreshStatus(),
+    loadPreviousModelMonitoring()
   ]);
   const modelSummary = publicModelSummary(modelRankings, modelExplainability);
 
@@ -4028,6 +4205,10 @@ async function main() {
     signalsBySymbol,
     marketDataStatus
   });
+  const modelMonitoring = buildModelMonitoring({
+    modelScorebook,
+    previousMonitoring: previousModelMonitoring
+  });
 
   const snapshot = {
     generatedAt: new Date().toISOString(),
@@ -4059,13 +4240,15 @@ async function main() {
 
   await Promise.all([
     writeFile(join(root, snapshotOutput), `${JSON.stringify(snapshot, null, 2)}\n`),
-    writeFile(join(root, scorebookOutput), `${JSON.stringify(modelScorebook, null, 2)}\n`)
+    writeFile(join(root, scorebookOutput), `${JSON.stringify(modelScorebook, null, 2)}\n`),
+    writeFile(join(root, monitoringOutput), `${JSON.stringify(modelMonitoring, null, 2)}\n`)
   ]);
   console.log(`Wrote ${snapshotOutput} with ${opportunities.length} ranked instruments.`);
   console.log(`Wrote ${scorebookOutput} with ${modelScorebook.rowCount} model-scored rows.`);
+  console.log(`Wrote ${monitoringOutput} with ${modelMonitoring.topDecileCount} top-decile rows.`);
 }
 
-export { checkSource, extractArticleCandidates, fetchOfficialMacroReleases, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };
+export { buildModelMonitoring, checkSource, extractArticleCandidates, fetchOfficialMacroReleases, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch((error) => {

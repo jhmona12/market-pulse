@@ -191,6 +191,20 @@ const state = {
     sortKey: "modelScore",
     sortDirection: "desc"
   },
+  monitoring: {
+    status: "loading",
+    generatedAt: null,
+    asOfDate: null,
+    rowCount: 0,
+    topDecileCutoff: 0,
+    topDecileCount: 0,
+    recentEntrantCount: 0,
+    trailingReturnStatus: "",
+    marketDataStatus: null,
+    currentTopDecile: [],
+    recentEntrants: [],
+    methodology: []
+  },
   tickerLab: {
     enabled: true,
     apiReady: false,
@@ -1048,6 +1062,156 @@ function renderScoreboard() {
     .join("");
 }
 
+function topDecileFromScorebook() {
+  const rows = [...(state.scorebook.rows || [])].sort((a, b) => Number(a.modelRank || 9999) - Number(b.modelRank || 9999));
+  const cutoff = Math.ceil(rows.length * 0.1);
+  return rows.slice(0, cutoff).map((row) => ({
+    ...row,
+    status: "Current Top Decile",
+    previousRank: null,
+    oneRunRankChange: null,
+    lookbackRankChange: null
+  }));
+}
+
+function displayRankMove(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "n/a";
+  if (number === 0) return "Flat";
+  return number > 0 ? `+${number}` : `${number}`;
+}
+
+function rankMoveClass(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number) || number === 0) return "";
+  return number > 0 ? "positive" : "negative";
+}
+
+function topDecileStatusClass(value) {
+  const text = String(value || "").toLowerCase();
+  if (text.includes("entrant")) return "entrant";
+  if (text.includes("upgrade")) return "upgrade";
+  if (text.includes("baseline")) return "baseline";
+  return "held";
+}
+
+function renderTopDecileSummary(rows, entrants) {
+  const target = $("#topDecileSummary");
+  if (!target) return;
+  const asOf = state.monitoring.asOfDate || state.scorebook.asOfDate;
+  const generatedAt = state.monitoring.generatedAt ? formatDate(state.monitoring.generatedAt) : "latest refresh";
+  const rowCount = state.monitoring.rowCount || state.scorebook.rowCount || state.scorebook.rows.length;
+  const cutoff = state.monitoring.topDecileCutoff || Math.ceil(rowCount * 0.1);
+  const dataStatus = state.monitoring.marketDataStatus?.status || state.scorebook.status;
+  target.innerHTML = `
+    <div class="monitor-card">
+      <span>As Of</span>
+      <strong>${esc(asOf ? formatShortDate(asOf) : "Latest close")}</strong>
+      <small>Generated ${esc(generatedAt)}</small>
+    </div>
+    <div class="monitor-card">
+      <span>Top Decile</span>
+      <strong>${esc(rows.length)} names</strong>
+      <small>Rank #1 to #${esc(cutoff || rows.length || "n/a")} of ${esc(rowCount || "n/a")}</small>
+    </div>
+    <div class="monitor-card">
+      <span>Recent Moves</span>
+      <strong>${esc(entrants.length)} flagged</strong>
+      <small>New entrants or material rank upgrades</small>
+    </div>
+    <div class="monitor-card">
+      <span>Data Tape</span>
+      <strong>${esc(dataStatus || "unknown")}</strong>
+      <small>${esc(state.monitoring.trailingReturnStatus || state.scorebook.returnNotes || "Model scorebook feed")}</small>
+    </div>
+  `;
+}
+
+function renderTopDecileMonitor() {
+  const currentBody = $("#topDecileRows");
+  const entrantBody = $("#topDecileEntrantRows");
+  const meta = $("#topDecileMeta");
+  const countMeta = $("#topDecileCount");
+  const entrantMeta = $("#topDecileEntrantMeta");
+  if (!currentBody || !entrantBody || !meta) return;
+
+  const currentRows = (state.monitoring.currentTopDecile?.length ? state.monitoring.currentTopDecile : topDecileFromScorebook())
+    .sort((a, b) => Number(a.modelRank || 9999) - Number(b.modelRank || 9999));
+  const recentEntrants = [...(state.monitoring.recentEntrants || [])].sort((a, b) => Number(a.modelRank || 9999) - Number(b.modelRank || 9999));
+  const rowCount = state.monitoring.rowCount || state.scorebook.rowCount || state.scorebook.rows.length;
+  const asOf = state.monitoring.asOfDate || state.scorebook.asOfDate;
+  meta.textContent = currentRows.length
+    ? `${currentRows.length}/${rowCount || "n/a"} names · as of ${asOf ? formatShortDate(asOf) : "latest close"}`
+    : "Top-decile monitor unavailable";
+  if (countMeta) countMeta.textContent = rowCount ? `Top 10% of ${rowCount} scored names` : "Top 10% of scored universe";
+  if (entrantMeta) entrantMeta.textContent = recentEntrants.length ? `${recentEntrants.length} flagged this refresh` : "Baseline until a prior refresh exists";
+
+  renderTopDecileSummary(currentRows, recentEntrants);
+
+  if (!recentEntrants.length) {
+    entrantBody.innerHTML = `
+      <tr>
+        <td colspan="11">No recent entrants yet. Once the dashboard has at least one prior distinct refresh, this table will flag names newly entering the top decile or making major rank jumps.</td>
+      </tr>
+    `;
+  } else {
+    entrantBody.innerHTML = recentEntrants
+      .map(
+        (row) => `
+          <tr>
+            <td><span class="monitor-badge ${topDecileStatusClass(row.status)}">${esc(row.status || "Flagged")}</span></td>
+            <td><span class="score-rank">#${esc(row.modelRank || "-")}</span></td>
+            <td><strong>${esc(row.symbol)}</strong></td>
+            <td>${esc(row.name || row.symbol)}</td>
+            <td>${esc(row.sector || "n/a")}</td>
+            <td>${esc(displayMarketCap(row.marketCapValue, row.marketCap))}</td>
+            <td>${esc(displayScore(row.modelScore))}</td>
+            <td>${Number.isFinite(Number(row.previousRank)) ? `#${Number(row.previousRank)}` : "n/a"}</td>
+            <td class="${rankMoveClass(row.oneRunRankChange ?? row.lookbackRankChange)}">${esc(displayRankMove(row.oneRunRankChange ?? row.lookbackRankChange))}</td>
+            <td class="${returnClass(row.return30)}">${esc(displayPct(row.return30))}</td>
+            <td class="${returnClass(row.ytdReturn)}">${esc(displayPct(row.ytdReturn))}</td>
+          </tr>
+        `
+      )
+      .join("");
+  }
+
+  if (!currentRows.length) {
+    currentBody.innerHTML = `
+      <tr>
+        <td colspan="13">Run the daily refresh to populate the current top-decile snapshot.</td>
+      </tr>
+    `;
+    return;
+  }
+
+  currentBody.innerHTML = currentRows
+    .map(
+      (row) => `
+        <tr>
+          <td><span class="score-rank">#${esc(row.modelRank || "-")}</span></td>
+          <td>
+            <strong>${esc(row.symbol)}</strong>
+            <span>${esc(row.sector || "Unclassified")}</span>
+            ${row.status ? `<small class="scoreboard-setup">${esc(row.status)}</small>` : ""}
+          </td>
+          <td>${esc(row.name || row.symbol)}</td>
+          <td>${esc(row.industry || "n/a")}</td>
+          <td>${esc(displayMarketCap(row.marketCapValue, row.marketCap))}</td>
+          <td>${esc(displayScore(row.modelScore))}</td>
+          <td>${Number.isFinite(Number(row.modelPercentile)) ? `${Number(row.modelPercentile).toFixed(1)}%` : "n/a"}</td>
+          <td>${esc(row.setupTags?.[0] || row.setupType || "n/a")}</td>
+          <td>${Number.isFinite(Number(row.beta60d)) ? Number(row.beta60d).toFixed(2) : "n/a"}</td>
+          <td class="${returnClass(row.return7)}">${esc(displayPct(row.return7))}</td>
+          <td class="${returnClass(row.return14)}">${esc(displayPct(row.return14))}</td>
+          <td class="${returnClass(row.return30)}">${esc(displayPct(row.return30))}</td>
+          <td class="${returnClass(row.ytdReturn)}">${esc(displayPct(row.ytdReturn))}</td>
+        </tr>
+      `
+    )
+    .join("");
+}
+
 function renderCalendar() {
   const target = $("#calendarList");
   target.innerHTML = "";
@@ -1139,25 +1303,28 @@ function render() {
   renderMacro();
   renderSources();
   renderScoreboard();
+  renderTopDecileMonitor();
 }
 
 function setActiveView(view) {
-  state.activeView = view === "scoreboard" ? "scoreboard" : "briefing";
-  const briefing = $("#briefingView");
-  const scoreboard = $("#scoreboardView");
-  if (briefing) {
-    briefing.hidden = state.activeView !== "briefing";
-    briefing.classList.toggle("active", state.activeView === "briefing");
-  }
-  if (scoreboard) {
-    scoreboard.hidden = state.activeView !== "scoreboard";
-    scoreboard.classList.toggle("active", state.activeView === "scoreboard");
-  }
+  const knownViews = new Set(["briefing", "scoreboard", "top-decile"]);
+  state.activeView = knownViews.has(view) ? view : "briefing";
+  const panels = {
+    briefing: $("#briefingView"),
+    scoreboard: $("#scoreboardView"),
+    "top-decile": $("#topDecileView")
+  };
+  Object.entries(panels).forEach(([key, panel]) => {
+    if (!panel) return;
+    panel.hidden = state.activeView !== key;
+    panel.classList.toggle("active", state.activeView === key);
+  });
   document.querySelectorAll("[data-view-target]").forEach((button) => {
     button.classList.toggle("active", button.dataset.viewTarget === state.activeView);
   });
   window.scrollTo({ top: 0, behavior: "smooth" });
   renderScoreboard();
+  renderTopDecileMonitor();
 }
 
 function setScorebookSort(key) {
@@ -1308,9 +1475,43 @@ async function loadScorebook() {
     };
   }
   renderScoreboard();
+  renderTopDecileMonitor();
+}
+
+async function loadModelMonitoring() {
+  try {
+    const response = await fetch(`data/model-monitoring.json?ts=${Date.now()}`);
+    if (!response.ok) throw new Error(`Model monitoring unavailable: ${response.status}`);
+    const payload = await response.json();
+    state.monitoring = {
+      ...state.monitoring,
+      status: payload.status || "ready",
+      generatedAt: payload.generatedAt || null,
+      asOfDate: payload.asOfDate || null,
+      rowCount: payload.rowCount || 0,
+      topDecileCutoff: payload.topDecileCutoff || 0,
+      topDecileCount: payload.topDecileCount || payload.currentTopDecile?.length || 0,
+      recentEntrantCount: payload.recentEntrantCount || payload.recentEntrants?.length || 0,
+      trailingReturnStatus: payload.trailingReturnStatus || "",
+      marketDataStatus: payload.marketDataStatus || null,
+      currentTopDecile: payload.currentTopDecile || [],
+      recentEntrants: payload.recentEntrants || [],
+      methodology: payload.methodology || []
+    };
+  } catch (error) {
+    console.warn(error);
+    state.monitoring = {
+      ...state.monitoring,
+      status: "missing",
+      currentTopDecile: [],
+      recentEntrants: []
+    };
+  }
+  renderTopDecileMonitor();
 }
 
 wireControls();
 loadSnapshot();
 loadScorebook();
+loadModelMonitoring();
 loadRuntimeConfig().then(checkTickerLabAvailability);

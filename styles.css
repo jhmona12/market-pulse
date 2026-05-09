@@ -1100,8 +1100,17 @@ li {
   margin-top: 14px;
 }
 
+.top-decile-view {
+  margin-top: 14px;
+}
+
 .scoreboard-panel {
   min-height: 72vh;
+}
+
+.top-decile-panel {
+  display: grid;
+  gap: 16px;
 }
 
 .scoreboard-controls {
@@ -1154,6 +1163,87 @@ li {
   border-collapse: collapse;
   font-family: var(--mono);
   font-size: 0.78rem;
+}
+
+.top-decile-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.monitor-card {
+  min-height: 112px;
+  border: 1px solid rgba(57, 255, 136, 0.16);
+  border-radius: 5px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(57, 255, 136, 0.06), rgba(3, 8, 6, 0.42));
+}
+
+.monitor-card span,
+.monitor-card small {
+  display: block;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.monitor-card strong {
+  display: block;
+  margin: 9px 0 6px;
+  color: var(--ink);
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.top-decile-section {
+  display: grid;
+  gap: 8px;
+}
+
+.compact-title {
+  margin-bottom: 0;
+}
+
+.top-decile-table-wrap {
+  max-height: 56vh;
+}
+
+.top-decile-table {
+  min-width: 1280px;
+}
+
+.monitor-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  border: 1px solid rgba(79, 216, 255, 0.24);
+  border-radius: 5px;
+  padding: 0 8px;
+  color: var(--ink);
+  background: rgba(79, 216, 255, 0.08);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.monitor-badge.entrant {
+  border-color: rgba(57, 255, 136, 0.46);
+  background: rgba(57, 255, 136, 0.12);
+}
+
+.monitor-badge.upgrade {
+  border-color: rgba(255, 202, 87, 0.42);
+  background: rgba(255, 202, 87, 0.11);
+}
+
+.monitor-badge.baseline,
+.monitor-badge.held {
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .scoreboard-table th {
@@ -1293,6 +1383,10 @@ li {
     grid-template-columns: 1fr;
   }
 
+  .top-decile-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .market-strip {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1354,6 +1448,7 @@ li {
 
   .sector-main,
   .sector-mini,
+  .top-decile-summary,
   .signal-grid {
     grid-template-columns: 1fr;
   }
