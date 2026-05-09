@@ -506,6 +506,28 @@ Top-minus-bottom spread:                 +3.45%
 
 The backtest report also includes `non_overlapping_offsets`, which evaluates every possible 14-trading-day rebalance offset separately. This helps avoid over-reading overlapping daily forward labels. For the tuned model, the non-overlapping offset top-decile returns ranged from `+2.31%` to `+3.05%`, with a mean of `+2.75%`.
 
+### Ongoing Model Monitoring
+
+Recent model-health checks live outside the public dashboard in `analysis/model-monitoring/`.
+These files are meant for local review and are not embedded in the GitHub Pages site.
+
+Run the monitor from the repo root:
+
+```bash
+.venv-model/bin/python analysis/model-monitoring/run_recent_decile_backtest.py
+```
+
+The monitor fetches fresh Yahoo daily history, rebuilds the live feature matrix,
+scores eligible historical dates with the frozen production model, buckets the
+S&P 500 into score deciles, and measures realized 14-trading-day performance by
+decile. It writes a plain-English summary, CSV tables, JSON diagnostics, and SVG
+charts to `analysis/model-monitoring/output/`.
+
+The strict post-training window is the cleanest check because it excludes dates
+used to train the current model. The recent completed window is broader and more
+useful for drift monitoring, but can overlap training when the model was trained
+recently.
+
 ### Ablation And Tuning
 
 Feature-group ablation showed that risk/volatility, liquidity, and market context are doing real work:
@@ -656,6 +678,7 @@ data/model-scorebook.json          Generated full S&P 500 model scoreboard
 data/model-reference-cache.json    Generated daily S&P 500 model reference cache
 data/market-cap-cache.json         Generated market-cap lookup cache for scorebook rows
 data/refresh-status.json           Generated refresh diagnostics and last-run health status
+analysis/model-monitoring/         Local-only model monitoring analyses and charts
 Dockerfile                         Container image for the private Ticker Lab backend
 render.yaml                        Render-style backend service blueprint
 .github/workflows/                 GitHub Pages and scheduled refresh workflows
