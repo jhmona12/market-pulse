@@ -12,10 +12,8 @@ const marketIntelArticleLimit = Number.parseInt(process.env.MARKET_INTEL_ARTICLE
 const marketIntelFreshHours = Number.parseFloat(process.env.MARKET_INTEL_FRESH_HOURS || "24");
 const marketIntelImportantHours = Number.parseFloat(process.env.MARKET_INTEL_IMPORTANT_HOURS || "96");
 const redditPostLimit = Number.parseInt(process.env.REDDIT_POST_LIMIT || "40", 10);
-const historyConcurrency = Number.parseInt(process.env.HISTORY_CONCURRENCY || "4", 10);
 const marketCapFetchLimit = Number.parseInt(process.env.MARKET_CAP_FETCH_LIMIT || "60", 10);
 const openAiTimeoutMs = Number.parseInt(process.env.OPENAI_TIMEOUT_MS || "180000", 10);
-const forceTechnicalDataUnavailable = process.env.FORCE_TECHNICAL_DATA_UNAVAILABLE === "1" || process.env.USE_CACHED_TECHNICALS === "1";
 const allowStaleModelData = process.env.ALLOW_STALE_MODEL_DATA === "1";
 const expectedMarketDataDate = process.env.EXPECTED_MARKET_DATA_DATE || "";
 const skipReddit = process.env.SKIP_REDDIT === "1";
@@ -30,7 +28,7 @@ const deeperReadHistoryPath = "data/deeper-read-history.json";
 const today = new Date();
 const startDate = new Date(today);
 startDate.setDate(startDate.getDate() - 430);
-const defaultAiPrompt = `Write a concise hedge-fund-style morning strategy memo. Use only the supplied macro indicators, source summaries, current-event drivers, upcoming events, XGBoost model rankings, rules-based desk calls, momentum metrics, and lowest-ranked avoid candidates. Treat every output as a research recommendation, not financial advice.`;
+const defaultAiPrompt = `Write a concise hedge-fund-style morning strategy memo. Use only the supplied macro indicators, source summaries, current-event drivers, upcoming events, XGBoost model rankings, deterministic desk calls, momentum metrics, and lowest-ranked avoid candidates. Treat every output as a research recommendation, not financial advice.`;
 const defaultOpenAiModel = "gpt-5-nano";
 const modelPricingPerMillion = {
   "gpt-5": { input: 1.25, cachedInput: 0.125, output: 10 },
@@ -1072,6 +1070,7 @@ function isUsableSourceArticle(article, maxAgeDays = sourceMaxArticleAgeDays) {
   if (!article?.title || !article?.url || !article?.publishedAt) return false;
   const text = `${article.title} ${article.summary || ""}`;
   if (/(pardon our interruption|access denied|privacy|terms|sign in|login|subscribe)/i.test(text)) return false;
+  if (isGenericArticleText(article.title) || isGenericArticleText(article.summary)) return false;
   if (/^(papers|browse research papers|financial market infrastructure supervision|economic news releases|press releases)$/i.test(article.title.trim())) return false;
   const publishedAt = new Date(article.publishedAt).getTime();
   if (!Number.isFinite(publishedAt)) return false;
@@ -1508,6 +1507,7 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
       const metadata = stockMetadata.get(item.symbol) || {};
       const marketCap = marketCapCache.bySymbol.get(item.symbol) || null;
       const signal = signalsBySymbol.get(item.symbol) || null;
+      const showActivation = item.setupType === "model_rebound_watch";
       return {
         symbol: item.symbol,
         name: item.name || metadata.name || item.symbol,
@@ -1523,9 +1523,9 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
         modelPercentile: roundedNumber(item.modelPercentile, 1),
         setupType: item.setupType || null,
         setupTags: item.setupTags || [],
-        reboundActivationPrice: finiteNumber(item.reboundActivationPrice),
-        reboundActivationPct: roundedNumber(item.reboundActivationPct, 2),
-        reboundActivationWindowDays: finiteNumber(item.reboundActivationWindowDays),
+        reboundActivationPrice: showActivation ? finiteNumber(item.reboundActivationPrice) : null,
+        reboundActivationPct: showActivation ? roundedNumber(item.reboundActivationPct, 2) : null,
+        reboundActivationWindowDays: showActivation ? finiteNumber(item.reboundActivationWindowDays) : null,
         stopSellPrice: shouldSurfaceStopSell(item) ? optionalNumber(item.stopSellPrice) : null,
         stopSellDistancePct: shouldSurfaceStopSell(item) ? optionalRoundedNumber(item.stopSellDistancePct, 2) : null,
         stopSellRule: shouldSurfaceStopSell(item) ? item.stopSellRule || null : null,
@@ -1743,157 +1743,9 @@ function buildModelMonitoring({ modelScorebook, previousMonitoring }) {
   };
 }
 
-function yahooSymbol(symbol) {
-  return symbol.toUpperCase().replaceAll(".", "-");
-}
-
-function parseCsv(csv) {
-  const lines = csv.trim().split(/\r?\n/);
-  const headers = lines.shift()?.split(",") || [];
-  return lines
-    .map((line) => {
-      const values = line.split(",");
-      return Object.fromEntries(headers.map((header, index) => [header, values[index]]));
-    })
-    .filter((row) => row.Date && row.Close && row.Close !== "N/D")
-    .map((row) => ({
-      date: row.Date,
-      open: Number(row.Open),
-      high: Number(row.High),
-      low: Number(row.Low),
-      close: Number(row.Close),
-      volume: Number(row.Volume)
-    }))
-    .filter((row) => Number.isFinite(row.close));
-}
-
-async function fetchHistory(symbol, options = {}) {
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(yahooSymbol(symbol))}?range=18mo&interval=1d&events=history`;
-  const text = await fetchText(url, { timeout: options.timeout || 12000, retries: options.retries ?? 5 });
-  const payload = JSON.parse(text);
-  const result = payload.chart?.result?.[0];
-  const timestamps = result?.timestamp || [];
-  const quote = result?.indicators?.quote?.[0] || {};
-  const adjusted = result?.indicators?.adjclose?.[0]?.adjclose || quote.close || [];
-  const rows = timestamps
-    .map((timestamp, index) => {
-      const rawClose = quote.close?.[index];
-      const close = adjusted[index] ?? rawClose;
-      const adjustmentFactor = Number.isFinite(Number(rawClose)) && Number(rawClose) !== 0 && Number.isFinite(Number(close))
-        ? Number(close) / Number(rawClose)
-        : 1;
-      return {
-        date: new Date(timestamp * 1000).toISOString().slice(0, 10),
-        open: Number.isFinite(Number(quote.open?.[index])) ? Number(quote.open?.[index]) * adjustmentFactor : quote.open?.[index],
-        high: Number.isFinite(Number(quote.high?.[index])) ? Number(quote.high?.[index]) * adjustmentFactor : quote.high?.[index],
-        low: Number.isFinite(Number(quote.low?.[index])) ? Number(quote.low?.[index]) * adjustmentFactor : quote.low?.[index],
-        close,
-        rawClose,
-        volume: quote.volume?.[index]
-      };
-    })
-    .filter((row) => Number.isFinite(row.close));
-  if (rows.length < 205) throw new Error(`Not enough history for ${symbol}`);
-  return rows;
-}
-
-function sma(values, period, end = values.length) {
-  if (end < period) return null;
-  const slice = values.slice(end - period, end);
-  return slice.reduce((sum, value) => sum + value, 0) / period;
-}
-
-function rollingMax(values, period, end = values.length) {
-  if (end < period) return null;
-  const slice = values.slice(end - period, end).filter((value) => Number.isFinite(Number(value)));
-  return slice.length === period ? Math.max(...slice) : null;
-}
-
-function rollingMin(values, period, end = values.length) {
-  if (end < period) return null;
-  const slice = values.slice(end - period, end).filter((value) => Number.isFinite(Number(value)));
-  return slice.length === period ? Math.min(...slice) : null;
-}
-
-function trueRanges(history) {
-  return history.map((row, index) => {
-    const high = Number(row.high);
-    const low = Number(row.low);
-    const previousClose = Number(history[index - 1]?.close);
-    if (!Number.isFinite(high) || !Number.isFinite(low)) return null;
-    if (!Number.isFinite(previousClose)) return high - low;
-    return Math.max(high - low, Math.abs(high - previousClose), Math.abs(low - previousClose));
-  });
-}
-
-function averageTrueRange(history, period = 20, end = history.length) {
-  if (end < period) return null;
-  const ranges = trueRanges(history).slice(end - period, end).filter((value) => Number.isFinite(Number(value)));
-  if (ranges.length !== period) return null;
-  return ranges.reduce((sum, value) => sum + value, 0) / period;
-}
-
-function buildStopSellSignal(history) {
-  if (history.length < 60) return null;
-  const end = history.length;
-  const close = Number(history.at(-1)?.close);
-  const highs = history.map((row) => Number(row.high));
-  const lows = history.map((row) => Number(row.low));
-  const closes = history.map((row) => Number(row.close));
-  const atr20 = averageTrueRange(history, 20, end);
-  const atr22 = averageTrueRange(history, 22, end);
-  const high22 = rollingMax(highs, 22, end);
-  const low20 = rollingMin(lows, 20, end);
-  const ma50 = sma(closes, 50, end);
-  if (![close, atr20, atr22, high22, low20, ma50].every(Number.isFinite) || atr20 <= 0 || atr22 <= 0) return null;
-
-  const chandelierStop = high22 - 3 * atr22;
-  const trendStop = ma50 - 0.5 * atr20;
-  const supportStop = low20 - 0.25 * atr20;
-  const lowerBound = close - 4 * atr20;
-  const upperBound = close - 1.5 * atr20;
-  const rawStop = Math.max(chandelierStop, trendStop, supportStop);
-  const stopSellPrice = Math.min(Math.max(rawStop, lowerBound), upperBound);
-  const stopSellDistancePct = ((stopSellPrice - close) / close) * 100;
-
-  return {
-    stopSellPrice: roundedNumber(stopSellPrice, 2),
-    stopSellDistancePct: roundedNumber(stopSellDistancePct, 2),
-    stopSellAtr20: roundedNumber(atr20, 2),
-    stopSellRule: "Exit on close below stop",
-    stopSellBasis: "balanced_atr_chandelier",
-    stopSellComponents: {
-      chandelierStop: roundedNumber(chandelierStop, 2),
-      trendStop: roundedNumber(trendStop, 2),
-      supportStop: roundedNumber(supportStop, 2),
-      lowerBound: roundedNumber(lowerBound, 2),
-      upperBound: roundedNumber(upperBound, 2)
-    }
-  };
-}
-
 function percentChange(now, before) {
   if (!before) return 0;
   return ((now - before) / before) * 100;
-}
-
-function trailingCalendarReturn(history, days) {
-  if (!history.length) return null;
-  const latest = history.at(-1);
-  const latestClose = latest?.close;
-  if (!Number.isFinite(Number(latestClose)) || !latest?.date) return null;
-  const target = new Date(`${latest.date}T12:00:00Z`);
-  target.setUTCDate(target.getUTCDate() - days);
-  const targetIso = target.toISOString().slice(0, 10);
-  const base = [...history].reverse().find((row) => row.date <= targetIso && Number.isFinite(Number(row.close)));
-  return base ? percentChange(latestClose, base.close) : null;
-}
-
-function assertFreshHistory(symbol, history, expectedAsOfDate) {
-  const latestDate = history.at(-1)?.date || null;
-  if (!latestDate || latestDate < expectedAsOfDate) {
-    throw new Error(`${symbol} chart history is stale: latest ${latestDate || "none"}, expected ${expectedAsOfDate}`);
-  }
 }
 
 function formatPercent(value) {
@@ -1907,217 +1759,13 @@ function formatNumber(value, decimals = 1) {
   return Number.isFinite(number) ? number.toFixed(decimals) : "n/a";
 }
 
-function rsi(values, period = 14) {
-  if (values.length < period + 1) return 50;
-  const slice = values.slice(-period - 1);
-  let gains = 0;
-  let losses = 0;
-  for (let index = 1; index < slice.length; index += 1) {
-    const delta = slice[index] - slice[index - 1];
-    if (delta >= 0) gains += delta;
-    else losses += Math.abs(delta);
-  }
-  if (losses === 0) return 100;
-  const rs = gains / losses;
-  return 100 - 100 / (1 + rs);
-}
-
-function crossedAbove(values, shortPeriod, longPeriod, lookback = 12) {
-  for (let offset = 0; offset < lookback; offset += 1) {
-    const end = values.length - offset;
-    const prevEnd = end - 1;
-    const shortNow = sma(values, shortPeriod, end);
-    const longNow = sma(values, longPeriod, end);
-    const shortPrev = sma(values, shortPeriod, prevEnd);
-    const longPrev = sma(values, longPeriod, prevEnd);
-    if ([shortNow, longNow, shortPrev, longPrev].some((value) => value == null)) continue;
-    if (shortPrev <= longPrev && shortNow > longNow) return true;
-  }
-  return false;
-}
-
-function betaToBenchmark(history, benchmarkHistory, period = 60) {
-  if (!benchmarkHistory?.length || history.length < period + 1) return null;
-  const benchmarkByDate = new Map(benchmarkHistory.map((row) => [row.date, row.close]));
-  const pairs = [];
-  for (let index = 1; index < history.length; index += 1) {
-    const row = history[index];
-    const previousRow = history[index - 1];
-    const benchmarkClose = benchmarkByDate.get(row.date);
-    const previousBenchmarkClose = benchmarkByDate.get(previousRow.date);
-    if (![row.close, previousRow.close, benchmarkClose, previousBenchmarkClose].every(Number.isFinite)) continue;
-    if (!previousRow.close || !previousBenchmarkClose) continue;
-    pairs.push({
-      assetReturn: row.close / previousRow.close - 1,
-      benchmarkReturn: benchmarkClose / previousBenchmarkClose - 1
-    });
-  }
-
-  const window = pairs.slice(-period);
-  if (window.length < Math.min(40, period)) return null;
-  const meanAsset = window.reduce((sum, item) => sum + item.assetReturn, 0) / window.length;
-  const meanBenchmark = window.reduce((sum, item) => sum + item.benchmarkReturn, 0) / window.length;
-  const covariance = window.reduce((sum, item) => sum + (item.assetReturn - meanAsset) * (item.benchmarkReturn - meanBenchmark), 0);
-  const variance = window.reduce((sum, item) => sum + (item.benchmarkReturn - meanBenchmark) ** 2, 0);
-  return variance ? covariance / variance : null;
-}
-
-function computeSignal(item, history, spyReturn20 = 0, spyHistory = null) {
-  const closes = history.map((row) => row.close);
-  const volumes = history.map((row) => row.volume || 0);
-  const close = closes.at(-1);
-  const prevClose = closes.at(-2);
-  const latestDate = history.at(-1)?.date || today.toISOString().slice(0, 10);
-  const ytdIndex = history.findIndex((row) => row.date >= `${latestDate.slice(0, 4)}-01-01`);
-  const ytdBase = ytdIndex >= 0 ? closes[ytdIndex] : closes[0];
-  const ma20 = sma(closes, 20);
-  const ma50 = sma(closes, 50);
-  const ma100 = sma(closes, 100);
-  const ma200 = sma(closes, 200);
-  const rsi14 = rsi(closes);
-  const return7 = trailingCalendarReturn(history, 7);
-  const return14 = trailingCalendarReturn(history, 14);
-  const return20 = percentChange(close, closes.at(-21));
-  const return30 = trailingCalendarReturn(history, 30);
-  const return60 = trailingCalendarReturn(history, 60);
-  const return90 = trailingCalendarReturn(history, 90);
-  const ytdReturn = percentChange(close, ytdBase);
-  const beta60d = item.symbol === "SPY" ? 1 : betaToBenchmark(history, spyHistory, 60);
-  const relativeStrength = return20 - spyReturn20;
-  const avgVolume20 = sma(volumes, 20) || 1;
-  const volumeRatio = (volumes.at(-1) || avgVolume20) / avgVolume20;
-  const above50 = close > ma50;
-  const above100 = close > ma100;
-  const above200 = close > ma200;
-  const recentCross = crossedAbove(closes, 20, 50) || crossedAbove(closes, 50, 200, 20);
-  const nearHigh = close / Math.max(...closes.slice(-252)) > 0.92;
-  const stopSell = buildStopSellSignal(history);
-
-  let score = 0;
-  if (close > ma20) score += 12;
-  if (above50) score += 14;
-  if (above100) score += 10;
-  if (above200) score += 16;
-  if (recentCross) score += 12;
-  if (return20 > 0) score += Math.min(12, return20);
-  if (return60 > 0) score += Math.min(10, return60 / 2);
-  if (relativeStrength > 0) score += Math.min(10, relativeStrength);
-  if (volumeRatio > 1.1) score += Math.min(8, (volumeRatio - 1) * 10);
-  if (rsi14 >= 50 && rsi14 <= 76) score += 8;
-  if (nearHigh) score += 8;
-
-  const tags = [];
-  if (recentCross) tags.push("Fresh cross");
-  if (above50 && above200) tags.push("Major trend");
-  if (relativeStrength > 2) tags.push("Beating SPY");
-  if (volumeRatio > 1.1) tags.push("Volume support");
-  if (nearHigh) tags.push("Near highs");
-  if (rsi14 > 76) tags.push("Extended RSI");
-
-  return {
-    symbol: item.symbol,
-    name: item.name,
-    type: item.type || "stock",
-    sector: item.sector || item.assetClass || "Unclassified",
-    score: Math.max(0, Math.min(100, (score / 112) * 100)),
-    close,
-    changePct: percentChange(close, prevClose),
-    rsi14,
-    volumeRatio,
-    return7,
-    return14,
-    return20,
-    return30,
-    return60,
-    return90,
-    ytdReturn,
-    beta60d,
-    stopSellPrice: stopSell?.stopSellPrice ?? null,
-    stopSellDistancePct: stopSell?.stopSellDistancePct ?? null,
-    stopSellAtr20: stopSell?.stopSellAtr20 ?? null,
-    stopSellRule: stopSell?.stopSellRule ?? null,
-    stopSellBasis: stopSell?.stopSellBasis ?? null,
-    stopSellComponents: stopSell?.stopSellComponents ?? null,
-    above50,
-    above100,
-    above200,
-    recentCross,
-    relativeStrength,
-    history: closes.slice(-36),
-    tags
-  };
-}
-
-function mergeModelScores(signals, modelRankings) {
-  if (modelRankings.status !== "ready" || !modelRankings.bySymbol.size) {
-    return signals.map((item) => ({ ...item, rulesScore: item.score })).sort((a, b) => b.score - a.score);
-  }
-
-  return signals
-    .map((item) => {
-      const model = modelRankings.bySymbol.get(item.symbol);
-      if (!model) return { ...item, rulesScore: item.score };
-
-      const modelPercentile = finiteNumber(model.modelPercentile);
-      const modelTags = [
-        ...(model.setupTags || []),
-        model.modelBucket,
-        ...(model.modelReasons || []).slice(0, 2)
-      ].filter(Boolean);
-      return {
-        ...item,
-        rulesScore: item.score,
-        score: modelPercentile ?? item.score,
-        modelRank: finiteNumber(model.modelRank),
-        modelUniverseCount: finiteNumber(model.modelUniverseCount),
-        modelScore: finiteNumber(model.modelScore),
-        modelPercentile,
-        modelBucket: model.modelBucket || "Ranked",
-        modelReasons: model.modelReasons || [],
-        riskFlags: model.riskFlags || [],
-        setupType: model.setupType || null,
-        setupTags: model.setupTags || [],
-        reboundActivationPrice: finiteNumber(model.reboundActivationPrice),
-        reboundActivationPct: finiteNumber(model.reboundActivationPct),
-        reboundActivationVolMultiple: finiteNumber(model.reboundActivationVolMultiple),
-        reboundActivationWindowDays: finiteNumber(model.reboundActivationWindowDays),
-        reboundActivationRule: model.reboundActivationRule || null,
-        stopSellPrice: finiteNumber(model.stopSellPrice) ?? item.stopSellPrice,
-        stopSellDistancePct: finiteNumber(model.stopSellDistancePct) ?? item.stopSellDistancePct,
-        stopSellAtr20: finiteNumber(model.stopSellAtr20) ?? item.stopSellAtr20,
-        stopSellRule: model.stopSellRule || item.stopSellRule,
-        stopSellBasis: model.stopSellBasis || item.stopSellBasis,
-        stopSellComponents: model.stopSellComponents || item.stopSellComponents,
-        modelAsOfDate: model.asOfDate || modelRankings.asOfDate,
-        close: finiteNumber(model.close) ?? item.close,
-        rsi14: finiteNumber(model.rsi14) ?? item.rsi14,
-        return20: finiteNumber(model.return20) ?? item.return20,
-        return60: finiteNumber(model.return60) ?? item.return60,
-        above50: typeof model.above50 === "boolean" ? model.above50 : item.above50,
-        above200: typeof model.above200 === "boolean" ? model.above200 : item.above200,
-        return120: finiteNumber(model.return120),
-        relativeReturn60VsSpy: finiteNumber(model.relativeReturn60VsSpy),
-        sectorReturn60: finiteNumber(model.sectorReturn60),
-        volatility60d: finiteNumber(model.volatility60d),
-        volatility60dVsSector: finiteNumber(model.volatility60dVsSector),
-        distanceTo52wHigh: finiteNumber(model.distanceTo52wHigh),
-        tags: [...new Set([...(item.tags || []), ...modelTags])]
-      };
-    })
-    .sort((a, b) => {
-      const aModel = hasModelRank(a);
-      const bModel = hasModelRank(b);
-      if (aModel && bModel) return Number(a.modelRank) - Number(b.modelRank);
-      if (aModel !== bModel) return aModel ? -1 : 1;
-      return b.score - a.score;
-    });
-}
 
 function modelOnlyOpportunities(modelRankings, stockMetadata = new Map()) {
   if (modelRankings.status !== "ready" || !modelRankings.rankings.length) return [];
   return modelRankings.rankings.map((item) => {
     const metadata = stockMetadata.get(item.symbol) || {};
     const modelPercentile = finiteNumber(item.modelPercentile);
+    const showActivation = item.setupType === "model_rebound_watch";
     const modelTags = [
       ...(item.setupTags || []),
       item.modelBucket,
@@ -2158,11 +1806,11 @@ function modelOnlyOpportunities(modelRankings, stockMetadata = new Map()) {
       riskFlags: item.riskFlags || [],
       setupType: item.setupType || null,
       setupTags: item.setupTags || [],
-      reboundActivationPrice: finiteNumber(item.reboundActivationPrice),
-      reboundActivationPct: finiteNumber(item.reboundActivationPct),
-      reboundActivationVolMultiple: finiteNumber(item.reboundActivationVolMultiple),
-      reboundActivationWindowDays: finiteNumber(item.reboundActivationWindowDays),
-      reboundActivationRule: item.reboundActivationRule || null,
+      reboundActivationPrice: showActivation ? finiteNumber(item.reboundActivationPrice) : null,
+      reboundActivationPct: showActivation ? finiteNumber(item.reboundActivationPct) : null,
+      reboundActivationVolMultiple: showActivation ? finiteNumber(item.reboundActivationVolMultiple) : null,
+      reboundActivationWindowDays: showActivation ? finiteNumber(item.reboundActivationWindowDays) : null,
+      reboundActivationRule: showActivation ? item.reboundActivationRule || null : null,
       stopSellPrice: finiteNumber(item.stopSellPrice),
       stopSellDistancePct: finiteNumber(item.stopSellDistancePct),
       stopSellAtr20: finiteNumber(item.stopSellAtr20),
@@ -2247,36 +1895,6 @@ function modelTechnicalOpportunities(modelRankings, stockMetadata, etfs) {
   return opportunities;
 }
 
-function computeSectorPerformance(item, history, spyHistory) {
-  const closes = history.map((row) => row.close);
-  const spyCloses = spyHistory.map((row) => row.close);
-  const close = closes.at(-1);
-  const date = history.at(-1)?.date;
-  const ytdIndex = history.findIndex((row) => row.date >= `${date.slice(0, 4)}-01-01`);
-  const ytdBase = ytdIndex >= 0 ? closes[ytdIndex] : closes[0];
-  const return30 = percentChange(close, closes.at(-31));
-  const spyReturn30 = percentChange(spyCloses.at(-1), spyCloses.at(-31));
-  const ma50 = sma(closes, 50);
-  const ma200 = sma(closes, 200);
-
-  return {
-    sector: item.sector,
-    symbol: item.symbol,
-    name: item.name,
-    date,
-    close,
-    change1d: percentChange(close, closes.at(-2)),
-    change5d: percentChange(close, closes.at(-6)),
-    change30d: return30,
-    ytd: percentChange(close, ytdBase),
-    relative30d: return30 - spyReturn30,
-    above50: close > ma50,
-    above200: close > ma200,
-    rsi14: rsi(closes),
-    history: closes.slice(-36)
-  };
-}
-
 async function mapLimit(items, limit, worker) {
   const results = [];
   let index = 0;
@@ -2346,7 +1964,9 @@ function articleBriefs(sources, limit = 3) {
 
 function isGenericArticleText(value) {
   const text = String(value || "").trim();
-  return /^(read our latest market commentary|stock market news, commentary|bond market updates|learn about the bond market|public .* research|where thought finds leadership|markets and economy|stock market news|bond market commentary)\b/i.test(text);
+  return /^(read our latest market commentary|stock market news, commentary|bond market updates|learn about the bond market|public .* research|markets and economy|stock market news|bond market commentary)\b/i.test(text)
+    || /\bwhere thought finds leadership\b/i.test(text)
+    || /\buncovers powerful insights that move business and society forward\b/i.test(text);
 }
 
 function cleanArticleConclusion(value, title = "") {
@@ -2748,6 +2368,49 @@ function cleanMemoText(value) {
     .trim();
 }
 
+function removeAiStopMetricText(value) {
+  const text = cleanMemoText(value);
+  if (!text) return "";
+  return text
+    .replace(/\b(?:if\s+)?(?:the\s+)?close\s+(?:fails|falls|breaks|closes)\s+(?:below|under)\s+(?:the\s+)?stop(?:-loss)?(?:\s+(?:level|price))?\s*\$?\d+(?:\.\d+)?\b[^.;]*/gi, "if price loses trend confirmation")
+    .replace(/\bstop(?:-loss)?(?:\s+(?:level|price))?\s*(?:of|at|near|below|under|:)?\s*\$?\d+(?:\.\d+)?\b/gi, "risk-control trigger")
+    .replace(/\b(?:below|under)\s+(?:the\s+)?stop(?:-loss)?(?:\s+(?:level|price))?\b/gi, "below trend confirmation")
+    .replace(/\bstop(?:-loss)?(?:\s+(?:level|price))?\b/gi, "risk-control trigger")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function sanitizeAiRecommendationText(field, value) {
+  const text = removeAiStopMetricText(value);
+  if (!text) return text;
+  if (field === "invalidation" && /risk-control trigger/i.test(text)) {
+    return "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.";
+  }
+  return text;
+}
+
+function sanitizeAiRecommendation(recommendation) {
+  const cleaned = { ...recommendation };
+  [
+    "setup",
+    "whyNow",
+    "rationale",
+    "companyOverview",
+    "earningsContext",
+    "recentNews",
+    "macroLink",
+    "macroEvidence",
+    "modelEvidence",
+    "technicalEvidence",
+    "momentumEvidence",
+    "risk",
+    "invalidation"
+  ].forEach((field) => {
+    if (typeof cleaned[field] === "string") cleaned[field] = sanitizeAiRecommendationText(field, cleaned[field]);
+  });
+  return cleaned;
+}
+
 function usableDailyReadItem(value) {
   return !/(no names lack|no data gaps|all data complete|no .* unavailable)/i.test(value);
 }
@@ -2777,7 +2440,7 @@ function cleanDailyRead(dailyRead) {
   };
 }
 
-function buildNote({ opportunities, macro, calendar, sources, model, sectorPerformance, rulesRecommendations, aiRecommendations, marketIntelligence }) {
+function buildNote({ opportunities, macro, calendar, sources, model, sectorPerformance, deskRecommendations, aiRecommendations, marketIntelligence }) {
   const modelReady = model?.status === "ready" && model.scoredCount > 0;
   const modelLeaders = opportunities.filter(hasModelRank);
   const leaders = (modelReady ? modelLeaders : opportunities).slice(0, 5);
@@ -2831,7 +2494,7 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
     ? "Fresh technical data is unavailable; use macro, news, and model context with caution."
     : modelReady
     ? `${regime}; model leadership is clustered in ${leaderText}, with ${topSector?.sector || "sector"} confirmation.`
-    : `${regime}; rules-based momentum leaders are ${leaderText}.`;
+    : `${regime}; model-ranked momentum leaders are unavailable.`;
   const intelligenceHeadline = latestOfficialMacro
     ? `${latestOfficialMacro.title || latestOfficialMacro.event} frames today's market read.`
     : topDrivers.length
@@ -2852,7 +2515,7 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
     ? `Retail attention is concentrated in ${redditTickers.slice(0, 4).map((item) => item.symbol).join(", ")}; treat that as sentiment, not verified news.`
     : "Reddit attention data was unavailable or did not produce clean ticker concentration.";
   const fallbackBody = !technicalsFresh
-    ? `${driverLead} ${earningsLead} ${redditLead} ${technicalStatusMessage} ${modelReady ? `The eligible model context still points to ${leaderText}, but trailing return, breadth, and sector-tile data should not be treated as current.` : "Model-ranked single-name context is unavailable, so do not rely on stale ranks."}`
+    ? `${driverLead} ${earningsLead} ${redditLead} ${technicalStatusMessage} ${modelReady ? `The model file reports ${model.scoredCount} scored names as of ${model.asOfDate || "the latest available close"}, but price-derived fields should not be treated as current until the model scorer restores the technical tape.` : "Model-ranked single-name context is unavailable, so do not rely on stale ranks."}`
     : `${regime}. ${driverLead} ${earningsLead} ${redditLead} The model read is secondary confirmation, with leadership concentrated in ${leaderText}.`;
   const macroReleaseBullets = officialMacroReleases
     .filter((release) => release.status === "ready")
@@ -2871,23 +2534,25 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
     technicalsFresh
       ? `Breadth: ${above50Pct}% of the screened universe is above the 50-day average, ${above200Pct}% is above the 200-day, and ${breadth}% clears both trend lines.`
       : `Data freshness: ${technicalStatusMessage}`,
-    modelReady
+    modelReady && technicalsFresh
       ? `Model read: ${leaderText} lead ${model.scoredCount} scored S&P 500 names; ${modelSectorText}; sector confirmation is ${topSectorText(sectorPerformance)}.`
-      : "Model rankings were unavailable, so the read used the rules-based momentum score.",
-    rulesRecommendations?.length
-      ? `Desk call summary: ${rulesRecommendations.slice(0, 4).map((item) => `${item.symbol} (${item.label})`).join(", ")}.`
+      : modelReady
+        ? `Model read: ${model.scoredCount} names were scored as of ${model.asOfDate || "the latest available close"}, but technical tape is unavailable so leadership and sector confirmation are suppressed.`
+      : "Model rankings were unavailable, so no single-name model read was used.",
+    deskRecommendations?.length
+      ? `Desk call summary: ${deskRecommendations.slice(0, 4).map((item) => `${item.symbol} (${item.label})`).join(", ")}.`
       : "Desk call summary was unavailable in this snapshot.",
     aiFocus ? `AI memo: ${aiFocus}` : "AI memo was unavailable, so this read is based on deterministic model, macro, sector, and source data.",
     sourceBriefs.length ? `Research tape: ${sourceBriefs.join(" | ")}.` : "Research tape: no high-quality article briefs were extracted from the configured source pages."
   ];
   const fallbackWatch = [
     upcomingEvents.length ? `Macro risk: ${upcomingEvents.map((event) => `${event.event} on ${event.date}`).join("; ")}.` : "No upcoming macro events are currently listed in the local calendar.",
-    modelReady
+    modelReady && technicalsFresh
       ? `Momentum risk: ${extended} top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.`
-      : `Momentum risk: ${extended} screened names have score >= 70 and RSI above 76.`,
+      : "Momentum risk: fresh technical tape is unavailable, so RSI/chase-risk counts are suppressed.",
     technicalsFresh
       ? `Confirmation check: ETF leaders are ${etfText}; if they roll over while single-name ranks stay high, reduce confidence in the long book.`
-      : "Data check: restore fresh Yahoo chart history before relying on trailing returns, sector tiles, breadth, or moving-average status.",
+      : "Data check: rerun the Python model scorer before relying on trailing returns, sector tiles, breadth, or moving-average status.",
     `${failedSources} of ${sources.length} configured source pages failed the latest check; blocked or stale sources should not drive the call.`
   ];
   const cleanedAiDailyRead = process.env.AI_DAILY_READ === "1" && aiRecommendations?.status === "ready" ? cleanDailyRead(aiRecommendations.dailyRead) : null;
@@ -3048,7 +2713,7 @@ function fallbackAiRecommendations(reason) {
     status: reason,
     model: null,
     headline: "AI macro and model synthesis is not configured yet.",
-    macroView: "The dashboard can still show model-ranked and rules-based recommendations. Add OPENAI_API_KEY to .env and rerun the refresh to generate AI recommendations that connect macro context, public source summaries, and the XGBoost single-name rank model.",
+    macroView: "The dashboard can still show model-ranked recommendations and deterministic desk context. Add OPENAI_API_KEY to .env and rerun the refresh to generate AI recommendations that connect macro context, public source summaries, and the XGBoost single-name rank model.",
     dailyRead: null,
     deeperRead: {
       status: "unavailable",
@@ -3058,7 +2723,7 @@ function fallbackAiRecommendations(reason) {
     },
     recommendations: [],
     portfolioNotes: [
-      "Model-ranked and rules-based screening remain available without an API key.",
+      "Model-ranked screening and deterministic dashboard context remain available without an API key.",
       "The AI layer is designed to explain why a model candidate matters now, what macro backdrop supports it, and what would invalidate it."
     ],
     openQuestions: [
@@ -3074,22 +2739,22 @@ function fallbackAiRecommendations(reason) {
   };
 }
 
-function deterministicRecommendationFallback(modelCandidates = [], rulesRecommendations = [], marketIntelligence = null) {
-  const ruleBySymbol = new Map((rulesRecommendations || []).map((item) => [item.symbol, item]));
+function deterministicRecommendationFallback(modelCandidates = [], deskRecommendations = [], marketIntelligence = null) {
+  const deskCallBySymbol = new Map((deskRecommendations || []).map((item) => [item.symbol, item]));
   const driver = (marketIntelligence?.briefingBullets || [])[0] || (marketIntelligence?.professionalDrivers || [])[0]?.summary || "Current macro and source context is available in the Daily Read.";
   const candidates = modelCandidates.length
     ? modelCandidates.slice(0, 4)
-    : (rulesRecommendations || []).slice(0, 4).map((item) => ({ symbol: item.symbol, name: item.symbol, score: null, modelRank: null, modelPercentile: null, modelReasons: [], riskFlags: [], setupTags: [] }));
+    : (deskRecommendations || []).slice(0, 4).map((item) => ({ symbol: item.symbol, name: item.symbol, score: null, modelRank: null, modelPercentile: null, modelReasons: [], riskFlags: [], setupTags: [] }));
   return candidates.map((candidate) => {
-    const rule = ruleBySymbol.get(candidate.symbol);
+    const deskCall = deskCallBySymbol.get(candidate.symbol);
     const setupTags = candidate.setupTags || [];
     return {
       symbol: candidate.symbol,
       action: candidate.setupType === "model_rebound_watch" ? "Watch for activation" : "Research long setup",
       conviction: candidate.setupType === "momentum_confirmed" ? "Medium" : "Review",
-      setup: rule?.rationale || `${candidate.symbol} ranks highly in the model book and should be reviewed against the macro tape before any trade decision.`,
+      setup: deskCall?.rationale || `${candidate.symbol} ranks highly in the model book and should be reviewed against the macro tape before any trade decision.`,
       whyNow: firstSentence(driver, 220),
-      rationale: rule?.rationale || `${candidate.symbol} is a top model candidate with ${formatPercent(candidate.relativeReturn60VsSpy)} 60-day relative return versus SPY.`,
+      rationale: deskCall?.rationale || `${candidate.symbol} is a top model candidate with ${formatPercent(candidate.relativeReturn60VsSpy)} 60-day relative return versus SPY.`,
       companyOverview: "",
       marketCap: candidate.marketCap || "",
       earningsContext: "",
@@ -3188,6 +2853,7 @@ async function writeDeeperReadHistory(deeperRead, previousHistory = {}) {
 }
 
 function compactCandidate(item) {
+  const showActivation = item.setupType === "model_rebound_watch";
   return {
     symbol: item.symbol,
     name: item.name,
@@ -3204,11 +2870,11 @@ function compactCandidate(item) {
     riskFlags: item.riskFlags || [],
     setupType: item.setupType || null,
     setupTags: item.setupTags || [],
-    reboundActivationPrice: roundedNumber(item.reboundActivationPrice, 2),
-    reboundActivationPct: roundedNumber(item.reboundActivationPct, 2),
-    reboundActivationVolMultiple: roundedNumber(item.reboundActivationVolMultiple, 2),
-    reboundActivationWindowDays: finiteNumber(item.reboundActivationWindowDays),
-    reboundActivationRule: item.reboundActivationRule || null,
+    reboundActivationPrice: showActivation ? roundedNumber(item.reboundActivationPrice, 2) : null,
+    reboundActivationPct: showActivation ? roundedNumber(item.reboundActivationPct, 2) : null,
+    reboundActivationVolMultiple: showActivation ? roundedNumber(item.reboundActivationVolMultiple, 2) : null,
+    reboundActivationWindowDays: showActivation ? finiteNumber(item.reboundActivationWindowDays) : null,
+    reboundActivationRule: showActivation ? item.reboundActivationRule || null : null,
     modelAsOfDate: item.modelAsOfDate || null,
     close: roundedNumber(item.close, 2),
     changePct: roundedNumber(item.changePct, 2),
@@ -3359,7 +3025,7 @@ function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRe
   const validRefSet = new Set(validSourceRefs);
   const recommendations = (parsed.recommendations || []).map((recommendation) => {
     const context = bySymbol.get(recommendation.symbol);
-    if (!context) return recommendation;
+    if (!context) return sanitizeAiRecommendation(recommendation);
 
     const sourceRefs = [
       ...(recommendation.sourceRefs || []),
@@ -3368,13 +3034,13 @@ function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRe
       context.earnings?.sourceId
     ].filter((ref, index, refs) => ref && validRefSet.has(ref) && refs.indexOf(ref) === index);
 
-    return {
+    return sanitizeAiRecommendation({
       ...recommendation,
       companyOverview: companyOverviewSummary(context) || recommendation.companyOverview || "",
       marketCap: context.marketCap?.text || recommendation.marketCap || "",
       earningsContext: context.earnings?.summary || recommendation.earningsContext || "",
       sourceRefs
-    };
+    });
   });
   const deeperRead = normalizeDeeperReadPayload(parsed.deeperRead, sourceTape, validSourceRefs);
   return { ...parsed, deeperRead, recommendations };
@@ -3722,7 +3388,7 @@ async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sour
   }
 }
 
-async function buildAiRecommendations({ opportunities, macro, calendar, sources, rulesRecommendations, sectorPerformance, model: modelSummary, marketIntelligence, promptText }) {
+async function buildAiRecommendations({ opportunities, macro, calendar, sources, deskRecommendations, sectorPerformance, model: modelSummary, marketIntelligence, promptText }) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (process.env.SKIP_AI === "1") return fallbackAiRecommendations("skipped_by_env");
   if (!apiKey) return fallbackAiRecommendations("missing_api_key");
@@ -3768,7 +3434,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
         : [
             ...opportunities.slice(0, 40).map((item) => item.symbol),
             ...opportunities.filter((item) => item.type === "etf").slice(0, 15).map((item) => item.symbol),
-            ...rulesRecommendations.map((item) => item.symbol)
+            ...deskRecommendations.map((item) => item.symbol)
           ]
     )
   ].filter(Boolean);
@@ -3844,7 +3510,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       articleCount,
       summary
     })),
-    rulesRecommendations,
+    deskRecommendations,
     sectorPerformance: sectorPerformance.map(({ sector, symbol, change1d, change5d, change30d, ytd, relative30d, above50, above200, rsi14 }) => ({
       sector,
       symbol,
@@ -4093,11 +3759,11 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       model: aiModel,
       headline: "Deterministic strategy fallback is showing because AI synthesis failed.",
       macroView: `The deterministic dashboard refreshed with current model, macro, source, earnings, and Reddit inputs. The AI call failed: ${error.message}`,
-      recommendations: deterministicRecommendationFallback(modelCandidates, rulesRecommendations, marketIntelligence),
+      recommendations: deterministicRecommendationFallback(modelCandidates, deskRecommendations, marketIntelligence),
       deeperRead: deterministicDeeperRead(deeperReadCandidates, `Strategy memo AI call failed: ${error.message}`),
       portfolioNotes: [
         "Use the Daily Read, Desk Calls, Momentum Book, and Model Scoreboard as the primary refreshed outputs for this run.",
-        "AI narrative synthesis failed, so company-specific recommendations are deterministic summaries of model and rules-based candidates."
+        "AI narrative synthesis failed, so company-specific recommendations are deterministic summaries of model-ranked candidates."
       ],
       openQuestions: [
         "Retry the AI call if a narrative recommendation layer is required for this refresh.",
@@ -4193,63 +3859,12 @@ async function main() {
       asOfDate: modelRankings.technicalTape.asOfDate,
       staleDataReused: false
     };
-  } else try {
-    if (forceTechnicalDataUnavailable) throw new Error("Fresh technical data disabled by environment");
-    const spyHistory = await fetchHistory("SPY");
-    assertFreshHistory("SPY", spyHistory, expectedTechnicalAsOfDate);
-    const spyCloses = spyHistory.map((row) => row.close);
-    const spyReturn20 = percentChange(spyCloses.at(-1), spyCloses.at(-21));
-    marketDataStatus = {
-      ...marketDataStatus,
-      asOfDate: spyHistory.at(-1)?.date || null,
-      message: `Fresh end-of-day chart history was fetched through ${spyHistory.at(-1)?.date || "the latest close"}.`
-    };
-
-    const signals = await mapLimit(universe, Math.max(1, historyConcurrency), async (item, index) => {
-      try {
-        if (index > 0 && index % 50 === 0) console.log(`...${index}/${universe.length}`);
-        const history = item.symbol === "SPY" ? spyHistory : await fetchHistory(item.symbol);
-        assertFreshHistory(item.symbol, history, expectedTechnicalAsOfDate);
-        await sleep(20);
-        return computeSignal(item, history, spyReturn20, spyHistory);
-      } catch (error) {
-        return null;
-      }
-    });
-
-    opportunities = mergeModelScores(signals.filter(Boolean), modelRankings);
-    signalsBySymbol = new Map(signals.filter(Boolean).map((item) => [item.symbol, item]));
-
-    const historyCache = new Map([["SPY", spyHistory]]);
-    const marketSymbols = ["SPY", "QQQ", "IWM", "TLT", "GLD", "HYG"];
-    marketStrip = (
-      await mapLimit(marketSymbols, 4, async (symbol) => {
-        const existing = opportunities.find((item) => item.symbol === symbol);
-        if (existing) return existing;
-        const metadata = etfs.find((item) => item.symbol === symbol) || { symbol, name: symbol };
-        const history = await fetchHistory(symbol);
-        assertFreshHistory(symbol, history, expectedTechnicalAsOfDate);
-        historyCache.set(symbol, history);
-        return computeSignal(metadata, history, spyReturn20, spyHistory);
-      })
-    ).map((item) => ({
-      symbol: item.symbol,
-      label: item.name.replace(/ ETF| Trust| Fund/g, ""),
-      price: item.close,
-      changePct: item.changePct
-    }));
-
-    const sectorEtfs = universeConfig.sectorEtfs || [];
-    sectorPerformance = (
-      await mapLimit(sectorEtfs, 4, async (item) => {
-        const history = historyCache.get(item.symbol) || await fetchHistory(item.symbol);
-        assertFreshHistory(item.symbol, history, expectedTechnicalAsOfDate);
-        historyCache.set(item.symbol, history);
-        return computeSectorPerformance(item, history, spyHistory);
-      })
-    ).sort((a, b) => b.change30d - a.change30d);
-  } catch (error) {
-    console.warn(`Fresh technical tape unavailable; stale cached technicals will not be reused: ${error.message}`);
+  } else {
+    const reason = modelRankings.error
+      || (modelRankings.technicalTape?.asOfDate
+        ? `model technical tape is stale: latest ${modelRankings.technicalTape.asOfDate}, expected ${expectedTechnicalAsOfDate}`
+        : "fresh model technical tape is missing");
+    console.warn(`Fresh model technical tape unavailable; stale cached technicals will not be reused: ${reason}`);
     opportunities = modelTechnicalOpportunities(modelRankings, stockMetadata, etfs);
     signalsBySymbol = new Map();
     marketStrip = (modelRankings.marketRows || []).slice(0, 6).map((item) => ({
@@ -4261,9 +3876,10 @@ async function main() {
     sectorPerformance = modelRankings.sectorRows || [];
     marketDataStatus = {
       status: "unavailable",
-      message: `Fresh Yahoo chart history failed (${error.message}); stale cached technical values were not reused. Trailing return columns and sector tiles are unavailable until a successful fresh price refresh.`,
+      source: modelRankings.technicalTape?.source || null,
+      message: `Fresh model technical tape is unavailable (${reason}); stale cached technical values were not reused. Run scripts/modeling/score_live_rank_model.py before the briefing refresh to restore trailing returns, sector tiles, breadth, and scorebook technical columns.`,
       expectedAsOfDate: expectedTechnicalAsOfDate,
-      asOfDate: null,
+      asOfDate: modelRankings.technicalTape?.asOfDate || modelRankings.asOfDate || null,
       staleDataReused: false
     };
   }
@@ -4296,13 +3912,13 @@ async function main() {
   });
   console.log(`Market intelligence built: ${(marketIntelligence.professionalDrivers || []).length} professional drivers.`);
   const upcomingCalendar = upcomingMacroEvents(calendar);
-  const rulesRecommendations = buildRecommendations(opportunities);
+  const deskRecommendations = buildRecommendations(opportunities);
   const aiRecommendations = await buildAiRecommendations({
     opportunities,
     macro,
     calendar: upcomingCalendar,
     sources,
-    rulesRecommendations,
+    deskRecommendations,
     sectorPerformance,
     model: modelSummary,
     marketIntelligence,
@@ -4335,7 +3951,7 @@ async function main() {
       sources,
       model: modelSummary,
       sectorPerformance,
-      rulesRecommendations,
+      deskRecommendations,
       aiRecommendations,
       marketIntelligence
     }),
@@ -4344,7 +3960,7 @@ async function main() {
     marketDataStatus,
     marketIntelligence,
     avoidList,
-    recommendations: rulesRecommendations,
+    recommendations: deskRecommendations,
     sectorPerformance,
     marketStrip,
     opportunities,

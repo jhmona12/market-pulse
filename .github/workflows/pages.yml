@@ -25,12 +25,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Verify project
+        run: npm run verify
+
       - name: Prepare static site
         run: |
           mkdir -p public/data public/config
           cp index.html styles.css app.js public/
           cp data/snapshot.json public/data/snapshot.json
           cp data/model-scorebook.json public/data/model-scorebook.json
+          cp data/model-monitoring.json public/data/model-monitoring.json
           if [ -f data/refresh-status.json ]; then
             cp data/refresh-status.json public/data/refresh-status.json
           fi

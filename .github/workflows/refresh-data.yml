@@ -220,6 +220,10 @@ jobs:
         if: steps.pacific_time.outputs.run_refresh == 'true'
         run: python -m pip install -r scripts/modeling/requirements.txt
 
+      - name: Verify project
+        if: steps.pacific_time.outputs.run_refresh == 'true'
+        run: npm run verify
+
       - name: Score XGBoost rank model
         id: score_model
         if: steps.pacific_time.outputs.run_refresh == 'true'

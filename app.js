@@ -1405,10 +1405,14 @@ async function checkTickerLabAvailability() {
     state.tickerLab.apiReady = Boolean(payload.enabled);
     state.tickerLab.requiresAccessCode = Boolean(payload.requiresAccessCode);
     state.tickerLab.maxTickers = payload.maxTickers || 25;
-    const cacheText = payload.referenceCache?.ready
-      ? ` Daily cache as of ${payload.referenceCache.asOfDate || "latest close"}.`
-      : " The first score may rebuild the reference cache.";
-    state.tickerLab.status = `Model API ready. Paste up to ${state.tickerLab.maxTickers} symbols.${cacheText}`;
+    if (payload.enabled) {
+      const cacheText = payload.referenceCache?.ready
+        ? ` Daily cache as of ${payload.referenceCache.asOfDate || "latest close"}.`
+        : " The first score may rebuild the reference cache.";
+      state.tickerLab.status = `Model API ready. Paste up to ${state.tickerLab.maxTickers} symbols.${cacheText}`;
+    } else {
+      state.tickerLab.status = payload.error || "Ticker Lab backend is disabled.";
+    }
   } catch (error) {
     state.tickerLab.enabled = true;
     state.tickerLab.apiReady = false;

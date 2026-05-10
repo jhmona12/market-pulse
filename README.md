@@ -207,10 +207,10 @@ The AI layer is optional. If `OPENAI_API_KEY` is available, the refresh script c
 The intended division of labor is:
 
 - The XGBoost rank model is the deterministic stock-selection engine.
-- The rules-based screener provides technical context, ETF confirmation, and fallback rankings.
+- The Python model scorer owns price history, technical features, ETF confirmation, stop levels, activation levels, and scorebook rows.
 - The AI Strategy Memo explains the model-ranked candidates against the macro calendar and public source tape.
 - Same-day official macro releases are fed into the AI context separately from the future calendar, so a released payrolls/CPI/PPI/GDP/PCE report can drive the Daily Read before research publications have reacted.
-- The Daily Read is AI-written when available, but it is anchored to deterministic facts and falls back to a rules-based executive snapshot if the AI call fails.
+- The Daily Read is AI-written when available, but it is anchored to deterministic facts and falls back to a deterministic executive snapshot if the AI call fails.
 - The Daily Read is deterministic by default so the top of the report stays tightly grounded in the source tape, earnings movers, Reddit attention, macro calendar, and model facts. Set `AI_DAILY_READ=1` to let AI write the Daily Read when its output passes local fact-language guardrails.
 - The Deeper Read section asks the AI to choose the most interesting non-obvious source analysis from the last 7 days, explain the second-order market implication, and avoid repeating sources used in the prior refresh when enough alternatives exist. Rotation memory is stored in `data/deeper-read-history.json`.
 - The Stay Away section is seeded deterministically from the lowest-ranked model names; AI may add concise commentary, but it cannot choose symbols outside that supplied avoid-candidate list.
@@ -374,7 +374,7 @@ For public-site use, deploy the backend from this repo with the included `Docker
 }
 ```
 
-If `TICKER_LAB_ACCESS_CODE` is set on the backend, the site shows an access-code field and sends that value in the `x-ticker-lab-token` header. This keeps the public page viewable while keeping model scoring private.
+If `TICKER_LAB_ACCESS_CODE` is set on the backend, the site shows an access-code field and sends that value in the `x-ticker-lab-token` header. This keeps the public page viewable while keeping model scoring private. Without an access code, the local server only allows scoring from localhost; hosted/non-local requests fail closed unless `TICKER_LAB_ALLOW_OPEN=1` is intentionally set.
 
 Suggested backend deployment flow:
 
@@ -537,8 +537,8 @@ The backtest report also includes `non_overlapping_offsets`, which evaluates eve
 
 ### Ongoing Model Monitoring
 
-Recent model-health checks live outside the public dashboard in `analysis/model-monitoring/`.
-These files are meant for local review and are not embedded in the GitHub Pages site.
+Recent model-health checks live in `analysis/model-monitoring/` for local review.
+The public dashboard also reads the compact generated `data/model-monitoring.json` file for the Top Decile Monitor tab.
 
 Run the monitor from the repo root:
 
@@ -705,10 +705,11 @@ config/ai-recommendation-prompt.md AI memo prompt
 config/runtime.json                Public runtime config for optional hosted Ticker Lab API URL
 data/snapshot.json                 Generated dashboard data
 data/model-scorebook.json          Generated full S&P 500 model scoreboard
+data/model-monitoring.json         Generated top-decile dashboard monitoring snapshot
 data/model-reference-cache.json    Generated daily S&P 500 model reference cache
 data/market-cap-cache.json         Generated market-cap lookup cache for scorebook rows
 data/refresh-status.json           Generated refresh diagnostics and last-run health status
-analysis/model-monitoring/         Local-only model monitoring analyses and charts
+analysis/model-monitoring/         Local model monitoring analyses and charts
 Dockerfile                         Container image for the private Ticker Lab backend
 render.yaml                        Render-style backend service blueprint
 .github/workflows/                 GitHub Pages and scheduled refresh workflows

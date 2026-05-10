@@ -13,6 +13,7 @@ const outputDir = join(root, "data/ticker-lab");
 const referenceCachePath = join(root, "data/model-reference-cache.json");
 const maxTickers = Number.parseInt(process.env.TICKER_LAB_MAX_TICKERS || "25", 10);
 const accessCode = process.env.TICKER_LAB_ACCESS_CODE || "";
+const allowOpenTickerLab = process.env.TICKER_LAB_ALLOW_OPEN === "1";
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -33,6 +34,7 @@ const publicStaticFiles = new Set([
   "config/runtime.json",
   "data/snapshot.json",
   "data/model-scorebook.json",
+  "data/model-monitoring.json",
   "data/refresh-status.json"
 ]);
 
@@ -54,9 +56,32 @@ function sendJson(response, statusCode, payload) {
   response.end(`${JSON.stringify(payload, null, 2)}\n`);
 }
 
+function requestHost(request) {
+  const rawHost = String(request.headers.host || "").toLowerCase();
+  if (rawHost.startsWith("[")) {
+    const closeBracket = rawHost.indexOf("]");
+    return closeBracket > 0 ? rawHost.slice(1, closeBracket) : rawHost.replace(/^\[|\]$/g, "");
+  }
+  if (rawHost === "::1") return "::1";
+  return rawHost.split(":")[0];
+}
+
+function isLocalRequest(request) {
+  const host = requestHost(request);
+  return host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "";
+}
+
+function tickerLabAccessMode(request) {
+  if (accessCode) return "access_code";
+  if (allowOpenTickerLab) return "open";
+  if (isLocalRequest(request)) return "local_open";
+  return "disabled";
+}
+
 function authorized(request) {
-  if (!accessCode) return true;
-  return request.headers["x-ticker-lab-token"] === accessCode;
+  const mode = tickerLabAccessMode(request);
+  if (mode === "access_code") return request.headers["x-ticker-lab-token"] === accessCode;
+  return mode === "open" || mode === "local_open";
 }
 
 function cleanTickerInput(value) {
@@ -120,7 +145,9 @@ async function scoreTickers(request, response) {
     if (!authorized(request)) {
       sendJson(response, 401, {
         status: "error",
-        error: "Ticker Lab access code is required."
+        error: accessCode
+          ? "Ticker Lab access code is required."
+          : "Ticker Lab is disabled for non-local requests. Set TICKER_LAB_ACCESS_CODE, or set TICKER_LAB_ALLOW_OPEN=1 only for an intentionally open backend."
       });
       return;
     }
@@ -198,6 +225,8 @@ const server = createServer(async (request, response) => {
     return;
   }
   if (request.method === "GET" && url.pathname === "/api/ticker-lab/status") {
+    const accessMode = tickerLabAccessMode(request);
+    const enabled = accessMode !== "disabled";
     let referenceCache = { ready: false };
     try {
       const payload = JSON.parse(await readFile(referenceCachePath, "utf8"));
@@ -211,12 +240,21 @@ const server = createServer(async (request, response) => {
       referenceCache = { ready: false };
     }
     sendJson(response, 200, {
-      enabled: true,
-      privacy: accessCode ? "access_code_required" : "open_endpoint",
-      requiresAccessCode: Boolean(accessCode),
+      enabled,
+      privacy: accessMode === "access_code"
+        ? "access_code_required"
+        : accessMode === "open"
+          ? "open_endpoint"
+          : accessMode === "local_open"
+            ? "localhost_only"
+            : "disabled_missing_access_code",
+      requiresAccessCode: accessMode === "access_code",
       maxTickers,
       referenceUniverse: "Current S&P 500",
-      referenceCache
+      referenceCache,
+      error: enabled
+        ? null
+        : "Ticker Lab is disabled for non-local requests because TICKER_LAB_ACCESS_CODE is unset."
     });
     return;
   }
@@ -235,4 +273,7 @@ const server = createServer(async (request, response) => {
 server.listen(port, () => {
   console.log(`Market Pulse local server running at http://localhost:${port}`);
   console.log("Ticker Lab API is available at /api/ticker-lab/score.");
+  if (!accessCode && !allowOpenTickerLab) {
+    console.log("Ticker Lab is open for localhost only; set TICKER_LAB_ACCESS_CODE before hosting this server.");
+  }
 });
