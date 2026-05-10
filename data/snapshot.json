@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-05-10T04:21:25.816Z",
+  "generatedAt": "2026-05-10T15:20:09.766Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-05-10T04:15:17.384126+00:00",
+    "generatedAt": "2026-05-10T15:14:05.324966+00:00",
     "asOfDate": "2026-05-08",
     "expectedAsOfDate": "2026-05-08",
     "isStale": false,
@@ -1350,12 +1350,12 @@
     }
   },
   "note": {
-    "headline": "AI and semis frames today's market read.",
-    "body": "Risk appetite is constructive but selective. The most relevant market drivers are ai and semis, earnings, rates and central banks. Earnings dispersion is visible in FLR -15.21%, AD +13.12%, EMBJ -11.28%. Reddit attention data was unavailable or did not produce clean ticker concentration. The model read is secondary confirmation, with leadership concentrated in CIEN, SATS, LITE, SNDK, STX.",
+    "headline": "Market color frames today's market read.",
+    "body": "Risk appetite is constructive but selective. The most relevant market drivers are market color, ai and semis, macro and growth. Earnings dispersion is visible in ASTS +14.85%, ACHR +3.18%, MARA +1.89%. Reddit attention data was unavailable or did not produce clean ticker concentration. The model read is secondary confirmation, with leadership concentrated in CIEN, SATS, LITE, SNDK, STX.",
     "changed": [
-      "Rates and central banks: As major market averages hit record highs, investors seemed to shrug off rising oil prices. (M3)",
-      "Macro and growth: The post-inflation job market has been especially hard for new grads, but there are ways they can help themselves prepare for the search. (M4)",
-      "Earnings movers: FLR -15.21%, AD +13.12%, EMBJ -11.28% show where post-results dispersion is largest.",
+      "Rates and central banks: As major market averages hit record highs, investors seemed to shrug off rising oil prices. (M7)",
+      "Macro and growth: The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth. (M3)",
+      "Earnings movers: ASTS +14.85%, ACHR +3.18%, MARA +1.89% show where post-results dispersion is largest.",
       "Breadth: 53% of the screened universe is above the 50-day average, 57% is above the 200-day, and 42% clears both trend lines.",
       "Model read: CIEN, SATS, LITE, SNDK, STX lead 502 scored S&P 500 names; 14 of the top 25 model-ranked stocks are in Information Technology; sector confirmation is Information Technology +23.88% over 30D, +14.77% vs SPY; Consumer Discretionary +8.46% over 30D; Real Estate +4.64% over 30D.",
       "Desk call summary: CIEN (Top Decile), LITE (Top Decile), SNDK (Top Decile), STX (Top Decile)."
@@ -1364,7 +1364,7 @@
       "Macro risk: Consumer Price Index on 2026-05-13; Producer Price Index on 2026-05-14; GDP Second Estimate on 2026-05-28.",
       "Momentum risk: 10 top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.",
       "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
-      "4 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
+      "5 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
     ],
     "generatedBy": "deterministic"
   },
@@ -1373,12 +1373,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 85957,
+      "inputTokens": 85043,
       "cachedInputTokens": 0,
-      "outputTokens": 2800,
+      "outputTokens": 2439,
       "reasoningTokens": 0,
-      "totalTokens": 88757,
-      "estimatedCostUsd": 0.005418,
+      "totalTokens": 87482,
+      "estimatedCostUsd": 0.005228,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1386,231 +1386,197 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "AI-led tech momentum extends; focus on CIEN, LITE, SNDK as core longs while monitoring macro risks and Nvidia-driven AI flow",
-    "macroView": "Global risk appetite remains tethered to AI/semis momentum and near-term macro data cadence. Despite mixed earnings signals, top decile momentum names in Information Technology continue to outperform, with sector IT showing strength while Financials and some defensives underperform. Upcoming CPI on May 13 and FOMC stance in mid-June are key risk events that could reprice rate expectations and equity multiples. Official macro releases are limited this window, with Employment Situation data blocked by a 403, leaving traders to rely on earnings and AI/semis narratives for direction.",
+    "headline": "AI-driven momentum leads a crowded tech rally; macro risk remains focused on inflation and next FOMC signal",
+    "macroView": "Macro regime remains constructive for risk-on tech, with IT leadership in rolling 24h signals and broad sector breadth supported by momentum on top stocks. Near-term macro risk centers on inflation readings and the Fed path, with upcoming CPI and PPI data due this week and the mid-June FOMC meeting in focus. Official macro release from BLS Employment Situation could not be fetched today, but the prior context keeps labor market resilience as a backdrop for pricing; oil and energy headlines remain a secondary driver shaping risk appetite.",
     "dailyRead": {
-      "headline": "AI-driven tech momentum persists; CIEN, LITE, SNDK lead the charge as macro data cadence tightens",
-      "body": "The regime remains risk-on for AI/semis-linked tech names with strong multi-month momentum and decoupled strength vs. the market. Information Technology leaders dominate, led by Ciena, Lumentum, and Sandisk, all posting top-decile momentum signals, above-200-day trend, and proximity to 52-week highs. Earnings news shows selective strength in hardware / AI infra peers (LITE, MU, INTC) alongside notable dispersion in cloud/AI-adjacent names (Cloudflare negative, Rocket Lab positive). The macro backdrop features a heavy focus on AI spend, energy price sensitivity, and central-bank signaling; the upcoming CPI and PPI prints (May 13-14) will test inflation resilience and Fed path expectations, potentially compressing or expanding multiples based on inflation surprise. On the micro side, Reddit sentiment is muted by data access limits, but the desk’s model ranks CIEN, SATS, LITE, SNDK as top ideas with momentum-confirmed setups and strong 60-day vs SPY performance. The highest-conviction calls are: CIEN, LITE, SNDK as core longs with STO-agnostic risk controls; SATS remains high-ranked but flagged for volatility and volume concerns. How this fits into a broader beta: AI and semis remain the dominant macro driver, with macro data risk skewed toward hotter inflation or hawkish Fed signals being the primary inversion to momentum. The key risk to watch is a negative macro surprise or a policy shift that sharpens rate expectations, which could curb high-momentum tech leadership and force rotation into more cyclical names.",
+      "headline": "AI-led tech momentum dominates, but inflation risk keeps Fed path uncertain",
+      "body": "Markets remain in a momentum-driven regime, led by long-horizon leaders in Information Technology and Communications hardware. The strongest evidence comes from a tight pack of Top Decile names with clear upward-trend bias, high relative returns versus SPY, and robust 14‑day momentum; meanwhile, macro and rate chatter centers on inflation data and the upcoming CPI/PPI releases. The top model signals favor CIEN, LITE, SNDK, STX, and MU as the clearest momentum plays, with SATS flagged as a high-signal name that requires caution due to volatility and volume gaps. The strongest near-term earnings catalysts come from high-profile tech hardware and data-storage names showing impressive margins and upside potential (SNDK, MU, STX, GLW, COHR), while energy and AI-related commentary from market primers supports continued capex and demand for advanced storage and networking hardware. In short, regime remains risk-on but tethered to inflation and rate guidance; best setup is liquid momentum trades in a handful of IT names with confirmable trend, while a broadening of leadership remains contingent on inflation cooling and a softer Fed path. Portfolio implication: lean into high-conviction momentum in CIEN/LITE/SNDK/STX/MU while monitoring Fed rhetoric and CPI prints for potential risk-off shifts.",
       "keyTakeaways": [
-        "Macro release: CPI and PPI due May 13-14; hotter inflation could push rate expectations higher and limit tech momentum.",
-        "Market drivers: AI/semis leadership intact; IT sector shows strongest 1- and 30-day returns; broader market breadth mixed.",
-        "Earnings: select AI infra players upbeat (LITE, MU), while Cloudflare reports material miss; divergences within AI ecosystem persist.",
-        "Retail attention: Reddit sentiment constrained by data access; still, momentum names dominate intraday chatter in IT",
-        "Breadth: Top momentum names show dispersion; sector IT leads, Financials weak, energy mixed.",
-        "Model read: CIEN, LITE, SNDK top-ranked; SATS still high but with volatility/volume caveats."
+        "Macro release: Inflation data and Fed path remain the dominant near-term macro driver; CPI/ PPI due this week; FOMC outlook remains sensitive to the inflation trajectory.",
+        "Market drivers: IT leadership persists; top momentum names expanding gains, with high 60d/120d return ranks versus SPY; AI/semis linked tech cycle remains in favor.",
+        "Earnings: Major momentum names show strong recent earnings execution (SNDK, MU, STX, GLW) supporting elevated valuations; protect on signs of earnings disappointment in rebound-watch names.",
+        "Retail attention: Reddit signals unavailable this cycle; market chatter dominated by AI narratives and big-tech multiple expansions (M7, M8 style).",
+        "Breadth: Concentrated leadership among a small cohort of IT names; sector breadth improving but concentration risk remains where RSI is elevated.",
+        "Model read: CIEN, SATS, LITE, SNDK, STX among top decile; SATS shows higher volatility risk; overall momentum tilt supports continued exposure to momentum names with robust trend."
       ],
       "watchItems": [
-        "Upcoming macro prints: CPI/PPi on May 13-14; FOMC-related guidance in June; watch for revisions to growth/inflation path.",
-        "Macro risk: If inflation accelerates, expect higher yields and potential rotation out of tech momentum into cyclicals or defensives.",
-        "Sector confirmation: Monitor XLK and IT breadth to see if leadership persists; watch for RSI overbought signals in exponential momentum names.",
-        "Data gaps: Official macro release delay (BLS Employment Situation 403) implies interpretive fragility; rely on earnings and price action.",
-        "Invalidation: A close below recent swing lows for CIEN or SNDK could invalidate momentum thesis; for rebound-watch names like CHRTR, note activation pending."
+        "Upcoming macro events: CPI on May 13; PPI on May 14; GDP Second Estimate on May 28; Employment Situation on June 5; FOMC decision June 17. Stay aligned to inflation path and rate expectations.",
+        "Market data gap risk: official macro release (O1) blocked; rely on prior context for near-term rate outlook; watch for any guidance from Fed speakers or policy proxies.",
+        "Sector confirmation: IT leadership remains, watch XLK/CTH names for durable breakout; monitor XLI and XLP for breadth signals.",
+        "Data gaps: official macro bullets not fetched; rely on model and earnings momentum to guide exposures; invalidate if CPI jumps surprise.",
+        "Invalidation: if CPI/ PPI relief fails to cool inflation, expect rotation out of high-momentum IT names and appetite for defensives."
       ]
     },
     "recommendations": [
       {
         "symbol": "CIEN",
-        "action": "Long",
+        "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum Confirmed",
-        "whyNow": "Momentum remains strong with long-horizon trend intact and 60d over SPY by +77.5bps; within 8% of 52w high, above 50 / 200-day moving averages, volume support moderate (volatility / volume flags present).",
-        "rationale": "Leading BE within top-decile momentum; 60d return vs SPY outperformance confirms uptrend.",
+        "setup": "momentum_confirmed",
+        "whyNow": "Industry-leading momentum with 60d SPY outperformance and proximity to 52w high; 200d trend positive; liquidity ample",
+        "rationale": "Long-horizon momentum ahead of sector median; top 120d sector rank; within 8% of 52w high; RSI around 60; elevated but manageable volatility.",
         "companyOverview": "Ciena is the global leader in high-speed connectivity. We build the world's most advanced networks to support exponential growth in bandwidth demand. By harnessing the power of our networking systems, interconnects, automation software, and services, Ciena revolutionizes data transmission and network management. Wit...",
         "marketCap": "$77.5B",
         "earningsContext": "Last reported 2026-03-05 for the Jan 2026 fiscal quarter; EPS 1.08 versus consensus 0.89; surprise 21.35%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Apr 2026 with consensus 1.19.",
-        "recentNews": "Earnings beat in Jan quarter; AI networking demand remains robust.",
-        "macroLink": "Market-wide AI / semis leadership supports case.",
-        "macroEvidence": "Top-sector momentum and sector 120d return rank; proximity to 52w high.",
-        "modelEvidence": "Rank 1; modelScore 0.276; SHAP features point to volatility and momentum features; risk flags indicate above-sector volatility and volume confirmation.",
-        "technicalEvidence": "RSI 60; distance to 52w high -4.97; 60d return 72%.",
-        "momentumEvidence": "Strong 60 / 120d momentum signals; above-200d trend.",
-        "risk": "Above-sector volatility; weak volume confirmation.",
-        "invalidation": "Close below stopSell (balanced_ATR) after activation; if breadth worsens or IT leadership collapses.",
+        "recentNews": "Strong earnings surprise and sector leadership reinforce the bullish setup.",
+        "macroLink": "https: / / www.bls.gov / news.release / empsit.nr0.htm",
+        "macroEvidence": "Official macro release delayed; market reacting to labor resilience and IT capex",
+        "modelEvidence": "Rank 1 of 502; top decile; SHAP features show momentum and volatility signals supporting stance.",
+        "technicalEvidence": "Close above 50 / 200d confirms uptrend; volume trend steady.",
+        "momentumEvidence": "60d and 120d momentum ranks support continuation",
+        "risk": "Above-sector volatility; weak volume confirmation could precede a pause or pullback",
+        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
           "S1",
           "C1-EARNINGS",
           "C1-MARKETCAP",
-          "S2",
-          "S3",
-          "S9",
-          "C1-IR"
-        ]
-      },
-      {
-        "symbol": "LITE",
-        "action": "Long",
-        "conviction": "High",
-        "setup": "Momentum Confirmed",
-        "whyNow": "Top Decile momentum with long-horizon momentum ahead of sector median; above 50 / 200d trends; liquidity favorable.",
-        "rationale": "Led by data-center / infrastructure demand and AI networking tailwinds; strong 60 / 120d momentum vs SPY.",
-        "companyOverview": "Lumentum (NASDAQ: LITE) is a global leader in optical and photonic technologies that power the networks and infrastructure behind AI, cloud computing, and next-generation communications. Built on decades of photonics innovation, Lumentum delivers high-performance lasers, modules, and optical subsystems that enable s...",
-        "marketCap": "$70.3B",
-        "earningsContext": "Last reported 2026-05-05 for the Mar 2026 fiscal quarter; EPS 1.88 versus consensus 1.81; surprise 3.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 2.18.",
-        "recentNews": "Q3 FY2026 solid margin expansion; AI infra demand supportive.",
-        "macroLink": "AI / semis cycle supportive.",
-        "macroEvidence": "IT sector strength; 60d / 120d momentum drivers.",
-        "modelEvidence": "Rank 3; SHAP-driven momentum features; volatility flag.",
-        "technicalEvidence": "RSI 51; distance to 52w high -9.13; volume ratio 1.18.",
-        "momentumEvidence": "Top-sector 120d return rank; 200d trend above.",
-        "risk": "Above-sector volatility; liquidity adequate.",
-        "invalidation": "Monitor for RSI exhaustion; ensure price remains above 50d / 200d averages.",
-        "sourceRefs": [
-          "C3-EARNINGS",
-          "C3-MARKETCAP",
-          "S3",
-          "C3-IR"
+          "C1-IR",
+          "O1"
         ]
       },
       {
         "symbol": "SNDK",
-        "action": "Long",
+        "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum Confirmed",
-        "whyNow": "Strong 60 / 120d momentum with 60d SPY outperformance; within 8% of 52w high; RSI elevated but trend intact.",
-        "rationale": "Storages leadership; AI / data-center tailwinds; momentum remains robust.",
+        "setup": "momentum_confirmed",
+        "whyNow": "Storage / SSD cycle benefiting from data growth; 52w high proximity; momentum strong; 60d SPY outperformance",
+        "rationale": "Long-horizon momentum, top sector return, above 200d trend; within 8% of 52w high; RSI caution near 81; liquidity healthy.",
         "companyOverview": "Sandisk is a leading developer, manufacturer and provider of data storage devices and solutions based on NAND flash technology. With a differentiated innovation engine driving advancements in storage and semiconductor technologies, our broad and ever-expanding portfolio delivers powerful flash storage solutions for...",
         "marketCap": "$231.4B",
         "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 31.81.",
-        "recentNews": "Earnings surprise drives momentum; AI storage demand.",
-        "macroLink": "AI / data center demand",
-        "macroEvidence": "Top-sector momentum; 120d return rank; proximity to 52w high.",
-        "modelEvidence": "Rank 4; high percentile; SHAP features indicate momentum",
-        "technicalEvidence": "RSI 81; distance to 52w high 0; volume 1.24x.",
-        "momentumEvidence": "Momentum confirmed; strong 60 / 120d signals.",
-        "risk": "RSI extended; above-sector volatility.",
+        "recentNews": "Strong earnings beat and data-storage demand support upside.",
+        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / sndk / earnings",
+        "macroEvidence": "IT demand strength; AI hardware cycle",
+        "modelEvidence": "Rank 4 of 502; momentum confirmed; SHAP features support volatility and momentum tilt.",
+        "technicalEvidence": "RSI 81 indicates overbought risk; risk-control trigger levels defined by chandelier stops.",
+        "momentumEvidence": "Top-sector 120d return rank; 60 / 120d momentum strong",
+        "risk": "RSI elevated; potential pullback risk; volume confirmation moderate",
         "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
           "C4-EARNINGS",
           "C4-MARKETCAP",
-          "S3",
-          "C4-IR"
+          "C4-IR",
+          "S1"
         ]
       },
       {
-        "symbol": "STX",
-        "action": "Long",
+        "symbol": "LITE",
+        "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum Confirmed",
-        "whyNow": "Within 8% of 52w high; top sector momentum; strong 60d / 120d momentum; RSI elevated but not extreme.",
-        "rationale": "Storage leader in IT; consistent earnings momentum; AI-tailwinds supportive.",
-        "companyOverview": "Seagate (NASDAQ: STX) is a pioneer in mass-capacity data storage, accelerating ability to harness the full value of data. Our portfolio of advanced storage solutions helps hyperscale cloud providers, enterprises, and consumers protect, create and manage the data that powers their transformation and growth. For more...",
-        "marketCap": "$175.5B",
-        "earningsContext": "Last reported 2026-04-28 for the Mar 2026 fiscal quarter; EPS 3.92 versus consensus 3.26; surprise 20.25%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 4.83.",
-        "recentNews": "Earnings beat; AI / storage demand.",
-        "macroLink": "AI data growth",
-        "macroEvidence": "Top-sector momentum; 120d return rank.",
-        "modelEvidence": "Rank 5; momentum feature set; volatility flag.",
-        "technicalEvidence": "RSI 88; distance to 52w high -0.48.",
-        "momentumEvidence": "Top-decile momentum; 60d return 85%",
-        "risk": "RSI extended; above-sector volatility.",
-        "invalidation": "Price action decay or break of 50d / 200d trend.",
+        "setup": "momentum_confirmed",
+        "whyNow": "AI / cloud infra buildout; 120d sector momentum; above 200d trend; highly liquid",
+        "rationale": "Long-horizon momentum with strong 60d / 120d gains; 50 / 200d trend positive; RSI around 51; near-term upside potential.",
+        "companyOverview": "Lumentum (NASDAQ: LITE) is a global leader in optical and photonic technologies that power the networks and infrastructure behind AI, cloud computing, and next-generation communications. Built on decades of photonics innovation, Lumentum delivers high-performance lasers, modules, and optical subsystems that enable s...",
+        "marketCap": "$70.3B",
+        "earningsContext": "Last reported 2026-05-05 for the Mar 2026 fiscal quarter; EPS 1.88 versus consensus 1.81; surprise 3.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 2.18.",
+        "recentNews": "Strong photonics demand; margin expansion.",
+        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / lite / earnings",
+        "macroEvidence": "AI hardware demand; data-center spending",
+        "modelEvidence": "Rank 3; momentum confirmed; liquidity favorable; SHAP indicates liquidity feature",
+        "technicalEvidence": "Above 50d / 200d; volume ratio 1.18; RSI 51; near 52w high margin.",
+        "momentumEvidence": "Top sector 120d return rank; liquid vs universe",
+        "risk": "RSI not extreme; volatility elevated but controlled",
+        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
-          "C5-EARNINGS",
-          "C5-MARKETCAP",
-          "C5-IR"
+          "C3-EARNINGS",
+          "C3-MARKETCAP",
+          "C3-IR"
         ]
       },
       {
-        "symbol": "WDC",
-        "action": "Long",
-        "conviction": "High",
-        "setup": "Momentum Confirmed",
-        "whyNow": "RSI 80s; top decile momentum; IT leadership; 60d / 120d momentum intact.",
-        "rationale": "Storage hardware demand tailwinds; AI / data center cycle supports.",
-        "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to enable reliable storage solutions that are proven and trusted at sca...",
-        "marketCap": "$165.4B",
-        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 2.62 versus consensus 2.28; surprise 14.91%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 3.16.",
-        "recentNews": "Earnings beat; AI / storage demand.",
-        "macroLink": "AI data center demand",
-        "macroEvidence": "Strong momentum in IT; top sector momentum.",
-        "modelEvidence": "Rank 6; momentum; volatility flag.",
-        "technicalEvidence": "RSI 80; distance to 52w high -0.65.",
-        "momentumEvidence": "Top-decile momentum; 60d return 83%",
-        "risk": "RSI elevated; above-sector volatility.",
-        "invalidation": "Watch for break of key moving averages.",
+        "symbol": "CHTR",
+        "action": "Avoid",
+        "conviction": "Low",
+        "setup": "model_rebound_watch",
+        "whyNow": "Below-50 / 200d trend; notable rebound activation parameters; not momentum confirmed",
+        "rationale": "Model rebound watch with activation pending; RSI very low (14) but price action weak; risk of continued drawdown.",
+        "companyOverview": "Charter Communications, Inc. (NASDAQ:CHTR ) is a leading broadband connectivity company with services available to nearly 59 million homes and small to large businesses across 41 states through its Spectrum brand. Founded in 1993, Charter has evolved from providing cable TV to streaming, and from high-speed Interne...",
+        "marketCap": "$21.5B",
+        "earningsContext": "Last reported 2026-04-24 for the Mar 2026 fiscal quarter; EPS 9.17 versus consensus 9.97; surprise -8.02%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 10.33.",
+        "recentNews": "No clear catalyst; price not supportive; IR data limited.",
+        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / chtr / earnings",
+        "macroEvidence": "No direct macro driver",
+        "modelEvidence": "Rank 12; rebound watch; activation pending; RSI 14; volatility signals.",
+        "technicalEvidence": "Below 50d / 200d trends; high volatility flagged",
+        "momentumEvidence": "Not momentum confirmed",
+        "risk": "Activation pending; high risk if fails to activate",
+        "invalidation": "Close below activation price 162.73 within 5 days.",
         "sourceRefs": [
-          "C6-EARNINGS",
-          "C6-MARKETCAP",
-          "C6-IR"
-        ]
-      },
-      {
-        "symbol": "MU",
-        "action": "Long",
-        "conviction": "High",
-        "setup": "Momentum Confirmed",
-        "whyNow": "Strong AI memory cycle; RSI elevated but trend intact; momentum leaders.",
-        "rationale": "AI / Mem tailwinds support demand; robust 120d momentum.",
-        "companyOverview": "Micron Technology, Inc., is an industry leader in innovative memory and storage solutions, transforming how the world uses information to enrich life for all. With a relentless focus on our customers, technology leadership, and manufacturing and operational excellence, Micron delivers a rich portfolio of high-perfor...",
-        "marketCap": "$842.2B",
-        "earningsContext": "Last reported 2026-03-18 for the Feb 2026 fiscal quarter; EPS 12.08 versus consensus 8.64; surprise 39.81%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as May 2026 with consensus 18.97.",
-        "recentNews": "AI memory demand; strong earnings.",
-        "macroLink": "AI demand",
-        "macroEvidence": "IT sector leadership; AI cycle.",
-        "modelEvidence": "Rank 7; momentum; volatility flag.",
-        "technicalEvidence": "RSI 88; distance to52w high 0; volume 1.51x.",
-        "momentumEvidence": "Top Decile momentum; 60d return 77%",
-        "risk": "RSI extended; volatility.",
-        "invalidation": "Monitor for reversal; tight risk controls.",
-        "sourceRefs": [
-          "C7-EARNINGS",
-          "C7-MARKETCAP",
-          "C7-IR"
+          "C12-EARNINGS",
+          "C12-IR",
+          "C12-MARKETCAP"
         ]
       }
     ],
     "avoidList": {
-      "summary": "Avoid crowded, overextended Financials and Utilities with weak momentum signals; many ranked as low-confidence names risking drawdown.",
+      "summary": "Investable names with weak multi-day momentum are concentrated in Financials, Industrials, Health Care, Utilities, and Consumer Staples; avoid fresh long exposure until macro signals and stock-specific momentum improve.",
       "sectors": [
         {
           "sector": "Financials",
-          "rationale": "16 of the weakest model-ranked names are concentrated here; rotation risk if rates stay higher longer."
+          "rationale": "16 weakest model-ranked names concentrated here; risk of further drawdown if rates stay high."
+        },
+        {
+          "sector": "Industrials",
+          "rationale": "11 weak names; sensitivity to capex cycles."
+        },
+        {
+          "sector": "Health Care",
+          "rationale": "11 weak names; earnings volatility and policy risk."
+        },
+        {
+          "sector": "Utilities",
+          "rationale": "8 weak names; defensive darlings may underperform if inflation cools."
         }
       ],
       "companies": [
         {
           "symbol": "AEP",
-          "rationale": "Ranked with negative model signal; near 52w high but weak liquidity; avoid long exposure until confirmation improves.",
-          "modelEvidence": "Ranked 502; -0.22 score; RSI 45; volume 0.95x."
+          "rationale": "Ranked bottom; weak momentum; volatility elevated.",
+          "modelEvidence": "Rank 502; -0.22 score; RSI 45; volatility 0.0128."
         },
         {
           "symbol": "AFL",
-          "rationale": "Low momentum and weak liquidity; not momentum confirmed.",
-          "modelEvidence": "Ranked 501; -0.22; RSI not supportive."
+          "rationale": "Bottom-ranked; low momentum signals; volume weak.",
+          "modelEvidence": "Rank 501; -0.22; RSI not supportive."
         }
       ]
     },
     "portfolioNotes": [
-      "Momentum leaders in IT dominate; avoid crowded financials/utilities without momentum.",
-      "Earnings surprises in AI infra hardware support upside",
-      "Reddit sentiment constrained by data access; AI-driven narratives remain relevant"
+      "Momentum-led long book concentrated in top decile IT names; SATS monitored for volatility",
+      "Earnings catalysts skew toward memory, networking, and storage hardware"
     ],
     "openQuestions": [
-      "Are CPI/PPI surprises likely to change Fed paths?",
-      "Will AI infra capex cycle persist through 2H 2026?"
+      "Is the CPI risk premia price-in before May 13?",
+      "Are near-term inflation prints strong enough to push Fed into a higher-for-longer stance?",
+      "What does the oil/energy complex imply for IT hardware demand in coming months?"
     ],
     "sourceRefs": [
       "S1",
-      "S2",
-      "S3",
-      "S6",
+      "C1-EARNINGS",
+      "C4-EARNINGS",
+      "C3-EARNINGS",
       "S7",
+      "S3",
+      "S4",
+      "S6",
+      "S8",
       "S9",
+      "S10",
       "S12"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "A focused, differentiated set of analytic angles drawn from the latest 7 days of candidate sources. Prioritizes non-redundant narratives and actionable market-read insights.",
+      "summary": "Selected angle-driven analyses from the past week, focusing on differentiated macro-detail and market structure signals rather than broad recaps. Avoids previously used sources unless necessary.",
       "cards": [
         {
           "sourceRef": "S15",
           "sourceName": "Axios Macro RSS",
           "title": "What is, and isn't, worrying about 100% debt to GDP - Axios",
-          "thesis": "The debate centers on whether the debt burden is a drag on growth or a predictable constraint that policy can offset through rate, inflation, and productivity dynamics. The nuance is in how near-term fiscal posture and longer-term debt dynamics interact with growth signals.",
-          "whyItMatters": "If debt concerns intensify, risk premia could widen not just in inflation-sensitive assets but across growth-sensitive equities as fiscal risk visibility increases. This is a lens on monetary policy credibility and potential policy missteps.",
-          "marketReadThrough": "Markets may reprice growth stocks and cyclicals if fiscal paths imply higher future taxes or tighter financial conditions. Look for dispersion in sectors with sensitivity to policy changes (capex-heavy vs. consumer-oriented) and shifts in credit risk premia.",
-          "variantAngle": "Distinguish between debt-fatigue (policy inertia) vs. debt-dynamic (growth-suppressing drag) narratives; the differential impact on long-duration vs. sectors with inflation pass-through capabilities.",
+          "thesis": "The debate isn’t binary: policy constraints, growth dynamics, and financial-fee pressures imply asymmetric risk around debt ceilings. Markets may overreact to headline debt metrics while the real stress appears in funding conditions and long-duration risk premia.",
+          "whyItMatters": "If debt-outlook shifts are priced in as permanent constraints, credit markets and long-term rates could reset in ways that tighten financial conditions without obvious policy pivots.",
+          "marketReadThrough": "Watch 10-year / 30-year yield curves, funding spreads, and bank loan markets for sudden flattening or steepening that presages credit-cycle tightening rather than immediate fiscal policy shocks.",
+          "variantAngle": "Focus on the interaction between debt sustainability narratives and financial conditions proxies (term premium, credit spreads) to identify mispriced duration risk.",
           "confidence": "Medium",
           "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBHel9tV0FWamJ6eTI3M1lObFhvWk1VWkZaZ1JQblVUVm1GaVR6a1k4R0stSVcwN05tRHh0RlBzZEZDZzJiZlFvOUZiNnRHb2RZdEc5TjFDTlRkVTJwYzF2ejdNQUxBTzJIVmk2N1NoZw?oc=5",
           "publishedAt": "2026-05-04T16:01:53.000Z",
@@ -1622,10 +1588,10 @@
           "sourceRef": "S11",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Looking to the Futures",
-          "thesis": "Futures data is signaling shifting bets around risk appetite, inflation expectations, and hedging demand in a nuanced way that isn’t captured by headline volatility. It emphasizes the structure of the risk premium embedded in asset prices.",
-          "whyItMatters": "Futures contours can reveal impending regime shifts before spot markets, especially in commodities and rate-sensitive assets. Understanding the term-structure and curve signals can guide timing for exposure in equities, bonds, and alternatives.",
-          "marketReadThrough": "Watch for changes in futures curves (commodity, rate, equity index) that precede moves in cash markets. Implied volatility surfaces and roll yields may inform hedging and positioning strategies.",
-          "variantAngle": "Emphasize the curve-driven narrative (e.g., contango / backwardation, rate-implied signals) over simple price moves; link to potential policy surprises or geopolitical catalysts that reshape risk pricing.",
+          "thesis": "Futures markets are signaling immediate-priority risk sensitivities-earnings, rates, geopolitics, and energy-yet the narrative remains compartmentalized, which can create mispricings when cross-asset correlations shift suddenly.",
+          "whyItMatters": "Futures-driven pricing often foreshadows broader risk-off / risk-on shifts before equities respond, offering a timing proxy for hedging across asset classes.",
+          "marketReadThrough": "Use cross-asset signals (equity-implied volatility, commodity curves, and rate futures) to test if equity risk premia are expanding due to real-economy stress or just term-structure adjustments.",
+          "variantAngle": "Examine cross-asset kink points where futures signals diverge from equity price action to spot hidden hedging demand or speculative liquidity dry spots.",
           "confidence": "Low",
           "url": "https://www.schwab.com/learn/story/looking-to-futures",
           "publishedAt": "2026-05-08T00:00:00.000Z",
@@ -1637,10 +1603,10 @@
           "sourceRef": "S16",
           "sourceName": "Fidelity Market Insights",
           "title": "Market volatility: Investing strategies for volatile markets | Fidelity",
-          "thesis": "Non-linear strategies and hedging approaches can help protect portfolios during sharp drawdowns, but require disciplined risk budgeting and performance analytics to avoid chasing noise.",
-          "whyItMatters": "Volatility regimes can cluster, creating persistent drawdown risk if portfolio construction isn’t aligned with regime expectations. This matters for risk parity, multi-asset, and options-driven strategies.",
-          "marketReadThrough": "Expect elevated dispersion in asset correlations; alpha sources may shift from beta to risk-hedging efficiency. Dynamic hedging costs and implementation details matter for performance attribution.",
-          "variantAngle": "Frame volatility as a regime-agnostic risk factor with explicit cost / benefit tradeoffs of hedging techniques; compare option-based vs. volatility-targeting overlays in current regime.",
+          "thesis": "Volatility isn’t just a risk; it’s a persistent driver of return regimes. Distinguishing regime-driven moves from noise is essential for positioning in a mid-cycle environment.",
+          "whyItMatters": "In volatile regimes, dispersion expands and stock-level idiosyncrasies matter more than macro beta. Tail-risk hedges and factor diversification may outperform during regime transitions.",
+          "marketReadThrough": "Evaluate volatility dispersion, correlation breakdowns, and factor performance skew during recent spikes to gauge where capital rotation will occur next.",
+          "variantAngle": "Prioritize strategies that perform in volatility regimes (volatility targeting, option-structure plays, and sector rotation via dispersion baskets) over outright directional bets.",
           "confidence": "Medium",
           "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
           "publishedAt": "2026-05-04T00:00:00.000Z",
@@ -1654,16 +1620,16 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "A focused, differentiated set of analytic angles drawn from the latest 7 days of candidate sources. Prioritizes non-redundant narratives and actionable market-read insights.",
+    "summary": "Selected angle-driven analyses from the past week, focusing on differentiated macro-detail and market structure signals rather than broad recaps. Avoids previously used sources unless necessary.",
     "cards": [
       {
         "sourceRef": "S15",
         "sourceName": "Axios Macro RSS",
         "title": "What is, and isn't, worrying about 100% debt to GDP - Axios",
-        "thesis": "The debate centers on whether the debt burden is a drag on growth or a predictable constraint that policy can offset through rate, inflation, and productivity dynamics. The nuance is in how near-term fiscal posture and longer-term debt dynamics interact with growth signals.",
-        "whyItMatters": "If debt concerns intensify, risk premia could widen not just in inflation-sensitive assets but across growth-sensitive equities as fiscal risk visibility increases. This is a lens on monetary policy credibility and potential policy missteps.",
-        "marketReadThrough": "Markets may reprice growth stocks and cyclicals if fiscal paths imply higher future taxes or tighter financial conditions. Look for dispersion in sectors with sensitivity to policy changes (capex-heavy vs. consumer-oriented) and shifts in credit risk premia.",
-        "variantAngle": "Distinguish between debt-fatigue (policy inertia) vs. debt-dynamic (growth-suppressing drag) narratives; the differential impact on long-duration vs. sectors with inflation pass-through capabilities.",
+        "thesis": "The debate isn’t binary: policy constraints, growth dynamics, and financial-fee pressures imply asymmetric risk around debt ceilings. Markets may overreact to headline debt metrics while the real stress appears in funding conditions and long-duration risk premia.",
+        "whyItMatters": "If debt-outlook shifts are priced in as permanent constraints, credit markets and long-term rates could reset in ways that tighten financial conditions without obvious policy pivots.",
+        "marketReadThrough": "Watch 10-year / 30-year yield curves, funding spreads, and bank loan markets for sudden flattening or steepening that presages credit-cycle tightening rather than immediate fiscal policy shocks.",
+        "variantAngle": "Focus on the interaction between debt sustainability narratives and financial conditions proxies (term premium, credit spreads) to identify mispriced duration risk.",
         "confidence": "Medium",
         "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBHel9tV0FWamJ6eTI3M1lObFhvWk1VWkZaZ1JQblVUVm1GaVR6a1k4R0stSVcwN05tRHh0RlBzZEZDZzJiZlFvOUZiNnRHb2RZdEc5TjFDTlRkVTJwYzF2ejdNQUxBTzJIVmk2N1NoZw?oc=5",
         "publishedAt": "2026-05-04T16:01:53.000Z",
@@ -1675,10 +1641,10 @@
         "sourceRef": "S11",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Looking to the Futures",
-        "thesis": "Futures data is signaling shifting bets around risk appetite, inflation expectations, and hedging demand in a nuanced way that isn’t captured by headline volatility. It emphasizes the structure of the risk premium embedded in asset prices.",
-        "whyItMatters": "Futures contours can reveal impending regime shifts before spot markets, especially in commodities and rate-sensitive assets. Understanding the term-structure and curve signals can guide timing for exposure in equities, bonds, and alternatives.",
-        "marketReadThrough": "Watch for changes in futures curves (commodity, rate, equity index) that precede moves in cash markets. Implied volatility surfaces and roll yields may inform hedging and positioning strategies.",
-        "variantAngle": "Emphasize the curve-driven narrative (e.g., contango / backwardation, rate-implied signals) over simple price moves; link to potential policy surprises or geopolitical catalysts that reshape risk pricing.",
+        "thesis": "Futures markets are signaling immediate-priority risk sensitivities-earnings, rates, geopolitics, and energy-yet the narrative remains compartmentalized, which can create mispricings when cross-asset correlations shift suddenly.",
+        "whyItMatters": "Futures-driven pricing often foreshadows broader risk-off / risk-on shifts before equities respond, offering a timing proxy for hedging across asset classes.",
+        "marketReadThrough": "Use cross-asset signals (equity-implied volatility, commodity curves, and rate futures) to test if equity risk premia are expanding due to real-economy stress or just term-structure adjustments.",
+        "variantAngle": "Examine cross-asset kink points where futures signals diverge from equity price action to spot hidden hedging demand or speculative liquidity dry spots.",
         "confidence": "Low",
         "url": "https://www.schwab.com/learn/story/looking-to-futures",
         "publishedAt": "2026-05-08T00:00:00.000Z",
@@ -1690,10 +1656,10 @@
         "sourceRef": "S16",
         "sourceName": "Fidelity Market Insights",
         "title": "Market volatility: Investing strategies for volatile markets | Fidelity",
-        "thesis": "Non-linear strategies and hedging approaches can help protect portfolios during sharp drawdowns, but require disciplined risk budgeting and performance analytics to avoid chasing noise.",
-        "whyItMatters": "Volatility regimes can cluster, creating persistent drawdown risk if portfolio construction isn’t aligned with regime expectations. This matters for risk parity, multi-asset, and options-driven strategies.",
-        "marketReadThrough": "Expect elevated dispersion in asset correlations; alpha sources may shift from beta to risk-hedging efficiency. Dynamic hedging costs and implementation details matter for performance attribution.",
-        "variantAngle": "Frame volatility as a regime-agnostic risk factor with explicit cost / benefit tradeoffs of hedging techniques; compare option-based vs. volatility-targeting overlays in current regime.",
+        "thesis": "Volatility isn’t just a risk; it’s a persistent driver of return regimes. Distinguishing regime-driven moves from noise is essential for positioning in a mid-cycle environment.",
+        "whyItMatters": "In volatile regimes, dispersion expands and stock-level idiosyncrasies matter more than macro beta. Tail-risk hedges and factor diversification may outperform during regime transitions.",
+        "marketReadThrough": "Evaluate volatility dispersion, correlation breakdowns, and factor performance skew during recent spikes to gauge where capital rotation will occur next.",
+        "variantAngle": "Prioritize strategies that perform in volatility regimes (volatility targeting, option-structure plays, and sector rotation via dispersion baskets) over outright directional bets.",
         "confidence": "Medium",
         "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
         "publishedAt": "2026-05-04T00:00:00.000Z",
@@ -1712,12 +1678,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-05-10T04:20:20.944Z",
+    "generatedAt": "2026-05-10T15:19:08.625Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-05-10T00:14:07.352Z"
+      "previousRefreshAt": "2026-05-10T04:21:25.816Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1728,7 +1694,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-05-10T04:15:26.158Z",
+      "generatedAt": "2026-05-10T15:14:14.533Z",
       "lookbackHours": 96,
       "releases": [
         {
@@ -1753,10 +1719,14 @@
     },
     "sourceHealth": {
       "checked": 26,
-      "live": 22,
+      "live": 21,
       "blockedOrFailed": [
         {
           "name": "Raymond James Commentary And Insights",
+          "reason": "Source check failed: This operation was aborted"
+        },
+        {
+          "name": "EIA Today In Energy",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -1776,43 +1746,114 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "The most prestigious role in AI has no job description",
-        "sourceName": "MarketWatch Top Stories RSS",
+        "title": "SEC delay on prediction markets ETFs echoes a long-fought bitcoin fund battle",
+        "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/the-most-prestigious-job-in-ai-has-no-description-d517601f?mod=mw_rss_topstories",
-        "publishedAt": "2026-05-10T01:32:00.000Z",
-        "summary": "Everyone from Anthropic to tiny startups is hiring for the “member of technical staff” - but does anyone know what it means?",
-        "excerpt": "Everyone from Anthropic to tiny startups is hiring for the “member of technical staff” — but does anyone know what it means?",
+        "url": "https://www.cnbc.com/2026/05/10/sec-prediction-markets-etfs-trading-launch-delay.html",
+        "publishedAt": "2026-05-10T12:22:02.000Z",
+        "summary": "The Securities and Exchange Commission has delayed approval for prediction markets ETFs, bringing up memories of the long battle over bitcoin funds.",
+        "excerpt": "The Securities and Exchange Commission has delayed approval for prediction markets ETFs, bringing up memories of the long battle over bitcoin funds.",
         "themes": [
-          "AI and semis"
+          "Market color"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 2.8,
+        "ageHours": 3,
         "score": 78,
         "tickers": []
       },
       {
         "id": "M2",
-        "title": "S&P 500 extends winning streak to 6 weeks. What drove the stock market gains",
+        "title": "Alphabet&apos;s 160% rally in a year reflects value of owning &apos;most of the stack&apos; in AI",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/09/sp-500-extends-winning-streak-to-6-weeks-what-drove-the-stock-market-gains.html",
-        "publishedAt": "2026-05-09T20:18:57.000Z",
-        "summary": "Investors cheered positive earnings, economic data, and a high-profile AI partnership.",
-        "excerpt": "Investors cheered positive earnings, economic data, and a high-profile AI partnership.",
+        "url": "https://www.cnbc.com/2026/05/10/alphabet-160percent-rally-in-year-reflects-value-of-owning-most-of-ai-stack.html",
+        "publishedAt": "2026-05-10T12:00:01.000Z",
+        "summary": "Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner.",
+        "excerpt": "Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner.",
         "themes": [
-          "Earnings",
           "AI and semis"
         ],
-        "freshness": "Last 24 hours",
-        "ageHours": 8,
-        "score": 70,
+        "freshness": "Since prior refresh",
+        "ageHours": 3.3,
+        "score": 78,
         "tickers": []
       },
       {
         "id": "M3",
+        "title": "Retailers are on a hiring spree. But consumers are sending warning signs",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/05/10/retailer-hiring-consumer-warning-jobs-report.html",
+        "publishedAt": "2026-05-10T11:29:25.000Z",
+        "summary": "The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth.",
+        "excerpt": "The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth.",
+        "themes": [
+          "Macro and growth"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 3.8,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M4",
+        "title": "Big Tech’s AI spending is depriving investors of juicy payouts",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/big-techs-ai-spending-is-depriving-investors-of-juicy-payouts-39d17305?mod=mw_rss_topstories",
+        "publishedAt": "2026-05-10T14:00:00.000Z",
+        "summary": "Goldman Sachs expects S&P 500 share buybacks to grow only 3% this year, as a shaky economic backdrop and AI cost pressures force spending reconsiderations.",
+        "excerpt": "Goldman Sachs expects S&P 500 share buybacks to grow only 3% this year, as a shaky economic backdrop and AI cost pressures force spending reconsiderations.",
+        "themes": [
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 1.3,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M5",
+        "title": "‘The S&P 500 seems to be doing particularly well’: I’m 66. Is this a good time to invest $100,000 in the stock market?",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/the-s-p-500-seems-to-be-doing-particularly-well-im-66-is-this-a-good-time-to-invest-100-000-in-the-stock-market-46fb8ff8?mod=mw_rss_topstories",
+        "publishedAt": "2026-05-10T13:00:00.000Z",
+        "summary": "“I own my home and I have no debt.”",
+        "excerpt": "“I own my home and I have no debt.”",
+        "themes": [
+          "Market color"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 2.3,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M6",
+        "title": "Stocks are walking a tightrope to fresh record highs — as a handful of names do most of the heavy lifting",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/stocks-are-walking-a-tightrope-to-fresh-record-highs-as-a-handful-of-names-do-most-of-the-heavy-lifting-fe5a166a?mod=mw_rss_topstories",
+        "publishedAt": "2026-05-10T13:00:00.000Z",
+        "summary": "Investors are caught on a tightrope - watching a very narrow band of tech stocks lift the stock market to fresh record highs, while looking down below for signs of trouble.",
+        "excerpt": "Investors are caught on a tightrope — watching a very narrow band of tech stocks lift the stock market to fresh record highs, while looking down below for signs of trouble.",
+        "themes": [
+          "Market color"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 2.3,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M7",
         "title": "Oil Prices, Bitcoin Rise While Rate Hike Odds Slip",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1827,31 +1868,12 @@
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 52.3,
+        "ageHours": 63.3,
         "score": 62,
         "tickers": []
       },
       {
-        "id": "M4",
-        "title": "These are the fastest-growing jobs for new college graduates — even in this low-hire market",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/these-are-the-fastest-growing-jobs-for-new-college-graduates-even-in-this-low-hire-market-974bf612?mod=mw_rss_topstories",
-        "publishedAt": "2026-05-09T19:12:00.000Z",
-        "summary": "The post-inflation job market has been especially hard for new grads, but there are ways they can help themselves prepare for the search.",
-        "excerpt": "The post-inflation job market has been especially hard for new grads, but there are ways they can help themselves prepare for the search.",
-        "themes": [
-          "Rates and central banks",
-          "Macro and growth"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 9.1,
-        "score": 62,
-        "tickers": []
-      },
-      {
-        "id": "M5",
+        "id": "M8",
         "title": "Cloudflare stock sinks 24% after earnings as company cuts 1,100 employees due to AI changes",
         "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
@@ -1865,62 +1887,8 @@
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 37.6,
+        "ageHours": 48.6,
         "score": 54,
-        "tickers": []
-      },
-      {
-        "id": "M6",
-        "title": "Nvidia embraces role of AI investor, pushing past $40 billion in equity bets this year",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/09/nvidia-embraces-ai-investor-topping-40-billion-in-equity-bets-2026.html",
-        "publishedAt": "2026-05-09T16:41:22.000Z",
-        "summary": "Nvidia is pouring billions of dollars at a time into companies across the AI infrastructure stack, while also signing commercial deals with them.",
-        "excerpt": "Nvidia is pouring billions of dollars at a time into companies across the AI infrastructure stack, while also signing commercial deals with them.",
-        "themes": [
-          "AI and semis"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 11.6,
-        "score": 48,
-        "tickers": []
-      },
-      {
-        "id": "M7",
-        "title": "There&apos;s little chance of a hantavirus global outbreak. What the latest odds say",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/09/hantavirus-outbreak-little-chance-says-kalshi.html",
-        "publishedAt": "2026-05-09T16:41:15.000Z",
-        "summary": "Prediction markets like Kalshi show slim chance that the hantavirus outbreak will be of international concern",
-        "excerpt": "Prediction markets like Kalshi show slim chance that the hantavirus outbreak will be of international concern",
-        "themes": [
-          "Market color"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 11.7,
-        "score": 48,
-        "tickers": []
-      },
-      {
-        "id": "M8",
-        "title": "I was a slave to credit-card debt, then I got laid off and turned my life around. Here’s how I did it.",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/americans-love-their-rose-colored-glasses-i-was-a-slave-to-credit-card-debt-then-i-got-laid-off-and-turned-my-life-around-32ba4d4c?mod=mw_rss_topstories",
-        "publishedAt": "2026-05-09T19:25:00.000Z",
-        "summary": "“I have steadily increased my assets by more than 10% since being laid off.”",
-        "excerpt": "“I have steadily increased my assets by more than 10% since being laid off.”",
-        "themes": [
-          "Credit and liquidity"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 8.9,
-        "score": 48,
         "tickers": []
       },
       {
@@ -1937,18 +1905,18 @@
           "Earnings"
         ],
         "freshness": "Important older item",
-        "ageHours": 31.1,
+        "ageHours": 42.1,
         "score": 46,
         "tickers": []
       }
     ],
     "topThemes": [
       {
-        "theme": "AI and semis",
-        "count": 4
+        "theme": "Market color",
+        "count": 3
       },
       {
-        "theme": "Earnings",
+        "theme": "AI and semis",
         "count": 3
       },
       {
@@ -1956,516 +1924,27 @@
         "count": 3
       },
       {
-        "theme": "Rates and central banks",
+        "theme": "Earnings",
         "count": 2
       },
       {
-        "theme": "Commodities and energy",
+        "theme": "Rates and central banks",
         "count": 1
       },
       {
-        "theme": "Market color",
+        "theme": "Commodities and energy",
         "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-05-10T04:20:20.938Z",
+      "generatedAt": "2026-05-10T15:19:08.619Z",
       "dates": [
-        "2026-05-08",
         "2026-05-09",
-        "2026-05-10"
+        "2026-05-10",
+        "2026-05-11"
       ],
       "calendars": [
-        {
-          "date": "2026-05-08",
-          "asOf": "Fri, May 8, 2026",
-          "status": "ready",
-          "error": null,
-          "rowCount": 116,
-          "rows": [
-            {
-              "date": "2026-05-08",
-              "symbol": "TM",
-              "name": "Toyota Motor Corp Ltd Ord",
-              "time": "time-not-supplied",
-              "marketCap": "$246,624,772,653",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "ENB",
-              "name": "Enbridge Inc",
-              "time": "time-not-supplied",
-              "marketCap": "$117,971,072,545",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.69",
-              "noOfEsts": "5",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "BAM",
-              "name": "Brookfield Asset Management",
-              "time": "time-not-supplied",
-              "marketCap": "$80,123,184,719",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.39",
-              "noOfEsts": "5",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "UI",
-              "name": "Ubiquiti Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$56,084,014,592",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$3.15",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "VST",
-              "name": "Vistra Corp.",
-              "time": "time-not-supplied",
-              "marketCap": "$52,119,663,503",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$2.21",
-              "noOfEsts": "5",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "AU",
-              "name": "AngloGold Ashanti PLC",
-              "time": "time-not-supplied",
-              "marketCap": "$50,468,516,422",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$2.21",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "SATS",
-              "name": "EchoStar Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$35,421,957,831",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.87)",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "PPL",
-              "name": "PPL Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$27,657,110,617",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.61",
-              "noOfEsts": "6",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "FIS",
-              "name": "Fidelity National Information Services, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$24,422,068,708",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$1.28",
-              "noOfEsts": "7",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "TU",
-              "name": "TELUS Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$19,702,472,498",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.17",
-              "noOfEsts": "5",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "PAA",
-              "name": "Plains All American Pipeline, L.P.",
-              "time": "time-not-supplied",
-              "marketCap": "$16,875,513,925",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.41",
-              "noOfEsts": "5",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "YPF",
-              "name": "YPF Sociedad Anonima",
-              "time": "time-not-supplied",
-              "marketCap": "$16,833,787,540",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.83",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "EMA",
-              "name": "Emera Incorporated",
-              "time": "time-not-supplied",
-              "marketCap": "$15,973,711,046",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.89",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "EMBJ",
-              "name": "Embraer S.A.",
-              "time": "time-not-supplied",
-              "marketCap": "$12,241,851,496",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.29",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "RDY",
-              "name": "Dr. Reddy's Laboratories Ltd",
-              "time": "time-not-supplied",
-              "marketCap": "$11,206,735,552",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.09",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "WULF",
-              "name": "TeraWulf Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$10,457,874,679",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.16)",
-              "noOfEsts": "6",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "OSK",
-              "name": "Oshkosh Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$9,589,083,644",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$1.04",
-              "noOfEsts": "6",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "MSGS",
-              "name": "Madison Square Garden Sports Corp.",
-              "time": "time-not-supplied",
-              "marketCap": "$8,003,534,609",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.66",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "JHG",
-              "name": "Janus Henderson Group plc",
-              "time": "time-after-hours",
-              "marketCap": "$7,962,627,421",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.98",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "ROAD",
-              "name": "Construction Partners, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$7,423,859,791",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.05)",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "FLR",
-              "name": "Fluor Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$7,336,492,240",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.66",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "BBUC",
-              "name": "Brookfield Business Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$6,956,716,407",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$1.31",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "STWD",
-              "name": "STARWOOD PROPERTY TRUST, INC.",
-              "time": "time-not-supplied",
-              "marketCap": "$6,690,768,278",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.40",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "CGON",
-              "name": "CG Oncology, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$6,088,530,416",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.58)",
-              "noOfEsts": "7",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "ESNT",
-              "name": "Essent Group Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$5,789,112,338",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$1.75",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "TKC",
-              "name": "Turkcell Iletisim Hizmetleri AS",
-              "time": "time-not-supplied",
-              "marketCap": "$5,746,400,000",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "TDS",
-              "name": "Telephone and Data Systems, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$5,179,760,632",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.87)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "ORLA",
-              "name": "Orla Mining Ltd.",
-              "time": "time-after-hours",
-              "marketCap": "$4,946,397,772",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.37",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "AQN",
-              "name": "Algonquin Power & Utilities Corp.",
-              "time": "time-not-supplied",
-              "marketCap": "$4,824,968,072",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.11",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "PAGP",
-              "name": "Plains GP Holdings, L.P.",
-              "time": "time-not-supplied",
-              "marketCap": "$4,676,474,450",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.62",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "AD",
-              "name": "Array Digital Infrastructure, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$4,260,837,740",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.06)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "BH",
-              "name": "Biglari Holdings Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$3,653,377,026",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "BH.A",
-              "name": "Biglari Holdings Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$3,653,377,026",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "PPTA",
-              "name": "Perpetua Resources Corp.",
-              "time": "time-not-supplied",
-              "marketCap": "$3,569,624,659",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.50)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "CLMT",
-              "name": "Calumet, Inc",
-              "time": "time-not-supplied",
-              "marketCap": "$3,012,473,712",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.57)",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "NHC",
-              "name": "National HealthCare Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$2,673,988,465",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "HE",
-              "name": "Hawaiian Electric Industries, Inc.",
-              "time": "time-after-hours",
-              "marketCap": "$2,662,041,322",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "AMR",
-              "name": "Alpha Metallurgical Resources, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$2,471,814,696",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.86)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "ANIP",
-              "name": "ANI Pharmaceuticals, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$1,884,464,877",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "$0.96",
-              "noOfEsts": "4",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            },
-            {
-              "date": "2026-05-08",
-              "symbol": "SLVM",
-              "name": "Sylvamo Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$1,736,435,975",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.25)",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-08"
-            }
-          ]
-        },
         {
           "date": "2026-05-09",
           "asOf": "Sat, May 9, 2026",
@@ -2496,106 +1975,630 @@
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-10"
             }
           ]
+        },
+        {
+          "date": "2026-05-11",
+          "asOf": "Mon, May 11, 2026",
+          "status": "ready",
+          "error": null,
+          "rowCount": 214,
+          "rows": [
+            {
+              "date": "2026-05-11",
+              "symbol": "PBR",
+              "name": "Petroleo Brasileiro S.A.- Petrobras",
+              "time": "time-not-supplied",
+              "marketCap": "$131,271,743,181",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$1.02",
+              "noOfEsts": "3",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$0.62",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "PBR.A",
+              "name": "Petroleo Brasileiro S.A.- Petrobras",
+              "time": "time-not-supplied",
+              "marketCap": "$131,271,743,181",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.62",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "CEG",
+              "name": "Constellation Energy Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$97,527,038,747",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$2.56",
+              "noOfEsts": "4",
+              "lastYearReportDate": "5/06/2025",
+              "lastYearEps": "$2.14",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "B",
+              "name": "Barrick Mining Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$70,276,649,243",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.74",
+              "noOfEsts": "6",
+              "lastYearReportDate": "5/07/2025",
+              "lastYearEps": "$0.35",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "SPG",
+              "name": "Simon Property Group, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$65,424,424,660",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$2.98",
+              "noOfEsts": "6",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$2.95",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "VIV",
+              "name": "Telefonica Brasil S.A.",
+              "time": "time-not-supplied",
+              "marketCap": "$49,148,425,694",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.17",
+              "noOfEsts": "3",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$0.11",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "IX",
+              "name": "ORIX Corporation",
+              "time": "time-not-supplied",
+              "marketCap": "$38,598,716,878",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$0.46",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "CRCL",
+              "name": "Circle Internet Group, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$27,996,580,065",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.15",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "ASTS",
+              "name": "AST SpaceMobile, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$25,359,519,983",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.23)",
+              "noOfEsts": "6",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "($0.20)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "FOX",
+              "name": "Fox Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$24,034,878,407",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$1.04",
+              "noOfEsts": "3",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$1.10",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "FOXA",
+              "name": "Fox Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$24,034,878,407",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$1.02",
+              "noOfEsts": "7",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$1.10",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "SBS",
+              "name": "Companhia de saneamento Basico Do Estado De Sao Paulo - Sabesp",
+              "time": "time-not-supplied",
+              "marketCap": "$22,451,281,739",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$0.07",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "STE",
+              "name": "STERIS plc",
+              "time": "time-after-hours",
+              "marketCap": "$20,958,632,843",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$2.89",
+              "noOfEsts": "3",
+              "lastYearReportDate": "5/14/2025",
+              "lastYearEps": "$2.74",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "OVV",
+              "name": "Ovintiv Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$16,537,978,445",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$1.52",
+              "noOfEsts": "6",
+              "lastYearReportDate": "5/06/2025",
+              "lastYearEps": "$1.42",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "KSPI",
+              "name": "Joint Stock Company Kaspi.kz",
+              "time": "time-pre-market",
+              "marketCap": "$16,413,318,081",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$2.41",
+              "noOfEsts": "1",
+              "lastYearReportDate": "5/16/2025",
+              "lastYearEps": "$2.59",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "ACM",
+              "name": "AECOM",
+              "time": "time-after-hours",
+              "marketCap": "$10,533,144,197",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$1.58",
+              "noOfEsts": "3",
+              "lastYearReportDate": "5/05/2025",
+              "lastYearEps": "$1.25",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "FIGR",
+              "name": "Figure Technology Solutions, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$8,235,547,923",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.17",
+              "noOfEsts": "2",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "HALO",
+              "name": "Halozyme Therapeutics, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$7,723,339,617",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$1.46",
+              "noOfEsts": "4",
+              "lastYearReportDate": "5/06/2025",
+              "lastYearEps": "$1.03",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "MOS",
+              "name": "Mosaic Company (The)",
+              "time": "time-pre-market",
+              "marketCap": "$7,281,866,614",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.20",
+              "noOfEsts": "5",
+              "lastYearReportDate": "5/06/2025",
+              "lastYearEps": "$0.49",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "SGHC",
+              "name": "Super Group (SGHC) Limited",
+              "time": "time-after-hours",
+              "marketCap": "$6,589,755,940",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.17",
+              "noOfEsts": "1",
+              "lastYearReportDate": "5/08/2025",
+              "lastYearEps": "$0.12",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "APGE",
+              "name": "Apogee Therapeutics, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$6,162,572,881",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($1.12)",
+              "noOfEsts": "4",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "($0.95)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "RGTI",
+              "name": "Rigetti Computing, Inc. ",
+              "time": "time-after-hours",
+              "marketCap": "$6,095,217,350",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.05)",
+              "noOfEsts": "3",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "($0.08)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "KGS",
+              "name": "Kodiak Gas Services, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$6,035,806,726",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.54",
+              "noOfEsts": "4",
+              "lastYearReportDate": "5/07/2025",
+              "lastYearEps": "$0.42",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "HIMS",
+              "name": "Hims & Hers Health, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$5,922,671,620",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.04",
+              "noOfEsts": "5",
+              "lastYearReportDate": "5/05/2025",
+              "lastYearEps": "$0.20",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "AVAL",
+              "name": "Grupo Aval Acciones y Valores S.A.",
+              "time": "time-not-supplied",
+              "marketCap": "$5,318,538,570",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$0.07",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "PACS",
+              "name": "PACS Group, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$5,285,459,925",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.42",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.17",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "IFS",
+              "name": "Intercorp Financial Services Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$5,181,293,000",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$1.40",
+              "noOfEsts": "1",
+              "lastYearReportDate": "5/08/2025",
+              "lastYearEps": "$1.06",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "TEO",
+              "name": "Telecom Argentina Stet - France Telecom S.A.",
+              "time": "time-not-supplied",
+              "marketCap": "$5,164,543,848",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.28",
+              "noOfEsts": "2",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$0.20",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "NOVT",
+              "name": "Novanta Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$4,853,017,065",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.77",
+              "noOfEsts": "2",
+              "lastYearReportDate": "5/06/2025",
+              "lastYearEps": "$0.74",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "MARA",
+              "name": "MARA Holdings, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$4,841,205,253",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.25)",
+              "noOfEsts": "2",
+              "lastYearReportDate": "5/08/2025",
+              "lastYearEps": "($0.40)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "ACHR",
+              "name": "Archer Aviation Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$4,770,275,497",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.37)",
+              "noOfEsts": "2",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "($0.17)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "RDNT",
+              "name": "RadNet, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$4,515,805,510",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.14)",
+              "noOfEsts": "3",
+              "lastYearReportDate": "5/11/2025",
+              "lastYearEps": "($0.35)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "PLUG",
+              "name": "Plug Power, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$4,365,804,037",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.09)",
+              "noOfEsts": "6",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "($0.21)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "BATRA",
+              "name": "Atlanta Braves Holdings, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$4,053,949,741",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.80)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "($0.66)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "BATRK",
+              "name": "Atlanta Braves Holdings, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$4,053,949,741",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.83)",
+              "noOfEsts": "2",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "($0.66)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "CPRX",
+              "name": "Catalyst Pharmaceuticals, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$3,805,990,845",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.58",
+              "noOfEsts": "2",
+              "lastYearReportDate": "5/07/2025",
+              "lastYearEps": "$0.63",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "LQDA",
+              "name": "Liquidia Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$3,758,422,296",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.34",
+              "noOfEsts": "5",
+              "lastYearReportDate": "5/08/2025",
+              "lastYearEps": "($0.45)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "CLSK",
+              "name": "CleanSpark, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$3,575,425,724",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.25)",
+              "noOfEsts": "3",
+              "lastYearReportDate": "5/08/2025",
+              "lastYearEps": "($0.02)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "MNDY",
+              "name": "monday.com Ltd.",
+              "time": "time-pre-market",
+              "marketCap": "$3,549,306,355",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$0.34",
+              "noOfEsts": "3",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "$0.52",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            },
+            {
+              "date": "2026-05-11",
+              "symbol": "TNGX",
+              "name": "Tango Therapeutics, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$3,386,808,523",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.32)",
+              "noOfEsts": "6",
+              "lastYearReportDate": "5/12/2025",
+              "lastYearEps": "($0.36)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-11"
+            }
+          ]
         }
       ],
       "earningsMovers": [
         {
-          "symbol": "FLR",
-          "name": "Fluor Corporation",
-          "price": 43.31,
-          "changePct": -15.21,
-          "change": -7.77,
-          "volume": 10984094,
-          "marketCap": 6197932032,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
-          "moverBucket": "loser"
-        },
-        {
-          "symbol": "AD",
-          "name": "Array Digital Infrastructure, I",
-          "price": 55.77,
-          "changePct": 13.12,
-          "change": 6.47,
-          "volume": 847315,
-          "marketCap": 4820923392,
+          "symbol": "ASTS",
+          "name": "AST SpaceMobile, Inc.",
+          "price": 75.05,
+          "changePct": 14.85,
+          "change": 9.71,
+          "volume": 22391879,
+          "marketCap": 29123674112,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
           "moverBucket": "gainer"
         },
         {
-          "symbol": "EMBJ",
-          "name": "Embraer S.A.",
-          "price": 60.11,
-          "changePct": -11.28,
-          "change": -7.64,
-          "volume": 5615596,
-          "marketCap": 10697069568,
+          "symbol": "ACHR",
+          "name": "Archer Aviation Inc.",
+          "price": 6.48,
+          "changePct": 3.18,
+          "change": 0.2,
+          "volume": 44193630,
+          "marketCap": 4922194944,
           "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
-          "moverBucket": "loser"
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/",
+          "moverBucket": "most_active"
         },
         {
-          "symbol": "OSK",
-          "name": "Oshkosh Corporation (Holding Co",
-          "price": 137.97,
-          "changePct": -9.86,
-          "change": -15.09,
-          "volume": 1937005,
-          "marketCap": 8643707904,
+          "symbol": "MARA",
+          "name": "MARA Holdings, Inc.",
+          "price": 12.94,
+          "changePct": 1.89,
+          "change": 0.24,
+          "volume": 47962656,
+          "marketCap": 4932692480,
           "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
-          "moverBucket": "loser"
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/",
+          "moverBucket": "most_active"
         },
         {
-          "symbol": "UI",
-          "name": "Ubiquiti Inc.",
-          "price": 842.1,
-          "changePct": -9.13,
-          "change": -84.59,
-          "volume": 255332,
-          "marketCap": 50964557824,
+          "symbol": "PLUG",
+          "name": "Plug Power, Inc.",
+          "price": 3.12,
+          "changePct": -0.32,
+          "change": -0.01,
+          "volume": 44797817,
+          "marketCap": 4351855616,
           "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
-          "moverBucket": "loser"
-        },
-        {
-          "symbol": "BBUC",
-          "name": "Brookfield Business Corporation",
-          "price": 30.85,
-          "changePct": -8.21,
-          "change": -2.76,
-          "volume": 467498,
-          "marketCap": 6386180608,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
-          "moverBucket": "loser"
-        },
-        {
-          "symbol": "FIS",
-          "name": "Fidelity National Information S",
-          "price": 43.49,
-          "changePct": -7.96,
-          "change": -3.76,
-          "volume": 11318492,
-          "marketCap": 22478641152,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
-          "moverBucket": "loser"
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/",
+          "moverBucket": "most_active"
         }
       ],
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "S&P 500 extends winning streak to 6 weeks. What drove the stock market gains",
-          "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/05/09/sp-500-extends-winning-streak-to-6-weeks-what-drove-the-stock-market-gains.html",
-          "publishedAt": "2026-05-09T20:18:57.000Z",
-          "summary": "Investors cheered positive earnings, economic data, and a high-profile AI partnership.",
-          "tickers": []
-        },
-        {
-          "id": "E2",
           "title": "Rocket Lab surges 34% in best day ever on revenue beat, record-setting launch deal",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/05/08/rocket-lab-rklb-q1-earnings-2026.html",
@@ -2604,7 +2607,7 @@
           "tickers": []
         },
         {
-          "id": "E3",
+          "id": "E2",
           "title": "Michael Burry says the market today feels like 'the last months of the 1999-2000 bubble'",
           "sourceName": "CNBC Markets",
           "url": "https://www.cnbc.com/2026/05/08/michael-burry-says-the-market-today-feels-like-the-last-months-of-the-1999-2000-bubble.html",
@@ -2613,7 +2616,7 @@
           "tickers": []
         },
         {
-          "id": "E4",
+          "id": "E3",
           "title": "Cloudflare stock sinks 24% after earnings as company cuts 1,100 employees due to AI changes",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/05/07/cloudflare-net-q1-2026-stock-earnings-layoffs.html",
@@ -2622,7 +2625,7 @@
           "tickers": []
         },
         {
-          "id": "E5",
+          "id": "E4",
           "title": "Looking to the Futures",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/looking-to-futures",
@@ -2631,7 +2634,7 @@
           "tickers": []
         },
         {
-          "id": "E6",
+          "id": "E5",
           "title": "Stocks Climb as April Jobs Growth Tops Estimates",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/stock-market-update-open",
@@ -2640,30 +2643,12 @@
           "tickers": []
         },
         {
-          "id": "E7",
+          "id": "E6",
           "title": "Market volatility: Investing strategies for volatile markets | Fidelity",
           "sourceName": "Fidelity Market Insights",
           "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
           "publishedAt": "2026-05-04T00:00:00.000Z",
           "summary": "Navigating stock and other investment volatility can be difficult. Here is what to know to manage market volatility.",
-          "tickers": []
-        },
-        {
-          "id": "E8",
-          "title": "Weekly Natural Gas Storage Report - EIA",
-          "sourceName": "EIA Today In Energy",
-          "url": "http://ir.eia.gov/ngs/ngs.html",
-          "publishedAt": "2026-05-01T00:00:00.000Z",
-          "summary": "Weekly Natural Gas Storage Report - EIA",
-          "tickers": []
-        },
-        {
-          "id": "E9",
-          "title": "Weekly Petroleum Status Report - U.S. Energy Information Administration (EIA)",
-          "sourceName": "EIA Today In Energy",
-          "url": "https://www.eia.gov/petroleum/supply/weekly/",
-          "publishedAt": "2026-05-01T00:00:00.000Z",
-          "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
           "tickers": []
         }
       ],
@@ -2671,7 +2656,7 @@
     },
     "reddit": {
       "status": "error",
-      "generatedAt": "2026-05-10T04:15:26.557Z",
+      "generatedAt": "2026-05-10T15:14:14.616Z",
       "sourceNote": "Public Reddit JSON endpoints; use as sentiment and attention only, not verified news.",
       "subreddits": [
         {
@@ -3121,17 +3106,16 @@
       "errors": []
     },
     "briefingBullets": [
-      "Rates and central banks: As major market averages hit record highs, investors seemed to shrug off rising oil prices. (M3)",
-      "Macro and growth: The post-inflation job market has been especially hard for new grads, but there are ways they can help themselves prepare for the search. (M4)",
-      "Earnings: Investors cheered positive earnings, economic data, and a high-profile AI partnership. (M2)",
-      "AI and semis: Everyone from Anthropic to tiny startups is hiring for the “member of technical staff” - but does anyone know what it means? (M1)",
-      "Credit and liquidity: “I have steadily increased my assets by more than 10% since being laid off.” (M8)",
-      "Earnings movers: FLR -15.21%, AD +13.12%, EMBJ -11.28% show where post-results dispersion is largest."
+      "Rates and central banks: As major market averages hit record highs, investors seemed to shrug off rising oil prices. (M7)",
+      "Macro and growth: The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth. (M3)",
+      "Earnings: The cloud provider announced it is laying off 20% of its workforce as agentic artificial intelligence \"fundamentally changes\" the company's work. (M8)",
+      "AI and semis: Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner. (M2)",
+      "Earnings movers: ASTS +14.85%, ACHR +3.18%, MARA +1.89% show where post-results dispersion is largest."
     ]
   },
   "avoidList": {
     "status": "ready",
-    "summary": "Avoid crowded, overextended Financials and Utilities with weak momentum signals; many ranked as low-confidence names risking drawdown.",
+    "summary": "Investable names with weak multi-day momentum are concentrated in Financials, Industrials, Health Care, Utilities, and Consumer Staples; avoid fresh long exposure until macro signals and stock-specific momentum improve.",
     "sectors": [
       {
         "sector": "Financials",
@@ -3142,7 +3126,7 @@
           "AIZ",
           "TROW"
         ],
-        "rationale": "16 of the weakest model-ranked names are concentrated here; rotation risk if rates stay higher longer."
+        "rationale": "16 weakest model-ranked names concentrated here; risk of further drawdown if rates stay high."
       },
       {
         "sector": "Industrials",
@@ -3153,7 +3137,7 @@
           "ITW",
           "AOS"
         ],
-        "rationale": "11 of the weakest model-ranked names are in Industrials; examples include WAB, IEX, ITW, AOS."
+        "rationale": "11 weak names; sensitivity to capex cycles."
       },
       {
         "sector": "Health Care",
@@ -3164,7 +3148,7 @@
           "BMY",
           "HCA"
         ],
-        "rationale": "11 of the weakest model-ranked names are in Health Care; examples include ISRG, BDX, BMY, HCA."
+        "rationale": "11 weak names; earnings volatility and policy risk."
       },
       {
         "sector": "Utilities",
@@ -3175,7 +3159,7 @@
           "AEE",
           "ATO"
         ],
-        "rationale": "8 of the weakest model-ranked names are in Utilities; examples include AEP, WEC, AEE, ATO."
+        "rationale": "8 weak names; defensive darlings may underperform if inflation cools."
       }
     ],
     "companies": [
@@ -3196,7 +3180,7 @@
           "Below 50d trend"
         ],
         "modelEvidence": "AEP ranks #502 of 502 with +0.35% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
-        "rationale": "Ranked with negative model signal; near 52w high but weak liquidity; avoid long exposure until confirmation improves."
+        "rationale": "Ranked bottom; weak momentum; volatility elevated."
       },
       {
         "symbol": "AFL",
@@ -3214,7 +3198,7 @@
           "Weak volume confirmation"
         ],
         "modelEvidence": "AFL ranks #501 of 502 with -9.08% 60-day relative return versus SPY, rules score 0.0, and positive trend alignment.",
-        "rationale": "Low momentum and weak liquidity; not momentum confirmed."
+        "rationale": "Bottom-ranked; low momentum signals; volume weak."
       },
       {
         "symbol": "AIG",
@@ -9150,7 +9134,7 @@
     },
     {
       "symbol": "CCL",
-      "name": "Carnival",
+      "name": "Carnival Corporation",
       "type": "stock",
       "sector": "Consumer Discretionary",
       "score": 90.6,
@@ -56197,30 +56181,11 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
-      "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
-      "articles": [
-        {
-          "sourceName": "EIA Today In Energy",
-          "title": "Weekly Natural Gas Storage Report - EIA",
-          "url": "http://ir.eia.gov/ngs/ngs.html",
-          "publishedAt": "2026-05-01T00:00:00.000Z",
-          "summary": "Weekly Natural Gas Storage Report - EIA",
-          "excerpt": "Weekly Natural Gas Storage Report - EIA &lsaquo; See All Natural Gas Reports Weekly Natural Gas Storage Report for week ending May 1, 2026 | Released: May 7, 2026 at 10:30 a.m. | Next Release: May 14, 2026 Working gas in underground storage, Lower 48 states Summary text CSV JSN Historical Comparisons Stocks billion cubic feet (Bcf) Year ago (05/01/25) 5-year average (2021-25) Region 05/01/26 04/24/26 net change implied flow Bcf % change Bcf % change East 361 332 29 29 358 0.8 362 -0.3 Midwest 452 429 23 23 450 0.4 459 -1.5 Mountain 203 205 -2 -2 179 13.4 137 48.2 Pacific 275 272 3 3 231 19.0 197 39.6 South Central 914 905 9 9 912 0.2 910 0.4 Salt 273 272 1 1 291 -6.2 277 -1.4 Nonsalt 641 634 7 7 621 3.2 633 1.3 Total 2,205 2,142 63 63 2,130 3.5 2,066 6.7 Totals may not equal sum of components because of independent rounding. Summary Working gas in storage was 2,205 Bcf as of Friday, May 1, 2026, according to EIA estimates. This represents a net increase of 63 Bcf from the previous week. Stocks were 75 Bcf higher than last year at this time and 139 Bcf above the five-year average of 2,066 Bcf. At 2,205 Bcf, total working gas is within the five-year historical range. For information on sampling error in this report, see Estimated Measures of Sampling Variability table below. Note: The shaded area indicates the range between the historical minimum and maximum values for the weekly series from 2021 through 2025. The dashed vertical lines indicate current and year-ago weekly periods. Source: Form EIA-912, \"Weekly Underground Natural Gas Storage Report.\" --> Estimated measures of sampling variability Download History (April 2015 to Present) Coefficient of Variation for Stocks % of working gas Standard Error for Net Change billion cubic feet (Bcf) Region 05/01/26 04/24/26 net ",
-          "discoveredFrom": "https://www.eia.gov/todayinenergy/"
-        },
-        {
-          "sourceName": "EIA Today In Energy",
-          "title": "Weekly Petroleum Status Report - U.S. Energy Information Administration (EIA)",
-          "url": "https://www.eia.gov/petroleum/supply/weekly/",
-          "publishedAt": "2026-05-01T00:00:00.000Z",
-          "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
-          "excerpt": "Weekly Petroleum Status Report - U.S. Energy Information Administration (EIA) Petroleum & Other Liquids Skip to page content Overview Data Summary Prices Crude reserves and production Refining and processing Imports/exports Movements Stocks Consumption/sales Analysis & Projections Major Topics Find by Most popular Consumption/demand Exports/imports Forecasts/projections Inventories/stocks Prices Production/supply Refining Reserves All reports Alphabetical Recurring Tag Cloud Glossary FAQS See All Petroleum Reports Weekly Petroleum Status Report Data for week ending May 1, 2026 Release Date: May 6, 2026 Next Release Date: May 13, 2026 full report PDF Previous Issues Select Week dropdown arrow May 6, 2026 April 29, 2026 April 22, 2026 April 15, 2026 April 8, 2026 April 1, 2026 March 25, 2026 prior issues Crude Oil Production Re-benchmarking Notice: Each month, when we publish the Short-Term Energy Outlook (STEO), we review weekly estimates of domestic crude oil production to spot any differences between recent survey-based production trends reported in the Petroleum Supply Monthly (PSM) and other current data. If we identify a significant discrepancy between these sources, we may re-benchmark the weekly production estimate during the STEO release week. For this week, the domestic crude oil production estimate includes a re-benchmarking adjustment that lowered estimated volumes by 52,000 barrels per day, or about 0.38% of this week’s estimated production total. --> Notice: We will publish the Weekly Petroleum Status Report with data for the week ending December 19 today at 5:00 P.M. eastern. Notice: We are delaying today's release of the Weekly Petroleum Status Report with data for the week ending Dec. 19. As soon as possible, we will post a new publication time with at le",
-          "discoveredFrom": "https://www.eia.gov/todayinenergy/"
-        }
-      ],
-      "articleCount": 2,
-      "ok": true
+      "title": "EIA Today In Energy",
+      "summary": "Source check failed: This operation was aborted",
+      "articles": [],
+      "articleCount": 0,
+      "ok": false
     },
     {
       "name": "BLS Economic News Releases",
@@ -56409,29 +56374,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "S&P 500 extends winning streak to 6 weeks. What drove the stock market gains",
-          "url": "https://www.cnbc.com/2026/05/09/sp-500-extends-winning-streak-to-6-weeks-what-drove-the-stock-market-gains.html",
-          "publishedAt": "2026-05-09T20:18:57.000Z",
-          "summary": "Investors cheered positive earnings, economic data, and a high-profile AI partnership.",
-          "excerpt": "Investors cheered positive earnings, economic data, and a high-profile AI partnership.",
+          "title": "SEC delay on prediction markets ETFs echoes a long-fought bitcoin fund battle",
+          "url": "https://www.cnbc.com/2026/05/10/sec-prediction-markets-etfs-trading-launch-delay.html",
+          "publishedAt": "2026-05-10T12:22:02.000Z",
+          "summary": "The Securities and Exchange Commission has delayed approval for prediction markets ETFs, bringing up memories of the long battle over bitcoin funds.",
+          "excerpt": "The Securities and Exchange Commission has delayed approval for prediction markets ETFs, bringing up memories of the long battle over bitcoin funds.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Nvidia embraces role of AI investor, pushing past $40 billion in equity bets this year",
-          "url": "https://www.cnbc.com/2026/05/09/nvidia-embraces-ai-investor-topping-40-billion-in-equity-bets-2026.html",
-          "publishedAt": "2026-05-09T16:41:22.000Z",
-          "summary": "Nvidia is pouring billions of dollars at a time into companies across the AI infrastructure stack, while also signing commercial deals with them.",
-          "excerpt": "Nvidia is pouring billions of dollars at a time into companies across the AI infrastructure stack, while also signing commercial deals with them.",
+          "title": "Alphabet&apos;s 160% rally in a year reflects value of owning &apos;most of the stack&apos; in AI",
+          "url": "https://www.cnbc.com/2026/05/10/alphabet-160percent-rally-in-year-reflects-value-of-owning-most-of-ai-stack.html",
+          "publishedAt": "2026-05-10T12:00:01.000Z",
+          "summary": "Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner.",
+          "excerpt": "Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "There&apos;s little chance of a hantavirus global outbreak. What the latest odds say",
-          "url": "https://www.cnbc.com/2026/05/09/hantavirus-outbreak-little-chance-says-kalshi.html",
-          "publishedAt": "2026-05-09T16:41:15.000Z",
-          "summary": "Prediction markets like Kalshi show slim chance that the hantavirus outbreak will be of international concern",
-          "excerpt": "Prediction markets like Kalshi show slim chance that the hantavirus outbreak will be of international concern",
+          "title": "Retailers are on a hiring spree. But consumers are sending warning signs",
+          "url": "https://www.cnbc.com/2026/05/10/retailer-hiring-consumer-warning-jobs-report.html",
+          "publishedAt": "2026-05-10T11:29:25.000Z",
+          "summary": "The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth.",
+          "excerpt": "The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56491,29 +56456,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "The most prestigious role in AI has no job description",
-          "url": "https://www.marketwatch.com/story/the-most-prestigious-job-in-ai-has-no-description-d517601f?mod=mw_rss_topstories",
-          "publishedAt": "2026-05-10T01:32:00.000Z",
-          "summary": "Everyone from Anthropic to tiny startups is hiring for the “member of technical staff” — but does anyone know what it means?",
-          "excerpt": "Everyone from Anthropic to tiny startups is hiring for the “member of technical staff” — but does anyone know what it means?",
+          "title": "Big Tech’s AI spending is depriving investors of juicy payouts",
+          "url": "https://www.marketwatch.com/story/big-techs-ai-spending-is-depriving-investors-of-juicy-payouts-39d17305?mod=mw_rss_topstories",
+          "publishedAt": "2026-05-10T14:00:00.000Z",
+          "summary": "Goldman Sachs expects S&P 500 share buybacks to grow only 3% this year, as a shaky economic backdrop and AI cost pressures force spending reconsiderations.",
+          "excerpt": "Goldman Sachs expects S&P 500 share buybacks to grow only 3% this year, as a shaky economic backdrop and AI cost pressures force spending reconsiderations.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "I was a slave to credit-card debt, then I got laid off and turned my life around. Here’s how I did it.",
-          "url": "https://www.marketwatch.com/story/americans-love-their-rose-colored-glasses-i-was-a-slave-to-credit-card-debt-then-i-got-laid-off-and-turned-my-life-around-32ba4d4c?mod=mw_rss_topstories",
-          "publishedAt": "2026-05-09T19:25:00.000Z",
-          "summary": "“I have steadily increased my assets by more than 10% since being laid off.”",
-          "excerpt": "“I have steadily increased my assets by more than 10% since being laid off.”",
+          "title": "‘The S&P 500 seems to be doing particularly well’: I’m 66. Is this a good time to invest $100,000 in the stock market?",
+          "url": "https://www.marketwatch.com/story/the-s-p-500-seems-to-be-doing-particularly-well-im-66-is-this-a-good-time-to-invest-100-000-in-the-stock-market-46fb8ff8?mod=mw_rss_topstories",
+          "publishedAt": "2026-05-10T13:00:00.000Z",
+          "summary": "“I own my home and I have no debt.”",
+          "excerpt": "“I own my home and I have no debt.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "These are the fastest-growing jobs for new college graduates — even in this low-hire market",
-          "url": "https://www.marketwatch.com/story/these-are-the-fastest-growing-jobs-for-new-college-graduates-even-in-this-low-hire-market-974bf612?mod=mw_rss_topstories",
-          "publishedAt": "2026-05-09T19:12:00.000Z",
-          "summary": "The post-inflation job market has been especially hard for new grads, but there are ways they can help themselves prepare for the search.",
-          "excerpt": "The post-inflation job market has been especially hard for new grads, but there are ways they can help themselves prepare for the search.",
+          "title": "Stocks are walking a tightrope to fresh record highs — as a handful of names do most of the heavy lifting",
+          "url": "https://www.marketwatch.com/story/stocks-are-walking-a-tightrope-to-fresh-record-highs-as-a-handful-of-names-do-most-of-the-heavy-lifting-fe5a166a?mod=mw_rss_topstories",
+          "publishedAt": "2026-05-10T13:00:00.000Z",
+          "summary": "Investors are caught on a tightrope — watching a very narrow band of tech stocks lift the stock market to fresh record highs, while looking down below for signs of trouble.",
+          "excerpt": "Investors are caught on a tightrope — watching a very narrow band of tech stocks lift the stock market to fresh record highs, while looking down below for signs of trouble.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
