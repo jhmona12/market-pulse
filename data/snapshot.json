@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-05-10T15:20:09.766Z",
+  "generatedAt": "2026-05-11T04:42:57.042Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-05-10T15:14:05.324966+00:00",
+    "generatedAt": "2026-05-11T04:36:45.480437+00:00",
     "asOfDate": "2026-05-08",
     "expectedAsOfDate": "2026-05-08",
     "isStale": false,
@@ -1350,11 +1350,11 @@
     }
   },
   "note": {
-    "headline": "Market color frames today's market read.",
-    "body": "Risk appetite is constructive but selective. The most relevant market drivers are market color, ai and semis, macro and growth. Earnings dispersion is visible in ASTS +14.85%, ACHR +3.18%, MARA +1.89%. Reddit attention data was unavailable or did not produce clean ticker concentration. The model read is secondary confirmation, with leadership concentrated in CIEN, SATS, LITE, SNDK, STX.",
+    "headline": "Geopolitical and policy risk frames today's market read.",
+    "body": "Risk appetite is constructive but selective. The most relevant market drivers are geopolitical and policy risk. Earnings dispersion is visible in ASTS +14.85%, ACHR +3.18%, MARA +1.89%. Reddit attention data was unavailable or did not produce clean ticker concentration. The model read is secondary confirmation, with leadership concentrated in CIEN, SATS, LITE, SNDK, STX.",
     "changed": [
-      "Rates and central banks: As major market averages hit record highs, investors seemed to shrug off rising oil prices. (M7)",
-      "Macro and growth: The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth. (M3)",
+      "Geopolitics and policy: Investors headed into Monday on edge as Trump’s rejection of Iran’s ceasefire proposal fueled concerns about a prolonged Middle East conflict. (M1)",
+      "Rates and central banks: China has cushioned the worst of the energy shock through its strategic oil stockpiles and a diversified mix of renewable energy sources. (M3)",
       "Earnings movers: ASTS +14.85%, ACHR +3.18%, MARA +1.89% show where post-results dispersion is largest.",
       "Breadth: 53% of the screened universe is above the 50-day average, 57% is above the 200-day, and 42% clears both trend lines.",
       "Model read: CIEN, SATS, LITE, SNDK, STX lead 502 scored S&P 500 names; 14 of the top 25 model-ranked stocks are in Information Technology; sector confirmation is Information Technology +23.88% over 30D, +14.77% vs SPY; Consumer Discretionary +8.46% over 30D; Real Estate +4.64% over 30D.",
@@ -1373,12 +1373,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 85043,
+      "inputTokens": 86999,
       "cachedInputTokens": 0,
-      "outputTokens": 2439,
+      "outputTokens": 2320,
       "reasoningTokens": 0,
-      "totalTokens": 87482,
-      "estimatedCostUsd": 0.005228,
+      "totalTokens": 89319,
+      "estimatedCostUsd": 0.005278,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1386,96 +1386,71 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "AI-driven momentum leads a crowded tech rally; macro risk remains focused on inflation and next FOMC signal",
-    "macroView": "Macro regime remains constructive for risk-on tech, with IT leadership in rolling 24h signals and broad sector breadth supported by momentum on top stocks. Near-term macro risk centers on inflation readings and the Fed path, with upcoming CPI and PPI data due this week and the mid-June FOMC meeting in focus. Official macro release from BLS Employment Situation could not be fetched today, but the prior context keeps labor market resilience as a backdrop for pricing; oil and energy headlines remain a secondary driver shaping risk appetite.",
+    "headline": "Tech-led momentum dominates; macro geo-political risk and Iran tensions loom over energy and rates.",
+    "macroView": "Macro backdrop centers on an energy shock and Iran-related geopolitical risk keeping oil elevated and risk assets sensitive to headlines. The IT hardware/metals/semis complex leads momentum, with a cluster of top names trading well above multi-month trend lines. Upcoming macro prints are high-importance: CPI and PPI on May 13–14, GDP second estimate later in May, and the June FOMC meeting remains the key rate path hinge. Official macro releases are limited this window (Employment Situation data briefly delayed by a 403 error) but the narrative remains: hotter energy, persistent wage pressures, and a cautious Fed tilt could cap multiple expansion, even as high-beta tech remains bid.",
     "dailyRead": {
-      "headline": "AI-led tech momentum dominates, but inflation risk keeps Fed path uncertain",
-      "body": "Markets remain in a momentum-driven regime, led by long-horizon leaders in Information Technology and Communications hardware. The strongest evidence comes from a tight pack of Top Decile names with clear upward-trend bias, high relative returns versus SPY, and robust 14‑day momentum; meanwhile, macro and rate chatter centers on inflation data and the upcoming CPI/PPI releases. The top model signals favor CIEN, LITE, SNDK, STX, and MU as the clearest momentum plays, with SATS flagged as a high-signal name that requires caution due to volatility and volume gaps. The strongest near-term earnings catalysts come from high-profile tech hardware and data-storage names showing impressive margins and upside potential (SNDK, MU, STX, GLW, COHR), while energy and AI-related commentary from market primers supports continued capex and demand for advanced storage and networking hardware. In short, regime remains risk-on but tethered to inflation and rate guidance; best setup is liquid momentum trades in a handful of IT names with confirmable trend, while a broadening of leadership remains contingent on inflation cooling and a softer Fed path. Portfolio implication: lean into high-conviction momentum in CIEN/LITE/SNDK/STX/MU while monitoring Fed rhetoric and CPI prints for potential risk-off shifts.",
+      "headline": "Tech-led momentum dominates; macro geo-political risk and Iran tensions loom over energy and rates.",
+      "body": "Market regime favors sustained tech leadership amid resilient momentum in CIEN, LITE, SNDK, STX, MU and INTC, supported by long-horizon momentum metrics and above-200d trend. Energy and geopolitical tensions keep oil elevated and rate expectations uncertain ahead of CPI/PPI next week and the FOMC in June, creating a headwind for exuberant rally breadth. The strongest signal comes from the XGBoost sector14 rankings, with CIEN, LITE, SNDK, STX and MU at the top of the list on momentum, liquidity, and relative strength, while a rebound-watch in Charter Communications highlights latent beta risk. The highest-conviction, tradable ideas concentrate in Information Technology with durable price trends and favorable sector breadth, though elevated RSI in several names flags caution for extended long exposure. Macro risks center on energy price shocks, Iran escalation dynamics, and potential Fed guidance shifts as CPI and PPI data hit mid-month. Near-term catalysts include the CPI/PPI prints (May 13–14) and the FOMC outlook for inflation and policy path (June 17).",
       "keyTakeaways": [
-        "Macro release: Inflation data and Fed path remain the dominant near-term macro driver; CPI/ PPI due this week; FOMC outlook remains sensitive to the inflation trajectory.",
-        "Market drivers: IT leadership persists; top momentum names expanding gains, with high 60d/120d return ranks versus SPY; AI/semis linked tech cycle remains in favor.",
-        "Earnings: Major momentum names show strong recent earnings execution (SNDK, MU, STX, GLW) supporting elevated valuations; protect on signs of earnings disappointment in rebound-watch names.",
-        "Retail attention: Reddit signals unavailable this cycle; market chatter dominated by AI narratives and big-tech multiple expansions (M7, M8 style).",
-        "Breadth: Concentrated leadership among a small cohort of IT names; sector breadth improving but concentration risk remains where RSI is elevated.",
-        "Model read: CIEN, SATS, LITE, SNDK, STX among top decile; SATS shows higher volatility risk; overall momentum tilt supports continued exposure to momentum names with robust trend."
+        "Macro release: Market is responding to energy/oil price pressure and Iran-related geopolitical risk; inflation readings and Fed guidance will drive near-term rates expectations.",
+        "",
+        "Market drivers: Information Technology leadership remains the strongest driver; top-ranked CIEN/ LITE / SNDK / STX / MU show long-horizon momentum and above-200d trends.",
+        "",
+        "Earnings: Top movers (CIEN, SNDK, MU, STX) have positive earnings momentum in recent quarters; mu and SNDK show outsized 120d returns.",
+        ""
       ],
       "watchItems": [
-        "Upcoming macro events: CPI on May 13; PPI on May 14; GDP Second Estimate on May 28; Employment Situation on June 5; FOMC decision June 17. Stay aligned to inflation path and rate expectations.",
-        "Market data gap risk: official macro release (O1) blocked; rely on prior context for near-term rate outlook; watch for any guidance from Fed speakers or policy proxies.",
-        "Sector confirmation: IT leadership remains, watch XLK/CTH names for durable breakout; monitor XLI and XLP for breadth signals.",
-        "Data gaps: official macro bullets not fetched; rely on model and earnings momentum to guide exposures; invalidate if CPI jumps surprise.",
-        "Invalidation: if CPI/ PPI relief fails to cool inflation, expect rotation out of high-momentum IT names and appetite for defensives."
+        "Upcoming macro prints: CPI (May 13), PPI (May 14), GDP second estimate (May 28), and FOMC rate decision (June 17).",
+        "Geopolitical: Iran-related tensions and Strait of Hormuz energy implications.",
+        "Sector breadth: IT leadership vs. lagging Financials and weaker Health Care signals from model risk flags.",
+        "Data gaps: official macro releases blocked (Employment Situation 403) may delay reaction to labor data.",
+        "Invalidations: If CPI/PPI show cooling, rate path may shift; tech momentum could falter if volume confirms deteriorate or RSI becomes extended."
       ]
     },
     "recommendations": [
       {
         "symbol": "CIEN",
-        "action": "Buy",
+        "action": "Long",
         "conviction": "High",
-        "setup": "momentum_confirmed",
-        "whyNow": "Industry-leading momentum with 60d SPY outperformance and proximity to 52w high; 200d trend positive; liquidity ample",
-        "rationale": "Long-horizon momentum ahead of sector median; top 120d sector rank; within 8% of 52w high; RSI around 60; elevated but manageable volatility.",
+        "setup": "Momentum confirmed: long-horizon momentum, above 50 & 200d moving averages, near 52w high",
+        "whyNow": "Dominant top decile position in Information Technology; sector momentum strongest in window; 60d RSI around 60; volume supportive but not excessive.",
+        "rationale": "CIEN sits at the top of model rankings with a 100th percentile, 60d return lead vs. SPY, and strong 120d momentum. Price sits within 5% of 52w high; RSI modestly elevated but not overheated. Weak volume confirmation and higher sector volatility are caveats.",
         "companyOverview": "Ciena is the global leader in high-speed connectivity. We build the world's most advanced networks to support exponential growth in bandwidth demand. By harnessing the power of our networking systems, interconnects, automation software, and services, Ciena revolutionizes data transmission and network management. Wit...",
         "marketCap": "$77.5B",
         "earningsContext": "Last reported 2026-03-05 for the Jan 2026 fiscal quarter; EPS 1.08 versus consensus 0.89; surprise 21.35%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Apr 2026 with consensus 1.19.",
-        "recentNews": "Strong earnings surprise and sector leadership reinforce the bullish setup.",
-        "macroLink": "https: / / www.bls.gov / news.release / empsit.nr0.htm",
-        "macroEvidence": "Official macro release delayed; market reacting to labor resilience and IT capex",
-        "modelEvidence": "Rank 1 of 502; top decile; SHAP features show momentum and volatility signals supporting stance.",
-        "technicalEvidence": "Close above 50 / 200d confirms uptrend; volume trend steady.",
-        "momentumEvidence": "60d and 120d momentum ranks support continuation",
-        "risk": "Above-sector volatility; weak volume confirmation could precede a pause or pullback",
+        "recentNews": "Earnings beat history echoed in model; momentum-driven move.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 1 / 502; percentile 100; SHAP top features show momentum and downside-volatility considerations.",
+        "technicalEvidence": "Near-term trend up; distance to 52w high -4.97%; RSI 60; volume ratio 0.66.",
+        "momentumEvidence": "Top sector return 60d; top-decile momentum; long-horizon momentum.",
+        "risk": "Above-sector volatility; weak volume confirmation; exposure to IT sector.",
         "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
           "S1",
           "C1-EARNINGS",
           "C1-MARKETCAP",
-          "C1-IR",
-          "O1"
-        ]
-      },
-      {
-        "symbol": "SNDK",
-        "action": "Buy",
-        "conviction": "High",
-        "setup": "momentum_confirmed",
-        "whyNow": "Storage / SSD cycle benefiting from data growth; 52w high proximity; momentum strong; 60d SPY outperformance",
-        "rationale": "Long-horizon momentum, top sector return, above 200d trend; within 8% of 52w high; RSI caution near 81; liquidity healthy.",
-        "companyOverview": "Sandisk is a leading developer, manufacturer and provider of data storage devices and solutions based on NAND flash technology. With a differentiated innovation engine driving advancements in storage and semiconductor technologies, our broad and ever-expanding portfolio delivers powerful flash storage solutions for...",
-        "marketCap": "$231.4B",
-        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 31.81.",
-        "recentNews": "Strong earnings beat and data-storage demand support upside.",
-        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / sndk / earnings",
-        "macroEvidence": "IT demand strength; AI hardware cycle",
-        "modelEvidence": "Rank 4 of 502; momentum confirmed; SHAP features support volatility and momentum tilt.",
-        "technicalEvidence": "RSI 81 indicates overbought risk; risk-control trigger levels defined by chandelier stops.",
-        "momentumEvidence": "Top-sector 120d return rank; 60 / 120d momentum strong",
-        "risk": "RSI elevated; potential pullback risk; volume confirmation moderate",
-        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
-        "sourceRefs": [
-          "C4-EARNINGS",
-          "C4-MARKETCAP",
-          "C4-IR",
-          "S1"
+          "O1",
+          "C1-IR"
         ]
       },
       {
         "symbol": "LITE",
-        "action": "Buy",
+        "action": "Long",
         "conviction": "High",
-        "setup": "momentum_confirmed",
-        "whyNow": "AI / cloud infra buildout; 120d sector momentum; above 200d trend; highly liquid",
-        "rationale": "Long-horizon momentum with strong 60d / 120d gains; 50 / 200d trend positive; RSI around 51; near-term upside potential.",
+        "setup": "Momentum confirmed: above 50 and 200d averages, top sector momentum",
+        "whyNow": "IT sector leadership; LITE strong 120d momentum, high liquidity.",
+        "rationale": "LITE ranks 3rd, with top-decile momentum and long-horizon momentum; near 52w high margins, RSI ~51; volume supportive.",
         "companyOverview": "Lumentum (NASDAQ: LITE) is a global leader in optical and photonic technologies that power the networks and infrastructure behind AI, cloud computing, and next-generation communications. Built on decades of photonics innovation, Lumentum delivers high-performance lasers, modules, and optical subsystems that enable s...",
         "marketCap": "$70.3B",
         "earningsContext": "Last reported 2026-05-05 for the Mar 2026 fiscal quarter; EPS 1.88 versus consensus 1.81; surprise 3.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 2.18.",
-        "recentNews": "Strong photonics demand; margin expansion.",
-        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / lite / earnings",
-        "macroEvidence": "AI hardware demand; data-center spending",
-        "modelEvidence": "Rank 3; momentum confirmed; liquidity favorable; SHAP indicates liquidity feature",
-        "technicalEvidence": "Above 50d / 200d; volume ratio 1.18; RSI 51; near 52w high margin.",
-        "momentumEvidence": "Top sector 120d return rank; liquid vs universe",
-        "risk": "RSI not extreme; volatility elevated but controlled",
+        "recentNews": "Strong quarterly results with margin expansion; AI-related demand tailwinds.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 3 / 502; percentile 99.6; SHAP features support momentum tilt.",
+        "technicalEvidence": "RSI ~51; distance to 52w high -9.13; volume 1.18x; above50 / above200.",
+        "momentumEvidence": "Top-decile momentum; liquid vs universe.",
+        "risk": "Above-sector volatility.",
         "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
           "C3-EARNINGS",
@@ -1484,134 +1459,169 @@
         ]
       },
       {
-        "symbol": "CHTR",
-        "action": "Avoid",
-        "conviction": "Low",
-        "setup": "model_rebound_watch",
-        "whyNow": "Below-50 / 200d trend; notable rebound activation parameters; not momentum confirmed",
-        "rationale": "Model rebound watch with activation pending; RSI very low (14) but price action weak; risk of continued drawdown.",
-        "companyOverview": "Charter Communications, Inc. (NASDAQ:CHTR ) is a leading broadband connectivity company with services available to nearly 59 million homes and small to large businesses across 41 states through its Spectrum brand. Founded in 1993, Charter has evolved from providing cable TV to streaming, and from high-speed Interne...",
-        "marketCap": "$21.5B",
-        "earningsContext": "Last reported 2026-04-24 for the Mar 2026 fiscal quarter; EPS 9.17 versus consensus 9.97; surprise -8.02%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 10.33.",
-        "recentNews": "No clear catalyst; price not supportive; IR data limited.",
-        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / chtr / earnings",
-        "macroEvidence": "No direct macro driver",
-        "modelEvidence": "Rank 12; rebound watch; activation pending; RSI 14; volatility signals.",
-        "technicalEvidence": "Below 50d / 200d trends; high volatility flagged",
-        "momentumEvidence": "Not momentum confirmed",
-        "risk": "Activation pending; high risk if fails to activate",
-        "invalidation": "Close below activation price 162.73 within 5 days.",
+        "symbol": "SNDK",
+        "action": "Long",
+        "conviction": "High",
+        "setup": "Momentum confirmed: strong long-horizon momentum; near 52w high",
+        "whyNow": "IT hardware leader; 120d momentum; large 60d return vs SPY; high liquidity.",
+        "rationale": "Sandisk shows extreme upside momentum with RSI high ~81; 120d return 541%; top decile; within 8% of 52w high.",
+        "companyOverview": "Sandisk is a leading developer, manufacturer and provider of data storage devices and solutions based on NAND flash technology. With a differentiated innovation engine driving advancements in storage and semiconductor technologies, our broad and ever-expanding portfolio delivers powerful flash storage solutions for...",
+        "marketCap": "$231.4B",
+        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 31.81.",
+        "recentNews": "Strong earnings surprise boosts momentum; data-storage demand tailwinds.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 4 / 502; percentile 99.4; long-horizon momentum; top sector 120d return.",
+        "technicalEvidence": "RSI 81; distance to 52w high 0; volume 1.24x.",
+        "momentumEvidence": "Top decile momentum; high relative strength vs SPY.",
+        "risk": "RSI extended; above-sector volatility.",
+        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
-          "C12-EARNINGS",
-          "C12-IR",
-          "C12-MARKETCAP"
+          "C4-EARNINGS",
+          "C4-MARKETCAP",
+          "C4-IR"
+        ]
+      },
+      {
+        "symbol": "STX",
+        "action": "Long",
+        "conviction": "High",
+        "setup": "Momentum confirmed: above 50 and 200d averages",
+        "whyNow": "Strong 60d / 120d momentum; sector leader in IT.",
+        "rationale": "STX ranks 5; 120d return rank; RSI 88 signals overbought but within uptrend.",
+        "companyOverview": "Seagate (NASDAQ: STX) is a pioneer in mass-capacity data storage, accelerating ability to harness the full value of data. Our portfolio of advanced storage solutions helps hyperscale cloud providers, enterprises, and consumers protect, create and manage the data that powers their transformation and growth. For more...",
+        "marketCap": "$175.5B",
+        "earningsContext": "Last reported 2026-04-28 for the Mar 2026 fiscal quarter; EPS 3.92 versus consensus 3.26; surprise 20.25%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 4.83.",
+        "recentNews": "Earnings beat supported by storage demand tailwinds.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "Rank 5 / 502; percentile 99.2; momentum confirmed.",
+        "technicalEvidence": "RSI 88; distance to52wHigh -0.48; volume 1.03x.",
+        "momentumEvidence": "Top sector momentum; below-average risk.",
+        "risk": "RSI elevated; potential pullback risk.",
+        "invalidation": "Exit on close below 632.98 lower bound from chandelier stops.",
+        "sourceRefs": [
+          "C5-EARNINGS",
+          "C5-MARKETCAP",
+          "C5-IR"
         ]
       }
     ],
     "avoidList": {
-      "summary": "Investable names with weak multi-day momentum are concentrated in Financials, Industrials, Health Care, Utilities, and Consumer Staples; avoid fresh long exposure until macro signals and stock-specific momentum improve.",
+      "summary": "Avoid crowded long exposure in late-stage momentum across Financials, Industrials, Health Care and Utilities where the weakest, highest-variance names cluster.",
       "sectors": [
         {
           "sector": "Financials",
-          "rationale": "16 weakest model-ranked names concentrated here; risk of further drawdown if rates stay high."
+          "rationale": "16 weakest model-ranked names concentrated here; crowding risk high."
         },
         {
           "sector": "Industrials",
-          "rationale": "11 weak names; sensitivity to capex cycles."
+          "rationale": "11 weak names; beta risk rising with idiosyncratic movers."
         },
         {
           "sector": "Health Care",
-          "rationale": "11 weak names; earnings volatility and policy risk."
+          "rationale": "11 weak names; dispersion rising; fundamentals mixed."
         },
         {
           "sector": "Utilities",
-          "rationale": "8 weak names; defensive darlings may underperform if inflation cools."
+          "rationale": "8 weak names; defensive crowding risk if rate path hawkish."
         }
       ],
       "companies": [
         {
           "symbol": "AEP",
-          "rationale": "Ranked bottom; weak momentum; volatility elevated.",
-          "modelEvidence": "Rank 502; -0.22 score; RSI 45; volatility 0.0128."
+          "rationale": "Ranked bottom; poor momentum and higher volatility.",
+          "modelEvidence": "Ranked 502/502; RSI 45; vol 0.0128; price near 52w high low; risk flags present."
         },
         {
           "symbol": "AFL",
-          "rationale": "Bottom-ranked; low momentum signals; volume weak.",
-          "modelEvidence": "Rank 501; -0.22; RSI not supportive."
+          "rationale": "Low momentum signal; weak volume confirmation.",
+          "modelEvidence": "Ranked 501/502; volatility low but trend questionable."
+        },
+        {
+          "symbol": "AIG",
+          "rationale": "Weak momentum and high dispersion risk.",
+          "modelEvidence": "Ranked 500/502; volatility 0.0138; RSI not supportive."
+        },
+        {
+          "symbol": "AIZ",
+          "rationale": "Low momentum; crowding risk in Financials.",
+          "modelEvidence": "Ranked 499/502; volatility 0.0139; RSI 66."
         }
       ]
     },
     "portfolioNotes": [
-      "Momentum-led long book concentrated in top decile IT names; SATS monitored for volatility",
-      "Earnings catalysts skew toward memory, networking, and storage hardware"
+      "Macro risk remains elevated; stay nimble around CPI/PPI and Iran headlines.",
+      "IT leadership remains the core driver; avoid overexposure to crowded Financials/Industrials names with weak momentum signals.",
+      "If Powell signals inflation persistence, risk-off could reassert."
     ],
     "openQuestions": [
-      "Is the CPI risk premia price-in before May 13?",
-      "Are near-term inflation prints strong enough to push Fed into a higher-for-longer stance?",
-      "What does the oil/energy complex imply for IT hardware demand in coming months?"
+      "Is the Iran energy shock persistent or transitory?",
+      "What is the Fed path post-CPI/PPI data release?",
+      "Are there any unexpected earnings catalysts from top momentum names?"
     ],
     "sourceRefs": [
       "S1",
-      "C1-EARNINGS",
-      "C4-EARNINGS",
-      "C3-EARNINGS",
-      "S7",
+      "S2",
       "S3",
       "S4",
-      "S6",
-      "S8",
+      "S5",
       "S9",
       "S10",
-      "S12"
+      "C3-EARNINGS",
+      "C4-EARNINGS",
+      "C5-EARNINGS",
+      "C9-EARNINGS",
+      "C10-EARNINGS"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Selected angle-driven analyses from the past week, focusing on differentiated macro-detail and market structure signals rather than broad recaps. Avoids previously used sources unless necessary.",
+      "summary": "Focused source analysis from the latest week, prioritizing differentiated angles and avoiding generic recaps. Excludes model-specific jargon and recently used sources when solid alternatives exist.",
       "cards": [
         {
-          "sourceRef": "S15",
+          "sourceRef": "S16",
           "sourceName": "Axios Macro RSS",
           "title": "What is, and isn't, worrying about 100% debt to GDP - Axios",
-          "thesis": "The debate isn’t binary: policy constraints, growth dynamics, and financial-fee pressures imply asymmetric risk around debt ceilings. Markets may overreact to headline debt metrics while the real stress appears in funding conditions and long-duration risk premia.",
-          "whyItMatters": "If debt-outlook shifts are priced in as permanent constraints, credit markets and long-term rates could reset in ways that tighten financial conditions without obvious policy pivots.",
-          "marketReadThrough": "Watch 10-year / 30-year yield curves, funding spreads, and bank loan markets for sudden flattening or steepening that presages credit-cycle tightening rather than immediate fiscal policy shocks.",
-          "variantAngle": "Focus on the interaction between debt sustainability narratives and financial conditions proxies (term premium, credit spreads) to identify mispriced duration risk.",
+          "thesis": "Debt-to-GDP level debate reveals a bias toward policy normalization risks rather than immediate growth collapse; markets should watch for policy pivots or funding-cost constraints rather than headline debt ratios.",
+          "whyItMatters": "This frames macro risk as a policy and funding-cost dynamic, not a pure growth scare, suggesting risk assets react more to policy signaling (spreads, deficit financing) than static debt levels.",
+          "marketReadThrough": "Watch for shifts in sovereign credit concerns and financing conditions that could widen or compress credit spreads, particularly in long-duration or high-yield segments.",
+          "variantAngle": "From debt ratios to funding costs: a lens on whether bond markets are pricing future fiscal policy flexibility or austerity risk.",
           "confidence": "Medium",
           "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBHel9tV0FWamJ6eTI3M1lObFhvWk1VWkZaZ1JQblVUVm1GaVR6a1k4R0stSVcwN05tRHh0RlBzZEZDZzJiZlFvOUZiNnRHb2RZdEc5TjFDTlRkVTJwYzF2ejdNQUxBTzJIVmk2N1NoZw?oc=5",
           "publishedAt": "2026-05-04T16:01:53.000Z",
           "sourceRefs": [
-            "S15"
+            "S16"
           ]
         },
         {
-          "sourceRef": "S11",
+          "sourceRef": "S12",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Looking to the Futures",
-          "thesis": "Futures markets are signaling immediate-priority risk sensitivities-earnings, rates, geopolitics, and energy-yet the narrative remains compartmentalized, which can create mispricings when cross-asset correlations shift suddenly.",
-          "whyItMatters": "Futures-driven pricing often foreshadows broader risk-off / risk-on shifts before equities respond, offering a timing proxy for hedging across asset classes.",
-          "marketReadThrough": "Use cross-asset signals (equity-implied volatility, commodity curves, and rate futures) to test if equity risk premia are expanding due to real-economy stress or just term-structure adjustments.",
-          "variantAngle": "Examine cross-asset kink points where futures signals diverge from equity price action to spot hidden hedging demand or speculative liquidity dry spots.",
-          "confidence": "Low",
+          "thesis": "Futures pricing is signaling ongoing policy risk and earnings uncertainty; the market is pricing potential macro shocks into commodity and rate markets rather than into equity direction.",
+          "whyItMatters": "Futures term structure and volatility imply hedging demand and risk-off episodes may persist, even if equity fundamentals are stable.",
+          "marketReadThrough": "Implications for carry trades, commodity exposures, and hedging costs; duration risk in bond markets could influence equity valuations through discount rates.",
+          "variantAngle": "Futures-driven view of policy and earnings uncertainty, not just tech or growth headlines.",
+          "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/looking-to-futures",
           "publishedAt": "2026-05-08T00:00:00.000Z",
           "sourceRefs": [
-            "S11"
+            "S12"
           ]
         },
         {
-          "sourceRef": "S16",
-          "sourceName": "Fidelity Market Insights",
-          "title": "Market volatility: Investing strategies for volatile markets | Fidelity",
-          "thesis": "Volatility isn’t just a risk; it’s a persistent driver of return regimes. Distinguishing regime-driven moves from noise is essential for positioning in a mid-cycle environment.",
-          "whyItMatters": "In volatile regimes, dispersion expands and stock-level idiosyncrasies matter more than macro beta. Tail-risk hedges and factor diversification may outperform during regime transitions.",
-          "marketReadThrough": "Evaluate volatility dispersion, correlation breakdowns, and factor performance skew during recent spikes to gauge where capital rotation will occur next.",
-          "variantAngle": "Prioritize strategies that perform in volatility regimes (volatility targeting, option-structure plays, and sector rotation via dispersion baskets) over outright directional bets.",
-          "confidence": "Medium",
-          "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
-          "publishedAt": "2026-05-04T00:00:00.000Z",
+          "sourceRef": "S4",
+          "sourceName": "CNBC Top News RSS",
+          "title": "Do you need a chief AI officer? Here&apos;s how the tech is changing boardrooms",
+          "thesis": "AI governance adoption is accelerating at the board level, signaling a broader shift in exec attention toward AI risk management and strategic deployment rather than just product milestones.",
+          "whyItMatters": "Enhanced AI governance could affect capex intensity, automation productivity, and risk controls across sectors, influencing capex cycles and margins.",
+          "marketReadThrough": "Potential uptick in AI-related capex demand and productivity gains; tactically, sectors with high automation exposure may outperform if governance reduces implementation risk.",
+          "variantAngle": "Boardroom AI governance as a proxy for broader technology adoption and corporate risk management discipline.",
+          "confidence": "Low",
+          "url": "https://www.cnbc.com/2026/05/11/heres-how-artificial-intelligence-is-changing-boardrooms.html",
+          "publishedAt": "2026-05-11T02:10:29.000Z",
           "sourceRefs": [
-            "S16"
+            "S4"
           ]
         }
       ]
@@ -1620,51 +1630,51 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Selected angle-driven analyses from the past week, focusing on differentiated macro-detail and market structure signals rather than broad recaps. Avoids previously used sources unless necessary.",
+    "summary": "Focused source analysis from the latest week, prioritizing differentiated angles and avoiding generic recaps. Excludes model-specific jargon and recently used sources when solid alternatives exist.",
     "cards": [
       {
-        "sourceRef": "S15",
+        "sourceRef": "S16",
         "sourceName": "Axios Macro RSS",
         "title": "What is, and isn't, worrying about 100% debt to GDP - Axios",
-        "thesis": "The debate isn’t binary: policy constraints, growth dynamics, and financial-fee pressures imply asymmetric risk around debt ceilings. Markets may overreact to headline debt metrics while the real stress appears in funding conditions and long-duration risk premia.",
-        "whyItMatters": "If debt-outlook shifts are priced in as permanent constraints, credit markets and long-term rates could reset in ways that tighten financial conditions without obvious policy pivots.",
-        "marketReadThrough": "Watch 10-year / 30-year yield curves, funding spreads, and bank loan markets for sudden flattening or steepening that presages credit-cycle tightening rather than immediate fiscal policy shocks.",
-        "variantAngle": "Focus on the interaction between debt sustainability narratives and financial conditions proxies (term premium, credit spreads) to identify mispriced duration risk.",
+        "thesis": "Debt-to-GDP level debate reveals a bias toward policy normalization risks rather than immediate growth collapse; markets should watch for policy pivots or funding-cost constraints rather than headline debt ratios.",
+        "whyItMatters": "This frames macro risk as a policy and funding-cost dynamic, not a pure growth scare, suggesting risk assets react more to policy signaling (spreads, deficit financing) than static debt levels.",
+        "marketReadThrough": "Watch for shifts in sovereign credit concerns and financing conditions that could widen or compress credit spreads, particularly in long-duration or high-yield segments.",
+        "variantAngle": "From debt ratios to funding costs: a lens on whether bond markets are pricing future fiscal policy flexibility or austerity risk.",
         "confidence": "Medium",
         "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBHel9tV0FWamJ6eTI3M1lObFhvWk1VWkZaZ1JQblVUVm1GaVR6a1k4R0stSVcwN05tRHh0RlBzZEZDZzJiZlFvOUZiNnRHb2RZdEc5TjFDTlRkVTJwYzF2ejdNQUxBTzJIVmk2N1NoZw?oc=5",
         "publishedAt": "2026-05-04T16:01:53.000Z",
         "sourceRefs": [
-          "S15"
+          "S16"
         ]
       },
       {
-        "sourceRef": "S11",
+        "sourceRef": "S12",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Looking to the Futures",
-        "thesis": "Futures markets are signaling immediate-priority risk sensitivities-earnings, rates, geopolitics, and energy-yet the narrative remains compartmentalized, which can create mispricings when cross-asset correlations shift suddenly.",
-        "whyItMatters": "Futures-driven pricing often foreshadows broader risk-off / risk-on shifts before equities respond, offering a timing proxy for hedging across asset classes.",
-        "marketReadThrough": "Use cross-asset signals (equity-implied volatility, commodity curves, and rate futures) to test if equity risk premia are expanding due to real-economy stress or just term-structure adjustments.",
-        "variantAngle": "Examine cross-asset kink points where futures signals diverge from equity price action to spot hidden hedging demand or speculative liquidity dry spots.",
-        "confidence": "Low",
+        "thesis": "Futures pricing is signaling ongoing policy risk and earnings uncertainty; the market is pricing potential macro shocks into commodity and rate markets rather than into equity direction.",
+        "whyItMatters": "Futures term structure and volatility imply hedging demand and risk-off episodes may persist, even if equity fundamentals are stable.",
+        "marketReadThrough": "Implications for carry trades, commodity exposures, and hedging costs; duration risk in bond markets could influence equity valuations through discount rates.",
+        "variantAngle": "Futures-driven view of policy and earnings uncertainty, not just tech or growth headlines.",
+        "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/looking-to-futures",
         "publishedAt": "2026-05-08T00:00:00.000Z",
         "sourceRefs": [
-          "S11"
+          "S12"
         ]
       },
       {
-        "sourceRef": "S16",
-        "sourceName": "Fidelity Market Insights",
-        "title": "Market volatility: Investing strategies for volatile markets | Fidelity",
-        "thesis": "Volatility isn’t just a risk; it’s a persistent driver of return regimes. Distinguishing regime-driven moves from noise is essential for positioning in a mid-cycle environment.",
-        "whyItMatters": "In volatile regimes, dispersion expands and stock-level idiosyncrasies matter more than macro beta. Tail-risk hedges and factor diversification may outperform during regime transitions.",
-        "marketReadThrough": "Evaluate volatility dispersion, correlation breakdowns, and factor performance skew during recent spikes to gauge where capital rotation will occur next.",
-        "variantAngle": "Prioritize strategies that perform in volatility regimes (volatility targeting, option-structure plays, and sector rotation via dispersion baskets) over outright directional bets.",
-        "confidence": "Medium",
-        "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
-        "publishedAt": "2026-05-04T00:00:00.000Z",
+        "sourceRef": "S4",
+        "sourceName": "CNBC Top News RSS",
+        "title": "Do you need a chief AI officer? Here&apos;s how the tech is changing boardrooms",
+        "thesis": "AI governance adoption is accelerating at the board level, signaling a broader shift in exec attention toward AI risk management and strategic deployment rather than just product milestones.",
+        "whyItMatters": "Enhanced AI governance could affect capex intensity, automation productivity, and risk controls across sectors, influencing capex cycles and margins.",
+        "marketReadThrough": "Potential uptick in AI-related capex demand and productivity gains; tactically, sectors with high automation exposure may outperform if governance reduces implementation risk.",
+        "variantAngle": "Boardroom AI governance as a proxy for broader technology adoption and corporate risk management discipline.",
+        "confidence": "Low",
+        "url": "https://www.cnbc.com/2026/05/11/heres-how-artificial-intelligence-is-changing-boardrooms.html",
+        "publishedAt": "2026-05-11T02:10:29.000Z",
         "sourceRefs": [
-          "S16"
+          "S4"
         ]
       }
     ]
@@ -1678,12 +1688,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-05-10T15:19:08.625Z",
+    "generatedAt": "2026-05-11T04:41:48.928Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-05-10T04:21:25.816Z"
+      "previousRefreshAt": "2026-05-10T15:20:09.766Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1694,7 +1704,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-05-10T15:14:14.533Z",
+      "generatedAt": "2026-05-11T04:36:54.074Z",
       "lookbackHours": 96,
       "releases": [
         {
@@ -1722,11 +1732,11 @@
       "live": 21,
       "blockedOrFailed": [
         {
-          "name": "Raymond James Commentary And Insights",
-          "reason": "Source check failed: This operation was aborted"
+          "name": "Bank of America Institute",
+          "reason": "Source check failed: 403 Forbidden"
         },
         {
-          "name": "EIA Today In Energy",
+          "name": "Raymond James Commentary And Insights",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -1746,114 +1756,159 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "SEC delay on prediction markets ETFs echoes a long-fought bitcoin fund battle",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
+        "title": "South Korea's Kospi hits fresh record as Asia markets trade mixed amid oil surge, Iran risks",
+        "sourceName": "CNBC Markets",
+        "sourceCategory": "News",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/10/sec-prediction-markets-etfs-trading-launch-delay.html",
-        "publishedAt": "2026-05-10T12:22:02.000Z",
-        "summary": "The Securities and Exchange Commission has delayed approval for prediction markets ETFs, bringing up memories of the long battle over bitcoin funds.",
-        "excerpt": "The Securities and Exchange Commission has delayed approval for prediction markets ETFs, bringing up memories of the long battle over bitcoin funds.",
+        "url": "https://www.cnbc.com/2026/05/11/asia-markets-today-live-updates-nikkei-kospi-hang-seng-sensex-csi-300-iran-hormuz.html",
+        "publishedAt": "2026-05-10T23:46:28.000Z",
+        "summary": "Investors headed into Monday on edge as Trump’s rejection of Iran’s ceasefire proposal fueled concerns about a prolonged Middle East conflict.",
+        "excerpt": "Asia markets today: Nikkei, Kospi, Hang Seng, Sensex, CSI 300 Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Oil prices climbed after Trump rejected Iran's latest counteroffer to end the war. Iran tensions overshadowed strong recent gains on Wall Street. Strait of Hormuz disruption fears continued to rattle global markets. In this article @DJ.1 @SP.1 @ND.1 Follow your favorite stocks CREATE FREE ACCOUNT South Korea's Kospi opened at a fresh record Monday, leading gains in Asia-Pacific markets amid rising oil prices and escalating tensions between the U.S. and Iran. President Donald Trump 's rejection of Tehran's latest proposal to end the war, however, stoked worries over an elongated Middle East conflict. Iran submitted a new proposal to U.S. negotiators focused on ending the Middle East conflict. Iran's semi-official Tasnim news agency said that the counteroffer called for an end to the war on all fronts and the lifting of sanctions on Tehran, citing an informed source. However, Trump said he did not like Iran's response and called it \"TOTALLY UNACCEPTABLE!\" in a Truth Social Post. Meanwhile, Israeli Prime Minister Benjamin Netanyahu said Sunday that the war with Iran was \"not over,\" as the U.S. and Israel still aim to curb Tehran's nuclear ambitions. Netanyahu's comments come ahead of Trump 's trip to China later this week, where he's expected to meet with Chinese President Xi Jinping . The war and the subsequent closure of the Strait of Hormuz by Iran have spiked global energy costs and sharply raised gas prices in the U.S. The West Texas Intermediate futures for June was 3.94% higher at $99.18 per barrel as of 9:32 p.m. ET. Brent crude futures for July rose 3.49% to $104.83 per barrel. South Ko",
         "themes": [
-          "Market color"
+          "Geopolitics and policy",
+          "Commodities and energy"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 3,
-        "score": 78,
+        "ageHours": 4.9,
+        "score": 100,
         "tickers": []
       },
       {
         "id": "M2",
-        "title": "Alphabet&apos;s 160% rally in a year reflects value of owning &apos;most of the stack&apos; in AI",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
+        "title": "Stock futures slide as investors monitor the latest Iran war negotiations: Live updates",
+        "sourceName": "CNBC Markets",
+        "sourceCategory": "News",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/10/alphabet-160percent-rally-in-year-reflects-value-of-owning-most-of-ai-stack.html",
-        "publishedAt": "2026-05-10T12:00:01.000Z",
-        "summary": "Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner.",
-        "excerpt": "Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner.",
+        "url": "https://www.cnbc.com/2026/05/10/stock-market-today-live-updates.html",
+        "publishedAt": "2026-05-10T22:01:43.000Z",
+        "summary": "The three major indexes are coming off a winning weak.",
+        "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Traders work at the New York Stock Exchange on May 7, 2026. NYSE Stock futures edged lower early Monday, following a winning week on Wall Street, as oil prices jumped after President Donald Trump rejected Iran's latest proposal to end the war. Futures tied to the Dow Jones Industrial Average slid 81 points, or 0.16%. S&P 500 futures and Nasdaq 100 futures were both marginally lower. Sunday's moves come after the S&P 500 and Nasdaq Composite rallied more than 2% and 4%, respectively, last week. Both indexes recorded their sixth-straight winning weeks — a first for each since 2024. The Dow rose 0.2% for the week, notching its fifth week of gains out of the last six. Stocks advanced to end the week on Friday after the U.S. nonfarm payrolls report showed an increase of 115,000 jobs in April, surpassing expectations of 55,000 from economists polled by Dow Jones. The S&P 500 and Nasdaq both ended Friday's session at all-time highs. Iran sent a new proposal to U.S. negotiators, centered on ending the monthslong conflict. The counteroffer stressed the need to end the war on all fronts and to lift sanctions on Tehran, Iran's semi-official Tasnim news agency said , citing an informed source. In response, Trump said in a Truth Social post that he did not like Iran's response, adding that it was \"TOTALLY UNACCEPTABLE!\" Oil futures climbed in overnight trading following Trump's rejection. Nonetheless, some market watchers expect U.S. markets to remain resilient despite the uncertainty. \"The economy may slow somewhat from its prior path, due to the Iran war and subsequent oil price shock,\" said Rick Rieder, chief investment officer of global fix",
         "themes": [
-          "AI and semis"
+          "Geopolitics and policy",
+          "Commodities and energy",
+          "Macro and growth"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 3.3,
-        "score": 78,
+        "ageHours": 6.7,
+        "score": 100,
         "tickers": []
       },
       {
         "id": "M3",
-        "title": "Retailers are on a hiring spree. But consumers are sending warning signs",
+        "title": "China inflation beat estimates in April as Iran war drives producer prices to three-year highs",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/10/retailer-hiring-consumer-warning-jobs-report.html",
-        "publishedAt": "2026-05-10T11:29:25.000Z",
-        "summary": "The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth.",
-        "excerpt": "The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth.",
+        "url": "https://www.cnbc.com/2026/05/11/china-cpi-ppi-inflation-energy-costs-oil-iran-war.html",
+        "publishedAt": "2026-05-11T04:08:05.000Z",
+        "summary": "China has cushioned the worst of the energy shock through its strategic oil stockpiles and a diversified mix of renewable energy sources.",
+        "excerpt": "China has cushioned the worst of the energy shock through its strategic oil stockpiles and a diversified mix of renewable energy sources.",
         "themes": [
-          "Macro and growth"
+          "Earnings",
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "Commodities and energy"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 3.8,
-        "score": 78,
+        "ageHours": 0.6,
+        "score": 100,
         "tickers": []
       },
       {
         "id": "M4",
-        "title": "Big Tech’s AI spending is depriving investors of juicy payouts",
+        "title": "U.S. stock futures fall, oil surges as Trump calls Iran’s latest offer to end war ‘totally unacceptable’",
         "sourceName": "MarketWatch Top Stories RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/big-techs-ai-spending-is-depriving-investors-of-juicy-payouts-39d17305?mod=mw_rss_topstories",
-        "publishedAt": "2026-05-10T14:00:00.000Z",
-        "summary": "Goldman Sachs expects S&P 500 share buybacks to grow only 3% this year, as a shaky economic backdrop and AI cost pressures force spending reconsiderations.",
-        "excerpt": "Goldman Sachs expects S&P 500 share buybacks to grow only 3% this year, as a shaky economic backdrop and AI cost pressures force spending reconsiderations.",
+        "url": "https://www.marketwatch.com/story/u-s-stock-futures-fall-oil-surges-as-trump-calls-irans-latest-offer-to-end-war-totally-unacceptable-187e3d87?mod=mw_rss_topstories",
+        "publishedAt": "2026-05-11T03:01:00.000Z",
+        "summary": "U.S. stock-index futures fell and oil prices rose on Sunday, after President Donald Trump called Iran’s response to the latest U.S.",
+        "excerpt": "U.S. stock-index futures fell and oil prices rose on Sunday, after President Donald Trump called Iran’s response to the latest U.S. proposal to end the war “totally unacceptable.”",
         "themes": [
-          "AI and semis"
+          "Geopolitics and policy",
+          "Commodities and energy"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 1.3,
-        "score": 78,
+        "ageHours": 1.7,
+        "score": 100,
         "tickers": []
       },
       {
         "id": "M5",
-        "title": "‘The S&P 500 seems to be doing particularly well’: I’m 66. Is this a good time to invest $100,000 in the stock market?",
-        "sourceName": "MarketWatch Top Stories RSS",
+        "title": "Iran says it will &apos;never bow&apos; as Trump rejects peace counteroffer, prolonging Middle East conflict",
+        "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/the-s-p-500-seems-to-be-doing-particularly-well-im-66-is-this-a-good-time-to-invest-100-000-in-the-stock-market-46fb8ff8?mod=mw_rss_topstories",
-        "publishedAt": "2026-05-10T13:00:00.000Z",
-        "summary": "“I own my home and I have no debt.”",
-        "excerpt": "“I own my home and I have no debt.”",
+        "url": "https://www.cnbc.com/2026/05/11/iran-war-trump-negotiation-hormuz-nuclear-talks.html",
+        "publishedAt": "2026-05-11T02:21:44.000Z",
+        "summary": "Washington has sought to press Beijing to lean on Tehran to reopen the strait, though China's appetite to act as a pressure mechanism remains unclear.",
+        "excerpt": "Washington has sought to press Beijing to lean on Tehran to reopen the strait, though China's appetite to act as a pressure mechanism remains unclear.",
         "themes": [
-          "Market color"
+          "Geopolitics and policy"
         ],
         "freshness": "Since prior refresh",
         "ageHours": 2.3,
-        "score": 78,
+        "score": 92,
         "tickers": []
       },
       {
         "id": "M6",
-        "title": "Stocks are walking a tightrope to fresh record highs — as a handful of names do most of the heavy lifting",
+        "title": "Powell’s legacy as Fed chair is fighting inflation and Trump. He may lose the battle against both.",
         "sourceName": "MarketWatch Top Stories RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/stocks-are-walking-a-tightrope-to-fresh-record-highs-as-a-handful-of-names-do-most-of-the-heavy-lifting-fe5a166a?mod=mw_rss_topstories",
-        "publishedAt": "2026-05-10T13:00:00.000Z",
-        "summary": "Investors are caught on a tightrope - watching a very narrow band of tech stocks lift the stock market to fresh record highs, while looking down below for signs of trouble.",
-        "excerpt": "Investors are caught on a tightrope — watching a very narrow band of tech stocks lift the stock market to fresh record highs, while looking down below for signs of trouble.",
+        "url": "https://www.marketwatch.com/story/powells-legacy-as-fed-chair-is-fighting-inflation-and-trump-he-may-lose-the-battle-against-both-aeb32f89?mod=mw_rss_topstories",
+        "publishedAt": "2026-05-10T22:00:00.000Z",
+        "summary": "Jerome Powell will be remembered for how the struggles against inflation and to preserve Federal Reserve independence ultimately end.",
+        "excerpt": "Jerome Powell will be remembered for how the struggles against inflation and to preserve Federal Reserve independence ultimately end.",
         "themes": [
-          "Market color"
+          "Rates and central banks"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 2.3,
-        "score": 78,
+        "ageHours": 6.7,
+        "score": 92,
         "tickers": []
       },
       {
         "id": "M7",
+        "title": "Do you need a chief AI officer? Here&apos;s how the tech is changing boardrooms",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/05/11/heres-how-artificial-intelligence-is-changing-boardrooms.html",
+        "publishedAt": "2026-05-11T02:10:29.000Z",
+        "summary": "AI may now be coming for the C-suite, according to a report published Monday by IBM, which found that most companies were now staffing chief AI officer roles.",
+        "excerpt": "AI may now be coming for the C-suite, according to a report published Monday by IBM, which found that most companies were now staffing chief AI officer roles.",
+        "themes": [
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 2.5,
+        "score": 78,
+        "tickers": [
+          "IBM"
+        ]
+      },
+      {
+        "id": "M8",
+        "title": "I was a slave to credit-card debt, then I got laid off and turned my life around. Here’s how I did it.",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/americans-love-their-rose-colored-glasses-i-was-a-slave-to-credit-card-debt-then-i-got-laid-off-and-turned-my-life-around-32ba4d4c?mod=mw_rss_topstories",
+        "publishedAt": "2026-05-10T23:35:00.000Z",
+        "summary": "“I have steadily increased my assets by more than 10% since being laid off.”",
+        "excerpt": "“I have steadily increased my assets by more than 10% since being laid off.”",
+        "themes": [
+          "Credit and liquidity"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 5.1,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M9",
         "title": "Oil Prices, Bitcoin Rise While Rate Hike Odds Slip",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1868,12 +1923,12 @@
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 63.3,
+        "ageHours": 76.7,
         "score": 62,
         "tickers": []
       },
       {
-        "id": "M8",
+        "id": "M10",
         "title": "Cloudflare stock sinks 24% after earnings as company cuts 1,100 employees due to AI changes",
         "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
@@ -1887,12 +1942,12 @@
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 48.6,
+        "ageHours": 62,
         "score": 54,
         "tickers": []
       },
       {
-        "id": "M9",
+        "id": "M11",
         "title": "Rocket Lab surges 34% in best day ever on revenue beat, record-setting launch deal",
         "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
@@ -1905,19 +1960,19 @@
           "Earnings"
         ],
         "freshness": "Important older item",
-        "ageHours": 42.1,
+        "ageHours": 55.4,
         "score": 46,
         "tickers": []
       }
     ],
     "topThemes": [
       {
-        "theme": "Market color",
-        "count": 3
+        "theme": "Geopolitics and policy",
+        "count": 5
       },
       {
-        "theme": "AI and semis",
-        "count": 3
+        "theme": "Commodities and energy",
+        "count": 5
       },
       {
         "theme": "Macro and growth",
@@ -1925,20 +1980,20 @@
       },
       {
         "theme": "Earnings",
-        "count": 2
+        "count": 3
       },
       {
         "theme": "Rates and central banks",
-        "count": 1
+        "count": 3
       },
       {
-        "theme": "Commodities and energy",
-        "count": 1
+        "theme": "AI and semis",
+        "count": 2
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-05-10T15:19:08.619Z",
+      "generatedAt": "2026-05-11T04:41:48.922Z",
       "dates": [
         "2026-05-09",
         "2026-05-10",
@@ -2005,7 +2060,7 @@
               "marketCap": "$131,271,743,181",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
-              "noOfEsts": "N/A",
+              "noOfEsts": "4",
               "lastYearReportDate": "N/A",
               "lastYearEps": "$0.62",
               "sourceName": "Nasdaq earnings calendar",
@@ -2089,7 +2144,7 @@
               "marketCap": "$27,996,580,065",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "$0.15",
-              "noOfEsts": "N/A",
+              "noOfEsts": "4",
               "lastYearReportDate": "N/A",
               "lastYearEps": "N/A",
               "sourceName": "Nasdaq earnings calendar",
@@ -2215,7 +2270,7 @@
               "marketCap": "$8,235,547,923",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "$0.17",
-              "noOfEsts": "2",
+              "noOfEsts": "4",
               "lastYearReportDate": "N/A",
               "lastYearEps": "N/A",
               "sourceName": "Nasdaq earnings calendar",
@@ -2341,7 +2396,7 @@
               "marketCap": "$5,285,459,925",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "$0.42",
-              "noOfEsts": "N/A",
+              "noOfEsts": "4",
               "lastYearReportDate": "N/A",
               "lastYearEps": "$0.17",
               "sourceName": "Nasdaq earnings calendar",
@@ -2553,7 +2608,7 @@
           "price": 75.05,
           "changePct": 14.85,
           "change": 9.71,
-          "volume": 22391879,
+          "volume": 22685040,
           "marketCap": 29123674112,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
@@ -2577,7 +2632,7 @@
           "price": 12.94,
           "changePct": 1.89,
           "change": 0.24,
-          "volume": 47962656,
+          "volume": 48391814,
           "marketCap": 4932692480,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/",
@@ -2589,7 +2644,7 @@
           "price": 3.12,
           "changePct": -0.32,
           "change": -0.01,
-          "volume": 44797817,
+          "volume": 45815735,
           "marketCap": 4351855616,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/",
@@ -2599,6 +2654,26 @@
       "articleHeadlines": [
         {
           "id": "E1",
+          "title": "Do you need a chief AI officer? Here&apos;s how the tech is changing boardrooms",
+          "sourceName": "CNBC Top News RSS",
+          "url": "https://www.cnbc.com/2026/05/11/heres-how-artificial-intelligence-is-changing-boardrooms.html",
+          "publishedAt": "2026-05-11T02:10:29.000Z",
+          "summary": "AI may now be coming for the C-suite, according to a report published Monday by IBM, which found that most companies were now staffing chief AI officer roles.",
+          "tickers": [
+            "IBM"
+          ]
+        },
+        {
+          "id": "E2",
+          "title": "Stock futures slide as investors monitor the latest Iran war negotiations: Live updates",
+          "sourceName": "CNBC Markets",
+          "url": "https://www.cnbc.com/2026/05/10/stock-market-today-live-updates.html",
+          "publishedAt": "2026-05-10T22:01:43.000Z",
+          "summary": "The three major indexes are coming off a winning weak.",
+          "tickers": []
+        },
+        {
+          "id": "E3",
           "title": "Rocket Lab surges 34% in best day ever on revenue beat, record-setting launch deal",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/05/08/rocket-lab-rklb-q1-earnings-2026.html",
@@ -2607,16 +2682,7 @@
           "tickers": []
         },
         {
-          "id": "E2",
-          "title": "Michael Burry says the market today feels like 'the last months of the 1999-2000 bubble'",
-          "sourceName": "CNBC Markets",
-          "url": "https://www.cnbc.com/2026/05/08/michael-burry-says-the-market-today-feels-like-the-last-months-of-the-1999-2000-bubble.html",
-          "publishedAt": "2026-05-08T17:35:23.000Z",
-          "summary": "\"Stocks are not up or down because of jobs or consumer sentiment,\" Burry wrote. \"Feeling like the last months of the 1999-2000 bubble.\"",
-          "tickers": []
-        },
-        {
-          "id": "E3",
+          "id": "E4",
           "title": "Cloudflare stock sinks 24% after earnings as company cuts 1,100 employees due to AI changes",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/05/07/cloudflare-net-q1-2026-stock-earnings-layoffs.html",
@@ -2625,7 +2691,7 @@
           "tickers": []
         },
         {
-          "id": "E4",
+          "id": "E5",
           "title": "Looking to the Futures",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/looking-to-futures",
@@ -2634,7 +2700,7 @@
           "tickers": []
         },
         {
-          "id": "E5",
+          "id": "E6",
           "title": "Stocks Climb as April Jobs Growth Tops Estimates",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/stock-market-update-open",
@@ -2643,12 +2709,21 @@
           "tickers": []
         },
         {
-          "id": "E6",
+          "id": "E7",
           "title": "Market volatility: Investing strategies for volatile markets | Fidelity",
           "sourceName": "Fidelity Market Insights",
           "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
           "publishedAt": "2026-05-04T00:00:00.000Z",
           "summary": "Navigating stock and other investment volatility can be difficult. Here is what to know to manage market volatility.",
+          "tickers": []
+        },
+        {
+          "id": "E8",
+          "title": "Weekly Natural Gas Storage Report - EIA",
+          "sourceName": "EIA Today In Energy",
+          "url": "http://ir.eia.gov/ngs/ngs.html",
+          "publishedAt": "2026-05-01T00:00:00.000Z",
+          "summary": "Weekly Natural Gas Storage Report - EIA",
           "tickers": []
         }
       ],
@@ -2656,7 +2731,7 @@
     },
     "reddit": {
       "status": "error",
-      "generatedAt": "2026-05-10T15:14:14.616Z",
+      "generatedAt": "2026-05-11T04:36:54.309Z",
       "sourceNote": "Public Reddit JSON endpoints; use as sentiment and attention only, not verified news.",
       "subreddits": [
         {
@@ -2705,22 +2780,22 @@
         {
           "symbol": "INOD",
           "name": "Innodata Inc.",
-          "price": 84.89,
-          "changePct": 86,
-          "change": 39.25,
-          "volume": 19130921,
-          "marketCap": 2772113408,
+          "price": 84.85,
+          "changePct": 85.75,
+          "change": 39.17,
+          "volume": 19182368,
+          "marketCap": 2770807040,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
           "symbol": "RKLB",
           "name": "Rocket Lab Corporation",
-          "price": 105.47,
-          "changePct": 34.22,
-          "change": 26.89,
-          "volume": 76022604,
-          "marketCap": 61040865280,
+          "price": 105.545,
+          "changePct": 34.44,
+          "change": 27.04,
+          "volume": 79927310,
+          "marketCap": 61084270592,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
@@ -2730,7 +2805,7 @@
           "price": 24.16,
           "changePct": 27.36,
           "change": 5.19,
-          "volume": 41238047,
+          "volume": 41472189,
           "marketCap": 4452946432,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2741,7 +2816,7 @@
           "price": 147.71,
           "changePct": 26.58,
           "change": 31.02,
-          "volume": 20819897,
+          "volume": 21492867,
           "marketCap": 21565661184,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2752,7 +2827,7 @@
           "price": 8.01,
           "changePct": 25.94,
           "change": 1.65,
-          "volume": 53620575,
+          "volume": 53900107,
           "marketCap": 2719417600,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2763,7 +2838,7 @@
           "price": 70.55,
           "changePct": 23.73,
           "change": 13.53,
-          "volume": 9192425,
+          "volume": 9196270,
           "marketCap": 8547648000,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2774,7 +2849,7 @@
           "price": 39.68,
           "changePct": 22.62,
           "change": 7.32,
-          "volume": 11871946,
+          "volume": 11917290,
           "marketCap": 6358133248,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2785,7 +2860,7 @@
           "price": 99.83,
           "changePct": 21.2,
           "change": 17.46,
-          "volume": 7740398,
+          "volume": 7816173,
           "marketCap": 8939373568,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2796,7 +2871,7 @@
           "price": 28.1,
           "changePct": 20.6,
           "change": 4.8,
-          "volume": 13309192,
+          "volume": 13336249,
           "marketCap": 5085950464,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2818,7 +2893,7 @@
           "price": 28.97,
           "changePct": 20.16,
           "change": 4.86,
-          "volume": 16090197,
+          "volume": 16468522,
           "marketCap": 4634095104,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2829,7 +2904,7 @@
           "price": 83.79,
           "changePct": 19.07,
           "change": 13.42,
-          "volume": 1232653,
+          "volume": 1316572,
           "marketCap": 2530786048,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2864,7 +2939,7 @@
           "price": 16.15,
           "changePct": -18.6,
           "change": -3.69,
-          "volume": 8861406,
+          "volume": 8874447,
           "marketCap": 4565000192,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -2907,8 +2982,8 @@
           "name": "Crinetics Pharmaceuticals, Inc.",
           "price": 37.48,
           "changePct": -13.79,
-          "change": -6,
-          "volume": 4611410,
+          "change": -5.99,
+          "volume": 4707630,
           "marketCap": 3951898880,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -2938,11 +3013,11 @@
         {
           "symbol": "LFST",
           "name": "LifeStance Health Group, Inc.",
-          "price": 7.7,
-          "changePct": -12.99,
-          "change": -1.15,
-          "volume": 24932066,
-          "marketCap": 2986324992,
+          "price": 7.695,
+          "changePct": -13.1,
+          "change": -1.16,
+          "volume": 24976010,
+          "marketCap": 2984386048,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
@@ -2952,7 +3027,7 @@
           "price": 1632.52,
           "changePct": -12.7,
           "change": -237.49,
-          "volume": 2319474,
+          "volume": 2333893,
           "marketCap": 82764169216,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -2963,7 +3038,7 @@
           "price": 194.24,
           "changePct": -11.64,
           "change": -25.58,
-          "volume": 3447187,
+          "volume": 3925677,
           "marketCap": 27733295104,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -2973,22 +3048,22 @@
         {
           "symbol": "INTC",
           "name": "Intel Corporation",
-          "price": 124.92,
-          "changePct": 13.96,
-          "change": 15.3,
-          "volume": 222288356,
-          "marketCap": 627847921664,
+          "price": 124.895,
+          "changePct": 13.91,
+          "change": 15.25,
+          "volume": 227681300,
+          "marketCap": 627722223616,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "NVDA",
           "name": "NVIDIA Corporation",
-          "price": 215.2,
-          "changePct": 1.75,
-          "change": 3.7,
-          "volume": 134128204,
-          "marketCap": 5230436024320,
+          "price": 215.217,
+          "changePct": 1.77,
+          "change": 3.74,
+          "volume": 136421361,
+          "marketCap": 5230849163264,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -2998,7 +3073,7 @@
           "price": 61.2,
           "changePct": 7.65,
           "change": 4.35,
-          "volume": 108260255,
+          "volume": 110542100,
           "marketCap": 20303661056,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
@@ -3015,13 +3090,13 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "CTRA",
-          "name": "Coterra Energy Inc.",
-          "price": 32.56,
-          "changePct": -8.62,
-          "change": -3.07,
-          "volume": 73317709,
-          "marketCap": 24724652032,
+          "symbol": "RKLB",
+          "name": "Rocket Lab Corporation",
+          "price": 105.545,
+          "changePct": 34.44,
+          "change": 27.04,
+          "volume": 79927310,
+          "marketCap": 61084270592,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -3037,13 +3112,24 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "RKLB",
-          "name": "Rocket Lab Corporation",
-          "price": 105.47,
-          "changePct": 34.22,
-          "change": 26.89,
-          "volume": 76022604,
-          "marketCap": 61040865280,
+          "symbol": "CTRA",
+          "name": "Coterra Energy Inc.",
+          "price": 32.56,
+          "changePct": -8.62,
+          "change": -3.07,
+          "volume": 73317709,
+          "marketCap": 24724652032,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "MU",
+          "name": "Micron Technology, Inc.",
+          "price": 746.79,
+          "changePct": 15.51,
+          "change": 100.3,
+          "volume": 65130914,
+          "marketCap": 842180460544,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -3053,19 +3139,19 @@
           "price": 428.35,
           "changePct": 4.02,
           "change": 16.54,
-          "volume": 63489555,
+          "volume": 65049970,
           "marketCap": 1608764358656,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "MU",
-          "name": "Micron Technology, Inc.",
-          "price": 746.81,
-          "changePct": 15.52,
-          "change": 100.34,
-          "volume": 64140362,
-          "marketCap": 842203070464,
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "price": 455.19,
+          "changePct": 11.44,
+          "change": 46.73,
+          "volume": 58134868,
+          "marketCap": 742233079808,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -3075,30 +3161,19 @@
           "price": 13.35,
           "changePct": 1.29,
           "change": 0.17,
-          "volume": 56021983,
+          "volume": 57836397,
           "marketCap": 8829492224,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "RDW",
-          "name": "Redwire Corporation",
-          "price": 11.07,
-          "changePct": 20.33,
-          "change": 1.87,
-          "volume": 53414126,
-          "marketCap": 2202030080,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "SOFI",
-          "name": "SoFi Technologies, Inc.",
-          "price": 15.75,
-          "changePct": -1.56,
-          "change": -0.25,
-          "volume": 53715596,
-          "marketCap": 20203173888,
+          "symbol": "BB",
+          "name": "BlackBerry Limited",
+          "price": 6.37,
+          "changePct": 4.43,
+          "change": 0.27,
+          "volume": 42471765,
+          "marketCap": 3744810496,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         }
@@ -3106,16 +3181,19 @@
       "errors": []
     },
     "briefingBullets": [
-      "Rates and central banks: As major market averages hit record highs, investors seemed to shrug off rising oil prices. (M7)",
-      "Macro and growth: The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth. (M3)",
-      "Earnings: The cloud provider announced it is laying off 20% of its workforce as agentic artificial intelligence \"fundamentally changes\" the company's work. (M8)",
-      "AI and semis: Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner. (M2)",
+      "Geopolitics and policy: Investors headed into Monday on edge as Trump’s rejection of Iran’s ceasefire proposal fueled concerns about a prolonged Middle East conflict. (M1)",
+      "Rates and central banks: China has cushioned the worst of the energy shock through its strategic oil stockpiles and a diversified mix of renewable energy sources. (M3)",
+      "Commodities and energy: U.S. stock-index futures fell and oil prices rose on Sunday, after President Donald Trump called Iran’s response to the latest U.S. (M4)",
+      "Macro and growth: The three major indexes are coming off a winning weak. (M2)",
+      "Earnings: The cloud provider announced it is laying off 20% of its workforce as agentic artificial intelligence \"fundamentally changes\" the company's work. (M10)",
+      "AI and semis: AI may now be coming for the C-suite, according to a report published Monday by IBM, which found that most companies were now staffing chief AI officer roles. (M7)",
+      "Credit and liquidity: “I have steadily increased my assets by more than 10% since being laid off.” (M8)",
       "Earnings movers: ASTS +14.85%, ACHR +3.18%, MARA +1.89% show where post-results dispersion is largest."
     ]
   },
   "avoidList": {
     "status": "ready",
-    "summary": "Investable names with weak multi-day momentum are concentrated in Financials, Industrials, Health Care, Utilities, and Consumer Staples; avoid fresh long exposure until macro signals and stock-specific momentum improve.",
+    "summary": "Avoid crowded long exposure in late-stage momentum across Financials, Industrials, Health Care and Utilities where the weakest, highest-variance names cluster.",
     "sectors": [
       {
         "sector": "Financials",
@@ -3126,7 +3204,7 @@
           "AIZ",
           "TROW"
         ],
-        "rationale": "16 weakest model-ranked names concentrated here; risk of further drawdown if rates stay high."
+        "rationale": "16 weakest model-ranked names concentrated here; crowding risk high."
       },
       {
         "sector": "Industrials",
@@ -3137,7 +3215,7 @@
           "ITW",
           "AOS"
         ],
-        "rationale": "11 weak names; sensitivity to capex cycles."
+        "rationale": "11 weak names; beta risk rising with idiosyncratic movers."
       },
       {
         "sector": "Health Care",
@@ -3148,7 +3226,7 @@
           "BMY",
           "HCA"
         ],
-        "rationale": "11 weak names; earnings volatility and policy risk."
+        "rationale": "11 weak names; dispersion rising; fundamentals mixed."
       },
       {
         "sector": "Utilities",
@@ -3159,7 +3237,7 @@
           "AEE",
           "ATO"
         ],
-        "rationale": "8 weak names; defensive darlings may underperform if inflation cools."
+        "rationale": "8 weak names; defensive crowding risk if rate path hawkish."
       }
     ],
     "companies": [
@@ -3180,7 +3258,7 @@
           "Below 50d trend"
         ],
         "modelEvidence": "AEP ranks #502 of 502 with +0.35% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
-        "rationale": "Ranked bottom; weak momentum; volatility elevated."
+        "rationale": "Ranked bottom; poor momentum and higher volatility."
       },
       {
         "symbol": "AFL",
@@ -3198,7 +3276,7 @@
           "Weak volume confirmation"
         ],
         "modelEvidence": "AFL ranks #501 of 502 with -9.08% 60-day relative return versus SPY, rules score 0.0, and positive trend alignment.",
-        "rationale": "Bottom-ranked; low momentum signals; volume weak."
+        "rationale": "Low momentum signal; weak volume confirmation."
       },
       {
         "symbol": "AIG",
@@ -3217,7 +3295,7 @@
           "Below 200d trend"
         ],
         "modelEvidence": "AIG ranks #500 of 502 with -8.97% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
-        "rationale": "AIG sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves."
+        "rationale": "Weak momentum and high dispersion risk."
       },
       {
         "symbol": "AIZ",
@@ -3233,7 +3311,7 @@
         "above200": true,
         "riskFlags": [],
         "modelEvidence": "AIZ ranks #499 of 502 with +4.51% 60-day relative return versus SPY, rules score 0.0, and positive trend alignment.",
-        "rationale": "AIZ sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves."
+        "rationale": "Low momentum; crowding risk in Financials."
       },
       {
         "symbol": "WEC",
@@ -55991,11 +56069,11 @@
       "cadence": "Weekly",
       "trust": "High",
       "notes": "Public consumer, macro, and market research.",
-      "title": "Bank of America Institute – Where Thought Finds Leadership",
-      "summary": "No recent dated articles found in the last 30 days.",
+      "title": "Bank of America Institute",
+      "summary": "Source check failed: 403 Forbidden",
       "articles": [],
       "articleCount": 0,
-      "ok": true
+      "ok": false
     },
     {
       "name": "Raymond James Commentary And Insights",
@@ -56181,11 +56259,21 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "EIA Today In Energy",
-      "summary": "Source check failed: This operation was aborted",
-      "articles": [],
-      "articleCount": 0,
-      "ok": false
+      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
+      "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
+      "articles": [
+        {
+          "sourceName": "EIA Today In Energy",
+          "title": "Weekly Natural Gas Storage Report - EIA",
+          "url": "http://ir.eia.gov/ngs/ngs.html",
+          "publishedAt": "2026-05-01T00:00:00.000Z",
+          "summary": "Weekly Natural Gas Storage Report - EIA",
+          "excerpt": "Weekly Natural Gas Storage Report - EIA &lsaquo; See All Natural Gas Reports Weekly Natural Gas Storage Report for week ending May 1, 2026 | Released: May 7, 2026 at 10:30 a.m. | Next Release: May 14, 2026 Working gas in underground storage, Lower 48 states Summary text CSV JSN Historical Comparisons Stocks billion cubic feet (Bcf) Year ago (05/01/25) 5-year average (2021-25) Region 05/01/26 04/24/26 net change implied flow Bcf % change Bcf % change East 361 332 29 29 358 0.8 362 -0.3 Midwest 452 429 23 23 450 0.4 459 -1.5 Mountain 203 205 -2 -2 179 13.4 137 48.2 Pacific 275 272 3 3 231 19.0 197 39.6 South Central 914 905 9 9 912 0.2 910 0.4 Salt 273 272 1 1 291 -6.2 277 -1.4 Nonsalt 641 634 7 7 621 3.2 633 1.3 Total 2,205 2,142 63 63 2,130 3.5 2,066 6.7 Totals may not equal sum of components because of independent rounding. Summary Working gas in storage was 2,205 Bcf as of Friday, May 1, 2026, according to EIA estimates. This represents a net increase of 63 Bcf from the previous week. Stocks were 75 Bcf higher than last year at this time and 139 Bcf above the five-year average of 2,066 Bcf. At 2,205 Bcf, total working gas is within the five-year historical range. For information on sampling error in this report, see Estimated Measures of Sampling Variability table below. Note: The shaded area indicates the range between the historical minimum and maximum values for the weekly series from 2021 through 2025. The dashed vertical lines indicate current and year-ago weekly periods. Source: Form EIA-912, \"Weekly Underground Natural Gas Storage Report.\" --> Estimated measures of sampling variability Download History (April 2015 to Present) Coefficient of Variation for Stocks % of working gas Standard Error for Net Change billion cubic feet (Bcf) Region 05/01/26 04/24/26 net ",
+          "discoveredFrom": "https://www.eia.gov/todayinenergy/"
+        }
+      ],
+      "articleCount": 1,
+      "ok": true
     },
     {
       "name": "BLS Economic News Releases",
@@ -56333,11 +56421,20 @@
       "articles": [
         {
           "sourceName": "CNBC Markets",
-          "title": "Michael Burry says the market today feels like 'the last months of the 1999-2000 bubble'",
-          "url": "https://www.cnbc.com/2026/05/08/michael-burry-says-the-market-today-feels-like-the-last-months-of-the-1999-2000-bubble.html",
-          "publishedAt": "2026-05-08T17:35:23.000Z",
-          "summary": "\"Stocks are not up or down because of jobs or consumer sentiment,\" Burry wrote. \"Feeling like the last months of the 1999-2000 bubble.\"",
-          "excerpt": "Michael Burry says the market today feels like 'the last months of the 1999-2000 bubble' Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Michael Burry, best known for predicting the U.S. housing crash, said stocks are no longer reacting logically to economic data. \"Stocks are not up or down because of jobs or consumer sentiment,\" Burry wrote. \"Feeling like the last months of the 1999-2000 bubble.\" Burry compared the recent trajectory of the Philadelphia Semiconductor Index with the run-up that preceded the collapse of technology stocks in March 2000. Michael Burry attends \"The Big Short\" New York screening Ziegfeld Theater on Nov. 23, 2015 in New York City. Astrid Stawiarz | Getty Images Michael Burry of \"Big Short\" fame is warning that the stock market's fixation on artificial intelligence is beginning to resemble the final stages of the dot-com bubble. \"Absolutely non-stop AI. Nobody is talking about anything else all day,\" Burry wrote Friday in a Substack post after listening to financial television and radio coverage during a long drive. The investor, best known for predicting the U.S. housing crash, said stocks are no longer reacting meaningfully to economic data such as jobs reports or consumer sentiment in a logical way. The S&P 500 rose to a fresh record high Friday as traders focused on a slightly better-than-expected April jobs report rather than a record low reading in consumer sentiment. \"Stocks are not up or down because of jobs or consumer sentiment,\" Burry wrote. \"They are going straight up because they have been going straight up. On a two letter thesis that everyone thinks they understand. ... Feeling like the last months of the 1999-2000 bubble.\" Burry compared the recent trajectory",
+          "title": "South Korea's Kospi hits fresh record as Asia markets trade mixed amid oil surge, Iran risks",
+          "url": "https://www.cnbc.com/2026/05/11/asia-markets-today-live-updates-nikkei-kospi-hang-seng-sensex-csi-300-iran-hormuz.html",
+          "publishedAt": "2026-05-10T23:46:28.000Z",
+          "summary": "Investors headed into Monday on edge as Trump’s rejection of Iran’s ceasefire proposal fueled concerns about a prolonged Middle East conflict.",
+          "excerpt": "Asia markets today: Nikkei, Kospi, Hang Seng, Sensex, CSI 300 Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Oil prices climbed after Trump rejected Iran's latest counteroffer to end the war. Iran tensions overshadowed strong recent gains on Wall Street. Strait of Hormuz disruption fears continued to rattle global markets. In this article @DJ.1 @SP.1 @ND.1 Follow your favorite stocks CREATE FREE ACCOUNT South Korea's Kospi opened at a fresh record Monday, leading gains in Asia-Pacific markets amid rising oil prices and escalating tensions between the U.S. and Iran. President Donald Trump 's rejection of Tehran's latest proposal to end the war, however, stoked worries over an elongated Middle East conflict. Iran submitted a new proposal to U.S. negotiators focused on ending the Middle East conflict. Iran's semi-official Tasnim news agency said that the counteroffer called for an end to the war on all fronts and the lifting of sanctions on Tehran, citing an informed source. However, Trump said he did not like Iran's response and called it \"TOTALLY UNACCEPTABLE!\" in a Truth Social Post. Meanwhile, Israeli Prime Minister Benjamin Netanyahu said Sunday that the war with Iran was \"not over,\" as the U.S. and Israel still aim to curb Tehran's nuclear ambitions. Netanyahu's comments come ahead of Trump 's trip to China later this week, where he's expected to meet with Chinese President Xi Jinping . The war and the subsequent closure of the Strait of Hormuz by Iran have spiked global energy costs and sharply raised gas prices in the U.S. The West Texas Intermediate futures for June was 3.94% higher at $99.18 per barrel as of 9:32 p.m. ET. Brent crude futures for July rose 3.49% to $104.83 per barrel. South Ko",
+          "discoveredFrom": "https://www.cnbc.com/markets/"
+        },
+        {
+          "sourceName": "CNBC Markets",
+          "title": "Stock futures slide as investors monitor the latest Iran war negotiations: Live updates",
+          "url": "https://www.cnbc.com/2026/05/10/stock-market-today-live-updates.html",
+          "publishedAt": "2026-05-10T22:01:43.000Z",
+          "summary": "The three major indexes are coming off a winning weak.",
+          "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Traders work at the New York Stock Exchange on May 7, 2026. NYSE Stock futures edged lower early Monday, following a winning week on Wall Street, as oil prices jumped after President Donald Trump rejected Iran's latest proposal to end the war. Futures tied to the Dow Jones Industrial Average slid 81 points, or 0.16%. S&P 500 futures and Nasdaq 100 futures were both marginally lower. Sunday's moves come after the S&P 500 and Nasdaq Composite rallied more than 2% and 4%, respectively, last week. Both indexes recorded their sixth-straight winning weeks — a first for each since 2024. The Dow rose 0.2% for the week, notching its fifth week of gains out of the last six. Stocks advanced to end the week on Friday after the U.S. nonfarm payrolls report showed an increase of 115,000 jobs in April, surpassing expectations of 55,000 from economists polled by Dow Jones. The S&P 500 and Nasdaq both ended Friday's session at all-time highs. Iran sent a new proposal to U.S. negotiators, centered on ending the monthslong conflict. The counteroffer stressed the need to end the war on all fronts and to lift sanctions on Tehran, Iran's semi-official Tasnim news agency said , citing an informed source. In response, Trump said in a Truth Social post that he did not like Iran's response, adding that it was \"TOTALLY UNACCEPTABLE!\" Oil futures climbed in overnight trading following Trump's rejection. Nonetheless, some market watchers expect U.S. markets to remain resilient despite the uncertainty. \"The economy may slow somewhat from its prior path, due to the Iran war and subsequent oil price shock,\" said Rick Rieder, chief investment officer of global fix",
           "discoveredFrom": "https://www.cnbc.com/markets/"
         },
         {
@@ -56347,15 +56444,6 @@
           "publishedAt": "2026-05-05T05:16:34.000Z",
           "summary": "European stocks finished higher on Tuesday as investors digest the latest developments in the Iran war.",
           "excerpt": "European markets: Stoxx 600, FTSE, DAX, Iran war news, oil prices Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu In this article BUD ISP-IT RACE GBRF-FF GBRF-FF BAMI-IT 1CO-DE 1CO-DE HSBC UCG-IT CBK-FF RHM-FF .STOXX BUD Follow your favorite stocks CREATE FREE ACCOUNT A trading floor manager works on the floor of the American Stock Exchange (AMEX) at the New York Stock Exchange (NYSE) in New York, US, on Monday, May 4, 2026. Michael Nagle | Bloomberg | Getty Images LONDON — European stocks closed higher on Tuesday, as investors digested the latest developments in the Iran war. The pan-European Stoxx 600 closed the session almost 0.7% higher, with most sectors finishing in the green. Major bourses in Frankfurt, Paris and Milan made gains, though the U.K.'s FTSE 100 bucked the wider positive trend, falling 1.4%. Global markets were shaken on Monday as a fragile ceasefire between the U.S. and Iran appeared to be close to collapse as the United Arab Emirates came under attack from Iranian drones and missiles, and the U.S. said it sank Iranian boats in the Strait of Hormuz. Read more Iran attacks UAE; U.S. says it sank boats in Strait of Hormuz Oil slides as traders assess Middle East developments with Iran attacks keeping markets jittery U.S. President Donald Trump , in a Fox News interview later Monday, warned Iran that it will be \"blown off the face of the earth\" if it targets U.S. ships that are protecting commercial vessels transiting the strait. Trump also said in a Truth Social post that a South Korean cargo ship had come under fire from Iran in the waterway. \"Perhaps it's time for South Korea to come and join the mission!\" Trump wrote in the post . Stock market indices closed sharply lower and oil prices ros",
-          "discoveredFrom": "https://www.cnbc.com/markets/"
-        },
-        {
-          "sourceName": "CNBC Markets",
-          "title": "Gold heads for weekly loss as high oil prices feed inflation worries",
-          "url": "https://www.cnbc.com/2026/05/01/gold-heads-for-weekly-loss-on-oil-driven-inflation-concerns.html",
-          "publishedAt": "2026-05-01T06:54:15.000Z",
-          "summary": "​High oil prices ​continued to fan inflation concerns that would discourage central banks from cutting interest rates.",
-          "excerpt": "Gold heads for weekly loss as high oil prices feed inflation worries Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Iran says it would retaliate with strikes on U.S. positions Higher oil prices have raised concern about a global economic slowdown and faster inflation U.S. inflation ⁠accelerated in March as the war raised gasoline prices, reinforcing expectations that the Federal ‌Reserve could keep interest rates on hold well ‌into next year In this article XAU= @GC.1 XAG= XPT= @PA.1 Follow your favorite stocks CREATE FREE ACCOUNT Gold prices edged higher on Thursday, buoyed by a softer dollar and safe-haven demand fueled by uncertainty surrounding U.S. tariff policy and U.S.-Iran talks. Frame Studio | Moment | Getty Images Gold prices fell more than 1% on Friday and were headed for a similar-sized weekly loss, as ​elevated oil prices ​continued to fan inflation concerns that would discourage central banks from cutting interest rates. Spot gold was down 1.1% at $4,568.82 per ounce, and ⁠on ‌track for a weekly loss of 1.2%. U.S. gold futures for June delivery fell 1.1% to $4,579.70. \"Gold remains negatively correlated to oil in the short term, as it impacts interest rate expectations,\" said UBS analyst Giovanni Staunovo. Iran said ‌on Thursday it would respond with \"long and painful strikes\" on U.S. positions if Washington renewed attacks, reiterating its claim to the Strait ​of Hormuz. Brent crude prices have touched double the levels seen at the start of the year, raising concerns about a global economic slowdown and higher inflation as fuel prices surge. U.S. inflation ⁠accelerated in March as the war raised gasoline prices, reinforcing expectations that the Federal ‌Reserve could keep interest ra",
           "discoveredFrom": "https://www.cnbc.com/markets/"
         }
       ],
@@ -56374,29 +56462,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "SEC delay on prediction markets ETFs echoes a long-fought bitcoin fund battle",
-          "url": "https://www.cnbc.com/2026/05/10/sec-prediction-markets-etfs-trading-launch-delay.html",
-          "publishedAt": "2026-05-10T12:22:02.000Z",
-          "summary": "The Securities and Exchange Commission has delayed approval for prediction markets ETFs, bringing up memories of the long battle over bitcoin funds.",
-          "excerpt": "The Securities and Exchange Commission has delayed approval for prediction markets ETFs, bringing up memories of the long battle over bitcoin funds.",
+          "title": "China inflation beat estimates in April as Iran war drives producer prices to three-year highs",
+          "url": "https://www.cnbc.com/2026/05/11/china-cpi-ppi-inflation-energy-costs-oil-iran-war.html",
+          "publishedAt": "2026-05-11T04:08:05.000Z",
+          "summary": "China has cushioned the worst of the energy shock through its strategic oil stockpiles and a diversified mix of renewable energy sources.",
+          "excerpt": "China has cushioned the worst of the energy shock through its strategic oil stockpiles and a diversified mix of renewable energy sources.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Alphabet&apos;s 160% rally in a year reflects value of owning &apos;most of the stack&apos; in AI",
-          "url": "https://www.cnbc.com/2026/05/10/alphabet-160percent-rally-in-year-reflects-value-of-owning-most-of-ai-stack.html",
-          "publishedAt": "2026-05-10T12:00:01.000Z",
-          "summary": "Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner.",
-          "excerpt": "Google was seen as an AI laggard in the early days of the AI boom, but investors are now betting that the search giant will be a clear winner.",
+          "title": "Iran says it will &apos;never bow&apos; as Trump rejects peace counteroffer, prolonging Middle East conflict",
+          "url": "https://www.cnbc.com/2026/05/11/iran-war-trump-negotiation-hormuz-nuclear-talks.html",
+          "publishedAt": "2026-05-11T02:21:44.000Z",
+          "summary": "Washington has sought to press Beijing to lean on Tehran to reopen the strait, though China's appetite to act as a pressure mechanism remains unclear.",
+          "excerpt": "Washington has sought to press Beijing to lean on Tehran to reopen the strait, though China's appetite to act as a pressure mechanism remains unclear.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Retailers are on a hiring spree. But consumers are sending warning signs",
-          "url": "https://www.cnbc.com/2026/05/10/retailer-hiring-consumer-warning-jobs-report.html",
-          "publishedAt": "2026-05-10T11:29:25.000Z",
-          "summary": "The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth.",
-          "excerpt": "The retail trades added nearly 22,000 jobs in April, accounting for about one-fifth of total job growth.",
+          "title": "Do you need a chief AI officer? Here&apos;s how the tech is changing boardrooms",
+          "url": "https://www.cnbc.com/2026/05/11/heres-how-artificial-intelligence-is-changing-boardrooms.html",
+          "publishedAt": "2026-05-11T02:10:29.000Z",
+          "summary": "AI may now be coming for the C-suite, according to a report published Monday by IBM, which found that most companies were now staffing chief AI officer roles.",
+          "excerpt": "AI may now be coming for the C-suite, according to a report published Monday by IBM, which found that most companies were now staffing chief AI officer roles.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56456,29 +56544,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Big Tech’s AI spending is depriving investors of juicy payouts",
-          "url": "https://www.marketwatch.com/story/big-techs-ai-spending-is-depriving-investors-of-juicy-payouts-39d17305?mod=mw_rss_topstories",
-          "publishedAt": "2026-05-10T14:00:00.000Z",
-          "summary": "Goldman Sachs expects S&P 500 share buybacks to grow only 3% this year, as a shaky economic backdrop and AI cost pressures force spending reconsiderations.",
-          "excerpt": "Goldman Sachs expects S&P 500 share buybacks to grow only 3% this year, as a shaky economic backdrop and AI cost pressures force spending reconsiderations.",
+          "title": "U.S. stock futures fall, oil surges as Trump calls Iran’s latest offer to end war ‘totally unacceptable’",
+          "url": "https://www.marketwatch.com/story/u-s-stock-futures-fall-oil-surges-as-trump-calls-irans-latest-offer-to-end-war-totally-unacceptable-187e3d87?mod=mw_rss_topstories",
+          "publishedAt": "2026-05-11T03:01:00.000Z",
+          "summary": "U.S. stock-index futures fell and oil prices rose on Sunday, after President Donald Trump called Iran’s response to the latest U.S. proposal to end the war “totally unacceptable.”",
+          "excerpt": "U.S. stock-index futures fell and oil prices rose on Sunday, after President Donald Trump called Iran’s response to the latest U.S. proposal to end the war “totally unacceptable.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "‘The S&P 500 seems to be doing particularly well’: I’m 66. Is this a good time to invest $100,000 in the stock market?",
-          "url": "https://www.marketwatch.com/story/the-s-p-500-seems-to-be-doing-particularly-well-im-66-is-this-a-good-time-to-invest-100-000-in-the-stock-market-46fb8ff8?mod=mw_rss_topstories",
-          "publishedAt": "2026-05-10T13:00:00.000Z",
-          "summary": "“I own my home and I have no debt.”",
-          "excerpt": "“I own my home and I have no debt.”",
+          "title": "I was a slave to credit-card debt, then I got laid off and turned my life around. Here’s how I did it.",
+          "url": "https://www.marketwatch.com/story/americans-love-their-rose-colored-glasses-i-was-a-slave-to-credit-card-debt-then-i-got-laid-off-and-turned-my-life-around-32ba4d4c?mod=mw_rss_topstories",
+          "publishedAt": "2026-05-10T23:35:00.000Z",
+          "summary": "“I have steadily increased my assets by more than 10% since being laid off.”",
+          "excerpt": "“I have steadily increased my assets by more than 10% since being laid off.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Stocks are walking a tightrope to fresh record highs — as a handful of names do most of the heavy lifting",
-          "url": "https://www.marketwatch.com/story/stocks-are-walking-a-tightrope-to-fresh-record-highs-as-a-handful-of-names-do-most-of-the-heavy-lifting-fe5a166a?mod=mw_rss_topstories",
-          "publishedAt": "2026-05-10T13:00:00.000Z",
-          "summary": "Investors are caught on a tightrope — watching a very narrow band of tech stocks lift the stock market to fresh record highs, while looking down below for signs of trouble.",
-          "excerpt": "Investors are caught on a tightrope — watching a very narrow band of tech stocks lift the stock market to fresh record highs, while looking down below for signs of trouble.",
+          "title": "Powell’s legacy as Fed chair is fighting inflation and Trump. He may lose the battle against both.",
+          "url": "https://www.marketwatch.com/story/powells-legacy-as-fed-chair-is-fighting-inflation-and-trump-he-may-lose-the-battle-against-both-aeb32f89?mod=mw_rss_topstories",
+          "publishedAt": "2026-05-10T22:00:00.000Z",
+          "summary": "Jerome Powell will be remembered for how the struggles against inflation and to preserve Federal Reserve independence ultimately end.",
+          "excerpt": "Jerome Powell will be remembered for how the struggles against inflation and to preserve Federal Reserve independence ultimately end.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
