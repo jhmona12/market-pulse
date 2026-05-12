@@ -141,11 +141,15 @@ def load_constituents(max_symbols: int) -> tuple[pd.DataFrame, str]:
 
 def load_price_frame(symbol: str, years: int) -> tuple[str, pd.DataFrame | None, str | None]:
     config = run_config_for_years(years)
+    expected_as_of = latest_expected_market_data_date()
     try:
         frame = fetch_yahoo_history(symbol, config.start_date, config.end_date)
         if frame.empty:
             raise ValueError("empty price history")
         frame["date"] = pd.to_datetime(frame["date"])
+        frame = frame[frame["date"].dt.date <= expected_as_of].copy()
+        if frame.empty:
+            raise ValueError(f"empty price history through expected EOD date {expected_as_of.isoformat()}")
         for column in ("open", "high", "low", "close", "volume"):
             frame[column] = pd.to_numeric(frame[column], errors="coerce")
         frame = frame.dropna(subset=["close"]).sort_values("date").reset_index(drop=True)
