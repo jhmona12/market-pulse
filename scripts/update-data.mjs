@@ -51,10 +51,10 @@ const macroSeries = [
 
 const calendar = [
   { date: "2026-05-08", time: "8:30 AM ET", event: "Employment Situation", source: "BLS", importance: "High" },
-  { date: "2026-05-13", time: "8:30 AM ET", event: "Consumer Price Index", source: "BLS", importance: "High" },
-  { date: "2026-05-14", time: "8:30 AM ET", event: "Producer Price Index", source: "BLS", importance: "High" },
+  { date: "2026-05-12", time: "8:30 AM ET", event: "Consumer Price Index", source: "BLS", importance: "High" },
+  { date: "2026-05-13", time: "8:30 AM ET", event: "Producer Price Index", source: "BLS", importance: "High" },
   { date: "2026-05-28", time: "8:30 AM ET", event: "GDP Second Estimate", source: "BEA", importance: "High" },
-  { date: "2026-05-29", time: "8:30 AM ET", event: "Personal Income and Outlays", source: "BEA", importance: "High" },
+  { date: "2026-05-28", time: "8:30 AM ET", event: "Personal Income and Outlays", source: "BEA", importance: "High" },
   { date: "2026-06-05", time: "8:30 AM ET", event: "Employment Situation", source: "BLS", importance: "High" },
   { date: "2026-06-17", time: "2:00 PM ET", event: "FOMC Rate Decision", source: "Federal Reserve", importance: "High" },
   { date: "2026-07-29", time: "2:00 PM ET", event: "FOMC Rate Decision", source: "Federal Reserve", importance: "High" }
@@ -75,7 +75,7 @@ const officialMacroReleaseSpecs = [
     releaseName: "Consumer Price Index",
     sourceName: "BLS Consumer Price Index",
     sourceUrl: "https://www.bls.gov/news.release/cpi.nr0.htm",
-    parser: parseGenericOfficialMacroRelease
+    parser: parseBlsCpiRelease
   },
   {
     source: "BLS",
@@ -83,7 +83,7 @@ const officialMacroReleaseSpecs = [
     releaseName: "Producer Price Index",
     sourceName: "BLS Producer Price Index",
     sourceUrl: "https://www.bls.gov/news.release/ppi.nr0.htm",
-    parser: parseGenericOfficialMacroRelease
+    parser: parseBlsPpiRelease
   },
   {
     source: "BEA",
@@ -826,6 +826,8 @@ function releaseSentenceStarting(text, startRegex, maxLength = 360) {
 function releasedPeriodFromText(text, fallback = "") {
   return (
     text.match(/\bTHE EMPLOYMENT SITUATION\s+--\s+([A-Z]+\s+20\d{2})/i)?.[1] ||
+    text.match(/\bCONSUMER PRICE INDEX\s+-\s+([A-Z]+\s+20\d{2})/i)?.[1] ||
+    text.match(/\bPRODUCER PRICE INDEXES?\s+-\s+([A-Z]+\s+20\d{2})/i)?.[1] ||
     text.match(/\b(Consumer Price Index|Producer Price Index|Personal Income and Outlays|GDP)[^\n.]*?,?\s+((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?|First|Second|Third|Fourth|1st|2nd|3rd|4th)[^,.]{0,40}20\d{2})/i)?.[2] ||
     fallback
   );
@@ -898,6 +900,132 @@ function parseBlsEmploymentSituationRelease(html, event, spec) {
     revisions: revisionSentence,
     themes: ["Macro and growth", "Rates and central banks"],
     importance: "High"
+  };
+}
+
+function numberFromMatch(text, regex) {
+  const value = text.match(regex)?.[1];
+  if (value == null) return null;
+  const number = Number.parseFloat(String(value).replace(/,/g, ""));
+  return Number.isFinite(number) ? number : null;
+}
+
+function releaseBodyAfter(text, startRegex) {
+  const match = text.match(startRegex);
+  if (!match || match.index == null) return text;
+  return text.slice(match.index);
+}
+
+function parseBlsCpiRelease(html, event, spec) {
+  const text = visibleTextFromHtml(html);
+  const body = releaseBodyAfter(text, /CONSUMER PRICE INDEX\s+-\s+[A-Z]+\s+20\d{2}/i);
+  const title = titleFromHtml(html, "Consumer Price Index Summary");
+  const period = releasedPeriodFromText(text, event?.date || "");
+  const headlineSentence =
+    sentenceMatch(body, /The Consumer Price Index for All Urban Consumers[\s\S]{0,420}?reported today\./i) ||
+    releaseSentenceStarting(body, /The Consumer Price Index for All Urban Consumers/i, 420);
+  const energySentence = releaseSentenceStarting(body, /The index for energy rose/i, 260);
+  const foodSentence = releaseSentenceStarting(body, /The index for food increased/i, 260);
+  const coreSentence = releaseSentenceStarting(body, /The index for all items less food and energy rose/i, 360);
+  const yearSentence = releaseSentenceStarting(body, /The all items index rose/i, 320);
+  const bullets = [headlineSentence, energySentence, foodSentence, coreSentence, yearSentence].filter(Boolean);
+
+  const headlineMoM = numberFromMatch(body, /CPI-U\)\s+increased\s+([\d.]+)\s+percent/i);
+  const priorHeadlineMoM = numberFromMatch(body, /after rising\s+([\d.]+)\s+percent\s+in\s+[A-Z][a-z]+/i);
+  const headlineYoY = numberFromMatch(body, /all items index increased\s+([\d.]+)\s+percent\s+before seasonal adjustment/i);
+  const coreMoM = numberFromMatch(body, /all items less food and energy rose\s+([\d.]+)\s+percent\s+in\s+[A-Z][a-z]+/i);
+  const coreYoY = numberFromMatch(body, /all items less food and energy index rose\s+([\d.]+)\s+percent\s+over the year/i);
+  const energyMoM = numberFromMatch(body, /The index for energy rose\s+([\d.]+)\s+percent/i);
+  const shelterMoM = numberFromMatch(body, /shelter index also increased[\s\S]{0,80}?rising\s+([\d.]+)\s+percent/i);
+  const foodMoM = numberFromMatch(body, /The index for food increased\s+([\d.]+)\s+percent/i);
+
+  const marketPieces = [];
+  if (headlineMoM != null && headlineYoY != null) {
+    marketPieces.push(`CPI-U rose ${headlineMoM}% month over month in ${period || "the latest release"} and ${headlineYoY}% year over year`);
+  } else if (headlineSentence) {
+    marketPieces.push(firstSentence(headlineSentence, 180));
+  }
+  if (coreMoM != null || coreYoY != null) {
+    marketPieces.push(`core CPI was ${coreMoM ?? "n/a"}% month over month and ${coreYoY ?? "n/a"}% year over year`);
+  }
+  if (energyMoM != null || shelterMoM != null || foodMoM != null) {
+    marketPieces.push(`energy ${energyMoM ?? "n/a"}%, shelter ${shelterMoM ?? "n/a"}%, and food ${foodMoM ?? "n/a"}% were key internals`);
+  }
+
+  return {
+    title,
+    event: event.event,
+    period,
+    sourceName: spec.sourceName,
+    sourceUrl: spec.sourceUrl,
+    publishedAt: calendarEventReleaseAt(event)?.toISOString() || new Date().toISOString(),
+    summary: bullets.slice(0, 3).join(" "),
+    marketRead: `${marketPieces.filter(Boolean).join("; ")}.`,
+    metrics: {
+      headlineCpiMoM: headlineMoM,
+      priorHeadlineCpiMoM: priorHeadlineMoM,
+      headlineCpiYoY: headlineYoY,
+      coreCpiMoM: coreMoM,
+      coreCpiYoY: coreYoY,
+      energyMoM,
+      shelterMoM,
+      foodMoM
+    },
+    bullets,
+    industryDetails: [energySentence, foodSentence, coreSentence].filter(Boolean),
+    revisions: null,
+    themes: ["Macro and growth", "Rates and central banks", "Energy"],
+    importance: "High"
+  };
+}
+
+function parseBlsPpiRelease(html, event, spec) {
+  const text = visibleTextFromHtml(html);
+  const body = releaseBodyAfter(text, /PRODUCER PRICE INDEXES?\s+-\s+[A-Z]+\s+20\d{2}/i);
+  const title = titleFromHtml(html, "Producer Price Index");
+  const period = releasedPeriodFromText(text, event?.date || "");
+  const headlineSentence = releaseSentenceStarting(body, /The Producer Price Index for final demand/i, 420);
+  const goodsSentence = releaseSentenceStarting(body, /The index for final demand goods/i, 300);
+  const servicesSentence = releaseSentenceStarting(body, /Prices for final demand services/i, 300);
+  const releaseScheduleSentence = releaseSentenceStarting(body, /The Producer Price Index for/i, 260);
+  const bullets = [headlineSentence, goodsSentence, servicesSentence].filter(Boolean);
+
+  const finalDemandMoM = numberFromMatch(body, /final demand (?:increased|advanced|rose)\s+([\d.]+)\s+percent/i);
+  const priorFinalDemandMoM = numberFromMatch(body, /Final demand prices moved up\s+([\d.]+)\s+percent\s+in\s+[A-Z][a-z]+/i);
+  const finalDemandYoY = numberFromMatch(body, /final demand rose\s+([\d.]+)\s+percent\s+for the 12 months/i);
+  const goodsMoM = numberFromMatch(body, /final demand goods (?:advanced|rose|increased)\s+([\d.]+)\s+percent/i);
+  const servicesMoM = numberFromMatch(body, /final demand services (?:increased|advanced|rose|decreased|declined|were unchanged)\s+([\d.]+)?\s*percent?/i);
+  const marketPieces = [];
+  if (finalDemandMoM != null || finalDemandYoY != null) {
+    marketPieces.push(`PPI final demand was ${finalDemandMoM ?? "n/a"}% month over month and ${finalDemandYoY ?? "n/a"}% year over year`);
+  } else if (headlineSentence) {
+    marketPieces.push(firstSentence(headlineSentence, 180));
+  }
+  if (goodsMoM != null || servicesMoM != null) {
+    marketPieces.push(`goods ${goodsMoM ?? "n/a"}% and services ${servicesMoM ?? "n/a"}% drove the mix`);
+  }
+
+  return {
+    title,
+    event: event.event,
+    period,
+    sourceName: spec.sourceName,
+    sourceUrl: spec.sourceUrl,
+    publishedAt: calendarEventReleaseAt(event)?.toISOString() || publishedDateFromHtml(html) || new Date().toISOString(),
+    summary: bullets.length ? bullets.slice(0, 3).join(" ") : releaseScheduleSentence,
+    marketRead: marketPieces.length ? `${marketPieces.join("; ")}.` : firstSentence(releaseScheduleSentence || headlineSentence, 260),
+    metrics: {
+      finalDemandPpiMoM: finalDemandMoM,
+      priorFinalDemandPpiMoM: priorFinalDemandMoM,
+      finalDemandPpiYoY: finalDemandYoY,
+      goodsMoM,
+      servicesMoM
+    },
+    bullets,
+    industryDetails: [goodsSentence, servicesSentence].filter(Boolean),
+    revisions: null,
+    themes: ["Macro and growth", "Rates and central banks"],
+    importance: event.importance || "High"
   };
 }
 
