@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-12T03:52:38.032Z",
+  "generatedAt": "2026-05-12T03:56:12.260Z",
   "asOfDate": "2026-05-11",
   "status": "ready",
   "source": "data/model-scorebook.json",
@@ -170,11 +170,11 @@
       "ytdReturn": 190.56,
       "asOfDate": "2026-05-11",
       "modelDecile": 1,
-      "previousRank": 7,
+      "previousRank": 5,
       "previousDecile": 1,
-      "oneRunRankChange": 2,
-      "lookbackRank": 7,
-      "lookbackRankChange": 2,
+      "oneRunRankChange": 0,
+      "lookbackRank": 5,
+      "lookbackRankChange": 0,
       "status": "Held Top Decile"
     },
     {
@@ -200,11 +200,11 @@
       "ytdReturn": 174.95,
       "asOfDate": "2026-05-11",
       "modelDecile": 1,
-      "previousRank": 5,
+      "previousRank": 6,
       "previousDecile": 1,
-      "oneRunRankChange": -1,
-      "lookbackRank": 5,
-      "lookbackRankChange": -1,
+      "oneRunRankChange": 0,
+      "lookbackRank": 6,
+      "lookbackRankChange": 0,
       "status": "Held Top Decile"
     },
     {
@@ -230,11 +230,11 @@
       "ytdReturn": 152.26,
       "asOfDate": "2026-05-11",
       "modelDecile": 1,
-      "previousRank": 6,
+      "previousRank": 7,
       "previousDecile": 1,
-      "oneRunRankChange": -1,
-      "lookbackRank": 6,
-      "lookbackRankChange": -1,
+      "oneRunRankChange": 0,
+      "lookbackRank": 7,
+      "lookbackRankChange": 0,
       "status": "Held Top Decile"
     },
     {
@@ -456,7 +456,7 @@
       "marketCapValue": 10678534791,
       "modelRank": 15,
       "modelScore": 0.130398,
-      "modelPercentile": 97,
+      "modelPercentile": 97.2,
       "setupType": "model_rebound_watch",
       "setupTags": [
         "Model Rebound Watch",
@@ -624,11 +624,11 @@
       "ytdReturn": -29.88,
       "asOfDate": "2026-05-11",
       "modelDecile": 1,
-      "previousRank": 21,
+      "previousRank": 20,
       "previousDecile": 1,
-      "oneRunRankChange": 1,
-      "lookbackRank": 21,
-      "lookbackRankChange": 1,
+      "oneRunRankChange": 0,
+      "lookbackRank": 20,
+      "lookbackRankChange": 0,
       "status": "Held Top Decile"
     },
     {
@@ -654,11 +654,11 @@
       "ytdReturn": -8.43,
       "asOfDate": "2026-05-11",
       "modelDecile": 1,
-      "previousRank": 20,
+      "previousRank": 21,
       "previousDecile": 1,
-      "oneRunRankChange": -1,
-      "lookbackRank": 20,
-      "lookbackRankChange": -1,
+      "oneRunRankChange": 0,
+      "lookbackRank": 21,
+      "lookbackRankChange": 0,
       "status": "Held Top Decile"
     },
     {
@@ -730,8 +730,8 @@
       "name": "Brown–Forman",
       "sector": "Consumer Staples",
       "industry": "Distillers & Vintners",
-      "marketCap": "$12.4B",
-      "marketCapValue": 12362062802,
+      "marketCap": "$12.6B",
+      "marketCapValue": 12609762761,
       "modelRank": 24,
       "modelScore": 0.101476,
       "modelPercentile": 95.4,
@@ -940,40 +940,8 @@
       "status": "Held Top Decile"
     },
     {
-      "symbol": "NRG",
-      "name": "NRG Energy",
-      "sector": "Utilities",
-      "industry": "Independent Power Producers & Energy Traders",
-      "marketCap": "$29.0B",
-      "marketCapValue": 29037012934,
-      "modelRank": 27,
-      "modelScore": 0.09758,
-      "modelPercentile": 94.8,
-      "setupType": "model_rebound_watch",
-      "setupTags": [
-        "Model Rebound Watch",
-        "Not Momentum Confirmed",
-        "Activation Pending"
-      ],
-      "beta60d": 1.42,
-      "return7": -11.09,
-      "return14": -13.79,
-      "return30": -15.85,
-      "return60": -9.22,
-      "return90": -11.74,
-      "ytdReturn": -16.65,
-      "asOfDate": "2026-05-11",
-      "modelDecile": 1,
-      "previousRank": 30,
-      "previousDecile": 1,
-      "oneRunRankChange": 3,
-      "lookbackRank": 30,
-      "lookbackRankChange": 3,
-      "status": "Held Top Decile"
-    },
-    {
-      "symbol": "FCX",
-      "name": "Freeport-McMoRan",
+      "symbol": "CF",
+      "name": "CF Industries",
       "sector": "Materials",
       "industry": "Fertilizers & Agricultural Chemicals",
       "marketCap": "$19.1B",
@@ -1127,7 +1095,7 @@
       "marketCap": "$24.8B",
       "marketCapValue": 24765097363,
       "modelRank": 36,
-      "modelScore": 0.083434,
+      "modelScore": 0.082788,
       "modelPercentile": 93,
       "setupType": "momentum_confirmed",
       "setupTags": [
@@ -1248,7 +1216,7 @@
       "marketCapValue": 748103267167,
       "modelRank": 40,
       "modelScore": 0.073557,
-      "modelPercentile": 92,
+      "modelPercentile": 92.2,
       "setupType": "momentum_confirmed",
       "setupTags": [
         "Momentum Confirmed"
@@ -1762,7 +1730,7 @@
   ],
   "history": [
     {
-      "generatedAt": "2026-05-12T03:52:38.032Z",
+      "generatedAt": "2026-05-12T03:56:12.260Z",
       "asOfDate": "2026-05-11",
       "rowCount": 502,
       "topDecileCutoff": 51,

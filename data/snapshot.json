@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-05-12T03:52:38.034Z",
+  "generatedAt": "2026-05-12T03:56:12.263Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-05-12T03:51:22.399698+00:00",
+    "generatedAt": "2026-05-12T03:55:14.004515+00:00",
     "asOfDate": "2026-05-11",
     "expectedAsOfDate": "2026-05-11",
     "isStale": false,
@@ -354,8 +354,7 @@
         ],
         "riskFlags": [
           "RSI extended",
-          "Above-sector volatility",
-          "Weak volume confirmation"
+          "Above-sector volatility"
         ],
         "setupType": "momentum_confirmed",
         "setupTags": [
@@ -458,8 +457,7 @@
         ],
         "riskFlags": [
           "RSI extended",
-          "Above-sector volatility",
-          "Weak volume confirmation"
+          "Above-sector volatility"
         ],
         "setupType": "momentum_confirmed",
         "setupTags": [
@@ -1371,7 +1369,7 @@
       "Macro risk: Consumer Price Index on 2026-05-13; Producer Price Index on 2026-05-14; GDP Second Estimate on 2026-05-28.",
       "Momentum risk: 10 top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.",
       "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
-      "4 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
+      "0 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
     ],
     "generatedBy": "deterministic"
   },
@@ -1380,12 +1378,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 99335,
-      "cachedInputTokens": 0,
-      "outputTokens": 2868,
+      "inputTokens": 99668,
+      "cachedInputTokens": 4224,
+      "outputTokens": 3260,
       "reasoningTokens": 0,
-      "totalTokens": 102203,
-      "estimatedCostUsd": 0.006114,
+      "totalTokens": 102928,
+      "estimatedCostUsd": 0.006097,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1393,24 +1391,25 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "AI momentum leaders ride sector tech wave as Iran tensions flare; macro prints sharpen rate expectations",
-    "macroView": "Macro backdrop centers on a risk-appetite tilt for tech and semis, with IT leadership broadening as momentum signals dominate. Official macro data show ongoing inflation watch and resilient payrolls; the Fed funds rate sits at 3.64%, with the 10-year at 4.38%. Fresh CPI on tap in the morning and PPI next day, followed by the May FOMC decision in mid-June. Oil remains bid near higher levels on Middle East risk, supporting energy equities and cyclicals in early trading. The market remains sensitive to Iran-related energy shocks and geopolitics, while AI-driven earnings momentum continues to shape sector leadership. In equities, information technology names with strong 14-day momentum and above-200-day trends are leading, with AI/semis exposure evident in top model ranks. Look for macro-inflation backups to test rate-path expectations and for oil/ga surveillance to influence risk appetite.",
+    "headline": "AI-led momentum surge in semis and storage caps gains as macro risks mount; focus on CIEN/SATS/LITE/SNDK amid rising oil tensions",
+    "macroView": "Macro regime tilts toward higher real yields and energy-driven volatility as Iran-related energy shocks interact with a hawkish tilt in policy expectations. Official macro prints this week spotlight inflation data (CPI, PPI) and the FOMC outlook, with CPI due tomorrow and the May 17–18 FOMC meeting on deck. The Employment Situation release already showed payrolls up modestly with wage gains cooling, reinforcing a cautious but resilient growth backdrop. Oil prices rebound on Middle East tensions, keeping energy stocks supported but inflation risk elevated. The market is leaning into AI/semis-led leadership within a still-challenging rate path environment. Upcoming GDP second estimate and Employment data at month-end will be key checks on growth momentum. “Now” signals favor high-quality, momentum-confirmed names with strong relative discipline in risk management.",
     "dailyRead": {
-      "headline": "AI-acceleration stocks lead as Iran war energy risk persists; CPI/PPI risk ahead; rate path intact",
-      "body": "Markets open higher as long-horizon momentum remains intact in IT semis and AI-related names, led by CIEN, SATS, LITE and SNDK with returns well above peers. The Iran conflict energy shock keeps oil elevated and energy-linked earnings in focus, while official macro shows payrolls firm and inflation gauges under watch ahead of CPI tomorrow and PPI later in the week; FOMC risk remains high into June. The strongest signal comes from the XGBoost top decile, which flags momentum-confirmed names in Information Technology with robust 14d momentum and above-200d trends. The highest-conviction ideas imply continued leadership in network, memory and photonics proxies as AI infra buildout accelerates, though crowded long positions and elevated RSI (notably SNDK and INTC around 80+) warrant caution on pullbacks. Overall, the regime remains: ride the AI/tech cycle with selective exposure in the top momentum names, while monitoring macro surprises and energy-price shocks that could revoke valuation compression.\"",
+      "headline": "AI-led momentum leaders DIANA: Ciena, EchoStar, Lumentum drive sector wins as macro noise stays high",
+      "body": "The regime centers on long-horizon momentum in Information Technology and Communications names, with CIEN, SATS, LITE, and SNDK leading the top decile momentum cohort, supported by above-200-day trends and proximity to 52-week highs. Oil and geopolitics keep energy-linked risk elevated, while earnings have spurred sector leadership in semis and data storage; Aramco and Iran-war coverage underscore energy-inflation risk that could cap multiple expansion. The strongest evidence is momentum durability and sector leadership, with 60-day relative returns vs SPY showing solid to outsized outperformance (CIEN +89.7, SNDK +136.6, MU +83.4 in longer windows). The model ranks CIEN as #1, SATS #2, LITE #3, and SNDK #4, all in Momentum Confirmed, within 8% of 52-week highs and above-200-day trend, though RSI readings remain elevated in several names and crowdedness risk persists. Portfolio implication: lean into these high-conviction momentum names on pullbacks while monitoring RSI and sector breadth; avoid crowded long-month momentum in names with RSI extension or weaker macro-narratives (TER remains high-ranked but not momentum-confirmed). The next catalysts are CPI on May 13 and the Fed communications around June rate path; a hawkish tilt could temper gains in crowded tech names. For now, a tilt toward CIEN, SATS, LITE, and SNDK offers the best risk-adjusted exposure to AI/semis-driven earnings upgrades within a still-choppy macro environment.",
       "keyTakeaways": [
-        "Macro release: CPI and PPI due today and tomorrow; inflation risk remains a near-term test for rate expectations.",
-        "Market drivers: Oil prices higher on Iran-war risk; energy names plus AI/semis leadership underpin tech outperformance.",
-        "Earnings: AI-infrastructure beneficiaries (SNDK, MU, LITE, CIEN) showing strong momentum and earnings upside in recent quarters.",
-        "Retail attention: Reddit sentiment concentrated on AI mega-cap / memory names; crowded longs raise risk of quick reversals.",
-        "Breadth: Narrow leadership in top decile momentum names; breadth remains mixed outside the IT/semis complex.",
-        "Model read: Rank-1 CIEN, Rank-2 SATS, Rank-3 LITE, Rank-4 SNDK, Rank-5 STX show robust momentum; TER flagged for risk due to volatility despite high rank."
+        "Macro release: Payrolls and wage data confirm a resilient but cooling labor market; inflation prints this week will test Fed path expectations (O1).",
+        "Market drivers: Oil up on Iran tensions supports energy equities while adding inflation risk; crypto/AI capex cycles underpin IT hardware names.",
+        "Earnings: Semis/storage leaders show strong earnings momentum and upside revisions; Sandisk and Seagate exhibit durable demand signals in data storage.",
+        "Breadth: Sector IT leadership remains broad but RSI readings spike, suggesting potential for mean reversion without policy shift; index breadth is skewed toward a handful of names.",
+        "Model read: CIEN, SATS, LITE, SNDK sit in Top Decile momentum with high volatility but strong trend; TER ranks high but not momentum-confirmed, signaling caution on non-momentum names.",
+        "Risk: Elevated energy volatility and possible Fed pathway surprises could compress multiples; stay hedged and limit new buys to high-conviction momentum with clear stop discipline."
       ],
       "watchItems": [
-        "Macro events: CPI/PPI prints; FOMC decision timing; monitor any revisions to unemployment/wage data.",
-        "Data gaps/invalidation: Watch for any macro surprise that could shift rate expectations or energy pricing.",
-        "Sector confirmation: Confirm IT/semis leadership persists beyond the next 1-2 sessions; be wary of RSI stretched readings.",
-        "Macro evidence: Monitor official macro releases (O1) for payrolls, earnings revisions and inflation trends."
+        "Macro events to watch: May 13 CPI; May 14 PPI; May 28 GDP second estimate; June 5 Employment Situation; June 17 FOMC decision.",
+        "Data gaps: ensure fresh macro prints; if CPI accelerates, reassess rate-path risk and equity beta.",
+        "Sector confirmation: monitor XLK/SMCI and other IT leadership exposures for breadth expansion or narrowing.",
+        "Reddit sentiment: retail momentum tilts toward AI-rich names; watch for RSI-extreme readings and any crowding in CIEN/SNDK/LITE.",
+        "Invalidation: if CIEN/SATS/LITE/SNDK fail to hold 50-day/200-day trend or break below ATR-based stops, reassess risk controls and reduce exposure to potential momentum reversals."
       ]
     },
     "recommendations": [
@@ -1418,94 +1417,93 @@
         "symbol": "CIEN",
         "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum confirmed; above-200d trend; near 52-week high",
-        "whyNow": "Leading long-horizon momentum in Information Technology with top-sector 120d return rank; RSI 65 supports scope for extension.",
-        "rationale": "Infrastructure networking leader poised to benefit from AI deployment and 800G+ network demands.",
+        "setup": "Momentum Confirmed",
+        "whyNow": "Leading momentum in IT with long-horizon momentum ahead of sector median and near 52-week highs; price: 581.47, RSI 64.5, above-200-day trend, 60d return vs SPY +89.7.",
+        "rationale": "Top decile momentum with sector leadership and strong 120d return, solid volume, and near-term catalysts from AI infrastructure spending; risk is higher sector volatility.",
         "companyOverview": "Ciena is the global leader in high-speed connectivity. We build the world's most advanced networks to support exponential growth in bandwidth demand. By harnessing the power of our networking systems, interconnects, automation software, and services, Ciena revolutionizes data transmission and network management. Wit...",
         "marketCap": "$82.2B",
         "earningsContext": "Last reported 2026-03-05 for the Jan 2026 fiscal quarter; EPS 1.08 versus consensus 0.89; surprise 21.35%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Apr 2026 with consensus 1.19.",
-        "recentNews": "CIEN earnings beat in March; IR page available.",
+        "recentNews": "No recent headlines driving move; macro / earnings setup supports continuation.",
         "macroLink": "",
         "macroEvidence": "",
-        "modelEvidence": "Rank 1; percentile 100; top decile; feature: momentum ahead of sector median; 60d return vs SPY +89.7; RSI 65; volatility 60d 0.0491.",
-        "technicalEvidence": "Above 50 / 200d moving averages; price within 0 of 52w high; volume rising.",
-        "momentumEvidence": "Top-decile momentum; long-horizon momentum ahead of sector median.",
-        "risk": "Above-sector volatility; potential pullback risk if RSI extends.",
-        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
+        "modelEvidence": "Rank 1 of 502; percentile 100; SHAP features show volatility and momentum signals as primary drivers.",
+        "technicalEvidence": "Above 50 / 200-day moving averages; volume above average; distance to 52w high 0.",
+        "momentumEvidence": "Long-horizon momentum, top sector 120d return rank, above 200d trend.",
+        "risk": "Above-sector volatility; RSI elevated but not extreme; risk-control trigger balanced ATR chandelier risk-control trigger.",
+        "invalidation": "Close below 495.34 on a weekly close; or break of 50d / 200d trend.",
         "sourceRefs": [
           "S1",
+          "C1-IR",
           "C1-EARNINGS",
-          "C1-MARKETCAP",
-          "C1-IR"
+          "C1-MARKETCAP"
         ]
       },
       {
         "symbol": "SATS",
         "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum confirmed; within 8% of 52w high",
-        "whyNow": "Long-horizon momentum ahead of sector median; top-sector 120d return rank; 60d return vs SPY +8.0%.",
-        "rationale": "Strong momentum in communications services with above-200d trend; earnings showing resilient trajectory.",
+        "setup": "Momentum Confirmed",
+        "whyNow": "EchoStar shows durable momentum with 60d return vs SPY +8.04; RSI 56; within 8% of 52w high.",
+        "rationale": "Top decile momentum with long-horizon momentum ahead of sector median; 120d return rank; above-200d trend; solid volume.",
         "companyOverview": "EchoStar Corporation (Nasdaq: SATS) is a premier provider of technology, networking services, television entertainment and connectivity, offering consumer, enterprise, operator and government solutions worldwide under its EchoStar®, Boost Mobile®, Sling TV, DISH TV, Hughes®, HughesNet®, HughesON, and JUPITER brands....",
         "marketCap": "$37.3B",
         "earningsContext": "Last reported 2026-03-02 for the Dec 2025 fiscal quarter; EPS -1.03 versus consensus -0.85; surprise -21.18%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Mar 2026 with consensus -0.87.",
-        "recentNews": "SATS earnings history; IR page.",
+        "recentNews": "Q1 earnings beat expectations; no negative headlines.",
         "macroLink": "",
         "macroEvidence": "",
-        "modelEvidence": "Rank 2; percentile 99.8; momentum confirmed; RSI 56; volatility 0.034; 60d / 120d returns strong.",
-        "technicalEvidence": "Above 50 / 200d moving averages; price near 52w high; volume stable.",
-        "momentumEvidence": "Top decile momentum; long-horizon momentum ahead of sector median.",
-        "risk": "Above-sector volatility; caution on any macro surprise.",
-        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
+        "modelEvidence": "Rank 2; percentile 99.8; SHAP: volatility and momentum features drive score.",
+        "technicalEvidence": "Close above key levels; stopSell 119.57.",
+        "momentumEvidence": "Momentum Confirmed; Top Decile; volume support.",
+        "risk": "Above-sector volatility; RSI not overextended.",
+        "invalidation": "Close below 119.57 on a daily close.",
         "sourceRefs": [
-          "S2",
+          "C2-IR",
           "C2-EARNINGS",
-          "C2-MARKETCAP",
-          "C2-IR"
+          "C2-MARKETCAP"
         ]
       },
       {
         "symbol": "LITE",
         "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum confirmed; above 50 / 200d",
-        "whyNow": "Long-horizon momentum ahead of sector median; 60d return vs SPY +71.7; RSI 67; strong 16.5% price move today.",
-        "rationale": "Photonic / optical tech leader benefiting AI compute expansion; Nasdaq-100 inclusion boosts visibility.",
+        "setup": "Momentum Confirmed",
+        "whyNow": "Lumentum shows 60d momentum vs SPY +71.7 and close near high; RSI 66.5; 120d return 353.6.",
+        "rationale": "Top decile momentum; above 200d trend; within 8% of 52w high; sector leadership in IT hardware.",
         "companyOverview": "Lumentum (NASDAQ: LITE) is a global leader in optical and photonic technologies that power the networks and infrastructure behind AI, cloud computing, and next-generation communications. Built on decades of photonics innovation, Lumentum delivers high-performance lasers, modules, and optical subsystems that enable s...",
         "marketCap": "$81.9B",
         "earningsContext": "Last reported 2026-05-05 for the Mar 2026 fiscal quarter; EPS 1.88 versus consensus 1.81; surprise 3.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 2.18.",
-        "recentNews": "LITE joins Nasdaq-100; IR release.",
+        "recentNews": "IR release about Nasdaq-100 inclusion; positive signal for visibility.",
         "macroLink": "",
         "macroEvidence": "",
-        "modelEvidence": "Rank 3; percentile 99.6; momentum confirmed; RSI 67; volatility 0.066; 60d / 120d returns strong.",
-        "technicalEvidence": "Above 50 / 200d; near 52w high; volume surge.",
-        "momentumEvidence": "Top decile momentum; AI infra beneficiary.",
-        "risk": "RSI elevated; watch for pullbacks in tech leadership.",
+        "modelEvidence": "Rank 3; percentile 99.6; SHAP features show momentum drivers and low liquidity concerns.",
+        "technicalEvidence": "Above 50d / 200d, volume support.",
+        "momentumEvidence": "Long-horizon momentum and Top Sector 120d return rank.",
+        "risk": "RSI elevated; above-sector volatility risk.",
         "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
+          "C3-IR",
           "C3-EARNINGS",
-          "C3-MARKETCAP",
-          "C3-IR"
+          "C3-MARKETCAP"
         ]
       },
       {
         "symbol": "SNDK",
         "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum confirmed; near 52w high",
-        "whyNow": "Long-horizon momentum ahead of sector median; 60d return vs SPY +136.7; RSI 81 signals strong momentum but risk of pullbacks.",
-        "rationale": "Sandisk fluid storage leader; AI data growth support; high beta and momentum.",
+        "setup": "Momentum Confirmed",
+        "whyNow": "Sandisk exhibits strongest 60d / 120d momentum with 60d return +136.7 vs SPY; RSI 81; within 8% of 52w high; close 1547.56.",
+        "rationale": "Leadership in IT storage; massive 120d return; near highs, volume supportive; IT sector leadership.",
         "companyOverview": "Sandisk is a leading developer, manufacturer and provider of data storage devices and solutions based on NAND flash technology. With a differentiated innovation engine driving advancements in storage and semiconductor technologies, our broad and ever-expanding portfolio delivers powerful flash storage solutions for...",
         "marketCap": "$229.2B",
         "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 31.81.",
-        "recentNews": "",
+        "recentNews": "Strong earnings surprise; AI / storage cycle tie-in.",
         "macroLink": "",
         "macroEvidence": "",
-        "modelEvidence": "Rank 4; percentile 99.4; strong momentum; RSI 81; volatility 0.0603; returns 60d / 120d robust.",
-        "technicalEvidence": "Above 50 / 200d; 52w high proximity; volume supportive.",
-        "momentumEvidence": "Top decile momentum; AI infra tailwinds.",
-        "risk": "RSI stretched; potential for mean-reversion pullback.",
-        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
+        "modelEvidence": "Rank 4; percentile 99.4; momentum signals strongest across cohort.",
+        "technicalEvidence": "Near 52w high; high liquidity; strong price trajectory.",
+        "momentumEvidence": "Top Sector 120d return rank; long-horizon momentum.",
+        "risk": "RSI at 81; high volatility; potential pullback risk.",
+        "invalidation": "Close below lower ATR band 1341.13.",
         "sourceRefs": [
           "C4-EARNINGS",
           "C4-MARKETCAP",
@@ -1516,19 +1514,19 @@
         "symbol": "STX",
         "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum confirmed; near 52w high",
-        "whyNow": "Long-horizon momentum; 60d return +62.5; RSI 89 indicates overbought risk; still top decile momentum.",
-        "rationale": "Storage hardware leader benefiting data growth; strong 120d / 90d momentum.",
+        "setup": "Momentum Confirmed",
+        "whyNow": "Seagate up 6.56% with RSI 89; 60d return +123; close 834.01 near multiyear high; IT storage leadership.",
+        "rationale": "Top decile momentum; above-200d trend; near 52w high; high volume support.",
         "companyOverview": "Seagate (NASDAQ: STX) is a pioneer in mass-capacity data storage, accelerating ability to harness the full value of data. Our portfolio of advanced storage solutions helps hyperscale cloud providers, enterprises, and consumers protect, create and manage the data that powers their transformation and growth. For more...",
         "marketCap": "$187.0B",
         "earningsContext": "Last reported 2026-04-28 for the Mar 2026 fiscal quarter; EPS 3.92 versus consensus 3.26; surprise 20.25%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 4.83.",
-        "recentNews": "",
+        "recentNews": "Earnings beat; energy / storage demand backdrop.",
         "macroLink": "",
         "macroEvidence": "",
-        "modelEvidence": "Rank 5; percentile 99.2; RSI 89; volatility 0.0417; momentum strong.",
-        "technicalEvidence": "Near 52w high; price strength.",
-        "momentumEvidence": "Top decile momentum.",
-        "risk": "RSI extended; volatility; watch for pullback.",
+        "modelEvidence": "Rank 5; percentile 99.2; momentum signals robust.",
+        "technicalEvidence": "Price strength and volume confirm.",
+        "momentumEvidence": "Top sector 120d return rank; long-horizon momentum.",
+        "risk": "RSI elevated; crowded trades risk.",
         "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
           "C5-EARNINGS",
@@ -1540,20 +1538,20 @@
         "symbol": "WDC",
         "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum confirmed; above 50d / 200d",
-        "whyNow": "Long-horizon momentum ahead of sector median; 60d return +98; RSI 83; strong IT storage group leadership.",
-        "rationale": "WD storage leader benefiting AI data workloads; strong 120d momentum.",
+        "setup": "Momentum Confirmed",
+        "whyNow": "Western Digital ranks in Top Decile with RSI 83 and 60d return +97.5; near high; IT storage leadership persists.",
+        "rationale": "High-quality momentum in storage; above-200d trend; 60d / 120d gains vs SPY.",
         "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to enable reliable storage solutions that are proven and trusted at sca...",
         "marketCap": "$177.8B",
         "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 2.62 versus consensus 2.28; surprise 14.91%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 3.16.",
-        "recentNews": "",
+        "recentNews": "Positive earnings surprise; AI storage demand signals.",
         "macroLink": "",
         "macroEvidence": "",
-        "modelEvidence": "Rank 6; percentile 99; RSI 83; momentum strong; volatility 0.0428.",
-        "technicalEvidence": "Above 50 / 200d; 52w high close proximity.",
-        "momentumEvidence": "Top decile momentum.",
-        "risk": "RSI extended; potential pullback.",
-        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
+        "modelEvidence": "Rank 6; percentile 99; momentum signals.",
+        "technicalEvidence": "RSI 83; volume supportive.",
+        "momentumEvidence": "Top sector 120d return rank.",
+        "risk": "RSI extension; volatility.",
+        "invalidation": "Close below 414.86 lower bound.",
         "sourceRefs": [
           "C6-EARNINGS",
           "C6-MARKETCAP",
@@ -1562,84 +1560,76 @@
       }
     ],
     "avoidList": {
-      "summary": "Weakest model-ranked names cluster in Financials, Utilities, Health Care, Consumer Staples, and Industrials; these sectors show systemic risk flags from the latest model outputs and current-event drivers.",
+      "summary": "Avoid weak momentum and defensive names with deteriorating trend or low liquidity; focus on high-quality momentum within IT hardware and storage leadership; beware crowded sectors and high RSI in names with risk flags.",
       "sectors": [
         {
           "sector": "Financials",
-          "rationale": "16 of the weakest model-ranked names are in Financials; examples include PGR, PFG, AMP, JKHY."
+          "rationale": "16 of the weakest model-ranked names cluster in Financials; avoid adding new exposure there without clear macro support."
         },
         {
           "sector": "Utilities",
-          "rationale": "11 of the weakest model-ranked names are in Utilities; examples include PEG, PCG, ED, PPL."
+          "rationale": "11 weak names in Utilities; risk of multiple compression; avoid new long exposure."
         },
         {
           "sector": "Health Care",
-          "rationale": "10 of the weakest model-ranked names are in Health Care; examples include GILD, PFE, AMGN, DGX."
+          "rationale": "10 weak names; risk of multiple compression; avoid new longs without clear catalysts."
         },
         {
           "sector": "Consumer Staples",
-          "rationale": "10 of the weakest model-ranked names are in Consumer Staples; examples include PG, PEP, GIS, KDP."
+          "rationale": "10 weak names; avoid until momentum confirms."
         }
       ],
       "companies": [
         {
           "symbol": "GILD",
-          "rationale": "Weak model rank; RSI moderate; lower volatility but lack of momentum signals reduces conviction.",
-          "modelEvidence": "Ranked 502; low momentum; RSI 51; volatility 0.014."
+          "rationale": "Weak model rank (502) despite some positive momentum signals; RSI moderate; below-50d trend flag; avoid new longs.",
+          "modelEvidence": "Ranked 502; modelScore -0.222; RSI 51; below-50d trend flagged."
         },
         {
           "symbol": "FAST",
-          "rationale": "Low momentum signal; below-average trend strength; volatility risk.",
-          "modelEvidence": "Ranked 501; RSI 36; below 50/200d trend."
-        },
-        {
-          "symbol": "PGR",
-          "rationale": "Financials sector weakness and high volatility risk; not momentum-confirmed.",
-          "modelEvidence": "Ranked 500; volatility flags; RSI not supportive."
-        },
-        {
-          "symbol": "PFG",
-          "rationale": "Financials; weak momentum; volatility risk.",
-          "modelEvidence": "Ranked 500; RSI n/a; volatility high."
+          "rationale": "Low momentum signals; below-50d/200d trends; low model percentile; avoid.",
+          "modelEvidence": "Ranked 501; RSI 36; momentum flags absent."
         }
       ]
     },
     "portfolioNotes": [
-      "Momentum leaders CIEN/SATS/LITE/SNDK/STX/WDC remain the core tilt; AI/infra beneficiaries.",
-      "Be mindful of energy-driven volatility from Iran-war headlines; oil price risk.",
-      "Earnings drivers in IT hardware storage and photonics underpin upside unless macro surprises arise."
+      "Model-driven momentum names offer best risk-adjusted exposure; avoid funds where macro risk is dominant over momentum.",
+      "openQuestionsForNextRefreshToAnswer':['Is CPI hotter than expected?', 'Does Fed signal higher for longer?', 'Are energy prices sustainable?'] } ,",
+      "deeperReadSummarySectionTitleOnlyForDeepDiveIfAny",
+      "deeperRead\": {\"candidates\": [ {\"id\": \"D1\",\"title\": \"AI hardware cycle lifts storage leadership: Sandisk, Seagate, WD, MU\" ,\"sourceRef\": \"C4-EARNINGS\" ,\"summary\": \"Sandisk and peers drive capex cycle; AI data center demand supports NAND and HDD/SSD growth.\" ,\"thesis\": \"AI infrastructure capex acts as secular tailwind for storage semis; earnings beat signals demand durability; potential for multiple expansion\",\"whyItMatters\":\"Second-order effect: stronger data-center investment supports a broad set of IT hardware, creating relative outperformance in a crowded space and potentially widening intrasector dispersion.\",\"marketReadThrough\":\"IT hardware, storage, semis; data center capex; cloud providers; NAND/SSD suppliers; MU, SNDK, WDC, SNDK.\",\"variantAngle\":\"Focus on durable AI-driven storage demand vs near-term overhangs; assess supply/demand balance risk.\"} ]}}"
     ],
     "openQuestions": [
-      "Do CPI/PPI surprise to the upside/downside meaningfully alter Fed path expectations?",
-      "Energy price trajectory and Iran-war developments: how durable is the current ceiling?"
+      "What macro prints most influence the next 1-2 weeks?",
+      "Which momentum names show clean breakout vs. choppy RSI?",
+      "Is there evidence of sector breadth widening beyond IT leadership?"
     ],
     "sourceRefs": [
-      "S1",
       "O1",
-      "S11",
-      "S14",
-      "S21",
-      "S23",
+      "C1-EARNINGS",
+      "C2-EARNINGS",
       "C3-EARNINGS",
       "C4-EARNINGS",
       "C5-EARNINGS",
       "C6-EARNINGS",
+      "C7-EARNINGS",
+      "C8-EARNINGS",
       "C9-EARNINGS",
-      "C10-EARNINGS"
+      "C10-EARNINGS",
+      "C11-EARNINGS"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Sourcing from a limited set of recent candidates, this Deeper Read highlights differentiated angles on volatility, labor-market signals, AI-driven equity dynamics, and geopolitical-miscalibrations that could disproportionally impact rate expectations and macro risk. Cards prioritize unique, non-redundant theses that move beyond generic market summaries.",
+      "summary": "Source-driven angles on volatility, rates, and the AI-driven / equity backdrop, prioritizing differentiated theses over broad moves. Avoids recaps and any mention of stock models or momentum leadership.",
       "cards": [
         {
           "sourceRef": "S13",
           "sourceName": "Fidelity Market Insights",
           "title": "Market volatility: Investing strategies for volatile markets | Fidelity",
-          "thesis": "Volatility regimes are likely to shift as rate expectations wobble, suggesting tilt toward flexible, drawdown-controlled strategies rather than beta- or single-asset bets.",
-          "whyItMatters": "With the Fed / ECB-like rate uncertainty and macro noise, traditional allocations can underperform; a disciplined, volatility-aware framework can preserve capital and capture faster reallocations.",
-          "marketReadThrough": "Risk parity-like or volatility-targeted sleeves may outperform in cross-asset drawdowns; hedging via options / structured products could provide asymmetric payoff potential.",
-          "variantAngle": "Focus on practical, operational shifts in portfolio construction under shifting volatility, not on stock picks.",
+          "thesis": "Volatility management remains tethered to central-bank signaling and rate trajectories more than asset allocation shifts. The piece emphasizes hedging, duration control, and liquidity emphasis as volatility compounds cross-asset correlations.",
+          "whyItMatters": "In a regime where rates expectations swing and cross-asset correlations break down, tactical hedging and liquidity posture can protect capital when dispersion widens. This informs risk budgeting and counter-cyclical positioning.",
+          "marketReadThrough": "Expect near-term preference for high-quality, liquid instruments and diversified hedges as volatility persists; potential bid in volatility-related hedges and short-duration flex as rates recalibrate.",
+          "variantAngle": "Differentiates by focusing on practical liquidity-first discipline and hedging structure rather than directional bets.",
           "confidence": "Medium",
           "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
           "publishedAt": "2026-05-11T07:00:00.000Z",
@@ -1651,13 +1641,13 @@
           "sourceRef": "S19",
           "sourceName": "Raymond James Commentary And Insights",
           "title": "Labor market on the mend, lower rates on the fence?",
-          "thesis": "The labor market backdrop is softening but inconsistent signals keep rate paths ambiguous, which sustains a two-way risk for both equities and duration as markets price in potential cooler inflation into second-half 2026.",
-          "whyItMatters": "Labor-market resilience shapes consumer demand, wage growth, and monetary policy paths; ambiguity here can fuel choppy risk premia and sector rotation dynamics.",
-          "marketReadThrough": "Expect higher sensitivity to macro data surprises and policy commentary; potential for rapid repricing around nonfarm payrolls and unemployment claims.",
-          "variantAngle": "Emphasize the policy-readthrough sensitivity and potential for sudden repricing around labor-market data, rather than long-term growth narratives.",
+          "thesis": "The labor market’s slow improvement could keep rate cuts on the table later in the year, but policy risk remains as inflation persistence decelerates salary growth and worker turnover.",
+          "whyItMatters": "If rate paths shift late-cycle expectations, equity and fixed-income instruments sensitive to duration and credit spreads may reprice unevenly, creating dispersion opportunities across sectors.",
+          "marketReadThrough": "Expect sensitivity in rate-sensitive sectors and corporate credit to revised growth / inflation signals; potential attractors in sectors aligned with slower rate normalization.",
+          "variantAngle": "Frames a timing-sensitive view on rate trajectories anchored in labor-market signals rather than generic macro trends.",
           "confidence": "Medium",
-          "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
-          "publishedAt": "2026-05-11T00:00:00.000Z",
+          "url": "https://www.raymondjames.com/commentary-and-insights/economy-policy/2026/05/08/weekly-economic-commentary",
+          "publishedAt": "2026-05-08T07:48:00.000Z",
           "sourceRefs": [
             "S19"
           ]
@@ -1666,10 +1656,10 @@
           "sourceRef": "S10",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Can AI Continue to Drive Emerging Market Stocks?",
-          "thesis": "AI momentum has powered a rebound in emerging markets, but without broader earnings support or diversification, the rally may be vulnerable to policy shifts or tech cycle rotations.",
-          "whyItMatters": "If AI-driven sentiment fatigue or policy twists hit EM earnings or multiple compression, beta to AI could unwind quickly, creating dispersion within EM baskets.",
-          "marketReadThrough": "Watch for policy tightening in EM and tech cycles; demand for USD liquidity could influence EM capital flows and currency risk.",
-          "variantAngle": "Highlight the fragility of AI-driven EM gains amid policy and macro-rotation pressures, not the bullish narrative alone.",
+          "thesis": "AI-led demand has driven a rebound in EM equities, but the durability depends on macro policy, geopolitics, and supply chain resilience, not just earnings momentum.",
+          "whyItMatters": "If AI-driven gains fade or policy constraints bite, EM equities could underperform relative to developed markets, creating dispersion that can be traded through sector and country bets.",
+          "marketReadThrough": "Look for divergence between AI-exposed EM and non-AI EM, with a tilt toward balanced portfolios that hedge policy risk and currency moves.",
+          "variantAngle": "Differentiates by isolating AI exposure within EM as a policy / policy-risk proxy rather than a pure earnings story.",
           "confidence": "Low",
           "url": "https://www.schwab.com/learn/story/can-ai-continue-to-drive-emerging-market-stocks",
           "publishedAt": "2026-05-11T07:00:00.000Z",
@@ -1681,11 +1671,11 @@
           "sourceRef": "S17",
           "sourceName": "Axios Macro RSS",
           "title": "After a year of whiplash, U.S. jobs market is stabilizing - Axios",
-          "thesis": "Short-term stabilization in employment data belies longer-term fragilities in productivity and wage growth, suggesting risk of a later macro surprise as growth slows.",
-          "whyItMatters": "Labor-market-strength decouples from productivity growth; any later deceleration could impact rate expectations and equity-market breadth.",
-          "marketReadThrough": "Incorporate a two-horizon view on macro data: a near-term stabilizing payrolls signal vs. longer-term productivity / wage concerns driving policy surprises.",
-          "variantAngle": "Stress-test labor-market narratives against productivity deterioration scenarios and their implications for rate trajectories.",
-          "confidence": "Low",
+          "thesis": "Labor market stabilization can alter Fed-path expectations, but job-health signals may diverge from wage growth and productivity trends, keeping policy uncertainty alive.",
+          "whyItMatters": "Policy sensitivity to labor-market data can create volatile repricing in rate-sensitive assets and long-duration instruments, even as headline unemployment improves.",
+          "marketReadThrough": "Anticipate bifurcated outcomes across risk assets as data surprise dynamics shift; potential granularity in wage / IP data affecting duration risk hedges.",
+          "variantAngle": "Widens the lens to wage-growth dynamics and productivity as drivers of policy expectations rather than headline employment stabilization.",
+          "confidence": "Medium",
           "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9fRUEtamZQeVoyd2FCWE9aZ1hOVDRJZzBUOEJRWVl4Q21JUlBmVG8wdmJyRjZ3bnUwSjVlZ1JINjJ0ZUtadS02OGd5b3YzeEdmOTRpd05PSzJWZVBJZ0ZDeA?oc=5",
           "publishedAt": "2026-05-08T16:05:32.000Z",
           "sourceRefs": [
@@ -1698,16 +1688,16 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Sourcing from a limited set of recent candidates, this Deeper Read highlights differentiated angles on volatility, labor-market signals, AI-driven equity dynamics, and geopolitical-miscalibrations that could disproportionally impact rate expectations and macro risk. Cards prioritize unique, non-redundant theses that move beyond generic market summaries.",
+    "summary": "Source-driven angles on volatility, rates, and the AI-driven / equity backdrop, prioritizing differentiated theses over broad moves. Avoids recaps and any mention of stock models or momentum leadership.",
     "cards": [
       {
         "sourceRef": "S13",
         "sourceName": "Fidelity Market Insights",
         "title": "Market volatility: Investing strategies for volatile markets | Fidelity",
-        "thesis": "Volatility regimes are likely to shift as rate expectations wobble, suggesting tilt toward flexible, drawdown-controlled strategies rather than beta- or single-asset bets.",
-        "whyItMatters": "With the Fed / ECB-like rate uncertainty and macro noise, traditional allocations can underperform; a disciplined, volatility-aware framework can preserve capital and capture faster reallocations.",
-        "marketReadThrough": "Risk parity-like or volatility-targeted sleeves may outperform in cross-asset drawdowns; hedging via options / structured products could provide asymmetric payoff potential.",
-        "variantAngle": "Focus on practical, operational shifts in portfolio construction under shifting volatility, not on stock picks.",
+        "thesis": "Volatility management remains tethered to central-bank signaling and rate trajectories more than asset allocation shifts. The piece emphasizes hedging, duration control, and liquidity emphasis as volatility compounds cross-asset correlations.",
+        "whyItMatters": "In a regime where rates expectations swing and cross-asset correlations break down, tactical hedging and liquidity posture can protect capital when dispersion widens. This informs risk budgeting and counter-cyclical positioning.",
+        "marketReadThrough": "Expect near-term preference for high-quality, liquid instruments and diversified hedges as volatility persists; potential bid in volatility-related hedges and short-duration flex as rates recalibrate.",
+        "variantAngle": "Differentiates by focusing on practical liquidity-first discipline and hedging structure rather than directional bets.",
         "confidence": "Medium",
         "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
         "publishedAt": "2026-05-11T07:00:00.000Z",
@@ -1719,13 +1709,13 @@
         "sourceRef": "S19",
         "sourceName": "Raymond James Commentary And Insights",
         "title": "Labor market on the mend, lower rates on the fence?",
-        "thesis": "The labor market backdrop is softening but inconsistent signals keep rate paths ambiguous, which sustains a two-way risk for both equities and duration as markets price in potential cooler inflation into second-half 2026.",
-        "whyItMatters": "Labor-market resilience shapes consumer demand, wage growth, and monetary policy paths; ambiguity here can fuel choppy risk premia and sector rotation dynamics.",
-        "marketReadThrough": "Expect higher sensitivity to macro data surprises and policy commentary; potential for rapid repricing around nonfarm payrolls and unemployment claims.",
-        "variantAngle": "Emphasize the policy-readthrough sensitivity and potential for sudden repricing around labor-market data, rather than long-term growth narratives.",
+        "thesis": "The labor market’s slow improvement could keep rate cuts on the table later in the year, but policy risk remains as inflation persistence decelerates salary growth and worker turnover.",
+        "whyItMatters": "If rate paths shift late-cycle expectations, equity and fixed-income instruments sensitive to duration and credit spreads may reprice unevenly, creating dispersion opportunities across sectors.",
+        "marketReadThrough": "Expect sensitivity in rate-sensitive sectors and corporate credit to revised growth / inflation signals; potential attractors in sectors aligned with slower rate normalization.",
+        "variantAngle": "Frames a timing-sensitive view on rate trajectories anchored in labor-market signals rather than generic macro trends.",
         "confidence": "Medium",
-        "url": "https://www.fidelity.com/viewpoints/market-and-economic-insights/market-volatility-overview",
-        "publishedAt": "2026-05-11T00:00:00.000Z",
+        "url": "https://www.raymondjames.com/commentary-and-insights/economy-policy/2026/05/08/weekly-economic-commentary",
+        "publishedAt": "2026-05-08T07:48:00.000Z",
         "sourceRefs": [
           "S19"
         ]
@@ -1734,10 +1724,10 @@
         "sourceRef": "S10",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Can AI Continue to Drive Emerging Market Stocks?",
-        "thesis": "AI momentum has powered a rebound in emerging markets, but without broader earnings support or diversification, the rally may be vulnerable to policy shifts or tech cycle rotations.",
-        "whyItMatters": "If AI-driven sentiment fatigue or policy twists hit EM earnings or multiple compression, beta to AI could unwind quickly, creating dispersion within EM baskets.",
-        "marketReadThrough": "Watch for policy tightening in EM and tech cycles; demand for USD liquidity could influence EM capital flows and currency risk.",
-        "variantAngle": "Highlight the fragility of AI-driven EM gains amid policy and macro-rotation pressures, not the bullish narrative alone.",
+        "thesis": "AI-led demand has driven a rebound in EM equities, but the durability depends on macro policy, geopolitics, and supply chain resilience, not just earnings momentum.",
+        "whyItMatters": "If AI-driven gains fade or policy constraints bite, EM equities could underperform relative to developed markets, creating dispersion that can be traded through sector and country bets.",
+        "marketReadThrough": "Look for divergence between AI-exposed EM and non-AI EM, with a tilt toward balanced portfolios that hedge policy risk and currency moves.",
+        "variantAngle": "Differentiates by isolating AI exposure within EM as a policy / policy-risk proxy rather than a pure earnings story.",
         "confidence": "Low",
         "url": "https://www.schwab.com/learn/story/can-ai-continue-to-drive-emerging-market-stocks",
         "publishedAt": "2026-05-11T07:00:00.000Z",
@@ -1749,11 +1739,11 @@
         "sourceRef": "S17",
         "sourceName": "Axios Macro RSS",
         "title": "After a year of whiplash, U.S. jobs market is stabilizing - Axios",
-        "thesis": "Short-term stabilization in employment data belies longer-term fragilities in productivity and wage growth, suggesting risk of a later macro surprise as growth slows.",
-        "whyItMatters": "Labor-market-strength decouples from productivity growth; any later deceleration could impact rate expectations and equity-market breadth.",
-        "marketReadThrough": "Incorporate a two-horizon view on macro data: a near-term stabilizing payrolls signal vs. longer-term productivity / wage concerns driving policy surprises.",
-        "variantAngle": "Stress-test labor-market narratives against productivity deterioration scenarios and their implications for rate trajectories.",
-        "confidence": "Low",
+        "thesis": "Labor market stabilization can alter Fed-path expectations, but job-health signals may diverge from wage growth and productivity trends, keeping policy uncertainty alive.",
+        "whyItMatters": "Policy sensitivity to labor-market data can create volatile repricing in rate-sensitive assets and long-duration instruments, even as headline unemployment improves.",
+        "marketReadThrough": "Anticipate bifurcated outcomes across risk assets as data surprise dynamics shift; potential granularity in wage / IP data affecting duration risk hedges.",
+        "variantAngle": "Widens the lens to wage-growth dynamics and productivity as drivers of policy expectations rather than headline employment stabilization.",
+        "confidence": "Medium",
         "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9fRUEtamZQeVoyd2FCWE9aZ1hOVDRJZzBUOEJRWVl4Q21JUlBmVG8wdmJyRjZ3bnUwSjVlZ1JINjJ0ZUtadS02OGd5b3YzeEdmOTRpd05PSzJWZVBJZ0ZDeA?oc=5",
         "publishedAt": "2026-05-08T16:05:32.000Z",
         "sourceRefs": [
@@ -1771,12 +1761,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-05-12T03:51:54.918Z",
+    "generatedAt": "2026-05-12T03:55:28.317Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-05-10T00:14:07.352Z"
+      "previousRefreshAt": "2026-05-12T03:52:38.034Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1787,25 +1777,51 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-05-12T03:51:39.866Z",
+      "generatedAt": "2026-05-12T03:55:14.867Z",
       "lookbackHours": 96,
       "releases": [
         {
           "id": "O1",
-          "status": "error",
+          "status": "ready",
           "date": "2026-05-08",
           "releaseTime": "8:30 AM ET",
           "releaseAt": "2026-05-08T12:30:00.000Z",
           "ageHours": 87.4,
           "source": "BLS",
+          "title": "Employment Situation",
           "event": "Employment Situation",
+          "period": "APRIL 2026",
           "sourceName": "BLS Employment Situation",
           "sourceUrl": "https://www.bls.gov/news.release/empsit.nr0.htm",
-          "error": "403 Forbidden",
-          "marketRead": "Employment Situation was due, but the official release could not be fetched: 403 Forbidden",
-          "bullets": [],
+          "publishedAt": "2026-05-08T12:30:00.000Z",
+          "summary": "Total nonfarm payroll employment edged up by 115,000 in April, and the unemployment rate was unchanged at 4.3 percent, the U.S. Bureau of Labor Statistics reported today. The unemployment rate was unchanged at 4.3 percent in April, and the number of unemployed people changed little at 7.4 million. Both measures changed little over the year. In April, average hourly earnings for all employees on private nonfarm payrolls rose by 6 cents, or 0.2 percent, to $37.41. Over the year, average hourly earnings have increased by 3.6 percent.",
+          "marketRead": "Payrolls rose 115,000; unemployment held at 4.3%; wages rose 0.2% month over month and 3.6% year over year.",
+          "metrics": {
+            "payrollsChange": 115000,
+            "unemploymentRate": 4.3,
+            "laborForceParticipationRate": 61.8,
+            "averageHourlyEarningsMoM": 0.2,
+            "averageHourlyEarningsYoY": 3.6
+          },
+          "bullets": [
+            "Total nonfarm payroll employment edged up by 115,000 in April, and the unemployment rate was unchanged at 4.3 percent, the U.S. Bureau of Labor Statistics reported today.",
+            "The unemployment rate was unchanged at 4.3 percent in April, and the number of unemployed people changed little at 7.4 million. Both measures changed little over the year.",
+            "Both the labor force participation rate, at 61.8 percent, and the employment-population ratio, at 59.1 percent, changed little in April.",
+            "The number of people employed part time for economic reasons increased by 445,000 to 4.9 million in April.",
+            "In April, average hourly earnings for all employees on private nonfarm payrolls rose by 6 cents, or 0.2 percent, to $37.41. Over the year, average hourly earnings have increased by 3.6 percent.",
+            "The change in total nonfarm payroll employment for February was revised down by 23,000, from -133,000 to -156,000, and the change for March was revised up by 7,000, from +178,000 to +185,000. With these revisions, employment in February and March combined is 16,000 lower than previously reported."
+          ],
+          "industryDetails": [
+            "In April, health care added 37,000 jobs, in line with the average monthly gain of 32,000 over the prior 12 months.",
+            "Transportation and warehousing employment increased by 30,000 in April, reflecting a gain in couriers and messengers (+38,000).",
+            "Retail trade added 22,000 jobs in April.",
+            "Federal government employment continued to decline.",
+            "Employment in information continued to trend down in April (-13,000)."
+          ],
+          "revisions": "The change in total nonfarm payroll employment for February was revised down by 23,000, from -133,000 to -156,000, and the change for March was revised up by 7,000, from +178,000 to +185,000. With these revisions, employment in February and March combined is 16,000 lower than previously reported.",
           "themes": [
-            "Macro and growth"
+            "Macro and growth",
+            "Rates and central banks"
           ],
           "importance": "High"
         }
@@ -1813,25 +1829,8 @@
     },
     "sourceHealth": {
       "checked": 26,
-      "live": 22,
-      "blockedOrFailed": [
-        {
-          "name": "Raymond James Commentary And Insights",
-          "reason": "Source check failed: This operation was aborted"
-        },
-        {
-          "name": "BLS Economic News Releases",
-          "reason": "Source check failed: 403 Forbidden"
-        },
-        {
-          "name": "FRED Releases",
-          "reason": "Source check failed: This operation was aborted"
-        },
-        {
-          "name": "SEC Current Reports",
-          "reason": "Source check failed: 403 Forbidden"
-        }
-      ]
+      "live": 26,
+      "blockedOrFailed": []
     },
     "professionalDrivers": [
       {
@@ -1852,9 +1851,9 @@
           "Macro and growth",
           "AI and semis"
         ],
-        "freshness": "Since prior refresh",
+        "freshness": "Last 24 hours",
         "ageHours": 20.9,
-        "score": 108,
+        "score": 78,
         "tickers": []
       },
       {
@@ -1871,9 +1870,9 @@
           "Geopolitics and policy",
           "Commodities and energy"
         ],
-        "freshness": "Since prior refresh",
+        "freshness": "Last 24 hours",
         "ageHours": 20.9,
-        "score": 108,
+        "score": 78,
         "tickers": []
       },
       {
@@ -1893,9 +1892,9 @@
           "Commodities and energy",
           "Macro and growth"
         ],
-        "freshness": "Since prior refresh",
+        "freshness": "Last 24 hours",
         "ageHours": 20.9,
-        "score": 108,
+        "score": 78,
         "tickers": []
       },
       {
@@ -1913,9 +1912,9 @@
           "Geopolitics and policy",
           "Commodities and energy"
         ],
-        "freshness": "Since prior refresh",
+        "freshness": "Last 24 hours",
         "ageHours": 20.9,
-        "score": 100,
+        "score": 70,
         "tickers": []
       },
       {
@@ -1932,9 +1931,9 @@
           "Geopolitics and policy",
           "Commodities and energy"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 2.4,
-        "score": 100,
+        "freshness": "Last 24 hours",
+        "ageHours": 2.5,
+        "score": 70,
         "tickers": []
       },
       {
@@ -1951,9 +1950,9 @@
           "Geopolitics and policy",
           "Commodities and energy"
         ],
-        "freshness": "Since prior refresh",
+        "freshness": "Last 24 hours",
         "ageHours": 22.5,
-        "score": 100,
+        "score": 70,
         "tickers": []
       },
       {
@@ -1970,9 +1969,9 @@
           "Geopolitics and policy",
           "Commodities and energy"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 0.9,
-        "score": 100,
+        "freshness": "Last 24 hours",
+        "ageHours": 1,
+        "score": 70,
         "tickers": []
       },
       {
@@ -1988,13 +1987,34 @@
         "themes": [
           "Earnings"
         ],
-        "freshness": "Since prior refresh",
+        "freshness": "Last 24 hours",
         "ageHours": 3.6,
-        "score": 100,
+        "score": 70,
         "tickers": []
       },
       {
         "id": "M9",
+        "title": "Five takeaways from first quarter earnings season",
+        "sourceName": "Raymond James Commentary And Insights",
+        "sourceCategory": "Institution research",
+        "trust": "High",
+        "url": "https://www.raymondjames.com/commentary-and-insights/markets-investing/2026/05/08/weekly-investment-strategy",
+        "publishedAt": "2026-05-08T07:48:00.000Z",
+        "summary": "Connect with a Raymond James advisor or an office near you.",
+        "excerpt": "Five takeaways from first quarter earnings season Skip to content Share: Five takeaways from first quarter earnings season Markets & Investing May 08, 2026 Key takeaways: Review the latest Weekly Headings by CIO Larry Adam. S&P 500 earnings have seen the strongest upward revision to EPS in four years Mega-cap tech has been the standout through 1Q earnings Despite headwinds from rising energy costs, margins hit a record in 1Q With 82% of market cap having reported, the S&P 500 is on track for 27% year-over-year earnings per share (EPS) growth, the strongest since 4Q21. More than 84% have beaten earnings estimates &minus; the most since 1Q21 &minus; while earnings revisions are up 12%, the fastest pace in four years. That said, here are five other takeaways from 1Q26 earnings season so far: Consumer remains on solid footing While rising gas prices have weighed on consumer sentiment &minus; the University of Michigan Sentiment Survey fell to a record low in April &minus; real‑time indicators suggest consumer spending remains healthy. This view was echoed by management commentary during 1Q26 earnings calls. Banks pointed to continued consumer resilience with limited deterioration in credit quality, while credit card companies reported solid spending growth across all income cohorts, with some noting recent acceleration. At the industry level, airlines are seeing strong forward booking demand and select restaurants this week highlighted healthy overall spending. While elevated gas prices remain a near‑term headwind, solid consumer demand should continue to support growth. Mega-cap a standout Against a backdrop of strong earnings growth, mega‑cap tech once again stood out. MAGMAN* is on track to deliver 59% year-over-year EPS growth, versus just 12% for the rest of the index,",
+        "themes": [
+          "Earnings",
+          "Commodities and energy",
+          "Macro and growth",
+          "Credit and liquidity"
+        ],
+        "freshness": "Important older item",
+        "ageHours": 92.1,
+        "score": 62,
+        "tickers": []
+      },
+      {
+        "id": "M10",
         "title": "Five things to watch in Asia as Trump prepares to meet China&apos;s Xi this week",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
@@ -2006,13 +2026,13 @@
         "themes": [
           "Geopolitics and policy"
         ],
-        "freshness": "Since prior refresh",
+        "freshness": "Last 24 hours",
         "ageHours": 1.1,
-        "score": 92,
+        "score": 62,
         "tickers": []
       },
       {
-        "id": "M10",
+        "id": "M11",
         "title": "Asia markets trade mixed as investors weigh Trump’s ceasefire warning",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
@@ -2024,13 +2044,13 @@
         "themes": [
           "Geopolitics and policy"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 1.8,
-        "score": 92,
+        "freshness": "Last 24 hours",
+        "ageHours": 1.9,
+        "score": 62,
         "tickers": []
       },
       {
-        "id": "M11",
+        "id": "M12",
         "title": "Saudi Aramco first-quarter profit jumps 26% as key pipeline reaches capacity amid Iran war",
         "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
@@ -2044,13 +2064,13 @@
           "Geopolitics and policy",
           "Commodities and energy"
         ],
-        "freshness": "Since prior refresh",
+        "freshness": "Last 24 hours",
         "ageHours": 22.1,
-        "score": 92,
+        "score": 62,
         "tickers": []
       },
       {
-        "id": "M12",
+        "id": "M13",
         "title": "Meet the Nvidias of power — 5 stocks winning Big Tech’s $700 billion AI energy grab",
         "sourceName": "MarketWatch Top Stories RSS",
         "sourceCategory": "News RSS",
@@ -2063,106 +2083,15 @@
           "Commodities and energy",
           "AI and semis"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 4,
-        "score": 92,
+        "freshness": "Last 24 hours",
+        "ageHours": 4.1,
+        "score": 62,
         "tickers": [
           "GE"
         ]
       },
       {
-        "id": "M13",
-        "title": "South Korea's Kospi hits fresh record as Asia markets trade mixed amid oil surge, Iran risks",
-        "sourceName": "CNBC Markets",
-        "sourceCategory": "News",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/11/asia-markets-today-live-updates-nikkei-kospi-hang-seng-sensex-csi-300-iran-hormuz.html",
-        "publishedAt": "2026-05-10T23:46:28.000Z",
-        "summary": "Investors headed into Monday on edge as Trump’s rejection of Iran’s ceasefire proposal fueled concerns about a prolonged Middle East conflict.",
-        "excerpt": "Asia markets today: Nikkei, Kospi, Hang Seng, Sensex, CSI 300 Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Oil prices climbed after Trump rejected Iran's latest counteroffer to end the war. Iran tensions overshadowed strong recent gains on Wall Street. Strait of Hormuz disruption fears continued to rattle global markets. In this article @DJ.1 @SP.1 @ND.1 .NSEI Follow your favorite stocks CREATE FREE ACCOUNT watch now VIDEO 6:10 06:10 A 'perfect positive storm' is driving the South Korean market: Goldman Sachs Squawk Box Asia South Korea's Kospi opened at a fresh record Monday, leading gains in Asia-Pacific markets amid rising oil prices and escalating tensions between the U.S. and Iran. President Donald Trump 's rejection of Tehran's latest proposal to end the war, however, stoked worries over an elongated Middle East conflict. Iran submitted a new proposal to U.S. negotiators focused on ending the Middle East conflict. Iran's semi-official Tasnim news agency said that the counteroffer called for an end to the war on all fronts and the lifting of sanctions on Tehran, citing an informed source. However, Trump said he did not like Iran's response and called it \"TOTALLY UNACCEPTABLE!\" in a Truth Social Post. Meanwhile, Israeli Prime Minister Benjamin Netanyahu said Sunday that the war with Iran was \"not over,\" as the U.S. and Israel still aim to curb Tehran's nuclear ambitions. Netanyahu's comments come ahead of Trump 's trip to China later this week, where he's expected to meet with Chinese President Xi Jinping . The war and the subsequent closure of the Strait of Hormuz by Iran have spiked global energy costs and sharply raised gas prices in the U.S. The West Texas Intermediate futures for June was",
-        "themes": [
-          "Geopolitics and policy",
-          "Commodities and energy"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 28.1,
-        "score": 84,
-        "tickers": []
-      },
-      {
         "id": "M14",
-        "title": "Nintendo plunges 8% after Switch 2 price hike and weak sales forecast",
-        "sourceName": "CNBC Earnings RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/11/nintendo-stock-switch-2-price-rise-weak-sales-forecast.html",
-        "publishedAt": "2026-05-11T20:39:08.000Z",
-        "summary": "Investors are concerned about Nintendo's outlook of lower Switch 2 sales in the current fiscal year, driven by price increases for the console.",
-        "excerpt": "Investors are concerned about Nintendo's outlook of lower Switch 2 sales in the current fiscal year, driven by price increases for the console.",
-        "themes": [
-          "Market color"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 7.2,
-        "score": 78,
-        "tickers": []
-      },
-      {
-        "id": "M15",
-        "title": "At TV upfronts, AI is in and corporate shuffles are reshaping the lineup",
-        "sourceName": "CNBC Earnings RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/11/tv-upfronts-ai-data-industry-shifts.html",
-        "publishedAt": "2026-05-11T14:41:18.000Z",
-        "summary": "Advertisers will be hearing about the slate of live events in the coming year - and how AI is being integrated.",
-        "excerpt": "Advertisers will be hearing about the slate of live events in the coming year — and how AI is being integrated. Plus, media consolidation reshapes the lineup.",
-        "themes": [
-          "AI and semis"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 13.2,
-        "score": 78,
-        "tickers": []
-      },
-      {
-        "id": "M16",
-        "title": "Iren’s stock pulls back as investors assess the steep price of the AI buildout",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/irens-stock-pulls-back-as-investors-assess-the-steep-price-of-the-ai-buildout-3013b59b?mod=mw_rss_topstories",
-        "publishedAt": "2026-05-12T01:15:00.000Z",
-        "summary": "Iren will take on debt in the wake of its new Nvidia partnership.",
-        "excerpt": "Iren will take on debt in the wake of its new Nvidia partnership. One analyst said Monday’s stock drop is an overreaction.",
-        "themes": [
-          "AI and semis"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 2.6,
-        "score": 78,
-        "tickers": []
-      },
-      {
-        "id": "M17",
-        "title": "Five takeaways from first quarter earnings season",
-        "sourceName": "Raymond James Commentary And Insights",
-        "sourceCategory": "Institution research",
-        "trust": "High",
-        "url": "https://www.raymondjames.com/commentary-and-insights/markets-investing/2026/05/08/weekly-investment-strategy",
-        "publishedAt": "2026-05-08T07:48:00.000Z",
-        "summary": "Connect with a Raymond James advisor or an office near you.",
-        "excerpt": "Five takeaways from first quarter earnings season Skip to content Share: Five takeaways from first quarter earnings season Markets & Investing May 08, 2026 Key takeaways: Review the latest Weekly Headings by CIO Larry Adam. S&P 500 earnings have seen the strongest upward revision to EPS in four years Mega-cap tech has been the standout through 1Q earnings Despite headwinds from rising energy costs, margins hit a record in 1Q With 82% of market cap having reported, the S&P 500 is on track for 27% year-over-year earnings per share (EPS) growth, the strongest since 4Q21. More than 84% have beaten earnings estimates &minus; the most since 1Q21 &minus; while earnings revisions are up 12%, the fastest pace in four years. That said, here are five other takeaways from 1Q26 earnings season so far: Consumer remains on solid footing While rising gas prices have weighed on consumer sentiment &minus; the University of Michigan Sentiment Survey fell to a record low in April &minus; real‑time indicators suggest consumer spending remains healthy. This view was echoed by management commentary during 1Q26 earnings calls. Banks pointed to continued consumer resilience with limited deterioration in credit quality, while credit card companies reported solid spending growth across all income cohorts, with some noting recent acceleration. At the industry level, airlines are seeing strong forward booking demand and select restaurants this week highlighted healthy overall spending. While elevated gas prices remain a near‑term headwind, solid consumer demand should continue to support growth. Mega-cap a standout Against a backdrop of strong earnings growth, mega‑cap tech once again stood out. MAGMAN* is on track to deliver 59% year-over-year EPS growth, versus just 12% for the rest of the index,",
-        "themes": [
-          "Earnings"
-        ],
-        "freshness": "Important older item",
-        "ageHours": 92.1,
-        "score": 62,
-        "tickers": []
-      },
-      {
-        "id": "M18",
         "title": "Labor market on the mend, lower rates on the fence?",
         "sourceName": "Raymond James Commentary And Insights",
         "sourceCategory": "Institution research",
@@ -2181,6 +2110,79 @@
         "ageHours": 92.1,
         "score": 54,
         "tickers": []
+      },
+      {
+        "id": "M15",
+        "title": "South Korea's Kospi hits fresh record as Asia markets trade mixed amid oil surge, Iran risks",
+        "sourceName": "CNBC Markets",
+        "sourceCategory": "News",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/05/11/asia-markets-today-live-updates-nikkei-kospi-hang-seng-sensex-csi-300-iran-hormuz.html",
+        "publishedAt": "2026-05-10T23:46:28.000Z",
+        "summary": "Investors headed into Monday on edge as Trump’s rejection of Iran’s ceasefire proposal fueled concerns about a prolonged Middle East conflict.",
+        "excerpt": "Asia markets today: Nikkei, Kospi, Hang Seng, Sensex, CSI 300 Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Oil prices climbed after Trump rejected Iran's latest counteroffer to end the war. Iran tensions overshadowed strong recent gains on Wall Street. Strait of Hormuz disruption fears continued to rattle global markets. In this article @DJ.1 @SP.1 @ND.1 .NSEI Follow your favorite stocks CREATE FREE ACCOUNT watch now VIDEO 6:10 06:10 A 'perfect positive storm' is driving the South Korean market: Goldman Sachs Squawk Box Asia South Korea's Kospi opened at a fresh record Monday, leading gains in Asia-Pacific markets amid rising oil prices and escalating tensions between the U.S. and Iran. President Donald Trump 's rejection of Tehran's latest proposal to end the war, however, stoked worries over an elongated Middle East conflict. Iran submitted a new proposal to U.S. negotiators focused on ending the Middle East conflict. Iran's semi-official Tasnim news agency said that the counteroffer called for an end to the war on all fronts and the lifting of sanctions on Tehran, citing an informed source. However, Trump said he did not like Iran's response and called it \"TOTALLY UNACCEPTABLE!\" in a Truth Social Post. Meanwhile, Israeli Prime Minister Benjamin Netanyahu said Sunday that the war with Iran was \"not over,\" as the U.S. and Israel still aim to curb Tehran's nuclear ambitions. Netanyahu's comments come ahead of Trump 's trip to China later this week, where he's expected to meet with Chinese President Xi Jinping . The war and the subsequent closure of the Strait of Hormuz by Iran have spiked global energy costs and sharply raised gas prices in the U.S. The West Texas Intermediate futures for June was",
+        "themes": [
+          "Geopolitics and policy",
+          "Commodities and energy"
+        ],
+        "freshness": "Important older item",
+        "ageHours": 28.2,
+        "score": 54,
+        "tickers": []
+      },
+      {
+        "id": "M16",
+        "title": "Nintendo plunges 8% after Switch 2 price hike and weak sales forecast",
+        "sourceName": "CNBC Earnings RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/05/11/nintendo-stock-switch-2-price-rise-weak-sales-forecast.html",
+        "publishedAt": "2026-05-11T20:39:08.000Z",
+        "summary": "Investors are concerned about Nintendo's outlook of lower Switch 2 sales in the current fiscal year, driven by price increases for the console.",
+        "excerpt": "Investors are concerned about Nintendo's outlook of lower Switch 2 sales in the current fiscal year, driven by price increases for the console.",
+        "themes": [
+          "Market color"
+        ],
+        "freshness": "Last 24 hours",
+        "ageHours": 7.3,
+        "score": 48,
+        "tickers": []
+      },
+      {
+        "id": "M17",
+        "title": "At TV upfronts, AI is in and corporate shuffles are reshaping the lineup",
+        "sourceName": "CNBC Earnings RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/05/11/tv-upfronts-ai-data-industry-shifts.html",
+        "publishedAt": "2026-05-11T14:41:18.000Z",
+        "summary": "Advertisers will be hearing about the slate of live events in the coming year - and how AI is being integrated.",
+        "excerpt": "Advertisers will be hearing about the slate of live events in the coming year — and how AI is being integrated. Plus, media consolidation reshapes the lineup.",
+        "themes": [
+          "AI and semis"
+        ],
+        "freshness": "Last 24 hours",
+        "ageHours": 13.2,
+        "score": 48,
+        "tickers": []
+      },
+      {
+        "id": "M18",
+        "title": "Iren’s stock pulls back as investors assess the steep price of the AI buildout",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/irens-stock-pulls-back-as-investors-assess-the-steep-price-of-the-ai-buildout-3013b59b?mod=mw_rss_topstories",
+        "publishedAt": "2026-05-12T01:15:00.000Z",
+        "summary": "Iren will take on debt in the wake of its new Nvidia partnership.",
+        "excerpt": "Iren will take on debt in the wake of its new Nvidia partnership. One analyst said Monday’s stock drop is an overreaction.",
+        "themes": [
+          "AI and semis"
+        ],
+        "freshness": "Last 24 hours",
+        "ageHours": 2.7,
+        "score": 48,
+        "tickers": []
       }
     ],
     "topThemes": [
@@ -2197,8 +2199,8 @@
         "count": 5
       },
       {
-        "theme": "Commodities and energy",
-        "count": 7
+        "theme": "Rates and central banks",
+        "count": 5
       },
       {
         "theme": "Macro and growth",
@@ -2211,7 +2213,7 @@
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-05-12T03:51:54.911Z",
+      "generatedAt": "2026-05-12T03:55:28.312Z",
       "dates": [
         "2026-05-10",
         "2026-05-11",
@@ -3448,8 +3450,8 @@
           "volume": 3043719,
           "marketCap": 4731165696,
           "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
-          "moverBucket": "gainer"
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
+          "moverBucket": "loser"
         },
         {
           "symbol": "MARA",
@@ -3560,7 +3562,7 @@
           "title": "Weekly Natural Gas Storage Report - EIA",
           "sourceName": "EIA Today In Energy",
           "url": "http://ir.eia.gov/ngs/ngs.html",
-          "publishedAt": "2026-05-01T00:00:00.000Z",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
           "summary": "Weekly Natural Gas Storage Report - EIA",
           "tickers": []
         },
@@ -3569,7 +3571,7 @@
           "title": "Weekly Petroleum Status Report - U.S. Energy Information Administration (EIA)",
           "sourceName": "EIA Today In Energy",
           "url": "https://www.eia.gov/petroleum/supply/weekly/",
-          "publishedAt": "2026-05-01T00:00:00.000Z",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
           "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
           "tickers": []
         }
@@ -3578,50 +3580,50 @@
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-05-12T03:51:41.763Z",
+      "generatedAt": "2026-05-12T03:55:16.941Z",
       "sourceNote": "Public Reddit JSON endpoints; use as sentiment and attention only, not verified news.",
       "subreddits": [
         {
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "status": "error",
-          "error": "403 Blocked",
-          "postCount": 0
+          "status": "ready",
+          "error": null,
+          "postCount": 40
         },
         {
           "subreddit": "stocks",
           "segment": "Retail investing",
-          "status": "error",
-          "error": "403 Blocked",
-          "postCount": 0
+          "status": "ready",
+          "error": null,
+          "postCount": 40
         },
         {
           "subreddit": "investing",
           "segment": "Retail investing",
-          "status": "error",
-          "error": "403 Blocked",
-          "postCount": 0
+          "status": "ready",
+          "error": null,
+          "postCount": 40
         },
         {
           "subreddit": "SecurityAnalysis",
           "segment": "Fundamental research",
-          "status": "error",
-          "error": "403 Blocked",
-          "postCount": 0
+          "status": "ready",
+          "error": null,
+          "postCount": 40
         },
         {
           "subreddit": "options",
           "segment": "Options sentiment",
-          "status": "error",
-          "error": "403 Blocked",
-          "postCount": 0
+          "status": "ready",
+          "error": null,
+          "postCount": 40
         }
       ],
       "topTickers": [
         {
           "symbol": "AMD",
           "mentions": 14,
-          "score": 3348,
+          "score": 3360,
           "comments": 1071,
           "subreddits": [
             "wallstreetbets",
@@ -3633,31 +3635,31 @@
             {
               "title": "AMD +21k % - 10 Years of Diamond Hands. Thank you, Lisa.",
               "subreddit": "wallstreetbets",
-              "score": 1859,
+              "score": 1868,
               "comments": 54,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tacyxl/amd_21k_10_years_of_diamond_hands_thank_you_lisa/"
             },
             {
               "title": "I got into AMD at ~$60 per share and now have zero strategy for it. Help.",
               "subreddit": "stocks",
-              "score": 599,
+              "score": 600,
               "comments": 293,
               "permalink": "https://www.reddit.com/r/stocks/comments/1ta2dya/i_got_into_amd_at_60_per_share_and_now_have_zero/"
             },
             {
               "title": "The market seems to think everyone in AI will be a long-term winner. I don't see how that's possible",
               "subreddit": "stocks",
-              "score": 326,
+              "score": 331,
               "comments": 138,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t8tgfg/the_market_seems_to_think_everyone_in_ai_will_be/"
             }
           ],
-          "attentionScore": 260.51
+          "attentionScore": 260.75
         },
         {
           "symbol": "MU",
           "mentions": 8,
-          "score": 1711,
+          "score": 1716,
           "comments": 1030,
           "subreddits": [
             "wallstreetbets",
@@ -3668,31 +3670,31 @@
             {
               "title": "If you had $7.5k to invest tomorrow, what would you do in this current market?",
               "subreddit": "stocks",
-              "score": 339,
+              "score": 340,
               "comments": 587,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t9dj9v/if_you_had_75k_to_invest_tomorrow_what_would_you/"
             },
             {
               "title": "The rally continues… MU",
               "subreddit": "wallstreetbets",
-              "score": 537,
+              "score": 542,
               "comments": 89,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ta9mly/the_rally_continues_mu/"
             },
             {
               "title": "Advanced MU technical analysis for tomorrow’s session",
               "subreddit": "wallstreetbets",
-              "score": 493,
+              "score": 499,
               "comments": 48,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1talqio/advanced_mu_technical_analysis_for_tomorrows/"
             }
           ],
-          "attentionScore": 165.72
+          "attentionScore": 165.82
         },
         {
           "symbol": "SPY",
           "mentions": 5,
-          "score": 1830,
+          "score": 1829,
           "comments": 1120,
           "subreddits": [
             "stocks",
@@ -3703,31 +3705,31 @@
             {
               "title": "Anyone else feel mentally messed up seeing people casually make insane money trading options?",
               "subreddit": "stocks",
-              "score": 1475,
+              "score": 1473,
               "comments": 469,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t8r0gr/anyone_else_feel_mentally_messed_up_seeing_people/"
             },
             {
               "title": "If you had $7.5k to invest tomorrow, what would you do in this current market?",
               "subreddit": "stocks",
-              "score": 339,
+              "score": 340,
               "comments": 587,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t9dj9v/if_you_had_75k_to_invest_tomorrow_what_would_you/"
             },
             {
               "title": "Got Caught in a Breakout Yesterday — Starting to Rethink Entries",
               "subreddit": "options",
-              "score": 10,
+              "score": 11,
               "comments": 24,
               "permalink": "https://www.reddit.com/r/options/comments/1t8slgp/got_caught_in_a_breakout_yesterday_starting_to/"
             }
           ],
-          "attentionScore": 142.6
+          "attentionScore": 142.57999999999998
         },
         {
           "symbol": "NVDA",
           "mentions": 7,
-          "score": 1565,
+          "score": 1555,
           "comments": 618,
           "subreddits": [
             "stocks",
@@ -3738,31 +3740,31 @@
             {
               "title": "Anyone else feel mentally messed up seeing people casually make insane money trading options?",
               "subreddit": "stocks",
-              "score": 1475,
+              "score": 1473,
               "comments": 469,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t8r0gr/anyone_else_feel_mentally_messed_up_seeing_people/"
             },
             {
               "title": "What are the odds memory chip costs will stabilize? NTDOY play",
               "subreddit": "stocks",
-              "score": 28,
+              "score": 30,
               "comments": 35,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t9b5hp/what_are_the_odds_memory_chip_costs_will/"
             },
             {
               "title": "ASTS earnings?",
               "subreddit": "options",
-              "score": 34,
+              "score": 29,
               "comments": 28,
               "permalink": "https://www.reddit.com/r/options/comments/1t97033/asts_earnings/"
             }
           ],
-          "attentionScore": 132.2
+          "attentionScore": 132
         },
         {
           "symbol": "VOO",
           "mentions": 4,
-          "score": 345,
+          "score": 346,
           "comments": 612,
           "subreddits": [
             "stocks",
@@ -3772,7 +3774,7 @@
             {
               "title": "If you had $7.5k to invest tomorrow, what would you do in this current market?",
               "subreddit": "stocks",
-              "score": 339,
+              "score": 340,
               "comments": 587,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t9dj9v/if_you_had_75k_to_invest_tomorrow_what_would_you/"
             },
@@ -3791,12 +3793,12 @@
               "permalink": "https://www.reddit.com/r/investing/comments/1ta0s31/youtubersuncompensated_risk/"
             }
           ],
-          "attentionScore": 77.5
+          "attentionScore": 77.52000000000001
         },
         {
           "symbol": "INTC",
           "mentions": 4,
-          "score": 261,
+          "score": 263,
           "comments": 89,
           "subreddits": [
             "wallstreetbets",
@@ -3808,31 +3810,31 @@
             {
               "title": "INTC and AMD took me to 200k",
               "subreddit": "wallstreetbets",
-              "score": 203,
+              "score": 205,
               "comments": 36,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1taj7x5/intc_and_amd_took_me_to_200k/"
             },
             {
               "title": "if u had to pick one INTC or AMD puts?",
               "subreddit": "options",
-              "score": 35,
+              "score": 33,
               "comments": 51,
               "permalink": "https://www.reddit.com/r/options/comments/1t7sj6x/if_u_had_to_pick_one_intc_or_amd_puts/"
             },
             {
               "title": "Intel (INTC) Stock Rockets 14% After Apple Partnership and SK Hynix Negotiations Surface",
               "subreddit": "stocks",
-              "score": 20,
+              "score": 23,
               "comments": 1,
               "permalink": "https://www.reddit.com/r/stocks/comments/1ta4u7i/intel_intc_stock_rockets_14_after_apple/"
             }
           ],
-          "attentionScore": 49.67
+          "attentionScore": 49.71
         },
         {
           "symbol": "MSFT",
           "mentions": 2,
-          "score": 364,
+          "score": 368,
           "comments": 189,
           "subreddits": [
             "wallstreetbets",
@@ -3842,25 +3844,25 @@
             {
               "title": "Every big tech is green from the beginning of the year, except MSFT. And it crushed earnings twice this year. I just don't understand.",
               "subreddit": "stocks",
-              "score": 345,
+              "score": 348,
               "comments": 141,
               "permalink": "https://www.reddit.com/r/stocks/comments/1ta3lkg/every_big_tech_is_green_from_the_beginning_of_the/"
             },
             {
               "title": "Too Concentrated or just stupid? Microsoft",
               "subreddit": "wallstreetbets",
-              "score": 19,
+              "score": 20,
               "comments": 48,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1taonrm/too_concentrated_or_just_stupid_microsoft/"
             }
           ],
-          "attentionScore": 36.730000000000004
+          "attentionScore": 36.81
         },
         {
           "symbol": "TSLA",
           "mentions": 2,
-          "score": 327,
-          "comments": 81,
+          "score": 336,
+          "comments": 82,
           "subreddits": [
             "wallstreetbets",
             "options"
@@ -3869,8 +3871,8 @@
             {
               "title": "TSLA 5k to 150k",
               "subreddit": "wallstreetbets",
-              "score": 303,
-              "comments": 50,
+              "score": 312,
+              "comments": 51,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ta8em5/tsla_5k_to_150k/"
             },
             {
@@ -3881,12 +3883,12 @@
               "permalink": "https://www.reddit.com/r/options/comments/1t9od64/amd_455_call_options_not_assigned_a_bit_puzzled/"
             }
           ],
-          "attentionScore": 30.59
+          "attentionScore": 30.82
         },
         {
           "symbol": "RKLB",
           "mentions": 1,
-          "score": 832,
+          "score": 827,
           "comments": 71,
           "subreddits": [
             "wallstreetbets"
@@ -3895,17 +3897,17 @@
             {
               "title": "Up 1.2 million. Still holding. Still buying. $RKLB 🚀💎",
               "subreddit": "wallstreetbets",
-              "score": 832,
+              "score": 827,
               "comments": 71,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t9v9ey/up_12_million_still_holding_still_buying_rklb/"
             }
           ],
-          "attentionScore": 30.19
+          "attentionScore": 30.09
         },
         {
           "symbol": "USO",
           "mentions": 1,
-          "score": 343,
+          "score": 350,
           "comments": 143,
           "subreddits": [
             "stocks"
@@ -3914,12 +3916,12 @@
             {
               "title": "The war is back on, boys!",
               "subreddit": "stocks",
-              "score": 343,
+              "score": 350,
               "comments": 143,
               "permalink": "https://www.reddit.com/r/stocks/comments/1t9myym/the_war_is_back_on_boys/"
             }
           ],
-          "attentionScore": 24.009999999999998
+          "attentionScore": 24.15
         },
         {
           "symbol": "META",
@@ -4004,8 +4006,8 @@
         {
           "symbol": "POET",
           "mentions": 1,
-          "score": 193,
-          "comments": 35,
+          "score": 196,
+          "comments": 36,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -4013,18 +4015,18 @@
             {
               "title": "$POET 1 year gains, I posted DD",
               "subreddit": "wallstreetbets",
-              "score": 193,
-              "comments": 35,
+              "score": 196,
+              "comments": 36,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tamrk2/poet_1_year_gains_i_posted_dd/"
             }
           ],
-          "attentionScore": 15.61
+          "attentionScore": 15.72
         },
         {
           "symbol": "POEL",
           "mentions": 1,
-          "score": 193,
-          "comments": 35,
+          "score": 196,
+          "comments": 36,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -4032,12 +4034,12 @@
             {
               "title": "$POET 1 year gains, I posted DD",
               "subreddit": "wallstreetbets",
-              "score": 193,
-              "comments": 35,
+              "score": 196,
+              "comments": 36,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tamrk2/poet_1_year_gains_i_posted_dd/"
             }
           ],
-          "attentionScore": 15.61
+          "attentionScore": 15.72
         }
       ],
       "topPosts": [
@@ -4050,7 +4052,7 @@
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t9zwi8/daily_discussion_thread_for_may_11_2026/",
           "createdAt": "2026-05-11T11:01:45.000Z",
           "score": 218,
-          "comments": 12404,
+          "comments": 12401,
           "upvoteRatio": 0.93,
           "flair": "Daily Discussion",
           "tickers": []
@@ -4063,7 +4065,7 @@
           "url": "https://i.redd.it/glcy8ulwuc0h1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t9f690/modern_day_pirate/",
           "createdAt": "2026-05-10T18:42:40.000Z",
-          "score": 16228,
+          "score": 16236,
           "comments": 155,
           "upvoteRatio": 0.98,
           "flair": "Meme",
@@ -4078,7 +4080,7 @@
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1taeixu/what_are_your_moves_tomorrow_may_12_2026/",
           "createdAt": "2026-05-11T19:57:09.000Z",
           "score": 230,
-          "comments": 7615,
+          "comments": 7652,
           "upvoteRatio": 0.93,
           "flair": "Daily Discussion",
           "tickers": []
@@ -4091,8 +4093,8 @@
           "url": "https://finance.yahoo.com/markets/stocks/articles/wendy-net-income-declines-22-091740079.html",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t9y5kw/wendys_net_income_declines_to_227m_in_q1_2026/",
           "createdAt": "2026-05-11T09:28:36.000Z",
-          "score": 5470,
-          "comments": 964,
+          "score": 5476,
+          "comments": 965,
           "upvoteRatio": 0.98,
           "flair": "News",
           "tickers": []
@@ -4105,7 +4107,7 @@
           "url": "https://i.redd.it/nqkolb04hd0h1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t9ih21/found_the_perfect_protection_for_this_sub/",
           "createdAt": "2026-05-10T20:47:08.000Z",
-          "score": 6803,
+          "score": 6806,
           "comments": 79,
           "upvoteRatio": 0.97,
           "flair": "Discussion",
@@ -4119,8 +4121,8 @@
           "url": "https://www.reddit.com/gallery/1tagon1",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tagon1/5k_donated_to_st_judes_children_promise_made/",
           "createdAt": "2026-05-11T21:12:24.000Z",
-          "score": 6397,
-          "comments": 240,
+          "score": 6424,
+          "comments": 241,
           "upvoteRatio": 0.97,
           "flair": "Discussion",
           "tickers": []
@@ -4133,7 +4135,7 @@
           "url": "https://i.redd.it/5mafoatevi0h1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ta5qq9/167k_to_33_million_holding_for_10m/",
           "createdAt": "2026-05-11T14:56:08.000Z",
-          "score": 3453,
+          "score": 3456,
           "comments": 268,
           "upvoteRatio": 0.93,
           "flair": "YOLO",
@@ -4147,7 +4149,7 @@
           "url": "https://www.pcgamer.com/gaming-industry/microsoft-fires-head-of-israeli-subsidiary-and-other-managers-over-surveillance-of-palestinians/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tamte4/microsoft_fires_head_of_israeli_subsidiary_and/",
           "createdAt": "2026-05-12T01:22:35.000Z",
-          "score": 3530,
+          "score": 3612,
           "comments": 123,
           "upvoteRatio": 0.96,
           "flair": "News",
@@ -4161,8 +4163,8 @@
           "url": "https://www.reddit.com/gallery/1taes9a",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1taes9a/22m_at_31/",
           "createdAt": "2026-05-11T20:06:06.000Z",
-          "score": 2708,
-          "comments": 515,
+          "score": 2730,
+          "comments": 518,
           "upvoteRatio": 0.82,
           "flair": "YOLO",
           "tickers": []
@@ -4175,7 +4177,7 @@
           "url": "https://i.redd.it/q1oc5eiwjd0h1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t9iv7s/its_almost_monday_i_am_getting_ready/",
           "createdAt": "2026-05-10T21:02:43.000Z",
-          "score": 2779,
+          "score": 2774,
           "comments": 73,
           "upvoteRatio": 0.99,
           "flair": "Meme",
@@ -4189,7 +4191,7 @@
           "url": "https://www.reddit.com/r/stocks/comments/1t8r0gr/anyone_else_feel_mentally_messed_up_seeing_people/",
           "permalink": "https://www.reddit.com/r/stocks/comments/1t8r0gr/anyone_else_feel_mentally_messed_up_seeing_people/",
           "createdAt": "2026-05-09T23:53:26.000Z",
-          "score": 1475,
+          "score": 1473,
           "comments": 469,
           "upvoteRatio": 0.92,
           "flair": "Advice Request",
@@ -4206,7 +4208,7 @@
           "url": "https://www.digitalhealth.net/2026/05/palantir-to-be-granted-unlimited-access-to-nhs-patient-data/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1talc7i/palantir_to_be_granted_unlimited_access_to_nhs/",
           "createdAt": "2026-05-12T00:18:22.000Z",
-          "score": 1889,
+          "score": 1919,
           "comments": 126,
           "upvoteRatio": 0.97,
           "flair": "News",
@@ -4220,7 +4222,7 @@
           "url": "https://i.redd.it/a0jnyesh3k0h1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tacyxl/amd_21k_10_years_of_diamond_hands_thank_you_lisa/",
           "createdAt": "2026-05-11T19:03:13.000Z",
-          "score": 1859,
+          "score": 1868,
           "comments": 54,
           "upvoteRatio": 0.98,
           "flair": "Gain",
@@ -4236,7 +4238,7 @@
           "url": "https://www.reddit.com/r/investing/comments/1t9gzdt/how_are_you_reacting_to_warren_buffets_stance/",
           "permalink": "https://www.reddit.com/r/investing/comments/1t9gzdt/how_are_you_reacting_to_warren_buffets_stance/",
           "createdAt": "2026-05-10T19:49:53.000Z",
-          "score": 889,
+          "score": 883,
           "comments": 473,
           "upvoteRatio": 0.88,
           "flair": null,
@@ -4250,7 +4252,7 @@
           "url": "https://www.reddit.com/r/stocks/comments/1t9dj9v/if_you_had_75k_to_invest_tomorrow_what_would_you/",
           "permalink": "https://www.reddit.com/r/stocks/comments/1t9dj9v/if_you_had_75k_to_invest_tomorrow_what_would_you/",
           "createdAt": "2026-05-10T17:42:22.000Z",
-          "score": 339,
+          "score": 340,
           "comments": 587,
           "upvoteRatio": 0.83,
           "flair": "Advice Request",
@@ -4268,7 +4270,7 @@
           "url": "https://i.redd.it/7u3lhrtpd00h1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1t7pyg2/weekly_earnings_thread_511_515/",
           "createdAt": "2026-05-09T00:44:53.000Z",
-          "score": 97,
+          "score": 94,
           "comments": 673,
           "upvoteRatio": 0.95,
           "flair": "Earnings Thread",
@@ -4690,15 +4692,15 @@
       "Commodities and energy: Oil prices rose Tuesday amid concerns over a prolonged Middle East conflict after President Trump's comments that the ceasefire with Iran is on \"life support\" (M7)",
       "Macro and growth: Navigating stock and other investment volatility can be difficult. (M3)",
       "Earnings: Investors had been excited early Monday about speed breakthroughs at the satellite company. (M8)",
-      "AI and semis: Infrastructure giants such as GE Vernova and Bloom Energy are the new gatekeepers of the AI grid. (M12)",
-      "Credit and liquidity: Connect with a Raymond James advisor or an office near you. (M17)",
+      "AI and semis: Infrastructure giants such as GE Vernova and Bloom Energy are the new gatekeepers of the AI grid. (M13)",
+      "Credit and liquidity: Connect with a Raymond James advisor or an office near you. (M9)",
       "Earnings movers: BW +30.05%, LQDA +25.35%, PLUG +12.82% show where post-results dispersion is largest.",
       "Retail attention: AMD, MU, SPY, NVDA are drawing the most Reddit ticker concentration; treat this as sentiment, not verified news."
     ]
   },
   "avoidList": {
     "status": "ready",
-    "summary": "Weakest model-ranked names cluster in Financials, Utilities, Health Care, Consumer Staples, and Industrials; these sectors show systemic risk flags from the latest model outputs and current-event drivers.",
+    "summary": "Avoid weak momentum and defensive names with deteriorating trend or low liquidity; focus on high-quality momentum within IT hardware and storage leadership; beware crowded sectors and high RSI in names with risk flags.",
     "sectors": [
       {
         "sector": "Financials",
@@ -4709,7 +4711,7 @@
           "AMP",
           "JKHY"
         ],
-        "rationale": "16 of the weakest model-ranked names are in Financials; examples include PGR, PFG, AMP, JKHY."
+        "rationale": "16 of the weakest model-ranked names cluster in Financials; avoid adding new exposure there without clear macro support."
       },
       {
         "sector": "Utilities",
@@ -4720,7 +4722,7 @@
           "ED",
           "PPL"
         ],
-        "rationale": "11 of the weakest model-ranked names are in Utilities; examples include PEG, PCG, ED, PPL."
+        "rationale": "11 weak names in Utilities; risk of multiple compression; avoid new long exposure."
       },
       {
         "sector": "Health Care",
@@ -4731,7 +4733,7 @@
           "AMGN",
           "DGX"
         ],
-        "rationale": "10 of the weakest model-ranked names are in Health Care; examples include GILD, PFE, AMGN, DGX."
+        "rationale": "10 weak names; risk of multiple compression; avoid new longs without clear catalysts."
       },
       {
         "sector": "Consumer Staples",
@@ -4742,7 +4744,7 @@
           "GIS",
           "KDP"
         ],
-        "rationale": "10 of the weakest model-ranked names are in Consumer Staples; examples include PG, PEP, GIS, KDP."
+        "rationale": "10 weak names; avoid until momentum confirms."
       }
     ],
     "companies": [
@@ -4759,10 +4761,10 @@
         "above50": false,
         "above200": true,
         "riskFlags": [
-          "Weak volume confirmation"
+          "Below 50d trend"
         ],
         "modelEvidence": "GILD ranks #502 of 502 with -20.36% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
-        "rationale": "Weak model rank; RSI moderate; lower volatility but lack of momentum signals reduces conviction."
+        "rationale": "Weak model rank (502) despite some positive momentum signals; RSI moderate; below-50d trend flag; avoid new longs."
       },
       {
         "symbol": "FAST",
@@ -4777,13 +4779,11 @@
         "above50": false,
         "above200": false,
         "riskFlags": [
-          "Above-sector volatility",
           "Below 50d trend",
-          "Below 200d trend",
-          "Weak volume confirmation"
+          "Below 200d trend"
         ],
         "modelEvidence": "FAST ranks #501 of 502 with -13.23% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
-        "rationale": "Low momentum signal; below-average trend strength; volatility risk."
+        "rationale": "Low momentum signals; below-50d / 200d trends; low model percentile; avoid."
       },
       {
         "symbol": "PGR",
@@ -4798,10 +4798,12 @@
         "above50": false,
         "above200": false,
         "riskFlags": [
+          "Below 50d trend",
+          "Below 200d trend",
           "Weak volume confirmation"
         ],
         "modelEvidence": "PGR ranks #500 of 502 with -12.92% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
-        "rationale": "Financials sector weakness and high volatility risk; not momentum-confirmed."
+        "rationale": "PGR sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves."
       },
       {
         "symbol": "PG",
@@ -4836,7 +4838,7 @@
         "above200": true,
         "riskFlags": [],
         "modelEvidence": "PFG ranks #498 of 502 with +2.88% 60-day relative return versus SPY, rules score 0.0, and positive trend alignment.",
-        "rationale": "Financials; weak momentum; volatility risk."
+        "rationale": "PFG sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves."
       },
       {
         "symbol": "PFE",
@@ -4851,7 +4853,7 @@
         "above50": false,
         "above200": true,
         "riskFlags": [
-          "Weak volume confirmation"
+          "Below 50d trend"
         ],
         "modelEvidence": "PFE ranks #497 of 502 with -13.31% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
         "rationale": "PFE sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves."
@@ -5999,8 +6001,7 @@
       ],
       "riskFlags": [
         "RSI extended",
-        "Above-sector volatility",
-        "Weak volume confirmation"
+        "Above-sector volatility"
       ],
       "setupType": "momentum_confirmed",
       "setupTags": [
@@ -7095,8 +7096,7 @@
       "riskFlags": [
         "Above-sector volatility",
         "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
+        "Below 200d trend"
       ],
       "setupType": "model_ranked_not_momentum_confirmed",
       "setupTags": [
@@ -8725,7 +8725,7 @@
         "Momentum Confirmed",
         "Top Decile",
         "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank"
+        "Above 200d trend"
       ],
       "rulesScore": null,
       "modelRank": 29,
@@ -8735,14 +8735,13 @@
       "modelBucket": "Top Decile",
       "modelReasons": [
         "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank",
         "Above 200d trend",
-        "Within 8% of 52w high"
+        "Within 8% of 52w high",
+        "Liquid versus universe"
       ],
       "riskFlags": [
         "RSI extended",
-        "Above-sector volatility",
-        "Weak volume confirmation"
+        "Above-sector volatility"
       ],
       "setupType": "momentum_confirmed",
       "setupTags": [
@@ -11340,8 +11339,7 @@
       ],
       "tags": [
         "Top Quintile",
-        "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank"
+        "Liquid versus universe"
       ],
       "rulesScore": null,
       "modelRank": 53,
@@ -11350,9 +11348,6 @@
       "modelPercentile": 89.6,
       "modelBucket": "Top Quintile",
       "modelReasons": [
-        "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank",
-        "Above 200d trend",
         "Liquid versus universe"
       ],
       "riskFlags": [
@@ -13074,8 +13069,7 @@
       ],
       "riskFlags": [
         "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
+        "Below 200d trend"
       ],
       "setupType": "model_ranked",
       "setupTags": [],
@@ -13099,8 +13093,8 @@
       "distanceTo52wHigh": -56.03
     },
     {
-      "symbol": "ARE",
-      "name": "Alexandria Real Estate Equities",
+      "symbol": "CDW",
+      "name": "CDW Corporation",
       "type": "stock",
       "sector": "Information Technology",
       "score": 86,
@@ -13172,8 +13166,7 @@
       "riskFlags": [
         "Above-sector volatility",
         "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
+        "Below 200d trend"
       ],
       "setupType": "model_ranked",
       "setupTags": [],
@@ -13270,8 +13263,7 @@
       "riskFlags": [
         "Above-sector volatility",
         "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
+        "Below 200d trend"
       ],
       "setupType": "model_ranked",
       "setupTags": [],
@@ -13494,8 +13486,8 @@
       "distanceTo52wHigh": -15.93
     },
     {
-      "symbol": "CDW",
-      "name": "CDW Corporation",
+      "symbol": "FDS",
+      "name": "FactSet",
       "type": "stock",
       "sector": "Financials",
       "score": 85.2,
@@ -14073,8 +14065,7 @@
         "Within 8% of 52w high"
       ],
       "riskFlags": [
-        "Above-sector volatility",
-        "Weak volume confirmation"
+        "Above-sector volatility"
       ],
       "setupType": "model_ranked",
       "setupTags": [],
@@ -14569,7 +14560,7 @@
         "Liquid versus universe"
       ],
       "rulesScore": null,
-      "modelRank": 82,
+      "modelRank": 85,
       "modelUniverseCount": 502,
       "modelScore": -0.073173,
       "modelPercentile": 83.2,
@@ -16386,8 +16377,7 @@
       "riskFlags": [
         "Above-sector volatility",
         "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
+        "Below 200d trend"
       ],
       "setupType": "model_ranked",
       "setupTags": [],
@@ -16683,7 +16673,9 @@
         "Liquid versus universe"
       ],
       "riskFlags": [
-        "Weak volume confirmation"
+        "Above-sector volatility",
+        "Below 50d trend",
+        "Below 200d trend"
       ],
       "setupType": "model_ranked",
       "setupTags": [],
@@ -17477,20 +17469,7 @@
         "Above 200d trend",
         "Liquid versus universe"
       ],
-      "rulesScore": null,
-      "modelRank": 114,
-      "modelUniverseCount": 502,
-      "modelScore": -0.161672,
-      "modelPercentile": 77.4,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Lower 60d volatility than sector median",
-        "Above 200d trend",
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Weak volume confirmation"
-      ],
+      "riskFlags": [],
       "setupType": "model_ranked",
       "setupTags": [],
       "reboundActivationPrice": null,
@@ -18086,1831 +18065,6 @@
       "riskFlags": [
         "Above-sector volatility",
         "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -21.67,
-      "relativeReturn60VsSpy": -27.94,
-      "sectorReturn60": -7.75,
-      "volatility60d": 0.0267,
-      "volatility60dVsSector": 0.0068,
-      "distanceTo52wHigh": -27.02
-    },
-    {
-      "symbol": "COF",
-      "name": "Capital One",
-      "type": "stock",
-      "sector": "Financials",
-      "score": 72.5,
-      "close": 184.48,
-      "changePct": -2.64,
-      "rsi14": 22.7,
-      "volumeRatio": 0.42,
-      "return7": -2.86,
-      "return14": -4.96,
-      "return20": -6.62,
-      "return30": -4.41,
-      "return60": 3.96,
-      "return90": -15.8,
-      "ytdReturn": -25.31,
-      "beta60d": 1.5,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -14.43,
-      "history": [
-        181.46,
-        184,
-        184.64,
-        185.23,
-        182.12,
-        176.1,
-        178.13,
-        182.43,
-        184.5,
-        181.92,
-        184.21,
-        181.15,
-        192.46,
-        194.73,
-        193,
-        197.55,
-        199.84,
-        202.98,
-        200.71,
-        206.47,
-        205.71,
-        202.5,
-        199.43,
-        196.63,
-        191.39,
-        194.11,
-        192.1,
-        190.84,
-        191.3,
-        191.91,
-        189.92,
-        189.68,
-        193.4,
-        192.59,
-        189.48,
-        184.48
-      ],
-      "tags": [
-        "Ranked",
-        "Liquid versus universe"
-      ],
-      "rulesScore": null,
-      "modelRank": 139,
-      "modelUniverseCount": 502,
-      "modelScore": -0.17182,
-      "modelPercentile": 72.5,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -11.96,
-      "relativeReturn60VsSpy": -19.37,
-      "sectorReturn60": -0.4,
-      "volatility60d": 0.0231,
-      "volatility60dVsSector": 0.0063,
-      "distanceTo52wHigh": -28.21
-    },
-    {
-      "symbol": "COR",
-      "name": "Cencora",
-      "type": "stock",
-      "sector": "Health Care",
-      "score": 72.3,
-      "close": 259.81,
-      "changePct": -0.49,
-      "rsi14": 20,
-      "volumeRatio": 0.55,
-      "return7": -14.44,
-      "return14": -16.23,
-      "return20": -18.59,
-      "return30": -19.02,
-      "return60": -26.33,
-      "return90": -27.71,
-      "ytdReturn": -23.2,
-      "beta60d": -0.08,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -26.4,
-      "history": [
-        326.91,
-        320.61,
-        327.27,
-        325.08,
-        318.03,
-        312.45,
-        309.93,
-        314.14,
-        317.66,
-        324.8,
-        320.96,
-        320.89,
-        324.93,
-        322.46,
-        320.82,
-        319.12,
-        319.9,
-        317.58,
-        322.37,
-        327.56,
-        323.01,
-        312.39,
-        308.3,
-        311.39,
-        308.19,
-        310.16,
-        311.99,
-        311.43,
-        308.01,
-        304,
-        303.66,
-        305.9,
-        252.74,
-        255.66,
-        261.08,
-        259.81
-      ],
-      "tags": [
-        "Ranked",
-        "Long-horizon momentum ahead of sector median"
-      ],
-      "rulesScore": null,
-      "modelRank": 140,
-      "modelUniverseCount": 502,
-      "modelScore": -0.17182,
-      "modelPercentile": 72.3,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Long-horizon momentum ahead of sector median"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -28.09,
-      "relativeReturn60VsSpy": -34.74,
-      "sectorReturn60": -7.75,
-      "volatility60d": 0.0263,
-      "volatility60dVsSector": 0.0064,
-      "distanceTo52wHigh": -30.55
-    },
-    {
-      "symbol": "VLO",
-      "name": "Valero Energy",
-      "type": "stock",
-      "sector": "Energy",
-      "score": 72.1,
-      "close": 247.99,
-      "changePct": 2.87,
-      "rsi14": 61.9,
-      "volumeRatio": 0.28,
-      "return7": -1.45,
-      "return14": 4.09,
-      "return20": 2.44,
-      "return30": 3.84,
-      "return60": 5.16,
-      "return90": 24.3,
-      "ytdReturn": 50.93,
-      "beta60d": -1.17,
-      "above50": true,
-      "above100": true,
-      "above200": true,
-      "recentCross": false,
-      "relativeStrength": -5.37,
-      "history": [
-        239.86,
-        237.39,
-        241.75,
-        234.54,
-        248.14,
-        254.32,
-        250.27,
-        247.08,
-        241.46,
-        244.09,
-        245.58,
-        251.49,
-        239.64,
-        235.1,
-        238.82,
-        242.08,
-        235.58,
-        235,
-        241.74,
-        223.65,
-        226.28,
-        233.39,
-        234.36,
-        233.83,
-        235.85,
-        238.25,
-        240.27,
-        251.3,
-        252.58,
-        246.87,
-        251.63,
-        253.45,
-        236.69,
-        236.35,
-        241.06,
-        247.99
-      ],
-      "tags": [
-        "Ranked",
-        "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank"
-      ],
-      "rulesScore": null,
-      "modelRank": 141,
-      "modelUniverseCount": 502,
-      "modelScore": -0.17182,
-      "modelPercentile": 72.1,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank",
-        "Above 200d trend",
-        "Within 8% of 52w high"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": 38.14,
-      "relativeReturn60VsSpy": 17.07,
-      "sectorReturn60": 6.34,
-      "volatility60d": 0.0258,
-      "volatility60dVsSector": 0.0055,
-      "distanceTo52wHigh": -2.49
-    },
-    {
-      "symbol": "ALGN",
-      "name": "Align Technology",
-      "type": "stock",
-      "sector": "Health Care",
-      "score": 71.9,
-      "close": 163.76,
-      "changePct": -2.97,
-      "rsi14": 20,
-      "volumeRatio": 0.35,
-      "return7": -4.72,
-      "return14": -11.34,
-      "return20": -9.36,
-      "return30": -5.42,
-      "return60": -1.89,
-      "return90": -16.56,
-      "ytdReturn": 4.95,
-      "beta60d": 1.85,
-      "above50": false,
-      "above100": false,
-      "above200": true,
-      "recentCross": false,
-      "relativeStrength": -17.17,
-      "history": [
-        173.18,
-        180.86,
-        179.34,
-        180.27,
-        177.33,
-        166.38,
-        166.26,
-        171.43,
-        172.73,
-        170.6,
-        171.87,
-        166.87,
-        176.83,
-        174.53,
-        173.14,
-        180.67,
-        184.69,
-        186.53,
-        185.02,
-        190.07,
-        191.66,
-        195.2,
-        196.05,
-        190.67,
-        189.61,
-        184.7,
-        177.28,
-        178.4,
-        176.01,
-        178.91,
-        171.88,
-        168.71,
-        173.94,
-        168.39,
-        168.78,
-        163.76
-      ],
-      "tags": [
-        "Ranked",
-        "Top-sector 120d return rank",
-        "Above 200d trend"
-      ],
-      "rulesScore": null,
-      "modelRank": 142,
-      "modelUniverseCount": 502,
-      "modelScore": -0.17182,
-      "modelPercentile": 71.9,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Top-sector 120d return rank",
-        "Above 200d trend"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": 19.42,
-      "relativeReturn60VsSpy": -19.81,
-      "sectorReturn60": -7.75,
-      "volatility60d": 0.0255,
-      "volatility60dVsSector": 0.0056,
-      "distanceTo52wHigh": -20.96
-    },
-    {
-      "symbol": "TPR",
-      "name": "Tapestry, Inc.",
-      "type": "stock",
-      "sector": "Consumer Discretionary",
-      "score": 71.7,
-      "close": 135.45,
-      "changePct": 1.47,
-      "rsi14": 35.4,
-      "volumeRatio": 0.74,
-      "return7": -3.07,
-      "return14": -7.53,
-      "return20": -9.69,
-      "return30": -9.88,
-      "return60": -5.06,
-      "return90": -11.34,
-      "ytdReturn": 5.22,
-      "beta60d": 1.85,
-      "above50": false,
-      "above100": false,
-      "above200": true,
-      "recentCross": false,
-      "relativeStrength": -17.5,
-      "history": [
-        140.88,
-        144.42,
-        144.02,
-        146.18,
-        141.41,
-        138.84,
-        136.92,
-        141.11,
-        144.35,
-        141.2,
-        143.7,
-        140.2,
-        150.57,
-        152.62,
-        150.3,
-        149.97,
-        150.87,
-        151.37,
-        150.69,
-        155.85,
-        153.61,
-        150.5,
-        146.17,
-        146.45,
-        145.89,
-        146.47,
-        143.84,
-        141.6,
-        145.04,
-        142.74,
-        139.74,
-        141.39,
-        148.83,
-        130.52,
-        133.48,
-        135.45
-      ],
-      "tags": [
-        "Ranked",
-        "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank"
-      ],
-      "rulesScore": null,
-      "modelRank": 143,
-      "modelUniverseCount": 502,
-      "modelScore": -0.17182,
-      "modelPercentile": 71.7,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank",
-        "Above 200d trend"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": 34.39,
-      "relativeReturn60VsSpy": -19.91,
-      "sectorReturn60": 3.16,
-      "volatility60d": 0.0274,
-      "volatility60dVsSector": 0.0055,
-      "distanceTo52wHigh": -15.38
-    },
-    {
-      "symbol": "SYY",
-      "name": "Sysco",
-      "type": "stock",
-      "sector": "Consumer Staples",
-      "score": 71.5,
-      "close": 72.71,
-      "changePct": 0.38,
-      "rsi14": 40.1,
-      "volumeRatio": 0.24,
-      "return7": 0.31,
-      "return14": -3.51,
-      "return20": -0.88,
-      "return30": -0.14,
-      "return60": -13.72,
-      "return90": -16.39,
-      "ytdReturn": 0.89,
-      "beta60d": 0.89,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -8.69,
-      "history": [
-        80.72,
-        80.99,
-        81.72,
-        82.18,
-        82.02,
-        81.19,
-        68.78,
-        70.8,
-        71.63,
-        71.16,
-        73.24,
-        73.24,
-        75.15,
-        74.99,
-        72.82,
-        73.36,
-        74.04,
-        74.09,
-        74.05,
-        76.27,
-        76.26,
-        74.79,
-        75.53,
-        75.81,
-        76.56,
-        75.36,
-        73.37,
-        73.97,
-        74.71,
-        74.05,
-        72.49,
-        72.84,
-        73.33,
-        72.88,
-        72.44,
-        72.71
-      ],
-      "tags": [
-        "Ranked",
-        "Long-horizon momentum ahead of sector median"
-      ],
-      "rulesScore": null,
-      "modelRank": 144,
-      "modelUniverseCount": 502,
-      "modelScore": -0.17182,
-      "modelPercentile": 71.5,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Long-horizon momentum ahead of sector median"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -1.21,
-      "relativeReturn60VsSpy": -27.39,
-      "sectorReturn60": -6.36,
-      "volatility60d": 0.0236,
-      "volatility60dVsSector": 0.0059,
-      "distanceTo52wHigh": -19.63
-    },
-    {
-      "symbol": "CHRW",
-      "name": "C.H. Robinson",
-      "type": "stock",
-      "sector": "Industrials",
-      "score": 71.3,
-      "close": 171.26,
-      "changePct": -0.08,
-      "rsi14": 36.6,
-      "volumeRatio": 0.19,
-      "return7": 6.21,
-      "return14": -9.11,
-      "return20": 3.84,
-      "return30": 4.75,
-      "return60": -0.35,
-      "return90": -12.6,
-      "ytdReturn": 4.96,
-      "beta60d": 1.07,
-      "above50": false,
-      "above100": false,
-      "above200": true,
-      "recentCross": false,
-      "relativeStrength": -3.97,
-      "history": [
-        168.88,
-        166.84,
-        169.2,
-        169.74,
-        167.66,
-        161.57,
-        161.92,
-        166.07,
-        168.5,
-        167.84,
-        169.01,
-        166.1,
-        172.42,
-        170.2,
-        163.49,
-        164.92,
-        168.51,
-        168.08,
-        181.61,
-        182.24,
-        183.95,
-        183.64,
-        182.35,
-        183.74,
-        183.03,
-        188.42,
-        187.96,
-        186.43,
-        181.81,
-        177.3,
-        161.24,
-        167.13,
-        168.59,
-        171.37,
-        171.39,
-        171.26
-      ],
-      "tags": [
-        "Ranked",
-        "Long-horizon momentum ahead of sector median",
-        "Above 200d trend"
-      ],
-      "rulesScore": null,
-      "modelRank": 145,
-      "modelUniverseCount": 502,
-      "modelScore": -0.17182,
-      "modelPercentile": 71.3,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Long-horizon momentum ahead of sector median",
-        "Above 200d trend"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": 12.91,
-      "relativeReturn60VsSpy": -6.45,
-      "sectorReturn60": 1.56,
-      "volatility60d": 0.0275,
-      "volatility60dVsSector": 0.0067,
-      "distanceTo52wHigh": -14.33
-    },
-    {
-      "symbol": "RVTY",
-      "name": "Revvity",
-      "type": "stock",
-      "sector": "Health Care",
-      "score": 71.1,
-      "close": 100.21,
-      "changePct": -0.79,
-      "rsi14": 59.1,
-      "volumeRatio": 0.47,
-      "return7": 15.83,
-      "return14": 15.44,
-      "return20": 8.25,
-      "return30": 11.69,
-      "return60": 18.31,
-      "return90": -4.26,
-      "ytdReturn": 2.24,
-      "beta60d": 1.75,
-      "above50": true,
-      "above100": true,
-      "above200": true,
-      "recentCross": false,
-      "relativeStrength": 0.44,
-      "history": [
-        85.87,
-        87.09,
-        87.39,
-        87.77,
-        87.05,
-        83.83,
-        84.71,
-        87.54,
-        87.85,
-        88.87,
-        88.25,
-        87.72,
-        90.33,
-        90.39,
-        89.72,
-        92.57,
-        93.44,
-        92.83,
-        89.46,
-        93.96,
-        93.03,
-        94.27,
-        94.28,
-        87.15,
-        86.77,
-        86.8,
-        85.18,
-        82.26,
-        86.62,
-        86.68,
-        86.51,
-        92.3,
-        99.09,
-        98.85,
-        101,
-        100.21
-      ],
-      "tags": [
-        "Ranked",
-        "Top-sector 120d return rank",
-        "Above 200d trend"
-      ],
-      "rulesScore": null,
-      "modelRank": 146,
-      "modelUniverseCount": 502,
-      "modelScore": -0.17182,
-      "modelPercentile": 71.1,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Top-sector 120d return rank",
-        "Above 200d trend"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": 8.21,
-      "relativeReturn60VsSpy": -3.94,
-      "sectorReturn60": -7.75,
-      "volatility60d": 0.0267,
-      "volatility60dVsSector": 0.0068,
-      "distanceTo52wHigh": -14.83
-    },
-    {
-      "symbol": "DPZ",
-      "name": "Domino's",
-      "type": "stock",
-      "sector": "Consumer Discretionary",
-      "score": 70.9,
-      "close": 314.81,
-      "changePct": -2.68,
-      "rsi14": 25.3,
-      "volumeRatio": 0.47,
-      "return7": -4.72,
-      "return14": -6.11,
-      "return20": -14.65,
-      "return30": -13.97,
-      "return60": -20.1,
-      "return90": -18.82,
-      "ytdReturn": -25.6,
-      "beta60d": 0.27,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -22.46,
-      "history": [
-        373.35,
-        366.8,
-        360.09,
-        362.53,
-        358.54,
-        348.14,
-        352.94,
-        358.79,
-        361.54,
-        370.82,
-        380.77,
-        368.15,
-        376.24,
-        373.3,
-        365.95,
-        368.83,
-        369.17,
-        368.07,
-        369,
-        372.06,
-        369.46,
-        369.2,
-        365.93,
-        372.39,
-        367.83,
-        335.3,
-        340.46,
-        332.31,
-        339.42,
-        337.77,
-        330.42,
-        331.73,
-        324.66,
-        332.53,
-        323.48,
-        314.81
-      ],
-      "tags": [
-        "Ranked"
-      ],
-      "rulesScore": null,
-      "modelRank": 147,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173105,
-      "modelPercentile": 70.9,
-      "modelBucket": "Ranked",
-      "modelReasons": [],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -22.55,
-      "relativeReturn60VsSpy": -26,
-      "sectorReturn60": 3.16,
-      "volatility60d": 0.022,
-      "volatility60dVsSector": 0.0001,
-      "distanceTo52wHigh": -35.65
-    },
-    {
-      "symbol": "CRM",
-      "name": "Salesforce",
-      "type": "stock",
-      "sector": "Information Technology",
-      "score": 70.7,
-      "close": 176.97,
-      "changePct": -2.67,
-      "rsi14": 41.9,
-      "volumeRatio": 0.35,
-      "return7": -4.59,
-      "return14": -1.78,
-      "return20": 2.4,
-      "return30": 7.28,
-      "return60": -10.97,
-      "return90": -8.29,
-      "ytdReturn": -30.05,
-      "beta60d": 0.06,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -5.41,
-      "history": [
-        194.89,
-        194.69,
-        182.56,
-        181.51,
-        185.18,
-        178.86,
-        184.57,
-        186.2,
-        185.78,
-        186.71,
-        184.57,
-        182.5,
-        175.93,
-        170.85,
-        164.96,
-        172.82,
-        171.31,
-        177.6,
-        181.22,
-        182.14,
-        186.27,
-        187.11,
-        189.8,
-        173.3,
-        178.16,
-        180.18,
-        181.32,
-        181.22,
-        176.53,
-        183.82,
-        185.48,
-        186.99,
-        181.19,
-        186.34,
-        181.82,
-        176.97
-      ],
-      "tags": [
-        "Ranked",
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
-      ],
-      "rulesScore": null,
-      "modelRank": 148,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173105,
-      "modelPercentile": 70.7,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -27.07,
-      "relativeReturn60VsSpy": -13.2,
-      "sectorReturn60": 27.71,
-      "volatility60d": 0.0271,
-      "volatility60dVsSector": -0.0044,
-      "distanceTo52wHigh": -38.76
-    },
-    {
-      "symbol": "NKE",
-      "name": "Nike, Inc.",
-      "type": "stock",
-      "sector": "Consumer Discretionary",
-      "score": 70.5,
-      "close": 42.81,
-      "changePct": -3.02,
-      "rsi14": 25.3,
-      "volumeRatio": 0.5,
-      "return7": -0.66,
-      "return14": -5.17,
-      "return20": -0.24,
-      "return30": 0.43,
-      "return60": -20.92,
-      "return90": -31.65,
-      "ytdReturn": -31.91,
-      "beta60d": 0.84,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -8.06,
-      "history": [
-        52.37,
-        52.71,
-        53.49,
-        52.98,
-        52.07,
-        51.37,
-        51.24,
-        52.82,
-        44.63,
-        44.19,
-        44.03,
-        42.69,
-        43.13,
-        44,
-        42.62,
-        42.91,
-        44.2,
-        45.44,
-        45.7,
-        46.03,
-        46.48,
-        46.39,
-        45.68,
-        44.78,
-        44.69,
-        45.14,
-        45.03,
-        44.39,
-        44.36,
-        44.4,
-        43.09,
-        43.06,
-        43.88,
-        44.41,
-        44.14,
-        42.81
-      ],
-      "tags": [
-        "Ranked",
-        "Liquid versus universe"
-      ],
-      "rulesScore": null,
-      "modelRank": 149,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173105,
-      "modelPercentile": 70.5,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -32.42,
-      "relativeReturn60VsSpy": -38.35,
-      "sectorReturn60": 3.16,
-      "volatility60d": 0.0261,
-      "volatility60dVsSector": 0.0042,
-      "distanceTo52wHigh": -44.99
-    },
-    {
-      "symbol": "ADBE",
-      "name": "Adobe Inc.",
-      "type": "stock",
-      "sector": "Information Technology",
-      "score": 70.3,
-      "close": 246,
-      "changePct": -2.78,
-      "rsi14": 49.2,
-      "volumeRatio": 0.31,
-      "return7": -3.13,
-      "return14": 2.8,
-      "return20": 2.45,
-      "return30": 9.16,
-      "return60": -8.81,
-      "return90": -7.05,
-      "ytdReturn": -26.19,
-      "beta60d": 0.46,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -5.36,
-      "history": [
-        248.15,
-        247.64,
-        238.87,
-        237.25,
-        240.88,
-        234.84,
-        241.13,
-        243.08,
-        241.37,
-        242.92,
-        244.36,
-        240.14,
-        239.31,
-        229.94,
-        225.35,
-        240.11,
-        235.72,
-        244.66,
-        248.16,
-        244.45,
-        248.63,
-        247.18,
-        255.94,
-        238.98,
-        245.44,
-        239.31,
-        243.2,
-        243.57,
-        246.1,
-        250.71,
-        253.96,
-        255.62,
-        250.17,
-        256.51,
-        253.04,
-        246
-      ],
-      "tags": [
-        "Ranked",
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
-      ],
-      "rulesScore": null,
-      "modelRank": 150,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173105,
-      "modelPercentile": 70.3,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -25.7,
-      "relativeReturn60VsSpy": -15.16,
-      "sectorReturn60": 27.71,
-      "volatility60d": 0.025,
-      "volatility60dVsSector": -0.0066,
-      "distanceTo52wHigh": -41.52
-    },
-    {
-      "symbol": "ADSK",
-      "name": "Autodesk",
-      "type": "stock",
-      "sector": "Information Technology",
-      "score": 70.1,
-      "close": 236.73,
-      "changePct": -3.18,
-      "rsi14": 43.6,
-      "volumeRatio": 0.4,
-      "return7": -4.37,
-      "return14": 0.72,
-      "return20": 4.22,
-      "return30": 8.37,
-      "return60": -5.27,
-      "return90": -2.81,
-      "ytdReturn": -17.44,
-      "beta60d": 0.39,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -3.59,
-      "history": [
-        247.99,
-        247.44,
-        239.39,
-        235.42,
-        239.83,
-        229.84,
-        235.68,
-        239.4,
-        237.87,
-        238.08,
-        237.72,
-        234.96,
-        240.65,
-        225.13,
-        218.45,
-        227.14,
-        228.59,
-        239.32,
-        243.16,
-        242.02,
-        245.31,
-        245.48,
-        247.57,
-        231.98,
-        237.44,
-        235.03,
-        234.85,
-        235.87,
-        237,
-        244.35,
-        247.54,
-        249.43,
-        243.08,
-        251.04,
-        244.5,
-        236.73
-      ],
-      "tags": [
-        "Ranked",
-        "Lower 60d volatility than sector median"
-      ],
-      "rulesScore": null,
-      "modelRank": 151,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173105,
-      "modelPercentile": 70.1,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Lower 60d volatility than sector median"
-      ],
-      "riskFlags": [
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -20.93,
-      "relativeReturn60VsSpy": -2.95,
-      "sectorReturn60": 27.71,
-      "volatility60d": 0.0244,
-      "volatility60dVsSector": -0.0072,
-      "distanceTo52wHigh": -27.56
-    },
-    {
-      "symbol": "ACN",
-      "name": "Accenture",
-      "type": "stock",
-      "sector": "Information Technology",
-      "score": 69.9,
-      "close": 175.8,
-      "changePct": -2.56,
-      "rsi14": 26.7,
-      "volumeRatio": 0.32,
-      "return7": -2.4,
-      "return14": -0.66,
-      "return20": -8.41,
-      "return30": -2.07,
-      "return60": -9.57,
-      "return90": -26.39,
-      "ytdReturn": -31.8,
-      "beta60d": 0.08,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -16.22,
-      "history": [
-        198.31,
-        198.34,
-        191.91,
-        190.67,
-        194.77,
-        190.98,
-        195.89,
-        196.62,
-        195.4,
-        199.64,
-        197.28,
-        195.64,
-        192.21,
-        186.03,
-        179.53,
-        191.95,
-        190.37,
-        194,
-        194,
-        197.65,
-        195.06,
-        194.42,
-        190.1,
-        178.28,
-        178.36,
-        176.97,
-        177.75,
-        180.26,
-        178.71,
-        179.83,
-        180.12,
-        179.01,
-        174.57,
-        180.19,
-        180.42,
-        175.8
-      ],
-      "tags": [
-        "Ranked",
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
-      ],
-      "rulesScore": null,
-      "modelRank": 152,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173105,
-      "modelPercentile": 69.9,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -27.7,
-      "relativeReturn60VsSpy": -29.03,
-      "sectorReturn60": 27.71,
-      "volatility60d": 0.0258,
-      "volatility60dVsSector": -0.0058,
-      "distanceTo52wHigh": -44.87
-    },
-    {
-      "symbol": "CMCSA",
-      "name": "Comcast",
-      "type": "stock",
-      "sector": "Communication Services",
-      "score": 69.7,
-      "close": 24.99,
-      "changePct": -1.63,
-      "rsi14": 30.4,
-      "volumeRatio": 0.42,
-      "return7": -7.7,
-      "return14": -9.18,
-      "return20": -10.93,
-      "return30": -10.54,
-      "return60": -16.2,
-      "return90": -21.77,
-      "ytdReturn": -7.63,
-      "beta60d": -0.07,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -18.74,
-      "history": [
-        28.69,
-        28.68,
-        28.88,
-        28.4,
-        28.39,
-        28,
-        28.57,
-        28.38,
-        28.05,
-        27.93,
-        27.66,
-        27.79,
-        27.96,
-        28.31,
-        27.93,
-        28.05,
-        28.14,
-        28.3,
-        29.35,
-        29.63,
-        29.73,
-        29.05,
-        29.37,
-        31.64,
-        27.56,
-        27.51,
-        27.64,
-        26.76,
-        27.04,
-        27.19,
-        27.07,
-        26.46,
-        26.44,
-        26.24,
-        25.4,
-        24.99
-      ],
-      "tags": [
-        "Ranked",
-        "Liquid versus universe"
-      ],
-      "rulesScore": null,
-      "modelRank": 153,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173105,
-      "modelPercentile": 69.7,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -0.82,
-      "relativeReturn60VsSpy": -29.44,
-      "sectorReturn60": 1.35,
-      "volatility60d": 0.0244,
-      "volatility60dVsSector": 0.0033,
-      "distanceTo52wHigh": -23.4
-    },
-    {
-      "symbol": "BSX",
-      "name": "Boston Scientific",
-      "type": "stock",
-      "sector": "Health Care",
-      "score": 69.5,
-      "close": 53.53,
-      "changePct": -0.74,
-      "rsi14": 35.8,
-      "volumeRatio": 0.33,
-      "return7": -5.84,
-      "return14": -10.71,
-      "return20": -15.27,
-      "return30": -13.37,
-      "return60": -21.91,
-      "return90": -27.91,
-      "ytdReturn": -43.48,
-      "beta60d": 0.48,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -23.09,
-      "history": [
-        69.48,
-        69.54,
-        68.15,
-        69.78,
-        70.17,
-        69.17,
-        62.93,
-        62.75,
-        62,
-        62.82,
-        62.59,
-        61.86,
-        62.56,
-        61.28,
-        61.79,
-        63.18,
-        63.82,
-        64.61,
-        63.42,
-        64.23,
-        60.99,
-        59.52,
-        64.87,
-        65.69,
-        62.07,
-        59.95,
-        58.45,
-        57.15,
-        57.61,
-        56.5,
-        56.85,
-        55.98,
-        56,
-        56.57,
-        53.93,
-        53.53
-      ],
-      "tags": [
-        "Ranked",
-        "Liquid versus universe"
-      ],
-      "rulesScore": null,
-      "modelRank": 154,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173105,
-      "modelPercentile": 69.5,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -47.87,
-      "relativeReturn60VsSpy": -36.65,
-      "sectorReturn60": -7.75,
-      "volatility60d": 0.0249,
-      "volatility60dVsSector": 0.0051,
-      "distanceTo52wHigh": -50.5
-    },
-    {
-      "symbol": "IBM",
-      "name": "IBM",
-      "type": "stock",
-      "sector": "Information Technology",
-      "score": 69.3,
-      "close": 224.06,
-      "changePct": -2.48,
-      "rsi14": 26.4,
-      "volumeRatio": 0.41,
-      "return7": -1.64,
-      "return14": -1.03,
-      "return20": -5.09,
-      "return30": -2.19,
-      "return60": -8.87,
-      "return90": -22.64,
-      "ytdReturn": -22.13,
-      "beta60d": 0.84,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -12.91,
-      "history": [
-        240,
-        246.62,
-        238.83,
-        239.63,
-        239.9,
-        234.61,
-        235.52,
-        240.62,
-        241.36,
-        246.35,
-        244.94,
-        243.28,
-        239.97,
-        235.45,
-        229.07,
-        236.08,
-        238.51,
-        243.01,
-        249.17,
-        251.62,
-        251.86,
-        253.81,
-        250.02,
-        229.39,
-        230.29,
-        226.38,
-        231.34,
-        225.44,
-        229.29,
-        230.5,
-        227.8,
-        227.36,
-        224.09,
-        229.62,
-        229.76,
-        224.06
-      ],
-      "tags": [
-        "Ranked",
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
-      ],
-      "rulesScore": null,
-      "modelRank": 155,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173105,
-      "modelPercentile": 69.3,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -25.74,
-      "relativeReturn60VsSpy": -21.9,
-      "sectorReturn60": 27.71,
-      "volatility60d": 0.0267,
-      "volatility60dVsSector": -0.0048,
-      "distanceTo52wHigh": -27.93
-    },
-    {
-      "symbol": "APH",
-      "name": "Amphenol",
-      "type": "stock",
-      "sector": "Information Technology",
-      "score": 69.1,
-      "close": 124.24,
-      "changePct": -2.96,
-      "rsi14": 19,
-      "volumeRatio": 0.99,
-      "return7": -11.91,
-      "return14": -16.42,
-      "return20": -14.48,
-      "return30": -11.73,
-      "return60": -5.31,
-      "return90": -13.64,
-      "ytdReturn": -10.9,
-      "beta60d": 1.55,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -22.29,
-      "history": [
-        126.49,
-        130.67,
-        127.96,
-        128.73,
-        123.13,
-        123.62,
-        119.15,
-        126.35,
-        127.7,
-        128,
-        126.49,
-        128.38,
-        135.32,
-        137.68,
-        140.75,
-        145.27,
-        148.72,
-        146.98,
-        148.96,
-        151.06,
-        152.81,
-        151.93,
-        148.13,
-        150.18,
-        149.71,
-        148.64,
-        143.72,
-        148.38,
-        147.27,
-        142.3,
-        141.03,
-        136.69,
-        138.47,
-        136.62,
-        128.03,
-        124.24
-      ],
-      "tags": [
-        "Ranked",
-        "Lower 60d volatility than sector median",
-        "Long-horizon momentum ahead of sector median"
-      ],
-      "rulesScore": null,
-      "modelRank": 156,
-      "modelUniverseCount": 502,
-      "modelScore": -0.173761,
-      "modelPercentile": 69.1,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Lower 60d volatility than sector median",
-        "Long-horizon momentum ahead of sector median",
-        "Liquid versus universe"
-      ],
-      "riskFlags": [
-        "Below 50d trend",
         "Below 200d trend"
       ],
       "setupType": "model_ranked",
@@ -20228,8 +18382,8 @@
       "distanceTo52wHigh": -39.64
     },
     {
-      "symbol": "GPC",
-      "name": "Genuine Parts Company",
+      "symbol": "ALLE",
+      "name": "Allegion",
       "type": "stock",
       "sector": "Industrials",
       "score": 75.4,
@@ -28192,7 +26346,7 @@
       ],
       "tags": [
         "Ranked",
-        "Liquid versus universe"
+        "Long-horizon momentum ahead of sector median"
       ],
       "rulesScore": null,
       "modelRank": 203,
@@ -28201,13 +26355,12 @@
       "modelPercentile": 59.7,
       "modelBucket": "Ranked",
       "modelReasons": [
-        "Liquid versus universe"
+        "Long-horizon momentum ahead of sector median"
       ],
       "riskFlags": [
         "Above-sector volatility",
         "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
+        "Below 200d trend"
       ],
       "setupType": "model_ranked",
       "setupTags": [],
@@ -29042,8 +27195,8 @@
       "distanceTo52wHigh": -18.42
     },
     {
-      "symbol": "ABNB",
-      "name": "Airbnb",
+      "symbol": "SYF",
+      "name": "Synchrony Financial",
       "type": "stock",
       "sector": "Financials",
       "score": 57.9,
@@ -29104,8 +27257,7 @@
       ],
       "tags": [
         "Ranked",
-        "Lower 60d volatility than sector median",
-        "Top-sector 120d return rank"
+        "Long-horizon momentum ahead of sector median"
       ],
       "rulesScore": null,
       "modelRank": 212,
@@ -29114,10 +27266,7 @@
       "modelPercentile": 57.9,
       "modelBucket": "Ranked",
       "modelReasons": [
-        "Lower 60d volatility than sector median",
-        "Top-sector 120d return rank",
-        "Above 200d trend",
-        "Within 8% of 52w high"
+        "Long-horizon momentum ahead of sector median"
       ],
       "riskFlags": [
         "Above-sector volatility",
@@ -32489,8 +30638,8 @@
       "distanceTo52wHigh": -19.35
     },
     {
-      "symbol": "MSI",
-      "name": "Motorola Solutions",
+      "symbol": "TRMB",
+      "name": "Trimble Inc.",
       "type": "stock",
       "sector": "Information Technology",
       "score": 51.1,
@@ -33346,8 +31495,8 @@
       ],
       "tags": [
         "Ranked",
-        "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank"
+        "Lower 60d volatility than sector median",
+        "Long-horizon momentum ahead of sector median"
       ],
       "rulesScore": null,
       "modelRank": 254,
@@ -33356,10 +31505,12 @@
       "modelPercentile": 49.5,
       "modelBucket": "Ranked",
       "modelReasons": [
+        "Lower 60d volatility than sector median",
         "Long-horizon momentum ahead of sector median",
         "Above 200d trend",
         "Within 8% of 52w high"
       ],
+      "riskFlags": [],
       "setupType": "model_ranked",
       "setupTags": [],
       "reboundActivationPrice": null,
@@ -33654,205 +31805,6 @@
       "modelBucket": "Ranked",
       "modelReasons": [
         "Long-horizon momentum ahead of sector median"
-      ],
-      "riskFlags": [
-        "Below 50d trend",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -22.19,
-      "relativeReturn60VsSpy": -21.9,
-      "sectorReturn60": -7.75,
-      "volatility60d": 0.0196,
-      "volatility60dVsSector": -0.0003,
-      "distanceTo52wHigh": -29.98
-    },
-    {
-      "symbol": "MCO",
-      "name": "Moody's Corporation",
-      "type": "stock",
-      "sector": "Financials",
-      "score": 44.9,
-      "close": 448.26,
-      "changePct": -0.68,
-      "rsi14": 42.6,
-      "volumeRatio": 0.31,
-      "return7": -0.29,
-      "return14": -2.71,
-      "return20": 1.97,
-      "return30": 4.88,
-      "return60": 5.11,
-      "return90": 7.22,
-      "ytdReturn": -9.97,
-      "beta60d": 0.68,
-      "above50": true,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -5.85,
-      "history": [
-        435.12,
-        441.07,
-        428.46,
-        428.05,
-        432.28,
-        424.84,
-        432.05,
-        436.25,
-        438.78,
-        440.79,
-        444.1,
-        438,
-        447.62,
-        438.22,
-        427.41,
-        439.61,
-        438.06,
-        446.81,
-        448.42,
-        455.35,
-        459.91,
-        459.59,
-        466.72,
-        452.35,
-        456.05,
-        460.74,
-        457.99,
-        460.11,
-        461.85,
-        455.77,
-        449.56,
-        454.55,
-        448.64,
-        457.1,
-        451.32,
-        448.26
-      ],
-      "tags": [
-        "Ranked"
-      ],
-      "rulesScore": null,
-      "modelRank": 277,
-      "modelUniverseCount": 502,
-      "modelScore": -0.211702,
-      "modelPercentile": 44.9,
-      "modelBucket": "Ranked",
-      "modelReasons": [],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 200d trend",
-        "Weak volume confirmation"
-      ],
-      "setupType": "model_ranked",
-      "setupTags": [],
-      "reboundActivationPrice": null,
-      "reboundActivationPct": null,
-      "reboundActivationVolMultiple": null,
-      "reboundActivationWindowDays": null,
-      "reboundActivationRule": null,
-      "stopSellPrice": null,
-      "stopSellDistancePct": null,
-      "stopSellAtr20": null,
-      "stopSellRule": null,
-      "stopSellBasis": null,
-      "stopSellComponents": null,
-      "modelAsOfDate": "2026-05-11",
-      "return120": -6.12,
-      "relativeReturn60VsSpy": -0.65,
-      "sectorReturn60": -0.4,
-      "volatility60d": 0.0187,
-      "volatility60dVsSector": 0.002,
-      "distanceTo52wHigh": -16.75
-    },
-    {
-      "symbol": "ISRG",
-      "name": "Intuitive Surgical",
-      "type": "stock",
-      "sector": "Health Care",
-      "score": 44.7,
-      "close": 421.24,
-      "changePct": -6.4,
-      "rsi14": 36.8,
-      "volumeRatio": 0.76,
-      "return7": -6.88,
-      "return14": -10.56,
-      "return20": -8.22,
-      "return30": -6.52,
-      "return60": -12.11,
-      "return90": -14.93,
-      "ytdReturn": -25.04,
-      "beta60d": 1.07,
-      "above50": false,
-      "above100": false,
-      "above200": false,
-      "recentCross": false,
-      "relativeStrength": -16.03,
-      "history": [
-        477.97,
-        478.04,
-        471.91,
-        469.98,
-        468.55,
-        452.66,
-        452.78,
-        460.99,
-        464.45,
-        452.07,
-        452.58,
-        452.95,
-        462.28,
-        454.94,
-        450.62,
-        458.96,
-        467.22,
-        468.36,
-        458.08,
-        469.21,
-        465.6,
-        451.29,
-        483.62,
-        478.82,
-        482.22,
-        470.99,
-        466.64,
-        453.83,
-        457.61,
-        457.78,
-        452.35,
-        451.38,
-        451.73,
-        453.49,
-        450.06,
-        421.24
-      ],
-      "tags": [
-        "Ranked",
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
-      ],
-      "rulesScore": null,
-      "modelRank": 278,
-      "modelUniverseCount": 502,
-      "modelScore": -0.211702,
-      "modelPercentile": 44.7,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Lower 60d volatility than sector median",
-        "Liquid versus universe"
       ],
       "riskFlags": [
         "Below 50d trend",
@@ -46829,20 +44781,7 @@
         "Top-sector 120d return rank",
         "Above 200d trend"
       ],
-      "rulesScore": null,
-      "modelRank": 308,
-      "modelUniverseCount": 502,
-      "modelScore": -0.221949,
-      "modelPercentile": 38.7,
-      "modelBucket": "Ranked",
-      "modelReasons": [
-        "Above 200d trend"
-      ],
-      "riskFlags": [
-        "Above-sector volatility",
-        "Below 50d trend",
-        "Weak volume confirmation"
-      ],
+      "riskFlags": [],
       "setupType": "model_ranked",
       "setupTags": [],
       "reboundActivationPrice": null,
@@ -47237,8 +45176,8 @@
         "Lower 60d volatility than sector median"
       ],
       "riskFlags": [
-        "Below 200d trend",
-        "Weak volume confirmation"
+        "Below 50d trend",
+        "Below 200d trend"
       ],
       "setupType": "model_ranked",
       "setupTags": [],
@@ -55180,11 +53119,10 @@
       "modelReasons": [
         "Lower 60d volatility than sector median",
         "Long-horizon momentum ahead of sector median",
-        "Top-sector 120d return rank",
         "Above 200d trend"
       ],
       "riskFlags": [
-        "Weak volume confirmation"
+        "Below 50d trend"
       ],
       "setupType": "model_ranked",
       "setupTags": [],
@@ -59611,23 +57549,23 @@
     },
     {
       "label": "Fed Funds",
-      "value": "n/a",
-      "delta": "This operation was aborted"
+      "value": "3.64%",
+      "delta": "+0.00"
     },
     {
       "label": "Unemployment",
-      "value": "n/a",
-      "delta": "This operation was aborted"
+      "value": "4.30%",
+      "delta": "+0.0 pp"
     },
     {
       "label": "CPI Index",
-      "value": "n/a",
-      "delta": "This operation was aborted"
+      "value": "330.29",
+      "delta": "+0.87%"
     },
     {
       "label": "GDP",
-      "value": "n/a",
-      "delta": "This operation was aborted"
+      "value": "31856B",
+      "delta": "+1.38%"
     }
   ],
   "calendar": [
@@ -59741,11 +57679,30 @@
       "cadence": "Periodic",
       "trust": "High",
       "notes": "Public market commentary and insights hub; site may intermittently reject automated checks.",
-      "title": "Raymond James Commentary And Insights",
-      "summary": "Source check failed: This operation was aborted",
-      "articles": [],
-      "articleCount": 0,
-      "ok": false
+      "title": "Commentary and Insights",
+      "summary": "Commentary & Insights",
+      "articles": [
+        {
+          "sourceName": "Raymond James Commentary And Insights",
+          "title": "Five takeaways from first quarter earnings season",
+          "url": "https://www.raymondjames.com/commentary-and-insights/markets-investing/2026/05/08/weekly-investment-strategy",
+          "publishedAt": "2026-05-08T07:48:00.000Z",
+          "summary": "Connect with a Raymond James advisor or an office near you.",
+          "excerpt": "Five takeaways from first quarter earnings season Skip to content Share: Five takeaways from first quarter earnings season Markets & Investing May 08, 2026 Key takeaways: Review the latest Weekly Headings by CIO Larry Adam. S&P 500 earnings have seen the strongest upward revision to EPS in four years Mega-cap tech has been the standout through 1Q earnings Despite headwinds from rising energy costs, margins hit a record in 1Q With 82% of market cap having reported, the S&P 500 is on track for 27% year-over-year earnings per share (EPS) growth, the strongest since 4Q21. More than 84% have beaten earnings estimates &minus; the most since 1Q21 &minus; while earnings revisions are up 12%, the fastest pace in four years. That said, here are five other takeaways from 1Q26 earnings season so far: Consumer remains on solid footing While rising gas prices have weighed on consumer sentiment &minus; the University of Michigan Sentiment Survey fell to a record low in April &minus; real‑time indicators suggest consumer spending remains healthy. This view was echoed by management commentary during 1Q26 earnings calls. Banks pointed to continued consumer resilience with limited deterioration in credit quality, while credit card companies reported solid spending growth across all income cohorts, with some noting recent acceleration. At the industry level, airlines are seeing strong forward booking demand and select restaurants this week highlighted healthy overall spending. While elevated gas prices remain a near‑term headwind, solid consumer demand should continue to support growth. Mega-cap a standout Against a backdrop of strong earnings growth, mega‑cap tech once again stood out. MAGMAN* is on track to deliver 59% year-over-year EPS growth, versus just 12% for the rest of the index,",
+          "discoveredFrom": "https://www.raymondjames.com/commentary-and-insights"
+        },
+        {
+          "sourceName": "Raymond James Commentary And Insights",
+          "title": "Labor market on the mend, lower rates on the fence?",
+          "url": "https://www.raymondjames.com/commentary-and-insights/economy-policy/2026/05/08/weekly-economic-commentary",
+          "publishedAt": "2026-05-08T07:48:00.000Z",
+          "summary": "Connect with a Raymond James advisor or an office near you.",
+          "excerpt": "Labor market on the mend, lower rates on the fence? Skip to content Share: Labor market on the mend, lower rates on the fence? Economy & Policy May 08, 2026 Raymond James Chief Economist Eugenio J. Alem&aacute;n discusses current economic conditions. Firms pulled back sharply on hiring last year as policy uncertainty and higher input costs &ndash; driven largely by tariffs &ndash; forced a reassessment of risk. Nonfarm payroll growth averaged just 9,700 per month in 2025, down dramatically from 121,600 in 2024. That slowdown reflected a familiar corporate response: When uncertainty rises, labor &ndash; the largest and most flexible cost &ndash; becomes the primary adjustment mechanism. Rather than expand headcount, firms chose to wait. This dynamic was most pronounced in manufacturing; ironically, the sector tariffs were intended to protect. Manufacturing payrolls weakened even as broader private-sector employment continued to grow, highlighting the disconnect between policy intent and labor market outcomes. Click here to enlarge Importantly, manufacturing activity is now being driven less by trade policy and more by the lagged effects of earlier industrial policy. The investment surge sparked by the CHIPS Act and the Inflation Reduction Act pushed construction spending on manufacturing facilities to record levels beginning in 2021 to 2022. Those projects are now coming online. As new plants ramp up production &ndash; and as data center construction remains elevated amid the AI buildout &ndash; both investment spending and manufacturing output have improved, a trend reflected in the rebound in the ISM Manufacturing PMI in recent months. Click here to enlarge What has not followed is a parallel recovery in manufacturing employment. Firms are meeting higher demand by boos",
+          "discoveredFrom": "https://www.raymondjames.com/commentary-and-insights"
+        }
+      ],
+      "articleCount": 2,
+      "ok": true
     },
     {
       "name": "Schwab Weekly Market Outlook",
@@ -59811,7 +57768,7 @@
           "sourceName": "Fidelity Market Insights",
           "title": "Investment opportunities amid volatility | Fidelity",
           "url": "https://www.fidelity.com/learning-center/trading-investing/finding-opportunities-market-volatility",
-          "publishedAt": "2026-04-29T15:51:17.000Z",
+          "publishedAt": "2026-04-29T22:51:17.000Z",
           "summary": "Where to find investment opportunities after several weeks of market turbulence sparked by the Iran conflict.",
           "excerpt": "Investment opportunities amid volatility | Fidelity April 29, 2026 5 min Save Close Popover Great, you have saved this article to you My Learn Profile page. Share Close Popover Finding opportunities amid market volatility Clicking a link will open a new window. Facebook Twitter LinkedIn Print Feedback --> Key takeaways Producers of materials, industrial goods, and technology hardware are poised to benefit from increased demand for hard assets. Supply disruption sparked by the Iran conflict may prompt more governments to increase spending on energy and other infrastructure. Non-US financial services companies have generated robust margins and returns fueled by higher interest rates. The stock market’s turbulent start this year may have opened doors to overlooked corners of the market with promising growth prospects. Yet even after a rapid recovery rally, Fidelity portfolio managers say they have continued to find attractive valuations in a variety of market segments. Investment opportunities amid market volatility Though the stock market has pulled off one of the fastest-ever recoveries, market volatility sparked by the Iran conflict may have created pathways for investors to add exposure to some promising but overlooked companies. These include hardware, capital goods, and materials companies at the receiving end of increased spending on strategic infrastructure. “For a long period of time, the marketplace has underinvested in hard assets and capital-intensive businesses while favoring software and asset-light models,” says Daniel Kelley, primary manager of the Fidelity ® Puritan ® Fund ( ). “Right now, all the real stuff is on sale, and so I'm choosing hard assets over soft assets.” Kelley specifically sees increased demand for energy, basic materials, IT hardware, and",
           "discoveredFrom": "https://www.fidelity.com/viewpoints/market-and-economic-insights"
@@ -59925,7 +57882,7 @@
           "sourceName": "EIA Today In Energy",
           "title": "Weekly Natural Gas Storage Report - EIA",
           "url": "http://ir.eia.gov/ngs/ngs.html",
-          "publishedAt": "2026-05-01T00:00:00.000Z",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
           "summary": "Weekly Natural Gas Storage Report - EIA",
           "excerpt": "Weekly Natural Gas Storage Report - EIA &lsaquo; See All Natural Gas Reports Weekly Natural Gas Storage Report for week ending May 1, 2026 | Released: May 7, 2026 at 10:30 a.m. | Next Release: May 14, 2026 Working gas in underground storage, Lower 48 states Summary text CSV JSN Historical Comparisons Stocks billion cubic feet (Bcf) Year ago (05/01/25) 5-year average (2021-25) Region 05/01/26 04/24/26 net change implied flow Bcf % change Bcf % change East 361 332 29 29 358 0.8 362 -0.3 Midwest 452 429 23 23 450 0.4 459 -1.5 Mountain 203 205 -2 -2 179 13.4 137 48.2 Pacific 275 272 3 3 231 19.0 197 39.6 South Central 914 905 9 9 912 0.2 910 0.4 Salt 273 272 1 1 291 -6.2 277 -1.4 Nonsalt 641 634 7 7 621 3.2 633 1.3 Total 2,205 2,142 63 63 2,130 3.5 2,066 6.7 Totals may not equal sum of components because of independent rounding. Summary Working gas in storage was 2,205 Bcf as of Friday, May 1, 2026, according to EIA estimates. This represents a net increase of 63 Bcf from the previous week. Stocks were 75 Bcf higher than last year at this time and 139 Bcf above the five-year average of 2,066 Bcf. At 2,205 Bcf, total working gas is within the five-year historical range. For information on sampling error in this report, see Estimated Measures of Sampling Variability table below. Note: The shaded area indicates the range between the historical minimum and maximum values for the weekly series from 2021 through 2025. The dashed vertical lines indicate current and year-ago weekly periods. Source: Form EIA-912, \"Weekly Underground Natural Gas Storage Report.\" --> Estimated measures of sampling variability Download History (April 2015 to Present) Coefficient of Variation for Stocks % of working gas Standard Error for Net Change billion cubic feet (Bcf) Region 05/01/26 04/24/26 net ",
           "discoveredFrom": "https://www.eia.gov/todayinenergy/"
@@ -59934,7 +57891,7 @@
           "sourceName": "EIA Today In Energy",
           "title": "Weekly Petroleum Status Report - U.S. Energy Information Administration (EIA)",
           "url": "https://www.eia.gov/petroleum/supply/weekly/",
-          "publishedAt": "2026-05-01T00:00:00.000Z",
+          "publishedAt": "2026-05-01T07:00:00.000Z",
           "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
           "excerpt": "Weekly Petroleum Status Report - U.S. Energy Information Administration (EIA) Petroleum & Other Liquids Skip to page content Overview Data Summary Prices Crude reserves and production Refining and processing Imports/exports Movements Stocks Consumption/sales Analysis & Projections Major Topics Find by Most popular Consumption/demand Exports/imports Forecasts/projections Inventories/stocks Prices Production/supply Refining Reserves All reports Alphabetical Recurring Tag Cloud Glossary FAQS See All Petroleum Reports Weekly Petroleum Status Report Data for week ending May 1, 2026 Release Date: May 6, 2026 Next Release Date: May 13, 2026 full report PDF Previous Issues Select Week dropdown arrow May 6, 2026 April 29, 2026 April 22, 2026 April 15, 2026 April 8, 2026 April 1, 2026 March 25, 2026 prior issues Crude Oil Production Re-benchmarking Notice: Each month, when we publish the Short-Term Energy Outlook (STEO), we review weekly estimates of domestic crude oil production to spot any differences between recent survey-based production trends reported in the Petroleum Supply Monthly (PSM) and other current data. If we identify a significant discrepancy between these sources, we may re-benchmark the weekly production estimate during the STEO release week. For this week, the domestic crude oil production estimate includes a re-benchmarking adjustment that lowered estimated volumes by 52,000 barrels per day, or about 0.38% of this week’s estimated production total. --> Notice: We will publish the Weekly Petroleum Status Report with data for the week ending December 19 today at 5:00 P.M. eastern. Notice: We are delaying today's release of the Weekly Petroleum Status Report with data for the week ending Dec. 19. As soon as possible, we will post a new publication time with at le",
           "discoveredFrom": "https://www.eia.gov/todayinenergy/"
@@ -59950,11 +57907,11 @@
       "cadence": "Scheduled",
       "trust": "Very high",
       "notes": "CPI, payrolls, unemployment, PPI, and labor releases.",
-      "title": "BLS Economic News Releases",
-      "summary": "Source check failed: 403 Forbidden",
+      "title": "May 2026",
+      "summary": "No recent dated articles found in the last 30 days.",
       "articles": [],
       "articleCount": 0,
-      "ok": false
+      "ok": true
     },
     {
       "name": "BEA News Release Schedule",
@@ -59976,11 +57933,11 @@
       "cadence": "Scheduled",
       "trust": "Very high",
       "notes": "St. Louis Fed release directory.",
-      "title": "FRED Releases",
-      "summary": "Source check failed: This operation was aborted",
+      "title": "Releases",
+      "summary": "No recent dated articles found in the last 30 days.",
       "articles": [],
       "articleCount": 0,
-      "ok": false
+      "ok": true
     },
     {
       "name": "SEC Current Reports",
@@ -59989,11 +57946,11 @@
       "cadence": "Continuous",
       "trust": "Very high",
       "notes": "Company current reports and catalysts.",
-      "title": "SEC Current Reports",
-      "summary": "Source check failed: 403 Forbidden",
+      "title": "SEC.gov | EDGAR Full Text Search",
+      "summary": "No recent dated articles found in the last 30 days.",
       "articles": [],
       "articleCount": 0,
-      "ok": false
+      "ok": true
     },
     {
       "name": "Axios Markets RSS",
