@@ -168,9 +168,9 @@ const fallbackSnapshot = {
     { label: "GDP QoQ", value: "1.6%", delta: "-1.8 pp" }
   ],
   calendar: [
-    { date: "2026-05-08", time: "8:30 AM ET", event: "Employment Situation", source: "BLS", importance: "High" },
-    { date: "2026-05-13", time: "8:30 AM ET", event: "Consumer Price Index", source: "BLS", importance: "High" },
-    { date: "2026-05-29", time: "8:30 AM ET", event: "Personal Income and Outlays", source: "BEA", importance: "High" },
+    { date: "2026-05-13", time: "8:30 AM ET", event: "Producer Price Index", source: "BLS", importance: "High" },
+    { date: "2026-05-28", time: "8:30 AM ET", event: "GDP Second Estimate", source: "BEA", importance: "High" },
+    { date: "2026-05-28", time: "8:30 AM ET", event: "Personal Income and Outlays", source: "BEA", importance: "High" },
     { date: "2026-06-17", time: "2:00 PM ET", event: "FOMC Rate Decision", source: "Federal Reserve", importance: "High" }
   ],
   sources: []

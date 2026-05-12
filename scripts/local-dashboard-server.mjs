@@ -35,6 +35,7 @@ const publicStaticFiles = new Set([
   "data/snapshot.json",
   "data/model-scorebook.json",
   "data/model-monitoring.json",
+  "data/macro-calendar.json",
   "data/refresh-status.json"
 ]);
 

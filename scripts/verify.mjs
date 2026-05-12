@@ -74,6 +74,7 @@ function sortedSourceArticles(sources) {
 run("node", ["--check", "app.js"]);
 run("node", ["--check", "scripts/verify.mjs"]);
 run("node", ["--check", "scripts/update-data.mjs"]);
+run("node", ["--check", "scripts/update-macro-calendar.mjs"]);
 run("node", ["--check", "scripts/local-dashboard-server.mjs"]);
 run("node", ["--check", "scripts/configure-ticker-backend.mjs"]);
 run("node", ["--check", "scripts/write-refresh-status.mjs"]);
@@ -91,6 +92,7 @@ const requiredJsonFiles = [
   "data/model-scorebook.json",
   "data/model-monitoring.json",
   "data/model-reference-cache.json",
+  "data/macro-calendar.json",
   "data/refresh-status.json"
 ];
 
@@ -99,9 +101,11 @@ for (const file of requiredJsonFiles) readJson(file);
 const snapshot = readJson("data/snapshot.json");
 const scorebook = readJson("data/model-scorebook.json");
 const monitoring = readJson("data/model-monitoring.json");
+const macroCalendar = readJson("data/macro-calendar.json");
 if (!Array.isArray(snapshot?.opportunities)) fail("data/snapshot.json is missing opportunities[]");
 if (!Array.isArray(scorebook?.rows)) fail("data/model-scorebook.json is missing rows[]");
 if (!Array.isArray(monitoring?.currentTopDecile)) fail("data/model-monitoring.json is missing currentTopDecile[]");
+if (!Array.isArray(macroCalendar?.events) || !macroCalendar.events.length) fail("data/macro-calendar.json is missing events[]");
 
 if (snapshot.marketDataStatus?.status !== "fresh") fail(`snapshot marketDataStatus is ${snapshot.marketDataStatus?.status || "missing"}`);
 if (scorebook.marketDataStatus?.status !== "fresh") fail(`scorebook marketDataStatus is ${scorebook.marketDataStatus?.status || "missing"}`);
@@ -170,6 +174,16 @@ const localServer = readFileSync(join(root, "scripts/local-dashboard-server.mjs"
 if (!localServer.includes('"data/model-monitoring.json"')) {
   fail("scripts/local-dashboard-server.mjs does not allow data/model-monitoring.json");
 }
+if (!localServer.includes('"data/macro-calendar.json"')) {
+  fail("scripts/local-dashboard-server.mjs does not allow data/macro-calendar.json");
+}
+
+const macroEvents = macroCalendar.events.filter((event) => event?.date && event?.time && event?.event && event?.source);
+if (macroEvents.length !== macroCalendar.events.length) fail("data/macro-calendar.json contains incomplete macro events");
+const requiredMacroFamilies = ["Employment Situation", "Consumer Price Index", "Producer Price Index", "FOMC Rate Decision"];
+requiredMacroFamilies.forEach((family) => {
+  if (!macroEvents.some((event) => event.event === family)) fail(`data/macro-calendar.json is missing ${family}`);
+});
 
 if (process.exitCode) process.exit(process.exitCode);
 console.log("Project verification passed.");

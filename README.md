@@ -53,8 +53,8 @@ flowchart TD
 - Shows a volatility-adjusted rebound activation price for high-ranked broken-trend names when the model likes the setup but price action still needs confirmation.
 - Tracks sector performance using major sector ETF proxies.
 - Pulls macro indicators from public FRED CSV endpoints.
-- Tracks a configured macro calendar for market-moving events such as CPI, payrolls, GDP, and FOMC dates.
-- After a scheduled official macro release has occurred, pulls the primary release page directly when a parser is configured. Employment Situation, CPI, PPI, GDP, and Personal Income/PCE pages are seeded, with the BLS Employment Situation parser extracting payrolls, unemployment, wages, revisions, participation, and sector job changes.
+- Scrapes a rolling macro calendar for market-moving events such as CPI, payrolls, PPI, GDP, PCE, and FOMC dates.
+- After a scheduled official macro release has occurred, pulls the primary release page directly when a parser is configured. Employment Situation, CPI, PPI, GDP, and Personal Income/PCE pages are seeded, with targeted BLS parsers extracting jobs, inflation, internals, revisions, and market-relevant details.
 - Ingests public research and commentary sources listed in `config/news-sources.md`.
 - Discovers recent articles from source landing pages and RSS feeds, prioritizes newer dated articles, and builds a top-of-report market intelligence tape.
 - Tracks professional market drivers, earnings calendars, earnings-linked daily movers, Yahoo Finance mover screens, and Reddit ticker attention as separate inputs.
@@ -161,6 +161,7 @@ The refresh script:
 - Adds ETFs from `config/universe.json`
 - Fetches delayed/end-of-day chart history from Yahoo Finance's public chart endpoint
 - Pulls selected macro series from FRED
+- Refreshes `data/macro-calendar.json` with the next six months of macro release dates from FRED release calendars, BEA's release schedule, and the Fed's FOMC calendar
 - Pulls same-day or recent official macro releases from primary-source pages once scheduled releases have occurred
 - Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
@@ -407,6 +408,7 @@ The schedule intentionally avoids minute `0`. GitHub documents that scheduled wo
 
 When the refresh runs successfully, it:
 
+- Regenerates `data/macro-calendar.json` before the dashboard snapshot so macro dates are not hand-keyed
 - Scores the current S&P 500 universe with the committed XGBoost rank model when dependencies and free data endpoints are available
 - Refreshes `data/model-reference-cache.json` for fast Ticker Lab scoring
 - Regenerates `data/snapshot.json`
@@ -698,12 +700,14 @@ index.html                         Static dashboard shell
 styles.css                         Dashboard styling
 app.js                             Browser rendering logic
 scripts/update-data.mjs            Data refresh, source ingestion, screening, AI call
+scripts/update-macro-calendar.mjs  Scrapes rolling BLS/FRED, BEA, and Fed release calendars
 scripts/local-dashboard-server.mjs Static server and private Ticker Lab API
 config/news-sources.md             Editable public source registry
 config/universe.json               ETF and fallback universe configuration
 config/ai-recommendation-prompt.md AI memo prompt
 config/runtime.json                Public runtime config for optional hosted Ticker Lab API URL
 data/snapshot.json                 Generated dashboard data
+data/macro-calendar.json           Generated next-six-month macro release calendar
 data/model-scorebook.json          Generated full S&P 500 model scoreboard
 data/model-monitoring.json         Generated top-decile dashboard monitoring snapshot
 data/model-reference-cache.json    Generated daily S&P 500 model reference cache
@@ -719,7 +723,7 @@ render.yaml                        Render-style backend service blueprint
 
 - Data is free, delayed, and best-effort.
 - The dashboard is designed for scheduled research, not intraday execution.
-- The macro calendar is currently a maintained list in `scripts/update-data.mjs`; it should be refreshed as future official dates are released.
+- Direct BLS schedule pages may block automated requests, so the calendar scraper uses FRED's release calendar for BLS CPI, PPI, and Employment Situation dates, then uses BLS primary release pages only after a release is due.
 - Public websites may change markup, block automated requests, or omit publication dates.
 - Yahoo Finance and other free endpoints are not a licensed market data feed.
 - AI output should be treated as research synthesis, not trading advice.

@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "python3 -m http.server 4173",
     "dev:local": "node scripts/local-dashboard-server.mjs",
-    "refresh": "node scripts/update-data.mjs",
-    "refresh:sample": "MAX_TICKERS=80 node scripts/update-data.mjs",
+    "refresh": "node scripts/update-macro-calendar.mjs && node scripts/update-data.mjs",
+    "refresh:calendar": "node scripts/update-macro-calendar.mjs",
+    "refresh:sample": "node scripts/update-macro-calendar.mjs && MAX_TICKERS=80 node scripts/update-data.mjs",
     "configure:ticker-backend": "node scripts/configure-ticker-backend.mjs",
     "verify": "node scripts/verify.mjs"
   }

@@ -40,6 +40,9 @@ jobs:
           cp data/snapshot.json public/data/snapshot.json
           cp data/model-scorebook.json public/data/model-scorebook.json
           cp data/model-monitoring.json public/data/model-monitoring.json
+          if [ -f data/macro-calendar.json ]; then
+            cp data/macro-calendar.json public/data/macro-calendar.json
+          fi
           if [ -f data/refresh-status.json ]; then
             cp data/refresh-status.json public/data/refresh-status.json
           fi

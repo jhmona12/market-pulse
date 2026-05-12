@@ -25,6 +25,7 @@ const deeperReadLookbackDays = Number.parseFloat(process.env.DEEPER_READ_LOOKBAC
 const deeperReadCandidateLimit = Number.parseInt(process.env.DEEPER_READ_CANDIDATE_LIMIT || "14", 10);
 const macroReleaseLookbackHours = Number.parseFloat(process.env.MACRO_RELEASE_LOOKBACK_HOURS || "96");
 const deeperReadHistoryPath = "data/deeper-read-history.json";
+const macroCalendarPath = process.env.MACRO_CALENDAR_PATH || "data/macro-calendar.json";
 const today = new Date();
 const startDate = new Date(today);
 startDate.setDate(startDate.getDate() - 430);
@@ -49,7 +50,7 @@ const macroSeries = [
   { id: "GDP", label: "GDP", suffix: "B", deltaKind: "pct" }
 ];
 
-const calendar = [
+const fallbackCalendar = [
   { date: "2026-05-08", time: "8:30 AM ET", event: "Employment Situation", source: "BLS", importance: "High" },
   { date: "2026-05-12", time: "8:30 AM ET", event: "Consumer Price Index", source: "BLS", importance: "High" },
   { date: "2026-05-13", time: "8:30 AM ET", event: "Producer Price Index", source: "BLS", importance: "High" },
@@ -238,6 +239,38 @@ function upcomingMacroEvents(events, now = new Date()) {
       return new Date(`${event.date}T23:59:59`).getTime() >= now.getTime();
     })
     .slice(0, 8);
+}
+
+async function loadMacroCalendar() {
+  try {
+    const payload = JSON.parse(await readFile(join(root, macroCalendarPath), "utf8"));
+    const events = Array.isArray(payload?.events) ? payload.events : [];
+    const cleanEvents = events
+      .filter((event) => event?.date && event?.time && event?.event && event?.source)
+      .map((event) => ({
+        date: String(event.date),
+        time: String(event.time),
+        event: String(event.event),
+        source: String(event.source),
+        importance: event.importance || "High",
+        title: event.title,
+        sourceUrl: event.sourceUrl,
+        sourceName: event.sourceName,
+        upstreamSource: event.upstreamSource,
+        scraper: event.scraper,
+        note: event.note
+      }))
+      .sort((a, b) => {
+        if (a.date !== b.date) return a.date.localeCompare(b.date);
+        if (a.time !== b.time) return a.time.localeCompare(b.time);
+        return a.event.localeCompare(b.event);
+      });
+    if (cleanEvents.length) return cleanEvents;
+    console.warn(`${macroCalendarPath} did not contain events; using fallback macro calendar.`);
+  } catch (error) {
+    console.warn(`Could not load ${macroCalendarPath}: ${error.message}. Using fallback macro calendar.`);
+  }
+  return fallbackCalendar;
 }
 
 function sleep(ms) {
@@ -3904,14 +3937,15 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
 async function main() {
   await loadLocalEnv();
 
-  const [sourceMarkdown, universeConfigText, aiPromptText, modelRankings, modelExplainability, previousRefreshStatus, previousModelMonitoring] = await Promise.all([
+  const [sourceMarkdown, universeConfigText, aiPromptText, modelRankings, modelExplainability, previousRefreshStatus, previousModelMonitoring, macroCalendar] = await Promise.all([
     readFile(join(root, "config/news-sources.md"), "utf8"),
     readFile(join(root, "config/universe.json"), "utf8"),
     readFile(join(root, "config/ai-recommendation-prompt.md"), "utf8").catch(() => defaultAiPrompt),
     loadModelRankings(),
     loadModelExplainability(),
     loadPreviousRefreshStatus(),
-    loadPreviousModelMonitoring()
+    loadPreviousModelMonitoring(),
+    loadMacroCalendar()
   ]);
   const modelSummary = publicModelSummary(modelRankings, modelExplainability);
 
@@ -3952,7 +3986,7 @@ async function main() {
   );
   const redditTapePromise = fetchRedditTape(knownSymbols);
   const marketMoversPromise = fetchMarketMovers();
-  const officialMacroPromise = fetchOfficialMacroReleases(calendar);
+  const officialMacroPromise = fetchOfficialMacroReleases(macroCalendar);
 
   console.log(`Screening ${universe.length} instruments...`);
 
@@ -4039,7 +4073,7 @@ async function main() {
     officialMacro
   });
   console.log(`Market intelligence built: ${(marketIntelligence.professionalDrivers || []).length} professional drivers.`);
-  const upcomingCalendar = upcomingMacroEvents(calendar);
+  const upcomingCalendar = upcomingMacroEvents(macroCalendar);
   const deskRecommendations = buildRecommendations(opportunities);
   const aiRecommendations = await buildAiRecommendations({
     opportunities,
