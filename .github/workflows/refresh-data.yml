@@ -224,10 +224,6 @@ jobs:
         if: steps.pacific_time.outputs.run_refresh == 'true'
         run: npm run refresh:calendar
 
-      - name: Verify project
-        if: steps.pacific_time.outputs.run_refresh == 'true'
-        run: npm run verify
-
       - name: Score XGBoost rank model
         id: score_model
         if: steps.pacific_time.outputs.run_refresh == 'true'
@@ -241,6 +237,10 @@ jobs:
           OPENAI_MODEL: gpt-5-nano
           MODEL_SCORING_OUTCOME: ${{ steps.score_model.outcome }}
         run: node scripts/update-data.mjs
+
+      - name: Verify generated site data
+        if: steps.pacific_time.outputs.run_refresh == 'true'
+        run: npm run verify
 
       - name: Write successful refresh status
         if: success() && steps.pacific_time.outputs.run_refresh == 'true'
