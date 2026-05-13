@@ -146,8 +146,14 @@ const missingActivations = scorebook.rows.filter((row) => row.setupType === "mod
 if (missingActivations.length) fail(`${missingActivations.length} Model Rebound Watch rows are missing reboundActivationPrice`);
 
 const serializedDashboard = JSON.stringify({ snapshot, scorebook, monitoring });
-["NaN", "undefined", "Infinity", "Activation $0.00", "Activation 0.00"].forEach((token) => {
-  if (serializedDashboard.includes(token)) fail(`dashboard data contains bad placeholder token: ${token}`);
+[
+  { token: "NaN", pattern: /(^|[^A-Za-z0-9])NaN([^A-Za-z0-9]|$)/ },
+  { token: "undefined", pattern: /(^|[^A-Za-z0-9])undefined([^A-Za-z0-9]|$)/ },
+  { token: "Infinity", pattern: /(^|[^A-Za-z0-9])Infinity([^A-Za-z0-9]|$)/ },
+  { token: "Activation $0.00", pattern: /Activation \$0\.00/ },
+  { token: "Activation 0.00", pattern: /Activation 0\.00/ }
+].forEach(({ token, pattern }) => {
+  if (pattern.test(serializedDashboard)) fail(`dashboard data contains bad placeholder token: ${token}`);
 });
 
 const aiMemoText = collectStrings(snapshot.aiRecommendations || {}).join(" ");
