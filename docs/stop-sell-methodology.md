@@ -1,6 +1,6 @@
 # Stop-Sell Methodology
 
-Market Pulse uses a deterministic stop-sell price for momentum-confirmed dashboard recommendations. The stop is meant to answer one narrow question:
+Market Pulse uses a deterministic stop-sell price for current top-decile model names and other surfaced dashboard recommendations. The stop is meant to answer one narrow question:
 
 ```text
 At what end-of-day closing price should the setup be considered broken enough to exit and reallocate?
@@ -41,7 +41,7 @@ The dashboard intentionally does not show the full formula on each card. The sto
 
 ## Formula
 
-For long momentum-confirmed names:
+For long model-ranked names:
 
 ```text
 chandelier_stop = 22-day highest high - 3.0 x ATR(22)
@@ -70,4 +70,4 @@ The stop calculation uses the same fresh Yahoo daily history fetched by the Pyth
 
 The briefing builder does not make a second Yahoo request for stops. It reuses the `stopSellPrice` and related fields exported in `data/model-rank-scores.json`, which reduces rate-limit pressure and keeps model ranks, trailing returns, and stop prices on the same as-of date. The machine-readable `stopSellBasis` field identifies this calculation as `balanced_atr_chandelier`.
 
-Stops are surfaced for `Momentum Confirmed` names and top-ranked names tagged `Not Momentum Confirmed`, including `Model Rebound Watch` candidates. Rebound-watch names can also show a separate activation level; the stop remains a close-based risk-control reference, while activation is the confirmation level that would make the setup actionable.
+Stops are surfaced for all current top-decile model names and top-ranked names tagged `Not Momentum Confirmed`, including `Model Rebound Watch` candidates. Rebound-watch names can also show a separate activation level; the stop remains a close-based risk-control reference, while activation is the confirmation level that would make the setup actionable.

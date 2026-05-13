@@ -167,7 +167,7 @@ The refresh script:
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
 - Adds setup tags from the model scorer, including `Momentum Confirmed`, `Model Rebound Watch`, and `Not Momentum Confirmed`
 - Adds a rebound activation price for qualifying rebound-watch names, calculated as current close plus `0.75 x 20-day realized daily volatility`
-- Adds a stop-sell price for `Momentum Confirmed` names during the model scorer's fresh price-history pass, so the briefing builder does not make a second Yahoo request for the same names
+- Adds a stop-sell price for all current top-decile model names, plus other surfaced non-confirmed model candidates, during the model scorer's fresh price-history pass so the briefing builder does not make a second Yahoo request for the same names
 - Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
 - Writes fresh market-strip and sector-performance rows during the model scoring step so the dashboard has complete technical sections even when the later briefing builder avoids another large price-history fetch
 - Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, 60-day beta to SPY, trailing 7D, 14D, 30D, 60D, 90D calendar-lookback returns, and YTD return when fresh price history is available
@@ -313,7 +313,7 @@ docs/rebound-activation-research.md
 
 ### Stop-Sell Discipline
 
-For `Momentum Confirmed` and `Not Momentum Confirmed` model candidates, the dashboard can show one compact stop label:
+For current top-decile model names, `Momentum Confirmed` names, and surfaced `Not Momentum Confirmed` candidates, the dashboard can show one compact stop label:
 
 ```text
 Stop: $123.45

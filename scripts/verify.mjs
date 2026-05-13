@@ -137,7 +137,11 @@ if (monitoring.topDecileCutoff !== topDecileCutoff) fail(`model-monitoring topDe
 if (JSON.stringify(expectedTopDecile) !== JSON.stringify(actualTopDecile)) fail("model-monitoring currentTopDecile does not match scorebook model ranks");
 
 const stopRequiredSetups = new Set(["momentum_confirmed", "model_rebound_watch", "model_ranked_not_momentum_confirmed"]);
-const missingStops = scorebook.rows.filter((row) => stopRequiredSetups.has(row.setupType) && numberOrNull(row.stopSellPrice) === null);
+const missingStops = scorebook.rows.filter((row) => {
+  const setupRequiresStop = stopRequiredSetups.has(row.setupType);
+  const topDecileRequiresStop = Number(row.modelRank) <= topDecileCutoff;
+  return (setupRequiresStop || topDecileRequiresStop) && numberOrNull(row.stopSellPrice) === null;
+});
 if (missingStops.length) fail(`${missingStops.length} scorebook rows that should show stop values are missing stopSellPrice`);
 
 const badActivations = scorebook.rows.filter((row) => row.setupType !== "model_rebound_watch" && numberOrNull(row.reboundActivationPrice) !== null);

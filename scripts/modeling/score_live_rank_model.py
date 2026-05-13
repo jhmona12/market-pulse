@@ -667,8 +667,8 @@ def setup_tags(row: pd.Series) -> list[str]:
     return []
 
 
-def should_surface_stop_sell(setup: str) -> bool:
-    return setup in {"momentum_confirmed", "model_rebound_watch", "model_ranked_not_momentum_confirmed"}
+def should_surface_stop_sell(row: pd.Series, setup: str) -> bool:
+    return setup in {"momentum_confirmed", "model_rebound_watch", "model_ranked_not_momentum_confirmed"} or is_top_decile(row)
 
 
 def rebound_activation(row: pd.Series) -> dict:
@@ -912,7 +912,7 @@ def row_payload(
     }
     payload.update({key: value for key, value in metrics.items() if value is not None and key != "stopSellSignal"})
     payload.update(rebound_activation(row))
-    if should_surface_stop_sell(setup):
+    if should_surface_stop_sell(row, setup):
         stop_sell_signal = metrics.get("stopSellSignal") or {}
         payload.update({key: value for key, value in stop_sell_signal.items() if value is not None})
     if reference_scores is not None:

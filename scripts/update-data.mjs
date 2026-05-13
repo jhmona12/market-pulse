@@ -435,8 +435,14 @@ function optionalRoundedNumber(value, digits = 2) {
   return number == null ? null : Number(number.toFixed(digits));
 }
 
+function isTopDecileModelItem(item = {}) {
+  const rank = Number(item.modelRank);
+  const universeCount = Number(item.modelUniverseCount);
+  return Number.isFinite(rank) && Number.isFinite(universeCount) && universeCount > 0 && rank <= Math.ceil(universeCount * 0.1);
+}
+
 function shouldSurfaceStopSell(item = {}) {
-  return ["momentum_confirmed", "model_rebound_watch", "model_ranked_not_momentum_confirmed"].includes(item.setupType);
+  return ["momentum_confirmed", "model_rebound_watch", "model_ranked_not_momentum_confirmed"].includes(item.setupType) || isTopDecileModelItem(item);
 }
 
 function roundedNumber(value, digits = 2) {
@@ -3036,6 +3042,11 @@ function compactCandidate(item) {
     reboundActivationVolMultiple: showActivation ? roundedNumber(item.reboundActivationVolMultiple, 2) : null,
     reboundActivationWindowDays: showActivation ? finiteNumber(item.reboundActivationWindowDays) : null,
     reboundActivationRule: showActivation ? item.reboundActivationRule || null : null,
+    stopSellPrice: roundedNumber(item.stopSellPrice, 2),
+    stopSellDistancePct: roundedNumber(item.stopSellDistancePct, 2),
+    stopSellAtr20: roundedNumber(item.stopSellAtr20, 2),
+    stopSellRule: item.stopSellRule || null,
+    stopSellBasis: item.stopSellBasis || null,
     modelAsOfDate: item.modelAsOfDate || null,
     close: roundedNumber(item.close, 2),
     changePct: roundedNumber(item.changePct, 2),
