@@ -31,6 +31,8 @@ Requirements:
 - Keep `dailyRead.body` concise but useful: 2-3 short sentences is ideal. It should state the regime call, the main market driver, and the highest-level portfolio implication. Do not use semicolon-separated source/article lists.
 - The first half of `dailyRead.body` should explain market drivers, not the model. Mention model rankings only after explaining the market, macro, earnings, rates, geopolitics, commodities, or sentiment setup.
 - Keep `dailyRead.headline` to one sentence under 140 characters.
+- Make the headline a conclusion, not a label. Bad: `Producer Price Index frames today's market read.` Good: `Hot PPI and higher yields make position sizing the main risk check.`
+- Avoid generic headlines such as `Risk appetite is constructive but selective`, `market drivers frame the tape`, `earnings movers lead the tape`, or `the market is mixed`. Those phrases are too vague unless immediately tied to a concrete driver and action.
 - Write polished prose for a human reader. Do not use field names, underscores, camelCase, or model jargon such as `modelRank` in the Daily Read; translate them into plain English.
 - Do not write phrases like "the tape is led by [article title]". Instead, translate the cited item into a conclusion, such as "Treasury yields eased as investors waited for jobless claims and Fed speakers."
 - If an article title is generic, such as "Markets and Economy", "Stock Market News", or "Bond Market Commentary", ignore the title and use the article summary/excerpt to extract the actual market conclusion.
@@ -38,9 +40,16 @@ Requirements:
 - Do not start array items with bullets, hyphens, or numbering. The UI already formats them as bullets.
 - `dailyRead.keyTakeaways` should be trader-useful bullets, not status updates. Write them in a logical order: market drivers first, earnings second, retail/sentiment third, breadth/sector confirmation fourth, model implications last.
 - Each `dailyRead.keyTakeaways` item should start with a short category label such as `Macro release:`, `Market drivers:`, `Earnings:`, `Retail attention:`, `Breadth:`, `Model read:`, or `Risk:`. After the label, state the conclusion first and include the evidence second.
+- Every `dailyRead.keyTakeaways` item must answer three questions: what changed, why it matters for risk or positioning, and what evidence supports it. If a bullet cannot answer those questions, omit it.
+- Never output a fragment after a category label. Bad: `Rates and central banks: The U.S. (M4)`. Good: `Rates: Hot PPI pushed Treasury yields higher, so long-duration growth needs stricter confirmation. (M4)`.
+- Do not use source IDs as a substitute for analysis. A source ID can support a bullet, but the sentence must stand on its own if the ID is removed.
 - Do not use source names as the category label. Bad: `Wells Fargo: Bond Market Commentary`. Good: `Rates: Treasury yields eased before jobless claims and Fed commentary.`
 - Cite source IDs in parentheses when useful, for example `(M4)`, but do not make the source ID or publisher the point of the bullet.
 - At least half of `dailyRead.keyTakeaways` should be about market drivers, earnings, macro/rates/central banks, geopolitics, commodities, or Reddit attention. Do not let model-ranking commentary dominate the top of the report.
+- Avoid `dispersion` unless the data shows a meaningful sector, factor, or market-cap pattern. Do not cherry-pick a few extreme movers as if that proves a market theme; there will always be outliers. If earnings movers are mixed or idiosyncratic, say that and explain the implication: catalyst risk is high, but it should not define the market regime.
+- Do not use the word `dispersion` as a generic substitute for mixed results, weak momentum, or scattered outliers. Only use it when a supplied field explicitly measures dispersion. Otherwise say the tape is mixed, idiosyncratic, weak, or not broad enough to drive the market call.
+- For earnings, prioritize broad read-throughs such as mega-cap reporters, sector clusters, guidance themes, margin pressure, demand commentary, or index-weighted names. If the supplied earnings screen only contains scattered single-name outliers, write `Earnings: the mover screen is idiosyncratic, so treat it as single-name catalyst risk rather than a market-wide signal.`
+- Do not label model-ranked momentum names as `Earnings movers` unless those exact symbols are supplied in the earnings mover tape. Model leaders belong under `Model read:` or `Momentum:`.
 - `dailyRead.watchItems` should focus on the next decision points: macro events, crowding/RSI risk, sector confirmation, source/data gaps, and invalidation signals.
 - Write `deeperRead` as a separate section from the Daily Read. This section is for thoughtful, second-order analysis from the source tape, not breaking-news recaps.
 - For `deeperRead`, use only `deeperRead.candidates` supplied in the prompt and stay inside the last 7 days unless the candidate object itself is supplied.
@@ -54,7 +63,7 @@ Requirements:
 - In `deeperRead.cards`, avoid generic phrases like "momentum remains robust" unless the selected source itself is making that deeper argument. This section should feel like smart source analysis, not another model recap.
 - Do not mention internal mechanics such as candidate pools, quality filters, source rotation, or previously used sources in `deeperRead.summary` or cards.
 - Separate professional commentary from Reddit / WallStreetBets commentary. Treat Reddit as sentiment and attention only. Never use Reddit posts as factual confirmation of news, earnings, policy, or corporate events.
-- Highlight WallStreetBets or Reddit ticker concentration when it is present in `marketIntelligence.reddit.topTickers`, but label it as retail attention or speculative sentiment.
+- Highlight WallStreetBets or Reddit ticker concentration only when `marketIntelligence.reddit.topTickers` contains clean filtered concentration. Label it as retail attention or speculative sentiment, not news. If Reddit is unavailable or the filter finds only generic megathreads/portfolio dumps, say the Reddit signal is not clean enough to use rather than forcing a ticker narrative.
 - Explicitly call out notable earnings reporters, earnings-linked movers, and guidance/results headlines when supplied. If no earnings mover is supplied, do not invent one.
 - Explicitly call out global rate/central-bank developments when supplied, including ECB, Bank of England, Bank of Japan, Fed, Treasury yields, or inflation data.
 - Explicitly call out major U.S. macro releases when supplied, including Employment Situation/payrolls, CPI, PPI, GDP, PCE, retail sales, ISM/PMI, jobless claims, and FOMC decisions. These primary-source releases can drive the report even before news or bank commentary reacts.
@@ -63,6 +72,7 @@ Requirements:
 - Connect current-event drivers to tradeable market channels: energy prices, inflation expectations, rates, Fed path, defensives/cyclicals, defense, airlines/transports, consumers, semiconductors, banks, credit spreads, and sector ETF confirmation.
 - Do not mention a current event just because it is globally important. Mention it only when the supplied source tape, macro data, or price/sector behavior supports market relevance.
 - Be precise on macro risk: hotter inflation, stronger yields, weaker growth, or a more hawkish Fed path are typical risks to long momentum. Do not describe softer inflation as bearish unless the supplied data explicitly supports that interpretation.
+- If same-week CPI or PPI data are hot or sticky, describe the risk as `sticky inflation`, `hot inflation`, `inflation persistence`, `higher yields`, or `the risk that inflation does not cool fast enough`. Never write `inflation cooling is a risk`, `inflation cooling remains a key risk`, or similar phrasing. Cooling inflation is normally supportive for markets unless the supplied data explicitly frames it as a growth scare or deflation risk.
 - Do not claim access to live intraday market data.
 - If `marketIntelligence.marketDataStatus.status` is not `fresh`, explicitly state that fresh price/technical data is unavailable and that stale cached technical values were not reused. Do not cite trailing returns, sector tiles, breadth, or moving-average status as current when the supplied status says they are unavailable.
 - If the supplied model status is `stale`, `missing`, or otherwise not `ready`, do not make single-name model recommendations. State that stale model rankings were not used.

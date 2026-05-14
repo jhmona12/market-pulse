@@ -111,6 +111,7 @@ const redditSources = [
   { subreddit: "SecurityAnalysis", segment: "Fundamental research" },
   { subreddit: "options", segment: "Options sentiment" }
 ];
+const redditSorts = (process.env.REDDIT_SORTS || "hot,new,top").split(",").map((item) => item.trim()).filter(Boolean);
 
 const tickerStopWords = new Set([
   "A",
@@ -1505,6 +1506,50 @@ function extractTickersFromText(text, knownSymbols = new Set()) {
   return [...tickers];
 }
 
+function countSymbolMentions(text, symbol) {
+  if (!text || !symbol) return 0;
+  const escaped = symbol.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace("\\.", "[.-]");
+  const regex = new RegExp(`(?:\\$|\\b)${escaped}\\b`, "gi");
+  return [...String(text).matchAll(regex)].length;
+}
+
+function extractRedditTickerSignals({ title = "", selftext = "", flair = "" }, knownSymbols = new Set()) {
+  const titleText = String(title || "");
+  const bodyText = String(selftext || "").slice(0, 1200);
+  const combined = `${titleText} ${bodyText}`;
+  const titleTickers = new Set(extractTickersFromText(titleText, knownSymbols));
+  const bodyTickers = new Set(extractTickersFromText(bodyText, knownSymbols));
+  const cashtags = new Set([...combined.matchAll(/\$([A-Z][A-Z0-9.-]{0,7})\b/g)]
+    .map((match) => mentionKey(match[1]))
+    .filter((symbol) => symbol.length >= 1 && symbol.length <= 6 && (knownSymbols.has(symbol) || !tickerStopWords.has(symbol))));
+  const allTickers = [...new Set([...titleTickers, ...bodyTickers, ...cashtags])];
+  const genericThread = /\b(daily discussion|what are your moves|weekend discussion|earnings thread|daily thread|premarket thread|market open thread|moves tomorrow|watchlist)\b/i.test(`${titleText} ${flair || ""}`);
+  const portfolioDump = allTickers.length >= 8 && titleTickers.size === 0 && cashtags.size === 0;
+  const tickerWeights = {};
+  const directTickers = new Set();
+
+  allTickers.forEach((symbol) => {
+    const titleHit = titleTickers.has(symbol);
+    const cashtagHit = cashtags.has(symbol);
+    const bodyCount = countSymbolMentions(bodyText, symbol);
+    if (genericThread && !titleHit && !cashtagHit) return;
+    if (portfolioDump && !titleHit && !cashtagHit) return;
+    if (!titleHit && !cashtagHit && bodyCount < 2) return;
+
+    const weight = (titleHit ? 2.5 : 0) + (cashtagHit ? 2 : 0) + Math.min(bodyCount, 4) * 0.4;
+    if (weight < 1) return;
+    tickerWeights[symbol] = roundedNumber(weight, 2);
+    if (titleHit || cashtagHit) directTickers.add(symbol);
+  });
+
+  return {
+    tickers: Object.keys(tickerWeights),
+    tickerWeights,
+    directTickers: [...directTickers],
+    filteredAsGeneric: genericThread || portfolioDump
+  };
+}
+
 async function buildEarningsTape({ sources, marketMovers, knownSymbols }) {
   const pacificToday = dateKeyInTimeZone(new Date(), "America/Los_Angeles");
   const dates = [offsetDateKey(pacificToday, -1), pacificToday, offsetDateKey(pacificToday, 1)];
@@ -1557,7 +1602,8 @@ async function buildEarningsTape({ sources, marketMovers, knownSymbols }) {
 }
 
 async function fetchRedditListing(subreddit, sort = "hot", limit = redditPostLimit) {
-  const url = `https://www.reddit.com/r/${encodeURIComponent(subreddit)}/${sort}.json?limit=${limit}`;
+  const topWindow = sort === "top" ? "&t=day" : "";
+  const url = `https://www.reddit.com/r/${encodeURIComponent(subreddit)}/${sort}.json?limit=${limit}${topWindow}`;
   const payload = await fetchPublicJson(url, {
     timeout: 12000,
     retries: 1,
@@ -1580,13 +1626,20 @@ async function fetchRedditTape(knownSymbols) {
 
   const results = await mapLimit(redditSources, 2, async (source) => {
     try {
-      const posts = await fetchRedditListing(source.subreddit, "hot", redditPostLimit);
+      const listings = await mapLimit(redditSorts, 1, async (sort) => fetchRedditListing(source.subreddit, sort, redditPostLimit));
+      const seenPosts = new Set();
+      const posts = listings.flat().filter((post) => {
+        if (!post?.id || seenPosts.has(post.id)) return false;
+        seenPosts.add(post.id);
+        return true;
+      });
       return {
         ...source,
         status: "ready",
         posts: posts.map((post) => {
           const title = post.title || "";
           const selftext = post.selftext || "";
+          const tickerSignals = extractRedditTickerSignals({ title, selftext, flair: post.link_flair_text || "" }, knownSymbols);
           return {
             id: post.id,
             subreddit: source.subreddit,
@@ -1599,7 +1652,10 @@ async function fetchRedditTape(knownSymbols) {
             comments: finiteNumber(post.num_comments) || 0,
             upvoteRatio: finiteNumber(post.upvote_ratio),
             flair: post.link_flair_text || null,
-            tickers: extractTickersFromText(`${title} ${selftext.slice(0, 500)}`, knownSymbols)
+            tickers: tickerSignals.tickers,
+            tickerWeights: tickerSignals.tickerWeights,
+            directTickers: tickerSignals.directTickers,
+            filteredAsGeneric: tickerSignals.filteredAsGeneric
           };
         })
       };
@@ -1615,14 +1671,21 @@ async function fetchRedditTape(knownSymbols) {
       const existing = tickerScores.get(symbol) || {
         symbol,
         mentions: 0,
+        signalStrength: 0,
+        directMentions: 0,
         score: 0,
         comments: 0,
         subreddits: new Set(),
         posts: []
       };
+      const tickerCount = Math.max(1, post.tickers.length);
+      const tickerWeight = Number(post.tickerWeights?.[symbol]) || 1;
+      const allocation = Math.sqrt(tickerCount);
       existing.mentions += 1;
-      existing.score += post.score || 0;
-      existing.comments += post.comments || 0;
+      existing.signalStrength += tickerWeight;
+      existing.directMentions += (post.directTickers || []).includes(symbol) ? 1 : 0;
+      existing.score += Math.min(post.score || 0, 1200) / allocation;
+      existing.comments += Math.min(post.comments || 0, 500) / allocation;
       existing.subreddits.add(post.subreddit);
       existing.posts.push({
         title: post.title,
@@ -1640,8 +1703,12 @@ async function fetchRedditTape(knownSymbols) {
       ...item,
       subreddits: [...item.subreddits],
       posts: item.posts.sort((a, b) => (b.score + b.comments) - (a.score + a.comments)).slice(0, 3),
-      attentionScore: item.mentions * 10 + item.score * 0.02 + item.comments * 0.05
+      score: Math.round(item.score),
+      comments: Math.round(item.comments),
+      signalStrength: roundedNumber(item.signalStrength, 1),
+      attentionScore: roundedNumber(item.mentions * 8 + item.directMentions * 16 + item.signalStrength * 10 + item.score * 0.015 + item.comments * 0.04, 2)
     }))
+    .filter((item) => item.directMentions > 0 || item.mentions >= 2)
     .sort((a, b) => b.attentionScore - a.attentionScore)
     .slice(0, 15);
 
@@ -1652,7 +1719,7 @@ async function fetchRedditTape(knownSymbols) {
   return {
     status: results.some((result) => result.status === "ready") ? "ready" : "error",
     generatedAt: new Date().toISOString(),
-    sourceNote: "Public Reddit JSON endpoints; use as sentiment and attention only, not verified news.",
+    sourceNote: "Public Reddit JSON endpoints across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
     subreddits: results.map(({ subreddit, segment, status, error, posts }) => ({
       subreddit,
       segment,
@@ -2108,13 +2175,31 @@ async function fetchFredSeries(series) {
 function firstSentence(text, maxLength = 240) {
   if (!text) return "";
   const clean = String(text).replace(/\s+/g, " ").trim();
-  const parts = clean.match(/.*?[.!?](?:\s|$)/g) || [];
+  const protectedText = clean
+    .replace(/\bU\.S\./g, "US_ABBR")
+    .replace(/\bU\.K\./g, "UK_ABBR")
+    .replace(/\bE\.U\./g, "EU_ABBR")
+    .replace(/\bNo\./g, "NO_ABBR")
+    .replace(/\bInc\./g, "INC_ABBR")
+    .replace(/\bLtd\./g, "LTD_ABBR")
+    .replace(/\bCorp\./g, "CORP_ABBR")
+    .replace(/\bCo\./g, "CO_ABBR");
+  const parts = protectedText.match(/.*?[.!?](?:\s|$)/g) || [];
   let sentence = "";
   for (const part of parts) {
     sentence = `${sentence} ${part.trim()}`.trim();
-    if (sentence.length >= 60 && !/\b(?:U\.S|U\.K|E\.U|Inc|Ltd|Co|Corp)\.$/.test(sentence)) break;
+    if (sentence.length >= 60) break;
   }
-  if (!sentence) sentence = clean;
+  if (!sentence) sentence = protectedText;
+  sentence = sentence
+    .replace(/US_ABBR/g, "U.S.")
+    .replace(/UK_ABBR/g, "U.K.")
+    .replace(/EU_ABBR/g, "E.U.")
+    .replace(/NO_ABBR/g, "No.")
+    .replace(/INC_ABBR/g, "Inc.")
+    .replace(/LTD_ABBR/g, "Ltd.")
+    .replace(/CORP_ABBR/g, "Corp.")
+    .replace(/CO_ABBR/g, "Co.");
   return sentence.length > maxLength ? `${sentence.slice(0, maxLength - 3).trim()}...` : sentence;
 }
 
@@ -2132,6 +2217,8 @@ function articleBriefs(sources, limit = 3) {
 function isGenericArticleText(value) {
   const text = String(value || "").trim();
   return /^(read our latest market commentary|stock market news, commentary|bond market updates|learn about the bond market|public .* research|markets and economy|stock market news|bond market commentary)\b/i.test(text)
+    || /\b(official energy statistics from the u\.?s\.? government|independent statistics and analysis|energy information administration)\b/i.test(text)
+    || /\b(short interest monitor|investing strategies for volatile markets|track stocks with elevated and rising short interest|midyear outlook for the economy and markets|today's options market update|looking to the futures)\b/i.test(text)
     || /\bwhere thought finds leadership\b/i.test(text)
     || /\buncovers powerful insights that move business and society forward\b/i.test(text);
 }
@@ -2370,28 +2457,124 @@ function buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols }) 
 function buildMarketDriverSummary(drivers, earningsTape, redditTape, officialMacroReleases = []) {
   const pieces = [];
   const used = new Set();
+  const officialMacroThemes = new Set(
+    officialMacroReleases
+      .filter((release) => release.status === "ready")
+      .flatMap((release) => release.themes || [])
+  );
   officialMacroReleases
     .filter((release) => release.status === "ready")
     .slice(0, 3)
     .forEach((release) => {
       pieces.push(`Macro release: ${release.marketRead}${release.id ? ` (${release.id})` : ""}`);
     });
-  const priorityThemes = ["Geopolitics and policy", "Rates and central banks", "Commodities and energy", "Macro and growth", "Earnings", "AI and semis", "Credit and liquidity"];
+  const priorityThemes = ["Geopolitics and policy", "Rates and central banks", "Commodities and energy", "Macro and growth", "AI and semis", "Credit and liquidity"];
   priorityThemes.forEach((theme) => {
+    if (officialMacroThemes.has(theme)) return;
     const driver = drivers
       .filter((item) => !used.has(item.id) && (item.themes || []).includes(theme))
       .sort((a, b) => driverThemeFit(b, theme) - driverThemeFit(a, theme))[0];
     if (!driver) return;
+    const conclusion = driverConclusion(driver, theme);
+    if (!conclusion) return;
     used.add(driver.id);
-    pieces.push(`${theme}: ${driver.summary}${driver.id ? ` (${driver.id})` : ""}`);
+    pieces.push(`${themeTakeawayLabel(theme)}: ${conclusion}${driver.id ? ` (${driver.id})` : ""}`);
   });
-  if (earningsTape.earningsMovers?.length) {
-    pieces.push(`Earnings movers: ${earningsTape.earningsMovers.slice(0, 3).map((mover) => `${mover.symbol} ${formatPercent(mover.changePct)}`).join(", ")} show where post-results dispersion is largest.`);
-  }
+  const earningsTakeaway = earningsSignalTakeaway(earningsTape);
+  if (earningsTakeaway) pieces.push(earningsTakeaway);
   if (redditTape.topTickers?.length) {
     pieces.push(`Retail attention: ${redditTape.topTickers.slice(0, 4).map((ticker) => ticker.symbol).join(", ")} are drawing the most Reddit ticker concentration; treat this as sentiment, not verified news.`);
   }
   return pieces.slice(0, 10);
+}
+
+function usefulMarketSentence(value, maxLength = 260) {
+  const sentence = firstSentence(cleanDailyReadText(value), maxLength)
+    .replace(/\s+-\s+(Axios|CNBC|MarketWatch|Yahoo Finance|Reuters|Bloomberg)$/i, "")
+    .trim();
+  if (!sentence || sentence.length < 45) return "";
+  if (/^(the\s+u\.?s\.?|the market|stocks|investors|markets)\.?$/i.test(sentence)) return "";
+  if (/^(the\s+u\.?s\.?|the market|stocks|investors|markets)\s*$/i.test(sentence)) return "";
+  if (/^what if\b/i.test(sentence)) return "";
+  if (isGenericArticleText(sentence)) return "";
+  if (!/\b(rose|fell|climbed|declined|weighs|supports|pressures|tightens|eases|drives|signals|raises|cuts|keeps|threatens|boosts|hurts|limits|confirms|challenges|prices|yields|inflation|oil|earnings|guidance|tariff|conflict|supply|demand|credit|rates?)\b/i.test(sentence)) return "";
+  return sentence;
+}
+
+function driverConclusion(driver, theme = "") {
+  const combined = [driver.title, driver.summary, driver.excerpt].map(cleanDailyReadText).join(" ");
+  if (theme === "Rates and central banks" && /\binflation problem is getting worse\b/i.test(combined)) {
+    return "Inflation pressure is worsening, so long-duration growth needs stricter confirmation before adding exposure.";
+  }
+  if (theme === "Rates and central banks" && /\b(producer price|ppi|consumer price|cpi|inflation)\b/i.test(combined) && /\b(worse|hot|higher|rose|increased)\b/i.test(combined)) {
+    return "Inflation data are running hot, so rates remain the main constraint on crowded momentum.";
+  }
+  if (theme === "Geopolitics and policy" && /\b(taiwan|u\.?s\.?-china|china|tariff|trade)\b/i.test(combined)) {
+    return "U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite.";
+  }
+  if (theme === "AI and semis" && /\b(cisco|ai infrastructure|hyperscaler|data center|networking supercycle)\b/i.test(combined)) {
+    return "Cisco's AI infrastructure orders reinforce the spending cycle behind the semiconductor and networking trade.";
+  }
+  const text = [driver.summary, driver.excerpt, driver.title].map(cleanDailyReadText).filter(Boolean);
+  for (const value of text) {
+    const sentence = usefulMarketSentence(value);
+    if (sentence) return sentence;
+  }
+  const title = cleanDailyReadText(driver.title);
+  if (title && !isGenericArticleText(title) && title.length >= 50 && /\b(warns|says|signals|pushes|pressures|jumps|pops|rises|falls|higher|lower|cuts|raises|inflation|tariff|policy|earnings|guidance|orders|yields|oil)\b/i.test(title)) {
+    return firstSentence(title, 220);
+  }
+  if (theme === "Rates and central banks" && /\b(yield|treasury|rate|inflation|ppi|cpi)\b/i.test(`${driver.title} ${driver.summary}`)) {
+    return "Rates are the constraint: hotter inflation or higher Treasury yields reduce tolerance for crowded long-duration growth.";
+  }
+  return "";
+}
+
+function themeTakeawayLabel(theme) {
+  if (theme === "Geopolitics and policy") return "Policy/geopolitics";
+  if (theme === "Rates and central banks") return "Rates";
+  if (theme === "Commodities and energy") return "Commodities";
+  if (theme === "Macro and growth") return "Macro";
+  if (theme === "AI and semis") return "AI/semis";
+  if (theme === "Credit and liquidity") return "Credit";
+  return theme || "Market drivers";
+}
+
+function earningsSignalTakeaway(earningsTape = {}) {
+  const movers = (earningsTape.earningsMovers || []).filter((item) => Number.isFinite(Number(item.changePct)));
+  if (!movers.length) return "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.";
+  const largeMovers = movers.filter((item) => Number(item.marketCap) >= 50_000_000_000);
+  const positive = movers.filter((item) => Number(item.changePct) > 0).length;
+  const negative = movers.filter((item) => Number(item.changePct) < 0).length;
+  const maxMove = Math.max(...movers.map((item) => Math.abs(Number(item.changePct))));
+  if (largeMovers.length >= 2) {
+    return `Earnings: Large-cap reporters are moving enough to affect index tone; focus on guidance read-throughs from ${largeMovers.slice(0, 4).map((item) => item.symbol).join(", ")} rather than the full mover list.`;
+  }
+  if (positive && negative && maxMove >= 8) {
+    return "Earnings: The mover screen is two-sided and mostly idiosyncratic, so it is a catalyst-risk check rather than a broad market signal.";
+  }
+  if (positive > negative * 2) {
+    return "Earnings: Post-report reactions skew positive, but confirm whether the strength clusters by sector before treating it as a broader risk-on signal.";
+  }
+  if (negative > positive * 2) {
+    return "Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation.";
+  }
+  return "Earnings: The earnings tape is mixed; use it to flag single-name catalyst risk, not to set the overall market regime.";
+}
+
+function marketDriverBodySentence(drivers = [], skipThemes = new Set()) {
+  const priorityThemes = ["Rates and central banks", "Geopolitics and policy", "Commodities and energy", "Macro and growth", "Credit and liquidity", "AI and semis"];
+  const selected = [];
+  for (const theme of priorityThemes) {
+    if (skipThemes.has(theme)) continue;
+    const driver = drivers
+      .filter((item) => (item.themes || []).includes(theme))
+      .sort((a, b) => driverThemeFit(b, theme) - driverThemeFit(a, theme))[0];
+    const conclusion = driverConclusion(driver || {}, theme);
+    if (conclusion && !selected.includes(conclusion)) selected.push(conclusion);
+    if (selected.length >= 2) break;
+  }
+  return selected.join(" ");
 }
 
 function driverThemeFit(driver, theme) {
@@ -2413,8 +2596,43 @@ function driverThemeFit(driver, theme) {
   if (!isGenericArticleText(driver.summary)) score += 8;
   if (isGenericArticleText(driver.title)) score -= 10;
   if (isGenericArticleText(driver.summary)) score -= 12;
+  if (!driverConclusion(driver, theme)) score -= 45;
+  if (/^what if\b/i.test(summary) || /^what if\b/i.test(title)) score -= 35;
+  if (/looking to the futures/i.test(title) && theme === "Rates and central banks") score -= 55;
   if (driver.freshness === "Since prior refresh") score += 6;
   return score;
+}
+
+function inflationReleaseTone(release = {}) {
+  const metrics = release.metrics || {};
+  const mom = Number(metrics.finalDemandPpiMoM ?? metrics.headlineCpiMoM ?? metrics.coreCpiMoM);
+  if (Number.isFinite(mom) && mom >= 0.4) return "Hot";
+  if (Number.isFinite(mom) && mom <= 0.1) return "Cooler";
+  return "Inflation";
+}
+
+function macroReleaseHeadline(release = {}) {
+  const event = release.event || release.title || "Macro data";
+  if (/producer price|consumer price|cpi|ppi/i.test(event)) {
+    return `${inflationReleaseTone(release)} ${event.replace(/^Consumer Price Index$/i, "CPI").replace(/^Producer Price Index$/i, "PPI")} keeps rates risk front and center.`;
+  }
+  if (/employment|payroll|unemployment|jobs/i.test(event)) {
+    return `${event} resets the growth and Fed-path debate.`;
+  }
+  return `${event} is the main macro input for today's risk check.`;
+}
+
+function macroReleaseBodySentence(release = {}) {
+  const event = release.event || release.title || "Macro data";
+  const read = release.marketRead || release.summary || "";
+  if (!read) return "";
+  if (/producer price|consumer price|cpi|ppi/i.test(event)) {
+    return `${event} is the risk anchor: ${read} That keeps position sizing tied to inflation and rates sensitivity.`;
+  }
+  if (/employment|payroll|unemployment|jobs/i.test(event)) {
+    return `${event} is the risk anchor: ${read} That matters for growth expectations and the Fed path.`;
+  }
+  return `${event} is the risk anchor: ${read}`;
 }
 
 function primaryTheme(themes = []) {
@@ -2527,10 +2745,42 @@ function cleanDailyReadText(value) {
     .trim();
 }
 
+function isUsefulTakeaway(value) {
+  const text = cleanDailyReadText(value);
+  if (!text || text.length < 35) return false;
+  if (/:\s*(?:the\s+)?u\.?s\.?\s*(?:\([^)]*\))?\.?$/i.test(text)) return false;
+  if (/^[A-Za-z /&-]+:\s*(?:\([^)]*\))?\.?$/i.test(text)) return false;
+  if (/^(?:The\s+)?(?:fresh\s+)?market tape is led by/i.test(text)) return false;
+  if (/^Earnings movers:/i.test(text)) return false;
+  if (/\bdispersion\b/i.test(text)) return false;
+  return /\b(so|because|after|as|with|while|therefore|keeps|means|argues|supports|pressures|tightens|eases|risk|watch|avoid|confirm|treat|focus|signal|rose|fell|climbed|above|below|clears|drove|driven|concentrated|unavailable)\b/i.test(text);
+}
+
 function cleanMemoText(value) {
   return cleanDailyReadText(value)
+    .replace(/\bMacro regime:\s*inflation cooling remains (?:a|the)?\s*(key|major|primary)?\s*risk\b/gi, "Macro regime: the key risk is that inflation does not cool fast enough")
+    .replace(/\binflation cooling remains (?:a|the)?\s*(key|major|primary)?\s*risk\b/gi, "the key risk is that inflation does not cool fast enough")
+    .replace(/\bcooling inflation remains (?:a|the)?\s*(key|major|primary)?\s*risk\b/gi, "the key risk is that inflation does not cool fast enough")
+    .replace(/\binflation cooling is (?:a|the)?\s*(key|major|primary)?\s*risk\b/gi, "the key risk is that inflation does not cool fast enough")
+    .replace(/\bCPI and PPI subsidence risk\b/gi, "whether CPI and PPI cool enough")
+    .replace(/\binflation subsidence risk\b/gi, "the risk that inflation does not cool fast enough")
+    .replace(/\bbroad-synced\b/gi, "broad")
     .replace(/\bnot provided\b/gi, "")
     .replace(/\branked low\b/gi, "ranked near the bottom of the model book")
+    .replace(/\bearnings dispersion is idiosyncratic\b/gi, "earnings reactions look idiosyncratic")
+    .replace(/\bdispersion risk\b/gi, "weak trend risk")
+    .replace(/\bhigh dispersion and RSI concerns\b/gi, "weak model ranks and RSI concerns")
+    .replace(/\bhigh dispersion in\s*/gi, "weak model score within the ")
+    .replace(/\bdispersion between\b/gi, "spread between")
+    .replace(/\bhigh dispersion\b/gi, "weak confirmation")
+    .replace(/\bdispersion\b/gi, "mixed reactions")
+    .replace(/\bbalance-stop ranges\b/gi, "trend-confirmation levels")
+    .replace(/\bkey stops\b/gi, "trend-confirmation levels")
+    .replace(/\btighten stops\b/gi, "tighten risk controls")
+    .replace(/\bstop-loss and chandelier rules\b/gi, "risk-control rules")
+    .replace(/\bprice-mrompt confirmational momentum\b/gi, "price and volume confirmation")
+    .replace(/\bmrompt\b/gi, "")
+    .replace(/\bInformation Technology-([A-Z]{2,6})\b/g, "Information Technology: $1")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -2593,17 +2843,22 @@ function dailyReadPassesFactGuardrails(dailyRead) {
     .trim();
   if (!text) return false;
   if (/forward return|SHAP|cross-asset liquidity|sector monolith|risk-on bid|свеж/i.test(text)) return false;
+  if (/\bdispersion\b/i.test(text)) return false;
+  if (/\bstop(?:-loss)?\b|chandelier/i.test(text)) return false;
+  if (/\binflation cooling (?:is|remains)\b.*\brisk\b/i.test(text)) return false;
+  if (/\bcooling inflation (?:is|remains)\b.*\brisk\b/i.test(text)) return false;
   if (/[\u0400-\u04FF]/.test(text)) return false;
   return true;
 }
 
 function cleanDailyRead(dailyRead) {
   if (!dailyRead) return null;
+  const cleanItem = (value) => removeAiStopMetricText(cleanMemoText(value)).replace(/[\][]/g, "").trim();
   return {
-    headline: firstSentence(cleanDailyReadText(dailyRead.headline), 150),
-    body: cleanDailyReadText(dailyRead.body),
-    keyTakeaways: (dailyRead.keyTakeaways || []).map(cleanDailyReadText).filter(Boolean).filter(usableDailyReadItem),
-    watchItems: (dailyRead.watchItems || []).map(cleanDailyReadText).filter(Boolean).filter(usableDailyReadItem)
+    headline: firstSentence(cleanItem(dailyRead.headline), 150),
+    body: cleanItem(dailyRead.body),
+    keyTakeaways: (dailyRead.keyTakeaways || []).map(cleanItem).filter(Boolean).filter(usableDailyReadItem).filter(isUsefulTakeaway),
+    watchItems: (dailyRead.watchItems || []).map(cleanItem).filter(Boolean).filter(usableDailyReadItem).filter(isUsefulTakeaway)
   };
 }
 
@@ -2653,45 +2908,51 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
   const regime = !technicalsFresh
     ? "Fresh technical data is unavailable"
     : breadth >= 55
-      ? "Risk appetite is broad"
+      ? "Breadth supports taking model-ranked longs, but macro risk still sets position size"
       : breadth >= 40
-        ? "Risk appetite is constructive but selective"
-        : "Risk appetite is narrow";
+        ? "Breadth is not strong enough for a blanket risk-on call"
+        : "Breadth is narrow, so keep long exposure concentrated in the cleanest setups";
   const fallbackHeadline = !technicalsFresh
     ? "Fresh technical data is unavailable; use macro, news, and model context with caution."
     : modelReady
-    ? `${regime}; model leadership is clustered in ${leaderText}, with ${topSector?.sector || "sector"} confirmation.`
+    ? `${regime}; leadership is concentrated in ${leaderText}.`
     : `${regime}; model-ranked momentum leaders are unavailable.`;
   const intelligenceHeadline = latestOfficialMacro
-    ? `${latestOfficialMacro.title || latestOfficialMacro.event} frames today's market read.`
+    ? macroReleaseHeadline(latestOfficialMacro)
     : topDrivers.length
-      ? `${headlineTheme(primaryTheme(topDrivers[0].themes))} frames today's market read.`
+      ? `${driverConclusion(topDrivers[0], primaryTheme(topDrivers[0].themes)) || headlineTheme(primaryTheme(topDrivers[0].themes))} sets the first read.`
       : fallbackHeadline;
   const macroReleaseLead = latestOfficialMacro
-    ? `The primary macro release is ${latestOfficialMacro.title || latestOfficialMacro.event}: ${latestOfficialMacro.marketRead}`
+    ? macroReleaseBodySentence(latestOfficialMacro)
     : "";
+  const macroThemes = new Set(macroReleaseLead ? (latestOfficialMacro?.themes || []) : []);
+  const driverSentence = marketDriverBodySentence(topDrivers, macroThemes);
   const driverLead = macroReleaseLead
     ? macroReleaseLead
-    : topDrivers.length
-      ? `The most relevant market drivers are ${[...new Set(topDrivers.slice(0, 5).map((driver) => headlineTheme(primaryTheme(driver.themes)).toLowerCase()))].slice(0, 3).join(", ")}.`
+    : driverSentence
+      ? driverSentence
       : "The current market-driver read is thin because few configured sources yielded current dated articles.";
-  const earningsLead = earningsMovers.length
-    ? `Earnings dispersion is visible in ${earningsMovers.slice(0, 3).map((item) => `${item.symbol} ${formatPercent(item.changePct)}`).join(", ")}.`
-    : "No large Yahoo mover matched the Nasdaq earnings calendar in this refresh.";
+  const secondaryDriverLead = macroReleaseLead && driverSentence ? driverSentence : "";
+  const earningsLead = earningsSignalTakeaway(marketIntelligence?.earnings || {});
   const redditLead = redditTickers.length
     ? `Retail attention is concentrated in ${redditTickers.slice(0, 4).map((item) => item.symbol).join(", ")}; treat that as sentiment, not verified news.`
     : "Reddit attention data was unavailable or did not produce clean ticker concentration.";
   const fallbackBody = !technicalsFresh
-    ? `${driverLead} ${earningsLead} ${redditLead} ${technicalStatusMessage} ${modelReady ? `The model file reports ${model.scoredCount} scored names as of ${model.asOfDate || "the latest available close"}, but price-derived fields should not be treated as current until the model scorer restores the technical tape.` : "Model-ranked single-name context is unavailable, so do not rely on stale ranks."}`
-    : `${regime}. ${driverLead} ${earningsLead} ${redditLead} The model read is secondary confirmation, with leadership concentrated in ${leaderText}.`;
+    ? [driverLead, secondaryDriverLead, earningsLead, technicalStatusMessage, modelReady ? `The model file reports ${model.scoredCount} scored names as of ${model.asOfDate || "the latest available close"}, but price-derived fields should not be treated as current until the model scorer restores the technical tape.` : "Model-ranked single-name context is unavailable, so do not rely on stale ranks."].filter(Boolean).join(" ")
+    : [
+        [driverLead, secondaryDriverLead].filter(Boolean).join(" "),
+        earningsLead,
+        `${redditLead} ${regime}; use the model as the single-name filter, with leadership concentrated in ${leaderText}.`
+      ].filter(Boolean).join(" ");
   const macroReleaseBullets = officialMacroReleases
     .filter((release) => release.status === "ready")
     .slice(0, 3)
     .map((release) => `Macro release: ${release.marketRead}${release.id ? ` (${release.id})` : ""}`);
-  const earningsBullet = marketBullets.find((item) => item.startsWith("Earnings movers:"));
+  const earningsBullet = marketBullets.find((item) => item.startsWith("Earnings:"));
   const retailBullet = marketBullets.find((item) => item.startsWith("Retail attention:"));
   const driverBullets = marketBullets
-    .filter((item) => !item.startsWith("Macro release:") && !item.startsWith("Earnings movers:") && !item.startsWith("Retail attention:"))
+    .filter((item) => !item.startsWith("Macro release:") && !item.startsWith("Earnings:") && !item.startsWith("Earnings movers:") && !item.startsWith("Retail attention:"))
+    .filter(isUsefulTakeaway)
     .slice(0, 2);
   const fallbackChanged = [
     ...macroReleaseBullets,
@@ -2711,7 +2972,7 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
       : "Desk call summary was unavailable in this snapshot.",
     aiFocus ? `AI memo: ${aiFocus}` : "AI memo was unavailable, so this read is based on deterministic model, macro, sector, and source data.",
     sourceBriefs.length ? `Research tape: ${sourceBriefs.join(" | ")}.` : "Research tape: no high-quality article briefs were extracted from the configured source pages."
-  ];
+  ].filter(isUsefulTakeaway);
   const fallbackWatch = [
     upcomingEvents.length ? `Macro risk: ${upcomingEvents.map((event) => `${event.event} on ${event.date}`).join("; ")}.` : "No upcoming macro events are currently listed in the local calendar.",
     modelReady && technicalsFresh
@@ -3215,7 +3476,32 @@ function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRe
     });
   });
   const deeperRead = normalizeDeeperReadPayload(parsed.deeperRead, sourceTape, validSourceRefs);
-  return { ...parsed, deeperRead, recommendations };
+  const avoidList = parsed.avoidList
+    ? {
+        ...parsed.avoidList,
+        summary: cleanMemoText(parsed.avoidList.summary),
+        sectors: (parsed.avoidList.sectors || []).map((item) => ({
+          ...item,
+          rationale: cleanMemoText(item.rationale)
+        })),
+        companies: (parsed.avoidList.companies || []).map((item) => ({
+          ...item,
+          rationale: cleanMemoText(item.rationale),
+          modelEvidence: cleanMemoText(item.modelEvidence)
+        }))
+      }
+    : parsed.avoidList;
+  return {
+    ...parsed,
+    headline: cleanMemoText(parsed.headline),
+    macroView: cleanMemoText(parsed.macroView),
+    dailyRead: cleanDailyRead(parsed.dailyRead) || parsed.dailyRead,
+    portfolioNotes: (parsed.portfolioNotes || []).map(cleanMemoText).filter(Boolean),
+    openQuestions: (parsed.openQuestions || []).map(cleanMemoText).filter(Boolean),
+    avoidList,
+    deeperRead,
+    recommendations
+  };
 }
 
 function likelyIrLink(anchorText, href) {

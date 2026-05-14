@@ -576,7 +576,7 @@ function renderMarketIntelligence() {
     "No clean Reddit ticker concentration was extracted in this snapshot.",
     (item) => `
       <strong>${esc(item.symbol)}</strong>
-      <span>${esc(item.mentions || 0)} mentions · ${esc(item.comments || 0)} comments · ${esc((item.subreddits || []).join(", "))}</span>
+      <span>${esc(item.mentions || 0)} filtered mentions${item.directMentions != null ? ` · ${esc(item.directMentions)} direct` : ""} · ${esc(item.comments || 0)} comments · ${esc((item.subreddits || []).join(", "))}</span>
       <small>Retail sentiment only; not verified news.</small>
     `
   );

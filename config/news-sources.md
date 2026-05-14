@@ -10,6 +10,10 @@ When adding official macro sources, prefer primary government or central-bank pa
 
 Freshness rule: stale source items should not drive the briefing. Ordinary article/commentary items must have a recent publication date inside the configured freshness window before they can appear in the Source Tape or influence the Daily Read. Official macro releases should be tied to the actual release timestamp, not the observation period. If a landing page is live but only exposes stale or undated items, the script should treat it as source coverage, not current evidence.
 
+Briefing quality rule: source rows are evidence, not conclusions. A Daily Read takeaway should never be a category label plus a fragment, a publisher name, or a bare source ID. It should translate the source into a market implication, for example: `Rates: Hot PPI pushed Treasury yields higher, so long-duration growth needs stricter confirmation. (M4)`. Do not elevate scattered stock outliers into an earnings theme unless they share a clear sector, factor, guidance, or market-cap read-through.
+
+Reddit / WallStreetBets rule: retail attention is useful only as a sentiment and crowding input. The script should filter generic daily threads, portfolio screenshots, and long ticker dumps before ranking tickers. If no clean concentration remains, the briefing should explicitly say the Reddit signal was not clean enough to use, not invent a Reddit takeaway.
+
 | Name | URL | Category | Cadence | Trust | Notes |
 |---|---|---|---|---|---|
 | J.P. Morgan Markets Insights | https://www.jpmorgan.com/insights/markets | Institution research | Weekly | High | Public markets and macro research hub. |
