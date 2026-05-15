@@ -3,10 +3,11 @@ name: Refresh Market Data
 on:
   schedule:
     # GitHub cron runs in UTC and can be delayed after the scheduled slot.
-    # These slots cover 5:11/5:31/5:51 AM and 4:11/4:31/4:51 PM Pacific
-    # across daylight saving time. Multiple attempts reduce the impact of
-    # GitHub's best-effort scheduled runner. The gate below refreshes only
-    # once per Pacific morning/evening window.
+    # These slots create a backstop window around the intended 5 AM and 4 PM
+    # Pacific refreshes across daylight saving time. GitHub's scheduled
+    # runners are best-effort, so multiple attempts reduce the chance that a
+    # delayed or dropped cron slot leaves the site stale. The gate below
+    # refreshes only once per Pacific morning/evening window.
     # The gate below evaluates the intended scheduled slot, not the delayed
     # runner start time, so late GitHub scheduling does not skip the refresh.
     - cron: "11 12 * * *"
@@ -15,12 +16,33 @@ on:
     - cron: "11 13 * * *"
     - cron: "31 13 * * *"
     - cron: "51 13 * * *"
+    - cron: "11 14 * * *"
+    - cron: "31 14 * * *"
+    - cron: "51 14 * * *"
+    - cron: "11 15 * * *"
+    - cron: "31 15 * * *"
+    - cron: "51 15 * * *"
+    - cron: "11 16 * * *"
+    - cron: "31 16 * * *"
+    - cron: "51 16 * * *"
     - cron: "11 23 * * *"
     - cron: "31 23 * * *"
     - cron: "51 23 * * *"
     - cron: "11 0 * * *"
     - cron: "31 0 * * *"
     - cron: "51 0 * * *"
+    - cron: "11 1 * * *"
+    - cron: "31 1 * * *"
+    - cron: "51 1 * * *"
+    - cron: "11 2 * * *"
+    - cron: "31 2 * * *"
+    - cron: "51 2 * * *"
+    - cron: "11 3 * * *"
+    - cron: "31 3 * * *"
+    - cron: "51 3 * * *"
+    - cron: "11 4 * * *"
+    - cron: "31 4 * * *"
+    - cron: "51 4 * * *"
   workflow_dispatch:
 
 env:
@@ -72,64 +94,18 @@ jobs:
             exit 0
           fi
 
-          case "$SCHEDULE" in
-            "11 12 * * *")
-              scheduled_hour=12
-              scheduled_minute=11
-              ;;
-            "31 12 * * *")
-              scheduled_hour=12
-              scheduled_minute=31
-              ;;
-            "51 12 * * *")
-              scheduled_hour=12
-              scheduled_minute=51
-              ;;
-            "11 13 * * *")
-              scheduled_hour=13
-              scheduled_minute=11
-              ;;
-            "31 13 * * *")
-              scheduled_hour=13
-              scheduled_minute=31
-              ;;
-            "51 13 * * *")
-              scheduled_hour=13
-              scheduled_minute=51
-              ;;
-            "11 23 * * *")
-              scheduled_hour=23
-              scheduled_minute=11
-              ;;
-            "31 23 * * *")
-              scheduled_hour=23
-              scheduled_minute=31
-              ;;
-            "51 23 * * *")
-              scheduled_hour=23
-              scheduled_minute=51
-              ;;
-            "11 0 * * *")
-              scheduled_hour=0
-              scheduled_minute=11
-              ;;
-            "31 0 * * *")
-              scheduled_hour=0
-              scheduled_minute=31
-              ;;
-            "51 0 * * *")
-              scheduled_hour=0
-              scheduled_minute=51
-              ;;
-            *)
-              echo "run_refresh=false" >> "$GITHUB_OUTPUT"
-              echo "Unknown schedule slot: $SCHEDULE"
-              exit 0
-              ;;
-          esac
+          set -- $SCHEDULE
+          scheduled_minute="$1"
+          scheduled_hour="$2"
+          if ! [[ "$scheduled_minute" =~ ^[0-9]+$ && "$scheduled_hour" =~ ^[0-9]+$ ]]; then
+            echo "run_refresh=false" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=unknown schedule slot: $SCHEDULE" >> "$GITHUB_OUTPUT"
+            echo "Unknown schedule slot: $SCHEDULE"
+            exit 0
+          fi
 
           python3 - "$scheduled_hour" "$scheduled_minute" > /tmp/pacific-window.env <<'PY'
-          from datetime import datetime, timezone
+          from datetime import datetime, timedelta, timezone
           from zoneinfo import ZoneInfo
           import json
           from pathlib import Path
@@ -147,11 +123,13 @@ jobs:
               scheduled_minute,
               tzinfo=timezone.utc,
           )
+          if scheduled_utc - actual_utc > timedelta(hours=1):
+              scheduled_utc -= timedelta(days=1)
           scheduled_pacific = scheduled_utc.astimezone(ZoneInfo("America/Los_Angeles"))
           delay_minutes = round((actual_utc - scheduled_utc).total_seconds() / 60)
-          if scheduled_pacific.hour == 5:
+          if 5 <= scheduled_pacific.hour <= 9:
               target_window = "morning"
-          elif scheduled_pacific.hour == 16:
+          elif 16 <= scheduled_pacific.hour <= 21:
               target_window = "evening"
           else:
               target_window = "off_window"
@@ -175,7 +153,7 @@ jobs:
           )
           should_run = target_window in {"morning", "evening"} and not already_refreshed
           if target_window == "off_window":
-              skip_reason = "scheduled slot is not 5 AM or 4 PM Pacific"
+              skip_reason = "scheduled slot is outside the Pacific refresh backstop windows"
           elif already_refreshed:
               skip_reason = f"{target_window} refresh already succeeded for {scheduled_pacific.date().isoformat()}"
           else:
@@ -207,6 +185,18 @@ jobs:
             echo "Skipping refresh: $(grep '^skip_reason=' /tmp/pacific-window.env | cut -d= -f2-)"
           fi
 
+      - name: Write skipped refresh summary
+        if: steps.pacific_time.outputs.run_refresh != 'true'
+        run: |
+          {
+            echo "### Refresh skipped"
+            echo ""
+            echo "- Scheduled slot: \`${{ github.event.schedule || 'manual' }}\`"
+            echo "- Target window: \`${{ steps.pacific_time.outputs.refresh_target_window || 'unknown' }}\`"
+            echo "- Target key: \`${{ steps.pacific_time.outputs.refresh_target_key || 'unknown' }}\`"
+            echo "- Reason: \`${{ steps.pacific_time.outputs.skip_reason || 'not in active refresh window' }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Set up Node
         if: steps.pacific_time.outputs.run_refresh == 'true'
         uses: actions/setup-node@v4
@@ -235,6 +225,7 @@ jobs:
 
       - name: Refresh snapshot
         if: steps.pacific_time.outputs.run_refresh == 'true'
+        timeout-minutes: 25
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5-nano
