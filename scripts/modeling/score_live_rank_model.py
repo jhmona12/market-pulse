@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -142,21 +143,26 @@ def load_constituents(max_symbols: int) -> tuple[pd.DataFrame, str]:
 def load_price_frame(symbol: str, years: int) -> tuple[str, pd.DataFrame | None, str | None]:
     config = run_config_for_years(years)
     expected_as_of = latest_expected_market_data_date()
-    try:
-        frame = fetch_yahoo_history(symbol, config.start_date, config.end_date)
-        if frame.empty:
-            raise ValueError("empty price history")
-        frame["date"] = pd.to_datetime(frame["date"])
-        frame = frame[frame["date"].dt.date <= expected_as_of].copy()
-        if frame.empty:
-            raise ValueError(f"empty price history through expected EOD date {expected_as_of.isoformat()}")
-        for column in ("open", "high", "low", "close", "volume"):
-            frame[column] = pd.to_numeric(frame[column], errors="coerce")
-        frame = frame.dropna(subset=["close"]).sort_values("date").reset_index(drop=True)
-        frame["symbol"] = symbol
-        return symbol, enrich_price_features(frame), None
-    except Exception as error:  # noqa: BLE001
-        return symbol, None, str(error)
+    last_error: Exception | None = None
+    for attempt in range(4):
+        try:
+            frame = fetch_yahoo_history(symbol, config.start_date, config.end_date)
+            if frame.empty:
+                raise ValueError("empty price history")
+            frame["date"] = pd.to_datetime(frame["date"])
+            frame = frame[frame["date"].dt.date <= expected_as_of].copy()
+            if frame.empty:
+                raise ValueError(f"empty price history through expected EOD date {expected_as_of.isoformat()}")
+            for column in ("open", "high", "low", "close", "volume"):
+                frame[column] = pd.to_numeric(frame[column], errors="coerce")
+            frame = frame.dropna(subset=["close"]).sort_values("date").reset_index(drop=True)
+            frame["symbol"] = symbol
+            return symbol, enrich_price_features(frame), None
+        except Exception as error:  # noqa: BLE001
+            last_error = error
+            if attempt < 3:
+                time.sleep(1.5 * (attempt + 1))
+    return symbol, None, str(last_error or "unknown error")
 
 
 def fetch_symbol_frames(symbols: list[str], years: int, max_workers: int) -> tuple[dict[str, pd.DataFrame], dict[str, str]]:
