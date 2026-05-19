@@ -434,7 +434,12 @@ Important implementation note: pushes made by GitHub's default `GITHUB_TOKEN` do
 
 The repo includes a separate Python modeling workflow for researching S&P 500 momentum signals. Raw history, research models, predictions, and reports are ignored by git. The production rank model and compact explainability artifact are exported separately into `models/rank/` so GitHub Actions and the static dashboard can use them.
 
-The current primary model is an XGBoost learning-to-rank model. It is designed to answer a daily portfolio-selection question: which current S&P 500 stocks look most likely to outperform their sector over the next 14 trading days?
+There are two intentionally separate model families:
+
+- **14-day tactical rank model:** production dashboard model for short-term model-ranked momentum and rebound setups.
+- **252-day long-horizon rank model:** local research model for one-year holding candidates. It reuses shared feature engineering, but has separate labels, datasets, reports, and model names.
+
+The current primary dashboard model is an XGBoost learning-to-rank model. It is designed to answer a daily portfolio-selection question: which current S&P 500 stocks look most likely to outperform their sector over the next 14 trading days?
 
 ### Label
 
@@ -471,6 +476,125 @@ Legacy/research labels still exist for comparison:
 
 - `label_outperform_spy_14d`: stock 14-day return minus SPY return `> 0`.
 - `meta_label_momentum_success`: candidate-only success label using a return hurdle and drawdown floor.
+
+### Long-Horizon Research Model
+
+The 252-day model is not wired into the public dashboard yet. It is a separate local research track designed to answer a different question: which current S&P 500 names look attractive enough to hold through a roughly one-year window?
+
+The long-horizon dataset is built with:
+
+```bash
+.venv-model/bin/python scripts/modeling/build_long_horizon_dataset.py
+```
+
+It writes ignored local artifacts under `data/modeling/`:
+
+```text
+data/modeling/features/long_horizon_training_dataset.csv.gz
+data/modeling/features/long_horizon_training_dataset_metadata.json
+data/modeling/models/xgboost_rank_sector252_research.json
+data/modeling/reports/xgboost_rank_sector252_*
+models/long-horizon/xgboost_rank_sector252_research.json
+models/long-horizon/xgboost_rank_sector252_research_metadata.json
+models/long-horizon/xgboost_rank_sector252_research_explainability.json
+models/long-horizon/xgboost_rank_sector252_walk_forward_baseline_comparison.json
+```
+
+The `data/modeling/` files are ignored local research outputs. The `models/long-horizon/` files are small committed research artifacts. They are separate from the dashboard's `models/rank/` production artifacts.
+
+The long-horizon label is deliberately named with a `252d` suffix:
+
+```text
+target column: relevance_grade_sector_neutral_252d
+return column: sector_neutral_forward_return_252d_after_cost
+entry: next trading day's adjusted close
+exit: 252 trading days after entry
+benchmark: matching sector ETF over the same entry/exit window
+```
+
+The model uses the same 156 shared price, liquidity, volatility, relative-strength, sector, and market-context features as the 14-day model. It does not reuse the 14-day target, 14-day reports, or production dashboard artifact names.
+
+Initial local research dataset:
+
+```text
+Rows:        963,047
+Symbols:     501
+Date range:  2017-05-04 to 2025-04-29
+Features:    156
+```
+
+The labeled date range ends earlier than the raw price cache because every row needs a full 252-trading-day future path.
+
+Initial long-horizon walk-forward command:
+
+```bash
+.venv-model/bin/python scripts/modeling/walk_forward_rank_model.py \
+  --dataset long_horizon_training_dataset.csv.gz \
+  --model-name xgboost_rank_sector252_walk_forward \
+  --target-column relevance_grade_sector_neutral_252d \
+  --return-column sector_neutral_forward_return_252d_after_cost \
+  --folds 2 \
+  --test-days 252 \
+  --validation-days 252 \
+  --embargo-days 252 \
+  --min-train-days 700 \
+  --num-boost-round 300 \
+  --early-stopping-rounds 25
+```
+
+Initial research results were directionally strong but should be treated as research-grade because the universe uses current S&P 500 constituents and one-year labels overlap heavily inside each daily test window:
+
+```text
+Combined top-decile 252D sector-neutral return: +38.94%
+Top-decile hit rate:                             58.9%
+Top-minus-bottom 252D spread:                    +41.16%
+Monthly cohort median top-decile return:         +37.34%
+Quarterly cohort median top-decile return:       +32.24%
+```
+
+The first compact hyperparameter sweep kept the inherited `current_default` rank settings as the best performer across two one-year walk-forward folds:
+
+```text
+Best preset:                 current_default
+Top-decile 252D return:      +38.44%
+Top-decile hit rate:         58.6%
+Top-minus-bottom spread:     +40.79%
+Median best iteration:       9.0
+```
+
+SHAP-style explainability for the research model is stored in:
+
+```text
+data/modeling/reports/xgboost_rank_sector252_research_shap_summary.csv
+data/modeling/reports/xgboost_rank_sector252_research_shap_summary.json
+models/long-horizon/xgboost_rank_sector252_research_explainability.json
+```
+
+The current SHAP read is important: the one-year model is mostly sorting on volatility, liquidity, and risk-regime features, with 12-month momentum showing up as a secondary input. The largest feature by mean absolute SHAP is `volatility_60d_pct_rank`, followed by illiquidity/dollar-volume measures and volatility relative to SPY/sector. That does not mean the model is useless; it means the current model should be understood as a risk-adjusted long-horizon ranker rather than a pure momentum model.
+
+The long-horizon model is now compared against simple rule-based baselines with:
+
+```bash
+.venv-model/bin/python scripts/modeling/evaluate_rank_baselines.py \
+  --predictions xgboost_rank_sector252_walk_forward_test_predictions.csv \
+  --output-name xgboost_rank_sector252_walk_forward_baseline_comparison \
+  --artifact-output models/long-horizon/xgboost_rank_sector252_walk_forward_baseline_comparison.json
+```
+
+Walk-forward baseline comparison:
+
+```text
+Strategy                     Daily mean   Monthly median   Quarterly median
+XGBoost rank model           +38.94%      +35.84%          +34.56%
+Sector-relative momentum     +34.00%      +27.92%          +29.10%
+12-1 month momentum          +31.96%      +27.71%          +27.71%
+Technical composite          +17.00%      +19.42%          +21.25%
+Low volatility                -3.35%       -4.59%           -5.49%
+```
+
+The XGBoost ranker is beating the simple baselines in this test, but sector-relative momentum is the key benchmark to keep watching. If this model is added to the dashboard, it should appear as a separate long-horizon research view with baseline-agreement labels, not as part of the 14-day Momentum Book.
+
+Before promoting this model to production, review point-in-time constituent bias, keep expanding monthly/quarterly cohort monitoring, run a broader hyperparameter sweep, and consider adding fundamentals such as valuation, profitability, leverage, and growth.
 
 ### Universe And Null Treatment
 
@@ -594,6 +718,7 @@ Modeling scripts:
 ```text
 scripts/modeling/fetch_training_data.py    Cache raw price and macro data locally
 scripts/modeling/build_training_dataset.py Build the labeled feature matrix
+scripts/modeling/build_long_horizon_dataset.py Build the separate 252D long-horizon feature matrix
 scripts/modeling/data_quality_report.py    Audit labels, nulls, outliers, and raw price alignment
 scripts/modeling/model_features.py         Shared feature definitions for train/live scoring parity
 scripts/modeling/train_xgboost_model.py    Train the XGBoost classifier and save reports
@@ -601,6 +726,7 @@ scripts/modeling/train_rank_model.py       Train the sector-neutral XGBoost lear
 scripts/modeling/train_meta_label_model.py Train the candidate-only momentum meta-label model
 scripts/modeling/walk_forward_rank_model.py Run embargoed walk-forward rank-model evaluation
 scripts/modeling/backtest_model.py         Compare model scores against baseline ranking strategies
+scripts/modeling/evaluate_rank_baselines.py Compare rank-model holdout rows with simple baseline rules
 scripts/modeling/explain_model.py          Generate XGBoost SHAP-style contribution summaries
 scripts/modeling/export_model_explainability.py Export compact SHAP metadata for the app
 scripts/modeling/export_production_rank_model.py Export the committed production rank model

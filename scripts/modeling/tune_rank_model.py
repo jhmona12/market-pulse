@@ -86,6 +86,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Tune XGBoost rank-model hyperparameters with walk-forward evaluation.")
     parser.add_argument("--dataset", default="training_dataset.csv.gz", help="Dataset filename inside data/modeling/features.")
     parser.add_argument("--output-name", default="xgboost_rank_sector14_tuning", help="Base name for tuning reports.")
+    parser.add_argument("--target-column", default=TARGET_COLUMN, help="Relevance-grade target column.")
+    parser.add_argument("--return-column", default=RETURN_COLUMN, help="Forward return column used for economic evaluation.")
     parser.add_argument(
         "--preset",
         action="append",
@@ -111,6 +113,8 @@ def evaluate_preset(
     folds: list[dict],
     feature_columns: list[str],
     preset: dict,
+    target_column: str,
+    return_column: str,
 ) -> dict:
     predictions = []
     fold_reports = []
@@ -122,6 +126,7 @@ def evaluate_preset(
             train,
             validation,
             feature_columns,
+            target_column=target_column,
             params=preset["params"],
             num_boost_round=preset["num_boost_round"],
             early_stopping_rounds=preset["early_stopping_rounds"],
@@ -130,18 +135,18 @@ def evaluate_preset(
         dtest = xgb.DMatrix(ordered_test[feature_columns].to_numpy(dtype=float), feature_names=feature_columns)
         ordered_test["predicted_rank_score"] = booster.predict(dtest)
         ordered_test["fold"] = fold["fold"]
-        predictions.append(ordered_test[["fold", "date", "symbol", RETURN_COLUMN, TARGET_COLUMN, "predicted_rank_score"]])
+        predictions.append(ordered_test[["fold", "date", "symbol", return_column, target_column, "predicted_rank_score"]])
         fold_reports.append(
             {
                 "fold": fold["fold"],
                 "best_iteration": int(booster.best_iteration),
                 "split": {key: value for key, value in fold.items() if not key.endswith("_dates")},
-                "test_metrics": evaluate_ranked(ordered_test, "predicted_rank_score"),
+                "test_metrics": evaluate_ranked(ordered_test, "predicted_rank_score", return_column, target_column),
             }
         )
     combined = pd.concat(predictions, ignore_index=True)
     return {
-        "combined_test_metrics": evaluate_ranked(combined, "predicted_rank_score"),
+        "combined_test_metrics": evaluate_ranked(combined, "predicted_rank_score", return_column, target_column),
         "folds": fold_reports,
     }
 
@@ -163,14 +168,14 @@ def main() -> None:
     summary_rows = []
     for name in preset_names:
         preset = TUNING_PRESETS[name]
-        report = evaluate_preset(dataset, folds, feature_columns, preset)
+        report = evaluate_preset(dataset, folds, feature_columns, preset, args.target_column, args.return_column)
         metrics = report["combined_test_metrics"]
         row = {
             "preset": name,
             "feature_count": len(feature_columns),
-            "top_decile_sector_neutral_return_14d": metrics["top_decile_sector_neutral_return_14d"],
+            "top_decile_return": metrics["top_decile_return"],
             "top_decile_hit_rate": metrics["top_decile_hit_rate"],
-            "top_minus_bottom_sector_neutral_return_14d": metrics["top_minus_bottom_sector_neutral_return_14d"],
+            "top_minus_bottom_return": metrics["top_minus_bottom_return"],
             "median_best_iteration": float(pd.Series([fold["best_iteration"] for fold in report["folds"]]).median()),
         }
         summary_rows.append(row)
@@ -184,19 +189,19 @@ def main() -> None:
             }
         )
         print(
-            f"{name}: top return {metrics['top_decile_sector_neutral_return_14d']:.4f} | "
+            f"{name}: top return {metrics['top_decile_return']:.4f} | "
             f"hit {metrics['top_decile_hit_rate']:.3f} | "
-            f"spread {metrics['top_minus_bottom_sector_neutral_return_14d']:.4f}"
+            f"spread {metrics['top_minus_bottom_return']:.4f}"
         )
 
-    summary = pd.DataFrame(summary_rows).sort_values("top_decile_sector_neutral_return_14d", ascending=False)
+    summary = pd.DataFrame(summary_rows).sort_values("top_decile_return", ascending=False)
     summary_path = REPORTS_DIR / f"{args.output_name}_summary.csv"
     summary.to_csv(summary_path, index=False)
     payload = {
         "generated_at": pd.Timestamp.now("UTC").isoformat(),
         "dataset": str(dataset_path.relative_to(ROOT)),
-        "target_column": TARGET_COLUMN,
-        "return_column": RETURN_COLUMN,
+        "target_column": args.target_column,
+        "return_column": args.return_column,
         "feature_count": len(feature_columns),
         "fold_count": len(folds),
         "test_days": args.test_days,

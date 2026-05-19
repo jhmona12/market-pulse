@@ -8,6 +8,7 @@ from common import FEATURES_DIR
 
 DEFAULT_DATASET_NAME = "training_dataset.csv.gz"
 TARGET_HORIZON = 14
+LONG_HORIZON_DAYS = 252
 
 LEGACY_TARGET_COLUMN = "label_outperform_spy_14d"
 RANK_TARGET_COLUMN = "relevance_grade_sector_neutral_14d"
@@ -15,6 +16,12 @@ META_TARGET_COLUMN = "meta_label_momentum_success"
 SECTOR_POSITIVE_TARGET_COLUMN = "label_sector_neutral_positive_14d"
 SECTOR_HURDLE_TARGET_COLUMN = "label_sector_neutral_hurdle_14d"
 RANK_RETURN_COLUMN = "sector_neutral_forward_return_14d_after_cost"
+
+LONG_LEGACY_TARGET_COLUMN = "label_outperform_spy_252d"
+LONG_RANK_TARGET_COLUMN = "relevance_grade_sector_neutral_252d"
+LONG_SECTOR_POSITIVE_TARGET_COLUMN = "label_sector_neutral_positive_252d"
+LONG_SECTOR_HURDLE_TARGET_COLUMN = "label_sector_neutral_hurdle_252d"
+LONG_RANK_RETURN_COLUMN = "sector_neutral_forward_return_252d_after_cost"
 
 IDENTITY_COLUMNS = {
     "date",
@@ -40,6 +47,19 @@ TARGET_COLUMNS = {
     RANK_TARGET_COLUMN,
     "candidate_momentum_setup",
     META_TARGET_COLUMN,
+    "forward_return_252d_next_close",
+    "spy_forward_return_252d_next_close",
+    "excess_return_252d",
+    "sector_forward_return_252d_next_close",
+    "sector_neutral_forward_return_252d",
+    LONG_RANK_RETURN_COLUMN,
+    "max_drawdown_252d_next_close",
+    "sector_max_drawdown_252d_next_close",
+    LONG_LEGACY_TARGET_COLUMN,
+    LONG_SECTOR_POSITIVE_TARGET_COLUMN,
+    LONG_SECTOR_HURDLE_TARGET_COLUMN,
+    "sector_neutral_forward_return_252d_pct_rank",
+    LONG_RANK_TARGET_COLUMN,
 }
 
 NON_FEATURE_COLUMNS = IDENTITY_COLUMNS | TARGET_COLUMNS

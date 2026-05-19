@@ -32,6 +32,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run embargoed walk-forward XGBoost rank-model evaluation.")
     parser.add_argument("--dataset", default="training_dataset.csv.gz", help="Dataset filename inside data/modeling/features.")
     parser.add_argument("--model-name", default="xgboost_rank_sector14_walk_forward", help="Base name for report outputs.")
+    parser.add_argument("--target-column", default=TARGET_COLUMN, help="Relevance-grade target column.")
+    parser.add_argument("--return-column", default=RETURN_COLUMN, help="Forward return column used for economic evaluation.")
     parser.add_argument("--folds", type=int, default=4, help="Number of recent non-overlapping test folds.")
     parser.add_argument("--test-days", type=int, default=63, help="Trading days per test fold.")
     parser.add_argument("--validation-days", type=int, default=126, help="Trading days per validation fold.")
@@ -77,12 +79,13 @@ def train_fold(
     train: pd.DataFrame,
     validation: pd.DataFrame,
     feature_columns: list[str],
+    target_column: str = TARGET_COLUMN,
     params: dict | None = None,
     num_boost_round: int = DEFAULT_NUM_BOOST_ROUND,
     early_stopping_rounds: int = DEFAULT_EARLY_STOPPING_ROUNDS,
 ) -> xgb.Booster:
-    dtrain = make_dmatrix(train, feature_columns)
-    dvalidation = make_dmatrix(validation, feature_columns)
+    dtrain = make_dmatrix(train, feature_columns, target_column)
+    dvalidation = make_dmatrix(validation, feature_columns, target_column)
     return xgb.train(
         params=params or DEFAULT_RANK_PARAMS,
         dtrain=dtrain,
@@ -116,6 +119,7 @@ def main() -> None:
             train,
             validation,
             feature_columns,
+            target_column=args.target_column,
             params=params,
             num_boost_round=args.num_boost_round,
             early_stopping_rounds=args.early_stopping_rounds,
@@ -134,12 +138,12 @@ def main() -> None:
                     "symbol",
                     "sector",
                     "close",
-                    RETURN_COLUMN,
-                    TARGET_COLUMN,
-                    "candidate_momentum_setup",
+                    args.return_column,
+                    args.target_column,
                     "predicted_rank_score",
                     "predicted_probability",
                 ]
+                + (["candidate_momentum_setup"] if "candidate_momentum_setup" in ordered_test.columns else [])
             ].copy()
         )
         fold_reports.append(
@@ -150,7 +154,7 @@ def main() -> None:
                 "test_rows": int(len(test)),
                 "best_iteration": int(booster.best_iteration),
                 "split": {key: value for key, value in fold.items() if not key.endswith("_dates")},
-                "test_metrics": evaluate_ranked(ordered_test, "predicted_rank_score"),
+                "test_metrics": evaluate_ranked(ordered_test, "predicted_rank_score", args.return_column, args.target_column),
             }
         )
 
@@ -173,18 +177,18 @@ def main() -> None:
         "min_symbol_rows": args.min_symbol_rows,
         "removed_symbol_count": len(removed_symbols),
         "removed_symbols": removed_symbols,
-        "target_column": TARGET_COLUMN,
-        "return_column": RETURN_COLUMN,
+        "target_column": args.target_column,
+        "return_column": args.return_column,
         "params": params,
         "num_boost_round": args.num_boost_round,
         "early_stopping_rounds": args.early_stopping_rounds,
-        "combined_test_metrics": evaluate_ranked(combined, "predicted_rank_score"),
+        "combined_test_metrics": evaluate_ranked(combined, "predicted_rank_score", args.return_column, args.target_column),
         "folds": fold_reports,
     }
     write_json(report, REPORTS_DIR / f"{args.model_name}_report.json")
     print(
         f"Wrote walk-forward rank predictions to {(REPORTS_DIR / f'{args.model_name}_test_predictions.csv').relative_to(ROOT)} | "
-        f"combined top decile return {report['combined_test_metrics']['top_decile_sector_neutral_return_14d']:.4f}"
+        f"combined top decile return {report['combined_test_metrics']['top_decile_return']:.4f}"
     )
 
 

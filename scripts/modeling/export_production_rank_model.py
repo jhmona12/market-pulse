@@ -22,6 +22,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dataset", default="training_dataset.csv.gz", help="Dataset filename inside data/modeling/features.")
     parser.add_argument("--output-dir", default="models/rank", help="Committed model artifact directory.")
     parser.add_argument("--model-name", default="xgboost_rank_sector14_tuned", help="Base name for exported artifacts.")
+    parser.add_argument("--target-column", default=TARGET_COLUMN, help="Relevance-grade target column.")
+    parser.add_argument("--return-column", default=RETURN_COLUMN, help="Forward return column used for metadata.")
     parser.add_argument(
         "--num-boost-round",
         type=int,
@@ -38,7 +40,7 @@ def main() -> None:
     dataset["date"] = pd.to_datetime(dataset["date"])
     feature_columns = feature_columns_for(args.dataset)
 
-    dtrain = make_dmatrix(dataset, feature_columns)
+    dtrain = make_dmatrix(dataset, feature_columns, args.target_column)
     booster = xgb.train(
         params=DEFAULT_RANK_PARAMS,
         dtrain=dtrain,
@@ -57,8 +59,8 @@ def main() -> None:
         "generated_at": pd.Timestamp.now("UTC").isoformat(),
         "dataset": str(dataset_path.relative_to(ROOT)),
         "model_path": str(model_path.relative_to(ROOT)),
-        "target_column": TARGET_COLUMN,
-        "return_column": RETURN_COLUMN,
+        "target_column": args.target_column,
+        "return_column": args.return_column,
         "feature_count": len(feature_columns),
         "feature_columns": feature_columns,
         "training_rows": int(len(dataset)),

@@ -224,12 +224,14 @@ def add_cross_sectional_model_features(dataset: pd.DataFrame, round_trip_cost: f
             "price_vs_sector_sma_50": dataset["price_vs_sma_50"] - dataset["sector_price_vs_sma_50"],
             "price_vs_sector_sma_200": dataset["price_vs_sma_200"] - dataset["sector_price_vs_sma_200"],
             "rsi_vs_sector_etf": dataset["rsi_14"] - dataset["sector_rsi_14"],
-            "sector_neutral_forward_return_14d": dataset["forward_return_14d_next_close"]
-            - dataset["sector_forward_return_14d_next_close"],
         },
         index=dataset.index,
     )
-    if round_trip_cost is not None:
+    if {"forward_return_14d_next_close", "sector_forward_return_14d_next_close"}.issubset(dataset.columns):
+        derived_features["sector_neutral_forward_return_14d"] = (
+            dataset["forward_return_14d_next_close"] - dataset["sector_forward_return_14d_next_close"]
+        )
+    if round_trip_cost is not None and "sector_neutral_forward_return_14d" in derived_features.columns:
         derived_features[RANK_RETURN_COLUMN] = derived_features["sector_neutral_forward_return_14d"] - round_trip_cost
     dataset = pd.concat([dataset, derived_features], axis=1).copy()
 

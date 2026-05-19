@@ -81,7 +81,10 @@ def main() -> None:
         "rows_explained": int(len(frame)),
         "feature_count": int(len(feature_names)),
         "mean_bias_margin": float(np.mean(bias)),
-        "notes": "XGBoost pred_contribs values are SHAP-style margin contributions; positive values push the outperformance probability higher.",
+        "notes": (
+            "XGBoost pred_contribs values are SHAP-style margin contributions; "
+            "positive values push the model's rank score higher."
+        ),
         "top_features": summary.head(args.top_n).to_dict(orient="records"),
     }
     write_json(payload, REPORTS_DIR / f"{args.model_name}_shap_summary.json")

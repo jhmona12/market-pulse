@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 
 import numpy as np
 import pandas as pd
@@ -82,6 +83,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train an XGBoost learning-to-rank model for sector-neutral momentum selection.")
     parser.add_argument("--dataset", default="training_dataset.csv.gz", help="Dataset filename inside data/modeling/features.")
     parser.add_argument("--model-name", default="xgboost_rank_sector14", help="Base name for model outputs.")
+    parser.add_argument("--target-column", default=TARGET_COLUMN, help="Relevance-grade target column.")
+    parser.add_argument("--return-column", default=RETURN_COLUMN, help="Forward return column used for economic evaluation.")
     parser.add_argument("--test-days", type=int, default=252, help="Approximate number of trading days to reserve for test.")
     parser.add_argument("--validation-days", type=int, default=252, help="Approximate number of trading days to reserve for validation.")
     parser.add_argument("--embargo-days", type=int, default=14, help="Trading-date embargo between train/validation/test windows.")
@@ -121,9 +124,11 @@ def split_dates(dataset: pd.DataFrame, validation_days: int, test_days: int, emb
         raise ValueError("Not enough history to create embargoed train/validation/test splits.")
 
     test_start_index = len(unique_dates) - test_days
-    validation_start_index = test_start_index - validation_days
+    validation_end_index = test_start_index - embargo_days
+    validation_start_index = validation_end_index - validation_days
     train_end_index = max(0, validation_start_index - embargo_days)
-    validation_end_index = max(validation_start_index, test_start_index - embargo_days)
+    if train_end_index <= 0 or validation_start_index < 0 or validation_end_index <= validation_start_index:
+        raise ValueError("Not enough history to create non-empty embargoed train/validation/test splits.")
 
     metadata = {
         "train_end": unique_dates[train_end_index - 1].date().isoformat() if train_end_index else None,
@@ -144,18 +149,28 @@ def group_sizes(frame: pd.DataFrame) -> list[int]:
     return frame.groupby("date", sort=False).size().astype(int).tolist()
 
 
-def make_dmatrix(frame: pd.DataFrame, feature_columns: list[str]) -> xgb.DMatrix:
+def make_dmatrix(frame: pd.DataFrame, feature_columns: list[str], target_column: str = TARGET_COLUMN) -> xgb.DMatrix:
     ordered = frame.sort_values(["date", "symbol"]).reset_index(drop=True)
     matrix = xgb.DMatrix(
         ordered[feature_columns].to_numpy(dtype=float),
-        label=ordered[TARGET_COLUMN].to_numpy(dtype=float),
+        label=ordered[target_column].to_numpy(dtype=float),
         feature_names=feature_columns,
     )
     matrix.set_group(group_sizes(ordered))
     return matrix
 
 
-def evaluate_ranked(frame: pd.DataFrame, score_column: str) -> dict:
+def horizon_suffix(return_column: str) -> str:
+    match = re.search(r"_(\d+d)(?:_|$)", return_column)
+    return match.group(1) if match else "forward"
+
+
+def evaluate_ranked(
+    frame: pd.DataFrame,
+    score_column: str,
+    return_column: str = RETURN_COLUMN,
+    target_column: str = TARGET_COLUMN,
+) -> dict:
     daily_rows = []
     for _, group in frame.groupby("date", sort=True):
         ranked = group.sort_values(score_column, ascending=False)
@@ -164,19 +179,23 @@ def evaluate_ranked(frame: pd.DataFrame, score_column: str) -> dict:
         bottom = ranked.tail(bucket_count)
         daily_rows.append(
             {
-                "top_return": top[RETURN_COLUMN].mean(),
-                "top_hit_rate": (top[RETURN_COLUMN] > 0).mean(),
-                "bottom_return": bottom[RETURN_COLUMN].mean(),
-                "spread": top[RETURN_COLUMN].mean() - bottom[RETURN_COLUMN].mean(),
-                "avg_grade": top[TARGET_COLUMN].mean(),
+                "top_return": top[return_column].mean(),
+                "top_hit_rate": (top[return_column] > 0).mean(),
+                "bottom_return": bottom[return_column].mean(),
+                "spread": top[return_column].mean() - bottom[return_column].mean(),
+                "avg_grade": top[target_column].mean(),
             }
         )
     daily = pd.DataFrame(daily_rows)
+    suffix = horizon_suffix(return_column)
     return {
-        "top_decile_sector_neutral_return_14d": float(daily["top_return"].mean()),
+        "top_decile_return": float(daily["top_return"].mean()),
+        "bottom_decile_return": float(daily["bottom_return"].mean()),
+        "top_minus_bottom_return": float(daily["spread"].mean()),
+        f"top_decile_sector_neutral_return_{suffix}": float(daily["top_return"].mean()),
         "top_decile_hit_rate": float(daily["top_hit_rate"].mean()),
-        "bottom_decile_sector_neutral_return_14d": float(daily["bottom_return"].mean()),
-        "top_minus_bottom_sector_neutral_return_14d": float(daily["spread"].mean()),
+        f"bottom_decile_sector_neutral_return_{suffix}": float(daily["bottom_return"].mean()),
+        f"top_minus_bottom_sector_neutral_return_{suffix}": float(daily["spread"].mean()),
         "top_decile_average_relevance_grade": float(daily["avg_grade"].mean()),
     }
 
@@ -199,8 +218,8 @@ def main() -> None:
     validation = dataset[dataset["date"].isin(validation_dates)].copy()
     test = dataset[dataset["date"].isin(test_dates)].copy()
 
-    dtrain = make_dmatrix(train, feature_columns)
-    dvalidation = make_dmatrix(validation, feature_columns)
+    dtrain = make_dmatrix(train, feature_columns, args.target_column)
+    dvalidation = make_dmatrix(validation, feature_columns, args.target_column)
 
     params = rank_params_from_args(args)
     booster = xgb.train(
@@ -226,12 +245,14 @@ def main() -> None:
         "symbol",
         "sector",
         "close",
-        RETURN_COLUMN,
-        TARGET_COLUMN,
-        "candidate_momentum_setup",
+        args.return_column,
+        args.target_column,
         "predicted_rank_score",
         "predicted_probability",
     ]
+    if "candidate_momentum_setup" in ordered_test.columns:
+        prediction_columns.insert(-2, "candidate_momentum_setup")
+    prediction_columns = list(dict.fromkeys(prediction_columns))
     predictions = ordered_test[prediction_columns].copy()
     predictions = predictions.sort_values(["date", "predicted_rank_score"], ascending=[True, False])
     predictions.to_csv(REPORTS_DIR / f"{args.model_name}_test_predictions.csv", index=False)
@@ -248,11 +269,11 @@ def main() -> None:
         "removed_symbols": removed_symbols,
         "feature_count": len(feature_columns),
         "split": split_metadata,
-        "target_column": TARGET_COLUMN,
-        "return_column": RETURN_COLUMN,
+        "target_column": args.target_column,
+        "return_column": args.return_column,
         "best_iteration": int(booster.best_iteration),
         "params": params,
-        "test_metrics": evaluate_ranked(ordered_test, "predicted_rank_score"),
+        "test_metrics": evaluate_ranked(ordered_test, "predicted_rank_score", args.return_column, args.target_column),
         "top_features": [
             {"feature": feature, "gain": float(gain)}
             for feature, gain in sorted(booster.get_score(importance_type="gain").items(), key=lambda item: item[1], reverse=True)[:25]
@@ -261,7 +282,7 @@ def main() -> None:
     write_json(report, REPORTS_DIR / f"{args.model_name}_report.json")
     print(
         f"Saved rank model to {model_base.with_suffix('.json').relative_to(ROOT)} | "
-        f"top decile sector-neutral return {report['test_metrics']['top_decile_sector_neutral_return_14d']:.4f}"
+        f"top decile return {report['test_metrics']['top_decile_return']:.4f}"
     )
 
 
