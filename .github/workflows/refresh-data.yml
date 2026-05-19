@@ -3,21 +3,25 @@ name: Refresh Market Data
 on:
   schedule:
     # GitHub cron runs in UTC and can be delayed after the scheduled slot.
-    # These slots create two attempts around the intended 5 AM and 4 PM Pacific
-    # refreshes across daylight saving time. GitHub's scheduled runners are
-    # best-effort, so the second attempt is a backstop if the first one is
-    # delayed or dropped. The gate below refreshes only once per Pacific
-    # morning/evening window.
+    # These slots cover the intended 5 AM and 4 PM Pacific refreshes, plus the
+    # following Pacific hour as a backstop, across daylight saving and standard
+    # time. GitHub's scheduled runners are best-effort, so backup slots reduce
+    # the chance that a delayed or dropped cron slot leaves the site stale. The
+    # gate below refreshes only once per Pacific morning/evening window.
     # The gate below evaluates the intended scheduled slot, not the delayed
     # runner start time, so late GitHub scheduling does not skip the refresh.
     - cron: "11 12 * * *"
     - cron: "41 12 * * *"
     - cron: "11 13 * * *"
     - cron: "41 13 * * *"
+    - cron: "11 14 * * *"
+    - cron: "41 14 * * *"
     - cron: "11 23 * * *"
     - cron: "41 23 * * *"
     - cron: "11 0 * * *"
     - cron: "41 0 * * *"
+    - cron: "11 1 * * *"
+    - cron: "41 1 * * *"
   workflow_dispatch:
 
 env:
@@ -102,9 +106,9 @@ jobs:
               scheduled_utc -= timedelta(days=1)
           scheduled_pacific = scheduled_utc.astimezone(ZoneInfo("America/Los_Angeles"))
           delay_minutes = round((actual_utc - scheduled_utc).total_seconds() / 60)
-          if scheduled_pacific.hour == 5:
+          if 5 <= scheduled_pacific.hour <= 6:
               target_window = "morning"
-          elif scheduled_pacific.hour == 16:
+          elif 16 <= scheduled_pacific.hour <= 17:
               target_window = "evening"
           else:
               target_window = "off_window"
