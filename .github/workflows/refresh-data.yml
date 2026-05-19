@@ -226,10 +226,20 @@ jobs:
         run: node scripts/write-refresh-status.mjs failure "Refresh workflow failed before completion; inspect the linked GitHub Actions run."
 
       - name: Commit refresh outputs
+        id: commit_outputs
         if: always() && steps.pacific_time.outputs.run_refresh == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "$GITHUB_REF_NAME"
+          remote_sha="$(git rev-parse "origin/$GITHUB_REF_NAME")"
+          local_sha="$(git rev-parse HEAD)"
+          if [ "$local_sha" != "$remote_sha" ]; then
+            echo "Remote branch advanced during this refresh; skipping commit and Pages deploy to avoid overwriting newer output."
+            echo "remote_changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "remote_changed=false" >> "$GITHUB_OUTPUT"
           git add data/snapshot.json data/model-scorebook.json data/model-monitoring.json data/model-reference-cache.json data/market-cap-cache.json data/deeper-read-history.json data/refresh-status.json data/macro-calendar.json
           if git diff --cached --quiet; then
             echo "No refresh output changes to commit."
@@ -239,7 +249,7 @@ jobs:
           fi
 
       - name: Prepare static site
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_outputs.outputs.remote_changed != 'true'
         run: |
           mkdir -p public/data public/config
           cp index.html styles.css app.js public/
@@ -251,16 +261,16 @@ jobs:
           cp config/runtime.json public/config/runtime.json
 
       - name: Configure Pages
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_outputs.outputs.remote_changed != 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_outputs.outputs.remote_changed != 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
 
       - name: Deploy Pages
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_outputs.outputs.remote_changed != 'true'
         id: deployment
         uses: actions/deploy-pages@v4

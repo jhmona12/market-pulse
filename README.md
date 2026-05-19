@@ -417,6 +417,7 @@ When the refresh runs successfully, it:
 - Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, model date, and row counts
 - Commits the updated snapshot, scorebook, refresh status, market-cap cache, and reference cache back to `main` if any changed
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
+- Skips its own commit/deploy cleanly if `main` advanced while a delayed refresh was running, which prevents an older scheduled run from overwriting a newer manual refresh
 
 If model scoring fails, the workflow writes a failure status and deploys that diagnostic file with the last available dashboard data instead of silently publishing a model-less "success" snapshot.
 
