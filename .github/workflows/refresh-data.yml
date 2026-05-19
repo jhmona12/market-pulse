@@ -3,46 +3,21 @@ name: Refresh Market Data
 on:
   schedule:
     # GitHub cron runs in UTC and can be delayed after the scheduled slot.
-    # These slots create a backstop window around the intended 5 AM and 4 PM
-    # Pacific refreshes across daylight saving time. GitHub's scheduled
-    # runners are best-effort, so multiple attempts reduce the chance that a
-    # delayed or dropped cron slot leaves the site stale. The gate below
-    # refreshes only once per Pacific morning/evening window.
+    # These slots create two attempts around the intended 5 AM and 4 PM Pacific
+    # refreshes across daylight saving time. GitHub's scheduled runners are
+    # best-effort, so the second attempt is a backstop if the first one is
+    # delayed or dropped. The gate below refreshes only once per Pacific
+    # morning/evening window.
     # The gate below evaluates the intended scheduled slot, not the delayed
     # runner start time, so late GitHub scheduling does not skip the refresh.
     - cron: "11 12 * * *"
-    - cron: "31 12 * * *"
-    - cron: "51 12 * * *"
+    - cron: "41 12 * * *"
     - cron: "11 13 * * *"
-    - cron: "31 13 * * *"
-    - cron: "51 13 * * *"
-    - cron: "11 14 * * *"
-    - cron: "31 14 * * *"
-    - cron: "51 14 * * *"
-    - cron: "11 15 * * *"
-    - cron: "31 15 * * *"
-    - cron: "51 15 * * *"
-    - cron: "11 16 * * *"
-    - cron: "31 16 * * *"
-    - cron: "51 16 * * *"
+    - cron: "41 13 * * *"
     - cron: "11 23 * * *"
-    - cron: "31 23 * * *"
-    - cron: "51 23 * * *"
+    - cron: "41 23 * * *"
     - cron: "11 0 * * *"
-    - cron: "31 0 * * *"
-    - cron: "51 0 * * *"
-    - cron: "11 1 * * *"
-    - cron: "31 1 * * *"
-    - cron: "51 1 * * *"
-    - cron: "11 2 * * *"
-    - cron: "31 2 * * *"
-    - cron: "51 2 * * *"
-    - cron: "11 3 * * *"
-    - cron: "31 3 * * *"
-    - cron: "51 3 * * *"
-    - cron: "11 4 * * *"
-    - cron: "31 4 * * *"
-    - cron: "51 4 * * *"
+    - cron: "41 0 * * *"
   workflow_dispatch:
 
 env:
@@ -127,9 +102,9 @@ jobs:
               scheduled_utc -= timedelta(days=1)
           scheduled_pacific = scheduled_utc.astimezone(ZoneInfo("America/Los_Angeles"))
           delay_minutes = round((actual_utc - scheduled_utc).total_seconds() / 60)
-          if 5 <= scheduled_pacific.hour <= 9:
+          if scheduled_pacific.hour == 5:
               target_window = "morning"
-          elif 16 <= scheduled_pacific.hour <= 21:
+          elif scheduled_pacific.hour == 16:
               target_window = "evening"
           else:
               target_window = "off_window"

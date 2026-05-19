@@ -139,7 +139,7 @@ PORT=4174 npm run dev:local
 
 ## Refreshing Data
 
-GitHub Actions runs the full refresh from `.github/workflows/refresh-data.yml`. Because GitHub's scheduled runner is best-effort and can delay or drop individual scheduled runs, the workflow makes three attempts per target window: 7:11, 7:31, and 7:51 AM Pacific, plus 5:11, 5:31, and 5:51 PM Pacific. The workflow checks `data/refresh-status.json` before doing work and refreshes only once per Pacific morning/evening window.
+GitHub Actions runs the full refresh from `.github/workflows/refresh-data.yml`. Because GitHub's scheduled runner is best-effort and can delay or drop individual scheduled runs, the workflow makes two attempts per target window: shortly after 5 AM Pacific and shortly after 4 PM Pacific, with a 30-minute backup attempt for each. The workflow checks `data/refresh-status.json` before doing work and refreshes only once per Pacific morning/evening window.
 
 Run the refresh script:
 
@@ -402,9 +402,9 @@ The repository includes a GitHub Actions workflow at:
 .github/workflows/refresh-data.yml
 ```
 
-It is configured to refresh twice daily shortly after 5 AM Pacific and 4 PM Pacific. Because GitHub cron runs in UTC, the workflow schedules `12:11/12:31/12:51` and `13:11/13:31/13:51` UTC for the morning slot, plus `23:11/23:31/23:51` and `00:11/00:31/00:51` UTC for the afternoon slot. The alternate UTC hour covers daylight saving and standard time; the Pacific-time gate only runs the slot whose intended scheduled time maps to either 5 AM or 4 PM in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
+It is configured to refresh twice daily shortly after 5 AM Pacific and 4 PM Pacific. Because GitHub cron runs in UTC, the workflow schedules `12:11/12:41` and `13:11/13:41` UTC for the morning slot, plus `23:11/23:41` and `00:11/00:41` UTC for the afternoon slot. The alternate UTC hour covers daylight saving and standard time; the Pacific-time gate only runs the slot whose intended scheduled time maps to either 5 AM or 4 PM in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
 
-The schedule intentionally avoids minute `0`. GitHub documents that scheduled workflows may be delayed during high-load periods, especially at the start of every hour, and that queued scheduled jobs can be dropped. Running at minutes `11`, `31`, and `51` gives each window multiple attempts while keeping the refresh close to the requested 5 AM and 4 PM Pacific review times.
+The schedule intentionally avoids minute `0`. GitHub documents that scheduled workflows may be delayed during high-load periods, especially at the start of every hour, and that queued scheduled jobs can be dropped. Running at minutes `11` and `41` gives each window a backup attempt while keeping the schedule easier to audit.
 
 When the refresh runs successfully, it:
 
