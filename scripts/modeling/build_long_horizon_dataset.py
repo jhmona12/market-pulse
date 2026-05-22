@@ -15,10 +15,13 @@ from build_training_dataset import (
 from common import FEATURES_DIR, PRICES_DIR, REFERENCE_DIR, ROOT, SECTOR_ETFS, write_json
 from model_features import add_cross_sectional_model_features, model_feature_columns
 from schema import (
+    LONG_DRAWDOWN_ADJUSTED_RETURN_COLUMN,
+    LONG_DRAWDOWN_ADJUSTED_TARGET_COLUMN,
     LONG_HORIZON_DAYS,
     LONG_LEGACY_TARGET_COLUMN,
     LONG_RANK_RETURN_COLUMN,
     LONG_RANK_TARGET_COLUMN,
+    LONG_RELATIVE_DRAWDOWN_COLUMN,
     LONG_SECTOR_HURDLE_TARGET_COLUMN,
     LONG_SECTOR_POSITIVE_TARGET_COLUMN,
 )
@@ -45,6 +48,21 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=0.03,
         help="Diagnostic annual sector-neutral return hurdle for the positive-hurdle label.",
+    )
+    parser.add_argument(
+        "--drawdown-adjustment-weight",
+        type=float,
+        default=0.5,
+        help=(
+            "Weight applied to relative forward max drawdown when building the alternate path-quality label. "
+            "A stock with a 10 percentage-point smaller drawdown than its sector receives a 5 percentage-point label boost at the default."
+        ),
+    )
+    parser.add_argument(
+        "--drawdown-adjustment-clip",
+        type=float,
+        default=0.5,
+        help="Absolute cap on the relative drawdown term before applying the path-quality weight.",
     )
     parser.add_argument(
         "--include-macro",
@@ -201,6 +219,16 @@ def main() -> None:
         dataset[f"forward_return_{horizon}d_next_close"] - dataset[f"sector_forward_return_{horizon}d_next_close"]
     )
     dataset[LONG_RANK_RETURN_COLUMN] = dataset[f"sector_neutral_forward_return_{horizon}d"] - round_trip_cost
+    dataset[LONG_RELATIVE_DRAWDOWN_COLUMN] = (
+        dataset[f"max_drawdown_{horizon}d_next_close"] - dataset[f"sector_max_drawdown_{horizon}d_next_close"]
+    )
+    clipped_relative_drawdown = dataset[LONG_RELATIVE_DRAWDOWN_COLUMN].clip(
+        lower=-abs(args.drawdown_adjustment_clip),
+        upper=abs(args.drawdown_adjustment_clip),
+    )
+    dataset[LONG_DRAWDOWN_ADJUSTED_RETURN_COLUMN] = (
+        dataset[LONG_RANK_RETURN_COLUMN] + args.drawdown_adjustment_weight * clipped_relative_drawdown
+    )
     feature_columns = model_feature_columns(dataset)
     missing_feature_columns = [column for column in feature_columns if column not in dataset.columns]
     if missing_feature_columns:
@@ -215,6 +243,8 @@ def main() -> None:
         LONG_RANK_RETURN_COLUMN,
         f"max_drawdown_{horizon}d_next_close",
         f"sector_max_drawdown_{horizon}d_next_close",
+        LONG_RELATIVE_DRAWDOWN_COLUMN,
+        LONG_DRAWDOWN_ADJUSTED_RETURN_COLUMN,
     ]
     dataset = dataset.replace([np.inf, -np.inf], np.nan)
     dataset = dataset.dropna(subset=[*target_columns, *feature_columns])
@@ -234,6 +264,19 @@ def main() -> None:
         [4, 3, 0, 1],
         default=2,
     ).astype(int)
+    dataset[f"drawdown_adjusted_sector_neutral_return_{horizon}d_pct_rank"] = dataset.groupby("date")[
+        LONG_DRAWDOWN_ADJUSTED_RETURN_COLUMN
+    ].rank(pct=True)
+    dataset[LONG_DRAWDOWN_ADJUSTED_TARGET_COLUMN] = np.select(
+        [
+            dataset[f"drawdown_adjusted_sector_neutral_return_{horizon}d_pct_rank"] >= 0.90,
+            dataset[f"drawdown_adjusted_sector_neutral_return_{horizon}d_pct_rank"] >= 0.80,
+            dataset[f"drawdown_adjusted_sector_neutral_return_{horizon}d_pct_rank"] <= 0.10,
+            dataset[f"drawdown_adjusted_sector_neutral_return_{horizon}d_pct_rank"] <= 0.20,
+        ],
+        [4, 3, 0, 1],
+        default=2,
+    ).astype(int)
 
     output_columns = [
         "date",
@@ -246,6 +289,8 @@ def main() -> None:
         LONG_SECTOR_HURDLE_TARGET_COLUMN,
         f"sector_neutral_forward_return_{horizon}d_pct_rank",
         LONG_RANK_TARGET_COLUMN,
+        f"drawdown_adjusted_sector_neutral_return_{horizon}d_pct_rank",
+        LONG_DRAWDOWN_ADJUSTED_TARGET_COLUMN,
         *feature_columns,
     ]
     dataset = dataset[output_columns]
@@ -265,10 +310,15 @@ def main() -> None:
         "exit_timing": f"{horizon} trading days after entry",
         "target_column": LONG_RANK_TARGET_COLUMN,
         "return_column": LONG_RANK_RETURN_COLUMN,
+        "alternate_target_column": LONG_DRAWDOWN_ADJUSTED_TARGET_COLUMN,
+        "alternate_return_column": LONG_DRAWDOWN_ADJUSTED_RETURN_COLUMN,
         "label_outperform_spy_rate": float(dataset[LONG_LEGACY_TARGET_COLUMN].mean()),
         "sector_neutral_positive_rate": float(dataset[LONG_SECTOR_POSITIVE_TARGET_COLUMN].mean()),
         "sector_neutral_hurdle": args.sector_hurdle,
         "sector_neutral_hurdle_rate": float(dataset[LONG_SECTOR_HURDLE_TARGET_COLUMN].mean()),
+        "drawdown_adjustment_weight": args.drawdown_adjustment_weight,
+        "drawdown_adjustment_clip": args.drawdown_adjustment_clip,
+        "drawdown_adjusted_top_decile_rate": float((dataset[LONG_DRAWDOWN_ADJUSTED_TARGET_COLUMN] == 4).mean()),
         "feature_columns": feature_columns,
         "include_macro": bool(args.include_macro),
         "round_trip_cost_bps": args.round_trip_cost_bps,
@@ -278,7 +328,10 @@ def main() -> None:
             "Macro observation-date features remain disabled by default to avoid release-date leakage.",
         ],
     }
-    write_json(metadata, FEATURES_DIR / "long_horizon_training_dataset_metadata.json")
+    metadata_name = args.output_name.replace(".csv.gz", "_metadata.json")
+    write_json(metadata, FEATURES_DIR / metadata_name)
+    if args.output_name == "long_horizon_training_dataset.csv.gz":
+        write_json(metadata, FEATURES_DIR / "long_horizon_training_dataset_metadata.json")
     print(f"Wrote {len(dataset)} rows across {dataset['symbol'].nunique()} symbols to {output_path.relative_to(ROOT)}")
 
 

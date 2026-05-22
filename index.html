@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Morning Desk</title>
-    <link rel="stylesheet" href="styles.css?v=20260507-daily-read-width" />
+    <link rel="stylesheet" href="styles.css?v=20260522-strategy-lens" />
   </head>
   <body>
     <main class="shell">
@@ -22,18 +22,20 @@
         <button class="view-tab active" type="button" data-view-target="briefing">Briefing</button>
         <button class="view-tab" type="button" data-view-target="scoreboard">SP 500 Model Scoreboard</button>
         <button class="view-tab" type="button" data-view-target="top-decile">Top Decile Monitor</button>
+        <button class="view-tab" type="button" data-view-target="long-horizon">Long-Horizon Book</button>
       </nav>
 
       <div class="view-panel active" id="briefingView">
         <nav class="jump-nav" aria-label="Report sections">
           <a href="#daily-read">Daily Read</a>
-          <a href="#deeper-read">Deeper Read</a>
+          <a href="#model-lens">Model Lens</a>
           <a href="#ai-memo">AI Memo</a>
+          <a href="#deeper-read">Deeper Read</a>
           <a href="#sector-performance">Sectors</a>
-          <a href="#desk-calls">Desk Calls</a>
           <a href="#momentum-book">Momentum</a>
-          <a href="#ticker-lab" id="tickerLabNav">Ticker Lab</a>
           <a href="#stay-away">Stay Away</a>
+          <a href="#desk-calls">Desk Calls</a>
+          <a href="#ticker-lab" id="tickerLabNav">Ticker Lab</a>
           <a href="#macro-calendar">Calendar</a>
           <a href="#macro-pulse">Macro</a>
           <a href="#source-tape-section">Sources</a>
@@ -75,19 +77,18 @@
             </div>
           </article>
 
-          <article class="panel deeper-read-panel" id="deeper-read">
+          <article class="panel model-lens-panel" id="model-lens">
             <div class="panel-title">
-              <span>Deeper Read</span>
-              <span id="deeperReadMeta">Last 7 days</span>
+              <span>Model Lens</span>
+              <span id="modelLensMeta">14D + 1Y</span>
             </div>
-            <p id="deeperReadSummary"></p>
-            <div class="deeper-read-grid" id="deeperReadList"></div>
+            <div class="model-lens-layout" id="modelLens"></div>
           </article>
 
           <article class="panel ai-panel" id="ai-memo">
             <div class="panel-title">
               <span>AI Strategy Memo</span>
-              <span id="aiMeta">Macro + momentum</span>
+              <span id="aiMeta">Macro + tactical + 1Y</span>
             </div>
             <h2 id="aiHeadline">Waiting for AI synthesis</h2>
             <p id="aiMacroView"></p>
@@ -104,6 +105,15 @@
             </div>
           </article>
 
+          <article class="panel deeper-read-panel" id="deeper-read">
+            <div class="panel-title">
+              <span>Deeper Read</span>
+              <span id="deeperReadMeta">Last 7 days</span>
+            </div>
+            <p id="deeperReadSummary"></p>
+            <div class="deeper-read-grid" id="deeperReadList"></div>
+          </article>
+
           <article class="panel sector-panel" id="sector-performance">
             <div class="panel-title">
               <span>Sector Performance</span>
@@ -112,20 +122,30 @@
             <div class="sector-grid" id="sectorGrid"></div>
           </article>
 
-          <article class="panel recommendations-panel" id="desk-calls">
-            <div class="panel-title">
-              <span>Desk Calls</span>
-              <span>Research actions</span>
-            </div>
-            <div class="recommendation-list" id="recommendationList"></div>
-          </article>
-
           <article class="panel opportunities-panel" id="momentum-book">
             <div class="panel-title">
-              <span>Momentum Book</span>
+              <span>Tactical Momentum Book</span>
               <span id="bookMeta">End-of-day</span>
             </div>
             <div class="opportunity-list" id="opportunityList"></div>
+          </article>
+
+          <article class="panel avoid-panel" id="stay-away">
+            <div class="panel-title">
+              <span>Stay Away</span>
+              <span>Lowest model ranks</span>
+            </div>
+            <p id="avoidSummary" class="section-summary"></p>
+            <div class="avoid-sector-list" id="avoidSectors"></div>
+            <div class="avoid-list" id="avoidList"></div>
+          </article>
+
+          <article class="panel recommendations-panel" id="desk-calls">
+            <div class="panel-title">
+              <span>Tactical Desk Calls</span>
+              <span>14D setup details</span>
+            </div>
+            <div class="recommendation-list" id="recommendationList"></div>
           </article>
 
           <article class="panel ticker-lab-panel" id="ticker-lab">
@@ -144,16 +164,6 @@
               </div>
             </form>
             <div id="tickerLabResults" class="ticker-lab-results"></div>
-          </article>
-
-          <article class="panel avoid-panel" id="stay-away">
-            <div class="panel-title">
-              <span>Stay Away</span>
-              <span>Lowest model ranks</span>
-            </div>
-            <p id="avoidSummary" class="section-summary"></p>
-            <div class="avoid-sector-list" id="avoidSectors"></div>
-            <div class="avoid-list" id="avoidList"></div>
           </article>
 
           <article class="panel calendar-panel" id="macro-calendar">
@@ -303,8 +313,79 @@
           </div>
         </article>
       </section>
+
+      <section class="view-panel long-horizon-view" id="longHorizonView" hidden>
+        <article class="panel scoreboard-panel long-horizon-panel">
+          <div class="panel-title">
+            <span>Long-Horizon Book</span>
+            <span id="longHorizonMeta">Loading research model</span>
+          </div>
+          <div class="top-decile-summary long-horizon-summary" id="longHorizonSummary"></div>
+          <div class="long-horizon-metric-notes" id="longHorizonMetricNotes"></div>
+
+          <div class="long-horizon-section">
+            <div class="panel-title compact-title">
+              <span>One-Year Scoreboard</span>
+              <span>Searchable current S&P 500 lens</span>
+            </div>
+            <div class="scoreboard-controls">
+              <label class="scoreboard-search">
+                <span>Search</span>
+                <input id="longHorizonSearch" type="search" placeholder="Ticker, company, sector, industry" autocomplete="off" />
+              </label>
+              <label class="scoreboard-sector">
+                <span>Sector</span>
+                <select id="longHorizonSector">
+                  <option value="">All sectors</option>
+                </select>
+              </label>
+            </div>
+            <div class="scoreboard-table-wrap long-horizon-table-wrap">
+              <table class="scoreboard-table long-horizon-table">
+                <thead>
+                  <tr>
+                    <th><button type="button" data-long-sort="longModelRank">Rank</button></th>
+                    <th><button type="button" data-long-sort="symbol">Ticker</button></th>
+                    <th><button type="button" data-long-sort="name">Company</button></th>
+                    <th><button type="button" data-long-sort="industry">Industry</button></th>
+                    <th><button type="button" data-long-sort="marketCapValue">Market Cap</button></th>
+                    <th><button type="button" data-long-sort="longModelScore">1Y Score</button></th>
+                    <th><button type="button" data-long-sort="longModelPercentile">1Y Percentile</button></th>
+                    <th><button type="button" data-long-sort="tacticalModelPercentile">14D Percentile</button></th>
+                    <th><button type="button" data-long-sort="return60">60D</button></th>
+                    <th><button type="button" data-long-sort="ytdReturn">YTD</button></th>
+                    <th><button type="button" data-long-sort="agreementLabel">Read</button></th>
+                  </tr>
+                </thead>
+                <tbody id="longHorizonRows">
+                  <tr>
+                    <td colspan="11">Loading long-horizon candidates.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="long-horizon-grid">
+            <section class="long-horizon-section">
+              <div class="panel-title compact-title">
+                <span>Baseline Check</span>
+                <span>Median top-decile returns</span>
+              </div>
+              <div class="long-horizon-list" id="longHorizonBaselines"></div>
+            </section>
+            <section class="long-horizon-section">
+              <div class="panel-title compact-title">
+                <span>What Drives It</span>
+                <span>SHAP feature summary</span>
+              </div>
+              <div class="long-horizon-list" id="longHorizonFeatures"></div>
+            </section>
+          </div>
+        </article>
+      </section>
     </main>
 
-    <script type="module" src="app.js?v=20260509-top-decile-monitor"></script>
+    <script type="module" src="app.js?v=20260522-strategy-lens"></script>
   </body>
 </html>

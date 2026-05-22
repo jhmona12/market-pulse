@@ -205,6 +205,26 @@ const state = {
     recentEntrants: [],
     methodology: []
   },
+  longHorizon: {
+    status: "loading",
+    generatedAt: null,
+    sourceGeneratedAt: null,
+    asOfDate: null,
+    modelMetadata: {},
+    labelSummaries: [],
+    labelComparison: [],
+    rows: [],
+    rowCount: 0,
+    topCandidates: [],
+    trends: {},
+    baselineComparison: {},
+    shapTopFeatures: [],
+    methodology: [],
+    query: "",
+    sector: "",
+    sortKey: "longModelRank",
+    sortDirection: "asc"
+  },
   tickerLab: {
     enabled: true,
     apiReady: false,
@@ -263,6 +283,17 @@ function pct(value) {
 function displayPct(value) {
   if (!Number.isFinite(Number(value))) return "n/a";
   return pct(value);
+}
+
+function displayReturnDecimal(value) {
+  if (!Number.isFinite(Number(value))) return "n/a";
+  return pct(Number(value) * 100);
+}
+
+function displayPercentile(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "n/a";
+  return `${(number * 100).toFixed(1)}%`;
 }
 
 function displayScore(value) {
@@ -431,6 +462,107 @@ function activationChip(item) {
   if (item?.setupType !== "model_rebound_watch" || !hasNumericValue(item.reboundActivationPrice)) return "";
   const windowDays = item.reboundActivationWindowDays || 5;
   return `<span class="stop-chip activation-chip" title="Requires an end-of-day close above this level within ${esc(windowDays)} trading days">Activation: ${money(item.reboundActivationPrice)}</span>`;
+}
+
+function percentilePoint(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return null;
+  return number <= 1 ? number * 100 : number;
+}
+
+function displayPercentilePoint(value) {
+  const number = percentilePoint(value);
+  if (!Number.isFinite(number)) return "n/a";
+  return `${number.toFixed(0)}%`;
+}
+
+function isNotMomentumSetup(item) {
+  const tags = [...(item?.setupTags || []), ...(item?.tacticalSetupTags || [])].join(" ");
+  return /not momentum|activation pending|rebound watch/i.test(tags) || item?.setupType === "model_rebound_watch" || item?.tacticalSetupType === "model_rebound_watch";
+}
+
+function isMomentumConfirmedSetup(item) {
+  const tags = [...(item?.setupTags || []), ...(item?.tacticalSetupTags || [])].join(" ");
+  return /momentum confirmed/i.test(tags) && !isNotMomentumSetup(item);
+}
+
+function longHorizonRowsBySymbol() {
+  return new Map((state.longHorizon.rows || []).map((row) => [row.symbol, row]));
+}
+
+function scorebookRowsBySymbol() {
+  return new Map((state.scorebook.rows || []).map((row) => [row.symbol, row]));
+}
+
+function combinedLongHorizonRows() {
+  const scoreMap = scorebookRowsBySymbol();
+  return (state.longHorizon.rows || []).map((row) => {
+    const tactical = scoreMap.get(row.symbol) || {};
+    return {
+      ...tactical,
+      ...row,
+      modelRank: tactical.modelRank ?? row.tacticalModelRank,
+      modelPercentile: tactical.modelPercentile ?? row.tacticalModelPercentile,
+      modelScore: tactical.modelScore,
+      setupType: tactical.setupType ?? row.tacticalSetupType,
+      setupTags: tactical.setupTags?.length ? tactical.setupTags : row.tacticalSetupTags || [],
+      stopSellPrice: tactical.stopSellPrice,
+      stopSellDistancePct: tactical.stopSellDistancePct
+    };
+  });
+}
+
+function dominantSector(rows) {
+  const groups = new Map();
+  rows.forEach((row) => {
+    const sector = row.sector || "Unclassified";
+    const existing = groups.get(sector) || { sector, count: 0, symbols: [] };
+    existing.count += 1;
+    if (existing.symbols.length < 6 && row.symbol) existing.symbols.push(row.symbol);
+    groups.set(sector, existing);
+  });
+  return [...groups.values()].sort((a, b) => b.count - a.count || a.sector.localeCompare(b.sector))[0] || null;
+}
+
+function renderModelLensList(title, subtitle, rows, emptyText) {
+  const content = rows.length
+    ? rows
+        .slice(0, 5)
+        .map((row) => {
+          const tacticalPct = displayPercentilePoint(row.modelPercentile ?? row.tacticalModelPercentile);
+          const longPct = displayPercentilePoint(row.longModelPercentile);
+          const read = row.agreementLabel || (isMomentumConfirmedSetup(row) ? "Momentum confirmed" : "Monitor");
+          return `
+            <article class="model-lens-item">
+              <header>
+                <div>
+                  <strong>${esc(row.symbol || "n/a")}</strong>
+                  <span>${esc(row.name || row.sector || "Model-ranked name")}</span>
+                </div>
+                <em>${esc(read)}</em>
+              </header>
+              <div class="model-lens-metrics">
+                <span>14D ${esc(tacticalPct)}</span>
+                <span>1Y ${esc(longPct)}</span>
+                ${row.return60 != null ? `<span>60D ${esc(displayPct(row.return60))}</span>` : ""}
+              </div>
+              <small>${esc(row.sector || "Unclassified")}${row.marketCap ? ` · ${esc(row.marketCap)}` : ""}</small>
+              <div class="setup-chips">${stopSellChip(row)}</div>
+            </article>
+          `;
+        })
+        .join("")
+    : `<div class="empty-state">${esc(emptyText)}</div>`;
+
+  return `
+    <section class="model-lens-list">
+      <div>
+        <strong>${esc(title)}</strong>
+        <span>${esc(subtitle)}</span>
+      </div>
+      ${content}
+    </section>
+  `;
 }
 
 function renderList(target, items) {
@@ -719,6 +851,96 @@ function renderAiRecommendations() {
 
   renderList($("#aiPortfolioNotes"), ai.portfolioNotes || []);
   renderList($("#aiOpenQuestions"), ai.openQuestions || []);
+}
+
+function renderModelLens() {
+  const target = $("#modelLens");
+  const meta = $("#modelLensMeta");
+  if (!target || !meta) return;
+
+  const longRows = combinedLongHorizonRows();
+  const longMap = longHorizonRowsBySymbol();
+  const scoreRows = state.scorebook.rows || [];
+  const longReady = state.longHorizon.status === "ready" && longRows.length;
+  const tacticalReady = state.scorebook.status === "ready" && scoreRows.length;
+  const asOf = state.scorebook.asOfDate || state.longHorizon.asOfDate;
+  meta.textContent = `${tacticalReady ? "14D ready" : "14D missing"} · ${longReady ? "1Y ready" : "1Y missing"}${asOf ? ` · ${formatShortDate(asOf)}` : ""}`;
+
+  if (!longReady && !tacticalReady) {
+    target.innerHTML = `<div class="empty-state">Model lens will populate after the short-term and long-horizon scorebooks load.</div>`;
+    return;
+  }
+
+  const bothStrongAll = longRows
+    .filter((row) => percentilePoint(row.longModelPercentile) >= 90 && percentilePoint(row.modelPercentile ?? row.tacticalModelPercentile) >= 90 && isMomentumConfirmedSetup(row))
+    .sort((a, b) => {
+      const aScore = percentilePoint(a.longModelPercentile) + percentilePoint(a.modelPercentile ?? a.tacticalModelPercentile);
+      const bScore = percentilePoint(b.longModelPercentile) + percentilePoint(b.modelPercentile ?? b.tacticalModelPercentile);
+      return bScore - aScore || Number(a.longModelRank || 9999) - Number(b.longModelRank || 9999);
+    });
+  const strategicWatchAll = longRows
+    .filter((row) => percentilePoint(row.longModelPercentile) >= 90 && !isMomentumConfirmedSetup(row))
+    .sort((a, b) => Number(a.longModelRank || 9999) - Number(b.longModelRank || 9999));
+  const tacticalOnlyAll = scoreRows
+    .map((row) => ({ ...row, ...(longMap.get(row.symbol) || {}) }))
+    .filter((row) => {
+      const longPct = percentilePoint(row.longModelPercentile);
+      return percentilePoint(row.modelPercentile) >= 90 && isMomentumConfirmedSetup(row) && (!Number.isFinite(longPct) || longPct < 90);
+    })
+    .sort((a, b) => Number(a.modelRank || 9999) - Number(b.modelRank || 9999));
+
+  const tacticalTop = scoreRows
+    .filter((row) => percentilePoint(row.modelPercentile) >= 90)
+    .sort((a, b) => Number(a.modelRank || 9999) - Number(b.modelRank || 9999));
+  const tacticalSector = dominantSector(tacticalTop);
+  const longSector = state.longHorizon.trends?.sectorLeadership?.[0] || dominantSector(longRows.filter((row) => percentilePoint(row.longModelPercentile) >= 90));
+  const sectorText = longSector && tacticalSector
+    ? `${longSector.sector} leads 1Y; ${tacticalSector.sector} leads 14D`
+    : "Sector leadership pending";
+
+  target.innerHTML = `
+    <div class="model-lens-primer">
+      <article>
+        <strong>14D tactical model</strong>
+        <span>Use this for timing, current momentum, stop discipline, and whether a name belongs in the active trading book.</span>
+      </article>
+      <article>
+        <strong>1Y strategic model</strong>
+        <span>Use this for longer-horizon candidates, sector-relative durability, and names worth tracking even before momentum confirms.</span>
+      </article>
+      <article>
+        <strong>Combined read</strong>
+        <span>Agreement is the cleanest signal. Disagreement is still useful, but it changes the action: tactical trade, watchlist, or avoid.</span>
+      </article>
+    </div>
+    <div class="model-lens-summary">
+      <div class="monitor-card">
+        <span>Both Models Agree</span>
+        <strong>${esc(bothStrongAll.length)}</strong>
+        <small>Top 1Y names that also have confirmed 14D momentum</small>
+      </div>
+      <div class="monitor-card">
+        <span>Long-Horizon Watch</span>
+        <strong>${esc(strategicWatchAll.length)}</strong>
+        <small>High 1Y ranks without tactical confirmation yet</small>
+      </div>
+      <div class="monitor-card">
+        <span>Tactical Only</span>
+        <strong>${esc(tacticalOnlyAll.length)}</strong>
+        <small>Short-term momentum leaders without top-decile 1Y confirmation</small>
+      </div>
+      <div class="monitor-card">
+        <span>Sector Read</span>
+        <strong>${esc(sectorText)}</strong>
+        <small>${esc(longSector?.symbols?.length ? `1Y examples: ${longSector.symbols.slice(0, 5).join(", ")}` : "Waiting for sector clusters")}</small>
+      </div>
+    </div>
+    <div class="model-lens-lists">
+      ${renderModelLensList("Best Agreement", "Candidates where timing and longer-horizon ranking point the same way", bothStrongAll, "No names currently clear both the 1Y rank and 14D momentum-confirmation filters.")}
+      ${renderModelLensList("Strategic Watch", "Longer-horizon names where the model likes the setup but timing is not confirmed", strategicWatchAll, "No long-horizon watch names are available.")}
+      ${renderModelLensList("Tactical Only", "Momentum trades that should be treated as shorter-term unless the 1Y model improves into the top decile", tacticalOnlyAll, "No tactical-only leaders are available.")}
+    </div>
+  `;
 }
 
 function renderAvoidList() {
@@ -1239,6 +1461,278 @@ function renderTopDecileMonitor() {
     .join("");
 }
 
+function decimalReturnClass(value) {
+  if (!Number.isFinite(Number(value))) return "";
+  return Number(value) < 0 ? "negative" : "positive";
+}
+
+function findLongHorizonCohort(labelSummary, cohortName) {
+  return labelSummary?.[cohortName] || {};
+}
+
+function longHorizonComparisonRow(label, cohort) {
+  return (state.longHorizon.labelComparison || []).find((row) => row.label === label && row.cohort === cohort) || null;
+}
+
+function displayLivePercentile(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "n/a";
+  return `${number.toFixed(1)}%`;
+}
+
+function longHorizonSortValue(row, key) {
+  const value = row?.[key];
+  if (
+    [
+      "longModelRank",
+      "marketCapValue",
+      "longModelScore",
+      "longModelPercentile",
+      "tacticalModelPercentile",
+      "return60",
+      "ytdReturn"
+    ].includes(key)
+  ) {
+    return Number.isFinite(Number(value)) ? Number(value) : null;
+  }
+  return String(value || "").toLowerCase();
+}
+
+function compareLongHorizonRows(a, b) {
+  const { sortKey, sortDirection } = state.longHorizon;
+  const direction = sortDirection === "asc" ? 1 : -1;
+  const aValue = longHorizonSortValue(a, sortKey);
+  const bValue = longHorizonSortValue(b, sortKey);
+  if (aValue == null && bValue == null) return String(a.symbol).localeCompare(String(b.symbol));
+  if (aValue == null) return 1;
+  if (bValue == null) return -1;
+  if (typeof aValue === "number" && typeof bValue === "number") {
+    if (aValue !== bValue) return (aValue - bValue) * direction;
+  } else {
+    const comparison = String(aValue).localeCompare(String(bValue));
+    if (comparison !== 0) return comparison * direction;
+  }
+  return Number(a.longModelRank || 9999) - Number(b.longModelRank || 9999);
+}
+
+function filteredLongHorizonRows() {
+  const query = state.longHorizon.query.trim().toLowerCase();
+  const sector = state.longHorizon.sector;
+  return (state.longHorizon.rows || [])
+    .filter((row) => !sector || row.sector === sector)
+    .filter((row) => {
+      if (!query) return true;
+      return [
+        row.symbol,
+        row.name,
+        row.sector,
+        row.industry,
+        row.marketCapBucket,
+        row.agreementLabel,
+        ...(row.longModelReasons || []),
+        ...(row.tacticalSetupTags || [])
+      ].some((value) => String(value || "").toLowerCase().includes(query));
+    })
+    .sort(compareLongHorizonRows);
+}
+
+function renderLongHorizonSectorOptions() {
+  const select = $("#longHorizonSector");
+  if (!select) return;
+  const sectors = [...new Set((state.longHorizon.rows || []).map((row) => row.sector).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const signature = sectors.join("|");
+  if (select.dataset.signature === signature) return;
+  select.dataset.signature = signature;
+  select.innerHTML = `<option value="">All sectors</option>${sectors.map((sector) => `<option value="${esc(sector)}">${esc(sector)}</option>`).join("")}`;
+  select.value = state.longHorizon.sector;
+}
+
+function renderLongHorizonSortState() {
+  document.querySelectorAll("[data-long-sort]").forEach((button) => {
+    const active = button.dataset.longSort === state.longHorizon.sortKey;
+    button.classList.toggle("active", active);
+    button.dataset.direction = active ? state.longHorizon.sortDirection : "";
+  });
+}
+
+function renderLongHorizonSummary() {
+  const target = $("#longHorizonSummary");
+  const notesTarget = $("#longHorizonMetricNotes");
+  const meta = $("#longHorizonMeta");
+  if (!target || !meta) return;
+
+  const research = state.longHorizon;
+  const primary = research.labelSummaries?.[0] || {};
+  const quarterly = findLongHorizonCohort(primary, "quarterly");
+  const monthly = findLongHorizonCohort(primary, "monthly");
+  const modelMeta = research.modelMetadata || {};
+  const methodology = research.promotedMethodology || {};
+  const trends = research.trends || {};
+  const generatedAt = research.sourceGeneratedAt || research.generatedAt;
+  meta.textContent =
+    research.status === "ready"
+      ? `${research.rowCount || 0} rows · scores as of ${research.asOfDate || "latest"} · research ${generatedAt ? formatShortDate(generatedAt) : "latest"}`
+      : "Long-horizon research unavailable";
+
+  if (research.status !== "ready") {
+    target.innerHTML = `<div class="empty-state">Run the long-horizon research export to populate this tab.</div>`;
+    if (notesTarget) notesTarget.innerHTML = "";
+    return;
+  }
+
+  target.innerHTML = `
+    <div class="monitor-card">
+      <span>Primary Label</span>
+      <strong>${esc(primary.label || "252D sector-neutral")}</strong>
+      <small>${esc(primary.description || "One-year return versus sector ETF")}</small>
+    </div>
+    <div class="monitor-card">
+      <span>Quarterly Backtest Median</span>
+      <strong class="${decimalReturnClass(quarterly.top_decile_return_median)}">${esc(displayReturnDecimal(quarterly.top_decile_return_median))}</strong>
+      <small>Median one-year sector-relative return for quarterly test cohorts</small>
+    </div>
+    <div class="monitor-card">
+      <span>Monthly Backtest Median</span>
+      <strong class="${decimalReturnClass(monthly.top_decile_return_median)}">${esc(displayReturnDecimal(monthly.top_decile_return_median))}</strong>
+      <small>Median one-year sector-relative return for monthly test cohorts; mean ${esc(displayReturnDecimal(monthly.top_decile_return_mean))}</small>
+    </div>
+    <div class="monitor-card">
+      <span>Cross-Horizon Agreement</span>
+      <strong>${esc(trends.bothStrongCount ?? 0)}</strong>
+      <small>${esc(`${trends.tacticalWeakCount ?? 0} top 1Y names are tactically weak`)}</small>
+    </div>
+    <div class="monitor-card">
+      <span>Training Window</span>
+      <strong>${esc(modelMeta.trainingStartDate || "n/a")} - ${esc(modelMeta.trainingEndDate || "n/a")}</strong>
+      <small>${esc(modelMeta.trainingSymbols || "n/a")} symbols · ${esc(modelMeta.featureCount || "n/a")} features</small>
+    </div>
+    <div class="monitor-card">
+      <span>Boosting Rounds</span>
+      <strong>${esc(modelMeta.numBoostRound || "n/a")}</strong>
+      <small>${esc(modelMeta.trainSampleFrequency ? `${modelMeta.trainSampleFrequency} sampled training` : "Separate research model")}</small>
+    </div>
+    <div class="monitor-card">
+      <span>Top 1Y Cluster</span>
+      <strong>${esc(trends.sectorLeadership?.[0]?.sector || "n/a")}</strong>
+      <small>${esc(trends.sectorLeadership?.[0] ? `${trends.sectorLeadership[0].count} top-decile names: ${trends.sectorLeadership[0].symbols.join(", ")}` : "No live cluster yet")}</small>
+    </div>
+    <div class="monitor-card">
+      <span>Method Choice</span>
+      <strong>${esc(methodology.trainingWindow || "15y monthly tuned")}</strong>
+      <small>${esc((methodology.rationale || modelMeta.methodologyRationale || [])[0] || "Selected from 10y, 15y, and 20y comparisons")}</small>
+    </div>
+  `;
+
+  if (notesTarget) {
+    notesTarget.innerHTML = `
+      <div>
+        <strong>How to read the monthly and quarterly medians</strong>
+        <span>These are historical walk-forward test results, not current trailing monthly or quarterly returns. On each test date, the model ranked the S&amp;P 500, took the top decile, then measured that basket's next 252-trading-day return versus each stock's sector ETF after estimated trading cost.</span>
+      </div>
+      <div>
+        <strong>Monthly vs quarterly</strong>
+        <span>Monthly uses the first trading day of each month, giving more observations but more overlap between one-year holding windows. Quarterly uses fewer first-trading-day snapshots, so it is noisier but less overlap-heavy and often a cleaner robustness check.</span>
+      </div>
+    `;
+  }
+}
+
+function renderLongHorizonRows() {
+  const tbody = $("#longHorizonRows");
+  if (!tbody) return;
+  renderLongHorizonSectorOptions();
+  renderLongHorizonSortState();
+  const rows = filteredLongHorizonRows();
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="11">${state.longHorizon.status === "ready" ? "No rows match the current filter." : "No fresh long-horizon rows are available yet."}</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = rows
+    .map(
+      (row) => `
+        <tr>
+          <td><span class="score-rank">#${esc(row.longModelRank || "-")}</span></td>
+          <td>
+            <strong>${esc(row.symbol || "n/a")}</strong>
+            <span>${esc(row.sector || "Unclassified")}</span>
+            ${row.longModelReasons?.length ? `<small class="scoreboard-setup">${esc(row.longModelReasons[0])}</small>` : ""}
+          </td>
+          <td>${esc(row.name || row.symbol || "n/a")}</td>
+          <td>${esc(row.industry || "n/a")}</td>
+          <td>${esc(displayMarketCap(row.marketCapValue, row.marketCap))}</td>
+          <td>${esc(displayScore(row.longModelScore))}</td>
+          <td>${esc(displayLivePercentile(row.longModelPercentile))}</td>
+          <td>${esc(displayLivePercentile(row.tacticalModelPercentile))}</td>
+          <td class="${returnClass(row.return60)}">${esc(displayPct(row.return60))}</td>
+          <td class="${returnClass(row.ytdReturn)}">${esc(displayPct(row.ytdReturn))}</td>
+          <td><span class="monitor-badge ${String(row.agreementLabel || "").toLowerCase().includes("both") ? "entrant" : String(row.agreementLabel || "").toLowerCase().includes("weak") ? "fresh" : "held"}">${esc(row.agreementLabel || "Monitor")}</span></td>
+        </tr>
+      `
+    )
+    .join("");
+}
+
+function renderLongHorizonBaselines() {
+  const target = $("#longHorizonBaselines");
+  if (!target) return;
+  const rows = state.longHorizon.baselineComparison?.quarterly || [];
+  if (!rows.length) {
+    target.innerHTML = `<div class="empty-state">Baseline comparison unavailable.</div>`;
+    return;
+  }
+  target.innerHTML = rows
+    .slice(0, 6)
+    .map(
+      (row) => `
+        <div class="long-horizon-item">
+          <div>
+            <strong>${esc(row.strategy_label || row.strategy || "Strategy")}</strong>
+            <span>${esc(row.description || "")}</span>
+          </div>
+          <div>
+            <b class="${decimalReturnClass(row.top_decile_return_median)}">${esc(displayReturnDecimal(row.top_decile_return_median))}</b>
+            <small>Quarterly median · mean ${esc(displayReturnDecimal(row.top_decile_return_mean))}</small>
+          </div>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderLongHorizonFeatures() {
+  const target = $("#longHorizonFeatures");
+  if (!target) return;
+  const rows = state.longHorizon.shapTopFeatures || [];
+  if (!rows.length) {
+    target.innerHTML = `<div class="empty-state">Feature explainability unavailable.</div>`;
+    return;
+  }
+  target.innerHTML = rows
+    .slice(0, 8)
+    .map(
+      (row) => `
+        <div class="long-horizon-item">
+          <div>
+            <strong>${esc(row.feature || "Feature")}</strong>
+            <span>${esc(row.description || row.plainEnglish || "")}</span>
+          </div>
+          <div>
+            <b>${esc(Number.isFinite(Number(row.mean_abs_shap)) ? Number(row.mean_abs_shap).toFixed(4) : Number(row.meanAbsShap || 0).toFixed(4))}</b>
+            <small>mean abs SHAP</small>
+          </div>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderLongHorizonResearch() {
+  renderLongHorizonSummary();
+  renderLongHorizonRows();
+  renderLongHorizonBaselines();
+  renderLongHorizonFeatures();
+}
+
 function renderCalendar() {
   const target = $("#calendarList");
   target.innerHTML = "";
@@ -1321,6 +1815,7 @@ function render() {
   renderMarketStrip();
   renderDeeperRead();
   renderAiRecommendations();
+  renderModelLens();
   renderAvoidList();
   renderSectorPerformance();
   renderRecommendations();
@@ -1331,15 +1826,17 @@ function render() {
   renderSources();
   renderScoreboard();
   renderTopDecileMonitor();
+  renderLongHorizonResearch();
 }
 
 function setActiveView(view) {
-  const knownViews = new Set(["briefing", "scoreboard", "top-decile"]);
+  const knownViews = new Set(["briefing", "scoreboard", "top-decile", "long-horizon"]);
   state.activeView = knownViews.has(view) ? view : "briefing";
   const panels = {
     briefing: $("#briefingView"),
     scoreboard: $("#scoreboardView"),
-    "top-decile": $("#topDecileView")
+    "top-decile": $("#topDecileView"),
+    "long-horizon": $("#longHorizonView")
   };
   Object.entries(panels).forEach(([key, panel]) => {
     if (!panel) return;
@@ -1352,6 +1849,7 @@ function setActiveView(view) {
   window.scrollTo({ top: 0, behavior: "smooth" });
   renderScoreboard();
   renderTopDecileMonitor();
+  renderLongHorizonResearch();
 }
 
 function setScorebookSort(key) {
@@ -1364,6 +1862,16 @@ function setScorebookSort(key) {
   renderScoreboard();
 }
 
+function setLongHorizonSort(key) {
+  if (state.longHorizon.sortKey === key) {
+    state.longHorizon.sortDirection = state.longHorizon.sortDirection === "asc" ? "desc" : "asc";
+  } else {
+    state.longHorizon.sortKey = key;
+    state.longHorizon.sortDirection = ["longModelRank", "symbol", "name", "industry", "agreementLabel"].includes(key) ? "asc" : "desc";
+  }
+  renderLongHorizonResearch();
+}
+
 function wireControls() {
   on("#tickerLabForm", "submit", submitTickerLab);
   on("#scoreboardSearch", "input", (event) => {
@@ -1374,11 +1882,22 @@ function wireControls() {
     state.scorebook.sector = event.target.value || "";
     renderScoreboard();
   });
+  on("#longHorizonSearch", "input", (event) => {
+    state.longHorizon.query = event.target.value || "";
+    renderLongHorizonResearch();
+  });
+  on("#longHorizonSector", "change", (event) => {
+    state.longHorizon.sector = event.target.value || "";
+    renderLongHorizonResearch();
+  });
   document.querySelectorAll("[data-view-target]").forEach((button) => {
     button.addEventListener("click", () => setActiveView(button.dataset.viewTarget));
   });
   document.querySelectorAll("[data-score-sort]").forEach((button) => {
     button.addEventListener("click", () => setScorebookSort(button.dataset.scoreSort));
+  });
+  document.querySelectorAll("[data-long-sort]").forEach((button) => {
+    button.addEventListener("click", () => setLongHorizonSort(button.dataset.longSort));
   });
 }
 
@@ -1507,6 +2026,7 @@ async function loadScorebook() {
   }
   renderScoreboard();
   renderTopDecileMonitor();
+  renderModelLens();
 }
 
 async function loadModelMonitoring() {
@@ -1539,10 +2059,49 @@ async function loadModelMonitoring() {
     };
   }
   renderTopDecileMonitor();
+  renderModelLens();
+}
+
+async function loadLongHorizonResearch() {
+  try {
+    const response = await fetch(`data/long-horizon-research.json?ts=${Date.now()}`);
+    if (!response.ok) throw new Error(`Long-horizon research unavailable: ${response.status}`);
+    const payload = await response.json();
+    state.longHorizon = {
+      ...state.longHorizon,
+      status: payload.status || "ready",
+      generatedAt: payload.generatedAt || null,
+      sourceGeneratedAt: payload.sourceGeneratedAt || null,
+      asOfDate: payload.asOfDate || null,
+      modelMetadata: payload.modelMetadata || {},
+      labelSummaries: payload.labelSummaries || [],
+      labelComparison: payload.labelComparison || [],
+      rows: payload.rows || payload.topCandidates || [],
+      rowCount: payload.rowCount || payload.rows?.length || payload.topCandidates?.length || 0,
+      topCandidates: payload.topCandidates || [],
+      trends: payload.trends || {},
+      baselineComparison: payload.baselineComparison || {},
+      shapTopFeatures: payload.shapTopFeatures || [],
+      methodology: payload.methodology || []
+    };
+  } catch (error) {
+    console.warn(error);
+    state.longHorizon = {
+      ...state.longHorizon,
+      status: "missing",
+      rows: [],
+      rowCount: 0,
+      topCandidates: [],
+      labelSummaries: []
+    };
+  }
+  renderLongHorizonResearch();
+  renderModelLens();
 }
 
 wireControls();
 loadSnapshot();
 loadScorebook();
 loadModelMonitoring();
+loadLongHorizonResearch();
 loadRuntimeConfig().then(checkTickerLabAvailability);

@@ -20,6 +20,8 @@ const skipReddit = process.env.SKIP_REDDIT === "1";
 const snapshotOutput = process.env.SNAPSHOT_OUTPUT || "data/snapshot.json";
 const scorebookOutput = process.env.SCOREBOOK_OUTPUT || "data/model-scorebook.json";
 const monitoringOutput = process.env.MONITORING_OUTPUT || "data/model-monitoring.json";
+const longHorizonScoresPath = process.env.LONG_HORIZON_SCORES_PATH || "data/model-rank-scores-long-horizon.json";
+const longHorizonOutput = process.env.LONG_HORIZON_OUTPUT || "data/long-horizon-research.json";
 const marketCapCacheMaxAgeHours = Number.parseFloat(process.env.MARKET_CAP_CACHE_MAX_AGE_HOURS || "18");
 const deeperReadLookbackDays = Number.parseFloat(process.env.DEEPER_READ_LOOKBACK_DAYS || "7");
 const deeperReadCandidateLimit = Number.parseInt(process.env.DEEPER_READ_CANDIDATE_LIMIT || "14", 10);
@@ -503,9 +505,9 @@ function latestExpectedMarketDataDate(date = new Date()) {
   return pacific.hour >= 14 ? pacific.isoDate : previousBusinessDate(pacific.isoDate);
 }
 
-async function loadModelRankings() {
+async function loadModelRankings(path = "data/model-rank-scores.json") {
   try {
-    const text = await readFile(join(root, "data/model-rank-scores.json"), "utf8");
+    const text = await readFile(join(root, path), "utf8");
     const payload = JSON.parse(text);
     const rankings = (payload.rankings || []).filter((item) => item?.symbol);
     const expectedAsOfDate = latestExpectedMarketDataDate();
@@ -517,7 +519,7 @@ async function loadModelRankings() {
     ) {
       return {
         status: "stale",
-        error: `Model rankings are stale: as-of ${payload.asOfDate}, expected ${expectedAsOfDate}. Stale model data was not used.`,
+        error: `${path} is stale: as-of ${payload.asOfDate}, expected ${expectedAsOfDate}. Stale model data was not used.`,
         generatedAt: payload.generatedAt || null,
         asOfDate: payload.asOfDate || null,
         expectedAsOfDate,
@@ -579,6 +581,25 @@ async function loadModelExplainability() {
     return JSON.parse(text);
   } catch {
     return null;
+  }
+}
+
+async function loadLongHorizonResearchBase() {
+  try {
+    const text = await readFile(join(root, longHorizonOutput), "utf8");
+    return JSON.parse(text);
+  } catch {
+    return {
+      status: "missing",
+      generatedAt: null,
+      modelMetadata: {},
+      promotedMethodology: {},
+      labelSummaries: [],
+      labelComparison: [],
+      baselineComparison: {},
+      shapTopFeatures: [],
+      methodology: []
+    };
   }
 }
 
@@ -1808,6 +1829,189 @@ function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, sig
       ? "Return columns use fresh adjusted-close price history and calendar lookbacks: 7D, 14D, 30D, 60D, 90D, then YTD. If the exact calendar date was not a trading day, the prior available trading close is used."
       : "Fresh price history was unavailable; stale cached returns were not reused, so trailing return columns are intentionally blank until the next successful price refresh.",
     rows
+  };
+}
+
+function modelAgreementLabel(longRow, tacticalRow) {
+  const longPercentile = finiteNumber(longRow?.modelPercentile);
+  const tacticalPercentile = finiteNumber(tacticalRow?.modelPercentile);
+  const tacticalMomentum = tacticalRow?.setupType === "momentum_confirmed";
+  if (Number.isFinite(longPercentile) && longPercentile >= 90 && Number.isFinite(tacticalPercentile) && tacticalPercentile >= 80 && tacticalMomentum) {
+    return "Both Models Agree";
+  }
+  if (Number.isFinite(longPercentile) && longPercentile >= 90 && tacticalMomentum) {
+    return "1Y Strong + Tactical Momentum";
+  }
+  if (Number.isFinite(longPercentile) && longPercentile >= 90 && Number.isFinite(tacticalPercentile) && tacticalPercentile >= 80) {
+    return "1Y Strong / Tactical Watch";
+  }
+  if (Number.isFinite(longPercentile) && longPercentile >= 90 && Number.isFinite(tacticalPercentile) && tacticalPercentile < 50) {
+    return "1Y Strong / Tactical Weak";
+  }
+  if (Number.isFinite(longPercentile) && longPercentile >= 90) return "Long-Horizon Leader";
+  if (Number.isFinite(tacticalPercentile) && tacticalPercentile >= 90) return "Tactical Only";
+  if (Number.isFinite(longPercentile) && longPercentile >= 80) return "Long-Horizon Watch";
+  return "Monitor";
+}
+
+function marketCapBucket(value) {
+  const number = finiteNumber(value);
+  if (!Number.isFinite(number)) return "Unknown cap";
+  if (number >= 200_000_000_000) return "Mega cap";
+  if (number >= 10_000_000_000) return "Large cap";
+  if (number >= 2_000_000_000) return "Mid cap";
+  return "Small cap";
+}
+
+function buildLongHorizonRows({ longHorizonRankings, modelScorebook, stockMetadata, marketCapCache }) {
+  const tacticalBySymbol = new Map((modelScorebook?.rows || []).map((row) => [row.symbol, row]));
+  const rankings = longHorizonRankings.status === "ready" ? longHorizonRankings.rankings || [] : [];
+  return rankings
+    .map((item) => {
+      const metadata = stockMetadata.get(item.symbol) || {};
+      const marketCap = marketCapCache.bySymbol.get(item.symbol) || null;
+      const tactical = tacticalBySymbol.get(item.symbol) || null;
+      return {
+        symbol: item.symbol,
+        name: item.name || metadata.name || item.symbol,
+        sector: item.sector || metadata.sector || null,
+        industry: metadata.industry || null,
+        marketCap: marketCap?.text || null,
+        marketCapValue: finiteNumber(marketCap?.value),
+        marketCapBucket: marketCapBucket(marketCap?.value),
+        longModelRank: finiteNumber(item.modelRank),
+        longModelUniverseCount: finiteNumber(item.modelUniverseCount),
+        longModelScore: finiteNumber(item.modelScore),
+        longModelPercentile: roundedNumber(item.modelPercentile, 1),
+        longModelBucket: item.modelBucket || null,
+        longModelReasons: item.modelReasons || [],
+        longRiskFlags: item.riskFlags || [],
+        tacticalModelRank: finiteNumber(tactical?.modelRank),
+        tacticalModelPercentile: roundedNumber(tactical?.modelPercentile, 1),
+        tacticalSetupType: tactical?.setupType || null,
+        tacticalSetupTags: tactical?.setupTags || [],
+        agreementLabel: modelAgreementLabel(item, tactical),
+        close: finiteNumber(item.close),
+        beta60d: roundedNumber(item.beta60d, 2),
+        return7: roundedNumber(item.return7, 2),
+        return14: roundedNumber(item.return14, 2),
+        return30: roundedNumber(item.return30, 2),
+        return60: roundedNumber(item.return60, 2),
+        return90: roundedNumber(item.return90, 2),
+        ytdReturn: roundedNumber(item.ytdReturn, 2),
+        asOfDate: item.asOfDate || longHorizonRankings.asOfDate || null
+      };
+    })
+    .sort((a, b) => Number(a.longModelRank || 9999) - Number(b.longModelRank || 9999));
+}
+
+function summarizeLongHorizonTrends(rows) {
+  const topRows = rows.filter((row) => Number(row.longModelPercentile) >= 90);
+  const topSet = topRows.length ? topRows : rows.slice(0, Math.ceil(rows.length * 0.1));
+  const sectorMap = new Map();
+  const capMap = new Map();
+  let bothStrong = 0;
+  let tacticalWeak = 0;
+  topSet.forEach((row) => {
+    const sectorKey = row.sector || "Unclassified";
+    const sector = sectorMap.get(sectorKey) || { sector: sectorKey, count: 0, avgLongPercentile: 0, avgTacticalPercentile: 0, symbols: [] };
+    sector.count += 1;
+    sector.avgLongPercentile += Number(row.longModelPercentile) || 0;
+    sector.avgTacticalPercentile += Number(row.tacticalModelPercentile) || 0;
+    sector.symbols.push(row.symbol);
+    sectorMap.set(sectorKey, sector);
+
+    const capKey = row.marketCapBucket || "Unknown cap";
+    const cap = capMap.get(capKey) || { bucket: capKey, count: 0, symbols: [] };
+    cap.count += 1;
+    cap.symbols.push(row.symbol);
+    capMap.set(capKey, cap);
+
+    if (row.agreementLabel === "Both Models Agree" || row.agreementLabel === "1Y Strong + Tactical Momentum") bothStrong += 1;
+    if (row.agreementLabel === "1Y Strong / Tactical Weak") tacticalWeak += 1;
+  });
+  const sectorLeadership = [...sectorMap.values()]
+    .map((row) => ({
+      ...row,
+      avgLongPercentile: roundedNumber(row.avgLongPercentile / row.count, 1),
+      avgTacticalPercentile: roundedNumber(row.avgTacticalPercentile / row.count, 1),
+      symbols: row.symbols.slice(0, 6)
+    }))
+    .sort((a, b) => b.count - a.count || b.avgLongPercentile - a.avgLongPercentile)
+    .slice(0, 6);
+  const marketCapMix = [...capMap.values()].sort((a, b) => b.count - a.count);
+  return {
+    topDecileCount: topSet.length,
+    bothStrongCount: bothStrong,
+    tacticalWeakCount: tacticalWeak,
+    sectorLeadership,
+    marketCapMix
+  };
+}
+
+function buildLongHorizonContext({ longHorizonRankings, tacticalRankings }) {
+  const tacticalBySymbol = new Map((tacticalRankings.rankings || []).map((row) => [row.symbol, row]));
+  const rows = (longHorizonRankings.status === "ready" ? longHorizonRankings.rankings || [] : []).slice(0, 50).map((row) => {
+    const tactical = tacticalBySymbol.get(row.symbol);
+    return {
+      symbol: row.symbol,
+      name: row.name,
+      sector: row.sector,
+      longModelRank: row.modelRank,
+      longModelPercentile: row.modelPercentile,
+      tacticalModelRank: tactical?.modelRank || null,
+      tacticalModelPercentile: tactical?.modelPercentile || null,
+      tacticalSetupType: tactical?.setupType || null,
+      agreementLabel: modelAgreementLabel(row, tactical),
+      longModelReasons: (row.modelReasons || []).slice(0, 4),
+      longRiskFlags: (row.riskFlags || []).slice(0, 4),
+      return60: row.return60,
+      ytdReturn: row.ytdReturn
+    };
+  });
+  return {
+    status: longHorizonRankings.status,
+    asOfDate: longHorizonRankings.asOfDate || null,
+    model: longHorizonRankings.model || null,
+    guidance: "Use the one-year model as supporting context unless a name is also strong in the 14-day tactical model.",
+    topCandidates: rows.slice(0, 20),
+    sectorLeadership: summarizeLongHorizonTrends(rows).sectorLeadership
+  };
+}
+
+function buildLongHorizonResearch({ base, longHorizonRankings, modelScorebook, stockMetadata, marketCapCache }) {
+  const rows = buildLongHorizonRows({ longHorizonRankings, modelScorebook, stockMetadata, marketCapCache });
+  const trends = summarizeLongHorizonTrends(rows);
+  const status = longHorizonRankings.status === "ready" ? "ready" : longHorizonRankings.status || "missing";
+  return {
+    ...base,
+    status,
+    generatedAt: new Date().toISOString(),
+    sourceGeneratedAt: base.sourceGeneratedAt || base.generatedAt || null,
+    liveGeneratedAt: longHorizonRankings.generatedAt || null,
+    asOfDate: longHorizonRankings.asOfDate || null,
+    expectedAsOfDate: longHorizonRankings.expectedAsOfDate || null,
+    marketDataStatus: {
+      status: longHorizonRankings.status === "ready" ? "fresh" : longHorizonRankings.status || "missing",
+      asOfDate: longHorizonRankings.asOfDate || null,
+      expectedAsOfDate: longHorizonRankings.expectedAsOfDate || null,
+      message: longHorizonRankings.status === "ready"
+        ? `Fresh long-horizon model scores were generated through ${longHorizonRankings.asOfDate}.`
+        : longHorizonRankings.error || "Long-horizon model scores are unavailable."
+    },
+    modelMetadata: {
+      ...(base.modelMetadata || {}),
+      liveModel: longHorizonRankings.model || null
+    },
+    rowCount: rows.length,
+    rows,
+    topCandidates: rows.slice(0, 25),
+    trends,
+    methodology: [
+      ...(base.methodology || []),
+      "Live one-year scores are refreshed from the same feature tape as the tactical model and are shown as a separate research lens.",
+      "The AI memo may use long-horizon results as supporting context; a single-name recommendation should rely on them only when tactical and long-horizon evidence both support the setup."
+    ]
   };
 }
 
@@ -3846,7 +4050,7 @@ async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sour
   }
 }
 
-async function buildAiRecommendations({ opportunities, macro, calendar, sources, deskRecommendations, sectorPerformance, model: modelSummary, marketIntelligence, promptText }) {
+async function buildAiRecommendations({ opportunities, macro, calendar, sources, deskRecommendations, sectorPerformance, model: modelSummary, marketIntelligence, longHorizonContext, promptText }) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (process.env.SKIP_AI === "1") return fallbackAiRecommendations("skipped_by_env");
   if (!apiKey) return fallbackAiRecommendations("missing_api_key");
@@ -3982,6 +4186,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       rsi14: Math.round(rsi14)
     })),
     modelCandidates,
+    longHorizonContext,
     avoidCandidates,
     avoidSectors,
     topMomentum: opportunities.slice(0, 18).map(compactCandidate),
@@ -4234,17 +4439,31 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
 async function main() {
   await loadLocalEnv();
 
-  const [sourceMarkdown, universeConfigText, aiPromptText, modelRankings, modelExplainability, previousRefreshStatus, previousModelMonitoring, macroCalendar] = await Promise.all([
+  const [
+    sourceMarkdown,
+    universeConfigText,
+    aiPromptText,
+    modelRankings,
+    longHorizonRankings,
+    longHorizonResearchBase,
+    modelExplainability,
+    previousRefreshStatus,
+    previousModelMonitoring,
+    macroCalendar
+  ] = await Promise.all([
     readFile(join(root, "config/news-sources.md"), "utf8"),
     readFile(join(root, "config/universe.json"), "utf8"),
     readFile(join(root, "config/ai-recommendation-prompt.md"), "utf8").catch(() => defaultAiPrompt),
     loadModelRankings(),
+    loadModelRankings(longHorizonScoresPath),
+    loadLongHorizonResearchBase(),
     loadModelExplainability(),
     loadPreviousRefreshStatus(),
     loadPreviousModelMonitoring(),
     loadMacroCalendar()
   ]);
   const modelSummary = publicModelSummary(modelRankings, modelExplainability);
+  const longHorizonContext = buildLongHorizonContext({ longHorizonRankings, tacticalRankings: modelRankings });
 
   const universeConfig = JSON.parse(universeConfigText);
   const markdownSources = parseMarkdownSources(sourceMarkdown);
@@ -4264,6 +4483,7 @@ async function main() {
     [
       ...universe.map((item) => item.symbol),
       ...modelRankings.rankings.map((item) => item.symbol),
+      ...longHorizonRankings.rankings.map((item) => item.symbol),
       "SPY",
       "QQQ",
       "IWM",
@@ -4381,6 +4601,7 @@ async function main() {
     sectorPerformance,
     model: modelSummary,
     marketIntelligence,
+    longHorizonContext,
     promptText: aiPromptText
   });
   const avoidList = buildAvoidList(opportunities, aiRecommendations);
@@ -4398,6 +4619,13 @@ async function main() {
   const modelMonitoring = buildModelMonitoring({
     modelScorebook,
     previousMonitoring: previousModelMonitoring
+  });
+  const longHorizonResearch = buildLongHorizonResearch({
+    base: longHorizonResearchBase,
+    longHorizonRankings,
+    modelScorebook,
+    stockMetadata,
+    marketCapCache
   });
 
   const snapshot = {
@@ -4431,11 +4659,13 @@ async function main() {
   await Promise.all([
     writeFile(join(root, snapshotOutput), `${JSON.stringify(snapshot, null, 2)}\n`),
     writeFile(join(root, scorebookOutput), `${JSON.stringify(modelScorebook, null, 2)}\n`),
-    writeFile(join(root, monitoringOutput), `${JSON.stringify(modelMonitoring, null, 2)}\n`)
+    writeFile(join(root, monitoringOutput), `${JSON.stringify(modelMonitoring, null, 2)}\n`),
+    writeFile(join(root, longHorizonOutput), `${JSON.stringify(longHorizonResearch, null, 2)}\n`)
   ]);
   console.log(`Wrote ${snapshotOutput} with ${opportunities.length} ranked instruments.`);
   console.log(`Wrote ${scorebookOutput} with ${modelScorebook.rowCount} model-scored rows.`);
   console.log(`Wrote ${monitoringOutput} with ${modelMonitoring.topDecileCount} top-decile rows.`);
+  console.log(`Wrote ${longHorizonOutput} with ${longHorizonResearch.rowCount || 0} long-horizon rows.`);
 }
 
 export { buildModelMonitoring, checkSource, extractArticleCandidates, fetchOfficialMacroReleases, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };

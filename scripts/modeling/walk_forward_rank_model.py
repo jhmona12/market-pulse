@@ -28,6 +28,17 @@ except ModuleNotFoundError as error:  # pragma: no cover - handled at runtime
     ) from error
 
 
+EXTRA_DIAGNOSTIC_COLUMNS = [
+    "sector_neutral_forward_return_252d_after_cost",
+    "drawdown_adjusted_sector_neutral_return_252d_after_cost",
+    "max_drawdown_252d_next_close",
+    "sector_max_drawdown_252d_next_close",
+    "relative_max_drawdown_252d_next_close",
+    "relevance_grade_sector_neutral_252d",
+    "relevance_grade_drawdown_adjusted_252d",
+]
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run embargoed walk-forward XGBoost rank-model evaluation.")
     parser.add_argument("--dataset", default="training_dataset.csv.gz", help="Dataset filename inside data/modeling/features.")
@@ -44,6 +55,15 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=0,
         help="Drop symbols with fewer than this many feature-complete rows before walk-forward splitting.",
+    )
+    parser.add_argument(
+        "--train-sample-frequency",
+        choices=["daily", "weekly", "monthly"],
+        default="daily",
+        help=(
+            "Sample train dates before fitting to reduce dependence from overlapping labels. "
+            "Test dates are never sampled; validation uses the same sampling frequency as training."
+        ),
     )
     add_rank_hyperparameter_args(parser)
     return parser.parse_args()
@@ -96,6 +116,20 @@ def train_fold(
     )
 
 
+def sample_dates(dates: pd.DatetimeIndex, frequency: str) -> pd.DatetimeIndex:
+    if frequency == "daily" or len(dates) == 0:
+        return dates
+    frame = pd.DataFrame({"date": dates})
+    if frequency == "weekly":
+        frame["bucket"] = frame["date"].dt.to_period("W-FRI")
+    elif frequency == "monthly":
+        frame["bucket"] = frame["date"].dt.to_period("M")
+    else:
+        raise ValueError(f"Unsupported sample frequency: {frequency}")
+    sampled = frame.groupby("bucket", sort=True)["date"].first()
+    return pd.DatetimeIndex(sampled.tolist())
+
+
 def main() -> None:
     args = parse_args()
     dataset_path = FEATURES_DIR / args.dataset
@@ -112,8 +146,10 @@ def main() -> None:
     predictions = []
     fold_reports = []
     for fold in folds:
-        train = dataset[dataset["date"].isin(fold["train_dates"])].copy()
-        validation = dataset[dataset["date"].isin(fold["validation_dates"])].copy()
+        train_dates = sample_dates(fold["train_dates"], args.train_sample_frequency)
+        validation_dates = sample_dates(fold["validation_dates"], args.train_sample_frequency)
+        train = dataset[dataset["date"].isin(train_dates)].copy()
+        validation = dataset[dataset["date"].isin(validation_dates)].copy()
         test = dataset[dataset["date"].isin(fold["test_dates"])].copy()
         booster = train_fold(
             train,
@@ -130,28 +166,28 @@ def main() -> None:
         ordered_test["predicted_rank_score"] = booster.predict(dtest)
         ordered_test["predicted_probability"] = ordered_test["predicted_rank_score"]
         ordered_test["fold"] = fold["fold"]
-        predictions.append(
-            ordered_test[
-                [
-                    "fold",
-                    "date",
-                    "symbol",
-                    "sector",
-                    "close",
-                    args.return_column,
-                    args.target_column,
-                    "predicted_rank_score",
-                    "predicted_probability",
-                ]
-                + (["candidate_momentum_setup"] if "candidate_momentum_setup" in ordered_test.columns else [])
-            ].copy()
-        )
+        prediction_columns = [
+            "fold",
+            "date",
+            "symbol",
+            "sector",
+            "close",
+            args.return_column,
+            args.target_column,
+            *[column for column in EXTRA_DIAGNOSTIC_COLUMNS if column in ordered_test.columns],
+            "predicted_rank_score",
+            "predicted_probability",
+        ] + (["candidate_momentum_setup"] if "candidate_momentum_setup" in ordered_test.columns else [])
+        prediction_columns = list(dict.fromkeys(prediction_columns))
+        predictions.append(ordered_test[prediction_columns].copy())
         fold_reports.append(
             {
                 "fold": fold["fold"],
                 "train_rows": int(len(train)),
                 "validation_rows": int(len(validation)),
                 "test_rows": int(len(test)),
+                "train_date_count": int(len(train_dates)),
+                "validation_date_count": int(len(validation_dates)),
                 "best_iteration": int(booster.best_iteration),
                 "split": {key: value for key, value in fold.items() if not key.endswith("_dates")},
                 "test_metrics": evaluate_ranked(ordered_test, "predicted_rank_score", args.return_column, args.target_column),
@@ -174,6 +210,7 @@ def main() -> None:
         "test_days": args.test_days,
         "validation_days": args.validation_days,
         "embargo_days": args.embargo_days,
+        "train_sample_frequency": args.train_sample_frequency,
         "min_symbol_rows": args.min_symbol_rows,
         "removed_symbol_count": len(removed_symbols),
         "removed_symbols": removed_symbols,

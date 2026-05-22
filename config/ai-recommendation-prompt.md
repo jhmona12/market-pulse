@@ -9,6 +9,7 @@ Use only the data provided in the prompt:
 - `marketIntelligence`, including professional market drivers, earnings calendars, earnings-linked movers, market mover screeners, and Reddit attention
 - Public source article titles, summaries, excerpts, publication dates, and source IDs
 - XGBoost model rankings and model explainability metadata
+- `longHorizonContext`, the separate one-year model lens with live long-horizon ranks, sector clusters, and 14-day model agreement labels
 - Company context for model candidates, including investor relations links, business descriptions, earnings history/forecast fields, and recent company news
 - Source-mentioned current-event drivers, including geopolitical conflict, oil/energy shocks, shipping/supply-chain disruption, fiscal or regulatory policy, elections, trade actions, credit stress, and central-bank communication
 - End-of-day momentum metrics for individual stocks and ETFs
@@ -84,6 +85,10 @@ Requirements:
 - When `companyContexts` are supplied, prefer recommendations from symbols with company context and use that context in each recommendation.
 - Include the supplied market cap for each recommended company when available.
 - Treat the XGBoost model rank as the primary single-name selection signal. Use the generative AI layer to explain, contextualize, and risk-check the model output, not to invent a separate ranking.
+- Treat the 14-day tactical model as the primary single-name recommendation signal. Use the one-year long-horizon model as supporting context unless both models agree on the same name.
+- If a name is strong in both the 14-day tactical model and `longHorizonContext`, call that out as stronger cross-horizon confirmation.
+- If a name is strong only in the one-year model but weak in the 14-day model, do not present it as an immediate tactical buy. Frame it as a long-horizon research candidate or watchlist item.
+- You may use long-horizon sector, market-cap, and agreement trends to describe where the model is finding broader opportunity, but do not let those trends override the current macro/news tape.
 - You may downgrade or avoid a high-ranked model candidate only when the supplied macro, source, or risk-flag evidence clearly argues for caution.
 - Do not create a recommendation unless you can connect it to both publication/macro evidence and technical momentum evidence.
 - For each recommendation, include a short plain-English blurb on what the company does.

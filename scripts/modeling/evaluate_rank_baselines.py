@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from dataclasses import dataclass
 
 import numpy as np
@@ -110,12 +111,32 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--target-column", default=LONG_RANK_TARGET_COLUMN, help="Relevance-grade target column.")
     parser.add_argument("--return-column", default=LONG_RANK_RETURN_COLUMN, help="Forward return column to evaluate.")
     parser.add_argument(
+        "--metadata-artifact",
+        default="",
+        help="Optional exported model metadata JSON to include in the compact artifact.",
+    )
+    parser.add_argument(
+        "--methodology-note",
+        action="append",
+        default=[],
+        help="Methodology note to store in the compact artifact. Repeat for multiple notes.",
+    )
+    parser.add_argument(
         "--artifact-output",
         default="models/long-horizon/xgboost_rank_sector252_baseline_comparison.json",
         help="Small committed JSON artifact with the headline comparison. Use an empty string to skip.",
     )
     parser.add_argument("--latest-top-n", type=int, default=50, help="Rows to include in the latest-score snapshot.")
     return parser.parse_args()
+
+
+def load_metadata(path: str) -> dict:
+    if not path:
+        return {}
+    metadata_path = ROOT / path
+    if not metadata_path.exists():
+        raise FileNotFoundError(path)
+    return json.loads(metadata_path.read_text(encoding="utf-8"))
 
 
 def rank_by_date(frame: pd.DataFrame, column: str, ascending: bool = True) -> pd.Series:
@@ -328,8 +349,10 @@ def compact_artifact(summary: pd.DataFrame, details: pd.DataFrame, snapshot: pd.
     monthly = summary[summary["cohort"] == "Monthly first trading day"].copy()
     quarterly = summary[summary["cohort"] == "Quarterly first trading day"].copy()
     latest_date = snapshot["date"].iloc[0] if not snapshot.empty else None
+    metadata = load_metadata(args.metadata_artifact)
+    methodology_notes = args.methodology_note or metadata.get("methodology_rationale", [])
 
-    return {
+    artifact = {
         "generatedAt": pd.Timestamp.now("UTC").isoformat(),
         "dataset": str((FEATURES_DIR / args.dataset).relative_to(ROOT)),
         "predictions": str((REPORTS_DIR / args.predictions).relative_to(ROOT)),
@@ -346,6 +369,22 @@ def compact_artifact(summary: pd.DataFrame, details: pd.DataFrame, snapshot: pd.
         "latestXgboostTop": snapshot.head(25).to_dict(orient="records"),
         "cohortDetailRows": int(len(details)),
     }
+    if metadata or methodology_notes:
+        artifact["promotedMethodology"] = {
+            "modelPath": metadata.get("model_path"),
+            "trainingWindow": (
+                f"{metadata.get('training_start_date')} through {metadata.get('training_end_date')}"
+                if metadata.get("training_start_date") and metadata.get("training_end_date")
+                else None
+            ),
+            "trainingRows": metadata.get("training_rows"),
+            "trainingSymbols": metadata.get("training_symbols"),
+            "trainSampleFrequency": metadata.get("train_sample_frequency"),
+            "numBoostRound": metadata.get("num_boost_round"),
+            "params": metadata.get("params"),
+            "rationale": methodology_notes,
+        }
+    return artifact
 
 
 def main() -> None:

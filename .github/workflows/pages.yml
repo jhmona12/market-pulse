@@ -43,6 +43,9 @@ jobs:
           cp data/snapshot.json public/data/snapshot.json
           cp data/model-scorebook.json public/data/model-scorebook.json
           cp data/model-monitoring.json public/data/model-monitoring.json
+          if [ -f data/long-horizon-research.json ]; then
+            cp data/long-horizon-research.json public/data/long-horizon-research.json
+          fi
           if [ -f data/macro-calendar.json ]; then
             cp data/macro-calendar.json public/data/macro-calendar.json
           fi

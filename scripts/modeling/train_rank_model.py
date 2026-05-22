@@ -34,6 +34,15 @@ DEFAULT_RANK_PARAMS = {
 }
 DEFAULT_NUM_BOOST_ROUND = 700
 DEFAULT_EARLY_STOPPING_ROUNDS = 40
+EXTRA_DIAGNOSTIC_COLUMNS = [
+    "sector_neutral_forward_return_252d_after_cost",
+    "drawdown_adjusted_sector_neutral_return_252d_after_cost",
+    "max_drawdown_252d_next_close",
+    "sector_max_drawdown_252d_next_close",
+    "relative_max_drawdown_252d_next_close",
+    "relevance_grade_sector_neutral_252d",
+    "relevance_grade_drawdown_adjusted_252d",
+]
 
 
 def add_rank_hyperparameter_args(parser: argparse.ArgumentParser) -> None:
@@ -93,6 +102,15 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=0,
         help="Drop symbols with fewer than this many feature-complete rows before splitting. Disabled by default.",
+    )
+    parser.add_argument(
+        "--train-sample-frequency",
+        choices=["daily", "weekly", "monthly"],
+        default="daily",
+        help=(
+            "Sample train and validation dates before fitting to reduce dependence from overlapping labels. "
+            "The holdout test window is never sampled."
+        ),
     )
     add_rank_hyperparameter_args(parser)
     return parser.parse_args()
@@ -160,6 +178,20 @@ def make_dmatrix(frame: pd.DataFrame, feature_columns: list[str], target_column:
     return matrix
 
 
+def sample_dates(dates: pd.DatetimeIndex, frequency: str) -> pd.DatetimeIndex:
+    if frequency == "daily" or len(dates) == 0:
+        return dates
+    frame = pd.DataFrame({"date": dates})
+    if frequency == "weekly":
+        frame["bucket"] = frame["date"].dt.to_period("W-FRI")
+    elif frequency == "monthly":
+        frame["bucket"] = frame["date"].dt.to_period("M")
+    else:
+        raise ValueError(f"Unsupported sample frequency: {frequency}")
+    sampled = frame.groupby("bucket", sort=True)["date"].first()
+    return pd.DatetimeIndex(sampled.tolist())
+
+
 def horizon_suffix(return_column: str) -> str:
     match = re.search(r"_(\d+d)(?:_|$)", return_column)
     return match.group(1) if match else "forward"
@@ -180,9 +212,12 @@ def evaluate_ranked(
         daily_rows.append(
             {
                 "top_return": top[return_column].mean(),
+                "top_return_median": top[return_column].median(),
                 "top_hit_rate": (top[return_column] > 0).mean(),
                 "bottom_return": bottom[return_column].mean(),
+                "bottom_return_median": bottom[return_column].median(),
                 "spread": top[return_column].mean() - bottom[return_column].mean(),
+                "spread_median": top[return_column].median() - bottom[return_column].median(),
                 "avg_grade": top[target_column].mean(),
             }
         )
@@ -190,12 +225,18 @@ def evaluate_ranked(
     suffix = horizon_suffix(return_column)
     return {
         "top_decile_return": float(daily["top_return"].mean()),
+        "top_decile_return_median": float(daily["top_return"].median()),
         "bottom_decile_return": float(daily["bottom_return"].mean()),
+        "bottom_decile_return_median": float(daily["bottom_return"].median()),
         "top_minus_bottom_return": float(daily["spread"].mean()),
+        "top_minus_bottom_return_median": float(daily["spread"].median()),
         f"top_decile_sector_neutral_return_{suffix}": float(daily["top_return"].mean()),
+        f"top_decile_sector_neutral_return_{suffix}_median": float(daily["top_return"].median()),
         "top_decile_hit_rate": float(daily["top_hit_rate"].mean()),
         f"bottom_decile_sector_neutral_return_{suffix}": float(daily["bottom_return"].mean()),
+        f"bottom_decile_sector_neutral_return_{suffix}_median": float(daily["bottom_return"].median()),
         f"top_minus_bottom_sector_neutral_return_{suffix}": float(daily["spread"].mean()),
+        f"top_minus_bottom_sector_neutral_return_{suffix}_median": float(daily["spread"].median()),
         "top_decile_average_relevance_grade": float(daily["avg_grade"].mean()),
     }
 
@@ -214,6 +255,10 @@ def main() -> None:
         args.test_days,
         args.embargo_days,
     )
+    original_train_date_count = len(train_dates)
+    original_validation_date_count = len(validation_dates)
+    train_dates = sample_dates(train_dates, args.train_sample_frequency)
+    validation_dates = sample_dates(validation_dates, args.train_sample_frequency)
     train = dataset[dataset["date"].isin(train_dates)].copy()
     validation = dataset[dataset["date"].isin(validation_dates)].copy()
     test = dataset[dataset["date"].isin(test_dates)].copy()
@@ -247,6 +292,7 @@ def main() -> None:
         "close",
         args.return_column,
         args.target_column,
+        *[column for column in EXTRA_DIAGNOSTIC_COLUMNS if column in ordered_test.columns],
         "predicted_rank_score",
         "predicted_probability",
     ]
@@ -264,6 +310,12 @@ def main() -> None:
         "train_rows": int(len(train)),
         "validation_rows": int(len(validation)),
         "test_rows": int(len(test)),
+        "train_date_count": int(len(train_dates)),
+        "validation_date_count": int(len(validation_dates)),
+        "test_date_count": int(len(test_dates)),
+        "original_train_date_count": int(original_train_date_count),
+        "original_validation_date_count": int(original_validation_date_count),
+        "train_sample_frequency": args.train_sample_frequency,
         "min_symbol_rows": args.min_symbol_rows,
         "removed_symbol_count": len(removed_symbols),
         "removed_symbols": removed_symbols,

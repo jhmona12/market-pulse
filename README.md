@@ -169,6 +169,7 @@ The refresh script:
 - Adds a rebound activation price for qualifying rebound-watch names, calculated as current close plus `0.75 x 20-day realized daily volatility`
 - Adds a stop-sell price for all current top-decile model names, plus other surfaced non-confirmed model candidates, during the model scorer's fresh price-history pass so the briefing builder does not make a second Yahoo request for the same names
 - Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
+- Re-scores the same fresh S&P 500 feature cache with the tuned 252-day model so `data/long-horizon-research.json` can show a full searchable Long-Horizon Book without making a second Yahoo history pass
 - Writes fresh market-strip and sector-performance rows during the model scoring step so the dashboard has complete technical sections even when the later briefing builder avoids another large price-history fetch
 - Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, 60-day beta to SPY, trailing 7D, 14D, 30D, 60D, 90D calendar-lookback returns, and YTD return when fresh price history is available
 - Updates `data/market-cap-cache.json` from free public quote data and reuses recent values to keep the daily job reliable
@@ -180,10 +181,22 @@ To refresh model rankings before the dashboard snapshot:
 
 ```bash
 .venv-model/bin/python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json
+.venv-model/bin/python scripts/modeling/score_live_rank_model.py \
+  --model-dir models/long-horizon \
+  --model-name xgboost_rank_sector252_15y_monthly_tuned_research \
+  --output data/model-rank-scores-long-horizon.json \
+  --reference-cache data/model-reference-cache.json \
+  --score-reference-cache
 node scripts/update-data.mjs
 ```
 
-`data/model-rank-scores.json` is an intermediate file and is ignored by git. The generated `data/snapshot.json` contains the briefing data needed by the static site. The generated `data/model-scorebook.json` powers the public scoreboard tab. The generated `data/model-reference-cache.json` is intentionally committed because it gives the private Ticker Lab a fresh daily S&P 500 baseline without rebuilding the full universe on every pasted-ticker request.
+Or run both model scoring passes with:
+
+```bash
+npm run score:models
+```
+
+`data/model-rank-scores.json` and `data/model-rank-scores-long-horizon.json` are intermediate files and are ignored by git. The generated `data/snapshot.json` contains the briefing data needed by the static site. The generated `data/model-scorebook.json` powers the public scoreboard tab. The generated `data/long-horizon-research.json` powers the Long-Horizon Book tab. The generated `data/model-reference-cache.json` is intentionally committed because it gives the private Ticker Lab and the long-horizon scoring pass a fresh daily S&P 500 baseline without rebuilding the full universe on every request.
 
 Some current constituents may be fetched but not scored if they do not have enough clean trailing data to populate every required feature. The scorer records those symbols in the snapshot model metadata.
 
@@ -438,7 +451,7 @@ The repo includes a separate Python modeling workflow for researching S&P 500 mo
 There are two intentionally separate model families:
 
 - **14-day tactical rank model:** production dashboard model for short-term model-ranked momentum and rebound setups.
-- **252-day long-horizon rank model:** local research model for one-year holding candidates. It reuses shared feature engineering, but has separate labels, datasets, reports, and model names.
+- **252-day long-horizon rank model:** dashboard research model for one-year holding candidates. It reuses shared feature engineering, but has separate labels, datasets, reports, and model names.
 
 The current primary dashboard model is an XGBoost learning-to-rank model. It is designed to answer a daily portfolio-selection question: which current S&P 500 stocks look most likely to outperform their sector over the next 14 trading days?
 
@@ -480,7 +493,7 @@ Legacy/research labels still exist for comparison:
 
 ### Long-Horizon Research Model
 
-The 252-day model is not wired into the public dashboard yet. It is a separate local research track designed to answer a different question: which current S&P 500 names look attractive enough to hold through a roughly one-year window?
+The 252-day model powers a separate `Long-Horizon Book` dashboard tab. It answers a different question from the tactical model: which current S&P 500 names look attractive enough to hold through a roughly one-year window?
 
 The long-horizon dataset is built with:
 
@@ -498,10 +511,17 @@ data/modeling/reports/xgboost_rank_sector252_*
 models/long-horizon/xgboost_rank_sector252_research.json
 models/long-horizon/xgboost_rank_sector252_research_metadata.json
 models/long-horizon/xgboost_rank_sector252_research_explainability.json
+models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research.json
+models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research_metadata.json
+models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research_explainability.json
+models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_baseline_comparison.json
 models/long-horizon/xgboost_rank_sector252_walk_forward_baseline_comparison.json
+models/long-horizon/xgboost_rank_sector252_drawdown_adjusted_walk_forward_baseline_comparison.json
+models/long-horizon/long_horizon_label_comparison.json
+data/long-horizon-research.json
 ```
 
-The `data/modeling/` files are ignored local research outputs. The `models/long-horizon/` files are small committed research artifacts. They are separate from the dashboard's `models/rank/` production artifacts.
+The `data/modeling/` files are ignored local research outputs. The `models/long-horizon/` files are small committed research artifacts. `data/long-horizon-research.json` is the compact dashboard-facing export. These are separate from the dashboard's `models/rank/` production artifacts.
 
 The long-horizon label is deliberately named with a `252d` suffix:
 
@@ -513,9 +533,51 @@ exit: 252 trading days after entry
 benchmark: matching sector ETF over the same entry/exit window
 ```
 
+The experimental drawdown-adjusted label is also generated:
+
+```text
+target column: relevance_grade_drawdown_adjusted_252d
+return column: drawdown_adjusted_sector_neutral_return_252d_after_cost
+method: sector-neutral 252D return plus 0.5x clipped relative forward max drawdown
+```
+
+Plain English: it rewards one-year outperformance that arrives with a smoother path versus the sector. Current testing says this improves drawdown modestly, but gives up too much actual return, so it remains a diagnostic label rather than the primary label.
+
 The model uses the same 156 shared price, liquidity, volatility, relative-strength, sector, and market-context features as the 14-day model. It does not reuse the 14-day target, 14-day reports, or production dashboard artifact names.
 
-Initial local research dataset:
+Promoted long-horizon method:
+
+```text
+raw price cache: about 20 years
+labeled dataset window: 2012-05-23 to 2025-05-19
+exported model training window: 2012-05-23 to 2025-05-01
+train/validation sampling: monthly
+exported model training rows: 70,734 across 157 monthly sampled dates
+exported model parameters: eta 0.025, max_depth 2, min_child_weight 80, subsample 0.90, colsample_bytree 0.85
+exported boost rounds: 60
+test evaluation: full daily windows, summarized with monthly and quarterly cohorts
+target: relevance_grade_sector_neutral_252d
+```
+
+Why this was selected:
+
+- The 252-trading-day label makes neighboring daily rows highly overlapping, so monthly train/validation sampling reduces duplicate training information.
+- The 15-year labeled window keeps more history than the original 10-year baseline without leaning as hard on older regimes where market structure and current-S&P survivor bias are more concerning.
+- In the window/sampling comparison, 15-year monthly training had the strongest monthly and quarterly median top-decile returns.
+- A targeted hyperparameter tuning pass then favored a shallower, lower-learning-rate model over the inherited default settings.
+
+```text
+Run                  Sample    Monthly median   Quarterly median
+10y baseline         daily        +35.84%          +34.56%
+15y                 daily        +27.98%          +23.50%
+15y                 weekly       +27.03%          +25.97%
+15y                 monthly      +36.49%          +37.24%
+20y                 daily        +16.22%          +16.22%
+20y                 weekly       +26.11%          +26.11%
+20y                 monthly      +28.59%          +27.09%
+```
+
+Initial 10-year local research dataset:
 
 ```text
 Rows:        963,047
@@ -553,59 +615,86 @@ Monthly cohort median top-decile return:         +37.34%
 Quarterly cohort median top-decile return:       +32.24%
 ```
 
-The first compact hyperparameter sweep kept the inherited `current_default` rank settings as the best performer across two one-year walk-forward folds:
+Drawdown-adjusted label comparison on the same walk-forward rows:
 
 ```text
-Best preset:                 current_default
-Top-decile 252D return:      +38.44%
-Top-decile hit rate:         58.6%
-Top-minus-bottom spread:     +40.79%
-Median best iteration:       9.0
+Primary sector-neutral label:
+  Daily mean actual return:       +38.94%
+  Daily median actual return:     +35.42%
+  Quarterly median actual return: +34.56%
+  Mean forward max drawdown:      -19.82%
+
+Drawdown-adjusted label:
+  Daily mean actual return:       +21.84%
+  Daily median actual return:     +16.86%
+  Quarterly median actual return: +19.73%
+  Mean forward max drawdown:      -17.39%
+```
+
+The efficient tuning pass used the 15-year monthly dataset, monthly train/validation sampling, two recent one-year folds for the wider preset screen, and a four-fold confirmation run for the winning preset versus the inherited default. The selected preset is intentionally conservative: shallower trees, lower learning rate, and stronger dependence control from monthly sampling. It is an incremental improvement, not a clean sweep: the tuned preset improved daily mean return, hit rate, and quarterly median return in the confirmation run, while the prior default retained a slightly better monthly median and quarterly spread.
+
+```text
+Selected preset:                       depth2_more_rounds
+Parameters:                            eta 0.025, max_depth 2, min_child_weight 80
+Two-fold screen daily top-decile mean:  +39.45%
+Two-fold monthly median top decile:     +37.41%
+Four-fold daily top-decile mean:        +30.63%
+Four-fold monthly median top decile:    +22.35%
+Four-fold quarterly median top decile:  +26.66%
+Four-fold top-minus-bottom spread:      +32.75%
+Median best iteration, four folds:      27.5
+Exported fixed boosting rounds:         60
 ```
 
 SHAP-style explainability for the research model is stored in:
 
 ```text
-data/modeling/reports/xgboost_rank_sector252_research_shap_summary.csv
-data/modeling/reports/xgboost_rank_sector252_research_shap_summary.json
-models/long-horizon/xgboost_rank_sector252_research_explainability.json
+data/modeling/reports/xgboost_rank_sector252_15y_monthly_tuned_research_shap_summary.csv
+data/modeling/reports/xgboost_rank_sector252_15y_monthly_tuned_research_shap_summary.json
+models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research_explainability.json
 ```
 
-The current SHAP read is important: the one-year model is mostly sorting on volatility, liquidity, and risk-regime features, with 12-month momentum showing up as a secondary input. The largest feature by mean absolute SHAP is `volatility_60d_pct_rank`, followed by illiquidity/dollar-volume measures and volatility relative to SPY/sector. That does not mean the model is useless; it means the current model should be understood as a risk-adjusted long-horizon ranker rather than a pure momentum model.
+The current SHAP read is important: the tuned one-year model is mostly sorting on illiquidity, volatility, and risk-regime features. The largest feature by mean absolute SHAP is `amihud_20d_pct_rank`, followed by volatility measures versus the universe, sector, and SPY. That does not mean the model is useless; it means the current model should be understood as a risk/liquidity-aware long-horizon ranker rather than a pure momentum model.
 
 The long-horizon model is now compared against simple rule-based baselines with:
 
 ```bash
 .venv-model/bin/python scripts/modeling/evaluate_rank_baselines.py \
-  --predictions xgboost_rank_sector252_walk_forward_test_predictions.csv \
-  --output-name xgboost_rank_sector252_walk_forward_baseline_comparison \
-  --artifact-output models/long-horizon/xgboost_rank_sector252_walk_forward_baseline_comparison.json
+  --dataset long_horizon_training_dataset_15y.csv.gz \
+  --predictions xgboost_rank_sector252_15y_monthly_tuned_walk_forward_test_predictions.csv \
+  --output-name xgboost_rank_sector252_15y_monthly_tuned_baseline_comparison \
+  --artifact-output models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_baseline_comparison.json \
+  --metadata-artifact models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research_metadata.json
 ```
 
 Walk-forward baseline comparison:
 
 ```text
 Strategy                     Daily mean   Monthly median   Quarterly median
-XGBoost rank model           +38.94%      +35.84%          +34.56%
-Sector-relative momentum     +34.00%      +27.92%          +29.10%
-12-1 month momentum          +31.96%      +27.71%          +27.71%
-Technical composite          +17.00%      +19.42%          +21.25%
-Low volatility                -3.35%       -4.59%           -5.49%
+XGBoost rank model           +30.64%      +22.05%          +25.04%
+Sector-relative momentum     +18.87%      +15.06%          +10.98%
+12-1 month momentum          +18.36%      +16.12%          +15.91%
+Technical composite          +10.38%       +6.39%           +6.39%
+Low volatility                -1.66%       -2.23%           -1.91%
 ```
 
-The XGBoost ranker is beating the simple baselines in this test, but sector-relative momentum is the key benchmark to keep watching. If this model is added to the dashboard, it should appear as a separate long-horizon research view with baseline-agreement labels, not as part of the 14-day Momentum Book.
+The tuned XGBoost ranker is beating the simple baselines in this four-fold test, but sector-relative momentum remains the key benchmark to keep watching. The dashboard presents this as a separate Long-Horizon Book with full search/filter controls, 14-day tactical agreement labels, sector/cap mix context, and compact diagnostics. It is not part of the 14-day Momentum Book.
 
-Before promoting this model to production, review point-in-time constituent bias, keep expanding monthly/quarterly cohort monitoring, run a broader hyperparameter sweep, and consider adding fundamentals such as valuation, profitability, leverage, and growth.
+Before treating this model as production-grade portfolio advice, review point-in-time constituent bias, keep expanding monthly/quarterly cohort monitoring, and consider adding fundamentals such as valuation, profitability, leverage, and growth.
 
 ### Universe And Null Treatment
 
-- Universe: current S&P 500 constituents.
+- Universe: current S&P 500 constituents for training/scoring.
 - Price history: about 10 years of cached daily adjusted-close history from free public endpoints.
 - Short-history current constituents are kept by default once they have enough trailing data to compute every required feature and enough future data to compute the label.
 - Nulls are not imputed. Rows with missing required features, infinite values, or missing labels are dropped from the training dataset.
 - Macro/FRED observation-date fields are excluded by default because observation dates are not the same thing as market release dates.
 
 The current feature-complete dataset has `1,082,323` rows, `502` symbols, `156` features, zero feature null cells, and zero label mismatches. Most symbols have full coverage: `449` of `502` have more than 95% of the available post-feature history. The shortest histories are mostly spin-offs, IPOs, or newer S&P additions such as `SNDK`, `GEV`, `SOLV`, `VLTO`, `KVUE`, `GEHC`, `CEG`, `HOOD`, `APP`, and `COIN`.
+
+For the long-horizon model specifically, `scripts/modeling/audit_long_horizon_history.py` currently finds `501` feature-complete symbols out of `503` current constituents and an earliest clean labeled date of `2017-05-04` with the current 10-year raw price cache. The point-in-time universe audit is free-source only: `scripts/modeling/build_sp500_point_in_time_universe.py` parses Wikipedia current constituents plus index changes and found `357` change rows, but removed-name intervals remain incomplete and are not forced into training.
+
+Fundamentals are audit-first. `scripts/modeling/audit_sec_fundamentals.py` tests official SEC Company Facts coverage and aligns future feature work around filing dates rather than fiscal period dates. A 25-name smoke test matched all 25 sampled constituents with zero request failures, but fundamentals are not wired into daily refresh until coverage and reliability are reviewed.
 
 Minimum-history filters are available for research:
 
@@ -728,12 +817,17 @@ scripts/modeling/train_meta_label_model.py Train the candidate-only momentum met
 scripts/modeling/walk_forward_rank_model.py Run embargoed walk-forward rank-model evaluation
 scripts/modeling/backtest_model.py         Compare model scores against baseline ranking strategies
 scripts/modeling/evaluate_rank_baselines.py Compare rank-model holdout rows with simple baseline rules
+scripts/modeling/compare_long_horizon_labels.py Compare primary and drawdown-adjusted 252D labels
 scripts/modeling/explain_model.py          Generate XGBoost SHAP-style contribution summaries
 scripts/modeling/export_model_explainability.py Export compact SHAP metadata for the app
 scripts/modeling/export_production_rank_model.py Export the committed production rank model
+scripts/modeling/export_long_horizon_dashboard.py Export the long-horizon dashboard research JSON
 scripts/modeling/score_live_rank_model.py  Score the latest S&P 500 universe for the dashboard
 scripts/modeling/feature_ablation_rank_model.py Run rank-model feature-group ablations
 scripts/modeling/tune_rank_model.py        Run compact walk-forward hyperparameter tuning presets
+scripts/modeling/audit_long_horizon_history.py Audit clean long-horizon feature-history coverage
+scripts/modeling/build_sp500_point_in_time_universe.py Build free-source S&P 500 membership audit files
+scripts/modeling/audit_sec_fundamentals.py Audit official SEC Company Facts coverage before fundamentals are added
 scripts/modeling/backtest_rebound_activation.py Backtest activation rules for model-ranked rebound watches
 scripts/modeling/run_model_pipeline.py     Run the full modeling pipeline
 scripts/modeling/setup_training_env.sh     Create a local training venv and install the OpenMP runtime
@@ -837,6 +931,8 @@ data/snapshot.json                 Generated dashboard data
 data/macro-calendar.json           Generated next-six-month macro release calendar
 data/model-scorebook.json          Generated full S&P 500 model scoreboard
 data/model-monitoring.json         Generated top-decile dashboard monitoring snapshot
+data/long-horizon-research.json    Generated Long-Horizon Book dashboard snapshot
+data/model-rank-scores-long-horizon.json Ignored intermediate live one-year model scores
 data/model-reference-cache.json    Generated daily S&P 500 model reference cache
 data/market-cap-cache.json         Generated market-cap lookup cache for scorebook rows
 data/refresh-status.json           Generated refresh diagnostics and last-run health status

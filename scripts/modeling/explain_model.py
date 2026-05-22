@@ -20,6 +20,11 @@ except ModuleNotFoundError as error:  # pragma: no cover - handled at runtime
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate XGBoost SHAP-style contribution summaries for model features.")
     parser.add_argument("--model-name", default="xgboost_spy14", help="Base model name inside data/modeling/models.")
+    parser.add_argument(
+        "--model-path",
+        default=None,
+        help="Optional explicit model JSON path relative to the repo root. Defaults to data/modeling/models/<model-name>.json.",
+    )
     parser.add_argument("--dataset", default="training_dataset.csv.gz", help="Feature dataset inside data/modeling/features.")
     parser.add_argument("--predictions", default=None, help="Prediction CSV inside data/modeling/reports. Defaults to <model-name>_test_predictions.csv.")
     parser.add_argument("--top-n", type=int, default=25, help="Number of features to print.")
@@ -40,7 +45,7 @@ def load_frame(args: argparse.Namespace, feature_names: list[str]) -> pd.DataFra
 
 def main() -> None:
     args = parse_args()
-    model_path = MODELS_DIR / f"{args.model_name}.json"
+    model_path = ROOT / args.model_path if args.model_path else MODELS_DIR / f"{args.model_name}.json"
     booster = xgb.Booster()
     booster.load_model(str(model_path))
 

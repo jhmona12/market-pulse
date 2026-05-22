@@ -91,6 +91,7 @@ const requiredJsonFiles = [
   "data/snapshot.json",
   "data/model-scorebook.json",
   "data/model-monitoring.json",
+  "data/long-horizon-research.json",
   "data/model-reference-cache.json",
   "data/macro-calendar.json",
   "data/refresh-status.json"
@@ -101,16 +102,23 @@ for (const file of requiredJsonFiles) readJson(file);
 const snapshot = readJson("data/snapshot.json");
 const scorebook = readJson("data/model-scorebook.json");
 const monitoring = readJson("data/model-monitoring.json");
+const longHorizonResearch = readJson("data/long-horizon-research.json");
 const macroCalendar = readJson("data/macro-calendar.json");
 if (!Array.isArray(snapshot?.opportunities)) fail("data/snapshot.json is missing opportunities[]");
 if (!Array.isArray(scorebook?.rows)) fail("data/model-scorebook.json is missing rows[]");
 if (!Array.isArray(monitoring?.currentTopDecile)) fail("data/model-monitoring.json is missing currentTopDecile[]");
+if (!Array.isArray(longHorizonResearch?.topCandidates)) fail("data/long-horizon-research.json is missing topCandidates[]");
+if (!Array.isArray(longHorizonResearch?.rows)) fail("data/long-horizon-research.json is missing rows[]");
+if (!Array.isArray(longHorizonResearch?.labelSummaries) || !longHorizonResearch.labelSummaries.length) {
+  fail("data/long-horizon-research.json is missing labelSummaries[]");
+}
 if (!Array.isArray(macroCalendar?.events) || !macroCalendar.events.length) fail("data/macro-calendar.json is missing events[]");
 
 if (snapshot.marketDataStatus?.status !== "fresh") fail(`snapshot marketDataStatus is ${snapshot.marketDataStatus?.status || "missing"}`);
 if (scorebook.marketDataStatus?.status !== "fresh") fail(`scorebook marketDataStatus is ${scorebook.marketDataStatus?.status || "missing"}`);
 if (snapshot.model?.status !== "ready") fail(`snapshot model status is ${snapshot.model?.status || "missing"}`);
 if (scorebook.status !== "ready") fail(`scorebook status is ${scorebook.status || "missing"}`);
+if (longHorizonResearch.status !== "ready") fail(`long-horizon status is ${longHorizonResearch.status || "missing"}`);
 if (snapshot.model?.expectedAsOfDate && snapshot.marketDataStatus?.asOfDate !== snapshot.model.expectedAsOfDate) {
   fail(`snapshot market data is stale: ${snapshot.marketDataStatus?.asOfDate || "missing"} vs expected ${snapshot.model.expectedAsOfDate}`);
 }
@@ -125,6 +133,15 @@ for (let index = 0; index < ranks.length; index += 1) {
     fail(`scorebook rank sequence breaks at position ${index + 1}`);
     break;
   }
+}
+
+const longRanks = longHorizonResearch.rows.map((row) => numberOrNull(row.longModelRank)).filter((rank) => rank !== null).sort((a, b) => a - b);
+if (longRanks.length !== longHorizonResearch.rows.length) fail("long-horizon rows contain entries without numeric longModelRank");
+if (longRanks.length && (longRanks[0] !== 1 || longRanks.at(-1) !== longHorizonResearch.rows.length)) {
+  fail(`long-horizon rank range is ${longRanks[0]}-${longRanks.at(-1)} for ${longHorizonResearch.rows.length} rows`);
+}
+if (scorebook.asOfDate && longHorizonResearch.asOfDate && scorebook.asOfDate !== longHorizonResearch.asOfDate) {
+  fail(`long-horizon asOfDate ${longHorizonResearch.asOfDate} does not match scorebook ${scorebook.asOfDate}`);
 }
 
 const topDecileCutoff = Math.ceil(scorebook.rows.length * 0.1);
@@ -149,7 +166,7 @@ if (badActivations.length) fail(`${badActivations.length} non-rebound rows expos
 const missingActivations = scorebook.rows.filter((row) => row.setupType === "model_rebound_watch" && numberOrNull(row.reboundActivationPrice) === null);
 if (missingActivations.length) fail(`${missingActivations.length} Model Rebound Watch rows are missing reboundActivationPrice`);
 
-const serializedDashboard = JSON.stringify({ snapshot, scorebook, monitoring });
+const serializedDashboard = JSON.stringify({ snapshot, scorebook, monitoring, longHorizonResearch });
 [
   { token: "NaN", pattern: /(^|[^A-Za-z0-9])NaN([^A-Za-z0-9]|$)/ },
   { token: "undefined", pattern: /(^|[^A-Za-z0-9])undefined([^A-Za-z0-9]|$)/ },
@@ -179,10 +196,16 @@ const pagesWorkflow = readFileSync(join(root, ".github/workflows/pages.yml"), "u
 if (!pagesWorkflow.includes("data/model-monitoring.json public/data/model-monitoring.json")) {
   fail(".github/workflows/pages.yml does not publish data/model-monitoring.json");
 }
+if (!pagesWorkflow.includes("data/long-horizon-research.json public/data/long-horizon-research.json")) {
+  fail(".github/workflows/pages.yml does not publish data/long-horizon-research.json");
+}
 
 const localServer = readFileSync(join(root, "scripts/local-dashboard-server.mjs"), "utf8");
 if (!localServer.includes('"data/model-monitoring.json"')) {
   fail("scripts/local-dashboard-server.mjs does not allow data/model-monitoring.json");
+}
+if (!localServer.includes('"data/long-horizon-research.json"')) {
+  fail("scripts/local-dashboard-server.mjs does not allow data/long-horizon-research.json");
 }
 if (!localServer.includes('"data/macro-calendar.json"')) {
   fail("scripts/local-dashboard-server.mjs does not allow data/macro-calendar.json");

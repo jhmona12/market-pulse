@@ -459,6 +459,7 @@ li {
 
 .recommendations-panel,
 .ai-panel,
+.model-lens-panel,
 .sector-panel,
 .avoid-panel,
 .ticker-lab-panel,
@@ -789,6 +790,138 @@ li {
 .ai-evidence {
   display: grid;
   gap: 6px;
+}
+
+.model-lens-layout {
+  display: grid;
+  gap: 14px;
+}
+
+.model-lens-primer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.model-lens-primer article {
+  min-height: 128px;
+  border: 1px solid rgba(79, 216, 255, 0.18);
+  border-radius: 5px;
+  padding: 13px;
+  background: rgba(79, 216, 255, 0.04);
+}
+
+.model-lens-primer strong,
+.model-lens-list > div > strong {
+  display: block;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.model-lens-primer span,
+.model-lens-list > div > span {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.48;
+}
+
+.model-lens-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.model-lens-summary .monitor-card strong {
+  font-size: 1.16rem;
+}
+
+.model-lens-lists {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.model-lens-list {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.model-lens-list > div:first-child {
+  min-height: 72px;
+  border-bottom: 1px solid rgba(57, 255, 136, 0.12);
+  padding-bottom: 10px;
+}
+
+.model-lens-item {
+  display: grid;
+  gap: 8px;
+  min-height: 154px;
+  border: 1px solid rgba(57, 255, 136, 0.14);
+  border-radius: 5px;
+  padding: 12px;
+  background: linear-gradient(180deg, rgba(79, 216, 255, 0.035), rgba(7, 16, 12, 0.95));
+}
+
+.model-lens-item header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.model-lens-item header strong {
+  display: block;
+  font-family: var(--mono);
+  font-size: 1.12rem;
+}
+
+.model-lens-item header span,
+.model-lens-item small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.38;
+}
+
+.model-lens-item em {
+  flex: 0 0 auto;
+  width: fit-content;
+  max-width: 46%;
+  border: 1px solid rgba(79, 216, 255, 0.24);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--accent-2);
+  background: rgba(79, 216, 255, 0.07);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.model-lens-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.model-lens-metrics span {
+  border: 1px solid rgba(57, 255, 136, 0.16);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: #dcefe4;
+  background: rgba(57, 255, 136, 0.055);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 900;
 }
 
 .deeper-read-panel {
@@ -1137,11 +1270,20 @@ li {
   margin-top: 14px;
 }
 
+.long-horizon-view {
+  margin-top: 14px;
+}
+
 .scoreboard-panel {
   min-height: 72vh;
 }
 
 .top-decile-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.long-horizon-panel {
   display: grid;
   gap: 16px;
 }
@@ -1246,6 +1388,100 @@ li {
 
 .top-decile-table {
   min-width: 1280px;
+}
+
+.long-horizon-summary {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.long-horizon-metric-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  border: 1px solid rgba(79, 216, 255, 0.16);
+  border-radius: 5px;
+  padding: 12px;
+  background: rgba(79, 216, 255, 0.045);
+}
+
+.long-horizon-metric-notes div {
+  display: grid;
+  gap: 5px;
+}
+
+.long-horizon-metric-notes strong {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.long-horizon-metric-notes span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.long-horizon-section {
+  display: grid;
+  gap: 8px;
+}
+
+.long-horizon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.long-horizon-table-wrap {
+  max-height: 56vh;
+}
+
+.long-horizon-table {
+  min-width: 1480px;
+}
+
+.long-horizon-list {
+  display: grid;
+  gap: 8px;
+}
+
+.long-horizon-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, 180px);
+  gap: 12px;
+  align-items: start;
+  border: 1px solid rgba(57, 255, 136, 0.12);
+  border-radius: 5px;
+  padding: 11px;
+  background: rgba(3, 8, 6, 0.58);
+}
+
+.long-horizon-item strong,
+.long-horizon-item b {
+  display: block;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.long-horizon-item span,
+.long-horizon-item small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.long-horizon-item b {
+  font-size: 1rem;
+  text-align: right;
+}
+
+.long-horizon-item small {
+  text-align: right;
 }
 
 .monitor-badge {
@@ -1385,6 +1621,7 @@ li {
 
 @media (max-width: 1100px) {
   .deeper-read-grid,
+  .model-lens-lists,
   .sector-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1422,9 +1659,17 @@ li {
     grid-template-columns: 1fr;
   }
 
-  .top-decile-summary {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+	  .top-decile-summary {
+	    grid-template-columns: repeat(2, minmax(0, 1fr));
+	  }
+
+	  .long-horizon-summary,
+	  .model-lens-primer,
+	  .model-lens-summary,
+	  .long-horizon-metric-notes,
+	  .long-horizon-grid {
+	    grid-template-columns: 1fr;
+	  }
 
   .market-strip {
     grid-template-columns: repeat(2, 1fr);
@@ -1440,6 +1685,7 @@ li {
 	  .avoid-list,
 	  .avoid-sector-list,
 	  .deeper-read-grid,
+	  .model-lens-lists,
 	  .ticker-result-grid,
 	  .recommendation-list {
 	    grid-template-columns: 1fr;
@@ -1452,11 +1698,20 @@ li {
     grid-template-columns: 1fr;
   }
 
-  .event,
-  .source-item {
-    grid-template-columns: 1fr;
-  }
-}
+	  .event,
+	  .source-item {
+	    grid-template-columns: 1fr;
+	  }
+
+	  .long-horizon-item {
+	    grid-template-columns: 1fr;
+	  }
+
+	  .long-horizon-item b,
+	  .long-horizon-item small {
+	    text-align: left;
+	  }
+	}
 
 @media (max-width: 520px) {
   .shell {
@@ -1485,12 +1740,15 @@ li {
     grid-template-columns: 1fr 1fr;
   }
 
-  .sector-main,
-  .sector-mini,
-  .top-decile-summary,
-  .signal-grid {
-    grid-template-columns: 1fr;
-  }
+	  .sector-main,
+	  .sector-mini,
+	  .top-decile-summary,
+	  .long-horizon-summary,
+	  .model-lens-summary,
+	  .long-horizon-metric-notes,
+	  .signal-grid {
+	    grid-template-columns: 1fr;
+	  }
 
   .opportunity .signal-grid {
     grid-template-columns: 1fr;

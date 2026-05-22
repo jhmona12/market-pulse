@@ -1,0 +1,96 @@
+{
+  "generatedAt": "2026-05-22T02:04:47.592723+00:00",
+  "dataset": "data/modeling/features/long_horizon_training_dataset.csv.gz",
+  "summaryPath": "data/modeling/reports/long_horizon_label_comparison_summary.csv",
+  "rows": [
+    {
+      "label": "Sector-neutral label",
+      "cohort": "Daily overlapping",
+      "cohort_count": 504,
+      "top_original_return_mean": 0.38942726892306884,
+      "top_original_return_median": 0.35415699480650875,
+      "spread_original_return_mean": 0.411556280053841,
+      "top_adjusted_return_mean": 0.33306542373675596,
+      "top_adjusted_return_median": 0.2969382413699647,
+      "top_max_drawdown_mean": -0.19822573940872187,
+      "top_max_drawdown_median": -0.1973790760310763,
+      "top_relative_drawdown_mean": -0.11500142425282192,
+      "top_relative_drawdown_median": -0.11628010423096713
+    },
+    {
+      "label": "Sector-neutral label",
+      "cohort": "Monthly first trading day",
+      "cohort_count": 25,
+      "top_original_return_mean": 0.4017582074518953,
+      "top_original_return_median": 0.3583899363678242,
+      "spread_original_return_mean": 0.4169655536947915,
+      "top_adjusted_return_mean": 0.34602027661542983,
+      "top_adjusted_return_median": 0.300334405622027,
+      "top_max_drawdown_mean": -0.19336267950334818,
+      "top_max_drawdown_median": -0.19468029846374324,
+      "top_relative_drawdown_mean": -0.11345377674550589,
+      "top_relative_drawdown_median": -0.11266373565470586
+    },
+    {
+      "label": "Sector-neutral label",
+      "cohort": "Quarterly first trading day",
+      "cohort_count": 9,
+      "top_original_return_mean": 0.4285198842443044,
+      "top_original_return_median": 0.3455586432565212,
+      "spread_original_return_mean": 0.4442069063275759,
+      "top_adjusted_return_mean": 0.3734168641017994,
+      "top_adjusted_return_median": 0.300334405622027,
+      "top_max_drawdown_mean": -0.19358400453803992,
+      "top_max_drawdown_median": -0.20062244661374165,
+      "top_relative_drawdown_mean": -0.11195013799988948,
+      "top_relative_drawdown_median": -0.11508547870409162
+    },
+    {
+      "label": "Drawdown-adjusted label",
+      "cohort": "Daily overlapping",
+      "cohort_count": 504,
+      "top_original_return_mean": 0.21841614424016567,
+      "top_original_return_median": 0.16858781740547996,
+      "spread_original_return_mean": 0.24827505357571072,
+      "top_adjusted_return_mean": 0.16920096443115107,
+      "top_adjusted_return_median": 0.11288286735471123,
+      "top_max_drawdown_mean": -0.17391150092305685,
+      "top_max_drawdown_median": -0.18058250889860367,
+      "top_relative_drawdown_mean": -0.09972237340060351,
+      "top_relative_drawdown_median": -0.09475217741117337
+    },
+    {
+      "label": "Drawdown-adjusted label",
+      "cohort": "Monthly first trading day",
+      "cohort_count": 25,
+      "top_original_return_mean": 0.23679964663257874,
+      "top_original_return_median": 0.17243075605426875,
+      "spread_original_return_mean": 0.2627985533254779,
+      "top_adjusted_return_mean": 0.18913649978107894,
+      "top_adjusted_return_median": 0.13427800117770727,
+      "top_max_drawdown_mean": -0.1684592471462301,
+      "top_max_drawdown_median": -0.17108534003204467,
+      "top_relative_drawdown_mean": -0.0965955196260672,
+      "top_relative_drawdown_median": -0.09718327582553958
+    },
+    {
+      "label": "Drawdown-adjusted label",
+      "cohort": "Quarterly first trading day",
+      "cohort_count": 9,
+      "top_original_return_mean": 0.25290242320216383,
+      "top_original_return_median": 0.19733781466526779,
+      "spread_original_return_mean": 0.286608480394489,
+      "top_adjusted_return_mean": 0.2040459249739765,
+      "top_adjusted_return_median": 0.14020414234946013,
+      "top_max_drawdown_mean": -0.17342070485829122,
+      "top_max_drawdown_median": -0.15805924101490942,
+      "top_relative_drawdown_mean": -0.09870233741884862,
+      "top_relative_drawdown_median": -0.10025014435130684
+    }
+  ],
+  "notes": [
+    "Original return columns show the investable sector-neutral 252D return after cost.",
+    "Adjusted return columns include the experimental drawdown/path-quality term and should not be treated as realized portfolio return.",
+    "Median top-decile returns are emphasized because one-year outcomes can be skewed by a few large winners."
+  ]
+}

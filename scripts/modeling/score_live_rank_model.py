@@ -105,6 +105,14 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Ignore the reference cache and rebuild the full S&P 500 feature matrix.",
     )
+    parser.add_argument(
+        "--score-reference-cache",
+        action="store_true",
+        help=(
+            "Score the cached S&P 500 reference feature rows with the selected model instead of refetching prices. "
+            "Use after a full same-day scoring run has refreshed the reference cache."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -1121,6 +1129,111 @@ def score_focus_with_reference_cache(
     }
 
 
+def cached_dashboard_metrics(cache: dict) -> dict[str, dict]:
+    keys = [
+        "priceDataDate",
+        "changePct",
+        "return7",
+        "return14",
+        "return30",
+        "return90",
+        "ytdReturn",
+        "volumeRatio",
+        "above100",
+        "history",
+        "technicalSource",
+        "stopSellPrice",
+        "stopSellDistancePct",
+        "stopSellAtr20",
+        "stopSellRule",
+        "stopSellBasis",
+        "stopSellComponents",
+    ]
+    metrics: dict[str, dict] = {}
+    for item in cache.get("referenceRankings", []):
+        symbol = str(item.get("symbol") or "")
+        if not symbol:
+            continue
+        metrics[symbol] = {key: item.get(key) for key in keys if key in item}
+    return metrics
+
+
+def score_reference_cache(
+    args: argparse.Namespace,
+    cache: dict,
+    model_path: Path,
+    metadata: dict,
+    feature_columns: list[str],
+) -> dict:
+    reference_rows = records_frame(cache.get("referenceRows", []))
+    if reference_rows.empty:
+        raise ValueError("reference cache is missing referenceRows")
+
+    reference_date = pd.to_datetime(cache.get("asOfDate") or reference_rows["date"].max())
+    reference_rows["date"] = reference_date
+    dataset = add_cross_sectional_model_features(reference_rows, round_trip_cost=None)
+    missing_features = [column for column in feature_columns if column not in dataset.columns]
+    if missing_features:
+        raise ValueError(f"Cached feature matrix is missing model features: {missing_features}")
+
+    scored = score_rows(dataset, model_path, feature_columns)
+    scored["model_universe_count"] = len(scored)
+    latest_date = scored["date"].max().date().isoformat() if not scored.empty else None
+    assert_fresh_as_of(latest_date, "cached reference model rankings")
+
+    name_lookup = {}
+    if "name" in reference_rows.columns:
+        name_lookup = reference_rows.set_index("symbol")["name"].dropna().astype(str).to_dict()
+    dashboard_metrics = cached_dashboard_metrics(cache)
+    rankings = [
+        row_payload(row, name_lookup, dashboard_metrics=dashboard_metrics)
+        for _, row in scored.iterrows()
+    ]
+    unscored_symbols = sorted(set(reference_rows["symbol"].astype(str)) - {item["symbol"] for item in rankings})
+    return {
+        "status": "ready",
+        "generatedAt": pd.Timestamp.now("UTC").isoformat(),
+        "asOfDate": latest_date,
+        "model": {
+            "name": args.model_name,
+            "path": str(model_path.relative_to(ROOT)),
+            "target": metadata.get("target_column"),
+            "returnColumn": metadata.get("return_column"),
+            "featureCount": len(feature_columns),
+            "numBoostRound": metadata.get("num_boost_round"),
+            "trainingEndDate": metadata.get("training_end_date"),
+            "constituentSource": cache.get("model", {}).get("constituentSource"),
+        },
+        "scoredCount": len(rankings),
+        "requestedSymbolCount": int(len(reference_rows)),
+        "focusSymbols": [],
+        "focusRankings": [],
+        "focusFailureCount": 0,
+        "focusFailures": {},
+        "focusUnscoredSymbols": [],
+        "referenceUniverse": cache.get("referenceUniverse") or "Current S&P 500",
+        "referenceUniverseCount": int(len(rankings)),
+        "technicalTape": {
+            "status": "ready",
+            "source": "model_reference_cache",
+            "asOfDate": latest_date,
+            "expectedAsOfDate": latest_expected_market_data_date().isoformat(),
+        },
+        "marketRows": cache.get("marketRows", []),
+        "sectorRows": cache.get("sectorRows", []),
+        "sectorDiagnostics": {},
+        "methodologyNotes": [
+            "This run scored the cached current S&P 500 feature matrix with the selected model to avoid duplicate price-history fetches.",
+            "The cache is accepted only when its as-of date satisfies the same freshness guardrail as a full model scoring pass.",
+        ],
+        "failedSymbolCount": 0,
+        "unscoredSymbolCount": len(unscored_symbols),
+        "unscoredSymbols": unscored_symbols,
+        "failures": {},
+        "rankings": rankings,
+    }
+
+
 def main() -> None:
     args = parse_args()
     model_dir = ROOT / args.model_dir
@@ -1131,6 +1244,19 @@ def main() -> None:
 
     focus_symbols = parse_focus_symbols(args.focus_symbols)
     cache_path = ROOT / args.reference_cache
+    if args.score_reference_cache:
+        cache = load_reference_cache(cache_path)
+        if cache is None:
+            raise SystemExit(f"Reference cache unavailable: {cache_path.relative_to(ROOT)}")
+        try:
+            payload = score_reference_cache(args, cache, model_path, metadata, feature_columns)
+        except Exception as error:  # noqa: BLE001
+            raise SystemExit(f"Unable to score reference cache: {error}") from error
+        output_path = ROOT / args.output
+        write_json(payload, output_path)
+        print(f"Wrote {len(payload['rankings'])} cached live model rankings to {output_path.relative_to(ROOT)}")
+        return
+
     if focus_symbols and not args.no_reference_cache:
         cache = load_reference_cache(cache_path)
         if cache is not None:

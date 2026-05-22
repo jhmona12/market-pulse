@@ -22,6 +22,9 @@ LONG_RANK_TARGET_COLUMN = "relevance_grade_sector_neutral_252d"
 LONG_SECTOR_POSITIVE_TARGET_COLUMN = "label_sector_neutral_positive_252d"
 LONG_SECTOR_HURDLE_TARGET_COLUMN = "label_sector_neutral_hurdle_252d"
 LONG_RANK_RETURN_COLUMN = "sector_neutral_forward_return_252d_after_cost"
+LONG_RELATIVE_DRAWDOWN_COLUMN = "relative_max_drawdown_252d_next_close"
+LONG_DRAWDOWN_ADJUSTED_RETURN_COLUMN = "drawdown_adjusted_sector_neutral_return_252d_after_cost"
+LONG_DRAWDOWN_ADJUSTED_TARGET_COLUMN = "relevance_grade_drawdown_adjusted_252d"
 
 IDENTITY_COLUMNS = {
     "date",
@@ -55,11 +58,15 @@ TARGET_COLUMNS = {
     LONG_RANK_RETURN_COLUMN,
     "max_drawdown_252d_next_close",
     "sector_max_drawdown_252d_next_close",
+    LONG_RELATIVE_DRAWDOWN_COLUMN,
+    LONG_DRAWDOWN_ADJUSTED_RETURN_COLUMN,
     LONG_LEGACY_TARGET_COLUMN,
     LONG_SECTOR_POSITIVE_TARGET_COLUMN,
     LONG_SECTOR_HURDLE_TARGET_COLUMN,
     "sector_neutral_forward_return_252d_pct_rank",
     LONG_RANK_TARGET_COLUMN,
+    "drawdown_adjusted_sector_neutral_return_252d_pct_rank",
+    LONG_DRAWDOWN_ADJUSTED_TARGET_COLUMN,
 }
 
 NON_FEATURE_COLUMNS = IDENTITY_COLUMNS | TARGET_COLUMNS
