@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-26T16:59:20.339Z",
+  "generatedAt": "2026-05-26T17:06:25.532Z",
   "model": {
     "status": "missing",
     "generatedAt": null,
@@ -139,7 +139,7 @@
       "Macro risk: GDP Second Estimate on 2026-05-28; Personal Income and Outlays on 2026-05-28; Employment Situation on 2026-06-05.",
       "Momentum risk: fresh technical tape is unavailable, so RSI/chase-risk counts are suppressed.",
       "Data check: rerun the Python model scorer before relying on trailing returns, sector tiles, breadth, or moving-average status.",
-      "4 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
+      "5 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
     ],
     "generatedBy": "deterministic"
   },
@@ -148,12 +148,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 33148,
+      "inputTokens": 32611,
       "cachedInputTokens": 0,
-      "outputTokens": 1552,
+      "outputTokens": 1554,
       "reasoningTokens": 0,
-      "totalTokens": 34700,
-      "estimatedCostUsd": 0.002278,
+      "totalTokens": 34165,
+      "estimatedCostUsd": 0.002252,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -161,146 +161,143 @@
       }
     },
     "companyContextCount": 0,
-    "headline": "Oil, inflation risks, and AI-driven chip demand tilt positioning; stay light on crowded mega-caps.",
-    "macroView": "Escalating upstream inflation pressures keep core rates biased higher, while Iran peace-talk headlines drive oil volatility and risk appetite in short cycles. GDP second estimate and PCE data due late this week loom as pivotal for the Fed path; expect higher-yield sensitivity in cyclicals if energy remains tight and inflation persists.",
+    "headline": "Oil and AI-driven rallies clash with sticky inflation risk; position sizing narrows as growth / demand signals sharpen",
+    "macroView": "Regime: inflation remains sticky with upshot of higher policy resilience. The strongest signals point to continued high-rate expectations and energy-led risk appetite, tempered by earnings resilience in AI / semis and geopolitical tensions around Iran. Upcoming BEA GDP second estimate, PCE and employment data through late May into June will test whether inflation persists or cools. Expect yields to stay elevated and rotation toward cyclical, energy-linked and AI beneficiaries if macro data provesSticky inflation persists, but a softer growth backdrop could cap multiple expansion.",
     "dailyRead": {
-      "headline": "Oil and inflation risks anchor the tape as AI chip upcycle supports a selective bid",
-      "body": "Markets are shifting on persistent inflation signals and energy-price sensitivity, with upstream PPI pressures reinforcing higher for longer rate expectations even as AI-related demand supports memory and semis. The macro backdrop keeps rates and energy as the dominant risk channels, with earnings news and crowding in AI-intensive names reinforcing a narrow leadership set. The strongest confirmation comes from Micron’s surge on AI demand and UBS price targets plus the Iran peace-talk trajectory lifting risk-on sentiment in semis and space / AI-related themes.",
+      "headline": "Oil and AI-driven rallies clash with sticky inflation risk; position sizing narrows as growth / demand signals sharpen",
+      "body": "Inflation remains persistent, with upstream price pressures surfacing across the supply chain and oil / energy dynamics driving core-cost pressure. Markets are responding to elevated expectations for the Fed path and a potential Iran peace-deal backdrop that could ease energy volatility, while AI / semis strength keeps tech leadership intact. The regime favors selective, liquidity-friendly risk taking in energy / AI-named beneficiaries; broader discretionary exposure remains contingent on inflation momentum and rate expectations. The strongest signal comes from Micron and other memory / chip names rallying on AI demand, alongside Space / AI-driven space / tech names. Earnings / guide-paths remain supportive for a subset of mega-cap AI-adjacent equities, but elevated yields and energy-price sensitivity keep risk-reward tight for new longs. Watch macro prints on May 28 (GDP second estimate, Personal Income and Outlays) and June CPI and PPI, plus the June FOMC setup for a clearer read on the path of rates.",
       "keyTakeaways": [
-        "Market drivers: Inflation persistence and energy-price dynamics keep longer-dated yields vulnerable; oil-price volatility linked to Iran talks and geopolitical risk.",
-        "Retail attention: Reddit signal is unavailable; rely on official macro and earnings movers for now.",
-        "Breadth: Leadership remains narrow, with semis and AI beneficiaries leading while cyclicals and energy-sensitive names show mixed performance."
+        "Macro release: GDP second estimate and personal income data on May 28 are high importance; sticky inflation risks imply sensitivity to rate expectations and risk appetite.",
+        "Market drivers: AI / semis leadership persists with Micron and related memory names; oil / energy backdrop and Iran-related headlines continue to influence yields and sector rotations.",
+        "Earnings: selective AI / tech and consumer tech-related names show resilience; earnings momentum in chip / memory space supports higher multiples in AI beneficiaries.",
+        "Breadth: leadership is concentrated in AI / tech and energy; broad market breadth remains temperate given higher-for-longer rates.",
+        "Model read: XGBoost features point to momentum and volatility considerations; however, with missing model data, rely on 14-day tactical momentum cues if available."
       ],
-      "watchItems": [
-        "Track energy prices and oil volatility as Iran risk premiums ebb or re-accelerate; adjust duration exposure accordingly.",
-        "Watch Micron and other memory / AI-related names for continuation signals vs. risk of a pullback if inflation surprises to the upside.",
-        "Look for sector confirmation: if AI / semis leadership tightens with broad market breadth, increase exposure to high-quality names.",
-        "Invalidation: if 10y yield breaks higher on hotter inflation data and energy spikes, de-risk cyclicals and reduce long beta exposures."
-      ]
+      "watchItems": []
     },
     "recommendations": [
       {
         "symbol": "MU",
-        "action": "Long",
+        "action": "BUY",
         "conviction": "High",
-        "setup": "Fresh momentum supported by AI-driven memory demand; liquid leader with clear earnings momentum",
-        "whyNow": "AI cycle remains firm; UBS price target boost underscores potential for multiple expansion",
-        "rationale": "Micron’s AI-driven memory demand supports higher earnings power; liquidity and positioning in semis remain favorable if inflation stays sticky",
-        "companyOverview": "Memory-chip maker benefiting from AI workloads; strong pricing opportunities in long-term contracts",
-        "marketCap": "$1.0T+ (approx)",
-        "earningsContext": "Micron latest report showed AI demand strength; next earnings date",
-        "recentNews": "Micron stock surges on UBS target and AI demand narrative (E8)",
-        "macroLink": "Market breadth and AI-driven demand signals (M3, S3)",
-        "macroEvidence": "UBS price target upgrade signals durable earnings power",
-        "modelEvidence": "Top features show momentum and volatility signals; 14-day model also flags MU in leading cluster",
-        "technicalEvidence": "Strong price outperformance vs. sector; favorable liquidity backdrop",
-        "momentumEvidence": "Positive short-term price action corroborated by news",
-        "risk": "Regime risk if inflation accelerates or supply tightness reverses",
-        "invalidation": "If AI demand falters or memory pricing declines sharply, trim exposure quickly",
+        "setup": "14-day tactical momentum aligned with one-year context",
+        "whyNow": "AI-driven memory demand remains a structural tailwind; stock and sector momentum firm on strong UBS price target narrative and Micron's AI-driven reaffirmation of pricing power.",
+        "rationale": "AI-driven memory demand supports AI infra and broader data-center capex; price targets have been lifted, supporting upside risk.",
+        "companyOverview": "Micron Technology, Inc. engages in memory and storage solutions for AI workloads; benefiting from AI adoption and data-center expansion.",
+        "marketCap": "$998.0B",
+        "earningsContext": "Micron cited AI-driven demand catalysts; near-term earnings visibility improving.",
+        "recentNews": "MU rally driven by UBS price target upgrade and AI demand dynamics.",
+        "macroLink": "M3,M5",
+        "macroEvidence": "AI cycle support and memory pricing strength.",
+        "modelEvidence": "Top SHAP drivers include volatility and momentum features; strong breadth signals.",
+        "technicalEvidence": "Fresh intra-day momentum while price holds above key supports.",
+        "momentumEvidence": "Positive 14-day momentum; 252d momentum vs sector neutral.",
+        "risk": "Regulatory / semiconductor cycle risk; valuation sensitive to macro growth.",
+        "invalidation": "Price trades below 2.5% below session high; macro prints disappoint.",
         "sourceRefs": [
           "S3",
+          "S5",
           "S8",
-          "S12",
-          "S15",
-          "S19"
+          "S15"
+        ]
+      },
+      {
+        "symbol": "MRVL",
+        "action": "BUY",
+        "conviction": "Medium",
+        "setup": "14-day momentum confirm with sector leadership",
+        "whyNow": "Semis strength is broadening beyond memory; Marvell shows improving guidance and AI-related demand.",
+        "rationale": "Chipmakers benefitting from AI infrastructure spending.",
+        "companyOverview": "Marvell Technology, Inc. designs and develops storage, networking, and processor solutions.",
+        "marketCap": "$171.9B",
+        "earningsContext": "Earnings cycle shows resilience; near-term catalysts in AI workloads.",
+        "recentNews": "Strong AI demand backdrop; potential for multiple expansion.",
+        "macroLink": "M3",
+        "macroEvidence": "AI / semis exposure supported by market chatter and equity moves.",
+        "modelEvidence": "14-day model rank favorable; SHAP features show momentum and liquidity factors.",
+        "technicalEvidence": "Rising price action with solid volume.",
+        "momentumEvidence": "Positive 14-day momentum.",
+        "risk": "Industry cyclicality; client concentration risk.",
+        "invalidation": "Break of key trendline or negative sector rotation.",
+        "sourceRefs": [
+          "S3",
+          "S15"
         ]
       },
       {
         "symbol": "VSAT",
-        "action": "Watch",
-        "conviction": "Medium",
-        "setup": "Low-duration pullback with potential for upside continuation on 5G / space AI themes",
-        "whyNow": "Space and AI-related defense / space data products could benefit from ongoing funding and private / public space activity",
-        "rationale": "ViaSat shows banner move in communications / NASA-like ventures; liquidity and exposure to AI-enabled comms",
-        "companyOverview": "Satellite communications and secure connectivity provider",
-        "marketCap": "$11B",
-        "earningsContext": "Earnings movers show mixed results; no exact date provided",
-        "recentNews": "ViaSat price action + strong move in market movers",
-        "macroLink": "Geopolitics and energy themes; AI and semis strength supporting adjacent tech names",
-        "macroEvidence": "Space / AI demand cycle remains supportive",
-        "modelEvidence": "Moderate momentum signal with 14-day cross-section showing potential",
-        "technicalEvidence": "Idiosyncratic move; not broad-based",
-        "momentumEvidence": "Gains-led by a handful of names; confirm with price action",
-        "risk": "Company-specific risk remains; liquidity in smaller cap names can be volatile",
-        "invalidation": "A reversal in space / defense budgets or a broader market selloff would invalidate",
-        "sourceRefs": [
-          "S3",
-          "S6",
-          "S11"
-        ]
-      },
-      {
-        "symbol": "JOYY",
-        "action": "Long",
+        "action": "WATCH",
         "conviction": "Low",
-        "setup": "Idiosyncratic earnings move; need confirmation",
-        "whyNow": "Single-name outperformed on earnings expectations; watch for follow-through",
-        "rationale": "JOYY is a volatile name with outsized moves on earnings chatter",
-        "companyOverview": "Social media and live streaming company; exposure to ad market and user growth",
-        "marketCap": "$3.2B",
-        "earningsContext": "Date unspecified; multiple earnings movers in tape",
-        "recentNews": "Market mover tape shows JOYY gain on earnings optimism",
-        "macroLink": "Earnings movers in tape; AI / semis linkage",
-        "macroEvidence": "Broad AI / semis rally could lift social media players with ad leverage",
-        "modelEvidence": "Not a top tactical name; lower cross-model confirmation",
-        "technicalEvidence": "Strong intraday move but limited liquidity",
-        "momentumEvidence": "Short-term momentum but risk of reversal high",
-        "risk": "High idiosyncratic risk",
-        "invalidation": "If momentum fades intraday or next day, exit",
+        "setup": "Longer-horizon potential if AI / space demand sustains",
+        "whyNow": "Space / AI-linked names show early momentum; require confirmation via 14-day signal.",
+        "rationale": "Space-related connectivity demand could be accelerated by AI workloads.",
+        "companyOverview": "ViaSat, Inc. provides satellite broadband and communications solutions.",
+        "marketCap": "$10.1B",
+        "earningsContext": "Earnings movement mixed; not yet a clear 14-day signal.",
+        "recentNews": "Space stock enthusiasm driven by SpaceX headlines.",
+        "macroLink": "M1",
+        "macroEvidence": "Geopolitics and energy backdrop a factor for space / defense demand.",
+        "modelEvidence": "Long-horizon model has limited signals; need cross-check.",
+        "technicalEvidence": "No strong breakout yet.",
+        "momentumEvidence": "Early momentum in some space names.",
+        "risk": "High beta and liquidity risk; execution risk in aerospace.",
+        "invalidation": "No activation unless 14-day momentum confirms.",
         "sourceRefs": [
           "S3",
-          "S12"
+          "S11"
         ]
       }
     ],
     "avoidList": {
-      "summary": "Avoid crowded high-m multiple momentum in names with rich AI / semis exposure without clear macro confirmation; stay cautious on energy-sensitive names if inflation stays hot and rates grind higher.",
+      "summary": "Avoid crowded momentum in names with weak breadth signals and high rate- and energy-price sensitivity; sector leadership overly narrow, risk of sharp drawdown if inflation persistently hawkish.",
       "sectors": [
         {
-          "sector": "Energy",
-          "rationale": "Oil / energy shock risk remains high as geopolitical tensions persist; avoid adding new energy-sensitive long bets without macro confirmation."
+          "sector": "Energy/Utilities",
+          "rationale": "Energy prices and policy remain volatile; crowded long exposure could undo gains."
         },
         {
-          "sector": "Autos & Luxury",
-          "rationale": "RACE Ferraris and luxury markets show elevated risk-off signals; avoid crowded luxury / auto names without catalysts."
+          "sector": "Technology/AI",
+          "rationale": "Concentration risk in AI chips and software; signs of overheating and pullback risk if growth or margins disappoint."
         }
       ],
       "companies": [
         {
           "symbol": "AZO",
-          "rationale": "AutoZone weakness on rally suggests risk of top-pick fatigue; high beta name with idiosyncratic risk",
-          "modelEvidence": "Low model rank due to price action and lack of confirmatory macro signals"
+          "rationale": "AutoZone shows idiosyncratic weakness; avoid adding long exposure without stronger confirmation.",
+          "modelEvidence": "Price action weak; single-name beta risk."
         }
       ]
     },
     "portfolioNotes": [
-      "Positioning should be light on energy-intensive suggests; overweight AI / semis beneficiaries selectively.",
-      "Liquidity preservation is key given macro uncertainty and 24h rolling window signals."
+      "Macro and earnings risk are the dominant drivers; keep exposure selective and monitor BEA and NIPA data.",
+      "Reddit signal is not clean enough to rely on; ignore for now."
     ],
     "openQuestions": [
-      "Do we see a clean macro beat on GDP and PCE this week?",
-      "Is energy volatility sustainable or a regime shift in inflation?"
+      "Are CPI and PPI prints sticky enough to keep yields elevated?",
+      "Do 14-day momentum names align with 1-year horizon?",
+      "What is next relief catalyst from Iran talks?"
     ],
     "sourceRefs": [
       "S3",
+      "S4",
       "S8",
-      "S12",
-      "S19"
+      "S9",
+      "S12"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Curated, differentiated angles from the latest week’s publication set, focusing on non-redundant themes and actionable implications for market dynamics.",
+      "summary": "Analytical read of diverse sources focusing on distinct angles: upstream inflation pressures, geopolitical oil dynamics, and policy reaction signals, while avoiding recaps and prior-used angles.",
       "cards": [
         {
           "sourceRef": "S4",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Inflation Monitor: Pipeline Pressures Grow",
-          "thesis": "Upstream price signals are rising across sectors not tightly tied to oil, implying broad-based inflation risks that may be more persistent than commodity-driven spikes.",
-          "whyItMatters": "If upstream costs become persistent, downstream consumer inflation and pricing power dynamics could broaden beyond energy-linked items, shaping central bank expectations and real cash yields.",
-          "marketReadThrough": "Equity multiples may re-rate on higher expected real yields; sectors with energy-intensive supply chains could underperform if producer inflation feeds into margins. Look for volatility in long-duration assets as inflation psychology shifts.",
-          "variantAngle": "Differentiated angle: focus on producer-side price decoupling from oil, suggesting a potential for stagflation-like pressure pockets even with resilient growth.",
-          "confidence": "High",
+          "thesis": "Upstream producer prices are rising beyond oil linkages, signaling broader inflationary spillovers that could sustain higher costs for goods and services.",
+          "whyItMatters": "If upstream price pressures translate into consumer inflation, real yields face further pressure and central banks may maintain restrictive stances longer, impacting risk assets.",
+          "marketReadThrough": "Higher input costs could erode margins and support defensive positioning; potential regime of stubborn inflation complicates rate paths.",
+          "variantAngle": "Divergence between energy-linked prices and broad upstream price movements may create mixed reactions in inflation-sensitive sectors.",
+          "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/inflation-monitor-pipeline-pressures-grow",
           "publishedAt": "2026-05-26T16:14:24.000Z",
           "sourceRefs": [
@@ -311,11 +308,11 @@
           "sourceRef": "S19",
           "sourceName": "Fidelity Market Insights",
           "title": "Stock market outlook midyear 2026 | Fidelity",
-          "thesis": "Oil-price uplift from the Iran-related disruption could act as a near-term headwind against a generally bullish equity backdrop, creating a risk-hotspot around energy-equity exposure.",
-          "whyItMatters": "Energy-sensitive equities and beneficiaries of capex cycles may underperform if oil remains elevated, while defensives with pricing power could outperform in the near term.",
-          "marketReadThrough": "Expect mixed reactions within equities: cyclicals with energy exposure versus high-multiple growth names. Commodities-related hedges could become a tactical tool for downside protection.",
-          "variantAngle": "Differentiated angle: proximity to geopolitical oil shock as a cross-asset risk driver, not a pure earnings narrative, highlighting regime-dependent testing of equity risk premia.",
-          "confidence": "Medium",
+          "thesis": "Bull market durability faces a potential drag from elevated oil costs tied to geopolitical frictions, creating asymmetric risk for equities versus energy-sensitive sectors.",
+          "whyItMatters": "Oil-price-driven volatility can reprice risk premia and alter sector leadership, affecting portfolio hedges and sector bets.",
+          "marketReadThrough": "Equity beta may rise on geopolitical oil shocks; keep optionality in hedges and cyclicals with energy leverage as a partial hedge.",
+          "variantAngle": "Geopolitical oil scenarios as capstone risk can alter spread between tech growth and energy / value rotates.",
+          "confidence": "Low",
           "url": "https://www.fidelity.com/learning-center/trading-investing/stock-market-outlook",
           "publishedAt": "2026-05-20T15:51:17.000Z",
           "sourceRefs": [
@@ -326,10 +323,10 @@
           "sourceRef": "S13",
           "sourceName": "Axios Markets RSS",
           "title": "Matt Phillips Returns To Axios, Will Co-Author Markets Newsletter 05/22/2026 - MediaPost",
-          "thesis": "Market color commentary around leadership and publication shifts can signal evolving narrative drivers affecting sentiment and mixed reactions, rather than fundamental earnings shifts.",
-          "whyItMatters": "Shifts in who shapes market narratives can influence positioning, risk-on / risk-off cycles, and the timing of capital reallocation across equities and macro assets.",
-          "marketReadThrough": "Watch for subtle shifts in risk appetite and sector breadth as media narratives influence trader behavior, potentially increasing volatility around event-driven anchors.",
-          "variantAngle": "Differentiated angle: narrative regime shift potential from media leadership changes, a behavioral proxy for sentiment-driven risk premia.",
+          "thesis": "Market color note indicating personnel and content shifts can prefigure more crowded or shifting information flows, altering how quickly markets absorb macro cues.",
+          "whyItMatters": "Shifts in media digestion of markets can affect consensus formation and mixed reactions around policy expectations.",
+          "marketReadThrough": "Watch for changing alertness to macro signals; potential whipsaw if new newsletters alter narrative focus.",
+          "variantAngle": "Narrative-shift risk where changing voices influence short-cycle interpretations of inflation and policy moves.",
           "confidence": "Low",
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPdjFZNjgzT1E4d3Rjay1EeWNYZkpxdHFIX0pvcHpqNUMyQ2pnRF9VQ3ZZYTdGUWVpVjV0ZEVpM19nVE10SUk0LW5od0JNaW43eEIwcEpnQVFkUEV6LVZEdURpNDE4OG1PYTJ4Z0JraVlKTVJWeDV6NGVyaEJtODAyR25sYUItT1kxSEt5eXROUTF6SjRYZkE1SmZwVEJvRy1lZTlSdXdGN2p4OVFHSTZzMnh5ZkRvdXpLeVNaWXNOaEE?oc=5",
           "publishedAt": "2026-05-22T18:01:05.000Z",
@@ -341,11 +338,11 @@
           "sourceRef": "S18",
           "sourceName": "Axios Macro RSS",
           "title": "Trump gives blasé response to rate hike possibility - Axios",
-          "thesis": "Political framing of monetary policy expectations can modulate market-implied path for rate hikes, potentially dampening or amplifying moves in front-end yields depending on rhetoric",
-          "whyItMatters": "Policy expectations can become self-fulfilling, influencing curve steepness and Fed communications strategy through market pricing rather than just data.",
-          "marketReadThrough": "Near-term yield curve dynamics may respond to narrative cues; potential for faster stabilization if rhetoric aligns with data-dependent easing, or increased volatility if expectations diverge.",
-          "variantAngle": "Differentiated angle: political narrative as a risk-communication channel affecting rate-risk premia rather than a direct data signal.",
-          "confidence": "Medium",
+          "thesis": "Policy expectations around rate hikes remain less aggressive in short run, suggesting central banks may temper expectations even amid inflation signals.",
+          "whyItMatters": "Policy tone can anchor risk assets differently than implied by commodities movements, impacting relative value trades.",
+          "marketReadThrough": "Dovish tilt could support equities on growth optimism, but uncertain if it sustains with inflation inertia.",
+          "variantAngle": "Policy-signal asymmetry between rate-hike rhetoric and actual inflation data could drive cross-asset mixed reactions.",
+          "confidence": "Low",
           "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5GZFUxS2JWb2RJWlVjT3VSRlFObXBwdG9TLUU4bHhDTDkzQ3Y5VVZMZVdNdTUxbTlOd3c5SjNWZnpwUEYxLTc2dk9nTVlQeWhzdDVJQlhoazJ6WnZiNG5MWTRod0RScUxaZWc?oc=5",
           "publishedAt": "2026-05-21T00:19:49.000Z",
           "sourceRefs": [
@@ -358,17 +355,17 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Curated, differentiated angles from the latest week’s publication set, focusing on non-redundant themes and actionable implications for market dynamics.",
+    "summary": "Analytical read of diverse sources focusing on distinct angles: upstream inflation pressures, geopolitical oil dynamics, and policy reaction signals, while avoiding recaps and prior-used angles.",
     "cards": [
       {
         "sourceRef": "S4",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Inflation Monitor: Pipeline Pressures Grow",
-        "thesis": "Upstream price signals are rising across sectors not tightly tied to oil, implying broad-based inflation risks that may be more persistent than commodity-driven spikes.",
-        "whyItMatters": "If upstream costs become persistent, downstream consumer inflation and pricing power dynamics could broaden beyond energy-linked items, shaping central bank expectations and real cash yields.",
-        "marketReadThrough": "Equity multiples may re-rate on higher expected real yields; sectors with energy-intensive supply chains could underperform if producer inflation feeds into margins. Look for volatility in long-duration assets as inflation psychology shifts.",
-        "variantAngle": "Differentiated angle: focus on producer-side price decoupling from oil, suggesting a potential for stagflation-like pressure pockets even with resilient growth.",
-        "confidence": "High",
+        "thesis": "Upstream producer prices are rising beyond oil linkages, signaling broader inflationary spillovers that could sustain higher costs for goods and services.",
+        "whyItMatters": "If upstream price pressures translate into consumer inflation, real yields face further pressure and central banks may maintain restrictive stances longer, impacting risk assets.",
+        "marketReadThrough": "Higher input costs could erode margins and support defensive positioning; potential regime of stubborn inflation complicates rate paths.",
+        "variantAngle": "Divergence between energy-linked prices and broad upstream price movements may create mixed reactions in inflation-sensitive sectors.",
+        "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/inflation-monitor-pipeline-pressures-grow",
         "publishedAt": "2026-05-26T16:14:24.000Z",
         "sourceRefs": [
@@ -379,11 +376,11 @@
         "sourceRef": "S19",
         "sourceName": "Fidelity Market Insights",
         "title": "Stock market outlook midyear 2026 | Fidelity",
-        "thesis": "Oil-price uplift from the Iran-related disruption could act as a near-term headwind against a generally bullish equity backdrop, creating a risk-hotspot around energy-equity exposure.",
-        "whyItMatters": "Energy-sensitive equities and beneficiaries of capex cycles may underperform if oil remains elevated, while defensives with pricing power could outperform in the near term.",
-        "marketReadThrough": "Expect mixed reactions within equities: cyclicals with energy exposure versus high-multiple growth names. Commodities-related hedges could become a tactical tool for downside protection.",
-        "variantAngle": "Differentiated angle: proximity to geopolitical oil shock as a cross-asset risk driver, not a pure earnings narrative, highlighting regime-dependent testing of equity risk premia.",
-        "confidence": "Medium",
+        "thesis": "Bull market durability faces a potential drag from elevated oil costs tied to geopolitical frictions, creating asymmetric risk for equities versus energy-sensitive sectors.",
+        "whyItMatters": "Oil-price-driven volatility can reprice risk premia and alter sector leadership, affecting portfolio hedges and sector bets.",
+        "marketReadThrough": "Equity beta may rise on geopolitical oil shocks; keep optionality in hedges and cyclicals with energy leverage as a partial hedge.",
+        "variantAngle": "Geopolitical oil scenarios as capstone risk can alter spread between tech growth and energy / value rotates.",
+        "confidence": "Low",
         "url": "https://www.fidelity.com/learning-center/trading-investing/stock-market-outlook",
         "publishedAt": "2026-05-20T15:51:17.000Z",
         "sourceRefs": [
@@ -394,10 +391,10 @@
         "sourceRef": "S13",
         "sourceName": "Axios Markets RSS",
         "title": "Matt Phillips Returns To Axios, Will Co-Author Markets Newsletter 05/22/2026 - MediaPost",
-        "thesis": "Market color commentary around leadership and publication shifts can signal evolving narrative drivers affecting sentiment and mixed reactions, rather than fundamental earnings shifts.",
-        "whyItMatters": "Shifts in who shapes market narratives can influence positioning, risk-on / risk-off cycles, and the timing of capital reallocation across equities and macro assets.",
-        "marketReadThrough": "Watch for subtle shifts in risk appetite and sector breadth as media narratives influence trader behavior, potentially increasing volatility around event-driven anchors.",
-        "variantAngle": "Differentiated angle: narrative regime shift potential from media leadership changes, a behavioral proxy for sentiment-driven risk premia.",
+        "thesis": "Market color note indicating personnel and content shifts can prefigure more crowded or shifting information flows, altering how quickly markets absorb macro cues.",
+        "whyItMatters": "Shifts in media digestion of markets can affect consensus formation and mixed reactions around policy expectations.",
+        "marketReadThrough": "Watch for changing alertness to macro signals; potential whipsaw if new newsletters alter narrative focus.",
+        "variantAngle": "Narrative-shift risk where changing voices influence short-cycle interpretations of inflation and policy moves.",
         "confidence": "Low",
         "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPdjFZNjgzT1E4d3Rjay1EeWNYZkpxdHFIX0pvcHpqNUMyQ2pnRF9VQ3ZZYTdGUWVpVjV0ZEVpM19nVE10SUk0LW5od0JNaW43eEIwcEpnQVFkUEV6LVZEdURpNDE4OG1PYTJ4Z0JraVlKTVJWeDV6NGVyaEJtODAyR25sYUItT1kxSEt5eXROUTF6SjRYZkE1SmZwVEJvRy1lZTlSdXdGN2p4OVFHSTZzMnh5ZkRvdXpLeVNaWXNOaEE?oc=5",
         "publishedAt": "2026-05-22T18:01:05.000Z",
@@ -409,11 +406,11 @@
         "sourceRef": "S18",
         "sourceName": "Axios Macro RSS",
         "title": "Trump gives blasé response to rate hike possibility - Axios",
-        "thesis": "Political framing of monetary policy expectations can modulate market-implied path for rate hikes, potentially dampening or amplifying moves in front-end yields depending on rhetoric",
-        "whyItMatters": "Policy expectations can become self-fulfilling, influencing curve steepness and Fed communications strategy through market pricing rather than just data.",
-        "marketReadThrough": "Near-term yield curve dynamics may respond to narrative cues; potential for faster stabilization if rhetoric aligns with data-dependent easing, or increased volatility if expectations diverge.",
-        "variantAngle": "Differentiated angle: political narrative as a risk-communication channel affecting rate-risk premia rather than a direct data signal.",
-        "confidence": "Medium",
+        "thesis": "Policy expectations around rate hikes remain less aggressive in short run, suggesting central banks may temper expectations even amid inflation signals.",
+        "whyItMatters": "Policy tone can anchor risk assets differently than implied by commodities movements, impacting relative value trades.",
+        "marketReadThrough": "Dovish tilt could support equities on growth optimism, but uncertain if it sustains with inflation inertia.",
+        "variantAngle": "Policy-signal asymmetry between rate-hike rhetoric and actual inflation data could drive cross-asset mixed reactions.",
+        "confidence": "Low",
         "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5GZFUxS2JWb2RJWlVjT3VSRlFObXBwdG9TLUU4bHhDTDkzQ3Y5VVZMZVdNdTUxbTlOd3c5SjNWZnpwUEYxLTc2dk9nTVlQeWhzdDVJQlhoazJ6WnZiNG5MWTRod0RScUxaZWc?oc=5",
         "publishedAt": "2026-05-21T00:19:49.000Z",
         "sourceRefs": [
@@ -431,12 +428,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-05-26T16:59:03.201Z",
+    "generatedAt": "2026-05-26T17:06:11.174Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-05-26T16:36:49.080Z"
+      "previousRefreshAt": "2026-05-26T16:59:20.339Z"
     },
     "marketDataStatus": {
       "status": "unavailable",
@@ -447,16 +444,20 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-05-26T16:54:00.474Z",
+      "generatedAt": "2026-05-26T17:01:08.519Z",
       "lookbackHours": 96,
       "releases": []
     },
     "sourceHealth": {
       "checked": 26,
-      "live": 22,
+      "live": 21,
       "blockedOrFailed": [
         {
           "name": "Raymond James Commentary And Insights",
+          "reason": "Source check failed: This operation was aborted"
+        },
+        {
+          "name": "EIA Today In Energy",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -491,7 +492,7 @@
           "Macro and growth"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 0.7,
+        "ageHours": 0.9,
         "score": 78,
         "tickers": []
       },
@@ -511,7 +512,7 @@
           "AI and semis"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 17.1,
+        "ageHours": 17.3,
         "score": 70,
         "tickers": []
       },
@@ -529,7 +530,7 @@
           "Earnings"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 0.7,
+        "ageHours": 0.9,
         "score": 70,
         "tickers": []
       },
@@ -550,7 +551,7 @@
           "Commodities and energy"
         ],
         "freshness": "Important older item",
-        "ageHours": 92,
+        "ageHours": 92.2,
         "score": 62,
         "tickers": []
       },
@@ -569,7 +570,7 @@
           "AI and semis"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 2.2,
+        "ageHours": 2.3,
         "score": 62,
         "tickers": []
       },
@@ -587,7 +588,7 @@
           "Geopolitics and policy"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 1,
+        "ageHours": 1.1,
         "score": 62,
         "tickers": []
       },
@@ -605,7 +606,7 @@
           "Market color"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 0.6,
+        "ageHours": 0.7,
         "score": 56,
         "tickers": []
       },
@@ -623,7 +624,7 @@
           "Market color"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 9.8,
+        "ageHours": 9.9,
         "score": 48,
         "tickers": []
       },
@@ -642,7 +643,7 @@
           "AI and semis"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 0.5,
+        "ageHours": 0.6,
         "score": 48,
         "tickers": []
       },
@@ -660,7 +661,7 @@
           "Market color"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 0.8,
+        "ageHours": 1,
         "score": 48,
         "tickers": []
       },
@@ -678,7 +679,7 @@
           "Market color"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 1.2,
+        "ageHours": 1.3,
         "score": 48,
         "tickers": []
       },
@@ -700,7 +701,7 @@
           "Macro and growth"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 3.5,
+        "ageHours": 3.7,
         "score": 38,
         "tickers": []
       }
@@ -733,7 +734,7 @@
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-05-26T16:59:03.193Z",
+      "generatedAt": "2026-05-26T17:06:11.166Z",
       "dates": [
         "2026-05-25",
         "2026-05-26",
@@ -838,7 +839,7 @@
           "asOf": "Tue, May 26, 2026",
           "status": "ready",
           "error": null,
-          "rowCount": 48,
+          "rowCount": 49,
           "rows": [
             {
               "date": "2026-05-26",
@@ -1058,7 +1059,7 @@
               "marketCap": "$2,151,675,767",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
-              "noOfEsts": "N/A",
+              "noOfEsts": "3",
               "lastYearReportDate": "N/A",
               "lastYearEps": "N/A",
               "sourceName": "Nasdaq earnings calendar",
@@ -1086,7 +1087,7 @@
               "marketCap": "$1,003,680,854",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
-              "noOfEsts": "N/A",
+              "noOfEsts": "3",
               "lastYearReportDate": "N/A",
               "lastYearEps": "N/A",
               "sourceName": "Nasdaq earnings calendar",
@@ -1240,7 +1241,7 @@
               "marketCap": "$140,935,272",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
-              "noOfEsts": "N/A",
+              "noOfEsts": "3",
               "lastYearReportDate": "N/A",
               "lastYearEps": "($0.10)",
               "sourceName": "Nasdaq earnings calendar",
@@ -1338,9 +1339,23 @@
               "marketCap": "$30,692,528",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
-              "noOfEsts": "N/A",
+              "noOfEsts": "3",
               "lastYearReportDate": "N/A",
               "lastYearEps": "($0.20)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-26"
+            },
+            {
+              "date": "2026-05-26",
+              "symbol": "PSHG",
+              "name": "Performance Shipping Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$20,511,906",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "3",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.76",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-26"
             },
@@ -1380,23 +1395,9 @@
               "marketCap": "$18,151,736",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
-              "noOfEsts": "N/A",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "($0.47)",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-26"
-            },
-            {
-              "date": "2026-05-26",
-              "symbol": "SLAI",
-              "name": "SOLAI Limited",
-              "time": "time-after-hours",
-              "marketCap": "$15,632,816",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "",
               "noOfEsts": "3",
               "lastYearReportDate": "N/A",
-              "lastYearEps": "N/A",
+              "lastYearEps": "($0.47)",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-05-26"
             }
@@ -1976,11 +1977,11 @@
         {
           "symbol": "JOYY",
           "name": "JOYY Inc.",
-          "price": 63.78,
-          "changePct": 17.2,
-          "change": 9.36,
-          "volume": 519515,
-          "marketCap": 3213349888,
+          "price": 63.67,
+          "changePct": 17,
+          "change": 9.25,
+          "volume": 523555,
+          "marketCap": 3207807744,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
           "moverBucket": "gainer"
@@ -1988,11 +1989,11 @@
         {
           "symbol": "MOD",
           "name": "Modine Manufacturing Company",
-          "price": 302.83,
-          "changePct": 16.24,
-          "change": 42.31,
-          "volume": 2331122,
-          "marketCap": 15968587776,
+          "price": 304.485,
+          "changePct": 16.88,
+          "change": 43.96,
+          "volume": 2352643,
+          "marketCap": 16055857152,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
           "moverBucket": "gainer"
@@ -2000,11 +2001,11 @@
         {
           "symbol": "ARXS",
           "name": "Arxis, Inc.",
-          "price": 38.5,
-          "changePct": 10.63,
-          "change": 3.7,
-          "volume": 838488,
-          "marketCap": 15800622080,
+          "price": 38.95,
+          "changePct": 11.93,
+          "change": 4.15,
+          "volume": 874044,
+          "marketCap": 15985304576,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
           "moverBucket": "gainer"
@@ -2012,11 +2013,11 @@
         {
           "symbol": "VSAT",
           "name": "ViaSat, Inc.",
-          "price": 82.12,
-          "changePct": 10.14,
-          "change": 7.56,
-          "volume": 1616826,
-          "marketCap": 11154476032,
+          "price": 82.26,
+          "changePct": 10.33,
+          "change": 7.7,
+          "volume": 1625937,
+          "marketCap": 11173491712,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
           "moverBucket": "gainer"
@@ -2024,11 +2025,11 @@
         {
           "symbol": "AZO",
           "name": "AutoZone, Inc.",
-          "price": 3061.325,
-          "changePct": -10.13,
-          "change": -345.18,
-          "volume": 320316,
-          "marketCap": 50719485952,
+          "price": 3054.81,
+          "changePct": -10.32,
+          "change": -351.69,
+          "volume": 324539,
+          "marketCap": 50611548160,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
           "moverBucket": "loser"
@@ -2036,11 +2037,11 @@
         {
           "symbol": "KC",
           "name": "Kingsoft Cloud Holdings Limited",
-          "price": 13.125,
-          "changePct": -7.7,
-          "change": -1.1,
-          "volume": 1748025,
-          "marketCap": 3929226752,
+          "price": 13.15,
+          "changePct": -7.52,
+          "change": -1.07,
+          "volume": 1757247,
+          "marketCap": 3936710912,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
           "moverBucket": "loser"
@@ -2048,11 +2049,11 @@
         {
           "symbol": "MRVL",
           "name": "Marvell Technology, Inc.",
-          "price": 206.43,
-          "changePct": 5.14,
-          "change": 10.1,
-          "volume": 25955226,
-          "marketCap": 180740423680,
+          "price": 206.5899,
+          "changePct": 5.23,
+          "change": 10.26,
+          "volume": 26390616,
+          "marketCap": 180880441344,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/",
           "moverBucket": "most_active"
@@ -2139,22 +2140,13 @@
           "publishedAt": "2026-05-20T15:51:17.000Z",
           "summary": "Stocks could continue their historic bull market run, but higher oil prices sparked by the Iran conflict could weigh on markets.",
           "tickers": []
-        },
-        {
-          "id": "E10",
-          "title": "Weekly Natural Gas Storage Report - EIA",
-          "sourceName": "EIA Today In Energy",
-          "url": "http://ir.eia.gov/ngs/ngs.html",
-          "publishedAt": "2026-05-15T00:00:00.000Z",
-          "summary": "Weekly Natural Gas Storage Report - EIA",
-          "tickers": []
         }
       ],
       "sourceNote": "Nasdaq earnings calendar plus Yahoo Finance daily mover screeners and earnings-related article headlines."
     },
     "reddit": {
       "status": "error",
-      "generatedAt": "2026-05-26T16:54:09.673Z",
+      "generatedAt": "2026-05-26T17:01:16.856Z",
       "sourceNote": "Public Reddit JSON endpoints across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
       "subreddits": [
         {
@@ -2203,132 +2195,132 @@
         {
           "symbol": "TE",
           "name": "T1 Energy Inc.",
-          "price": 10.575,
-          "changePct": 30.87,
-          "change": 2.5,
-          "volume": 48253587,
-          "marketCap": 2953294848,
+          "price": 10.595,
+          "changePct": 31.13,
+          "change": 2.52,
+          "volume": 48745720,
+          "marketCap": 2958880512,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
           "symbol": "RDW",
           "name": "Redwire Corporation",
-          "price": 22.2,
-          "changePct": 26.93,
-          "change": 4.71,
-          "volume": 72023988,
-          "marketCap": 4415995904,
+          "price": 22.2899,
+          "changePct": 27.44,
+          "change": 4.8,
+          "volume": 72499420,
+          "marketCap": 4433878528,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
           "symbol": "ASTS",
           "name": "AST SpaceMobile, Inc.",
-          "price": 125.9899,
-          "changePct": 19.02,
-          "change": 20.13,
-          "volume": 29298808,
-          "marketCap": 48899776512,
+          "price": 125.97,
+          "changePct": 19,
+          "change": 20.11,
+          "volume": 29578156,
+          "marketCap": 48892051456,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
           "symbol": "YSS",
           "name": "York Space Systems Inc.",
-          "price": 34.36,
-          "changePct": 18.36,
-          "change": 5.33,
-          "volume": 1986850,
-          "marketCap": 4456301568,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "FLY",
-          "name": "Firefly Aerospace Inc.",
-          "price": 58.3,
-          "changePct": 17.78,
-          "change": 8.8,
-          "volume": 8334775,
-          "marketCap": 9341713408,
+          "price": 34.63,
+          "changePct": 19.29,
+          "change": 5.6,
+          "volume": 2014933,
+          "marketCap": 4491319296,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
           "symbol": "XNDU",
           "name": "Xanadu Quantum Technologies Lim",
-          "price": 17.855,
-          "changePct": 17.62,
-          "change": 2.67,
-          "volume": 7207863,
-          "marketCap": 5329919488,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "SEDG",
-          "name": "SolarEdge Technologies, Inc.",
-          "price": 72.905,
-          "changePct": 17.67,
-          "change": 10.95,
-          "volume": 5344431,
-          "marketCap": 4433950720,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "JOYY",
-          "name": "JOYY Inc.",
-          "price": 63.78,
-          "changePct": 17.2,
-          "change": 9.36,
-          "volume": 519515,
-          "marketCap": 3213349888,
+          "price": 18.0771,
+          "changePct": 19.08,
+          "change": 2.9,
+          "volume": 7625776,
+          "marketCap": 5396219392,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
           "symbol": "MU",
           "name": "Micron Technology, Inc.",
-          "price": 881.11,
-          "changePct": 17.32,
-          "change": 130.11,
-          "volume": 44429571,
-          "marketCap": 993657683968,
+          "price": 885.26,
+          "changePct": 17.88,
+          "change": 134.26,
+          "volume": 44916361,
+          "marketCap": 998337806336,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "JOYY",
+          "name": "JOYY Inc.",
+          "price": 63.67,
+          "changePct": 17,
+          "change": 9.25,
+          "volume": 523555,
+          "marketCap": 3207807744,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "FLY",
+          "name": "Firefly Aerospace Inc.",
+          "price": 58.2481,
+          "changePct": 17.67,
+          "change": 8.75,
+          "volume": 8420312,
+          "marketCap": 9333396480,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "SEDG",
+          "name": "SolarEdge Technologies, Inc.",
+          "price": 72.32,
+          "changePct": 16.74,
+          "change": 10.37,
+          "volume": 5389301,
+          "marketCap": 4398372352,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
           "symbol": "FUTU",
           "name": "Futu Holdings Limited",
-          "price": 104.89,
-          "changePct": 16.86,
-          "change": 15.13,
-          "volume": 13067877,
-          "marketCap": 14705000448,
+          "price": 105.2,
+          "changePct": 17.2,
+          "change": 15.44,
+          "volume": 13164176,
+          "marketCap": 14748461056,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
           "symbol": "POWI",
           "name": "Power Integrations, Inc.",
-          "price": 82.49,
-          "changePct": 16.43,
-          "change": 11.64,
-          "volume": 2204445,
-          "marketCap": 4596341248,
+          "price": 82.68,
+          "changePct": 16.7,
+          "change": 11.83,
+          "volume": 2228305,
+          "marketCap": 4606928384,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "AEHR",
-          "name": "Aehr Test Systems",
-          "price": 110.09,
-          "changePct": 15.86,
-          "change": 15.07,
-          "volume": 1670975,
-          "marketCap": 3462688512,
+          "symbol": "MOD",
+          "name": "Modine Manufacturing Company",
+          "price": 304.485,
+          "changePct": 16.88,
+          "change": 43.96,
+          "volume": 2352643,
+          "marketCap": 16055857152,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         }
@@ -2337,132 +2329,132 @@
         {
           "symbol": "AZO",
           "name": "AutoZone, Inc.",
-          "price": 3061.325,
-          "changePct": -10.13,
-          "change": -345.18,
-          "volume": 320316,
-          "marketCap": 50719485952,
+          "price": 3054.81,
+          "changePct": -10.32,
+          "change": -351.69,
+          "volume": 324539,
+          "marketCap": 50611548160,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
           "symbol": "EMAT",
           "name": "Evolution Metals & Technologies",
-          "price": 7.2599,
-          "changePct": -9.14,
-          "change": -0.73,
-          "volume": 244079,
-          "marketCap": 4307660288,
+          "price": 7.27,
+          "changePct": -9.01,
+          "change": -0.72,
+          "volume": 247802,
+          "marketCap": 4313653248,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
           "symbol": "POET",
           "name": "POET Technologies Inc.",
-          "price": 13.4375,
-          "changePct": -7.9,
-          "change": -1.15,
-          "volume": 32752561,
-          "marketCap": 2319250688,
+          "price": 13.45,
+          "changePct": -7.81,
+          "change": -1.14,
+          "volume": 33119483,
+          "marketCap": 2321408256,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
           "symbol": "KC",
           "name": "Kingsoft Cloud Holdings Limited",
-          "price": 13.125,
-          "changePct": -7.7,
-          "change": -1.1,
-          "volume": 1748025,
-          "marketCap": 3929226752,
+          "price": 13.15,
+          "changePct": -7.52,
+          "change": -1.07,
+          "volume": 1757247,
+          "marketCap": 3936710912,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
           "symbol": "TR",
           "name": "Tootsie Roll Industries, Inc.",
-          "price": 37.54,
-          "changePct": -6.29,
-          "change": -2.52,
-          "volume": 143553,
-          "marketCap": 2821926400,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "RACE",
-          "name": "Ferrari N.V.",
-          "price": 328.51,
-          "changePct": -5.67,
-          "change": -19.73,
-          "volume": 1345042,
-          "marketCap": 57880666112,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "TALO",
-          "name": "Talos Energy, Inc.",
-          "price": 15.13,
-          "changePct": -5.67,
-          "change": -0.91,
-          "volume": 641110,
-          "marketCap": 2525587712,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "GKOS",
-          "name": "Glaukos Corporation",
-          "price": 113.65,
-          "changePct": -5.47,
-          "change": -6.58,
-          "volume": 792543,
-          "marketCap": 6675109376,
+          "price": 37.585,
+          "changePct": -6.18,
+          "change": -2.48,
+          "volume": 146194,
+          "marketCap": 2825308928,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
           "symbol": "VG",
           "name": "Venture Global, Inc.",
-          "price": 13.01,
-          "changePct": -5.93,
-          "change": -0.82,
-          "volume": 7636386,
-          "marketCap": 32321499136,
+          "price": 12.985,
+          "changePct": -6.11,
+          "change": -0.85,
+          "volume": 8010398,
+          "marketCap": 32259389440,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "TALO",
+          "name": "Talos Energy, Inc.",
+          "price": 15.06,
+          "changePct": -6.11,
+          "change": -0.98,
+          "volume": 666598,
+          "marketCap": 2513903104,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "QBTS",
+          "name": "D-Wave Quantum Inc.",
+          "price": 27.77,
+          "changePct": -5.55,
+          "change": -1.63,
+          "volume": 38602747,
+          "marketCap": 10287262720,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "RACE",
+          "name": "Ferrari N.V.",
+          "price": 327.675,
+          "changePct": -5.91,
+          "change": -20.57,
+          "volume": 1378413,
+          "marketCap": 57733541888,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "MDB",
+          "name": "MongoDB, Inc.",
+          "price": 309.465,
+          "changePct": -5.11,
+          "change": -16.67,
+          "volume": 1589372,
+          "marketCap": 24911912960,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
           "symbol": "CRCL",
           "name": "Circle Internet Group, Inc.",
-          "price": 106.81,
-          "changePct": -5.58,
-          "change": -6.31,
-          "volume": 9652788,
-          "marketCap": 28549318656,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "TSCO",
-          "name": "Tractor Supply Company",
-          "price": 29.91,
+          "price": 107,
           "changePct": -5.41,
-          "change": -1.71,
-          "volume": 8302527,
-          "marketCap": 15686287360,
+          "change": -6.12,
+          "volume": 9725364,
+          "marketCap": 28600102912,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
-          "symbol": "MAAS",
-          "name": "Maase Inc.",
-          "price": 11.2264,
-          "changePct": -5.26,
-          "change": -0.62,
-          "volume": 40081,
-          "marketCap": 4964040192,
+          "symbol": "GKOS",
+          "name": "Glaukos Corporation",
+          "price": 113.62,
+          "changePct": -5.5,
+          "change": -6.61,
+          "volume": 816094,
+          "marketCap": 6673347072,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         }
@@ -2471,132 +2463,132 @@
         {
           "symbol": "NOK",
           "name": "Nokia Corporation Sponsored",
-          "price": 16.545,
-          "changePct": 6.95,
-          "change": 1.07,
-          "volume": 137202643,
-          "marketCap": 92363030528,
+          "price": 16.575,
+          "changePct": 7.14,
+          "change": 1.11,
+          "volume": 139149062,
+          "marketCap": 92530507776,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "NVDA",
           "name": "NVIDIA Corporation",
-          "price": 213.705,
-          "changePct": -0.75,
-          "change": -1.63,
-          "volume": 100119785,
-          "marketCap": 5176148623360,
+          "price": 213.88,
+          "changePct": -0.67,
+          "change": -1.45,
+          "volume": 101462600,
+          "marketCap": 5180387491840,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "RDW",
           "name": "Redwire Corporation",
-          "price": 22.2,
-          "changePct": 26.93,
-          "change": 4.71,
-          "volume": 72023988,
-          "marketCap": 4415995904,
+          "price": 22.2899,
+          "changePct": 27.44,
+          "change": 4.8,
+          "volume": 72499420,
+          "marketCap": 4433878528,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "INTC",
           "name": "Intel Corporation",
-          "price": 120.75,
-          "changePct": 0.76,
-          "change": 0.91,
-          "volume": 69398999,
-          "marketCap": 606889508864,
+          "price": 121.1718,
+          "changePct": 1.11,
+          "change": 1.33,
+          "volume": 70078863,
+          "marketCap": 609009467392,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "PLUG",
           "name": "Plug Power, Inc.",
-          "price": 3.935,
-          "changePct": 4.1,
-          "change": 0.15,
-          "volume": 68491587,
-          "marketCap": 5489596416,
+          "price": 3.9501,
+          "changePct": 4.5,
+          "change": 0.17,
+          "volume": 70018143,
+          "marketCap": 5510662144,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "RGTI",
           "name": "Rigetti Computing, Inc.",
-          "price": 25.19,
-          "changePct": -4.66,
-          "change": -1.23,
-          "volume": 65546960,
-          "marketCap": 8373126144,
+          "price": 25.295,
+          "changePct": -4.26,
+          "change": -1.13,
+          "volume": 66120102,
+          "marketCap": 8408028160,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "AAL",
           "name": "American Airlines Group, Inc.",
-          "price": 14.7445,
-          "changePct": 6.46,
-          "change": 0.89,
-          "volume": 62004476,
-          "marketCap": 9751793664,
+          "price": 14.775,
+          "changePct": 6.68,
+          "change": 0.92,
+          "volume": 63790115,
+          "marketCap": 9771965440,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "ONDS",
           "name": "Ondas Inc",
-          "price": 9.89,
-          "changePct": 9.15,
-          "change": 0.83,
-          "volume": 52909183,
-          "marketCap": 4930057728,
+          "price": 9.885,
+          "changePct": 9.11,
+          "change": 0.82,
+          "volume": 54043822,
+          "marketCap": 4927565312,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "SOFI",
           "name": "SoFi Technologies, Inc.",
-          "price": 16.0692,
-          "changePct": 2.88,
-          "change": 0.45,
-          "volume": 52227810,
-          "marketCap": 20612626432,
+          "price": 16.04,
+          "changePct": 2.69,
+          "change": 0.42,
+          "volume": 53204474,
+          "marketCap": 20575170560,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "F",
           "name": "Ford Motor Company",
-          "price": 15.3,
-          "changePct": 2.48,
-          "change": 0.37,
-          "volume": 51797369,
-          "marketCap": 60965797888,
+          "price": 15.34,
+          "changePct": 2.75,
+          "change": 0.41,
+          "volume": 52602061,
+          "marketCap": 61125185536,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "TE",
           "name": "T1 Energy Inc.",
-          "price": 10.575,
-          "changePct": 30.87,
-          "change": 2.5,
-          "volume": 48253587,
-          "marketCap": 2953294848,
+          "price": 10.595,
+          "changePct": 31.13,
+          "change": 2.52,
+          "volume": 48745720,
+          "marketCap": 2958880512,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "MU",
           "name": "Micron Technology, Inc.",
-          "price": 881.11,
-          "changePct": 17.32,
-          "change": 130.11,
-          "volume": 44429571,
-          "marketCap": 993657683968,
+          "price": 885.26,
+          "changePct": 17.88,
+          "change": 134.26,
+          "volume": 44916361,
+          "marketCap": 998337806336,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         }
@@ -2976,21 +2968,11 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
-      "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
-      "articles": [
-        {
-          "sourceName": "EIA Today In Energy",
-          "title": "Weekly Natural Gas Storage Report - EIA",
-          "url": "http://ir.eia.gov/ngs/ngs.html",
-          "publishedAt": "2026-05-15T00:00:00.000Z",
-          "summary": "Weekly Natural Gas Storage Report - EIA",
-          "excerpt": "Weekly Natural Gas Storage Report - EIA &lsaquo; See All Natural Gas Reports Weekly Natural Gas Storage Report for week ending May 15, 2026 | Released: May 21, 2026 at 10:30 a.m. | Next Release: May 28, 2026 Working gas in underground storage, Lower 48 states Summary text CSV JSN Historical Comparisons Stocks billion cubic feet (Bcf) Year ago (05/15/25) 5-year average (2021-25) Region 05/15/26 05/08/26 net change implied flow Bcf % change Bcf % change East 419 388 31 31 427 -1.9 413 1.5 Midwest 505 476 29 29 507 -0.4 503 0.4 Mountain 210 206 4 4 191 9.9 150 40.0 Pacific 286 279 7 7 243 17.7 214 33.6 South Central 972 941 31 31 990 -1.8 962 1.0 Salt 298 285 13 13 319 -6.6 292 2.1 Nonsalt 673 656 17 17 670 0.4 670 0.4 Total 2,391 2,290 101 101 2,358 1.4 2,242 6.6 Totals may not equal sum of components because of independent rounding. Summary Working gas in storage was 2,391 Bcf as of Friday, May 15, 2026, according to EIA estimates. This represents a net increase of 101 Bcf from the previous week. Stocks were 33 Bcf higher than last year at this time and 149 Bcf above the five-year average of 2,242 Bcf. At 2,391 Bcf, total working gas is within the five-year historical range. For information on sampling error in this report, see Estimated Measures of Sampling Variability table below. Note: The shaded area indicates the range between the historical minimum and maximum values for the weekly series from 2021 through 2025. The dashed vertical lines indicate current and year-ago weekly periods. Source: Form EIA-912, \"Weekly Underground Natural Gas Storage Report.\" --> Estimated measures of sampling variability Download History (April 2015 to Present) Coefficient of Variation for Stocks % of working gas Standard Error for Net Change billion cubic feet (Bcf) Region 05/15/26 05/0",
-          "discoveredFrom": "https://www.eia.gov/todayinenergy/"
-        }
-      ],
-      "articleCount": 1,
-      "ok": true
+      "title": "EIA Today In Energy",
+      "summary": "Source check failed: This operation was aborted",
+      "articles": [],
+      "articleCount": 0,
+      "ok": false
     },
     {
       "name": "BLS Economic News Releases",
