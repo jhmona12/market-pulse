@@ -53,9 +53,76 @@ MARKET_STRIP_LABELS = {
 }
 
 
-def previous_business_date(value: date) -> date:
+def observed_fixed_holiday(year: int, month: int, day: int) -> date:
+    holiday = date(year, month, day)
+    if holiday.weekday() == 5:
+        return holiday - timedelta(days=1)
+    if holiday.weekday() == 6:
+        return holiday + timedelta(days=1)
+    return holiday
+
+
+def nth_weekday(year: int, month: int, weekday: int, nth: int) -> date:
+    candidate = date(year, month, 1)
+    while candidate.weekday() != weekday:
+        candidate += timedelta(days=1)
+    return candidate + timedelta(days=7 * (nth - 1))
+
+
+def last_weekday(year: int, month: int, weekday: int) -> date:
+    if month == 12:
+        candidate = date(year, 12, 31)
+    else:
+        candidate = date(year, month + 1, 1) - timedelta(days=1)
+    while candidate.weekday() != weekday:
+        candidate -= timedelta(days=1)
+    return candidate
+
+
+def easter_sunday(year: int) -> date:
+    # Meeus/Jones/Butcher Gregorian algorithm.
+    a = year % 19
+    b = year // 100
+    c = year % 100
+    d = b // 4
+    e = b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i = c // 4
+    k = c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    month = (h + l - 7 * m + 114) // 31
+    day = ((h + l - 7 * m + 114) % 31) + 1
+    return date(year, month, day)
+
+
+def market_holidays(year: int) -> set[date]:
+    holidays = {
+        observed_fixed_holiday(year, 1, 1),
+        nth_weekday(year, 1, 0, 3),   # Martin Luther King Jr. Day
+        nth_weekday(year, 2, 0, 3),   # Washington's Birthday
+        easter_sunday(year) - timedelta(days=2),
+        last_weekday(year, 5, 0),     # Memorial Day
+        observed_fixed_holiday(year, 6, 19),
+        observed_fixed_holiday(year, 7, 4),
+        nth_weekday(year, 9, 0, 1),   # Labor Day
+        nth_weekday(year, 11, 3, 4),  # Thanksgiving
+        observed_fixed_holiday(year, 12, 25),
+    }
+    if year < 2022:
+        holidays.discard(observed_fixed_holiday(year, 6, 19))
+    return holidays
+
+
+def is_market_session(value: date) -> bool:
+    return value.weekday() < 5 and value not in market_holidays(value.year)
+
+
+def previous_market_session(value: date) -> date:
     candidate = value - timedelta(days=1)
-    while candidate.weekday() >= 5:
+    while not is_market_session(candidate):
         candidate -= timedelta(days=1)
     return candidate
 
@@ -66,9 +133,9 @@ def latest_expected_market_data_date(now: datetime | None = None) -> date:
         return date.fromisoformat(override)
     now_pt = (now or datetime.now(PACIFIC)).astimezone(PACIFIC)
     today_pt = now_pt.date()
-    if today_pt.weekday() >= 5:
-        return previous_business_date(today_pt)
-    return today_pt if now_pt.hour >= 14 else previous_business_date(today_pt)
+    if not is_market_session(today_pt):
+        return previous_market_session(today_pt)
+    return today_pt if now_pt.hour >= 14 else previous_market_session(today_pt)
 
 
 def assert_fresh_as_of(as_of: object, source: str) -> None:

@@ -49,6 +49,7 @@ const payload = {
   modelExpectedAsOfDate: snapshot?.model?.expectedAsOfDate || null,
   modelScoredCount: finiteNumber(snapshot?.model?.scoredCount ?? scorebook?.rowCount),
   modelScoringOutcome: process.env.MODEL_SCORING_OUTCOME || null,
+  longHorizonScoringOutcome: process.env.LONG_HORIZON_SCORING_OUTCOME || null,
   marketDataStatus: snapshot?.marketDataStatus?.status || scorebook?.marketDataStatus?.status || null,
   marketDataAsOfDate: snapshot?.marketDataStatus?.asOfDate || scorebook?.marketDataStatus?.asOfDate || null,
   expectedMarketDataDate: snapshot?.marketDataStatus?.expectedAsOfDate || scorebook?.marketDataStatus?.expectedAsOfDate || null,

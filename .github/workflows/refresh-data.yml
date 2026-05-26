@@ -214,6 +214,14 @@ jobs:
           --reference-cache data/model-reference-cache.json
           --score-reference-cache
 
+      - name: Stop if model scoring failed
+        if: steps.pacific_time.outputs.run_refresh == 'true' && (steps.score_model.outcome != 'success' || steps.score_long_horizon_model.outcome != 'success')
+        run: |
+          echo "Model scoring failed; preserving the last good dashboard snapshot."
+          echo "14D scorer outcome: ${{ steps.score_model.outcome }}"
+          echo "1Y scorer outcome: ${{ steps.score_long_horizon_model.outcome }}"
+          exit 1
+
       - name: Refresh snapshot
         if: steps.pacific_time.outputs.run_refresh == 'true'
         timeout-minutes: 25
@@ -232,15 +240,19 @@ jobs:
         if: success() && steps.pacific_time.outputs.run_refresh == 'true'
         env:
           MODEL_SCORING_OUTCOME: ${{ steps.score_model.outcome }}
+          LONG_HORIZON_SCORING_OUTCOME: ${{ steps.score_long_horizon_model.outcome }}
         run: node scripts/write-refresh-status.mjs success "Refresh completed and generated dashboard artifacts. Check modelStatus and marketDataStatus for freshness guardrails."
 
       - name: Write failed refresh status
         if: failure() && steps.pacific_time.outputs.run_refresh == 'true'
+        env:
+          MODEL_SCORING_OUTCOME: ${{ steps.score_model.outcome }}
+          LONG_HORIZON_SCORING_OUTCOME: ${{ steps.score_long_horizon_model.outcome }}
         run: node scripts/write-refresh-status.mjs failure "Refresh workflow failed before completion; inspect the linked GitHub Actions run."
 
-      - name: Commit refresh outputs
-        id: commit_outputs
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+      - name: Commit successful refresh outputs
+        id: commit_success_outputs
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -261,8 +273,31 @@ jobs:
             git push
           fi
 
+      - name: Commit failed refresh status
+        id: commit_failure_status
+        if: failure() && steps.pacific_time.outputs.run_refresh == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "$GITHUB_REF_NAME"
+          remote_sha="$(git rev-parse "origin/$GITHUB_REF_NAME")"
+          local_sha="$(git rev-parse HEAD)"
+          if [ "$local_sha" != "$remote_sha" ]; then
+            echo "Remote branch advanced during this failed refresh; skipping failure-status commit."
+            echo "remote_changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "remote_changed=false" >> "$GITHUB_OUTPUT"
+          git add data/refresh-status.json
+          if git diff --cached --quiet; then
+            echo "No failure status changes to commit."
+          else
+            git commit -m "Record failed refresh status"
+            git push
+          fi
+
       - name: Prepare static site
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_outputs.outputs.remote_changed != 'true'
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_success_outputs.outputs.remote_changed != 'true'
         run: |
           mkdir -p public/data public/config
           cp index.html styles.css app.js public/
@@ -277,16 +312,16 @@ jobs:
           cp config/runtime.json public/config/runtime.json
 
       - name: Configure Pages
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_outputs.outputs.remote_changed != 'true'
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_success_outputs.outputs.remote_changed != 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_outputs.outputs.remote_changed != 'true'
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_success_outputs.outputs.remote_changed != 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
 
       - name: Deploy Pages
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_outputs.outputs.remote_changed != 'true'
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_success_outputs.outputs.remote_changed != 'true'
         id: deployment
         uses: actions/deploy-pages@v4

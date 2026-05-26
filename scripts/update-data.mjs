@@ -490,19 +490,92 @@ function pacificDateParts(date = new Date()) {
   };
 }
 
-function previousBusinessDate(isoDate) {
-  const date = new Date(`${isoDate}T12:00:00Z`);
+function dateKeyFromUtcDate(date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function utcDateFromKey(isoDate) {
+  return new Date(`${isoDate}T12:00:00Z`);
+}
+
+function observedFixedHoliday(year, monthIndex, day) {
+  const date = new Date(Date.UTC(year, monthIndex, day, 12));
+  const weekday = date.getUTCDay();
+  if (weekday === 6) date.setUTCDate(date.getUTCDate() - 1);
+  if (weekday === 0) date.setUTCDate(date.getUTCDate() + 1);
+  return dateKeyFromUtcDate(date);
+}
+
+function nthWeekday(year, monthIndex, weekday, nth) {
+  const date = new Date(Date.UTC(year, monthIndex, 1, 12));
+  while (date.getUTCDay() !== weekday) date.setUTCDate(date.getUTCDate() + 1);
+  date.setUTCDate(date.getUTCDate() + 7 * (nth - 1));
+  return dateKeyFromUtcDate(date);
+}
+
+function lastWeekday(year, monthIndex, weekday) {
+  const date = monthIndex === 11
+    ? new Date(Date.UTC(year, 11, 31, 12))
+    : new Date(Date.UTC(year, monthIndex + 1, 0, 12));
+  while (date.getUTCDay() !== weekday) date.setUTCDate(date.getUTCDate() - 1);
+  return dateKeyFromUtcDate(date);
+}
+
+function easterSunday(year) {
+  // Meeus/Jones/Butcher Gregorian algorithm.
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(Date.UTC(year, month - 1, day, 12));
+}
+
+function marketHolidaySet(year) {
+  const holidays = new Set([
+    observedFixedHoliday(year, 0, 1),
+    nthWeekday(year, 0, 1, 3),
+    nthWeekday(year, 1, 1, 3),
+    dateKeyFromUtcDate(new Date(easterSunday(year).getTime() - 2 * 86400000)),
+    lastWeekday(year, 4, 1),
+    observedFixedHoliday(year, 5, 19),
+    observedFixedHoliday(year, 6, 4),
+    nthWeekday(year, 8, 1, 1),
+    nthWeekday(year, 10, 4, 4),
+    observedFixedHoliday(year, 11, 25)
+  ]);
+  if (year < 2022) holidays.delete(observedFixedHoliday(year, 5, 19));
+  return holidays;
+}
+
+function isMarketSession(isoDate) {
+  const date = utcDateFromKey(isoDate);
+  const weekday = date.getUTCDay();
+  return ![0, 6].includes(weekday) && !marketHolidaySet(date.getUTCFullYear()).has(isoDate);
+}
+
+function previousMarketSession(isoDate) {
+  const date = utcDateFromKey(isoDate);
   do {
     date.setUTCDate(date.getUTCDate() - 1);
-  } while ([0, 6].includes(date.getUTCDay()));
-  return date.toISOString().slice(0, 10);
+  } while (!isMarketSession(dateKeyFromUtcDate(date)));
+  return dateKeyFromUtcDate(date);
 }
 
 function latestExpectedMarketDataDate(date = new Date()) {
   if (/^\d{4}-\d{2}-\d{2}$/.test(expectedMarketDataDate)) return expectedMarketDataDate;
   const pacific = pacificDateParts(date);
-  if (pacific.weekday === "Sat" || pacific.weekday === "Sun") return previousBusinessDate(pacific.isoDate);
-  return pacific.hour >= 14 ? pacific.isoDate : previousBusinessDate(pacific.isoDate);
+  if (!isMarketSession(pacific.isoDate)) return previousMarketSession(pacific.isoDate);
+  return pacific.hour >= 14 ? pacific.isoDate : previousMarketSession(pacific.isoDate);
 }
 
 async function loadModelRankings(path = "data/model-rank-scores.json") {
