@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-26T01:35:30.134Z",
+  "generatedAt": "2026-05-26T04:40:20.075Z",
   "model": {
     "status": "missing",
     "generatedAt": null,
@@ -125,10 +125,10 @@
     }
   },
   "note": {
-    "headline": "Geopolitical and policy risk sets the first read.",
+    "headline": "Oil prices mixed as U.S. military strikes against Iran cloud Middle East peace prospects sets the first read.",
     "body": "Inflation data are running hot, so rates remain the main constraint on crowded momentum. Oil prices mixed as U.S. military strikes against Iran cloud Middle East peace prospects Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation. Fresh model technical tape is unavailable (ENOENT: no such file or directory, open '/home/runner/work/market-pulse/market-pulse/data/model-rank-scores.json'); stale cached technical values were not reused. Run scripts/modeling/score_live_rank_model.py before the briefing refresh to restore trailing returns, sector tiles, breadth, and scorebook technical columns. Model-ranked single-name context is unavailable, so do not rely on stale ranks.",
     "changed": [
-      "Policy/geopolitics: Oil prices mixed as U.S. military strikes against Iran cloud Middle East peace prospects (M2)",
+      "Policy/geopolitics: Oil prices mixed as U.S. military strikes against Iran cloud Middle East peace prospects (M1)",
       "Rates: Inflation data are running hot, so rates remain the main constraint on crowded momentum. (M7)",
       "Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation.",
       "Data freshness: Fresh model technical tape is unavailable (ENOENT: no such file or directory, open '/home/runner/work/market-pulse/market-pulse/data/model-rank-scores.json'); stale cached technical values were not reused. Run scripts/modeling/score_live_rank_model.py before the briefing refresh to restore trailing returns, sector tiles, breadth, and scorebook technical columns.",
@@ -139,7 +139,7 @@
       "Macro risk: GDP Second Estimate on 2026-05-28; Personal Income and Outlays on 2026-05-28; Employment Situation on 2026-06-05.",
       "Momentum risk: fresh technical tape is unavailable, so RSI/chase-risk counts are suppressed.",
       "Data check: rerun the Python model scorer before relying on trailing returns, sector tiles, breadth, or moving-average status.",
-      "6 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
+      "4 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
     ],
     "generatedBy": "deterministic"
   },
@@ -148,12 +148,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 29499,
+      "inputTokens": 29987,
       "cachedInputTokens": 0,
-      "outputTokens": 1491,
+      "outputTokens": 1440,
       "reasoningTokens": 0,
-      "totalTokens": 30990,
-      "estimatedCostUsd": 0.002071,
+      "totalTokens": 31427,
+      "estimatedCostUsd": 0.002075,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -161,137 +161,140 @@
       }
     },
     "companyContextCount": 0,
-    "headline": "Iran diplomacy optimism and oil pressure shift rate expectations; stay nimble on names with clean momentum.",
-    "macroView": "Markets lean constructive but sensitive to policy signals and energy prices. Iran diplomacy progress bolsters risk appetite in Asia tilts, while oil-price declines push rate expectations lower, keeping a mixed but non-leveraged risk posture for equities. The upcoming BEAGDPSecondEst, BEAPersonalIncome, and June FOMC are key near-term pivots; a hotter than expected CPI and PPI path remains a risk, potentially re-pricing rates and multiples.",
+    "headline": "Iranian peace hopes lift risk assets; global growth signals and earnings strength keep momentum selective",
+    "macroView": "Global risk sentiment is tethered to Iran diplomacy developments and oil price gyrations. Oil prices cooled on Iran peace prospects, supporting equities and risk appetite while raw energy volatility remains a key risk if talks stall. Upcoming macro deluge includes GDP second estimate and personal income from BEA on May 28, followed by the June CPI and PPI and the June 17 FOMC. The regime remains constructive for equities with earnings resilience supporting multiple sectors, but higher yields and energy shock risk keep posture disciplined.",
     "dailyRead": {
-      "headline": "Iran diplomacy optimism and oil pressure shift rate expectations; stay nimble on names with clean momentum.",
-      "body": "Markets are trading higher on headlines that Iran talks may advance, with oil softening as Hormuz-eyes reopen. That backdrop supports a modestly constructive risk tone, but higher rates remain a macro risk if inflation stays persistent. The strongest implied regime is a fragile bull with selective leadership; focus on names with resilient earnings momentum and clear AI / enterprise software exposure, while remaining cautious on highly levered or illiquid names. Earnings and macro data next week (GDP second estimate and CPI) will test the durability of the rally; the FOMC decision later this month could reprice rate expectations. In this environment, the highest-conviction exposure is to firms with solid cash flow and AI-driven demand, avoiding crowded, illiquid momentum and stress-tested cyclicals.",
+      "headline": "Iran diplomacy fuels a cautious rally as earnings underpin selective upside; rates and oil remain the main risk checks",
+      "body": "Oil prices moved lower on Iran peace-talk optimism, helping futures and risk appetite, while U.S. macro data over the coming days could re-anchor rate expectations. The market regime is to chase earnings-driven growth but stay wary of inflation persistence and higher-for-longer rates; the path for risk assets hinges on the Iran deal timeline and energy price trajectory. The strongest signals emerge from pure-play earnings leaders and AI / semis beneficiaries with clean uptrends; hedges around energy and growth exposures remain prudent.",
       "keyTakeaways": [
-        "Market drivers: Iran peace prospects lift global risk sentiment; oil price declines ease energy-driven inflation risk; near-term catalysts are GDP second estimate and CPI and PPI on June 10-11",
-        "Breadth: market breadth is unclear due to data issues; focus on wide-moat cash-cap names with AI upside",
-        "Risk: sticky inflation and higher-for-longer rate path remain the primary risk to a broad rally; geopolitical flare-ups could reprice risk assets"
+        "Market drivers: Oil / energy backdrop remains pivotal; softer oil on Hormuz optimism supports risk appetite but a flare-up could snap liquidity and reset rates.",
+        "Earnings: index-friendly earnings growth persists, with software / AI and select hardware names leading gains; watch commentary on margins and AI line items for durability.",
+        "Breadth: broader breadth shows resilience but is sensitive to rate path; staying with names with confirmable uptrends and liquidity.",
+        "Model read: due to missing model data, rely on qualitative momentum cues and avoid crowded names; cross-check any long-horizon ideas when model data becomes available.",
+        "Risk: geopolitical escalation or a surprise in inflation prints could shift the regime quickly; keep powder dry for activation signals."
       ],
       "watchItems": [
-        "Monitor GDP Second Estimate and Personal Income and Outlays for coherence with growth signals (BEA, May 28)",
-        "Track upcoming FOMC rate decision (June 17) for risk-on / off inflection",
-        "Watch oil price reactions to Middle East diplomacy progress as a inflation and rate signal",
-        "Check for any fresh company-level AI-driven earnings catalysts (software, cloud services) to confirm momentum"
+        "Monitor BEA GDP second estimate and BEA Personal Income prints on May 28 for real-time revision risk to the growth backdrop.",
+        "Track FOMC communications and implied rate path around the June 17 decision for rate-risk tilts.",
+        "Observe oil price trajectory and Hormuz developments as they feed into inflation expectations and equity multiples."
       ]
     },
     "recommendations": [
       {
-        "symbol": "AZO",
+        "symbol": "NVTS",
         "action": "Buy",
         "conviction": "High",
-        "setup": "Momentum with AI exposure and robust auto-services demand; clean trend",
-        "whyNow": "Oil-soft setup supports risk appetite; AutoZone demonstrates resilient consumer demand and good margins; earnings cadence supports multiple-expansion potential",
-        "rationale": "Strong cash flow and AI-enabled efficiency around auto-parts demand; global growth backdrop improves auto-repair spending",
-        "companyOverview": "AutoZone, Inc. operates in the aftermarket automotive parts retail sector; broad-based vehicle maintenance demand supports steady top-line growth.",
-        "marketCap": "$56.65B",
-        "earningsContext": "Last reported May 2025; next report date not supplied; IR page should confirm timing",
-        "recentNews": "Positive consumer demand and AI-driven efficiency touted in earnings commentary",
-        "macroLink": "N / A",
-        "macroEvidence": "N / A",
-        "modelEvidence": "Ranked strong in momentum signals; feature signals show favorable breadth and momentum vs sector",
-        "technicalEvidence": "Trending above key moving averages; alpha signals support upside",
-        "momentumEvidence": "Positive momentum with improving rate of change; RSIs not extended",
-        "risk": "Moderate exposure to consumer cyclicality; close watch on inflation path and rate expectations",
-        "invalidation": "If GDP surprises to the downside or CPI and PPI ignite a rate-rise repricing, downgrade",
-        "sourceRefs": [
-          "S12",
-          "S5"
-        ]
-      },
-      {
-        "symbol": "NVTS",
-        "action": "Watch",
-        "conviction": "Medium",
-        "setup": "Gapped AI / energy play with strong momentum",
-        "whyNow": "AI semiconductor maker showing strong recent run; volatility signals support careful sizing",
-        "rationale": "AI demand supports long-run growth; near-term momentum could fade if macro turns hawkish",
-        "companyOverview": "Navitas Semiconductor provides power semiconductors for AI / edge devices.",
+        "setup": "14-day tactical strength with clear momentum and thin float risk; AI / energy transition exposure",
+        "whyNow": "Earnings-led rally and AI demand driver support upside; macro backdrop forgiving on risk appetite amid Iran optimism",
+        "rationale": "Strong near-term momentum and structural AI tailwinds, with healthy liquidity and solid earnings growth. SHAP features show favorable momentum relative to sector.",
+        "companyOverview": "Navitas Semiconductor produces power semiconductors for energy-efficient electronics, benefiting from AI and EV supply chains.",
         "marketCap": "$6.93B",
-        "earningsContext": "Last earnings not listed; next report date not supplied",
-        "recentNews": "Strong AI-driven demand; momentum in chip-related space",
-        "macroLink": "N / A",
-        "macroEvidence": "N / A",
-        "modelEvidence": "Top features show sector-relative volatility and momentum signals; SHAP features imply some downside risk from volatility",
-        "technicalEvidence": "Recent up-move with consolidation risk",
-        "momentumEvidence": "Strong 60d momentum against sector ETF",
-        "risk": "High beta to AI cycle; potential pullback if risk appetite narrows",
-        "invalidation": "Break below 50-day MA or troughs in breadth metrics",
+        "earningsContext": "Recent earnings beat; next report not specified",
+        "recentNews": "Led AI-driven efficiency gains; solid order book growth",
+        "macroLink": "Oil prices and energy demand dynamics under Iran peace talks",
+        "macroEvidence": "Oil price relief supports risk appetite; potential energy shock risk if talks stall",
+        "modelEvidence": "14-day model rank strong; long-horizon context",
+        "technicalEvidence": "Positive price action and volume expansion",
+        "momentumEvidence": "Strong 14-day momentum; incremental volume",
+        "risk": "High exposure to AI hardware cycle; potential supply chain constraints",
+        "invalidation": "Break below key moving averages with weakening volume",
         "sourceRefs": [
           "S1",
-          "S12"
+          "S12",
+          "S15"
         ]
       },
       {
-        "symbol": "GILD",
-        "action": "Not Initiating",
-        "conviction": "Low",
-        "setup": "Idiosyncratic, no clear macro-aligned catalyst",
-        "whyNow": "Company-specific headlines in the data; lack of momentum consensus",
-        "rationale": "No strong cross-horizon confirmation; avoid crowded momentum names without earnings tilt",
-        "companyOverview": "Generic biopharma name used for example; actual ticker not supplied in this dataset",
-        "marketCap": "N/A",
-        "earningsContext": "N / A",
-        "recentNews": "N / A",
-        "macroLink": "N / A",
-        "macroEvidence": "N / A",
-        "modelEvidence": "No ranking available due to missing model data",
-        "technicalEvidence": "No clear momentum signals",
-        "momentumEvidence": "N / A",
-        "risk": "N / A",
-        "invalidation": "N / A",
+        "symbol": "RGTI",
+        "action": "Buy",
+        "conviction": "Medium",
+        "setup": "Momentum-driven with AI / quantum software exposure",
+        "whyNow": "Gravitational pull from AI / quantum computing CAPEX cycle supports upside",
+        "rationale": "Solid momentum and improving participation; earnings momentum from novel AI hardware / software play",
+        "companyOverview": "Rigetti Computing focuses on quantum computing hardware and software solutions for enterprise clients.",
+        "marketCap": "$8.78B",
+        "earningsContext": "Early-stage company; earnings cadence limited",
+        "recentNews": "AI hardware / software narrative enriched by partnerships",
+        "macroLink": "AI demand cycle",
+        "macroEvidence": "Tech capex cycle intact; growth rotation towards AI platforms",
+        "modelEvidence": "14-day model moderate strength; long-horizon corroboration unclear",
+        "technicalEvidence": "Breakout-like behavior with volume uptick",
+        "momentumEvidence": "Recent large move on high volume",
+        "risk": "High valuation, liquidity risk in small-cap AI plays",
+        "invalidation": "Failure to hold above recent highs on light volume",
         "sourceRefs": [
-          "S9"
+          "S1",
+          "S6"
+        ]
+      },
+      {
+        "symbol": "BB",
+        "action": "Watch",
+        "conviction": "Low",
+        "setup": "Mean-reversion candidate in AI-adjacent portfolio",
+        "whyNow": "Large intra-day move on rumor / sector rotation; risk of pullback",
+        "rationale": "Volatility in tech-adjacent names; not a clear trend yet",
+        "companyOverview": "BlackBerry focuses on software and security solutions for enterprise customers.",
+        "marketCap": "$4.64B",
+        "earningsContext": "N / A",
+        "recentNews": "AI / security product momentum noted",
+        "macroLink": "Cybersecurity budget cycles",
+        "macroEvidence": "Security budgets remain robust but not a catalyst for broad beta-wide rally",
+        "modelEvidence": "Low confidence from model ranks",
+        "technicalEvidence": "Dog-flag like patterns; mixed volume",
+        "momentumEvidence": "Mixed momentum",
+        "risk": "Speculative name with idiosyncratic risk",
+        "invalidation": "Break of trend lines with sustained selling pressure",
+        "sourceRefs": [
+          "S1"
         ]
       }
     ],
     "avoidList": {
-      "summary": "Weak momentum and unclear macro support cluster in pocket names; avoid stressed or illiquid names without earnings momentum or AI-driven demand tailwinds.",
+      "summary": "The weakest model candidates cluster in crowded momentum with elevated RSI and low conviction signals; energy-sensitive names and microcaps show weak confirmatory signals given the macro / geopolitical fragility.",
       "sectors": [
         {
-          "sector": "Cyclicals with weak cash flow",
-          "rationale": "Vulnerability to higher-for-longer rates and throttled consumer demand"
+          "sector": "High-beta tech",
+          "rationale": "Crowded momentum and overhang from energy prices; requires stronger confirmation"
         }
       ],
       "companies": [
         {
-          "symbol": "BBAR",
-          "rationale": "Recent price decline on Argentina issues; high macro and currency risk; poor liquidity",
-          "modelEvidence": "Low RSI and negative breadth alignment; recent loss of momentum"
+          "symbol": "FUTU",
+          "rationale": "High drawdown and weak setup in a volatile China internet name; spread risk vs. quality names",
+          "modelEvidence": "ranked near the bottom of the model book by models; high downside risk in a choppy tape"
         }
       ]
     },
     "portfolioNotes": [
-      "Position sizes should be small for the first pass until macro data clarify inflation path and policy stance.",
-      "Rationale: Focus on AI-driven software and services with durable cash flows; avoid high-beta cyclical exposure into rate-risk events."
+      "Liquidity discipline around earnings heavy days; maintain exposure to AI / growth leaders with clean signals.",
+      "Reddit signal is not clean enough to use due to access restrictions."
     ],
     "openQuestions": [
-      "Do we have fresh model rankings or new order signals?",
-      "What is the updated 14-day vs long-horizon agreement on strongest name?",
-      "If GDP or CPI surprise, which hedges are best to implement?"
+      "Are we seeing a durable regime shift or a rally fueled by Iran peace optimism?",
+      "What is the next major catalyst for rate path and energy pricing?"
     ],
     "sourceRefs": [
-      "S12",
+      "S1",
+      "S3",
       "S4",
       "S5",
-      "S13"
+      "S12",
+      "S15"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Analytical angles distilled from recent sources. Emphasizes differentiated takes on rates, macro policy, and market structure rather than generic recaps. Cards below.",
+      "summary": "Curated, differentiated angle on monetary policy, debt mechanics, and geopolitical-inflation channels. Avoids generic stock lobs and repeats; leverages fresh view across auctions, oil-price pressure, and rate-decision psychology.",
       "cards": [
         {
           "sourceRef": "S15",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "How Do Treasury Auctions Work?",
-          "thesis": "Understanding auction mechanics reveals subtle signals about demand for U.S. debt and implicit rate expectations, potentially foreshadowing shifts in funding costs and liquidity traps.",
-          "whyItMatters": "Auction dynamics can reflect demand at different maturities, influencing yields and the cost of financing for households and corporates. Small shifts in bid-to-cover or indirect bidding can precede rate volatility.",
-          "marketReadThrough": "If tail risks or a shift in primary dealer participation emerge, expect steeper or more volatile yield curves even without obvious macro news.",
-          "variantAngle": "From mechanics to market signaling: how auction structure affects real-world yields and liquidity in the 2s-10s segment.",
+          "thesis": "Understanding Treasury auction mechanics highlights how primary funding conditions can skew liquidity and short-end yields in ways that affect risk premia even when macro-growth signals are steady.",
+          "whyItMatters": "Auction demand shifts can tilt yield curves and funding costs for leveraged bets; small changes in bid-to-cover ratios or dealer roles can ripple into funding liquidity for risk assets.",
+          "marketReadThrough": "If auction demand weakens, short-duration bonds may rally less, potentially widening funding costs for carry trades and influencing slope trades in rates strategies.",
+          "variantAngle": "Debt-market microstructure as a driver of convexity and funding liquidity risk, beyond macro growth narratives.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/how-do-treasury-auctions-work",
           "publishedAt": "2026-05-21T17:14:39.000Z",
@@ -303,10 +306,10 @@
           "sourceRef": "S19",
           "sourceName": "Fidelity Market Insights",
           "title": "Stock market outlook midyear 2026 | Fidelity",
-          "thesis": "Oil price dynamics tied to geopolitics (Iran conflict) could act as a friction on equities, tempering the run of the bull market.",
-          "whyItMatters": "Energy shocks can blunt earnings resilience and complicate inflation dynamics, affecting multiple sectors and the discount rate used in valuations.",
-          "marketReadThrough": "Markets may tolerate gradual earnings growth but face headwinds if oil stays elevated; cyclicals and miners could outperform in a volatility regime.",
-          "variantAngle": "Oil-geopolitics as a real-time macro brake on a broad equity stretch, with implications for sector leadership and multiple compression.",
+          "thesis": "Oil-price pressure from geopolitical frictions can offset earnings resilience and create asymmetric risk for equities, especially those with high sensitivities to energy inputs.",
+          "whyItMatters": "Oil moves tied to Iran-related dynamics can cap upside and reprice cyclicals, affecting sectoral leadership and risk budgets for macro hedges.",
+          "marketReadThrough": "Potentially more volatility in energy-heavy portfolios; hedges may need to price in oil-asset correlations and regime shifts rather than pure earnings momentum.",
+          "variantAngle": "Geopolitical-commodity coupling as a driver of equity volatility and sector rotation, distinct from pure earnings narratives.",
           "confidence": "Medium",
           "url": "https://www.fidelity.com/learning-center/trading-investing/stock-market-outlook",
           "publishedAt": "2026-05-20T15:51:17.000Z",
@@ -318,10 +321,10 @@
           "sourceRef": "S10",
           "sourceName": "Axios Markets RSS",
           "title": "Matt Phillips Returns To Axios, Will Co-Author Markets Newsletter 05/22/2026 - MediaPost",
-          "thesis": "New authorial voice in markets coverage may shift narrative framing and highlight different market color cues.",
-          "whyItMatters": "Shifts in editorial framing can alter perceived risk signals and attention, impacting short-term trader behavior even if fundamentals remain unchanged.",
-          "marketReadThrough": "Watch for changes in emphasis on macro vs. micro stories; shifts can change how traders price headlines.",
-          "variantAngle": "Narrative framing effects on market sentiment and short-term price action as new voices enter the editorial fold.",
+          "thesis": "Market color drop-in from a seasoned journalist signals potential shifts in tone and breadth of coverage; cross-portfolio sentiment can diverge from price action.",
+          "whyItMatters": "Editorial shifts can foreshadow changes in market narrative or attention, influencing retail and institutional positioning beyond fundamentals.",
+          "marketReadThrough": "Be alert to shifts in market narrative that can precede regime changes in risk appetite or theme leadership.",
+          "variantAngle": "Narrative dynamics as a timing signal for sentiment-driven moves, not price momentum.",
           "confidence": "Low",
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPdjFZNjgzT1E4d3Rjay1EeWNYZkpxdHFIX0pvcHpqNUMyQ2pnRF9VQ3ZZYTdGUWVpVjV0ZEVpM19nVE10SUk0LW5od0JNaW43eEIwcEpnQVFkUEV6LVZEdURpNDE4OG1PYTJ4Z0JraVlKTVJWeDV6NGVyaEJtODAyR25sYUItT1kxSEt5eXROUTF6SjRYZkE1SmZwVEJvRy1lZTlSdXdGN2p4OVFHSTZzMnh5ZkRvdXpLeVNaWXNOaEE?oc=5",
           "publishedAt": "2026-05-22T18:01:05.000Z",
@@ -333,11 +336,11 @@
           "sourceRef": "S18",
           "sourceName": "Axios Macro RSS",
           "title": "Trump gives blasé response to rate hike possibility - Axios",
-          "thesis": "Policy risk perception remains tethered to rate-hike expectations, with a blasé stance potentially signaling longer-dated rate expectations feeding into risk assets.",
-          "whyItMatters": "Policy tone can be a leading indicator of implicit policy path, affecting duration risk and market volatility even before policy changes.",
-          "marketReadThrough": "If rate hike odds are priced in asymmetrically, credit spreads and equities could react to even subtle shifts in tone.",
-          "variantAngle": "Tone of policy discourse as a proxy for expected path of interest rates and its asset-valuation consequences.",
-          "confidence": "Medium",
+          "thesis": "Policy-signal interpretation around rate hikes remains ambiguous; markets may price in a slower or uncertain path rather than immediate hikes.",
+          "whyItMatters": "Ambiguity around policy pace can sustain a rangebound environment with skew toward duration risk and policy-risk hedging",
+          "marketReadThrough": "Expect insurance against rate risk to stay in demand; fluctuations in implied volatility of rate derivatives may reflect this uncertainty.",
+          "variantAngle": "Policy-path ambiguity as a driver of risk premia and hedging demand, distinct from explicit rate-hike expectations.",
+          "confidence": "Low",
           "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5GZFUxS2JWb2RJWlVjT3VSRlFObXBwdG9TLUU4bHhDTDkzQ3Y5VVZMZVdNdTUxbTlOd3c5SjNWZnpwUEYxLTc2dk9nTVlQeWhzdDVJQlhoazJ6WnZiNG5MWTRod0RScUxaZWc?oc=5",
           "publishedAt": "2026-05-21T00:19:49.000Z",
           "sourceRefs": [
@@ -350,16 +353,16 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Analytical angles distilled from recent sources. Emphasizes differentiated takes on rates, macro policy, and market structure rather than generic recaps. Cards below.",
+    "summary": "Curated, differentiated angle on monetary policy, debt mechanics, and geopolitical-inflation channels. Avoids generic stock lobs and repeats; leverages fresh view across auctions, oil-price pressure, and rate-decision psychology.",
     "cards": [
       {
         "sourceRef": "S15",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "How Do Treasury Auctions Work?",
-        "thesis": "Understanding auction mechanics reveals subtle signals about demand for U.S. debt and implicit rate expectations, potentially foreshadowing shifts in funding costs and liquidity traps.",
-        "whyItMatters": "Auction dynamics can reflect demand at different maturities, influencing yields and the cost of financing for households and corporates. Small shifts in bid-to-cover or indirect bidding can precede rate volatility.",
-        "marketReadThrough": "If tail risks or a shift in primary dealer participation emerge, expect steeper or more volatile yield curves even without obvious macro news.",
-        "variantAngle": "From mechanics to market signaling: how auction structure affects real-world yields and liquidity in the 2s-10s segment.",
+        "thesis": "Understanding Treasury auction mechanics highlights how primary funding conditions can skew liquidity and short-end yields in ways that affect risk premia even when macro-growth signals are steady.",
+        "whyItMatters": "Auction demand shifts can tilt yield curves and funding costs for leveraged bets; small changes in bid-to-cover ratios or dealer roles can ripple into funding liquidity for risk assets.",
+        "marketReadThrough": "If auction demand weakens, short-duration bonds may rally less, potentially widening funding costs for carry trades and influencing slope trades in rates strategies.",
+        "variantAngle": "Debt-market microstructure as a driver of convexity and funding liquidity risk, beyond macro growth narratives.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/how-do-treasury-auctions-work",
         "publishedAt": "2026-05-21T17:14:39.000Z",
@@ -371,10 +374,10 @@
         "sourceRef": "S19",
         "sourceName": "Fidelity Market Insights",
         "title": "Stock market outlook midyear 2026 | Fidelity",
-        "thesis": "Oil price dynamics tied to geopolitics (Iran conflict) could act as a friction on equities, tempering the run of the bull market.",
-        "whyItMatters": "Energy shocks can blunt earnings resilience and complicate inflation dynamics, affecting multiple sectors and the discount rate used in valuations.",
-        "marketReadThrough": "Markets may tolerate gradual earnings growth but face headwinds if oil stays elevated; cyclicals and miners could outperform in a volatility regime.",
-        "variantAngle": "Oil-geopolitics as a real-time macro brake on a broad equity stretch, with implications for sector leadership and multiple compression.",
+        "thesis": "Oil-price pressure from geopolitical frictions can offset earnings resilience and create asymmetric risk for equities, especially those with high sensitivities to energy inputs.",
+        "whyItMatters": "Oil moves tied to Iran-related dynamics can cap upside and reprice cyclicals, affecting sectoral leadership and risk budgets for macro hedges.",
+        "marketReadThrough": "Potentially more volatility in energy-heavy portfolios; hedges may need to price in oil-asset correlations and regime shifts rather than pure earnings momentum.",
+        "variantAngle": "Geopolitical-commodity coupling as a driver of equity volatility and sector rotation, distinct from pure earnings narratives.",
         "confidence": "Medium",
         "url": "https://www.fidelity.com/learning-center/trading-investing/stock-market-outlook",
         "publishedAt": "2026-05-20T15:51:17.000Z",
@@ -386,10 +389,10 @@
         "sourceRef": "S10",
         "sourceName": "Axios Markets RSS",
         "title": "Matt Phillips Returns To Axios, Will Co-Author Markets Newsletter 05/22/2026 - MediaPost",
-        "thesis": "New authorial voice in markets coverage may shift narrative framing and highlight different market color cues.",
-        "whyItMatters": "Shifts in editorial framing can alter perceived risk signals and attention, impacting short-term trader behavior even if fundamentals remain unchanged.",
-        "marketReadThrough": "Watch for changes in emphasis on macro vs. micro stories; shifts can change how traders price headlines.",
-        "variantAngle": "Narrative framing effects on market sentiment and short-term price action as new voices enter the editorial fold.",
+        "thesis": "Market color drop-in from a seasoned journalist signals potential shifts in tone and breadth of coverage; cross-portfolio sentiment can diverge from price action.",
+        "whyItMatters": "Editorial shifts can foreshadow changes in market narrative or attention, influencing retail and institutional positioning beyond fundamentals.",
+        "marketReadThrough": "Be alert to shifts in market narrative that can precede regime changes in risk appetite or theme leadership.",
+        "variantAngle": "Narrative dynamics as a timing signal for sentiment-driven moves, not price momentum.",
         "confidence": "Low",
         "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPdjFZNjgzT1E4d3Rjay1EeWNYZkpxdHFIX0pvcHpqNUMyQ2pnRF9VQ3ZZYTdGUWVpVjV0ZEVpM19nVE10SUk0LW5od0JNaW43eEIwcEpnQVFkUEV6LVZEdURpNDE4OG1PYTJ4Z0JraVlKTVJWeDV6NGVyaEJtODAyR25sYUItT1kxSEt5eXROUTF6SjRYZkE1SmZwVEJvRy1lZTlSdXdGN2p4OVFHSTZzMnh5ZkRvdXpLeVNaWXNOaEE?oc=5",
         "publishedAt": "2026-05-22T18:01:05.000Z",
@@ -401,11 +404,11 @@
         "sourceRef": "S18",
         "sourceName": "Axios Macro RSS",
         "title": "Trump gives blasé response to rate hike possibility - Axios",
-        "thesis": "Policy risk perception remains tethered to rate-hike expectations, with a blasé stance potentially signaling longer-dated rate expectations feeding into risk assets.",
-        "whyItMatters": "Policy tone can be a leading indicator of implicit policy path, affecting duration risk and market volatility even before policy changes.",
-        "marketReadThrough": "If rate hike odds are priced in asymmetrically, credit spreads and equities could react to even subtle shifts in tone.",
-        "variantAngle": "Tone of policy discourse as a proxy for expected path of interest rates and its asset-valuation consequences.",
-        "confidence": "Medium",
+        "thesis": "Policy-signal interpretation around rate hikes remains ambiguous; markets may price in a slower or uncertain path rather than immediate hikes.",
+        "whyItMatters": "Ambiguity around policy pace can sustain a rangebound environment with skew toward duration risk and policy-risk hedging",
+        "marketReadThrough": "Expect insurance against rate risk to stay in demand; fluctuations in implied volatility of rate derivatives may reflect this uncertainty.",
+        "variantAngle": "Policy-path ambiguity as a driver of risk premia and hedging demand, distinct from explicit rate-hike expectations.",
+        "confidence": "Low",
         "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5GZFUxS2JWb2RJWlVjT3VSRlFObXBwdG9TLUU4bHhDTDkzQ3Y5VVZMZVdNdTUxbTlOd3c5SjNWZnpwUEYxLTc2dk9nTVlQeWhzdDVJQlhoazJ6WnZiNG5MWTRod0RScUxaZWc?oc=5",
         "publishedAt": "2026-05-21T00:19:49.000Z",
         "sourceRefs": [
@@ -423,12 +426,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-05-26T01:35:13.789Z",
+    "generatedAt": "2026-05-26T04:40:02.812Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-05-26T00:21:00.160Z"
+      "previousRefreshAt": "2026-05-26T01:35:30.134Z"
     },
     "marketDataStatus": {
       "status": "unavailable",
@@ -439,24 +442,16 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-05-26T01:30:10.852Z",
+      "generatedAt": "2026-05-26T04:35:00.419Z",
       "lookbackHours": 96,
       "releases": []
     },
     "sourceHealth": {
       "checked": 26,
-      "live": 20,
+      "live": 22,
       "blockedOrFailed": [
         {
-          "name": "Bank of America Institute",
-          "reason": "Source check failed: 403 Forbidden"
-        },
-        {
           "name": "Raymond James Commentary And Insights",
-          "reason": "Source check failed: This operation was aborted"
-        },
-        {
-          "name": "EIA Today In Energy",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -476,6 +471,80 @@
     "professionalDrivers": [
       {
         "id": "M1",
+        "title": "Oil prices mixed as U.S. military strikes against Iran cloud Middle East peace prospects",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/05/26/oil-prices-today-brent-wti-iran-trump-hormuz.html",
+        "publishedAt": "2026-05-26T04:25:44.000Z",
+        "summary": "Donald Trump also said negotiations with Iran were \"proceeding nicely,\" but cautioned that the U.S. could resume military action if discussions were to collapse.",
+        "excerpt": "Donald Trump also said negotiations with Iran were \"proceeding nicely,\" but cautioned that the U.S. could resume military action if discussions were to collapse.",
+        "themes": [
+          "Geopolitics and policy",
+          "Commodities and energy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 0.2,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M2",
+        "title": "Oil prices tumble as deal to end Iran war appears close, though Trump says there’s no rush",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/trump-says-theres-no-rush-as-deal-to-end-iran-war-reopen-strait-of-hormuz-appears-close-c60056c0?mod=mw_rss_topstories",
+        "publishedAt": "2026-05-26T03:02:00.000Z",
+        "summary": "Oil prices were sharply lower and stock futures surged after weekend reports that the U.S. appears close to reaching an agreement that would end the war with Iran and reopen the strategic Strait of Hormuz.",
+        "excerpt": "Oil prices were sharply lower and stock futures surged after weekend reports that the U.S. appears close to reaching an agreement that would end the war with Iran and reopen the strategic Strait of Hormuz.",
+        "themes": [
+          "Geopolitics and policy",
+          "Commodities and energy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 1.6,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M3",
+        "title": "South Korea&apos;s Kospi hits new high amid mixed trading in Asia",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/05/26/asia-markets-today-sensex-kospi-nikkei-hang-seng-iran-us-oil-.html",
+        "publishedAt": "2026-05-26T03:55:30.000Z",
+        "summary": "Asia-Pacific markets were set to open broadly higher Tuesday, amid hopes for a breakthrough in the U.S.-Iran peace negotiations.",
+        "excerpt": "Asia-Pacific markets were set to open broadly higher Tuesday, amid hopes for a breakthrough in the U.S.-Iran peace negotiations.",
+        "themes": [
+          "Geopolitics and policy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 0.7,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M4",
+        "title": "U.S. conducts &apos;self-defense strikes&apos; in Iran as Trump pushes for peace deal",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/05/26/us-conducts-self-defense-strikes-in-iran-as-trump-seeks-peace-deal.html",
+        "publishedAt": "2026-05-26T02:56:12.000Z",
+        "summary": "Targets included missile launch sites and Iranian boats attempting to emplace mines.",
+        "excerpt": "Targets included missile launch sites and Iranian boats attempting to emplace mines.",
+        "themes": [
+          "Geopolitics and policy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 1.7,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M5",
         "title": "CNBC Daily Open: Faith in markets, doubts in diplomacy",
         "sourceName": "CNBC Markets",
         "sourceCategory": "News",
@@ -488,83 +557,9 @@
           "Geopolitics and policy",
           "Commodities and energy"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 0.6,
-        "score": 100,
-        "tickers": []
-      },
-      {
-        "id": "M2",
-        "title": "Oil prices mixed as U.S. military strikes against Iran cloud Middle East peace prospects",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/26/oil-prices-today-brent-wti-iran-trump-hormuz.html",
-        "publishedAt": "2026-05-26T00:43:54.000Z",
-        "summary": "Donald Trump also said negotiations with Iran were \"proceeding nicely,\" but cautioned that the U.S. could resume military action if discussions were to collapse.",
-        "excerpt": "Donald Trump also said negotiations with Iran were \"proceeding nicely,\" but cautioned that the U.S. could resume military action if discussions were to collapse.",
-        "themes": [
-          "Geopolitics and policy",
-          "Commodities and energy"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 0.9,
-        "score": 100,
-        "tickers": []
-      },
-      {
-        "id": "M3",
-        "title": "Oil prices tumble as deal to end Iran war appears close, though Trump says there’s no rush",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/trump-says-theres-no-rush-as-deal-to-end-iran-war-reopen-strait-of-hormuz-appears-close-c60056c0?mod=mw_rss_topstories",
-        "publishedAt": "2026-05-26T00:27:00.000Z",
-        "summary": "Oil prices were sharply lower and stock futures surged after weekend reports that the U.S. appears close to reaching an agreement that would end the war with Iran and reopen the strategic Strait of Hormuz.",
-        "excerpt": "Oil prices were sharply lower and stock futures surged after weekend reports that the U.S. appears close to reaching an agreement that would end the war with Iran and reopen the strategic Strait of Hormuz.",
-        "themes": [
-          "Geopolitics and policy",
-          "Commodities and energy"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 1.1,
-        "score": 100,
-        "tickers": []
-      },
-      {
-        "id": "M4",
-        "title": "South Korea&apos;s Kospi hits fresh record as hopes of U.S.-Iran breakthrough rise",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/26/asia-markets-today-sensex-kospi-nikkei-hang-seng-iran-us-oil-.html",
-        "publishedAt": "2026-05-26T00:32:36.000Z",
-        "summary": "Asia-Pacific markets were set to open broadly higher Tuesday, amid hopes for a breakthrough in the U.S.-Iran peace negotiations.",
-        "excerpt": "Asia-Pacific markets were set to open broadly higher Tuesday, amid hopes for a breakthrough in the U.S.-Iran peace negotiations.",
-        "themes": [
-          "Geopolitics and policy"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 1,
-        "score": 92,
-        "tickers": []
-      },
-      {
-        "id": "M5",
-        "title": "U.S. conducts &apos;self-defense strikes&apos; in Iran as Trump tries to push for peace deal",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/05/26/us-conducts-self-defense-strikes-in-iran-as-trump-seeks-peace-deal.html",
-        "publishedAt": "2026-05-26T01:18:35.000Z",
-        "summary": "Targets included missile launch sites and Iranian boats attempting to emplace mines.",
-        "excerpt": "Targets included missile launch sites and Iranian boats attempting to emplace mines.",
-        "themes": [
-          "Geopolitics and policy"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 0.3,
-        "score": 92,
+        "freshness": "Last 24 hours",
+        "ageHours": 3.6,
+        "score": 70,
         "tickers": []
       },
       {
@@ -583,7 +578,7 @@
           "AI and semis"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 5.8,
+        "ageHours": 8.8,
         "score": 70,
         "tickers": []
       },
@@ -603,7 +598,7 @@
           "Commodities and energy"
         ],
         "freshness": "Important older item",
-        "ageHours": 81.2,
+        "ageHours": 84.3,
         "score": 62,
         "tickers": []
       },
@@ -622,7 +617,7 @@
           "Commodities and energy"
         ],
         "freshness": "Important older item",
-        "ageHours": 25.8,
+        "ageHours": 28.8,
         "score": 54,
         "tickers": []
       },
@@ -642,7 +637,7 @@
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 89.7,
+        "ageHours": 92.8,
         "score": 54,
         "tickers": []
       },
@@ -660,7 +655,7 @@
           "Macro and growth"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 7.8,
+        "ageHours": 10.9,
         "score": 48,
         "tickers": []
       },
@@ -679,7 +674,7 @@
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 83.5,
+        "ageHours": 86.6,
         "score": 46,
         "tickers": []
       }
@@ -712,7 +707,7 @@
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-05-26T01:35:13.781Z",
+      "generatedAt": "2026-05-26T04:40:02.807Z",
       "dates": [
         "2026-05-24",
         "2026-05-25",
@@ -1536,13 +1531,13 @@
           "title": "Oil prices tumble as deal to end Iran war appears close, though Trump says there’s no rush",
           "sourceName": "MarketWatch Top Stories RSS",
           "url": "https://www.marketwatch.com/story/trump-says-theres-no-rush-as-deal-to-end-iran-war-reopen-strait-of-hormuz-appears-close-c60056c0?mod=mw_rss_topstories",
-          "publishedAt": "2026-05-26T00:27:00.000Z",
+          "publishedAt": "2026-05-26T03:02:00.000Z",
           "summary": "Oil prices were sharply lower and stock futures surged after weekend reports that the U.S. appears close to reaching an agreement that would end the war with Iran and reopen the strategic Strait of Hormuz.",
           "tickers": []
         },
         {
           "id": "E2",
-          "title": "South Korea's Kospi hits fresh record as hopes of U.S.-Iran breakthrough rise",
+          "title": "South Korea's Kospi hits new high amid mixed trading in Asia",
           "sourceName": "CNBC Markets",
           "url": "https://www.cnbc.com/2026/05/26/asia-markets-today-sensex-kospi-nikkei-hang-seng-iran-us-oil-.html",
           "publishedAt": "2026-05-25T23:50:55.000Z",
@@ -1611,13 +1606,22 @@
           "publishedAt": "2026-05-20T15:51:17.000Z",
           "summary": "Stocks could continue their historic bull market run, but higher oil prices sparked by the Iran conflict could weigh on markets.",
           "tickers": []
+        },
+        {
+          "id": "E10",
+          "title": "Weekly Natural Gas Storage Report - EIA",
+          "sourceName": "EIA Today In Energy",
+          "url": "http://ir.eia.gov/ngs/ngs.html",
+          "publishedAt": "2026-05-15T00:00:00.000Z",
+          "summary": "Weekly Natural Gas Storage Report - EIA",
+          "tickers": []
         }
       ],
       "sourceNote": "Nasdaq earnings calendar plus Yahoo Finance daily mover screeners and earnings-related article headlines."
     },
     "reddit": {
       "status": "error",
-      "generatedAt": "2026-05-26T01:30:19.654Z",
+      "generatedAt": "2026-05-26T04:35:09.267Z",
       "sourceNote": "Public Reddit JSON endpoints across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
       "subreddits": [
         {
@@ -1741,17 +1745,6 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "IMAX",
-          "name": "Imax Corporation",
-          "price": 39.12,
-          "changePct": 15.47,
-          "change": 5.24,
-          "volume": 3662131,
-          "marketCap": 2152221696,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
           "symbol": "HPQ",
           "name": "HP Inc.",
           "price": 25.24,
@@ -1794,6 +1787,17 @@
           "marketCap": 40285712384,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "NTAP",
+          "name": "NetApp, Inc.",
+          "price": 139.36,
+          "changePct": 12.44,
+          "change": 15.42,
+          "volume": 6668173,
+          "marketCap": 27601690624,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         }
       ],
       "losers": [
@@ -1827,17 +1831,6 @@
           "change": -18.8,
           "volume": 2709779,
           "marketCap": 7061578240,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "OCTVV",
-          "name": "Octave Intelligence plc Class B Ordinary Shares When Issued",
-          "price": 21.75,
-          "changePct": -9.38,
-          "change": -2.25,
-          "volume": 43632,
-          "marketCap": 5838521856,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
@@ -1926,6 +1919,17 @@
           "change": -0.52,
           "volume": 17939227,
           "marketCap": 7561895424,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "BULL",
+          "name": "Webull Corporation",
+          "price": 6.18,
+          "changePct": -6.51,
+          "change": -0.43,
+          "volume": 27372804,
+          "marketCap": 3286639104,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         }
@@ -2067,9 +2071,9 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: Oil prices mixed as U.S. military strikes against Iran cloud Middle East peace prospects (M2)",
+      "Policy/geopolitics: Oil prices mixed as U.S. military strikes against Iran cloud Middle East peace prospects (M1)",
       "Rates: Inflation data are running hot, so rates remain the main constraint on crowded momentum. (M7)",
-      "Commodities: Oil prices were sharply lower and stock futures surged after weekend reports that the U.S. appears close to reaching an agreement that would end the war with Iran and reopen the strategic Strait of Hormuz. (M3)",
+      "Commodities: Oil prices were sharply lower and stock futures surged after weekend reports that the U.S. appears close to reaching an agreement that would end the war with Iran and reopen the strategic Strait of Hormuz. (M2)",
       "Macro: Ever since Big Tech went all in on artificial intelligence more than three years ago, seven companies have done the heavy lifting for overall S&P 500 earnings growth. (M6)",
       "AI/semis: Lenovo shares jump nearly 20% on record earnings as AI revenue nearly doubles (M9)",
       "Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation."
@@ -2260,11 +2264,11 @@
       "cadence": "Weekly",
       "trust": "High",
       "notes": "Public consumer, macro, and market research.",
-      "title": "Bank of America Institute",
-      "summary": "Source check failed: 403 Forbidden",
+      "title": "Bank of America Institute – Where Thought Finds Leadership",
+      "summary": "No recent dated articles found in the last 30 days.",
       "articles": [],
       "articleCount": 0,
-      "ok": false
+      "ok": true
     },
     {
       "name": "Raymond James Commentary And Insights",
@@ -2441,11 +2445,21 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "EIA Today In Energy",
-      "summary": "Source check failed: This operation was aborted",
-      "articles": [],
-      "articleCount": 0,
-      "ok": false
+      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
+      "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
+      "articles": [
+        {
+          "sourceName": "EIA Today In Energy",
+          "title": "Weekly Natural Gas Storage Report - EIA",
+          "url": "http://ir.eia.gov/ngs/ngs.html",
+          "publishedAt": "2026-05-15T00:00:00.000Z",
+          "summary": "Weekly Natural Gas Storage Report - EIA",
+          "excerpt": "Weekly Natural Gas Storage Report - EIA &lsaquo; See All Natural Gas Reports Weekly Natural Gas Storage Report for week ending May 15, 2026 | Released: May 21, 2026 at 10:30 a.m. | Next Release: May 28, 2026 Working gas in underground storage, Lower 48 states Summary text CSV JSN Historical Comparisons Stocks billion cubic feet (Bcf) Year ago (05/15/25) 5-year average (2021-25) Region 05/15/26 05/08/26 net change implied flow Bcf % change Bcf % change East 419 388 31 31 427 -1.9 413 1.5 Midwest 505 476 29 29 507 -0.4 503 0.4 Mountain 210 206 4 4 191 9.9 150 40.0 Pacific 286 279 7 7 243 17.7 214 33.6 South Central 972 941 31 31 990 -1.8 962 1.0 Salt 298 285 13 13 319 -6.6 292 2.1 Nonsalt 673 656 17 17 670 0.4 670 0.4 Total 2,391 2,290 101 101 2,358 1.4 2,242 6.6 Totals may not equal sum of components because of independent rounding. Summary Working gas in storage was 2,391 Bcf as of Friday, May 15, 2026, according to EIA estimates. This represents a net increase of 101 Bcf from the previous week. Stocks were 33 Bcf higher than last year at this time and 149 Bcf above the five-year average of 2,242 Bcf. At 2,391 Bcf, total working gas is within the five-year historical range. For information on sampling error in this report, see Estimated Measures of Sampling Variability table below. Note: The shaded area indicates the range between the historical minimum and maximum values for the weekly series from 2021 through 2025. The dashed vertical lines indicate current and year-ago weekly periods. Source: Form EIA-912, \"Weekly Underground Natural Gas Storage Report.\" --> Estimated measures of sampling variability Download History (April 2015 to Present) Coefficient of Variation for Stocks % of working gas Standard Error for Net Change billion cubic feet (Bcf) Region 05/15/26 05/0",
+          "discoveredFrom": "https://www.eia.gov/todayinenergy/"
+        }
+      ],
+      "articleCount": 1,
+      "ok": true
     },
     {
       "name": "BLS Economic News Releases",
@@ -2602,11 +2616,11 @@
         },
         {
           "sourceName": "CNBC Markets",
-          "title": "South Korea's Kospi hits fresh record as hopes of U.S.-Iran breakthrough rise",
+          "title": "South Korea's Kospi hits new high amid mixed trading in Asia",
           "url": "https://www.cnbc.com/2026/05/26/asia-markets-today-sensex-kospi-nikkei-hang-seng-iran-us-oil-.html",
           "publishedAt": "2026-05-25T23:50:55.000Z",
           "summary": "Asia-Pacific markets were set to open broadly higher Tuesday, amid hopes for a breakthrough in the U.S.-Iran peace negotiations.",
-          "excerpt": "Asia markets today: Sensex, Kospi, Nikkei 225, Hang Seng, Iran, Oil Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points South Korea’s Kospi reached a record as markets reopened after a holiday. Iran peace hopes lifted sentiment despite continued military activity. Japanese shares pulled back after the Nikkei 225 crossed 65,000 on Monday. In this article @CL.1 @LCO.1 Follow your favorite stocks CREATE FREE ACCOUNT Currency dealers monitor exchange rates in a foreign exchange dealing room at the Hana Bank headquarters in Seoul on May 15, 2026. Jung Yeon-je | Afp | Getty Images South Korea's Kospi hit a fresh record Tuesday as trading resumed after a public holiday, with investor sentiment supported by hopes for a breakthrough in the U.S.-Iran peace talks. President Donald Trump said Monday negotiations with Iran were \" proceeding nicely ,\" though he warned that the U.S. could resume attacks if the talks failed. Oil prices were mixed after Trump's comments. West Texas Intermediate futures for July fell 5.37% to $91.41 per barrel as of 8:07 p.m. ET. International benchmark Brent futures for July rose about 1.75% to $97.82 per barrel. In a sign of how tenuous the negotiations were, the U.S. Central Command said that it conducted \"self-defense strikes\" targeting Iranian missile launch sites and boats attempting to lay mines in the south of the Islamic Republic. As the conflict wore on, Tehran appeared to be \"blinking\" over the Strait of Hormuz, ex-CIA director David Petraeus told CNBC's Lisa Kim at the UBS Asian Investment Conference on Monday. South Korea's Kospi rose to a fresh high of 8,094.90 in early trade, while the small-cap Kosdaq added 2.12% Japan's Nikkei 225 slipped 0.18% amid some profit taking, wh",
+          "excerpt": "Asia markets today: Sensex, Kospi, Nikkei 225, Hang Seng, Iran, Oil Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points South Korea’s Kospi reached a record as markets reopened after a holiday. Iran peace hopes lifted sentiment despite continued military activity. Japanese shares pulled back after the Nikkei 225 crossed 65,000 on Monday. In this article @CL.1 @LCO.1 .NSEI Follow your favorite stocks CREATE FREE ACCOUNT Currency dealers monitor exchange rates in a foreign exchange dealing room at the Hana Bank headquarters in Seoul on May 15, 2026. Jung Yeon-je | Afp | Getty Images South Korea's Kospi hit a fresh record Tuesday as trading resumed after a public holiday, with investor sentiment supported by hopes for a breakthrough in the U.S.-Iran peace talks. President Donald Trump said Monday negotiations with Iran were \" proceeding nicely ,\" though he warned that the U.S. could resume attacks if the talks failed. Oil prices were mixed after Trump's comments. West Texas Intermediate futures for July fell 5.24% to $91.54 per barrel as of 11:45 p.m. ET. International benchmark Brent futures for July rose 1.80% to $97.87 per barrel. Signaling the precarious nature of the Washington-Tehran engagement, the U.S. Central Command conducted \"self-defense strikes\" targeting Iranian missile launch sites and boats attempting to lay mines in the south of the Islamic Republic. Meanwhile, Tehran appears to be \"blinking\" over the Strait of Hormuz, ex-CIA Director David Petraeus told CNBC's Lisa Kim at the UBS Asian Investment Conference on Monday. South Korea's Kospi rose to a fresh high of 8,094.90 in early trade, while the small-cap Kosdaq pared gains and was 1.34% higher. Japan's Nikkei 225 slipped 0.32% amid some p",
           "discoveredFrom": "https://www.cnbc.com/markets/"
         },
         {
@@ -2634,29 +2648,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "U.S. conducts &apos;self-defense strikes&apos; in Iran as Trump tries to push for peace deal",
-          "url": "https://www.cnbc.com/2026/05/26/us-conducts-self-defense-strikes-in-iran-as-trump-seeks-peace-deal.html",
-          "publishedAt": "2026-05-26T01:18:35.000Z",
-          "summary": "Targets included missile launch sites and Iranian boats attempting to emplace mines.",
-          "excerpt": "Targets included missile launch sites and Iranian boats attempting to emplace mines.",
-          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
-        },
-        {
-          "sourceName": "CNBC Top News RSS",
           "title": "Oil prices mixed as U.S. military strikes against Iran cloud Middle East peace prospects",
           "url": "https://www.cnbc.com/2026/05/26/oil-prices-today-brent-wti-iran-trump-hormuz.html",
-          "publishedAt": "2026-05-26T00:43:54.000Z",
+          "publishedAt": "2026-05-26T04:25:44.000Z",
           "summary": "Donald Trump also said negotiations with Iran were \"proceeding nicely,\" but cautioned that the U.S. could resume military action if discussions were to collapse.",
           "excerpt": "Donald Trump also said negotiations with Iran were \"proceeding nicely,\" but cautioned that the U.S. could resume military action if discussions were to collapse.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "South Korea&apos;s Kospi hits fresh record as hopes of U.S.-Iran breakthrough rise",
+          "title": "South Korea&apos;s Kospi hits new high amid mixed trading in Asia",
           "url": "https://www.cnbc.com/2026/05/26/asia-markets-today-sensex-kospi-nikkei-hang-seng-iran-us-oil-.html",
-          "publishedAt": "2026-05-26T00:32:36.000Z",
+          "publishedAt": "2026-05-26T03:55:30.000Z",
           "summary": "Asia-Pacific markets were set to open broadly higher Tuesday, amid hopes for a breakthrough in the U.S.-Iran peace negotiations.",
           "excerpt": "Asia-Pacific markets were set to open broadly higher Tuesday, amid hopes for a breakthrough in the U.S.-Iran peace negotiations.",
+          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+        },
+        {
+          "sourceName": "CNBC Top News RSS",
+          "title": "U.S. conducts &apos;self-defense strikes&apos; in Iran as Trump pushes for peace deal",
+          "url": "https://www.cnbc.com/2026/05/26/us-conducts-self-defense-strikes-in-iran-as-trump-seeks-peace-deal.html",
+          "publishedAt": "2026-05-26T02:56:12.000Z",
+          "summary": "Targets included missile launch sites and Iranian boats attempting to emplace mines.",
+          "excerpt": "Targets included missile launch sites and Iranian boats attempting to emplace mines.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -2718,7 +2732,7 @@
           "sourceName": "MarketWatch Top Stories RSS",
           "title": "Oil prices tumble as deal to end Iran war appears close, though Trump says there’s no rush",
           "url": "https://www.marketwatch.com/story/trump-says-theres-no-rush-as-deal-to-end-iran-war-reopen-strait-of-hormuz-appears-close-c60056c0?mod=mw_rss_topstories",
-          "publishedAt": "2026-05-26T00:27:00.000Z",
+          "publishedAt": "2026-05-26T03:02:00.000Z",
           "summary": "Oil prices were sharply lower and stock futures surged after weekend reports that the U.S. appears close to reaching an agreement that would end the war with Iran and reopen the strategic Strait of Hormuz.",
           "excerpt": "Oil prices were sharply lower and stock futures surged after weekend reports that the U.S. appears close to reaching an agreement that would end the war with Iran and reopen the strategic Strait of Hormuz.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
