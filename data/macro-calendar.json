@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-05-27T00:16:55.633Z",
+  "generatedAt": "2026-05-27T16:11:17.835Z",
   "window": {
-    "today": "2026-05-26",
+    "today": "2026-05-27",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-05-19",
-    "endDate": "2026-11-26"
+    "startDate": "2026-05-20",
+    "endDate": "2026-11-27"
   },
   "sources": [
     {
@@ -28,8 +28,8 @@
     },
     {
       "source": "BEA release schedule",
-      "status": "error",
-      "error": "403 Forbidden",
+      "status": "ready",
+      "eventCount": 14,
       "scraper": "bea-release-schedule"
     },
     {
@@ -40,6 +40,28 @@
     }
   ],
   "events": [
+    {
+      "date": "2026-05-28",
+      "time": "8:30 AM ET",
+      "event": "GDP Second Estimate",
+      "title": "GDP (Second Estimate) and Corporate Profits, 1st Quarter 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2026-05-28",
+      "time": "8:30 AM ET",
+      "event": "Personal Income and Outlays",
+      "title": "Personal Income and Outlays, April 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
     {
       "date": "2026-06-05",
       "time": "8:30 AM ET",
@@ -90,6 +112,28 @@
       "sourceName": "Federal Reserve FOMC calendar",
       "scraper": "federal-reserve-fomc-calendar",
       "projectionMaterialsExpected": true
+    },
+    {
+      "date": "2026-06-25",
+      "time": "8:30 AM ET",
+      "event": "GDP Third Estimate",
+      "title": "GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 1st Quarter 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2026-06-25",
+      "time": "8:30 AM ET",
+      "event": "Personal Income and Outlays",
+      "title": "Personal Income and Outlays, May 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
     },
     {
       "date": "2026-07-02",
@@ -143,6 +187,28 @@
       "projectionMaterialsExpected": false
     },
     {
+      "date": "2026-07-30",
+      "time": "8:30 AM ET",
+      "event": "GDP Advance Estimate",
+      "title": "GDP (Advance Estimate), 2nd Quarter 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2026-07-30",
+      "time": "8:30 AM ET",
+      "event": "Personal Income and Outlays",
+      "title": "Personal Income and Outlays, June 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
       "date": "2026-08-07",
       "time": "8:30 AM ET",
       "event": "Employment Situation",
@@ -180,6 +246,28 @@
       "upstreamSource": "BLS",
       "scraper": "fred-release-calendar",
       "note": "FRED calendar for the BLS PPI release. Direct BLS schedule pages can block automated requests."
+    },
+    {
+      "date": "2026-08-26",
+      "time": "8:30 AM ET",
+      "event": "GDP Second Estimate",
+      "title": "GDP (Second Estimate) and Corporate Profits, 2nd Quarter 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "8:30 AM ET",
+      "event": "Personal Income and Outlays",
+      "title": "Personal Income and Outlays, July 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
     },
     {
       "date": "2026-09-04",
@@ -233,6 +321,28 @@
       "projectionMaterialsExpected": true
     },
     {
+      "date": "2026-09-30",
+      "time": "8:30 AM ET",
+      "event": "GDP Third Estimate",
+      "title": "GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 2nd Quarter 2026; State PCE, 2025",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2026-09-30",
+      "time": "8:30 AM ET",
+      "event": "Personal Income and Outlays",
+      "title": "Personal Income and Outlays, August 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
       "date": "2026-10-02",
       "time": "8:30 AM ET",
       "event": "Employment Situation",
@@ -284,6 +394,28 @@
       "projectionMaterialsExpected": false
     },
     {
+      "date": "2026-10-29",
+      "time": "8:30 AM ET",
+      "event": "GDP Advance Estimate",
+      "title": "GDP (Advance Estimate), 3rd Quarter 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2026-10-29",
+      "time": "8:30 AM ET",
+      "event": "Personal Income and Outlays",
+      "title": "Personal Income and Outlays, September 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
       "date": "2026-11-06",
       "time": "8:30 AM ET",
       "event": "Employment Situation",
@@ -321,6 +453,28 @@
       "upstreamSource": "BLS",
       "scraper": "fred-release-calendar",
       "note": "FRED calendar for the BLS PPI release. Direct BLS schedule pages can block automated requests."
+    },
+    {
+      "date": "2026-11-25",
+      "time": "8:30 AM ET",
+      "event": "GDP Second Estimate",
+      "title": "GDP (Second Estimate) and Corporate Profits, 3rd Quarter 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2026-11-25",
+      "time": "8:30 AM ET",
+      "event": "Personal Income and Outlays",
+      "title": "Personal Income and Outlays, October 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
     }
   ]
 }
