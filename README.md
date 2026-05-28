@@ -8,14 +8,16 @@ The project is built to run cheaply with free data sources. It is not an intrada
 
 ```mermaid
 flowchart TD
-  schedule[".github/workflows/refresh-data.yml<br/>Redundant 5 AM + 4 PM PT attempts"] --> scorer["scripts/modeling/score_live_rank_model.py<br/>Scores current S&P 500 with XGBoost"]
+  schedule[".github/workflows/refresh-data.yml<br/>Redundant 5 AM + 4 PM PT attempts"] --> gate["scripts/check-refresh-window.mjs<br/>Pacific window gate + idempotency check"]
+  ledger["data/refresh-ledger.json<br/>Successful morning/evening refresh ledger"] --> gate
+  gate --> scorer["scripts/modeling/score_live_rank_model.py<br/>Scores current S&P 500 with XGBoost"]
 
   modelFiles["models/rank/*<br/>Production model, metadata, explainability"] --> scorer
   universe["config/universe.json<br/>ETF universe and fallback stocks"] --> scorer
   scorer --> modelScores["data/model-rank-scores.json<br/>Intermediate model rankings, ignored by git"]
   scorer --> referenceCache["data/model-reference-cache.json<br/>Daily S&P 500 reference cache"]
 
-  schedule --> refresh["scripts/update-data.mjs<br/>Builds the market briefing"]
+  gate --> refresh["scripts/update-data.mjs<br/>Builds the market briefing"]
   newsSources["config/news-sources.md<br/>Research and news source registry"] --> refresh
   aiPrompt["config/ai-recommendation-prompt.md<br/>AI memo instructions"] --> refresh
   universe --> refresh
@@ -28,7 +30,8 @@ flowchart TD
   refresh --> monitoring["data/model-monitoring.json<br/>Model Lab top-decile monitor"]
   refresh --> longResearch["data/long-horizon-research.json<br/>Strategic Book one-year model lens"]
   refresh --> marketCaps["data/market-cap-cache.json<br/>Reusable market-cap lookups"]
-  schedule --> refreshStatus["data/refresh-status.json<br/>Last run status, delay, model date, row counts"]
+  gate --> refreshStatus["data/refresh-status.json<br/>Last run status, delay, model date, row counts"]
+  refreshStatus --> ledger
 
   snapshot --> command["Browser decision layer<br/>Command Center, action queue, contradictions"]
   command --> pages["GitHub Pages static site"]
@@ -36,6 +39,7 @@ flowchart TD
   monitoring --> pages
   longResearch --> pages
   refreshStatus --> pages
+  ledger --> pages
   appFiles["index.html + app.js + styles.css<br/>Browser dashboard UI"] --> pages
   runtime["config/runtime.json<br/>Optional private Ticker Lab backend URL"] --> pages
   pages --> browser["Laptop or mobile browser<br/>Briefing, Tactical, Strategic, Intel, Model Lab"]
@@ -146,7 +150,7 @@ PORT=4174 npm run dev:local
 
 ## Refreshing Data
 
-GitHub Actions runs the full refresh from `.github/workflows/refresh-data.yml`. Because GitHub's scheduled runner is best-effort and can delay or drop individual scheduled runs, the workflow covers each target window plus the following Pacific hour: shortly after 5 AM Pacific and 4 PM Pacific, with 30-minute backup attempts. The workflow checks `data/refresh-status.json` before doing work and refreshes only once per Pacific morning/evening window.
+GitHub Actions runs the full refresh from `.github/workflows/refresh-data.yml`. Because GitHub's scheduled runner is best-effort and can delay or drop individual scheduled runs, the workflow uses two attempts for each target window: shortly after 5 AM Pacific and shortly after 4 PM Pacific, with a 30-minute backup attempt for each. `scripts/check-refresh-window.mjs` checks `data/refresh-ledger.json` first and `data/refresh-status.json` as a fallback, so each Pacific morning/evening window refreshes only once even when a scheduled runner starts hours late.
 
 Run the refresh script:
 
@@ -438,9 +442,16 @@ The repository includes a GitHub Actions workflow at:
 .github/workflows/refresh-data.yml
 ```
 
-It is configured to refresh twice daily shortly after 5 AM Pacific and 4 PM Pacific, with a one-hour-later Pacific backstop for each target window. Because GitHub cron runs in UTC, the workflow schedules `12:11/12:41`, `13:11/13:41`, and `14:11/14:41` UTC for the morning window, plus `23:11/23:41`, `00:11/00:41`, and `01:11/01:41` UTC for the afternoon window. The alternate UTC hours cover daylight saving and standard time; the Pacific-time gate only runs slots whose intended scheduled time maps to either the target hour or the following backstop hour in `America/Los_Angeles`. The guard evaluates the scheduled slot rather than the delayed runner start time, so a late GitHub runner does not accidentally skip the refresh.
+It is configured to refresh twice daily shortly after 5 AM Pacific and 4 PM Pacific. Each window has a second attempt 30 minutes later:
 
-The schedule intentionally avoids minute `0`. GitHub documents that scheduled workflows may be delayed during high-load periods, especially at the start of every hour, and that queued scheduled jobs can be dropped. Running at minutes `11` and `41` gives each active hour a backup attempt while keeping the schedule easier to audit.
+- 5:17 AM Pacific
+- 5:47 AM Pacific backup
+- 4:17 PM Pacific
+- 4:47 PM Pacific backup
+
+The workflow uses GitHub Actions timezone-aware schedules with `timezone: "America/Los_Angeles"`, so the cron entries stay tied to Pacific time across daylight saving changes. The schedule intentionally avoids minute `0`. GitHub documents that scheduled workflows may be delayed during high-load periods, especially at the start of every hour, and that queued scheduled jobs can be dropped. Running at minutes `17` and `47` gives each target window a backup attempt while keeping the schedule easier to audit.
+
+`scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. On success, `scripts/write-refresh-status.mjs` records the completed target in `data/refresh-ledger.json`. That ledger prevents a delayed backup slot from rerunning a window that already succeeded, and it is more reliable than using only `data/refresh-status.json` because manual refreshes can update the status file without erasing prior scheduled-window history.
 
 When the refresh runs successfully, it:
 
@@ -452,6 +463,7 @@ When the refresh runs successfully, it:
 - Updates `data/deeper-read-history.json` so the next AI Deeper Read can avoid repeating the same source mix when enough alternatives exist
 - Updates `data/reddit-tape-cache.json` when Reddit ingestion produces clean ticker concentration, giving scheduled refreshes a transparent last-good fallback when Reddit blocks a runner
 - Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, model date, and row counts
+- Updates `data/refresh-ledger.json` after successful scheduled runs so delayed backup attempts can detect already-completed morning/evening windows
 - Commits the updated snapshot, scorebook, refresh status, market-cap cache, and reference cache back to `main` if any changed
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
 - Skips its own commit/deploy cleanly if `main` advanced while a delayed refresh was running, which prevents an older scheduled run from overwriting a newer manual refresh
@@ -946,6 +958,7 @@ styles.css                         Dashboard styling
 app.js                             Browser rendering logic
 scripts/update-data.mjs            Data refresh, source ingestion, screening, AI call
 scripts/update-macro-calendar.mjs  Scrapes rolling BLS/FRED, BEA, and Fed release calendars
+scripts/check-refresh-window.mjs   GitHub Actions Pacific refresh gate and duplicate-run guard
 scripts/local-dashboard-server.mjs Static server and private Ticker Lab API
 config/news-sources.md             Editable public source registry
 config/universe.json               ETF and fallback universe configuration
@@ -961,6 +974,7 @@ data/model-reference-cache.json    Generated daily S&P 500 model reference cache
 data/market-cap-cache.json         Generated market-cap lookup cache for scorebook rows
 data/reddit-tape-cache.json        Generated last-good Reddit ticker attention cache
 data/refresh-status.json           Generated refresh diagnostics and last-run health status
+data/refresh-ledger.json           Generated successful scheduled-window ledger
 analysis/model-monitoring/         Local model monitoring analyses and charts
 Dockerfile                         Container image for the private Ticker Lab backend
 render.yaml                        Render-style backend service blueprint

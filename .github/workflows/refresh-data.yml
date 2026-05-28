@@ -2,30 +2,22 @@ name: Refresh Market Data
 
 on:
   schedule:
-    # GitHub cron runs in UTC and can be delayed after the scheduled slot.
-    # These slots cover the intended 5 AM and 4 PM Pacific refreshes, plus the
-    # following Pacific hour as a backstop, across daylight saving and standard
-    # time. GitHub's scheduled runners are best-effort, so backup slots reduce
-    # the chance that a delayed or dropped cron slot leaves the site stale. The
-    # gate below refreshes only once per Pacific morning/evening window.
-    # The gate below evaluates the intended scheduled slot, not the delayed
-    # runner start time, so late GitHub scheduling does not skip the refresh.
-    - cron: "11 12 * * *"
-    - cron: "41 12 * * *"
-    - cron: "11 13 * * *"
-    - cron: "41 13 * * *"
-    - cron: "11 14 * * *"
-    - cron: "41 14 * * *"
-    - cron: "11 23 * * *"
-    - cron: "41 23 * * *"
-    - cron: "11 0 * * *"
-    - cron: "41 0 * * *"
-    - cron: "11 1 * * *"
-    - cron: "41 1 * * *"
+    # GitHub scheduled runners are best-effort and can start late. Keep two
+    # attempts per target window, then use data/refresh-ledger.json to make each
+    # Pacific morning/evening window idempotent even if a slot wakes up hours late.
+    - cron: "17 5 * * *"
+      timezone: "America/Los_Angeles"
+    - cron: "47 5 * * *"
+      timezone: "America/Los_Angeles"
+    - cron: "17 16 * * *"
+      timezone: "America/Los_Angeles"
+    - cron: "47 16 * * *"
+      timezone: "America/Los_Angeles"
   workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  SCHEDULE_TIMEZONE: America/Los_Angeles
 
 permissions:
   contents: write
@@ -53,116 +45,7 @@ jobs:
         id: pacific_time
         env:
           SCHEDULE: ${{ github.event.schedule }}
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "run_refresh=true" >> "$GITHUB_OUTPUT"
-            echo "scheduled_utc=manual" >> "$GITHUB_OUTPUT"
-            echo "scheduled_pacific=manual" >> "$GITHUB_OUTPUT"
-            echo "actual_start_utc=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"
-            echo "schedule_delay_minutes=0" >> "$GITHUB_OUTPUT"
-            echo "refresh_target_key=manual" >> "$GITHUB_OUTPUT"
-            echo "refresh_target_window=manual" >> "$GITHUB_OUTPUT"
-            {
-              echo "SCHEDULED_UTC=manual"
-              echo "SCHEDULED_PACIFIC=manual"
-              echo "ACTUAL_START_UTC=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-              echo "SCHEDULE_DELAY_MINUTES=0"
-              echo "REFRESH_TARGET_KEY=manual"
-              echo "REFRESH_TARGET_WINDOW=manual"
-            } >> "$GITHUB_ENV"
-            exit 0
-          fi
-
-          set -- $SCHEDULE
-          scheduled_minute="$1"
-          scheduled_hour="$2"
-          if ! [[ "$scheduled_minute" =~ ^[0-9]+$ && "$scheduled_hour" =~ ^[0-9]+$ ]]; then
-            echo "run_refresh=false" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=unknown schedule slot: $SCHEDULE" >> "$GITHUB_OUTPUT"
-            echo "Unknown schedule slot: $SCHEDULE"
-            exit 0
-          fi
-
-          python3 - "$scheduled_hour" "$scheduled_minute" > /tmp/pacific-window.env <<'PY'
-          from datetime import datetime, timedelta, timezone
-          from zoneinfo import ZoneInfo
-          import json
-          from pathlib import Path
-          import sys
-
-          scheduled_hour = int(sys.argv[1])
-          scheduled_minute = int(sys.argv[2])
-          actual_utc = datetime.now(timezone.utc)
-          today = actual_utc.date()
-          scheduled_utc = datetime(
-              today.year,
-              today.month,
-              today.day,
-              scheduled_hour,
-              scheduled_minute,
-              tzinfo=timezone.utc,
-          )
-          if scheduled_utc - actual_utc > timedelta(hours=1):
-              scheduled_utc -= timedelta(days=1)
-          scheduled_pacific = scheduled_utc.astimezone(ZoneInfo("America/Los_Angeles"))
-          delay_minutes = round((actual_utc - scheduled_utc).total_seconds() / 60)
-          if 5 <= scheduled_pacific.hour <= 6:
-              target_window = "morning"
-          elif 16 <= scheduled_pacific.hour <= 17:
-              target_window = "evening"
-          else:
-              target_window = "off_window"
-
-          target_key = (
-              f"{scheduled_pacific.date().isoformat()}-{target_window}"
-              if target_window != "off_window"
-              else None
-          )
-
-          prior = {}
-          try:
-              prior = json.loads(Path("data/refresh-status.json").read_text())
-          except Exception:
-              prior = {}
-
-          already_refreshed = (
-              target_key
-              and prior.get("status") == "success"
-              and prior.get("refreshTargetKey") == target_key
-          )
-          should_run = target_window in {"morning", "evening"} and not already_refreshed
-          if target_window == "off_window":
-              skip_reason = "scheduled slot is outside the Pacific refresh backstop windows"
-          elif already_refreshed:
-              skip_reason = f"{target_window} refresh already succeeded for {scheduled_pacific.date().isoformat()}"
-          else:
-              skip_reason = ""
-
-          print(f"scheduled_utc={scheduled_utc.isoformat()}")
-          print(f"scheduled_pacific={scheduled_pacific.isoformat()}")
-          print(f"actual_start_utc={actual_utc.isoformat()}")
-          print(f"schedule_delay_minutes={delay_minutes}")
-          print(f"refresh_target_key={target_key or ''}")
-          print(f"refresh_target_window={target_window}")
-          print(f"skip_reason={skip_reason}")
-          print(f"run_refresh={'true' if should_run else 'false'}")
-          PY
-
-          cat /tmp/pacific-window.env
-          cat /tmp/pacific-window.env >> "$GITHUB_OUTPUT"
-          {
-            grep '^scheduled_utc=' /tmp/pacific-window.env | sed 's/^scheduled_utc=/SCHEDULED_UTC=/'
-            grep '^scheduled_pacific=' /tmp/pacific-window.env | sed 's/^scheduled_pacific=/SCHEDULED_PACIFIC=/'
-            grep '^actual_start_utc=' /tmp/pacific-window.env | sed 's/^actual_start_utc=/ACTUAL_START_UTC=/'
-            grep '^schedule_delay_minutes=' /tmp/pacific-window.env | sed 's/^schedule_delay_minutes=/SCHEDULE_DELAY_MINUTES=/'
-            grep '^refresh_target_key=' /tmp/pacific-window.env | sed 's/^refresh_target_key=/REFRESH_TARGET_KEY=/'
-            grep '^refresh_target_window=' /tmp/pacific-window.env | sed 's/^refresh_target_window=/REFRESH_TARGET_WINDOW=/'
-            grep '^skip_reason=' /tmp/pacific-window.env | sed 's/^skip_reason=/REFRESH_SKIP_REASON=/'
-          } >> "$GITHUB_ENV"
-
-          if ! grep -q '^run_refresh=true$' /tmp/pacific-window.env; then
-            echo "Skipping refresh: $(grep '^skip_reason=' /tmp/pacific-window.env | cut -d= -f2-)"
-          fi
+        run: node scripts/check-refresh-window.mjs
 
       - name: Write skipped refresh summary
         if: steps.pacific_time.outputs.run_refresh != 'true'
@@ -268,7 +151,7 @@ jobs:
             exit 0
           fi
           echo "remote_changed=false" >> "$GITHUB_OUTPUT"
-          git add data/snapshot.json data/model-scorebook.json data/model-monitoring.json data/long-horizon-research.json data/model-reference-cache.json data/market-cap-cache.json data/deeper-read-history.json data/reddit-tape-cache.json data/refresh-status.json data/macro-calendar.json
+          git add data/snapshot.json data/model-scorebook.json data/model-monitoring.json data/long-horizon-research.json data/model-reference-cache.json data/market-cap-cache.json data/deeper-read-history.json data/reddit-tape-cache.json data/refresh-status.json data/refresh-ledger.json data/macro-calendar.json
           if git diff --cached --quiet; then
             echo "No refresh output changes to commit."
           else
@@ -312,6 +195,7 @@ jobs:
           fi
           cp data/macro-calendar.json public/data/macro-calendar.json
           cp data/refresh-status.json public/data/refresh-status.json
+          cp data/refresh-ledger.json public/data/refresh-ledger.json
           cp config/runtime.json public/config/runtime.json
 
       - name: Configure Pages

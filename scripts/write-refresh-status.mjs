@@ -59,3 +59,31 @@ const payload = {
 };
 
 await writeFile(join(root, "data/refresh-status.json"), `${JSON.stringify(payload, null, 2)}\n`);
+
+const targetKey = payload.refreshTargetKey;
+if (status === "success" && targetKey && targetKey !== "manual") {
+  const existingLedger = (await readJson("data/refresh-ledger.json")) || {};
+  const successfulTargets = Array.isArray(existingLedger.successfulTargets) ? existingLedger.successfulTargets : [];
+  const nextEntry = {
+    targetKey,
+    targetWindow: payload.refreshTargetWindow,
+    statusGeneratedAt: payload.generatedAt,
+    scheduledPacific: payload.scheduledPacific,
+    scheduledUtc: payload.scheduledUtc,
+    actualStartUtc: payload.actualStartUtc,
+    scheduleDelayMinutes: payload.scheduleDelayMinutes,
+    runId: payload.runId,
+    runUrl: payload.runUrl,
+    headSha: payload.headSha,
+    snapshotGeneratedAt: payload.snapshotGeneratedAt,
+    modelAsOfDate: payload.modelAsOfDate,
+    marketDataStatus: payload.marketDataStatus
+  };
+  const deduped = successfulTargets.filter((entry) => (entry?.targetKey || entry) !== targetKey);
+  const ledger = {
+    version: 1,
+    updatedAt: payload.generatedAt,
+    successfulTargets: [nextEntry, ...deduped].slice(0, 120)
+  };
+  await writeFile(join(root, "data/refresh-ledger.json"), `${JSON.stringify(ledger, null, 2)}\n`);
+}

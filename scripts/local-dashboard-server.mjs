@@ -37,7 +37,8 @@ const publicStaticFiles = new Set([
   "data/model-monitoring.json",
   "data/long-horizon-research.json",
   "data/macro-calendar.json",
-  "data/refresh-status.json"
+  "data/refresh-status.json",
+  "data/refresh-ledger.json"
 ]);
 
 function corsHeaders() {

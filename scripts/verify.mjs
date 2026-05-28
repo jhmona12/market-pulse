@@ -78,6 +78,7 @@ run("node", ["--check", "scripts/update-macro-calendar.mjs"]);
 run("node", ["--check", "scripts/local-dashboard-server.mjs"]);
 run("node", ["--check", "scripts/configure-ticker-backend.mjs"]);
 run("node", ["--check", "scripts/write-refresh-status.mjs"]);
+run("node", ["--check", "scripts/check-refresh-window.mjs"]);
 
 const python = process.env.PYTHON || "python3";
 const pythonFiles = [
@@ -94,7 +95,8 @@ const requiredJsonFiles = [
   "data/long-horizon-research.json",
   "data/model-reference-cache.json",
   "data/macro-calendar.json",
-  "data/refresh-status.json"
+  "data/refresh-status.json",
+  "data/refresh-ledger.json"
 ];
 
 for (const file of requiredJsonFiles) readJson(file);
@@ -104,6 +106,7 @@ const scorebook = readJson("data/model-scorebook.json");
 const monitoring = readJson("data/model-monitoring.json");
 const longHorizonResearch = readJson("data/long-horizon-research.json");
 const macroCalendar = readJson("data/macro-calendar.json");
+const refreshLedger = readJson("data/refresh-ledger.json");
 if (!Array.isArray(snapshot?.opportunities)) fail("data/snapshot.json is missing opportunities[]");
 if (!Array.isArray(scorebook?.rows)) fail("data/model-scorebook.json is missing rows[]");
 if (!Array.isArray(monitoring?.currentTopDecile)) fail("data/model-monitoring.json is missing currentTopDecile[]");
@@ -113,6 +116,14 @@ if (!Array.isArray(longHorizonResearch?.labelSummaries) || !longHorizonResearch.
   fail("data/long-horizon-research.json is missing labelSummaries[]");
 }
 if (!Array.isArray(macroCalendar?.events) || !macroCalendar.events.length) fail("data/macro-calendar.json is missing events[]");
+if (refreshLedger?.version !== 1 || !Array.isArray(refreshLedger?.successfulTargets)) {
+  fail("data/refresh-ledger.json is missing version 1 successfulTargets[]");
+}
+const badLedgerEntries = refreshLedger.successfulTargets.filter((entry) => {
+  if (typeof entry === "string") return !/^\d{4}-\d{2}-\d{2}-(morning|evening)$/.test(entry);
+  return !/^\d{4}-\d{2}-\d{2}-(morning|evening)$/.test(String(entry?.targetKey || ""));
+});
+if (badLedgerEntries.length) fail("data/refresh-ledger.json contains malformed target keys");
 
 if (snapshot.marketDataStatus?.status !== "fresh") fail(`snapshot marketDataStatus is ${snapshot.marketDataStatus?.status || "missing"}`);
 if (scorebook.marketDataStatus?.status !== "fresh") fail(`scorebook marketDataStatus is ${scorebook.marketDataStatus?.status || "missing"}`);
@@ -199,6 +210,9 @@ if (!pagesWorkflow.includes("data/model-monitoring.json public/data/model-monito
 if (!pagesWorkflow.includes("data/long-horizon-research.json public/data/long-horizon-research.json")) {
   fail(".github/workflows/pages.yml does not publish data/long-horizon-research.json");
 }
+if (!pagesWorkflow.includes("data/refresh-ledger.json public/data/refresh-ledger.json")) {
+  fail(".github/workflows/pages.yml does not publish data/refresh-ledger.json");
+}
 
 const refreshWorkflow = readFileSync(join(root, ".github/workflows/refresh-data.yml"), "utf8");
 if (!refreshWorkflow.includes("REDDIT_CLIENT_ID")) {
@@ -206,6 +220,15 @@ if (!refreshWorkflow.includes("REDDIT_CLIENT_ID")) {
 }
 if (!refreshWorkflow.includes("data/reddit-tape-cache.json")) {
   fail(".github/workflows/refresh-data.yml does not preserve data/reddit-tape-cache.json");
+}
+if (!refreshWorkflow.includes("timezone: \"America/Los_Angeles\"")) {
+  fail(".github/workflows/refresh-data.yml does not use Pacific timezone-aware schedules");
+}
+if (!refreshWorkflow.includes("node scripts/check-refresh-window.mjs")) {
+  fail(".github/workflows/refresh-data.yml does not use scripts/check-refresh-window.mjs");
+}
+if (!refreshWorkflow.includes("data/refresh-ledger.json")) {
+  fail(".github/workflows/refresh-data.yml does not preserve or publish data/refresh-ledger.json");
 }
 
 const localServer = readFileSync(join(root, "scripts/local-dashboard-server.mjs"), "utf8");
@@ -217,6 +240,9 @@ if (!localServer.includes('"data/long-horizon-research.json"')) {
 }
 if (!localServer.includes('"data/macro-calendar.json"')) {
   fail("scripts/local-dashboard-server.mjs does not allow data/macro-calendar.json");
+}
+if (!localServer.includes('"data/refresh-ledger.json"')) {
+  fail("scripts/local-dashboard-server.mjs does not allow data/refresh-ledger.json");
 }
 
 const macroEvents = macroCalendar.events.filter((event) => event?.date && event?.time && event?.event && event?.source);
