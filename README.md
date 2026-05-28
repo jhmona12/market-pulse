@@ -23,19 +23,23 @@ flowchart TD
   referenceCache --> refresh
   freeData["Free public data<br/>Yahoo Finance charts, FRED CSVs, source landing pages"] --> refresh
 
-  refresh --> snapshot["data/snapshot.json<br/>Briefing, daily read, AI memo, sectors, macro, source tape"]
-  refresh --> scorebook["data/model-scorebook.json<br/>Full SP 500 Model Scoreboard"]
+  refresh --> snapshot["data/snapshot.json<br/>Briefing, tactical book, market intelligence, macro, source tape"]
+  refresh --> scorebook["data/model-scorebook.json<br/>Tactical Book full S&P 500 scoreboard"]
+  refresh --> monitoring["data/model-monitoring.json<br/>Model Lab top-decile monitor"]
+  refresh --> longResearch["data/long-horizon-research.json<br/>Strategic Book one-year model lens"]
   refresh --> marketCaps["data/market-cap-cache.json<br/>Reusable market-cap lookups"]
   schedule --> refreshStatus["data/refresh-status.json<br/>Last run status, delay, model date, row counts"]
 
   snapshot --> pages["GitHub Pages static site"]
   scorebook --> pages
+  monitoring --> pages
+  longResearch --> pages
   refreshStatus --> pages
   appFiles["index.html + app.js + styles.css<br/>Browser dashboard UI"] --> pages
   runtime["config/runtime.json<br/>Optional private Ticker Lab backend URL"] --> pages
-  pages --> browser["Laptop or mobile browser<br/>Briefing + SP 500 Model Scoreboard"]
+  pages --> browser["Laptop or mobile browser<br/>Briefing, Tactical, Strategic, Intel, Model Lab"]
 
-  browser -. optional private scoring .-> tickerUi["Ticker Lab tab"]
+  browser -. optional private scoring .-> tickerUi["Model Lab<br/>Ticker Lab"]
   tickerUi -. POST /api/ticker-lab/score .-> backend["scripts/local-dashboard-server.mjs<br/>Local or hosted private API"]
   backend --> scorer
   referenceCache --> backend
@@ -48,7 +52,8 @@ flowchart TD
 - Summarizes the current market setup in a daily read.
 - Screens S&P 500 constituents and a curated ETF universe for momentum setups.
 - Scores current S&P 500 stocks with a production XGBoost learning-to-rank model.
-- Publishes a full S&P 500 Model Scoreboard tab with every scored company ranked from highest model score to lowest.
+- Organizes the web UI into five primary views: Briefing, Tactical Book, Strategic Book, Market Intel, and Model Lab.
+- Publishes a full S&P 500 Model Scoreboard inside the Tactical Book with every scored company ranked from highest model score to lowest.
 - Tags top-ranked names by setup type, separating clean momentum from model-ranked rebound watches that are not yet momentum-confirmed.
 - Shows a volatility-adjusted rebound activation price for high-ranked broken-trend names when the model likes the setup but price action still needs confirmation.
 - Tracks sector performance using major sector ETF proxies.
@@ -73,9 +78,9 @@ The dashboard is designed to be published as a static GitHub Pages site:
 https://jhmona12.github.io/market-pulse/
 ```
 
-The site reads from `data/snapshot.json` for the briefing and `data/model-scorebook.json` for the full S&P 500 Model Scoreboard. When those files change, the public page reflects the latest generated market snapshot after GitHub Pages redeploys.
+The site reads from `data/snapshot.json` for the briefing, tactical cards, AI memo, market intelligence, macro, and source tape; `data/model-scorebook.json` for the Tactical Book scoreboard; `data/long-horizon-research.json` for the Strategic Book; and `data/model-monitoring.json` for the Model Lab monitor. When those files change, the public page reflects the latest generated market snapshot after GitHub Pages redeploys.
 
-Ticker Lab is visible on the public page, but scoring requires a separate private model API because GitHub Pages can only serve static files. The browser reads the API base URL from `config/runtime.json`.
+Ticker Lab lives in the Model Lab view. Scoring requires a separate private model API because GitHub Pages can only serve static files. The browser reads the API base URL from `config/runtime.json`.
 
 ## Freshness Guardrails
 
@@ -123,7 +128,7 @@ Then open:
 http://localhost:4173
 ```
 
-The Ticker Lab section is always visible. It can score tickers when it can reach either the same-origin local API from `npm run dev:local` or a hosted backend configured in `config/runtime.json`.
+The Ticker Lab section is available in the Model Lab view. It can score tickers when it can reach either the same-origin local API from `npm run dev:local` or a hosted backend configured in `config/runtime.json`.
 
 If port `4173` is already in use for the static server, choose another port:
 
@@ -169,7 +174,7 @@ The refresh script:
 - Adds a rebound activation price for qualifying rebound-watch names, calculated as current close plus `0.75 x 20-day realized daily volatility`
 - Adds a stop-sell price for all current top-decile model names, plus other surfaced non-confirmed model candidates, during the model scorer's fresh price-history pass so the briefing builder does not make a second Yahoo request for the same names
 - Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
-- Re-scores the same fresh S&P 500 feature cache with the tuned 252-day model so `data/long-horizon-research.json` can show a full searchable Long-Horizon Book without making a second Yahoo history pass
+- Re-scores the same fresh S&P 500 feature cache with the tuned 252-day model so `data/long-horizon-research.json` can show a full searchable Strategic Book without making a second Yahoo history pass
 - Writes fresh market-strip and sector-performance rows during the model scoring step so the dashboard has complete technical sections even when the later briefing builder avoids another large price-history fetch
 - Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, 60-day beta to SPY, trailing 7D, 14D, 30D, 60D, 90D calendar-lookback returns, and YTD return when fresh price history is available
 - Updates `data/market-cap-cache.json` from free public quote data and reuses recent values to keep the daily job reliable
@@ -196,7 +201,7 @@ Or run both model scoring passes with:
 npm run score:models
 ```
 
-`data/model-rank-scores.json` and `data/model-rank-scores-long-horizon.json` are intermediate files and are ignored by git. The generated `data/snapshot.json` contains the briefing data needed by the static site. The generated `data/model-scorebook.json` powers the public scoreboard tab. The generated `data/long-horizon-research.json` powers the Long-Horizon Book tab. The generated `data/model-reference-cache.json` is intentionally committed because it gives the private Ticker Lab and the long-horizon scoring pass a fresh daily S&P 500 baseline without rebuilding the full universe on every request.
+`data/model-rank-scores.json` and `data/model-rank-scores-long-horizon.json` are intermediate files and are ignored by git. The generated `data/snapshot.json` contains the briefing, tactical-card, market-intelligence, macro, and source-tape data needed by the static site. The generated `data/model-scorebook.json` powers the Tactical Book scoreboard. The generated `data/long-horizon-research.json` powers the Strategic Book. The generated `data/model-monitoring.json` powers the Model Lab monitor. The generated `data/model-reference-cache.json` is intentionally committed because it gives the private Ticker Lab and the long-horizon scoring pass a fresh daily S&P 500 baseline without rebuilding the full universe on every request.
 
 Some current constituents may be fetched but not scored if they do not have enough clean trailing data to populate every required feature. The scorer records those symbols in the snapshot model metadata.
 
@@ -493,7 +498,7 @@ Legacy/research labels still exist for comparison:
 
 ### Long-Horizon Research Model
 
-The 252-day model powers a separate `Long-Horizon Book` dashboard tab. It answers a different question from the tactical model: which current S&P 500 names look attractive enough to hold through a roughly one-year window?
+The 252-day model powers the separate `Strategic Book` dashboard view. It answers a different question from the tactical model: which current S&P 500 names look attractive enough to hold through a roughly one-year window?
 
 The long-horizon dataset is built with:
 
@@ -678,7 +683,7 @@ Technical composite          +10.38%       +6.39%           +6.39%
 Low volatility                -1.66%       -2.23%           -1.91%
 ```
 
-The tuned XGBoost ranker is beating the simple baselines in this four-fold test, but sector-relative momentum remains the key benchmark to keep watching. The dashboard presents this as a separate Long-Horizon Book with full search/filter controls, 14-day tactical agreement labels, sector/cap mix context, and compact diagnostics. It is not part of the 14-day Momentum Book.
+The tuned XGBoost ranker is beating the simple baselines in this four-fold test, but sector-relative momentum remains the key benchmark to keep watching. The dashboard presents this in the Strategic Book with full search/filter controls, 14-day tactical agreement labels, sector/cap mix context, and compact diagnostics. It is not part of the 14-day Tactical Book.
 
 Before treating this model as production-grade portfolio advice, review point-in-time constituent bias, keep expanding monthly/quarterly cohort monitoring, and consider adding fundamentals such as valuation, profitability, leverage, and growth.
 
@@ -754,7 +759,7 @@ The backtest report also includes `non_overlapping_offsets`, which evaluates eve
 ### Ongoing Model Monitoring
 
 Recent model-health checks live in `analysis/model-monitoring/` for local review.
-The public dashboard also reads the compact generated `data/model-monitoring.json` file for the Top Decile Monitor tab.
+The public dashboard also reads the compact generated `data/model-monitoring.json` file for the Model Lab top-decile monitor.
 
 Run the monitor from the repo root:
 
@@ -931,7 +936,7 @@ data/snapshot.json                 Generated dashboard data
 data/macro-calendar.json           Generated next-six-month macro release calendar
 data/model-scorebook.json          Generated full S&P 500 model scoreboard
 data/model-monitoring.json         Generated top-decile dashboard monitoring snapshot
-data/long-horizon-research.json    Generated Long-Horizon Book dashboard snapshot
+data/long-horizon-research.json    Generated Strategic Book dashboard snapshot
 data/model-rank-scores-long-horizon.json Ignored intermediate live one-year model scores
 data/model-reference-cache.json    Generated daily S&P 500 model reference cache
 data/market-cap-cache.json         Generated market-cap lookup cache for scorebook rows

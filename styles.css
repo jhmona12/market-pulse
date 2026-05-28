@@ -102,8 +102,8 @@ p {
 h1 {
   margin-bottom: 0;
   font-family: var(--mono);
-  font-size: clamp(2.25rem, 6vw, 4.95rem);
-  line-height: 0.95;
+  font-size: clamp(2rem, 4vw, 3.65rem);
+  line-height: 1;
   letter-spacing: 0;
   text-shadow: 0 0 22px rgba(57, 255, 136, 0.26);
 }
@@ -182,32 +182,54 @@ h3 {
   outline: none;
 }
 
-.view-tabs {
-  display: flex;
+.primary-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
-  margin: 14px 0 8px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  margin: 12px -2px 10px;
+  padding: 8px 2px;
+  background: rgba(5, 8, 7, 0.9);
+  backdrop-filter: blur(16px);
 }
 
-.view-tabs::-webkit-scrollbar {
+.primary-tabs::-webkit-scrollbar {
   display: none;
 }
 
 .view-tab {
-  flex: 0 0 auto;
-  min-height: 40px;
+  min-height: 58px;
   border: 1px solid var(--line);
   border-radius: 5px;
-  padding: 0 13px;
+  padding: 8px 11px;
   color: var(--muted);
   background: rgba(7, 16, 12, 0.86);
   font-family: var(--mono);
-  font-size: 0.74rem;
-  font-weight: 900;
+  text-align: left;
   letter-spacing: 0;
-  text-transform: uppercase;
   cursor: pointer;
+}
+
+.view-tab strong,
+.view-tab span {
+  display: block;
+}
+
+.view-tab strong {
+  color: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.view-tab span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.25;
 }
 
 .view-tab:hover,
@@ -219,15 +241,25 @@ h3 {
   outline: none;
 }
 
+.view-tab.active span,
+.view-tab:hover span,
+.view-tab:focus-visible span {
+  color: #c8ecdb;
+}
+
 .view-panel[hidden] {
   display: none;
+}
+
+.view-panel {
+  margin-top: 10px;
 }
 
 .market-strip {
   display: grid;
   grid-template-columns: repeat(6, minmax(120px, 1fr));
   gap: 8px;
-  margin: 14px 0 8px;
+  margin: 10px 0 10px;
 }
 
 .ticker-tile {
@@ -463,7 +495,23 @@ li {
 .sector-panel,
 .avoid-panel,
 .ticker-lab-panel,
-.opportunities-panel {
+.opportunities-panel,
+.tactical-scoreboard-panel {
+  grid-column: 1 / -1;
+}
+
+.tactical-grid .recommendations-panel,
+.tactical-grid .avoid-panel {
+  grid-column: auto;
+}
+
+.intelligence-grid .calendar-panel,
+.intelligence-grid .macro-panel {
+  grid-column: auto;
+}
+
+.model-lab-grid .ticker-lab-panel,
+.model-lab-grid .top-decile-panel {
   grid-column: 1 / -1;
 }
 
@@ -579,6 +627,44 @@ li {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
+}
+
+.opportunity-group-heading {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(57, 255, 136, 0.16);
+  border-radius: 5px;
+  background: rgba(7, 16, 12, 0.74);
+}
+
+.opportunity-group-heading strong,
+.opportunity-group-heading small {
+  font-family: var(--mono);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.opportunity-group-heading strong {
+  display: block;
+  color: var(--ink);
+  font-size: 0.82rem;
+}
+
+.opportunity-group-heading span,
+.opportunity-group-heading small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.opportunity-group-heading.rebound-watch {
+  border-color: rgba(79, 216, 255, 0.24);
+  background: rgba(79, 216, 255, 0.035);
 }
 
 .ai-recs {
@@ -1130,6 +1216,16 @@ li {
   min-height: 250px;
 }
 
+.opportunity.rebound-watch {
+  border-color: rgba(79, 216, 255, 0.24);
+  background: linear-gradient(180deg, rgba(79, 216, 255, 0.055), rgba(7, 16, 12, 0.95));
+}
+
+.opportunity.not-momentum-confirmed,
+.opportunity.model-ranked {
+  border-color: rgba(242, 193, 78, 0.18);
+}
+
 .opp-head strong {
   font-family: var(--mono);
   font-size: 1.35rem;
@@ -1164,6 +1260,54 @@ li {
   border-color: var(--accent-2);
   color: var(--accent-2);
   box-shadow: 0 0 22px rgba(79, 209, 197, 0.18);
+}
+
+.setup-callout {
+  display: grid;
+  gap: 5px;
+  border: 1px solid rgba(57, 255, 136, 0.18);
+  border-radius: 5px;
+  padding: 10px;
+  background: rgba(57, 255, 136, 0.045);
+}
+
+.setup-callout strong {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.setup-callout span,
+.setup-callout small {
+  color: #d7eadf;
+  line-height: 1.35;
+}
+
+.setup-callout small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.setup-callout.rebound-watch {
+  border-color: rgba(79, 216, 255, 0.26);
+  background: rgba(79, 216, 255, 0.05);
+}
+
+.setup-callout.rebound-watch strong {
+  color: var(--accent-2);
+}
+
+.setup-callout.not-momentum-confirmed,
+.setup-callout.model-ranked {
+  border-color: rgba(242, 193, 78, 0.24);
+  background: rgba(242, 193, 78, 0.045);
+}
+
+.setup-callout.not-momentum-confirmed strong,
+.setup-callout.model-ranked strong {
+  color: var(--accent-3);
 }
 
 .spark {
@@ -1645,6 +1789,19 @@ li {
     justify-content: flex-start;
   }
 
+  .primary-tabs {
+    display: flex;
+    gap: 8px;
+    margin-inline: -14px;
+    padding-inline: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .view-tab {
+    flex: 0 0 170px;
+  }
+
   .jump-nav {
     margin-inline: -14px;
     padding-inline: 14px;
@@ -1672,7 +1829,20 @@ li {
 	  }
 
   .market-strip {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    margin-inline: -14px;
+    padding-inline: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .market-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ticker-tile {
+    flex: 0 0 172px;
+    min-height: 76px;
   }
 
   .grid {
@@ -1690,6 +1860,13 @@ li {
 	  .recommendation-list {
 	    grid-template-columns: 1fr;
 	  }
+
+  .tactical-grid .recommendations-panel,
+  .tactical-grid .avoid-panel,
+  .intelligence-grid .calendar-panel,
+  .intelligence-grid .macro-panel {
+    grid-column: 1 / -1;
+  }
 
   .note-columns,
   .market-intel,
@@ -1723,6 +1900,16 @@ li {
     padding-inline: 10px;
   }
 
+  .primary-tabs {
+    margin-inline: -10px;
+    padding-inline: 10px;
+  }
+
+  .view-tab {
+    flex-basis: 152px;
+    min-height: 54px;
+  }
+
   h1 {
     font-size: 2.1rem;
   }
@@ -1737,7 +1924,12 @@ li {
   }
 
   .market-strip {
-    grid-template-columns: 1fr 1fr;
+    margin-inline: -10px;
+    padding-inline: 10px;
+  }
+
+  .ticker-tile {
+    flex-basis: 154px;
   }
 
 	  .sector-main,

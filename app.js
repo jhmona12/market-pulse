@@ -464,6 +464,68 @@ function activationChip(item) {
   return `<span class="stop-chip activation-chip" title="Requires an end-of-day close above this level within ${esc(windowDays)} trading days">Activation: ${money(item.reboundActivationPrice)}</span>`;
 }
 
+function opportunitySetupClass(item) {
+  if (item?.setupType === "momentum_confirmed") return "momentum-confirmed";
+  if (item?.setupType === "model_rebound_watch") return "rebound-watch";
+  if (item?.setupTags?.includes("Not Momentum Confirmed")) return "not-momentum-confirmed";
+  return "model-ranked";
+}
+
+function opportunitySetupTitle(item) {
+  if (item?.setupType === "momentum_confirmed") return "Momentum confirmed";
+  if (item?.setupType === "model_rebound_watch") return "Watch only";
+  if (item?.setupTags?.includes("Not Momentum Confirmed")) return "Trend not confirmed";
+  return "Model ranked";
+}
+
+function opportunitySetupRead(item) {
+  const setup = opportunitySetupClass(item);
+  if (setup === "momentum-confirmed") {
+    return [
+      hasNumericValue(item.return20) ? `${pct(item.return20)} 20D` : null,
+      hasNumericValue(item.return60) ? `${pct(item.return60)} 60D` : null,
+      hasNumericValue(item.relativeReturn60VsSpy) ? `${pct(item.relativeReturn60VsSpy)} vs SPY` : null
+    ].filter(Boolean).join(" · ");
+  }
+
+  if (setup === "rebound-watch") {
+    return [
+      hasNumericValue(item.relativeReturn60VsSpy) ? `${pct(item.relativeReturn60VsSpy)} vs SPY over 60D` : null,
+      hasNumericValue(item.distanceTo52wHigh) ? `${pct(item.distanceTo52wHigh)} from 52W high` : null,
+      hasNumericValue(item.volatility60d) ? `${displayReturnDecimal(item.volatility60d)} 60D daily vol` : null
+    ].filter(Boolean).join(" · ");
+  }
+
+  return [
+    item.above50 ? "Above 50D" : "Below 50D",
+    item.above200 ? "Above 200D" : "Below 200D",
+    hasNumericValue(item.relativeReturn60VsSpy) ? `${pct(item.relativeReturn60VsSpy)} vs SPY` : null
+  ].filter(Boolean).join(" · ");
+}
+
+function opportunitySetupCallout(item) {
+  const setup = opportunitySetupClass(item);
+  const title = opportunitySetupTitle(item);
+  const read = opportunitySetupRead(item);
+  const riskFlags = (item.riskFlags || []).slice(0, 3).join(" · ");
+  const activation = item.setupType === "model_rebound_watch" && hasNumericValue(item.reboundActivationPrice)
+    ? `Needs an end-of-day close above ${money(item.reboundActivationPrice)} within ${item.reboundActivationWindowDays || 5} trading days before it is actionable.`
+    : "";
+  const body = setup === "rebound-watch"
+    ? `Top-decile model score, but not confirmed momentum. ${activation}`
+    : setup === "momentum-confirmed"
+      ? "Top-decile model score with positive intermediate trend confirmation."
+      : "Model score is notable, but the trend setup is incomplete.";
+  return `
+    <div class="setup-callout ${setup}">
+      <strong>${esc(title)}</strong>
+      <span>${esc(body)}</span>
+      ${read ? `<small>${esc(read)}</small>` : ""}
+      ${riskFlags ? `<small>Risk flags: ${esc(riskFlags)}</small>` : ""}
+    </div>
+  `;
+}
+
 function percentilePoint(value) {
   const number = Number(value);
   if (!Number.isFinite(number)) return null;
@@ -1048,6 +1110,26 @@ function renderOpportunities() {
       return b.score - a.score;
     })
     .slice(0, 18);
+  const sections = [
+    {
+      key: "momentum-confirmed",
+      title: "Momentum Confirmed",
+      subtitle: "Model-ranked names with price trend already confirmed.",
+      items: matches.filter((item) => item.setupType === "momentum_confirmed")
+    },
+    {
+      key: "rebound-watch",
+      title: "Rebound Watch",
+      subtitle: "Top-ranked dislocations. Watch only until the activation close is met.",
+      items: matches.filter((item) => item.setupType === "model_rebound_watch")
+    },
+    {
+      key: "model-ranked",
+      title: "Model Ranked",
+      subtitle: "High model scores where the trend setup needs more confirmation.",
+      items: matches.filter((item) => item.setupType !== "momentum_confirmed" && item.setupType !== "model_rebound_watch")
+    }
+  ].filter((section) => section.items.length);
 
   $("#bookMeta").textContent =
     state.snapshot.model?.status === "ready"
@@ -1060,36 +1142,50 @@ function renderOpportunities() {
     return;
   }
 
-  matches.forEach((item) => {
-    const article = document.createElement("article");
-    article.className = "opportunity";
-    const modelRanked = hasModelRank(item);
-    const badges = [...new Set([
-      ...(item.setupTags || []),
-      ...(modelRanked ? item.modelReasons || [] : []),
-      ...(item.tags || []),
-      ...(item.riskFlags || [])
-    ])].slice(0, 6);
-    article.innerHTML = `
-      <div class="opp-head">
-        <div>
-          <strong>${esc(item.symbol)}</strong>
-          <span>${esc(item.name || item.sector || item.type)}</span>
-        </div>
-        <div class="score ${modelRanked ? "model-score" : ""}">
-          ${modelRanked ? `<span>#${esc(item.modelRank)}</span><small>${Number(item.modelPercentile || 0).toFixed(0)}%</small>` : Math.round(item.score)}
-        </div>
+  sections.forEach((section) => {
+    const heading = document.createElement("div");
+    heading.className = `opportunity-group-heading ${section.key}`;
+    heading.innerHTML = `
+      <div>
+        <strong>${esc(section.title)}</strong>
+        <span>${esc(section.subtitle)}</span>
       </div>
-      <div class="setup-chips">${stopSellChip(item)}${activationChip(item)}</div>
-      ${sparkline(item.history || [])}
-      <div class="signal-grid">
-        <div><span>Close</span><strong>${money(item.close)}</strong></div>
-        <div><span>${modelRanked ? "60D vs SPY" : "20D return"}</span><strong>${pct(modelRanked ? item.relativeReturn60VsSpy : item.return20)}</strong></div>
-        <div><span>RSI 14</span><strong>${Number(item.rsi14 || 0).toFixed(0)}</strong></div>
-      </div>
-      <div class="tags">${badges.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>
+      <small>${esc(section.items.length)} names</small>
     `;
-    list.appendChild(article);
+    list.appendChild(heading);
+
+    section.items.forEach((item) => {
+      const article = document.createElement("article");
+      article.className = `opportunity ${opportunitySetupClass(item)}`;
+      const modelRanked = hasModelRank(item);
+      const badges = [...new Set([
+        ...(item.setupTags || []),
+        ...(modelRanked ? item.modelReasons || [] : []),
+        ...(item.tags || []),
+        ...(item.riskFlags || [])
+      ])].slice(0, 6);
+      article.innerHTML = `
+        <div class="opp-head">
+          <div>
+            <strong>${esc(item.symbol)}</strong>
+            <span>${esc(item.name || item.sector || item.type)}</span>
+          </div>
+          <div class="score ${modelRanked ? "model-score" : ""}">
+            ${modelRanked ? `<span>#${esc(item.modelRank)}</span><small>${Number(item.modelPercentile || 0).toFixed(0)}%</small>` : Math.round(item.score)}
+          </div>
+        </div>
+        <div class="setup-chips">${stopSellChip(item)}${activationChip(item)}</div>
+        ${opportunitySetupCallout(item)}
+        ${sparkline(item.history || [])}
+        <div class="signal-grid">
+          <div><span>Close</span><strong>${money(item.close)}</strong></div>
+          <div><span>${modelRanked ? "60D vs SPY" : "20D return"}</span><strong>${pct(modelRanked ? item.relativeReturn60VsSpy : item.return20)}</strong></div>
+          <div><span>RSI 14</span><strong>${Number(item.rsi14 || 0).toFixed(0)}</strong></div>
+        </div>
+        <div class="tags">${badges.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>
+      `;
+      list.appendChild(article);
+    });
   });
 }
 
@@ -1830,13 +1926,14 @@ function render() {
 }
 
 function setActiveView(view) {
-  const knownViews = new Set(["briefing", "scoreboard", "top-decile", "long-horizon"]);
+  const knownViews = new Set(["briefing", "tactical", "strategic", "intelligence", "model-lab"]);
   state.activeView = knownViews.has(view) ? view : "briefing";
   const panels = {
     briefing: $("#briefingView"),
-    scoreboard: $("#scoreboardView"),
-    "top-decile": $("#topDecileView"),
-    "long-horizon": $("#longHorizonView")
+    tactical: $("#tacticalView"),
+    strategic: $("#strategicView"),
+    intelligence: $("#intelligenceView"),
+    "model-lab": $("#modelLabView")
   };
   Object.entries(panels).forEach(([key, panel]) => {
     if (!panel) return;

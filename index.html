@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Morning Desk</title>
-    <link rel="stylesheet" href="styles.css?v=20260522-strategy-lens" />
+    <link rel="stylesheet" href="styles.css?v=20260527-information-architecture" />
   </head>
   <body>
     <main class="shell">
@@ -18,32 +18,33 @@
         </div>
       </header>
 
-      <nav class="view-tabs" aria-label="Dashboard views">
-        <button class="view-tab active" type="button" data-view-target="briefing">Briefing</button>
-        <button class="view-tab" type="button" data-view-target="scoreboard">SP 500 Model Scoreboard</button>
-        <button class="view-tab" type="button" data-view-target="top-decile">Top Decile Monitor</button>
-        <button class="view-tab" type="button" data-view-target="long-horizon">Long-Horizon Book</button>
+      <nav class="view-tabs primary-tabs" aria-label="Dashboard views">
+        <button class="view-tab active" type="button" data-view-target="briefing">
+          <strong>Briefing</strong>
+          <span>What matters now</span>
+        </button>
+        <button class="view-tab" type="button" data-view-target="tactical">
+          <strong>Tactical Book</strong>
+          <span>14D model + trades</span>
+        </button>
+        <button class="view-tab" type="button" data-view-target="strategic">
+          <strong>Strategic Book</strong>
+          <span>1Y model lens</span>
+        </button>
+        <button class="view-tab" type="button" data-view-target="intelligence">
+          <strong>Market Intel</strong>
+          <span>News + macro tape</span>
+        </button>
+        <button class="view-tab" type="button" data-view-target="model-lab">
+          <strong>Model Lab</strong>
+          <span>Private diagnostics</span>
+        </button>
       </nav>
 
+      <section class="market-strip" id="marketStrip" aria-label="Market index strip"></section>
+
       <div class="view-panel active" id="briefingView">
-        <nav class="jump-nav" aria-label="Report sections">
-          <a href="#daily-read">Daily Read</a>
-          <a href="#model-lens">Model Lens</a>
-          <a href="#ai-memo">AI Memo</a>
-          <a href="#deeper-read">Deeper Read</a>
-          <a href="#sector-performance">Sectors</a>
-          <a href="#momentum-book">Momentum</a>
-          <a href="#stay-away">Stay Away</a>
-          <a href="#desk-calls">Desk Calls</a>
-          <a href="#ticker-lab" id="tickerLabNav">Ticker Lab</a>
-          <a href="#macro-calendar">Calendar</a>
-          <a href="#macro-pulse">Macro</a>
-          <a href="#source-tape-section">Sources</a>
-        </nav>
-
-        <section class="market-strip" id="marketStrip" aria-label="Market index strip"></section>
-
-        <section class="grid">
+        <section class="grid briefing-grid">
           <article class="panel note-panel" id="daily-read">
             <div class="panel-title">
               <span>Daily Read</span>
@@ -104,30 +105,25 @@
               </div>
             </div>
           </article>
+        </section>
+      </div>
 
-          <article class="panel deeper-read-panel" id="deeper-read">
-            <div class="panel-title">
-              <span>Deeper Read</span>
-              <span id="deeperReadMeta">Last 7 days</span>
-            </div>
-            <p id="deeperReadSummary"></p>
-            <div class="deeper-read-grid" id="deeperReadList"></div>
-          </article>
-
-          <article class="panel sector-panel" id="sector-performance">
-            <div class="panel-title">
-              <span>Sector Performance</span>
-              <span>SPDR ETF proxies</span>
-            </div>
-            <div class="sector-grid" id="sectorGrid"></div>
-          </article>
-
+      <section class="view-panel tactical-view" id="tacticalView" hidden>
+        <section class="grid tactical-grid">
           <article class="panel opportunities-panel" id="momentum-book">
             <div class="panel-title">
               <span>Tactical Momentum Book</span>
               <span id="bookMeta">End-of-day</span>
             </div>
             <div class="opportunity-list" id="opportunityList"></div>
+          </article>
+
+          <article class="panel recommendations-panel" id="desk-calls">
+            <div class="panel-title">
+              <span>Tactical Desk Calls</span>
+              <span>14D setup details</span>
+            </div>
+            <div class="recommendation-list" id="recommendationList"></div>
           </article>
 
           <article class="panel avoid-panel" id="stay-away">
@@ -140,181 +136,55 @@
             <div class="avoid-list" id="avoidList"></div>
           </article>
 
-          <article class="panel recommendations-panel" id="desk-calls">
+          <article class="panel scoreboard-panel tactical-scoreboard-panel">
             <div class="panel-title">
-              <span>Tactical Desk Calls</span>
-              <span>14D setup details</span>
+              <span>SP 500 Model Scoreboard</span>
+              <span id="scoreboardMeta">Loading model rows</span>
             </div>
-            <div class="recommendation-list" id="recommendationList"></div>
-          </article>
-
-          <article class="panel ticker-lab-panel" id="ticker-lab">
-            <div class="panel-title">
-              <span>Ticker Lab</span>
-              <span id="tickerLabMeta">Local only</span>
+            <div class="scoreboard-controls">
+              <label class="scoreboard-search">
+                <span>Search</span>
+                <input id="scoreboardSearch" type="search" placeholder="Ticker, company, sector, industry" autocomplete="off" />
+              </label>
+              <label class="scoreboard-sector">
+                <span>Sector</span>
+                <select id="scoreboardSector">
+                  <option value="">All sectors</option>
+                </select>
+              </label>
             </div>
-            <form id="tickerLabForm" class="ticker-lab-form">
-              <label for="tickerLabInput">Tickers</label>
-              <textarea id="tickerLabInput" rows="4" placeholder="AAPL MSFT, TSM, 7203.T"></textarea>
-              <label for="tickerLabToken" id="tickerLabTokenLabel" hidden>Access Code</label>
-              <input id="tickerLabToken" class="ticker-lab-token" type="password" autocomplete="off" placeholder="Ticker Lab access code" hidden />
-              <div class="ticker-lab-actions">
-                <button class="text-button" type="submit" id="tickerLabSubmit">Score Tickers</button>
-                <span id="tickerLabStatus">Connecting to Ticker Lab backend.</span>
-              </div>
-            </form>
-            <div id="tickerLabResults" class="ticker-lab-results"></div>
-          </article>
-
-          <article class="panel calendar-panel" id="macro-calendar">
-            <div class="panel-title">
-              <span>Macro Calendar</span>
-              <span>Market movers</span>
+            <div class="scoreboard-table-wrap">
+              <table class="scoreboard-table">
+                <thead>
+                  <tr>
+                    <th><button type="button" data-score-sort="modelRank">Rank</button></th>
+                    <th><button type="button" data-score-sort="symbol">Ticker</button></th>
+                    <th><button type="button" data-score-sort="name">Company</button></th>
+                    <th><button type="button" data-score-sort="industry">Industry</button></th>
+                    <th><button type="button" data-score-sort="marketCapValue">Market Cap</button></th>
+                    <th><button type="button" data-score-sort="modelScore">Model Score</button></th>
+                    <th><button type="button" data-score-sort="modelPercentile">Percentile</button></th>
+                    <th><button type="button" data-score-sort="beta60d">Beta</button></th>
+                    <th><button type="button" data-score-sort="return7">7D</button></th>
+                    <th><button type="button" data-score-sort="return14">14D</button></th>
+                    <th><button type="button" data-score-sort="return30">30D</button></th>
+                    <th><button type="button" data-score-sort="return60">60D</button></th>
+                    <th><button type="button" data-score-sort="return90">90D</button></th>
+                    <th><button type="button" data-score-sort="ytdReturn">YTD</button></th>
+                  </tr>
+                </thead>
+                <tbody id="scoreboardRows">
+                  <tr>
+                    <td colspan="14">Loading model scoreboard.</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div id="calendarList" class="calendar-list"></div>
-          </article>
-
-          <article class="panel macro-panel" id="macro-pulse">
-            <div class="panel-title">
-              <span>Macro Pulse</span>
-              <span>FRED + official releases</span>
-            </div>
-            <div id="macroGrid" class="macro-grid"></div>
-          </article>
-
-          <article class="panel source-panel" id="source-tape-section">
-            <div class="panel-title">
-              <span>Source Tape</span>
-              <span id="sourceCount">0 sources</span>
-            </div>
-            <div id="sourceTape" class="source-tape"></div>
           </article>
         </section>
-      </div>
-
-      <section class="view-panel scoreboard-view" id="scoreboardView" hidden>
-        <article class="panel scoreboard-panel">
-          <div class="panel-title">
-            <span>SP 500 Model Scoreboard</span>
-            <span id="scoreboardMeta">Loading model rows</span>
-          </div>
-          <div class="scoreboard-controls">
-            <label class="scoreboard-search">
-              <span>Search</span>
-              <input id="scoreboardSearch" type="search" placeholder="Ticker, company, sector, industry" autocomplete="off" />
-            </label>
-            <label class="scoreboard-sector">
-              <span>Sector</span>
-              <select id="scoreboardSector">
-                <option value="">All sectors</option>
-              </select>
-            </label>
-          </div>
-          <div class="scoreboard-table-wrap">
-            <table class="scoreboard-table">
-              <thead>
-                <tr>
-                  <th><button type="button" data-score-sort="modelRank">Rank</button></th>
-                  <th><button type="button" data-score-sort="symbol">Ticker</button></th>
-                  <th><button type="button" data-score-sort="name">Company</button></th>
-                  <th><button type="button" data-score-sort="industry">Industry</button></th>
-                  <th><button type="button" data-score-sort="marketCapValue">Market Cap</button></th>
-                  <th><button type="button" data-score-sort="modelScore">Model Score</button></th>
-                  <th><button type="button" data-score-sort="modelPercentile">Percentile</button></th>
-                  <th><button type="button" data-score-sort="beta60d">Beta</button></th>
-                  <th><button type="button" data-score-sort="return7">7D</button></th>
-                  <th><button type="button" data-score-sort="return14">14D</button></th>
-                  <th><button type="button" data-score-sort="return30">30D</button></th>
-                  <th><button type="button" data-score-sort="return60">60D</button></th>
-                  <th><button type="button" data-score-sort="return90">90D</button></th>
-                  <th><button type="button" data-score-sort="ytdReturn">YTD</button></th>
-                </tr>
-              </thead>
-              <tbody id="scoreboardRows">
-                <tr>
-                  <td colspan="14">Loading model scoreboard.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
       </section>
 
-      <section class="view-panel top-decile-view" id="topDecileView" hidden>
-        <article class="panel scoreboard-panel top-decile-panel">
-          <div class="panel-title">
-            <span>Current Top-Decile Snapshot</span>
-            <span id="topDecileMeta">Loading monitor</span>
-          </div>
-          <div class="top-decile-summary" id="topDecileSummary"></div>
-
-          <div class="top-decile-section">
-            <div class="panel-title compact-title">
-              <span>Recent Entrants + Upgrades</span>
-              <span id="topDecileEntrantMeta">Waiting for history</span>
-            </div>
-            <div class="scoreboard-table-wrap top-decile-table-wrap">
-              <table class="scoreboard-table top-decile-table">
-                <thead>
-                  <tr>
-                    <th>Status</th>
-                    <th>Rank</th>
-                    <th>Ticker</th>
-                    <th>Company</th>
-                    <th>Sector</th>
-                    <th>Market Cap</th>
-                    <th>Score</th>
-                    <th>Prior Rank</th>
-                    <th>Rank Move</th>
-                    <th>30D</th>
-                    <th>YTD</th>
-                  </tr>
-                </thead>
-                <tbody id="topDecileEntrantRows">
-                  <tr>
-                    <td colspan="11">Loading recent top-decile changes.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="top-decile-section">
-            <div class="panel-title compact-title">
-              <span>All Current Top-Decile Names</span>
-              <span id="topDecileCount">Top 10% of scored universe</span>
-            </div>
-            <div class="scoreboard-table-wrap top-decile-table-wrap">
-              <table class="scoreboard-table top-decile-table">
-                <thead>
-                  <tr>
-                    <th>Rank</th>
-                    <th>Ticker</th>
-                    <th>Company</th>
-                    <th>Industry</th>
-                    <th>Market Cap</th>
-                    <th>Model Score</th>
-                    <th>Percentile</th>
-                    <th>Setup</th>
-                    <th>Beta</th>
-                    <th>7D</th>
-                    <th>14D</th>
-                    <th>30D</th>
-                    <th>YTD</th>
-                  </tr>
-                </thead>
-                <tbody id="topDecileRows">
-                  <tr>
-                    <td colspan="13">Loading current top-decile snapshot.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <section class="view-panel long-horizon-view" id="longHorizonView" hidden>
+      <section class="view-panel strategic-view" id="strategicView" hidden>
         <article class="panel scoreboard-panel long-horizon-panel">
           <div class="panel-title">
             <span>Long-Horizon Book</span>
@@ -324,7 +194,7 @@
           <div class="long-horizon-metric-notes" id="longHorizonMetricNotes"></div>
 
           <div class="long-horizon-section">
-            <div class="panel-title compact-title">
+            <div class="panel-title">
               <span>One-Year Scoreboard</span>
               <span>Searchable current S&P 500 lens</span>
             </div>
@@ -384,8 +254,147 @@
           </div>
         </article>
       </section>
+
+      <section class="view-panel intelligence-view" id="intelligenceView" hidden>
+        <section class="grid intelligence-grid">
+          <article class="panel deeper-read-panel" id="deeper-read">
+            <div class="panel-title">
+              <span>Deeper Read</span>
+              <span id="deeperReadMeta">Last 7 days</span>
+            </div>
+            <p id="deeperReadSummary"></p>
+            <div class="deeper-read-grid" id="deeperReadList"></div>
+          </article>
+
+          <article class="panel sector-panel" id="sector-performance">
+            <div class="panel-title">
+              <span>Sector Performance</span>
+              <span>SPDR ETF proxies</span>
+            </div>
+            <div class="sector-grid" id="sectorGrid"></div>
+          </article>
+
+          <article class="panel calendar-panel" id="macro-calendar">
+            <div class="panel-title">
+              <span>Macro Calendar</span>
+              <span>Market movers</span>
+            </div>
+            <div id="calendarList" class="calendar-list"></div>
+          </article>
+
+          <article class="panel macro-panel" id="macro-pulse">
+            <div class="panel-title">
+              <span>Macro Pulse</span>
+              <span>FRED + official releases</span>
+            </div>
+            <div id="macroGrid" class="macro-grid"></div>
+          </article>
+
+          <article class="panel source-panel" id="source-tape-section">
+            <div class="panel-title">
+              <span>Source Tape</span>
+              <span id="sourceCount">0 sources</span>
+            </div>
+            <div id="sourceTape" class="source-tape"></div>
+          </article>
+        </section>
+      </section>
+
+      <section class="view-panel model-lab-view" id="modelLabView" hidden>
+        <section class="grid model-lab-grid">
+          <article class="panel ticker-lab-panel" id="ticker-lab">
+            <div class="panel-title">
+              <span>Ticker Lab</span>
+              <span id="tickerLabMeta">Local only</span>
+            </div>
+            <form id="tickerLabForm" class="ticker-lab-form">
+              <label for="tickerLabInput">Tickers</label>
+              <textarea id="tickerLabInput" rows="4" placeholder="AAPL MSFT, TSM, 7203.T"></textarea>
+              <label for="tickerLabToken" id="tickerLabTokenLabel" hidden>Access Code</label>
+              <input id="tickerLabToken" class="ticker-lab-token" type="password" autocomplete="off" placeholder="Ticker Lab access code" hidden />
+              <div class="ticker-lab-actions">
+                <button class="text-button" type="submit" id="tickerLabSubmit">Score Tickers</button>
+                <span id="tickerLabStatus">Connecting to Ticker Lab backend.</span>
+              </div>
+            </form>
+            <div id="tickerLabResults" class="ticker-lab-results"></div>
+          </article>
+
+          <article class="panel scoreboard-panel top-decile-panel" id="top-decile-monitor">
+            <div class="panel-title">
+              <span>Current Top-Decile Snapshot</span>
+              <span id="topDecileMeta">Loading monitor</span>
+            </div>
+            <div class="top-decile-summary" id="topDecileSummary"></div>
+
+            <div class="top-decile-section">
+              <div class="panel-title compact-title">
+                <span>Recent Entrants + Upgrades</span>
+                <span id="topDecileEntrantMeta">Waiting for history</span>
+              </div>
+              <div class="scoreboard-table-wrap top-decile-table-wrap">
+                <table class="scoreboard-table top-decile-table">
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Rank</th>
+                      <th>Ticker</th>
+                      <th>Company</th>
+                      <th>Sector</th>
+                      <th>Market Cap</th>
+                      <th>Score</th>
+                      <th>Prior Rank</th>
+                      <th>Rank Move</th>
+                      <th>30D</th>
+                      <th>YTD</th>
+                    </tr>
+                  </thead>
+                  <tbody id="topDecileEntrantRows">
+                    <tr>
+                      <td colspan="11">Loading recent top-decile changes.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="top-decile-section">
+              <div class="panel-title compact-title">
+                <span>All Current Top-Decile Names</span>
+                <span id="topDecileCount">Top 10% of scored universe</span>
+              </div>
+              <div class="scoreboard-table-wrap top-decile-table-wrap">
+                <table class="scoreboard-table top-decile-table">
+                  <thead>
+                    <tr>
+                      <th>Rank</th>
+                      <th>Ticker</th>
+                      <th>Company</th>
+                      <th>Industry</th>
+                      <th>Market Cap</th>
+                      <th>Model Score</th>
+                      <th>Percentile</th>
+                      <th>Setup</th>
+                      <th>Beta</th>
+                      <th>7D</th>
+                      <th>14D</th>
+                      <th>30D</th>
+                      <th>YTD</th>
+                    </tr>
+                  </thead>
+                  <tbody id="topDecileRows">
+                    <tr>
+                      <td colspan="13">Loading current top-decile snapshot.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+        </section>
+      </section>
     </main>
 
-    <script type="module" src="app.js?v=20260522-strategy-lens"></script>
+    <script type="module" src="app.js?v=20260527-information-architecture"></script>
   </body>
 </html>
