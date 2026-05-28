@@ -1,0 +1,953 @@
+{
+  "status": "ready",
+  "generatedAt": "2026-05-28T01:52:05.443Z",
+  "authMode": "public",
+  "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
+  "subreddits": [
+    {
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "status": "ready",
+      "error": null,
+      "postCount": 67,
+      "sortStatuses": [
+        {
+          "sort": "hot",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "new",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "top",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        }
+      ]
+    },
+    {
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "status": "ready",
+      "error": null,
+      "postCount": 46,
+      "sortStatuses": [
+        {
+          "sort": "hot",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "new",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "top",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 29
+        }
+      ]
+    },
+    {
+      "subreddit": "investing",
+      "segment": "Retail investing",
+      "status": "ready",
+      "error": null,
+      "postCount": 44,
+      "sortStatuses": [
+        {
+          "sort": "hot",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "new",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "top",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 25
+        }
+      ]
+    },
+    {
+      "subreddit": "SecurityAnalysis",
+      "segment": "Fundamental research",
+      "status": "ready",
+      "error": null,
+      "postCount": 41,
+      "sortStatuses": [
+        {
+          "sort": "hot",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "new",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "top",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 0
+        }
+      ]
+    },
+    {
+      "subreddit": "options",
+      "segment": "Options sentiment",
+      "status": "ready",
+      "error": null,
+      "postCount": 42,
+      "sortStatuses": [
+        {
+          "sort": "hot",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "new",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 40
+        },
+        {
+          "sort": "top",
+          "status": "ready",
+          "method": "public_json:www.reddit.com",
+          "error": null,
+          "postCount": 12
+        }
+      ]
+    }
+  ],
+  "topTickers": [
+    {
+      "symbol": "MU",
+      "mentions": 8,
+      "signalStrength": 33.2,
+      "directMentions": 8,
+      "score": 4340,
+      "comments": 1008,
+      "subreddits": [
+        "wallstreetbets",
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "Wait, You Only Like It When MU’s Expensive?",
+          "subreddit": "wallstreetbets",
+          "score": 1673,
+          "comments": 210,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1too1z7/wait_you_only_like_it_when_mus_expensive/"
+        },
+        {
+          "title": "Yes, I held my $MU $160k yolo back at $110/share (for most of the run) 1,058% 1y return.",
+          "subreddit": "wallstreetbets",
+          "score": 1172,
+          "comments": 96,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpg5pp/yes_i_held_my_mu_160k_yolo_back_at_110share_for/"
+        },
+        {
+          "title": "MU +1111%",
+          "subreddit": "wallstreetbets",
+          "score": 995,
+          "comments": 104,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tp7s87/mu_1111/"
+        }
+      ],
+      "attentionScore": 629.4
+    },
+    {
+      "symbol": "CRSR",
+      "mentions": 4,
+      "signalStrength": 16,
+      "directMentions": 4,
+      "score": 456,
+      "comments": 374,
+      "subreddits": [
+        "wallstreetbets"
+      ],
+      "posts": [
+        {
+          "title": "CRSR Guy - $22k to $160k and holding strong",
+          "subreddit": "wallstreetbets",
+          "score": 191,
+          "comments": 139,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpicxe/crsr_guy_22k_to_160k_and_holding_strong/"
+        },
+        {
+          "title": "$CRSR AI PIVOT TO THE MOON",
+          "subreddit": "wallstreetbets",
+          "score": 171,
+          "comments": 141,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpcqmh/crsr_ai_pivot_to_the_moon/"
+        },
+        {
+          "title": "$CRSR memeing AH",
+          "subreddit": "wallstreetbets",
+          "score": 64,
+          "comments": 75,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpmnem/crsr_memeing_ah/"
+        }
+      ],
+      "attentionScore": 277.8
+    },
+    {
+      "symbol": "RKLB",
+      "mentions": 4,
+      "signalStrength": 13.4,
+      "directMentions": 3,
+      "score": 116,
+      "comments": 58,
+      "subreddits": [
+        "wallstreetbets"
+      ],
+      "posts": [
+        {
+          "title": "First 30 Bagger 🤑",
+          "subreddit": "wallstreetbets",
+          "score": 142,
+          "comments": 47,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tp4mxe/first_30_bagger/"
+        },
+        {
+          "title": "$RKLB +$110k +2,200%",
+          "subreddit": "wallstreetbets",
+          "score": 14,
+          "comments": 17,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tplz0n/rklb_110k_2200/"
+        },
+        {
+          "title": "Rockets to Riches",
+          "subreddit": "wallstreetbets",
+          "score": 9,
+          "comments": 10,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpnk2j/rockets_to_riches/"
+        }
+      ],
+      "attentionScore": 218.07
+    },
+    {
+      "symbol": "ALAB",
+      "mentions": 3,
+      "signalStrength": 7.6,
+      "directMentions": 3,
+      "score": 608,
+      "comments": 214,
+      "subreddits": [
+        "wallstreetbets",
+        "stocks",
+        "investing"
+      ],
+      "posts": [
+        {
+          "title": "Yes, I held my $MU $160k yolo back at $110/share (for most of the run) 1,058% 1y return.",
+          "subreddit": "wallstreetbets",
+          "score": 1172,
+          "comments": 96,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpg5pp/yes_i_held_my_mu_160k_yolo_back_at_110share_for/"
+        },
+        {
+          "title": "$MU became the AI memory trade nobody wanted to chase. What is the next “obvious in hindsight” chip-adjacent play?",
+          "subreddit": "stocks",
+          "score": 468,
+          "comments": 603,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1tp2gib/mu_became_the_ai_memory_trade_nobody_wanted_to/"
+        },
+        {
+          "title": "CRWV feels like one of the purest AI infrastructure bets now, but is the runway already priced in?",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 2,
+          "permalink": "https://www.reddit.com/r/investing/comments/1tp2kwg/crwv_feels_like_one_of_the_purest_ai/"
+        }
+      ],
+      "attentionScore": 165.68
+    },
+    {
+      "symbol": "NBIS",
+      "mentions": 3,
+      "signalStrength": 7.3,
+      "directMentions": 3,
+      "score": 280,
+      "comments": 249,
+      "subreddits": [
+        "wallstreetbets",
+        "stocks",
+        "investing"
+      ],
+      "posts": [
+        {
+          "title": "$MU became the AI memory trade nobody wanted to chase. What is the next “obvious in hindsight” chip-adjacent play?",
+          "subreddit": "stocks",
+          "score": 468,
+          "comments": 603,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1tp2gib/mu_became_the_ai_memory_trade_nobody_wanted_to/"
+        },
+        {
+          "title": "NBIS 38k lotto bought before close",
+          "subreddit": "wallstreetbets",
+          "score": 115,
+          "comments": 71,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpjcsl/nbis_38k_lotto_bought_before_close/"
+        },
+        {
+          "title": "CRWV feels like one of the purest AI infrastructure bets now, but is the runway already priced in?",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 2,
+          "permalink": "https://www.reddit.com/r/investing/comments/1tp2kwg/crwv_feels_like_one_of_the_purest_ai/"
+        }
+      ],
+      "attentionScore": 159.15
+    },
+    {
+      "symbol": "AMD",
+      "mentions": 2,
+      "signalStrength": 5.4,
+      "directMentions": 2,
+      "score": 1283,
+      "comments": 564,
+      "subreddits": [
+        "wallstreetbets",
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "AMD +$11M",
+          "subreddit": "wallstreetbets",
+          "score": 13828,
+          "comments": 826,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1to86h2/amd_11m/"
+        },
+        {
+          "title": "Thoughts on my AMD and DRAM positions",
+          "subreddit": "stocks",
+          "score": 83,
+          "comments": 64,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1tohbwj/thoughts_on_my_amd_and_dram_positions/"
+        }
+      ],
+      "attentionScore": 143.81
+    },
+    {
+      "symbol": "DELL",
+      "mentions": 2,
+      "signalStrength": 7.8,
+      "directMentions": 2,
+      "score": 463,
+      "comments": 83,
+      "subreddits": [
+        "wallstreetbets",
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "$DELL wins 9.7B government contract",
+          "subreddit": "wallstreetbets",
+          "score": 463,
+          "comments": 70,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpjvsq/dell_wins_97b_government_contract/"
+        },
+        {
+          "title": "Everyone forgot about DELL",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 13,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1toizrw/everyone_forgot_about_dell/"
+        }
+      ],
+      "attentionScore": 136.26
+    },
+    {
+      "symbol": "CRWV",
+      "mentions": 2,
+      "signalStrength": 7.7,
+      "directMentions": 2,
+      "score": 165,
+      "comments": 178,
+      "subreddits": [
+        "stocks",
+        "investing"
+      ],
+      "posts": [
+        {
+          "title": "$MU became the AI memory trade nobody wanted to chase. What is the next “obvious in hindsight” chip-adjacent play?",
+          "subreddit": "stocks",
+          "score": 468,
+          "comments": 603,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1tp2gib/mu_became_the_ai_memory_trade_nobody_wanted_to/"
+        },
+        {
+          "title": "CRWV feels like one of the purest AI infrastructure bets now, but is the runway already priced in?",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 2,
+          "permalink": "https://www.reddit.com/r/investing/comments/1tp2kwg/crwv_feels_like_one_of_the_purest_ai/"
+        }
+      ],
+      "attentionScore": 134.59
+    },
+    {
+      "symbol": "MRVL",
+      "mentions": 2,
+      "signalStrength": 5.2,
+      "directMentions": 2,
+      "score": 608,
+      "comments": 213,
+      "subreddits": [
+        "wallstreetbets",
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "Yes, I held my $MU $160k yolo back at $110/share (for most of the run) 1,058% 1y return.",
+          "subreddit": "wallstreetbets",
+          "score": 1172,
+          "comments": 96,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpg5pp/yes_i_held_my_mu_160k_yolo_back_at_110share_for/"
+        },
+        {
+          "title": "$MU became the AI memory trade nobody wanted to chase. What is the next “obvious in hindsight” chip-adjacent play?",
+          "subreddit": "stocks",
+          "score": 468,
+          "comments": 603,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1tp2gib/mu_became_the_ai_memory_trade_nobody_wanted_to/"
+        }
+      ],
+      "attentionScore": 117.65
+    },
+    {
+      "symbol": "GOOG",
+      "mentions": 2,
+      "signalStrength": 5.3,
+      "directMentions": 2,
+      "score": 850,
+      "comments": 96,
+      "subreddits": [
+        "wallstreetbets"
+      ],
+      "posts": [
+        {
+          "title": "Yes, I held my $MU $160k yolo back at $110/share (for most of the run) 1,058% 1y return.",
+          "subreddit": "wallstreetbets",
+          "score": 1172,
+          "comments": 96,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpg5pp/yes_i_held_my_mu_160k_yolo_back_at_110share_for/"
+        },
+        {
+          "title": "SUPER auspicious closing prices for Both GOOGL 388.88 and GOOG 384.84 -  May 26, 2026",
+          "subreddit": "wallstreetbets",
+          "score": 575,
+          "comments": 85,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tox7hw/super_auspicious_closing_prices_for_both_googl/"
+        }
+      ],
+      "attentionScore": 117.6
+    },
+    {
+      "symbol": "NVDA",
+      "mentions": 2,
+      "signalStrength": 4.9,
+      "directMentions": 2,
+      "score": 446,
+      "comments": 36,
+      "subreddits": [
+        "wallstreetbets",
+        "SecurityAnalysis"
+      ],
+      "posts": [
+        {
+          "title": "Yes, I held my $MU $160k yolo back at $110/share (for most of the run) 1,058% 1y return.",
+          "subreddit": "wallstreetbets",
+          "score": 1172,
+          "comments": 96,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpg5pp/yes_i_held_my_mu_160k_yolo_back_at_110share_for/"
+        },
+        {
+          "title": "NVDA: Unit Economics",
+          "subreddit": "SecurityAnalysis",
+          "score": 3,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/SecurityAnalysis/comments/1siu50v/nvda_unit_economics/"
+        }
+      ],
+      "attentionScore": 105.14
+    },
+    {
+      "symbol": "VRRM",
+      "mentions": 1,
+      "signalStrength": 5.3,
+      "directMentions": 1,
+      "score": 36,
+      "comments": 53,
+      "subreddits": [
+        "wallstreetbets"
+      ],
+      "posts": [
+        {
+          "title": "The $1M YOLO on $VRRM: Peak Retardation or Institutional Inside Information? A 70% Drop Post-Mortem DD 🚀📉",
+          "subreddit": "wallstreetbets",
+          "score": 36,
+          "comments": 53,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpnts5/the_1m_yolo_on_vrrm_peak_retardation_or/"
+        }
+      ],
+      "attentionScore": 79.66
+    },
+    {
+      "symbol": "OSUR",
+      "mentions": 1,
+      "signalStrength": 4.9,
+      "directMentions": 1,
+      "score": 11,
+      "comments": 5,
+      "subreddits": [
+        "options"
+      ],
+      "posts": [
+        {
+          "title": "Cheap calendar on $OSUR",
+          "subreddit": "options",
+          "score": 11,
+          "comments": 5,
+          "permalink": "https://www.reddit.com/r/options/comments/1tphfm5/cheap_calendar_on_osur/"
+        }
+      ],
+      "attentionScore": 73.37
+    },
+    {
+      "symbol": "SFIX",
+      "mentions": 1,
+      "signalStrength": 4.9,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 1,
+      "subreddits": [
+        "options"
+      ],
+      "posts": [
+        {
+          "title": "Did anyone here get caught holding Stitch Fix ($SFIX) after the growth story fell apart?",
+          "subreddit": "options",
+          "score": 0,
+          "comments": 1,
+          "permalink": "https://www.reddit.com/r/options/comments/1tpknw6/did_anyone_here_get_caught_holding_stitch_fix/"
+        }
+      ],
+      "attentionScore": 73.04
+    },
+    {
+      "symbol": "LUMN",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 10,
+      "comments": 45,
+      "subreddits": [
+        "wallstreetbets"
+      ],
+      "posts": [
+        {
+          "title": "$LUMN the hidden AI infastructure play",
+          "subreddit": "wallstreetbets",
+          "score": 10,
+          "comments": 45,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpaj3g/lumn_the_hidden_ai_infastructure_play/"
+        }
+      ],
+      "attentionScore": 70.95
+    }
+  ],
+  "topPosts": [
+    {
+      "id": "1tp25tq",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Daily Discussion Thread for May 27, 2026",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tp25tq/daily_discussion_thread_for_may_27_2026/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tp25tq/daily_discussion_thread_for_may_27_2026/",
+      "createdAt": "2026-05-27T11:00:43.000Z",
+      "score": 267,
+      "comments": 13211,
+      "upvoteRatio": 0.94,
+      "flair": "Daily Discussion",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": true,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1to86h2",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "AMD +$11M",
+      "url": "https://i.redd.it/h99hs7p7ph3h1.jpeg",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1to86h2/amd_11m/",
+      "createdAt": "2026-05-26T14:12:02.000Z",
+      "score": 13828,
+      "comments": 826,
+      "upvoteRatio": 0.94,
+      "flair": "Gain",
+      "tickers": [
+        "AMD"
+      ],
+      "tickerWeights": {
+        "AMD": 2.5
+      },
+      "directTickers": [
+        "AMD"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tpgqsw",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "What Are Your Moves Tomorrow, May 28, 2026",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tpgqsw/what_are_your_moves_tomorrow_may_28_2026/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpgqsw/what_are_your_moves_tomorrow_may_28_2026/",
+      "createdAt": "2026-05-27T19:57:12.000Z",
+      "score": 164,
+      "comments": 5384,
+      "upvoteRatio": 0.94,
+      "flair": "Daily Discussion",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": true,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tp2xgw",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "How Micron will be like today. You’re welcome.",
+      "url": "https://i.redd.it/i8bp9bbm2o3h1.jpeg",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tp2xgw/how_micron_will_be_like_today_youre_welcome/",
+      "createdAt": "2026-05-27T11:37:51.000Z",
+      "score": 9087,
+      "comments": 246,
+      "upvoteRatio": 0.96,
+      "flair": "Meme",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1todbfj",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Ferrari Stock Falls 6% After Electric Vehicle 'Luce' Debut",
+      "url": "https://blocknow.com/ferrari-stock-drops-after-electric-luce-reveal/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1todbfj/ferrari_stock_falls_6_after_electric_vehicle_luce/",
+      "createdAt": "2026-05-26T17:09:32.000Z",
+      "score": 4386,
+      "comments": 577,
+      "upvoteRatio": 0.97,
+      "flair": "News",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tom7yo",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "US Space Force awards SpaceX $2.29 billion contract for military space data network",
+      "url": "https://finance.yahoo.com/sectors/technology/articles/us-space-force-awards-spacex-211250093.html",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tom7yo/us_space_force_awards_spacex_229_billion_contract/",
+      "createdAt": "2026-05-26T22:18:51.000Z",
+      "score": 3170,
+      "comments": 289,
+      "upvoteRatio": 0.97,
+      "flair": "News",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tp5pat",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "All 3 Dram companies are now Trillion $ corporations",
+      "url": "https://i.redd.it/1ozs5euzmo3h1.jpeg",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tp5pat/all_3_dram_companies_are_now_trillion_corporations/",
+      "createdAt": "2026-05-27T13:32:03.000Z",
+      "score": 1844,
+      "comments": 214,
+      "upvoteRatio": 0.98,
+      "flair": "Discussion",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1too1z7",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Wait, You Only Like It When MU’s Expensive?",
+      "url": "https://i.redd.it/osah7wlvgk3h1.jpeg",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1too1z7/wait_you_only_like_it_when_mus_expensive/",
+      "createdAt": "2026-05-26T23:30:38.000Z",
+      "score": 1673,
+      "comments": 210,
+      "upvoteRatio": 0.97,
+      "flair": "Meme",
+      "tickers": [
+        "MU"
+      ],
+      "tickerWeights": {
+        "MU": 3.7
+      },
+      "directTickers": [
+        "MU"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tod7ce",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Okay Micron has gone crazy",
+      "url": "https://www.reddit.com/r/stocks/comments/1tod7ce/okay_micron_has_gone_crazy/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1tod7ce/okay_micron_has_gone_crazy/",
+      "createdAt": "2026-05-26T17:05:36.000Z",
+      "score": 964,
+      "comments": 370,
+      "upvoteRatio": 0.93,
+      "flair": "Company Discussion",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tp9f82",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Realized my first gain",
+      "url": "https://i.redd.it/1u5e36llap3h1.jpeg",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tp9f82/realized_my_first_gain/",
+      "createdAt": "2026-05-27T15:44:21.000Z",
+      "score": 1487,
+      "comments": 104,
+      "upvoteRatio": 0.98,
+      "flair": "Gain",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tp2gib",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "$MU became the AI memory trade nobody wanted to chase. What is the next “obvious in hindsight” chip-adjacent play?",
+      "url": "https://www.reddit.com/r/stocks/comments/1tp2gib/mu_became_the_ai_memory_trade_nobody_wanted_to/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1tp2gib/mu_became_the_ai_memory_trade_nobody_wanted_to/",
+      "createdAt": "2026-05-27T11:15:13.000Z",
+      "score": 468,
+      "comments": 603,
+      "upvoteRatio": 0.85,
+      "flair": null,
+      "tickers": [
+        "MU",
+        "WDC",
+        "STX",
+        "AVGO",
+        "MRVL",
+        "ALAB",
+        "CRWV",
+        "NBIS"
+      ],
+      "tickerWeights": {
+        "MU": 5.3,
+        "WDC": 2.4,
+        "STX": 2.4,
+        "AVGO": 2.4,
+        "MRVL": 2.4,
+        "ALAB": 2.4,
+        "CRWV": 2.4,
+        "NBIS": 2.4
+      },
+      "directTickers": [
+        "MU",
+        "WDC",
+        "STX",
+        "AVGO",
+        "MRVL",
+        "ALAB",
+        "CRWV",
+        "NBIS"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tkruuo",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Weekly Earnings Thread 5/25 - 5/29",
+      "url": "https://i.redd.it/lhyd3ck9hq2h1.jpeg",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tkruuo/weekly_earnings_thread_525_529/",
+      "createdAt": "2026-05-22T18:39:24.000Z",
+      "score": 97,
+      "comments": 677,
+      "upvoteRatio": 0.95,
+      "flair": "Earnings Thread",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": true,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tpnsd8",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Meta shares jump after company announces premium subscriptions for Facebook and Instagram. But will users actually buy them?",
+      "url": "https://www.forbes.com.au/news/investing/meta-shares-jump-after-company-announces-premium-subscriptions-for-facebook-and-instagram/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpnsd8/meta_shares_jump_after_company_announces_premium/",
+      "createdAt": "2026-05-28T00:30:59.000Z",
+      "score": 707,
+      "comments": 345,
+      "upvoteRatio": 0.95,
+      "flair": "Gain",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tpg5pp",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Yes, I held my $MU $160k yolo back at $110/share (for most of the run) 1,058% 1y return.",
+      "url": "https://www.reddit.com/gallery/1tpg5pp",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpg5pp/yes_i_held_my_mu_160k_yolo_back_at_110share_for/",
+      "createdAt": "2026-05-27T19:36:23.000Z",
+      "score": 1172,
+      "comments": 96,
+      "upvoteRatio": 0.97,
+      "flair": "Gain",
+      "tickers": [
+        "MU",
+        "ALAB",
+        "NVDA",
+        "APH",
+        "GOOG",
+        "MRVL",
+        "SNDK"
+      ],
+      "tickerWeights": {
+        "MU": 5.3,
+        "ALAB": 2.8,
+        "NVDA": 2.4,
+        "APH": 2.4,
+        "GOOG": 2.4,
+        "MRVL": 2.8,
+        "SNDK": 2.4
+      },
+      "directTickers": [
+        "MU",
+        "ALAB",
+        "NVDA",
+        "APH",
+        "GOOG",
+        "MRVL",
+        "SNDK"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1todfhu",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Micron hits $1 trillion market cap for the first time",
+      "url": "https://www.reddit.com/r/stocks/comments/1todfhu/micron_hits_1_trillion_market_cap_for_the_first/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1todfhu/micron_hits_1_trillion_market_cap_for_the_first/",
+      "createdAt": "2026-05-26T17:13:29.000Z",
+      "score": 1014,
+      "comments": 175,
+      "upvoteRatio": 0.97,
+      "flair": "Company News",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    },
+    {
+      "id": "1tpgngu",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Companies that will benefit/ are benefiting from ai and data centers",
+      "url": "https://i.redd.it/dxo3b6z3jq3h1.jpeg",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tpgngu/companies_that_will_benefit_are_benefiting_from/",
+      "createdAt": "2026-05-27T19:53:57.000Z",
+      "score": 634,
+      "comments": 354,
+      "upvoteRatio": 0.8,
+      "flair": "DD",
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "public_json:www.reddit.com"
+    }
+  ],
+  "currentFetchErrors": [
+    "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured"
+  ]
+}

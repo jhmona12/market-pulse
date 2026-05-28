@@ -12,7 +12,7 @@ Freshness rule: stale source items should not drive the briefing. Ordinary artic
 
 Briefing quality rule: source rows are evidence, not conclusions. A Daily Read takeaway should never be a category label plus a fragment, a publisher name, or a bare source ID. It should translate the source into a market implication, for example: `Rates: Hot PPI pushed Treasury yields higher, so long-duration growth needs stricter confirmation. (M4)`. Do not elevate scattered stock outliers into an earnings theme unless they share a clear sector, factor, guidance, or market-cap read-through.
 
-Reddit / WallStreetBets rule: retail attention is useful only as a sentiment and crowding input. The script should filter generic daily threads, portfolio screenshots, and long ticker dumps before ranking tickers. If no clean concentration remains, the briefing should explicitly say the Reddit signal was not clean enough to use, not invent a Reddit takeaway.
+Reddit / WallStreetBets rule: retail attention is useful only as a sentiment and crowding input. The script should filter generic daily threads, portfolio screenshots, and long ticker dumps before ranking tickers. Prefer the official OAuth API when credentials are configured; public JSON and RSS fallbacks are less reliable on hosted runners. If a last-good Reddit cache is used, label it as cached sentiment and include the age. If no clean concentration remains, the briefing should explicitly say the Reddit signal was not clean enough to use, not invent a Reddit takeaway.
 
 | Name | URL | Category | Cadence | Trust | Notes |
 |---|---|---|---|---|---|

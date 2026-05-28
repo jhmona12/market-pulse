@@ -12,6 +12,13 @@ const marketIntelArticleLimit = Number.parseInt(process.env.MARKET_INTEL_ARTICLE
 const marketIntelFreshHours = Number.parseFloat(process.env.MARKET_INTEL_FRESH_HOURS || "24");
 const marketIntelImportantHours = Number.parseFloat(process.env.MARKET_INTEL_IMPORTANT_HOURS || "96");
 const redditPostLimit = Number.parseInt(process.env.REDDIT_POST_LIMIT || "40", 10);
+const redditCachePath = process.env.REDDIT_TAPE_CACHE_PATH || "data/reddit-tape-cache.json";
+const redditCacheMaxAgeHours = Number.parseFloat(process.env.REDDIT_CACHE_MAX_AGE_HOURS || "24");
+const redditClientId = process.env.REDDIT_CLIENT_ID || "";
+const redditClientSecret = process.env.REDDIT_CLIENT_SECRET || "";
+const redditUserAgent =
+  process.env.REDDIT_USER_AGENT ||
+  "Mozilla/5.0 (compatible; MarketPulse/0.1; personal market research dashboard)";
 const marketCapFetchLimit = Number.parseInt(process.env.MARKET_CAP_FETCH_LIMIT || "60", 10);
 const openAiTimeoutMs = Number.parseInt(process.env.OPENAI_TIMEOUT_MS || "180000", 10);
 const allowStaleModelData = process.env.ALLOW_STALE_MODEL_DATA === "1";
@@ -114,6 +121,46 @@ const redditSources = [
   { subreddit: "options", segment: "Options sentiment" }
 ];
 const redditSorts = (process.env.REDDIT_SORTS || "hot,new,top").split(",").map((item) => item.trim()).filter(Boolean);
+const redditTickerAllowList = [
+  "SPY",
+  "QQQ",
+  "IWM",
+  "TLT",
+  "GLD",
+  "SLV",
+  "HYG",
+  "SOXX",
+  "URA",
+  "GME",
+  "AMC",
+  "RDDT",
+  "HOOD",
+  "COIN",
+  "MSTR",
+  "MARA",
+  "RIOT",
+  "RIVN",
+  "LCID",
+  "TSM",
+  "ASML",
+  "ARM",
+  "SMCI",
+  "PLTR",
+  "SOUN",
+  "BBAI",
+  "IONQ",
+  "QBTS",
+  "RGTI",
+  "ACHR",
+  "RKLB",
+  "SOFI",
+  "OKLO",
+  "CRCL",
+  "CRWV",
+  "ALAB",
+  "NBIS",
+  "CRSR"
+];
 
 const tickerStopWords = new Set([
   "A",
@@ -1695,15 +1742,157 @@ async function buildEarningsTape({ sources, marketMovers, knownSymbols }) {
   };
 }
 
-async function fetchRedditListing(subreddit, sort = "hot", limit = redditPostLimit) {
-  const topWindow = sort === "top" ? "&t=day" : "";
-  const url = `https://www.reddit.com/r/${encodeURIComponent(subreddit)}/${sort}.json?limit=${limit}${topWindow}`;
-  const payload = await fetchPublicJson(url, {
-    timeout: 12000,
-    retries: 1,
-    userAgent: "MarketPulse/0.1 personal research dashboard reddit sentiment reader"
+async function loadRedditCache() {
+  try {
+    return JSON.parse(await readFile(join(root, redditCachePath), "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+async function writeRedditCache(tape) {
+  if (!tape?.topTickers?.length) return;
+  await mkdir(dirname(join(root, redditCachePath)), { recursive: true });
+  await writeFile(join(root, redditCachePath), `${JSON.stringify(tape, null, 2)}\n`);
+}
+
+function redditCacheAgeHours(cache, now = new Date()) {
+  const generatedAt = cache?.sourceGeneratedAt || cache?.generatedAt;
+  const time = generatedAt ? new Date(generatedAt).getTime() : NaN;
+  if (!Number.isFinite(time)) return null;
+  return (now.getTime() - time) / (60 * 60 * 1000);
+}
+
+function cachedRedditTape(cache, currentErrors) {
+  const cacheAgeHours = redditCacheAgeHours(cache);
+  return {
+    ...cache,
+    status: "cache_fallback",
+    generatedAt: new Date().toISOString(),
+    sourceGeneratedAt: cache.sourceGeneratedAt || cache.generatedAt || null,
+    cacheAgeHours: cacheAgeHours == null ? null : roundedNumber(cacheAgeHours, 1),
+    currentFetchErrors: currentErrors,
+    sourceNote: `Latest Reddit fetch failed; showing the last successful Reddit attention sample from ${cache.sourceGeneratedAt || cache.generatedAt}. Treat as stale sentiment context, not live news.`
+  };
+}
+
+async function fetchRedditAccessToken() {
+  if (!redditClientId || !redditClientSecret) {
+    return { token: null, mode: "public", error: "REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured" };
+  }
+  const body = new URLSearchParams({ grant_type: "client_credentials" });
+  const authorization = Buffer.from(`${redditClientId}:${redditClientSecret}`).toString("base64");
+  const response = await fetch("https://www.reddit.com/api/v1/access_token", {
+    method: "POST",
+    headers: {
+      authorization: `Basic ${authorization}`,
+      "content-type": "application/x-www-form-urlencoded",
+      "user-agent": redditUserAgent,
+      accept: "application/json"
+    },
+    body
   });
+  if (!response.ok) {
+    throw new Error(`OAuth token request failed: ${response.status} ${response.statusText}`);
+  }
+  const payload = await response.json();
+  if (!payload.access_token) throw new Error("OAuth token response did not include access_token");
+  return { token: payload.access_token, mode: "oauth" };
+}
+
+function redditListingPostsFromJson(payload) {
   return (payload.data?.children || []).map((child) => child.data).filter(Boolean);
+}
+
+function parseRedditRssListing(xml, subreddit, segment, sort) {
+  const entries = [...xml.matchAll(/<entry\b[\s\S]*?<\/entry>/gi)].map((match) => match[0]);
+  return entries
+    .map((entry) => {
+      const rawContent = xmlRaw(entry, ["content", "summary"]);
+      const content = stripTags(decodeHtml(rawContent || "")).slice(0, 2000);
+      const permalink = xmlLink(entry);
+      return {
+        id: mentionKey(xmlText(entry, "id") || permalink || `${subreddit}-${sort}-${xmlText(entry, "title")}`).slice(0, 80),
+        subreddit,
+        segment,
+        title: xmlText(entry, "title"),
+        selftext: content,
+        url: permalink,
+        permalink,
+        created_utc: null,
+        createdAt: normalizeDate(xmlText(entry, ["published", "updated"])),
+        score: 0,
+        num_comments: 0,
+        upvote_ratio: null,
+        link_flair_text: null,
+        fetchMethod: "rss"
+      };
+    })
+    .filter((post) => post.title);
+}
+
+async function fetchRedditRssListing(subreddit, segment, sort = "hot", limit = redditPostLimit) {
+  const sortPath = sort === "hot" ? "" : `${sort}/`;
+  const topWindow = sort === "top" ? "?t=day" : "";
+  const errors = [];
+  for (const host of ["www.reddit.com", "old.reddit.com"]) {
+    const url = `https://${host}/r/${encodeURIComponent(subreddit)}/${sortPath}.rss${topWindow}`;
+    try {
+      const xml = await fetchText(url, {
+        timeout: 12000,
+        retries: 1
+      });
+      const posts = parseRedditRssListing(xml, subreddit, segment, sort).slice(0, limit);
+      if (posts.length) return { status: "ready", method: `rss:${host}`, sort, posts };
+      errors.push(`${host} RSS returned no posts`);
+    } catch (error) {
+      errors.push(`${host} RSS: ${error.message}`);
+    }
+  }
+  throw new Error(errors.join("; "));
+}
+
+async function fetchRedditListing(subreddit, segment, sort = "hot", limit = redditPostLimit, oauthToken = null) {
+  const topWindow = sort === "top" ? "&t=day" : "";
+  const errors = [];
+
+  if (oauthToken) {
+    const oauthUrl = `https://oauth.reddit.com/r/${encodeURIComponent(subreddit)}/${sort}?limit=${limit}${topWindow}`;
+    try {
+      const payload = await fetchPublicJson(oauthUrl, {
+        timeout: 12000,
+        retries: 2,
+        userAgent: redditUserAgent,
+        headers: { authorization: `Bearer ${oauthToken}` }
+      });
+      return { status: "ready", method: "oauth_json", sort, posts: redditListingPostsFromJson(payload) };
+    } catch (error) {
+      errors.push(`OAuth JSON: ${error.message}`);
+    }
+  }
+
+  for (const host of ["www.reddit.com", "old.reddit.com"]) {
+    const url = `https://${host}/r/${encodeURIComponent(subreddit)}/${sort}.json?limit=${limit}${topWindow}`;
+    try {
+      const payload = await fetchPublicJson(url, {
+        timeout: 12000,
+        retries: 1,
+        userAgent: redditUserAgent,
+        headers: { "accept-language": "en-US,en;q=0.9" }
+      });
+      return { status: "ready", method: `public_json:${host}`, sort, posts: redditListingPostsFromJson(payload) };
+    } catch (error) {
+      errors.push(`${host} JSON: ${error.message}`);
+    }
+  }
+
+  try {
+    return await fetchRedditRssListing(subreddit, segment, sort, limit);
+  } catch (error) {
+    errors.push(error.message);
+  }
+
+  throw new Error(errors.join("; "));
 }
 
 async function fetchRedditTape(knownSymbols) {
@@ -1718,44 +1907,70 @@ async function fetchRedditTape(knownSymbols) {
     };
   }
 
+  const cache = await loadRedditCache();
+  let oauth = { token: null, mode: "public" };
+  try {
+    oauth = await fetchRedditAccessToken();
+  } catch (error) {
+    oauth = { token: null, mode: "public", error: error.message };
+  }
+
   const results = await mapLimit(redditSources, 2, async (source) => {
-    try {
-      const listings = await mapLimit(redditSorts, 1, async (sort) => fetchRedditListing(source.subreddit, sort, redditPostLimit));
-      const seenPosts = new Set();
-      const posts = listings.flat().filter((post) => {
-        if (!post?.id || seenPosts.has(post.id)) return false;
+    const listings = await mapLimit(redditSorts, 1, async (sort) => {
+      try {
+        return await fetchRedditListing(source.subreddit, source.segment, sort, redditPostLimit, oauth.token);
+      } catch (error) {
+        return { status: "error", method: "none", sort, error: error.message, posts: [] };
+      }
+    });
+    const seenPosts = new Set();
+    const posts = listings.flatMap((listing) => listing.posts || []).filter((post) => {
+      if (!post?.id || seenPosts.has(post.id)) return false;
         seenPosts.add(post.id);
         return true;
-      });
+    });
+    const mappedPosts = posts.map((post) => {
+      const title = post.title || "";
+      const selftext = post.selftext || "";
+      const tickerSignals = extractRedditTickerSignals({ title, selftext, flair: post.link_flair_text || "" }, knownSymbols);
+      const permalink = post.permalink
+        ? post.permalink.startsWith("http")
+          ? post.permalink
+          : `https://www.reddit.com${post.permalink}`
+        : post.url || "";
       return {
-        ...source,
-        status: "ready",
-        posts: posts.map((post) => {
-          const title = post.title || "";
-          const selftext = post.selftext || "";
-          const tickerSignals = extractRedditTickerSignals({ title, selftext, flair: post.link_flair_text || "" }, knownSymbols);
-          return {
-            id: post.id,
-            subreddit: source.subreddit,
-            segment: source.segment,
-            title,
-            url: post.url_overridden_by_dest || `https://www.reddit.com${post.permalink}`,
-            permalink: `https://www.reddit.com${post.permalink}`,
-            createdAt: post.created_utc ? new Date(post.created_utc * 1000).toISOString() : null,
-            score: finiteNumber(post.score) || 0,
-            comments: finiteNumber(post.num_comments) || 0,
-            upvoteRatio: finiteNumber(post.upvote_ratio),
-            flair: post.link_flair_text || null,
-            tickers: tickerSignals.tickers,
-            tickerWeights: tickerSignals.tickerWeights,
-            directTickers: tickerSignals.directTickers,
-            filteredAsGeneric: tickerSignals.filteredAsGeneric
-          };
-        })
+        id: post.id,
+        subreddit: source.subreddit,
+        segment: source.segment,
+        title,
+        url: post.url_overridden_by_dest || post.url || permalink,
+        permalink,
+        createdAt: post.createdAt || (post.created_utc ? new Date(post.created_utc * 1000).toISOString() : null),
+        score: finiteNumber(post.score) || 0,
+        comments: finiteNumber(post.num_comments) || 0,
+        upvoteRatio: finiteNumber(post.upvote_ratio),
+        flair: post.link_flair_text || null,
+        tickers: tickerSignals.tickers,
+        tickerWeights: tickerSignals.tickerWeights,
+        directTickers: tickerSignals.directTickers,
+        filteredAsGeneric: tickerSignals.filteredAsGeneric,
+        fetchMethod: post.fetchMethod || listings.find((listing) => (listing.posts || []).some((candidate) => candidate.id === post.id))?.method || null
       };
-    } catch (error) {
-      return { ...source, status: "error", error: error.message, posts: [] };
-    }
+    });
+    const sortStatuses = listings.map(({ sort, status, method, error, posts: listingPosts }) => ({
+      sort,
+      status,
+      method,
+      error: error || null,
+      postCount: listingPosts?.length || 0
+    }));
+    return {
+      ...source,
+      status: mappedPosts.length ? "ready" : "error",
+      error: mappedPosts.length ? null : sortStatuses.map((item) => `${item.sort}: ${item.error || "no posts"}`).join(" | "),
+      sortStatuses,
+      posts: mappedPosts
+    };
   });
 
   const posts = results.flatMap((result) => result.posts || []);
@@ -1810,20 +2025,43 @@ async function fetchRedditTape(knownSymbols) {
     .sort((a, b) => (b.score + b.comments * 2) - (a.score + a.comments * 2))
     .slice(0, 16);
 
-  return {
+  const currentErrors = [
+    ...(oauth.error ? [`OAuth: ${oauth.error}`] : []),
+    ...results
+      .filter((result) => result.status !== "ready")
+      .map((result) => `${result.subreddit}: ${result.error || "no posts"}`)
+  ];
+  const liveTape = {
     status: results.some((result) => result.status === "ready") ? "ready" : "error",
     generatedAt: new Date().toISOString(),
-    sourceNote: "Public Reddit JSON endpoints across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
-    subreddits: results.map(({ subreddit, segment, status, error, posts }) => ({
+    authMode: oauth.token ? "oauth" : "public",
+    sourceNote: oauth.token
+      ? "Reddit OAuth API across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news."
+      : "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
+    subreddits: results.map(({ subreddit, segment, status, error, posts, sortStatuses }) => ({
       subreddit,
       segment,
       status,
       error: error || null,
-      postCount: posts?.length || 0
+      postCount: posts?.length || 0,
+      sortStatuses: sortStatuses || []
     })),
     topTickers,
-    topPosts
+    topPosts,
+    currentFetchErrors: currentErrors
   };
+
+  if (liveTape.topTickers.length) {
+    await writeRedditCache(liveTape);
+    return liveTape;
+  }
+
+  const cacheAge = redditCacheAgeHours(cache);
+  if (cache?.topTickers?.length && cacheAge != null && cacheAge <= redditCacheMaxAgeHours) {
+    return cachedRedditTape(cache, currentErrors);
+  }
+
+  return liveTape;
 }
 
 function buildModelScorebook({ modelRankings, stockMetadata, marketCapCache, signalsBySymbol, marketDataStatus }) {
@@ -2760,7 +2998,10 @@ function buildMarketDriverSummary(drivers, earningsTape, redditTape, officialMac
   const earningsTakeaway = earningsSignalTakeaway(earningsTape);
   if (earningsTakeaway) pieces.push(earningsTakeaway);
   if (redditTape.topTickers?.length) {
-    pieces.push(`Retail attention: ${redditTape.topTickers.slice(0, 4).map((ticker) => ticker.symbol).join(", ")} are drawing the most Reddit ticker concentration; treat this as sentiment, not verified news.`);
+    const freshness = redditTape.status === "cache_fallback"
+      ? `Last successful Reddit sample (${redditTape.cacheAgeHours ?? "unknown"} hours old)`
+      : "Retail attention";
+    pieces.push(`${freshness}: ${redditTape.topTickers.slice(0, 4).map((ticker) => ticker.symbol).join(", ")} are drawing the most filtered ticker concentration; treat this as sentiment, not verified news.`);
   }
   return pieces.slice(0, 10);
 }
@@ -3212,7 +3453,7 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
   const secondaryDriverLead = macroReleaseLead && driverSentence ? driverSentence : "";
   const earningsLead = earningsSignalTakeaway(marketIntelligence?.earnings || {});
   const redditLead = redditTickers.length
-    ? `Retail attention is concentrated in ${redditTickers.slice(0, 4).map((item) => item.symbol).join(", ")}; treat that as sentiment, not verified news.`
+    ? `${marketIntelligence?.reddit?.status === "cache_fallback" ? `Last successful Reddit sample (${marketIntelligence.reddit.cacheAgeHours ?? "unknown"} hours old)` : "Retail attention"} is concentrated in ${redditTickers.slice(0, 4).map((item) => item.symbol).join(", ")}; treat that as sentiment, not verified news.`
     : "Reddit attention data was unavailable or did not produce clean ticker concentration.";
   const fallbackBody = !technicalsFresh
     ? [driverLead, secondaryDriverLead, earningsLead, technicalStatusMessage, modelReady ? `The model file reports ${model.scoredCount} scored names as of ${model.asOfDate || "the latest available close"}, but price-derived fields should not be treated as current until the model scorer restores the technical tape.` : "Model-ranked single-name context is unavailable, so do not rely on stale ranks."].filter(Boolean).join(" ")
@@ -4557,19 +4798,7 @@ async function main() {
       ...universe.map((item) => item.symbol),
       ...modelRankings.rankings.map((item) => item.symbol),
       ...longHorizonRankings.rankings.map((item) => item.symbol),
-      "SPY",
-      "QQQ",
-      "IWM",
-      "TLT",
-      "GLD",
-      "HYG",
-      "GME",
-      "OKLO",
-      "CRCL",
-      "SOXX",
-      "URA",
-      "SLV",
-      "ASML"
+      ...redditTickerAllowList
     ]
       .map(mentionKey)
       .filter(Boolean)
@@ -4741,7 +4970,7 @@ async function main() {
   console.log(`Wrote ${longHorizonOutput} with ${longHorizonResearch.rowCount || 0} long-horizon rows.`);
 }
 
-export { buildModelMonitoring, checkSource, extractArticleCandidates, fetchOfficialMacroReleases, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };
+export { buildModelMonitoring, checkSource, extractArticleCandidates, extractRedditTickerSignals, fetchOfficialMacroReleases, fetchRedditTape, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch((error) => {

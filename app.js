@@ -740,7 +740,13 @@ function renderMarketIntelligence() {
     }));
   const drivers = [...officialMacro, ...(intel.professionalDrivers || [])].slice(0, 5);
   const earningsMovers = (intel.earnings?.earningsMovers || []).slice(0, 5);
-  const redditTickers = (intel.reddit?.topTickers || []).slice(0, 5);
+  const reddit = intel.reddit || {};
+  const redditTickers = (reddit.topTickers || []).slice(0, 5);
+  const redditStatusDetail = reddit.status === "cache_fallback"
+    ? `Showing last successful Reddit sample from ${formatShortDate(reddit.sourceGeneratedAt || reddit.generatedAt)}.`
+    : reddit.status === "error"
+      ? `Reddit fetch failed: ${(reddit.currentFetchErrors || reddit.subreddits?.map((item) => item.error).filter(Boolean) || []).slice(0, 2).join(" | ") || "no clean data returned"}.`
+      : "No clean Reddit ticker concentration was extracted in this snapshot.";
 
   renderIntelStack(
     $("#marketDriverList"),
@@ -767,12 +773,18 @@ function renderMarketIntelligence() {
   renderIntelStack(
     $("#redditAttentionList"),
     redditTickers,
-    "No clean Reddit ticker concentration was extracted in this snapshot.",
-    (item) => `
+    redditStatusDetail,
+    (item) => {
+      const topPost = item.posts?.[0]?.title || "";
+      const statusNote = reddit.status === "cache_fallback"
+        ? `Cached sentiment sample · ${esc(formatShortDate(reddit.sourceGeneratedAt || reddit.generatedAt))}`
+        : "Retail sentiment only; not verified news.";
+      return `
       <strong>${esc(item.symbol)}</strong>
-      <span>${esc(item.mentions || 0)} filtered mentions${item.directMentions != null ? ` · ${esc(item.directMentions)} direct` : ""} · ${esc(item.comments || 0)} comments · ${esc((item.subreddits || []).join(", "))}</span>
-      <small>Retail sentiment only; not verified news.</small>
-    `
+      <span>Attention ${esc(item.attentionScore ?? "n/a")} · ${esc(item.mentions || 0)} filtered mentions${item.directMentions != null ? ` · ${esc(item.directMentions)} direct` : ""} · ${esc(item.comments || 0)} comments · ${esc((item.subreddits || []).join(", "))}</span>
+      <small>${topPost ? `Top post: ${esc(topPost)}` : statusNote}</small>
+    `;
+    }
   );
 }
 

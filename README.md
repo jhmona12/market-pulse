@@ -161,6 +161,8 @@ The refresh script:
 - Requires source articles to have a publication date within the freshness window, 30 days by default, before they can appear in the Source Tape or feed the AI/source briefing
 - Builds `marketIntelligence` with rolling 24-hour professional drivers, important older context, earnings movers, market movers, and Reddit sentiment
 - Treats Reddit / WallStreetBets as attention and sentiment only, separated from professional commentary
+- Pulls Reddit through the free OAuth API when `REDDIT_CLIENT_ID` and `REDDIT_CLIENT_SECRET` are configured; otherwise it attempts public JSON, `old.reddit.com`, and RSS fallbacks
+- Writes `data/reddit-tape-cache.json` only when a clean Reddit ticker sample is extracted, then uses that last-good sample for up to 24 hours if the next refresh is blocked; cached sentiment is explicitly labeled as cached in the briefing
 - Reuses the fresh technical tape exported by `scripts/modeling/score_live_rank_model.py`; if that tape is unavailable and Yahoo chart history is temporarily rate-limited, stale technical values are left unavailable while sources, earnings, Reddit, macro, and eligible model context continue to refresh
 - Pulls S&P 500 constituents from Wikipedia when available
 - Adds ETFs from `config/universe.json`
@@ -264,6 +266,18 @@ The AI recommendation schema is intentionally constrained:
 If no API key is configured, the dashboard still works with the model-ranked Daily Read, Desk Calls, Momentum Book, Sector Performance, Macro Pulse, and Source Tape.
 
 AI usage estimates are written into `data/snapshot.json`; local usage logs are written to `data/usage-log.jsonl`, which is ignored by git.
+
+## Reddit Sentiment
+
+Reddit is optional and should be treated as retail attention, not verified news. The refresh script first uses the official Reddit OAuth API when these environment variables or GitHub Actions secrets exist:
+
+```bash
+REDDIT_CLIENT_ID=your_reddit_app_client_id
+REDDIT_CLIENT_SECRET=your_reddit_app_secret
+REDDIT_USER_AGENT="MarketPulse/0.1 by your-reddit-username"
+```
+
+If OAuth is not configured, the script tries Reddit's public JSON endpoints, `old.reddit.com`, and RSS feeds. Those unauthenticated paths can work locally but are frequently blocked from hosted runners, which is why OAuth is the preferred reliable setup. When a live Reddit pull fails, the dashboard can show `data/reddit-tape-cache.json` for up to 24 hours, clearly labeled as a cached sentiment sample.
 
 ## Source Registry
 
@@ -432,6 +446,7 @@ When the refresh runs successfully, it:
 - Regenerates `data/snapshot.json`
 - Regenerates `data/model-scorebook.json` and `data/market-cap-cache.json`
 - Updates `data/deeper-read-history.json` so the next AI Deeper Read can avoid repeating the same source mix when enough alternatives exist
+- Updates `data/reddit-tape-cache.json` when Reddit ingestion produces clean ticker concentration, giving scheduled refreshes a transparent last-good fallback when Reddit blocks a runner
 - Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, model date, and row counts
 - Commits the updated snapshot, scorebook, refresh status, market-cap cache, and reference cache back to `main` if any changed
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
@@ -940,6 +955,7 @@ data/long-horizon-research.json    Generated Strategic Book dashboard snapshot
 data/model-rank-scores-long-horizon.json Ignored intermediate live one-year model scores
 data/model-reference-cache.json    Generated daily S&P 500 model reference cache
 data/market-cap-cache.json         Generated market-cap lookup cache for scorebook rows
+data/reddit-tape-cache.json        Generated last-good Reddit ticker attention cache
 data/refresh-status.json           Generated refresh diagnostics and last-run health status
 analysis/model-monitoring/         Local model monitoring analyses and charts
 Dockerfile                         Container image for the private Ticker Lab backend

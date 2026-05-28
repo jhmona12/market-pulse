@@ -200,6 +200,14 @@ if (!pagesWorkflow.includes("data/long-horizon-research.json public/data/long-ho
   fail(".github/workflows/pages.yml does not publish data/long-horizon-research.json");
 }
 
+const refreshWorkflow = readFileSync(join(root, ".github/workflows/refresh-data.yml"), "utf8");
+if (!refreshWorkflow.includes("REDDIT_CLIENT_ID")) {
+  fail(".github/workflows/refresh-data.yml does not pass Reddit OAuth secrets to the refresh script");
+}
+if (!refreshWorkflow.includes("data/reddit-tape-cache.json")) {
+  fail(".github/workflows/refresh-data.yml does not preserve data/reddit-tape-cache.json");
+}
+
 const localServer = readFileSync(join(root, "scripts/local-dashboard-server.mjs"), "utf8");
 if (!localServer.includes('"data/model-monitoring.json"')) {
   fail("scripts/local-dashboard-server.mjs does not allow data/model-monitoring.json");
