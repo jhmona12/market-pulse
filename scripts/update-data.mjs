@@ -2796,6 +2796,7 @@ function deeperReadInterestingness(article) {
   if (/\b(Axios Macro|Axios Markets|Raymond James|Fidelity|Morgan Stanley|J\\.P\\. Morgan|Bank of America Institute|State Street|Merrill|Schwab)\b/i.test(sourceName)) score += 14;
   if (/\b(daily open|stock market news|market update|top stories|earnings rss|before the bell|opening comment|live updates|stock futures|oil futures rise|asia-pacific markets fall)\b/i.test(`${article.title || ""} ${sourceName}`)) score -= 34;
   if (/\b(CNBC Top News RSS|CNBC Markets|MarketWatch Top Stories RSS)\b/i.test(sourceName)) score -= 18;
+  if (isMediaMetaArticle(article)) score -= 90;
   const age = articleAgeHours(article.publishedAt);
   if (age != null) score += Math.max(0, 10 - age / 24);
   return roundedNumber(score, 1);
@@ -2803,6 +2804,7 @@ function deeperReadInterestingness(article) {
 
 function isDeeperReadAnalyticalCandidate(article) {
   const text = `${article.sourceName || ""} ${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`;
+  if (isMediaMetaArticle(article)) return false;
   if (/\b(daily open|stock market news|market update|top stories|earnings rss|before the bell|opening comment|live updates|stock futures|oil futures rise|asia-pacific markets fall)\b/i.test(text)) return false;
   if (/\b(Axios Macro|Axios Markets|Raymond James|Fidelity|Morgan Stanley|J\\.P\\. Morgan|Bank of America Institute|State Street|Merrill|Schwab)\b/i.test(article.sourceName || "")) return true;
   return /\b(why it matters|bottom line|between the lines|zoom out|big picture|what is|what isn't|how|why|k-shaped|debt to gdp|productivity|supply chain|ai trade|tariff|energy crisis|consumer stress|capital spending|capex|hard assets|cultural headwaters|volatility strategies|underappreciated|overlooked)\b/i.test(text);
@@ -2904,6 +2906,19 @@ function classifyMarketThemes(text) {
   return themes.length ? themes : ["Market color"];
 }
 
+function isMediaMetaArticle(article = {}) {
+  const text = `${article.sourceName || ""} ${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`;
+  return /\b(newsletter|co-author|coauthor|returns to|joins|hires|appointed|promoted|media post|mediapost|journalist|editor|coverage team|will author|will co-author)\b/i.test(text);
+}
+
+function isLowSignalMarketDriver(article = {}) {
+  const text = `${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`;
+  if (isMediaMetaArticle(article)) return true;
+  if (/\b(Dulux maker|takeover bid from major rival|stock soars 20% after takeover bid)\b/i.test(text)) return true;
+  if (/\b(live updates|stock market today|daily open|before the bell)\b/i.test(article.title || "") && !/\b(oil|yield|fed|cpi|ppi|payroll|earnings|guidance|hormuz|tariff|credit)\b/i.test(text)) return true;
+  return false;
+}
+
 function articleImportanceScore(article, source, previousRefreshAt, now = new Date()) {
   const text = `${article.title} ${article.summary || ""} ${article.excerpt || ""}`;
   const age = articleAgeHours(article.publishedAt, now);
@@ -2916,6 +2931,8 @@ function articleImportanceScore(article, source, previousRefreshAt, now = new Da
   if (themes.some((theme) => ["Earnings", "Rates and central banks", "Geopolitics and policy", "Commodities and energy"].includes(theme))) score += 14;
   if (/breaking|daily open|market pulse|stock market today|before the bell|after hours|wall street|yields?|oil|earnings|central bank/i.test(text)) score += 8;
   if (!article.publishedAt) score -= 12;
+  if (isMediaMetaArticle({ ...article, sourceName: source.name })) score -= 80;
+  if (isLowSignalMarketDriver({ ...article, sourceName: source.name })) score -= 45;
   if (/(pardon our interruption|privacy|terms|sign in|login|subscribe)/i.test(text)) score -= 40;
   return { score, themes, sincePrevious, ageHours: age == null ? null : roundedNumber(age, 1) };
 }
@@ -2938,6 +2955,7 @@ function buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols }) 
   sources.forEach((source) => {
     (source.articles || []).forEach((article) => {
       if (!article.title || !article.url) return;
+      if (isMediaMetaArticle({ ...article, sourceName: source.name }) || isLowSignalMarketDriver({ ...article, sourceName: source.name })) return;
       const ranked = articleImportanceScore(article, source, previousRefreshAt, now);
       const keepFresh = ranked.sincePrevious || (ranked.ageHours != null && ranked.ageHours <= marketIntelFreshHours);
       const keepImportant = ranked.ageHours != null && ranked.ageHours <= marketIntelImportantHours && ranked.score >= 44;
@@ -2988,8 +3006,10 @@ function buildMarketDriverSummary(drivers, earningsTape, redditTape, officialMac
     if (officialMacroThemes.has(theme)) return;
     const driver = drivers
       .filter((item) => !used.has(item.id) && (item.themes || []).includes(theme))
+      .filter((item) => !isLowSignalMarketDriver(item))
       .sort((a, b) => driverThemeFit(b, theme) - driverThemeFit(a, theme))[0];
     if (!driver) return;
+    if (driverThemeFit(driver, theme) < 45) return;
     const conclusion = driverConclusion(driver, theme);
     if (!conclusion) return;
     used.add(driver.id);
@@ -3271,7 +3291,7 @@ function isUsefulTakeaway(value) {
   if (/^(?:The\s+)?(?:fresh\s+)?market tape is led by/i.test(text)) return false;
   if (/^Earnings movers:/i.test(text)) return false;
   if (/\bdispersion\b/i.test(text)) return false;
-  return /\b(so|because|after|as|with|while|therefore|keeps|means|argues|supports|pressures|tightens|eases|risk|watch|avoid|confirm|treat|focus|signal|rose|fell|climbed|above|below|clears|drove|driven|concentrated|unavailable)\b/i.test(text);
+  return /\b(so|because|after|as|with|while|therefore|keeps|means|argues|supports|pressures|tightens|eases|risk|risks|warns|warned|concern|concerns|raising|persistent|embedded|watch|avoid|confirm|treat|focus|signal|rose|fell|climbed|above|below|clears|drove|driven|concentrated|unavailable)\b/i.test(text);
 }
 
 function cleanMemoText(value) {
@@ -3380,6 +3400,38 @@ function cleanDailyRead(dailyRead) {
   };
 }
 
+function headlineFromDriver(driver, fallbackHeadline) {
+  const themes = new Set(driver?.themes || []);
+  const text = `${driver?.title || ""} ${driver?.summary || ""}`.toLowerCase();
+  if (themes.has("Geopolitics and policy") && themes.has("Commodities and energy") && /\b(oil|hormuz|iran)\b/i.test(text)) {
+    return "Oil and geopolitical risk keep position sizing tighter.";
+  }
+  if (themes.has("Rates and central banks") && /\b(inflation|fed|yield|rate)\b/i.test(text)) {
+    return "Sticky inflation risk keeps high-beta momentum on a shorter leash.";
+  }
+  if (themes.has("Earnings") && themes.has("AI and semis")) {
+    return "AI earnings are supporting leaders, but guidance risk remains name-specific.";
+  }
+  if (themes.has("Credit and liquidity")) {
+    return "Funding and credit signals argue for tighter risk control.";
+  }
+  const conclusion = driverConclusion(driver || {}, primaryTheme(driver?.themes || []));
+  if (conclusion) return firstSentence(conclusion, 138);
+  return fallbackHeadline;
+}
+
+function commandStylePortfolioImplication({ regime, leaderText, confirmedLeaderText, modelSectorText, topSector, redditTickers, breadth }) {
+  const parts = [];
+  parts.push(`${regime}; use the model to choose single names rather than reaching for broad beta.`);
+  if (confirmedLeaderText && confirmedLeaderText !== "none") parts.push(`Confirmed momentum leadership is ${confirmedLeaderText}.`);
+  else if (leaderText && leaderText !== "none") parts.push(`Raw model leadership is ${leaderText}, but wait for trend confirmation where needed.`);
+  if (modelSectorText) parts.push(`${modelSectorText}.`);
+  if (topSector?.sector) parts.push(`ETF confirmation is strongest in ${topSector.sector}.`);
+  if (redditTickers?.length) parts.push(`Reddit attention is a crowding check, not a trade trigger.`);
+  if (Number.isFinite(breadth) && breadth < 50) parts.push("Keep sizing modest until breadth improves.");
+  return parts.join(" ");
+}
+
 function buildNote({ opportunities, macro, calendar, sources, model, sectorPerformance, deskRecommendations, aiRecommendations, marketIntelligence }) {
   const modelReady = model?.status === "ready" && model.scoredCount > 0;
   const modelLeaders = opportunities.filter(hasModelRank);
@@ -3404,6 +3456,7 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
   const articleHits = sources.reduce((total, source) => total + (source.articles?.length || 0), 0);
   const upcomingEvents = (calendar || []).slice(0, 3);
   const leaderText = leaders.map((item) => item.symbol).join(", ") || "none";
+  const confirmedLeaderText = modelLeaders.filter((item) => item.setupType === "momentum_confirmed").slice(0, 5).map((item) => item.symbol).join(", ") || "none";
   const etfText = etfLeaders.map((item) => item.symbol).join(", ") || "none";
   const topSector = sectorPerformance?.[0];
   const modelSectorText = dominantModelSectorText(modelLeaders);
@@ -3438,7 +3491,7 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
   const intelligenceHeadline = latestOfficialMacro
     ? macroReleaseHeadline(latestOfficialMacro)
     : topDrivers.length
-      ? `${driverConclusion(topDrivers[0], primaryTheme(topDrivers[0].themes)) || headlineTheme(primaryTheme(topDrivers[0].themes))} sets the first read.`
+      ? headlineFromDriver(topDrivers[0], fallbackHeadline)
       : fallbackHeadline;
   const macroReleaseLead = latestOfficialMacro
     ? macroReleaseBodySentence(latestOfficialMacro)
@@ -3460,7 +3513,8 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
     : [
         [driverLead, secondaryDriverLead].filter(Boolean).join(" "),
         earningsLead,
-        `${redditLead} ${regime}; use the model as the single-name filter, with leadership concentrated in ${leaderText}.`
+        redditLead,
+        commandStylePortfolioImplication({ regime, leaderText, confirmedLeaderText, modelSectorText, topSector, redditTickers, breadth })
       ].filter(Boolean).join(" ");
   const macroReleaseBullets = officialMacroReleases
     .filter((release) => release.status === "ready")
@@ -3488,7 +3542,6 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
     deskRecommendations?.length
       ? `Desk call summary: ${deskRecommendations.slice(0, 4).map((item) => `${item.symbol} (${item.label})`).join(", ")}.`
       : "Desk call summary was unavailable in this snapshot.",
-    aiFocus ? `AI memo: ${aiFocus}` : "AI memo was unavailable, so this read is based on deterministic model, macro, sector, and source data.",
     sourceBriefs.length ? `Research tape: ${sourceBriefs.join(" | ")}.` : "Research tape: no high-quality article briefs were extracted from the configured source pages."
   ].filter(isUsefulTakeaway);
   const fallbackWatch = [

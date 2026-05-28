@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Morning Desk</title>
-    <link rel="stylesheet" href="styles.css?v=20260527-information-architecture" />
+    <link rel="stylesheet" href="styles.css?v=20260528-command-center" />
   </head>
   <body>
     <main class="shell">
@@ -45,13 +45,75 @@
 
       <div class="view-panel active" id="briefingView">
         <section class="grid briefing-grid">
+          <article class="panel command-panel" id="command-center">
+            <div class="panel-title">
+              <span>Command Center</span>
+              <span id="commandMeta">Decision sheet</span>
+            </div>
+            <div class="command-layout">
+              <section class="command-call">
+                <span class="command-kicker" id="commandStanceLabel">Loading stance</span>
+                <h2 id="commandHeadline">Building the decision sheet</h2>
+                <p id="commandBody"></p>
+                <div class="command-badges" id="commandBadges"></div>
+              </section>
+              <div class="command-stat-grid" id="commandStats"></div>
+            </div>
+            <div class="command-modules">
+              <section class="command-module">
+                <h3>Action Queue</h3>
+                <div class="command-card-list" id="commandActionQueue"></div>
+              </section>
+              <section class="command-module">
+                <h3>What Changed</h3>
+                <div class="command-card-list" id="commandChangeTape"></div>
+              </section>
+              <section class="command-module">
+                <h3>Risk Radar</h3>
+                <div class="command-card-list" id="commandRiskRadar"></div>
+              </section>
+            </div>
+            <div class="command-modules secondary">
+              <section class="command-module">
+                <h3>Contradiction Flags</h3>
+                <div class="command-card-list" id="commandContradictions"></div>
+              </section>
+              <section class="command-module">
+                <h3>Portfolio Shape</h3>
+                <div class="command-card-list" id="commandPortfolioShape"></div>
+              </section>
+              <section class="command-module">
+                <h3>Retail Signal</h3>
+                <div class="command-card-list" id="commandRetailSignal"></div>
+              </section>
+            </div>
+          </article>
+
           <article class="panel note-panel" id="daily-read">
             <div class="panel-title">
-              <span>Daily Read</span>
+              <span>Market Read</span>
+              <span id="noteMeta">Conclusion + evidence</span>
             </div>
             <h2 id="noteHeadline">Loading the tape</h2>
             <p id="noteBody"></p>
             <div id="dataStatusBanner" class="data-status-banner" hidden></div>
+            <div class="note-columns">
+              <div>
+                <h3>Key Takeaways</h3>
+                <ul id="changedList"></ul>
+              </div>
+              <div>
+                <h3>Watch Next</h3>
+                <ul id="watchList"></ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel evidence-panel" id="evidence-tape">
+            <div class="panel-title">
+              <span>Evidence Tape</span>
+              <span>Top drivers only</span>
+            </div>
             <div class="market-intel" id="marketIntel">
               <div>
                 <h3>Market Drivers</h3>
@@ -64,16 +126,6 @@
               <div>
                 <h3>Retail Attention</h3>
                 <div class="intel-stack" id="redditAttentionList"></div>
-              </div>
-            </div>
-            <div class="note-columns">
-              <div>
-                <h3>Key Takeaways</h3>
-                <ul id="changedList"></ul>
-              </div>
-              <div>
-                <h3>Watch Next</h3>
-                <ul id="watchList"></ul>
               </div>
             </div>
           </article>
@@ -395,6 +447,6 @@
       </section>
     </main>
 
-    <script type="module" src="app.js?v=20260527-information-architecture"></script>
+    <script type="module" src="app.js?v=20260528-command-center"></script>
   </body>
 </html>

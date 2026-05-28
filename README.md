@@ -30,7 +30,8 @@ flowchart TD
   refresh --> marketCaps["data/market-cap-cache.json<br/>Reusable market-cap lookups"]
   schedule --> refreshStatus["data/refresh-status.json<br/>Last run status, delay, model date, row counts"]
 
-  snapshot --> pages["GitHub Pages static site"]
+  snapshot --> command["Browser decision layer<br/>Command Center, action queue, contradictions"]
+  command --> pages["GitHub Pages static site"]
   scorebook --> pages
   monitoring --> pages
   longResearch --> pages
@@ -49,7 +50,7 @@ flowchart TD
 
 ## What It Does
 
-- Summarizes the current market setup in a daily read.
+- Summarizes the current market setup in a Command Center built around stance, action queue, what changed, risk radar, contradictions, portfolio shape, and retail sentiment.
 - Screens S&P 500 constituents and a curated ETF universe for momentum setups.
 - Scores current S&P 500 stocks with a production XGBoost learning-to-rank model.
 - Organizes the web UI into five primary views: Briefing, Tactical Book, Strategic Book, Market Intel, and Model Lab.
@@ -65,6 +66,7 @@ flowchart TD
 - Tracks professional market drivers, earnings calendars, earnings-linked daily movers, Yahoo Finance mover screens, and Reddit ticker attention as separate inputs.
 - Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data into structured research recommendations.
 - Adds a Deeper Read section that uses AI to surface differentiated, thought-provoking source analysis from the last 7 days rather than generic daily market recaps.
+- Keeps the Briefing view decision-first: Command Center first, Market Read second, evidence tape below it, and detailed scoreboards/diagnostics in their own tabs.
 - Enriches model candidates with company descriptions, market caps, investor relations links, earnings context, and recent ticker-specific news where free sources are available.
 - Uses AI to draft the Daily Read executive snapshot, with deterministic model, sector, macro, and source-tape metrics as guardrails and fallback.
 - Shows a Stay Away section based on the lowest-ranked model names and weakest sector clusters, framed as risk control rather than short-sale advice.
@@ -163,6 +165,8 @@ The refresh script:
 - Treats Reddit / WallStreetBets as attention and sentiment only, separated from professional commentary
 - Pulls Reddit through the free OAuth API when `REDDIT_CLIENT_ID` and `REDDIT_CLIENT_SECRET` are configured; otherwise it attempts public JSON, `old.reddit.com`, and RSS fallbacks
 - Writes `data/reddit-tape-cache.json` only when a clean Reddit ticker sample is extracted, then uses that last-good sample for up to 24 hours if the next refresh is blocked; cached sentiment is explicitly labeled as cached in the briefing
+- Filters low-signal source items such as media-industry meta stories, publisher staffing announcements, and unrelated single-stock headlines before they can influence the Daily Read or Deeper Read
+- Builds a deterministic decision layer in the browser that turns the snapshot into stance, action queue, contradiction flags, sector/portfolio concentration, and retail-overlap checks
 - Reuses the fresh technical tape exported by `scripts/modeling/score_live_rank_model.py`; if that tape is unavailable and Yahoo chart history is temporarily rate-limited, stale technical values are left unavailable while sources, earnings, Reddit, macro, and eligible model context continue to refresh
 - Pulls S&P 500 constituents from Wikipedia when available
 - Adds ETFs from `config/universe.json`

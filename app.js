@@ -674,11 +674,237 @@ function renderMarketStrip() {
   });
 }
 
+function setupLabel(item = {}) {
+  if (item.setupType === "momentum_confirmed") return "Research long";
+  if (item.setupType === "model_rebound_watch") return "Wait for activation";
+  if ((item.setupTags || []).includes("Not Momentum Confirmed") || item.setupType === "model_ranked_not_momentum_confirmed") return "Do not chase";
+  return "Model watch";
+}
+
+function commandCard(label, title, body, meta = "", tone = "") {
+  return `
+    <article class="command-card ${tone}">
+      <span>${esc(label)}</span>
+      <strong>${esc(title)}</strong>
+      ${body ? `<p>${esc(body)}</p>` : ""}
+      ${meta ? `<small>${esc(meta)}</small>` : ""}
+    </article>
+  `;
+}
+
+function commandStat(label, value, note = "", tone = "") {
+  return `
+    <article class="command-stat ${tone}">
+      <span>${esc(label)}</span>
+      <strong>${esc(value)}</strong>
+      ${note ? `<small>${esc(note)}</small>` : ""}
+    </article>
+  `;
+}
+
+function topModelRows(limit = 25) {
+  return [...(state.scorebook.rows || [])]
+    .filter((row) => Number.isFinite(Number(row.modelRank)))
+    .sort((a, b) => Number(a.modelRank) - Number(b.modelRank))
+    .slice(0, limit);
+}
+
+function breadthStats() {
+  const opportunities = state.snapshot.opportunities || [];
+  const total = opportunities.length || 0;
+  const both = opportunities.filter((item) => item.above50 && item.above200).length;
+  const above50 = opportunities.filter((item) => item.above50).length;
+  const above200 = opportunities.filter((item) => item.above200).length;
+  return {
+    total,
+    both,
+    bothPct: total ? Math.round((both / total) * 100) : null,
+    above50Pct: total ? Math.round((above50 / total) * 100) : null,
+    above200Pct: total ? Math.round((above200 / total) * 100) : null
+  };
+}
+
+function commandStance() {
+  const breadth = breadthStats();
+  const marketStatus = state.snapshot.marketDataStatus || {};
+  const themes = new Set((state.snapshot.marketIntelligence?.topThemes || []).slice(0, 4).map((item) => item.theme));
+  const macroRisk = themes.has("Rates and central banks") || themes.has("Geopolitics and policy") || themes.has("Commodities and energy");
+  const dataFresh = marketStatus.status === "fresh";
+  if (!dataFresh) {
+    return {
+      label: "Data Caution",
+      headline: "Fresh technical data is unavailable; do not act on stale price signals.",
+      body: marketStatus.message || "Refresh the model scorer before relying on price-derived fields.",
+      tone: "warning"
+    };
+  }
+  if ((breadth.bothPct ?? 0) >= 55 && !macroRisk) {
+    return {
+      label: "Constructive",
+      headline: "Breadth supports adding risk, but keep single-name quality high.",
+      body: "Use the tactical model for timing and the long-horizon model as confirmation.",
+      tone: "positive"
+    };
+  }
+  if ((breadth.bothPct ?? 0) >= 40) {
+    return {
+      label: "Selective Long Risk",
+      headline: "Stay long the cleanest setups, but size down around macro and energy risk.",
+      body: "The opportunity is in model-confirmed names, not broad market beta. Favor names with trend confirmation and clear risk controls.",
+      tone: "watch"
+    };
+  }
+  return {
+    label: "Defensive",
+    headline: "Breadth is too narrow for broad risk; concentrate only in confirmed leaders.",
+    body: "Avoid rebound-watch names until activation and keep the avoid list out of the long book.",
+    tone: "risk"
+  };
+}
+
+function strongestCrossHorizonRows() {
+  return combinedLongHorizonRows()
+    .filter((row) => percentilePoint(row.longModelPercentile) >= 90 && percentilePoint(row.modelPercentile ?? row.tacticalModelPercentile) >= 90 && isMomentumConfirmedSetup(row))
+    .sort((a, b) => {
+      const bScore = percentilePoint(b.longModelPercentile) + percentilePoint(b.modelPercentile ?? b.tacticalModelPercentile);
+      const aScore = percentilePoint(a.longModelPercentile) + percentilePoint(a.modelPercentile ?? a.tacticalModelPercentile);
+      return bScore - aScore || Number(a.modelRank || 9999) - Number(b.modelRank || 9999);
+    });
+}
+
+function renderCommandCenter() {
+  const meta = $("#commandMeta");
+  if (!meta) return;
+
+  const stance = commandStance();
+  const breadth = breadthStats();
+  const top25 = topModelRows(25);
+  const topDecile = topModelRows(Math.ceil((state.scorebook.rows || []).length * 0.1));
+  const momentumRows = topDecile.filter((row) => row.setupType === "momentum_confirmed");
+  const watchRows = topDecile.filter((row) => row.setupType === "model_rebound_watch" || row.setupType === "model_ranked_not_momentum_confirmed");
+  const crossHorizon = strongestCrossHorizonRows();
+  const sector = dominantSector(top25);
+  const sourceHealth = state.snapshot.marketIntelligence?.sourceHealth || {};
+  const reddit = state.snapshot.marketIntelligence?.reddit || {};
+  const redditTickers = reddit.topTickers || [];
+  const avoidCompanies = state.snapshot.avoidList?.companies || [];
+  const recentEntrants = state.monitoring.recentEntrants || [];
+  const drivers = state.snapshot.marketIntelligence?.professionalDrivers || [];
+  const noteChanges = state.snapshot.note?.changed || [];
+  const earningsMovers = state.snapshot.marketIntelligence?.earnings?.earningsMovers || [];
+  const upcoming = state.snapshot.calendar || [];
+  const model = state.snapshot.model || {};
+  const extended = topDecile.filter((row) => Number(row.rsi14) > 76).length;
+  const notMomentumTop = topDecile.filter((row) => row.setupType !== "momentum_confirmed").slice(0, 4);
+  const redditOverlap = redditTickers.filter((item) => topDecile.some((row) => row.symbol === item.symbol));
+  const retailOnly = redditTickers.filter((item) => !topDecile.some((row) => row.symbol === item.symbol)).slice(0, 4);
+
+  meta.textContent = `${model.status === "ready" ? `${model.scoredCount || 0} scored` : "model unavailable"} · ${model.asOfDate || "latest close"}`;
+  $("#commandStanceLabel").textContent = stance.label;
+  $("#commandStanceLabel").className = `command-kicker ${stance.tone}`;
+  $("#commandHeadline").textContent = stance.headline;
+  $("#commandBody").textContent = stance.body;
+  $("#commandBadges").innerHTML = [
+    breadth.bothPct != null ? `${breadth.bothPct}% above both 50D/200D` : null,
+    sector ? `${sector.sector}: ${sector.count}/top 25` : null,
+    reddit.status === "ready" ? "Reddit live" : reddit.status === "cache_fallback" ? "Reddit cached" : null,
+    sourceHealth.checked ? `${sourceHealth.live || 0}/${sourceHealth.checked} sources live` : null
+  ].filter(Boolean).map((item) => `<span>${esc(item)}</span>`).join("");
+
+  $("#commandStats").innerHTML = [
+    commandStat("Breadth", breadth.bothPct == null ? "n/a" : `${breadth.bothPct}%`, `${breadth.above50Pct ?? "n/a"}% above 50D · ${breadth.above200Pct ?? "n/a"}% above 200D`, breadth.bothPct >= 55 ? "positive" : breadth.bothPct >= 40 ? "watch" : "risk"),
+    commandStat("Clean Top-Decile", `${momentumRows.length}/${topDecile.length || 0}`, "Momentum confirmed names inside the top model bucket", momentumRows.length >= topDecile.length / 2 ? "positive" : "watch"),
+    commandStat("Cross-Horizon", `${crossHorizon.length}`, "Top 1Y names with tactical confirmation", crossHorizon.length ? "positive" : "watch"),
+    commandStat("Source Health", sourceHealth.checked ? `${sourceHealth.live || 0}/${sourceHealth.checked}` : "n/a", "Live source pages feeding the briefing", sourceHealth.blockedOrFailed?.length ? "warning" : "positive")
+  ].join("");
+
+  const freshDriverItems = drivers
+    .filter((item) => item.freshness === "Since prior refresh" || item.freshness === "Last 24 hours")
+    .slice(0, 3);
+  const noteChangeItems = noteChanges
+    .filter((item) => typeof item === "string" && item.trim())
+    .slice(0, 2);
+  const actionLeaders = momentumRows.slice(0, 3);
+  const actionWatch = watchRows[0];
+  const actionTitle = actionLeaders.length
+    ? `${actionLeaders.map((row) => row.symbol).join(", ")} are the cleanest tactical longs`
+    : actionWatch
+      ? `${actionWatch.symbol} is the first watch-list setup`
+      : "No clean tactical queue";
+  const actionBody = actionLeaders.length
+    ? `Confirmed momentum with stops: ${actionLeaders.map((row) => `${row.symbol} ${money(row.stopSellPrice)}`).join(" · ")}.`
+    : "No top-decile name currently clears the momentum-confirmed setup filter.";
+  const actionMeta = actionWatch
+    ? `Watch: ${actionWatch.symbol}${actionWatch.reboundActivationPrice ? ` activation ${money(actionWatch.reboundActivationPrice)}` : " needs trend confirmation"}`
+    : "No rebound-watch name promoted";
+  $("#commandActionQueue").innerHTML = commandCard("Trade queue", actionTitle, actionBody, actionMeta, actionLeaders.length ? "positive" : "watch");
+
+  const changedSymbols = recentEntrants.slice(0, 2).map((row) => `${row.symbol} #${row.modelRank}`).join(", ");
+  const freshDriverText = freshDriverItems.length
+    ? freshDriverItems.slice(0, 2).map((item) => `${item.title || "Market driver"} (${item.sourceName || "source"})`).join(" · ")
+    : noteChangeItems.map((item) => item.replace(/\s+\(M\d+\)\s*$/, "")).join(" · ");
+  $("#commandChangeTape").innerHTML = commandCard(
+    "Refresh delta",
+    changedSymbols ? `${changedSymbols} moved into focus` : "No new model entrant changed the book",
+    freshDriverText || "No fresh source driver cleared the filter for this refresh.",
+    recentEntrants.length ? `${recentEntrants.length} top-decile entrant flags` : "Source-led change check",
+    freshDriverItems.length || recentEntrants.length ? "watch" : ""
+  );
+
+  $("#commandRiskRadar").innerHTML = commandCard(
+    "Risk checks",
+    drivers[0]?.themes?.slice(0, 2).join(" / ") || (state.snapshot.marketIntelligence?.topThemes || [])[0]?.theme || "No dominant theme",
+    `${drivers[0]?.summary || "No fresh professional driver cleared the current filter."} ${earningsMovers.length ? `Earnings watch: ${earningsMovers.slice(0, 3).map((item) => item.symbol).join(", ")}.` : ""}`,
+    `${extended} extended top-decile RSI flags`,
+    extended ? "warning" : "watch"
+  );
+
+  const contradictionRows = [
+    ...notMomentumTop.slice(0, 3),
+    ...combinedLongHorizonRows()
+      .filter((row) => percentilePoint(row.longModelPercentile) >= 95 && percentilePoint(row.modelPercentile ?? row.tacticalModelPercentile) < 50)
+      .slice(0, 1)
+  ];
+  $("#commandContradictions").innerHTML = commandCard(
+    "Model disagreement",
+    contradictionRows.length ? contradictionRows.map((row) => row.symbol).join(", ") : "No major contradictions",
+    contradictionRows.length
+      ? "These names score well somewhere in the stack but lack full price or horizon confirmation. Keep them out of the core queue until the missing confirmation improves."
+      : "The top model book is aligned with price confirmation and the long-horizon lens.",
+    contradictionRows[0]?.reboundActivationPrice ? `First activation ${money(contradictionRows[0].reboundActivationPrice)}` : "Confirmation check",
+    contradictionRows.length ? "warning" : "positive"
+  );
+
+  $("#commandPortfolioShape").innerHTML = commandCard(
+    "Book shape",
+    sector ? `${sector.sector} is the concentration risk` : "No dominant sector",
+    `${sector ? `${sector.count}/25 top model names, led by ${sector.symbols.slice(0, 5).join(", ")}.` : "Leadership is distributed."} ${
+      state.snapshot.sectorPerformance?.[0]
+        ? `${state.snapshot.sectorPerformance[0].sector} ETF proxy is ${pct(state.snapshot.sectorPerformance[0].change30d)} over 30D.`
+        : "Sector confirmation did not populate."
+    }`,
+    avoidCompanies.length ? `Avoid: ${avoidCompanies.slice(0, 3).map((item) => item.symbol).join(", ")}` : "Avoid book clear",
+    sector && sector.count >= 8 ? "warning" : "watch"
+  );
+
+  $("#commandRetailSignal").innerHTML = commandCard(
+    redditOverlap.length ? "Retail overlap" : "Retail separate",
+    redditOverlap.length ? redditOverlap.map((item) => item.symbol).join(", ") : (retailOnly.map((item) => item.symbol).join(", ") || "No clean ticker concentration"),
+    redditOverlap.length
+      ? "Retail attention overlaps with model leadership; treat it as crowding/sentiment, not proof."
+      : "Retail chatter is not setting the model queue. Use it as market color unless price and model confirmation show up.",
+    reddit.status === "ready" ? "Reddit live" : reddit.status === "cache_fallback" ? "Reddit cached" : "Reddit unavailable",
+    redditOverlap.length ? "warning" : "watch"
+  );
+}
+
 function renderNote() {
   const note = state.snapshot.note || fallbackSnapshot.note;
   $("#asOfDate").textContent = `As of ${formatDate(state.snapshot.generatedAt)}`;
+  $("#noteMeta").textContent = note.generatedBy ? `${note.generatedBy.replaceAll("_", " ")}` : "Conclusion + evidence";
   $("#noteHeadline").textContent = note.headline;
   $("#noteBody").textContent = note.body;
+  renderCommandCenter();
   renderDataStatusBanner();
   renderMarketIntelligence();
   renderList($("#changedList"), note.changed || []);
@@ -2136,6 +2362,7 @@ async function loadScorebook() {
   renderScoreboard();
   renderTopDecileMonitor();
   renderModelLens();
+  renderCommandCenter();
 }
 
 async function loadModelMonitoring() {
@@ -2169,6 +2396,7 @@ async function loadModelMonitoring() {
   }
   renderTopDecileMonitor();
   renderModelLens();
+  renderCommandCenter();
 }
 
 async function loadLongHorizonResearch() {
@@ -2206,6 +2434,7 @@ async function loadLongHorizonResearch() {
   }
   renderLongHorizonResearch();
   renderModelLens();
+  renderCommandCenter();
 }
 
 wireControls();
