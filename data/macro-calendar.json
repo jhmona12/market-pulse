@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-06-04T01:49:16.730Z",
+  "generatedAt": "2026-06-04T15:42:28.448Z",
   "window": {
-    "today": "2026-06-03",
+    "today": "2026-06-04",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-05-27",
-    "endDate": "2026-12-03"
+    "startDate": "2026-05-28",
+    "endDate": "2026-12-04"
   },
   "sources": [
     {
       "source": "BLS Employment Situation",
       "status": "ready",
-      "eventCount": 6,
+      "eventCount": 7,
       "scraper": "fred-release-calendar"
     },
     {
@@ -464,6 +464,19 @@
       "sourceUrl": "https://www.bea.gov/news/schedule",
       "sourceName": "BEA release schedule",
       "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2026-12-04",
+      "time": "8:30 AM ET",
+      "event": "Employment Situation",
+      "title": "Employment Situation",
+      "source": "BLS",
+      "importance": "High",
+      "sourceUrl": "https://fred.stlouisfed.org/releases/calendar?od=asc&rid=50&ve=2026-12-31&view=year&vs=2026-01-01",
+      "sourceName": "FRED release calendar",
+      "upstreamSource": "BLS",
+      "scraper": "fred-release-calendar",
+      "note": "FRED calendar for the BLS Employment Situation release. Direct BLS schedule pages can block automated requests."
     }
   ]
 }
