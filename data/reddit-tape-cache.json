@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-05T01:33:39.562Z",
+  "generatedAt": "2026-06-05T15:30:18.470Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
@@ -9,7 +9,7 @@
       "segment": "Retail momentum",
       "status": "ready",
       "error": null,
-      "postCount": 35,
+      "postCount": 33,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -39,7 +39,7 @@
       "segment": "Retail investing",
       "status": "ready",
       "error": null,
-      "postCount": 35,
+      "postCount": 34,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -60,7 +60,7 @@
           "status": "ready",
           "method": "rss:www.reddit.com",
           "error": null,
-          "postCount": 25
+          "postCount": 24
         }
       ]
     },
@@ -69,7 +69,7 @@
       "segment": "Retail investing",
       "status": "ready",
       "error": null,
-      "postCount": 37,
+      "postCount": 33,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -90,7 +90,7 @@
           "status": "ready",
           "method": "rss:www.reddit.com",
           "error": null,
-          "postCount": 25
+          "postCount": 24
         }
       ]
     },
@@ -129,7 +129,7 @@
       "segment": "Options sentiment",
       "status": "ready",
       "error": null,
-      "postCount": 29,
+      "postCount": 28,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -150,43 +150,44 @@
           "status": "ready",
           "method": "rss:www.reddit.com",
           "error": null,
-          "postCount": 11
+          "postCount": 5
         }
       ]
     }
   ],
   "topTickers": [
     {
-      "symbol": "AVGO",
+      "symbol": "MU",
       "mentions": 3,
       "signalStrength": 9.5,
       "directMentions": 3,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "wallstreetbets"
+        "wallstreetbets",
+        "options"
       ],
       "posts": [
         {
-          "title": "I did it y’all!! $AVGO 📉",
+          "title": "MU calls expiring tmr!",
           "subreddit": "wallstreetbets",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx2y6x/i_did_it_yall_avgo/"
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx7uhi/mu_calls_expiring_tmr/"
         },
         {
-          "title": "Full Port AVGO",
-          "subreddit": "wallstreetbets",
+          "title": "MU follow up: invalidation triggered",
+          "subreddit": "options",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twvl79/full_port_avgo/"
+          "permalink": "https://www.reddit.com/r/options/comments/1txnoz8/mu_follow_up_invalidation_triggered/"
         },
         {
-          "title": "50K AVGO YOLO",
-          "subreddit": "wallstreetbets",
+          "title": "MU: $583M in flow today and someone is pricing a move to $1050-$1100 by June 12",
+          "subreddit": "options",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twth6n/50k_avgo_yolo/"
+          "permalink": "https://www.reddit.com/r/options/comments/1twsxxo/mu_583m_in_flow_today_and_someone_is_pricing_a/"
         }
       ],
       "attentionScore": 167
@@ -250,6 +251,42 @@
       "attentionScore": 126
     },
     {
+      "symbol": "SPY",
+      "mentions": 3,
+      "signalStrength": 7,
+      "directMentions": 2,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks",
+        "investing"
+      ],
+      "posts": [
+        {
+          "title": "Social media \"20 minute trader\" theory useful?",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1tx9xyv/social_media_20_minute_trader_theory_useful/"
+        },
+        {
+          "title": "For those investing in S&P 500 ETFs (VOO/SPY/IVV), how have your returns been?",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/investing/comments/1txlqpf/for_those_investing_in_sp_500_etfs_voospyivv_how/"
+        },
+        {
+          "title": "10-Year Backtest: Leveraged Momentum Turned $10K into $347K (vs. SPY) - Thoughts on the Strategy?",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/investing/comments/1txabtx/10year_backtest_leveraged_momentum_turned_10k/"
+        }
+      ],
+      "attentionScore": 126
+    },
+    {
       "symbol": "HPE",
       "mentions": 2,
       "signalStrength": 7.4,
@@ -277,6 +314,34 @@
         }
       ],
       "attentionScore": 122
+    },
+    {
+      "symbol": "AVGO",
+      "mentions": 2,
+      "signalStrength": 7,
+      "directMentions": 2,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "wallstreetbets"
+      ],
+      "posts": [
+        {
+          "title": "wealthsimple exercised AVGO puts after hours. i'm down 1.2 million. is it over",
+          "subreddit": "wallstreetbets",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx91fj/wealthsimple_exercised_avgo_puts_after_hours_im/"
+        },
+        {
+          "title": "I did it y’all!! $AVGO 📉",
+          "subreddit": "wallstreetbets",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx2y6x/i_did_it_yall_avgo/"
+        }
+      ],
+      "attentionScore": 118
     },
     {
       "symbol": "RDDT",
@@ -347,27 +412,6 @@
         }
       ],
       "attentionScore": 85
-    },
-    {
-      "symbol": "IOT",
-      "mentions": 1,
-      "signalStrength": 5.7,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "wallstreetbets"
-      ],
-      "posts": [
-        {
-          "title": "$IOT - 100k YOLO JUNE 4 EARNINGs",
-          "subreddit": "wallstreetbets",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twvlwd/iot_100k_yolo_june_4_earnings/"
-        }
-      ],
-      "attentionScore": 81
     },
     {
       "symbol": "INTC",
@@ -494,38 +538,17 @@
         }
       ],
       "attentionScore": 69
-    },
-    {
-      "symbol": "AMC",
-      "mentions": 1,
-      "signalStrength": 3.7,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "options"
-      ],
-      "posts": [
-        {
-          "title": "AMC $2 CSP for June 2026",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/options/comments/1tv0ocz/amc_2_csp_for_june_2026/"
-        }
-      ],
-      "attentionScore": 61
     }
   ],
   "topPosts": [
     {
-      "id": "T31TR970D",
+      "id": "T31TXHO3C",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Weekly Earnings Thread 6/1 - 6/5",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tr970d/weekly_earnings_thread_61_65/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tr970d/weekly_earnings_thread_61_65/",
-      "createdAt": "2026-05-29T17:30:30.000Z",
+      "title": "Daily Discussion Thread for June 05, 2026",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1txho3c/daily_discussion_thread_for_june_05_2026/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1txho3c/daily_discussion_thread_for_june_05_2026/",
+      "createdAt": "2026-06-05T11:01:04.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -537,13 +560,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TWYORJ",
+      "id": "T31TXF6IM",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "What Are Your Moves Tomorrow, June 05, 2026",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1twyorj/what_are_your_moves_tomorrow_june_05_2026/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twyorj/what_are_your_moves_tomorrow_june_05_2026/",
-      "createdAt": "2026-06-04T19:57:09.000Z",
+      "title": "Fuck everyone. 4.5 years to get to a million without options and I’m done!",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1txf6im/fuck_everyone_45_years_to_get_to_a_million/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1txf6im/fuck_everyone_45_years_to_get_to_a_million/",
+      "createdAt": "2026-06-05T08:45:27.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -551,7 +574,25 @@
       "tickers": [],
       "tickerWeights": {},
       "directTickers": [],
-      "filteredAsGeneric": true,
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31TXJSGO",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "U.S. economy adds 172,000 jobs in May, beating expectations of 85,000. Unemployment rate holds at 4.3%",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1txjsgo/us_economy_adds_172000_jobs_in_may_beating/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1txjsgo/us_economy_adds_172000_jobs_in_may_beating/",
+      "createdAt": "2026-06-05T12:39:12.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
     {
@@ -562,6 +603,84 @@
       "url": "https://www.reddit.com/r/wallstreetbets/comments/1tx3d9y/spacex_other_mega_ipos_denied_fast_index_entry_by/",
       "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx3d9y/spacex_other_mega_ipos_denied_fast_index_entry_by/",
       "createdAt": "2026-06-04T22:56:14.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31TX91FJ",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "wealthsimple exercised AVGO puts after hours. i'm down 1.2 million. is it over",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tx91fj/wealthsimple_exercised_avgo_puts_after_hours_im/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx91fj/wealthsimple_exercised_avgo_puts_after_hours_im/",
+      "createdAt": "2026-06-05T03:11:16.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "AVGO"
+      ],
+      "tickerWeights": {
+        "AVGO": 2.5
+      },
+      "directTickers": [
+        "AVGO"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31TX7YG5",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "SpaceX creates dedicated ipo website with “open a brokerage account” on the front page",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tx7yg5/spacex_creates_dedicated_ipo_website_with_open_a/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx7yg5/spacex_creates_dedicated_ipo_website_with_open_a/",
+      "createdAt": "2026-06-05T02:20:14.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31TXER3W",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "You guys lied to me…",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1txer3w/you_guys_lied_to_me/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1txer3w/you_guys_lied_to_me/",
+      "createdAt": "2026-06-05T08:19:46.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31TX1DNO",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "This is actually a real quote of Buffett when he sold his stake in TSMC",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tx1dno/this_is_actually_a_real_quote_of_buffett_when_he/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx1dno/this_is_actually_a_real_quote_of_buffett_when_he/",
+      "createdAt": "2026-06-04T21:36:45.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -597,31 +716,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TX1DNO",
+      "id": "T31TXLYX2",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "This is actually a real quote of Buffett when he sold his stake in TSMC",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tx1dno/this_is_actually_a_real_quote_of_buffett_when_he/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx1dno/this_is_actually_a_real_quote_of_buffett_when_he/",
-      "createdAt": "2026-06-04T21:36:45.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TWYYO6",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Declining IPO participation is disabled.",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1twyyo6/declining_ipo_participation_is_disabled/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twyyo6/declining_ipo_participation_is_disabled/",
-      "createdAt": "2026-06-04T20:06:55.000Z",
+      "title": "Not sure how far we’ll fall",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1txlyx2/not_sure_how_far_well_fall/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1txlyx2/not_sure_how_far_well_fall/",
+      "createdAt": "2026-06-05T14:06:21.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -651,13 +752,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TWT3PY",
+      "id": "T31TXJ5JK",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "3pm Trump announcement on $700 million coal investment",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1twt3py/3pm_trump_announcement_on_700_million_coal/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twt3py/3pm_trump_announcement_on_700_million_coal/",
-      "createdAt": "2026-06-04T16:41:46.000Z",
+      "title": "$2.1MM MSOS YOLO - Trulieve (TCNNF) Uplisting to NYSE June 10th",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1txj5jk/21mm_msos_yolo_trulieve_tcnnf_uplisting_to_nyse/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1txj5jk/21mm_msos_yolo_trulieve_tcnnf_uplisting_to_nyse/",
+      "createdAt": "2026-06-05T12:11:32.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -669,40 +770,31 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TWZM6R",
+      "id": "T31TXK955",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "GOOG LEAPS 3,216%/$40k GAIN I BOUGHT ON SHROOMS CLOSED OUT",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1twzm6r/goog_leaps_321640k_gain_i_bought_on_shrooms/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twzm6r/goog_leaps_321640k_gain_i_bought_on_shrooms/",
-      "createdAt": "2026-06-04T20:31:20.000Z",
+      "title": "Multi-Year Bottom Fishing",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1txk955/multiyear_bottom_fishing/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1txk955/multiyear_bottom_fishing/",
+      "createdAt": "2026-06-05T12:58:25.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
       "flair": null,
-      "tickers": [
-        "GOOG",
-        "ON"
-      ],
-      "tickerWeights": {
-        "GOOG": 2.5,
-        "ON": 2.5
-      },
-      "directTickers": [
-        "GOOG",
-        "ON"
-      ],
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TX2Q4L",
+      "id": "T31TWYYO6",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "On a scale of 1-regard, how regarded am I?",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tx2q4l/on_a_scale_of_1regard_how_regarded_am_i/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx2q4l/on_a_scale_of_1regard_how_regarded_am_i/",
-      "createdAt": "2026-06-04T22:30:04.000Z",
+      "title": "Declining IPO participation is disabled.",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1twyyo6/declining_ipo_participation_is_disabled/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twyyo6/declining_ipo_participation_is_disabled/",
+      "createdAt": "2026-06-04T20:06:55.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -732,13 +824,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TWVQGF",
+      "id": "T31TXC5X4",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Quantinuum stock opens at $68 per share after IPO",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1twvqgf/quantinuum_stock_opens_at_68_per_share_after_ipo/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twvqgf/quantinuum_stock_opens_at_68_per_share_after_ipo/",
-      "createdAt": "2026-06-04T18:12:48.000Z",
+      "title": "Gonna call my brokerage for refund…",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1txc5x4/gonna_call_my_brokerage_for_refund/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1txc5x4/gonna_call_my_brokerage_for_refund/",
+      "createdAt": "2026-06-05T05:51:21.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -746,90 +838,6 @@
       "tickers": [],
       "tickerWeights": {},
       "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TW9VBT",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Bitcoin has fallen 22.28% since Microstrategy CEO Michael Saylor uploaded this last month",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tw9vbt/bitcoin_has_fallen_2228_since_microstrategy_ceo/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tw9vbt/bitcoin_has_fallen_2228_since_microstrategy_ceo/",
-      "createdAt": "2026-06-04T01:58:58.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TWJGE4",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Follow me for more financial advice…",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1twjge4/follow_me_for_more_financial_advice/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1twjge4/follow_me_for_more_financial_advice/",
-      "createdAt": "2026-06-04T10:17:35.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TX2Y6X",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "I did it y’all!! $AVGO 📉",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tx2y6x/i_did_it_yall_avgo/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tx2y6x/i_did_it_yall_avgo/",
-      "createdAt": "2026-06-04T22:39:07.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "AVGO"
-      ],
-      "tickerWeights": {
-        "AVGO": 4.5
-      },
-      "directTickers": [
-        "AVGO"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TWO4O1",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Spinning the wheel with $250K. 1/2 BB 1/2 NOW",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1two4o1/spinning_the_wheel_with_250k_12_bb_12_now/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1two4o1/spinning_the_wheel_with_250k_12_bb_12_now/",
-      "createdAt": "2026-06-04T13:44:40.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "NOW"
-      ],
-      "tickerWeights": {
-        "NOW": 2.9
-      },
-      "directTickers": [
-        "NOW"
-      ],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
     }
