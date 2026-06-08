@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-08T01:37:14.621Z",
+  "generatedAt": "2026-06-08T16:24:01.233Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
@@ -9,7 +9,7 @@
       "segment": "Retail momentum",
       "status": "ready",
       "error": null,
-      "postCount": 32,
+      "postCount": 37,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -39,7 +39,7 @@
       "segment": "Retail investing",
       "status": "ready",
       "error": null,
-      "postCount": 32,
+      "postCount": 33,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -60,7 +60,7 @@
           "status": "ready",
           "method": "rss:www.reddit.com",
           "error": null,
-          "postCount": 17
+          "postCount": 19
         }
       ]
     },
@@ -69,7 +69,7 @@
       "segment": "Retail investing",
       "status": "ready",
       "error": null,
-      "postCount": 31,
+      "postCount": 30,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -90,7 +90,7 @@
           "status": "ready",
           "method": "rss:www.reddit.com",
           "error": null,
-          "postCount": 18
+          "postCount": 20
         }
       ]
     },
@@ -129,7 +129,7 @@
       "segment": "Options sentiment",
       "status": "ready",
       "error": null,
-      "postCount": 28,
+      "postCount": 27,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -150,61 +150,32 @@
           "status": "ready",
           "method": "rss:www.reddit.com",
           "error": null,
-          "postCount": 4
+          "postCount": 5
         }
       ]
     }
   ],
   "topTickers": [
     {
-      "symbol": "AVGO",
+      "symbol": "QQQ",
       "mentions": 3,
-      "signalStrength": 8.7,
+      "signalStrength": 9,
       "directMentions": 3,
       "score": 0,
       "comments": 0,
       "subreddits": [
         "wallstreetbets",
-        "stocks",
-        "investing"
-      ],
-      "posts": [
-        {
-          "title": "All in on AVGO after dip",
-          "subreddit": "wallstreetbets",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzcp5m/all_in_on_avgo_after_dip/"
-        },
-        {
-          "title": "what is going on??? AVGO just dumped double digits after record earnings",
-          "subreddit": "stocks",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1tzd86d/what_is_going_on_avgo_just_dumped_double_digits/"
-        },
-        {
-          "title": "I went through the AVGO transcript line by line. Here's what I actually found.",
-          "subreddit": "investing",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/investing/comments/1ty77by/i_went_through_the_avgo_transcript_line_by_line/"
-        }
-      ],
-      "attentionScore": 159
-    },
-    {
-      "symbol": "QQQ",
-      "mentions": 2,
-      "signalStrength": 6.5,
-      "directMentions": 2,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
         "investing",
         "options"
       ],
       "posts": [
+        {
+          "title": "Profit is profit (QQQ Puts)",
+          "subreddit": "wallstreetbets",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u01srk/profit_is_profit_qqq_puts/"
+        },
         {
           "title": "Some honest assessment of my investing strategy and why \"steady but surely\" beats \"get rich now\" if you're not devoted to trading",
           "subreddit": "investing",
@@ -220,7 +191,36 @@
           "permalink": "https://www.reddit.com/r/options/comments/1tyr39u/qqq_skew_has_flipped/"
         }
       ],
-      "attentionScore": 113
+      "attentionScore": 162
+    },
+    {
+      "symbol": "SOFI",
+      "mentions": 2,
+      "signalStrength": 7.8,
+      "directMentions": 2,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "investing",
+        "options"
+      ],
+      "posts": [
+        {
+          "title": "Why I took a position in SOFI",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/investing/comments/1u0cco4/why_i_took_a_position_in_sofi/"
+        },
+        {
+          "title": "Grabbed some $SOFI calls expiring 1/30 at $30 strike",
+          "subreddit": "options",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/options/comments/1txrmks/grabbed_some_sofi_calls_expiring_130_at_30_strike/"
+        }
+      ],
+      "attentionScore": 126
     },
     {
       "symbol": "MU",
@@ -281,8 +281,29 @@
       "attentionScore": 105
     },
     {
-      "symbol": "VOO",
-      "mentions": 2,
+      "symbol": "GENI",
+      "mentions": 1,
+      "signalStrength": 5.3,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "wallstreetbets"
+      ],
+      "posts": [
+        {
+          "title": "$GENI is the PLTR of Sports Betting, and its arc is just starting",
+          "subreddit": "wallstreetbets",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u0c0yu/geni_is_the_pltr_of_sports_betting_and_its_arc_is/"
+        }
+      ],
+      "attentionScore": 77
+    },
+    {
+      "symbol": "AVEX",
+      "mentions": 1,
       "signalStrength": 4.5,
       "directMentions": 1,
       "score": 0,
@@ -292,21 +313,119 @@
       ],
       "posts": [
         {
-          "title": "I have mostly VOO portfolio. What would be a strategy to exclude exposure to AI companies?",
+          "title": "My $700k all-in bet that drone pure-plays are going parabolic in a couple of months. $AVEX $AVAV $KTOS",
           "subreddit": "stocks",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1tzb2f6/i_have_mostly_voo_portfolio_what_would_be_a/"
-        },
-        {
-          "title": "Is it crazy to have 36 postions across my retirements?",
-          "subreddit": "stocks",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1tzn31q/is_it_crazy_to_have_36_postions_across_my/"
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u09ymq/my_700k_allin_bet_that_drone_pureplays_are_going/"
         }
       ],
-      "attentionScore": 77
+      "attentionScore": 69
+    },
+    {
+      "symbol": "AVAV",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "My $700k all-in bet that drone pure-plays are going parabolic in a couple of months. $AVEX $AVAV $KTOS",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u09ymq/my_700k_allin_bet_that_drone_pureplays_are_going/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "KTOS",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "My $700k all-in bet that drone pure-plays are going parabolic in a couple of months. $AVEX $AVAV $KTOS",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u09ymq/my_700k_allin_bet_that_drone_pureplays_are_going/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "CASY",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "investing"
+      ],
+      "posts": [
+        {
+          "title": "Deep dive on $CASY: what I found",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/investing/comments/1u02xwg/deep_dive_on_casy_what_i_found/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "RUM",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "investing"
+      ],
+      "posts": [
+        {
+          "title": "$RUM 22% short float should soon be on everyone watchlist moving into cloud with 22K+ Nvidia GPUs almost same as $NBIS that’s over $200",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/investing/comments/1u09u4y/rum_22_short_float_should_soon_be_on_everyone/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "NBIS",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "investing"
+      ],
+      "posts": [
+        {
+          "title": "$RUM 22% short float should soon be on everyone watchlist moving into cloud with 22K+ Nvidia GPUs almost same as $NBIS that’s over $200",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/investing/comments/1u09u4y/rum_22_short_float_should_soon_be_on_everyone/"
+        }
+      ],
+      "attentionScore": 69
     },
     {
       "symbol": "TSN",
@@ -391,132 +510,6 @@
         }
       ],
       "attentionScore": 69
-    },
-    {
-      "symbol": "SOFI",
-      "mentions": 1,
-      "signalStrength": 4.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "options"
-      ],
-      "posts": [
-        {
-          "title": "Grabbed some $SOFI calls expiring 1/30 at $30 strike",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/options/comments/1txrmks/grabbed_some_sofi_calls_expiring_130_at_30_strike/"
-        }
-      ],
-      "attentionScore": 69
-    },
-    {
-      "symbol": "HPE",
-      "mentions": 1,
-      "signalStrength": 3.7,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "stocks"
-      ],
-      "posts": [
-        {
-          "title": "HPE - Anyone else stocking up?",
-          "subreddit": "stocks",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1tyrbph/hpe_anyone_else_stocking_up/"
-        }
-      ],
-      "attentionScore": 61
-    },
-    {
-      "symbol": "RDDT",
-      "mentions": 1,
-      "signalStrength": 3.3,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "stocks"
-      ],
-      "posts": [
-        {
-          "title": "RDDT FY2026 EPS update ($6.77) and 8-month price target ($304)",
-          "subreddit": "stocks",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1tztqok/rddt_fy2026_eps_update_677_and_8month_price/"
-        }
-      ],
-      "attentionScore": 57
-    },
-    {
-      "symbol": "AAPL",
-      "mentions": 1,
-      "signalStrength": 2.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "stocks"
-      ],
-      "posts": [
-        {
-          "title": "Am I crazy or is there underappreciated risk of AAPL re-rating significantly downward?",
-          "subreddit": "stocks",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1tzkv3y/am_i_crazy_or_is_there_underappreciated_risk_of/"
-        }
-      ],
-      "attentionScore": 49
-    },
-    {
-      "symbol": "GOOG",
-      "mentions": 1,
-      "signalStrength": 2.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "options"
-      ],
-      "posts": [
-        {
-          "title": "Is selling 280 put on GOOG for Dec 2028 a good idea?",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/options/comments/1tz3f8k/is_selling_280_put_on_goog_for_dec_2028_a_good/"
-        }
-      ],
-      "attentionScore": 49
-    },
-    {
-      "symbol": "ES",
-      "mentions": 1,
-      "signalStrength": 2.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "options"
-      ],
-      "posts": [
-        {
-          "title": "Index options data ESTX50, NDX, ES",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/options/comments/1tyn3z3/index_options_data_estx50_ndx_es/"
-        }
-      ],
-      "attentionScore": 49
     }
   ],
   "topPosts": [
@@ -539,13 +532,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TZMAHM",
+      "id": "T31U03HHC",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "What Are Your Moves Tomorrow, June 08, 2026",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzmahm/what_are_your_moves_tomorrow_june_08_2026/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzmahm/what_are_your_moves_tomorrow_june_08_2026/",
-      "createdAt": "2026-06-07T19:57:09.000Z",
+      "title": "Daily Discussion Thread for June 8, 2026",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u03hhc/daily_discussion_thread_for_june_8_2026/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u03hhc/daily_discussion_thread_for_june_8_2026/",
+      "createdAt": "2026-06-08T10:00:37.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -557,13 +550,91 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TZMZDO",
+      "id": "T31U04XV0",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "SpaceX Quietly Became an AI Cloud Company and Google Is Paying Almost $1B/Month for GPU Compute",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzmzdo/spacex_quietly_became_an_ai_cloud_company_and/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzmzdo/spacex_quietly_became_an_ai_cloud_company_and/",
-      "createdAt": "2026-06-07T20:23:45.000Z",
+      "title": "Anthropic and Google Are Paying SpaceX $2.17 Billion Every Month",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u04xv0/anthropic_and_google_are_paying_spacex_217/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u04xv0/anthropic_and_google_are_paying_spacex_217/",
+      "createdAt": "2026-06-08T11:17:28.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U0A7JW",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "At least the adds at IBKR are honest.",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u0a7jw/at_least_the_adds_at_ibkr_are_honest/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u0a7jw/at_least_the_adds_at_ibkr_are_honest/",
+      "createdAt": "2026-06-08T14:52:56.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "IBKR"
+      ],
+      "tickerWeights": {
+        "IBKR": 2.5
+      },
+      "directTickers": [
+        "IBKR"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31TZX8M0",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Tech sell-off widens as South Korea index plunges",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzx8m0/tech_selloff_widens_as_south_korea_index_plunges/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzx8m0/tech_selloff_widens_as_south_korea_index_plunges/",
+      "createdAt": "2026-06-08T04:05:54.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U00G3K",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "NVIDIA CEO Has Good News for Micron and SanDisk Investors: “The Memory Shortage to Continue for Several Years”",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u00g3k/nvidia_ceo_has_good_news_for_micron_and_sandisk/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u00g3k/nvidia_ceo_has_good_news_for_micron_and_sandisk/",
+      "createdAt": "2026-06-08T07:02:06.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U0734K",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Strategy resumes bitcoin buying spree, quelling market panic",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u0734k/strategy_resumes_bitcoin_buying_spree_quelling/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u0734k/strategy_resumes_bitcoin_buying_spree_quelling/",
+      "createdAt": "2026-06-08T12:55:25.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -593,6 +664,66 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31U05RZ2",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "NVIDIA and SK hynix Announce Multiyear Technology Partnership to Advance Memory for AI Factories",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u05rz2/nvidia_and_sk_hynix_announce_multiyear_technology/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u05rz2/nvidia_and_sk_hynix_announce_multiyear_technology/",
+      "createdAt": "2026-06-08T11:58:11.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31TZMZDO",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "SpaceX Quietly Became an AI Cloud Company and Google Is Paying Almost $1B/Month for GPU Compute",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzmzdo/spacex_quietly_became_an_ai_cloud_company_and/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzmzdo/spacex_quietly_became_an_ai_cloud_company_and/",
+      "createdAt": "2026-06-07T20:23:45.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U0AQQ4",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "All in on MSTR",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u0aqq4/all_in_on_mstr/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u0aqq4/all_in_on_mstr/",
+      "createdAt": "2026-06-08T15:11:57.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "MSTR"
+      ],
+      "tickerWeights": {
+        "MSTR": 2.9
+      },
+      "directTickers": [
+        "MSTR"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31TZLLMW",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
@@ -611,13 +742,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TZRNHO",
+      "id": "T31TZZIAA",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Is anyone else getting Wendy's dumpster ads on reddit now?",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzrnho/is_anyone_else_getting_wendys_dumpster_ads_on/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzrnho/is_anyone_else_getting_wendys_dumpster_ads_on/",
-      "createdAt": "2026-06-07T23:38:29.000Z",
+      "title": "It's Popcorn week guys!",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzziaa/its_popcorn_week_guys/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzziaa/its_popcorn_week_guys/",
+      "createdAt": "2026-06-08T06:07:49.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -629,13 +760,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TZ89AA",
+      "id": "T31U04OXE",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Priorities",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tz89aa/priorities/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tz89aa/priorities/",
-      "createdAt": "2026-06-07T10:12:47.000Z",
+      "title": "SK Telecom and NVIDIA Build AI Infrastructure to Power Korea’s AI Innovation",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u04oxe/sk_telecom_and_nvidia_build_ai_infrastructure_to/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u04oxe/sk_telecom_and_nvidia_build_ai_infrastructure_to/",
+      "createdAt": "2026-06-08T11:04:58.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -647,13 +778,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TZGQZ0",
+      "id": "T31U0BOJO",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "New pride month t-shirt just dropped",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzgqz0/new_pride_month_tshirt_just_dropped/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzgqz0/new_pride_month_tshirt_just_dropped/",
-      "createdAt": "2026-06-07T16:29:27.000Z",
+      "title": "SpaceX is buying Tesla - Double Down",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u0bojo/spacex_is_buying_tesla_double_down/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u0bojo/spacex_is_buying_tesla_double_down/",
+      "createdAt": "2026-06-08T15:45:58.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -665,145 +796,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31TZT4ZF",
+      "id": "T31TZUGJH",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Looks like meats back on the menu boys",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzt4zf/looks_like_meats_back_on_the_menu_boys/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzt4zf/looks_like_meats_back_on_the_menu_boys/",
-      "createdAt": "2026-06-08T00:46:25.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TZNVUV",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Lots of questions will be answered in about an hour.",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tznvuv/lots_of_questions_will_be_answered_in_about_an/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tznvuv/lots_of_questions_will_be_answered_in_about_an/",
-      "createdAt": "2026-06-07T20:58:56.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TZOODM",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "coca cola is up 3% while the market fucked me sideways without a condom or even a courtesy reach-around",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzoodm/coca_cola_is_up_3_while_the_market_fucked_me/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzoodm/coca_cola_is_up_3_while_the_market_fucked_me/",
-      "createdAt": "2026-06-07T21:30:47.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TZQ0EC",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Went to go check on a co worker after a year at a different facility. Found his thinking corner. I think he's belongs here.",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzq0ec/went_to_go_check_on_a_co_worker_after_a_year_at_a/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzq0ec/went_to_go_check_on_a_co_worker_after_a_year_at_a/",
-      "createdAt": "2026-06-07T22:26:05.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TZGTON",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Nvidia, SK to detail cooperation plan as Jensen Huang flags prolonged chip shortage",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzgton/nvidia_sk_to_detail_cooperation_plan_as_jensen/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzgton/nvidia_sk_to_detail_cooperation_plan_as_jensen/",
-      "createdAt": "2026-06-07T16:32:19.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TZRKFA",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "$47 fee? No wonder crypto is fucking dead",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzrkfa/47_fee_no_wonder_crypto_is_fucking_dead/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzrkfa/47_fee_no_wonder_crypto_is_fucking_dead/",
-      "createdAt": "2026-06-07T23:34:42.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TZCP5M",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "All in on AVGO after dip",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzcp5m/all_in_on_avgo_after_dip/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzcp5m/all_in_on_avgo_after_dip/",
-      "createdAt": "2026-06-07T13:50:54.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "AVGO"
-      ],
-      "tickerWeights": {
-        "AVGO": 2.5
-      },
-      "directTickers": [
-        "AVGO"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31TZSEGN",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "CELH is criminally undervalued. My biggest YOLO ever - $95k",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzsegn/celh_is_criminally_undervalued_my_biggest_yolo/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzsegn/celh_is_criminally_undervalued_my_biggest_yolo/",
-      "createdAt": "2026-06-08T00:12:34.000Z",
+      "title": "100k+ gain shorting Nebius and Marvell last Thursday",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1tzugjh/100k_gain_shorting_nebius_and_marvell_last/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1tzugjh/100k_gain_shorting_nebius_and_marvell_last/",
+      "createdAt": "2026-06-08T01:49:10.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
