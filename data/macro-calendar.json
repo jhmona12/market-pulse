@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-09T00:16:55.349Z",
+  "generatedAt": "2026-06-09T15:27:09.974Z",
   "window": {
-    "today": "2026-06-08",
+    "today": "2026-06-09",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-06-01",
-    "endDate": "2026-12-08"
+    "startDate": "2026-06-02",
+    "endDate": "2026-12-09"
   },
   "sources": [
     {
@@ -35,7 +35,7 @@
     {
       "source": "Federal Reserve FOMC calendar",
       "status": "ready",
-      "eventCount": 4,
+      "eventCount": 5,
       "scraper": "federal-reserve-fomc-calendar"
     }
   ],
@@ -477,6 +477,18 @@
       "upstreamSource": "BLS",
       "scraper": "fred-release-calendar",
       "note": "FRED calendar for the BLS Employment Situation release. Direct BLS schedule pages can block automated requests."
+    },
+    {
+      "date": "2026-12-09",
+      "time": "2:00 PM ET",
+      "event": "FOMC Rate Decision",
+      "title": "FOMC meeting decision (December 8-9*, 2026)",
+      "source": "Federal Reserve",
+      "importance": "High",
+      "sourceUrl": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "sourceName": "Federal Reserve FOMC calendar",
+      "scraper": "federal-reserve-fomc-calendar",
+      "projectionMaterialsExpected": true
     }
   ]
 }
