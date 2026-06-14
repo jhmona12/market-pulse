@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-13T14:27:35.953Z",
+  "generatedAt": "2026-06-14T02:03:58.596Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
@@ -99,14 +99,14 @@
       "segment": "Fundamental research",
       "status": "ready",
       "error": null,
-      "postCount": 1,
+      "postCount": 25,
       "sortStatuses": [
         {
           "sort": "hot",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
+          "status": "ready",
+          "method": "rss:www.reddit.com",
+          "error": null,
+          "postCount": 25
         },
         {
           "sort": "new",
@@ -117,10 +117,10 @@
         },
         {
           "sort": "top",
-          "status": "ready",
-          "method": "rss:www.reddit.com",
-          "error": null,
-          "postCount": 1
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
         }
       ]
     },
@@ -156,6 +156,111 @@
     }
   ],
   "topTickers": [
+    {
+      "symbol": "PWR",
+      "mentions": 1,
+      "signalStrength": 5.3,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "What is your view on this stock called $PWR They produce items that go into data centers.",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u4z2jc/what_is_your_view_on_this_stock_called_pwr_they/"
+        }
+      ],
+      "attentionScore": 77
+    },
+    {
+      "symbol": "TSN",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "SecurityAnalysis"
+      ],
+      "posts": [
+        {
+          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
+          "subreddit": "SecurityAnalysis",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "SFD",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "SecurityAnalysis"
+      ],
+      "posts": [
+        {
+          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
+          "subreddit": "SecurityAnalysis",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "PPC",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "SecurityAnalysis"
+      ],
+      "posts": [
+        {
+          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
+          "subreddit": "SecurityAnalysis",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "VIVO",
+      "mentions": 1,
+      "signalStrength": 3.2,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "VIVO power - next APLD?",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u57qcn/vivo_power_next_apld/"
+        }
+      ],
+      "attentionScore": 56
+    },
     {
       "symbol": "AVGO",
       "mentions": 1,
@@ -216,6 +321,24 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31U4V5VA",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Who is even allowed to sell SPCX right now?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u4v5va/who_is_even_allowed_to_sell_spcx_right_now/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u4v5va/who_is_even_allowed_to_sell_spcx_right_now/",
+      "createdAt": "2026-06-13T16:21:39.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31U4Q9WF",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -235,6 +358,48 @@
       },
       "directTickers": [
         "AVGO"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U4ZHA3",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Got lucky with John Deere",
+      "url": "https://www.reddit.com/r/stocks/comments/1u4zha3/got_lucky_with_john_deere/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u4zha3/got_lucky_with_john_deere/",
+      "createdAt": "2026-06-13T19:13:48.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U57QCN",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "VIVO power - next APLD?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u57qcn/vivo_power_next_apld/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u57qcn/vivo_power_next_apld/",
+      "createdAt": "2026-06-14T01:25:18.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "VIVO"
+      ],
+      "tickerWeights": {
+        "VIVO": 3.2
+      },
+      "directTickers": [
+        "VIVO"
       ],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
@@ -276,6 +441,24 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31U57AL7",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Target Date Fund For IRA",
+      "url": "https://www.reddit.com/r/stocks/comments/1u57al7/target_date_fund_for_ira/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u57al7/target_date_fund_for_ira/",
+      "createdAt": "2026-06-14T01:03:06.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31U3VCOW",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -290,6 +473,48 @@
       "tickers": [],
       "tickerWeights": {},
       "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U4PIWZ",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Is Cloudflare (NET) splitting it's stock? Confused about this proxy vote item",
+      "url": "https://www.reddit.com/r/stocks/comments/1u4piwz/is_cloudflare_net_splitting_its_stock_confused/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u4piwz/is_cloudflare_net_splitting_its_stock_confused/",
+      "createdAt": "2026-06-13T12:19:47.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U4Z2JC",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "What is your view on this stock called $PWR They produce items that go into data centers.",
+      "url": "https://www.reddit.com/r/stocks/comments/1u4z2jc/what_is_your_view_on_this_stock_called_pwr_they/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u4z2jc/what_is_your_view_on_this_stock_called_pwr_they/",
+      "createdAt": "2026-06-13T18:57:06.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "PWR"
+      ],
+      "tickerWeights": {
+        "PWR": 5.3
+      },
+      "directTickers": [
+        "PWR"
+      ],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
@@ -348,121 +573,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U3ZG8G",
+      "id": "T31U4UMAB",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "Do with this information what you will",
-      "url": "https://www.reddit.com/r/stocks/comments/1u3zg8g/do_with_this_information_what_you_will/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u3zg8g/do_with_this_information_what_you_will/",
-      "createdAt": "2026-06-12T16:01:59.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U4PIWZ",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Is Cloudflare (NET) splitting it's stock? Confused about this proxy vote item",
-      "url": "https://www.reddit.com/r/stocks/comments/1u4piwz/is_cloudflare_net_splitting_its_stock_confused/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u4piwz/is_cloudflare_net_splitting_its_stock_confused/",
-      "createdAt": "2026-06-13T12:19:47.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U3G4S9",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Space X Vs Microsoft valuation lol",
-      "url": "https://www.reddit.com/r/stocks/comments/1u3g4s9/space_x_vs_microsoft_valuation_lol/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u3g4s9/space_x_vs_microsoft_valuation_lol/",
-      "createdAt": "2026-06-12T00:22:52.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U3HYLP",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "I am not buying SPCX tomorrow and this is the exact math that changed my mind",
-      "url": "https://www.reddit.com/r/stocks/comments/1u3hylp/i_am_not_buying_spcx_tomorrow_and_this_is_the/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u3hylp/i_am_not_buying_spcx_tomorrow_and_this_is_the/",
-      "createdAt": "2026-06-12T01:48:28.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U4GQ4R",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "XEQT vs VFV and VDY",
-      "url": "https://www.reddit.com/r/stocks/comments/1u4gq4r/xeqt_vs_vfv_and_vdy/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u4gq4r/xeqt_vs_vfv_and_vdy/",
-      "createdAt": "2026-06-13T04:02:08.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U33YMS",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "People are treating SpaceX like a guaranteed lottery ticket",
-      "url": "https://www.reddit.com/r/stocks/comments/1u33yms/people_are_treating_spacex_like_a_guaranteed/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u33yms/people_are_treating_spacex_like_a_guaranteed/",
-      "createdAt": "2026-06-11T16:30:23.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U3GVS5",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Korean chip giant SK hynix could list in US as soon as August: Report",
-      "url": "https://www.reddit.com/r/stocks/comments/1u3gvs5/korean_chip_giant_sk_hynix_could_list_in_us_as/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u3gvs5/korean_chip_giant_sk_hynix_could_list_in_us_as/",
-      "createdAt": "2026-06-12T00:57:12.000Z",
+      "title": "r/Stocks Weekly Thread on Meme Stocks Saturday - Jun 13, 2026",
+      "url": "https://www.reddit.com/r/stocks/comments/1u4umab/rstocks_weekly_thread_on_meme_stocks_saturday_jun/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u4umab/rstocks_weekly_thread_on_meme_stocks_saturday_jun/",
+      "createdAt": "2026-06-13T16:00:10.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
