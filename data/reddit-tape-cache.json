@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-16T01:51:01.126Z",
+  "generatedAt": "2026-06-16T17:23:43.509Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
@@ -67,36 +67,6 @@
     {
       "subreddit": "investing",
       "segment": "Retail investing",
-      "status": "ready",
-      "error": null,
-      "postCount": 25,
-      "sortStatuses": [
-        {
-          "sort": "hot",
-          "status": "ready",
-          "method": "rss:old.reddit.com",
-          "error": null,
-          "postCount": 25
-        },
-        {
-          "sort": "new",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
-        },
-        {
-          "sort": "top",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
-        }
-      ]
-    },
-    {
-      "subreddit": "SecurityAnalysis",
-      "segment": "Fundamental research",
       "status": "error",
       "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
       "postCount": 0,
@@ -125,11 +95,41 @@
       ]
     },
     {
-      "subreddit": "options",
-      "segment": "Options sentiment",
+      "subreddit": "SecurityAnalysis",
+      "segment": "Fundamental research",
       "status": "ready",
       "error": null,
-      "postCount": 11,
+      "postCount": 25,
+      "sortStatuses": [
+        {
+          "sort": "hot",
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
+        },
+        {
+          "sort": "new",
+          "status": "ready",
+          "method": "rss:old.reddit.com",
+          "error": null,
+          "postCount": 25
+        },
+        {
+          "sort": "top",
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
+        }
+      ]
+    },
+    {
+      "subreddit": "options",
+      "segment": "Options sentiment",
+      "status": "error",
+      "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+      "postCount": 0,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -147,20 +147,167 @@
         },
         {
           "sort": "top",
-          "status": "ready",
-          "method": "rss:old.reddit.com",
-          "error": null,
-          "postCount": 11
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
         }
       ]
     }
   ],
   "topTickers": [
     {
+      "symbol": "DELL",
+      "mentions": 1,
+      "signalStrength": 5.7,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "$DELL got a 1.4 billion dollar deal from microsoft",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u7gl4w/dell_got_a_14_billion_dollar_deal_from_microsoft/"
+        }
+      ],
+      "attentionScore": 81
+    },
+    {
+      "symbol": "PKE",
+      "mentions": 1,
+      "signalStrength": 4.9,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "Lockheed signed a seven-year deal to triple PAC-3 interceptor production, Park Aerospace ($PKE) is a materials sole-source supplier",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u79lmn/lockheed_signed_a_sevenyear_deal_to_triple_pac3/"
+        }
+      ],
+      "attentionScore": 73
+    },
+    {
+      "symbol": "ACN",
+      "mentions": 1,
+      "signalStrength": 4.9,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "Accenture ($ACN) fair price in $80-90 range",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u7d2o0/accenture_acn_fair_price_in_8090_range/"
+        }
+      ],
+      "attentionScore": 73
+    },
+    {
+      "symbol": "TSN",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "SecurityAnalysis"
+      ],
+      "posts": [
+        {
+          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
+          "subreddit": "SecurityAnalysis",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "SFD",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "SecurityAnalysis"
+      ],
+      "posts": [
+        {
+          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
+          "subreddit": "SecurityAnalysis",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "PPC",
+      "mentions": 1,
+      "signalStrength": 4.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "SecurityAnalysis"
+      ],
+      "posts": [
+        {
+          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
+          "subreddit": "SecurityAnalysis",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+        }
+      ],
+      "attentionScore": 69
+    },
+    {
+      "symbol": "OKLO",
+      "mentions": 1,
+      "signalStrength": 3.7,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "Oklo and Standard Nuclear Partner on Fuel Recycling and Advanced Reactor Supply Chain (OKLO)",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u7ehjq/oklo_and_standard_nuclear_partner_on_fuel/"
+        }
+      ],
+      "attentionScore": 61
+    },
+    {
       "symbol": "SPY",
-      "mentions": 2,
-      "signalStrength": 5.4,
-      "directMentions": 2,
+      "mentions": 1,
+      "signalStrength": 2.9,
+      "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
@@ -173,45 +320,9 @@
           "score": 0,
           "comments": 0,
           "permalink": "https://www.reddit.com/r/stocks/comments/1u6payq/when_iran_war_started_spy_was_at_686_and_today/"
-        },
-        {
-          "title": "RSUs and ESPP, cash out and invest in ETFs, Dividends, SPY, or leave it?",
-          "subreddit": "stocks",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1u5xwgx/rsus_and_espp_cash_out_and_invest_in_etfs/"
         }
       ],
-      "attentionScore": 102
-    },
-    {
-      "symbol": "QQQ",
-      "mentions": 2,
-      "signalStrength": 4.9,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "stocks",
-        "options"
-      ],
-      "posts": [
-        {
-          "title": "What $10k invested in 8 major indices would be worth today *PART 2*",
-          "subreddit": "stocks",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1u6e5dn/what_10k_invested_in_8_major_indices_would_be/"
-        },
-        {
-          "title": "QQQ short downside puts research",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/options/comments/1u63zqw/qqq_short_downside_puts_research/"
-        }
-      ],
-      "attentionScore": 81
+      "attentionScore": 53
     },
     {
       "symbol": "AMZN",
@@ -235,43 +346,22 @@
       "attentionScore": 53
     },
     {
-      "symbol": "SOXX",
-      "mentions": 1,
-      "signalStrength": 2.9,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "options"
-      ],
-      "posts": [
-        {
-          "title": "SOXX or SMH",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/options/comments/1u6qxgw/soxx_or_smh/"
-        }
-      ],
-      "attentionScore": 53
-    },
-    {
-      "symbol": "RDDT",
+      "symbol": "INTC",
       "mentions": 1,
       "signalStrength": 2.5,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "investing"
+        "SecurityAnalysis"
       ],
       "posts": [
         {
-          "title": "RDDT is insanely under valued, Price Target: 428",
-          "subreddit": "investing",
+          "title": "Yes, INTC Should Raise Equity",
+          "subreddit": "SecurityAnalysis",
           "score": 0,
           "comments": 0,
-          "permalink": "https://old.reddit.com/r/investing/comments/1u6wa65/rddt_is_insanely_under_valued_price_target_428/"
+          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1u6cvvc/yes_intc_should_raise_equity/"
         }
       ],
       "attentionScore": 49
@@ -297,13 +387,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U6D4HR",
+      "id": "T31U78NFG",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "r/Stocks Daily Discussion Monday - Jun 15, 2026",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6d4hr/rstocks_daily_discussion_monday_jun_15_2026/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6d4hr/rstocks_daily_discussion_monday_jun_15_2026/",
-      "createdAt": "2026-06-15T10:50:05.000Z",
+      "title": "r/Stocks Daily Discussion & Technicals Tuesday - Jun 16, 2026",
+      "url": "https://www.reddit.com/r/stocks/comments/1u78nfg/rstocks_daily_discussion_technicals_tuesday_jun/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u78nfg/rstocks_daily_discussion_technicals_tuesday_jun/",
+      "createdAt": "2026-06-16T09:30:05.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -312,6 +402,24 @@
       "tickerWeights": {},
       "directTickers": [],
       "filteredAsGeneric": true,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U7EOLI",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "SpaceX surges past Amazon and Microsoft in market cap, becoming fourth-biggest U.S. company",
+      "url": "https://www.reddit.com/r/stocks/comments/1u7eoli/spacex_surges_past_amazon_and_microsoft_in_market/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u7eoli/spacex_surges_past_amazon_and_microsoft_in_market/",
+      "createdAt": "2026-06-16T14:11:18.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
     {
@@ -339,6 +447,42 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31U6WZX7",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "How are institutional investors buying SpaceX at the absurd valuation?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u6wzx7/how_are_institutional_investors_buying_spacex_at/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u6wzx7/how_are_institutional_investors_buying_spacex_at/",
+      "createdAt": "2026-06-15T23:28:41.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U7JHYX",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "SPCX - Beware, institutional money is NOT buying this trash on the open market",
+      "url": "https://www.reddit.com/r/stocks/comments/1u7jhyx/spcx_beware_institutional_money_is_not_buying/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u7jhyx/spcx_beware_institutional_money_is_not_buying/",
+      "createdAt": "2026-06-16T17:06:12.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31U6RXOQ",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -357,13 +501,139 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U6F1CC",
+      "id": "T31U73MSH",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "Fox to buy streaming device maker Roku for $22 billion",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6f1cc/fox_to_buy_streaming_device_maker_roku_for_22/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6f1cc/fox_to_buy_streaming_device_maker_roku_for_22/",
-      "createdAt": "2026-06-15T12:21:48.000Z",
+      "title": "Is there about to be a push into Quantum Computing stocks?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u73msh/is_there_about_to_be_a_push_into_quantum/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u73msh/is_there_about_to_be_a_push_into_quantum/",
+      "createdAt": "2026-06-16T04:39:51.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U6WXPR",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "SpaceX/SPCX IPO: Am I wrong to wait until the lock-up sell pressure becomes clear?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u6wxpr/spacexspcx_ipo_am_i_wrong_to_wait_until_the/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u6wxpr/spacexspcx_ipo_am_i_wrong_to_wait_until_the/",
+      "createdAt": "2026-06-15T23:26:04.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U7GL4W",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "$DELL got a 1.4 billion dollar deal from microsoft",
+      "url": "https://www.reddit.com/r/stocks/comments/1u7gl4w/dell_got_a_14_billion_dollar_deal_from_microsoft/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u7gl4w/dell_got_a_14_billion_dollar_deal_from_microsoft/",
+      "createdAt": "2026-06-16T15:22:03.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "DELL"
+      ],
+      "tickerWeights": {
+        "DELL": 5.7
+      },
+      "directTickers": [
+        "DELL"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U79LMN",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Lockheed signed a seven-year deal to triple PAC-3 interceptor production, Park Aerospace ($PKE) is a materials sole-source supplier",
+      "url": "https://www.reddit.com/r/stocks/comments/1u79lmn/lockheed_signed_a_sevenyear_deal_to_triple_pac3/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u79lmn/lockheed_signed_a_sevenyear_deal_to_triple_pac3/",
+      "createdAt": "2026-06-16T10:22:56.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "PKE"
+      ],
+      "tickerWeights": {
+        "PKE": 4.9
+      },
+      "directTickers": [
+        "PKE"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U7EHJQ",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Oklo and Standard Nuclear Partner on Fuel Recycling and Advanced Reactor Supply Chain (OKLO)",
+      "url": "https://www.reddit.com/r/stocks/comments/1u7ehjq/oklo_and_standard_nuclear_partner_on_fuel/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u7ehjq/oklo_and_standard_nuclear_partner_on_fuel/",
+      "createdAt": "2026-06-16T14:03:40.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "OKLO"
+      ],
+      "tickerWeights": {
+        "OKLO": 3.7
+      },
+      "directTickers": [
+        "OKLO"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U70T1C",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "What should I invest in long term as someone who knows nothing about investing?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u70t1c/what_should_i_invest_in_long_term_as_someone_who/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u70t1c/what_should_i_invest_in_long_term_as_someone_who/",
+      "createdAt": "2026-06-16T02:19:51.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U7GRIZ",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Samsung Opens Guarded Fab Data to 60 Suppliers in a Push Toward Unmanned, Lights-Out Chip Plants",
+      "url": "https://www.reddit.com/r/stocks/comments/1u7griz/samsung_opens_guarded_fab_data_to_60_suppliers_in/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u7griz/samsung_opens_guarded_fab_data_to_60_suppliers_in/",
+      "createdAt": "2026-06-16T15:28:15.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -399,140 +669,6 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U6WXPR",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "SpaceX/SPCX IPO: Am I wrong to wait until the lock-up sell pressure becomes clear?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6wxpr/spacexspcx_ipo_am_i_wrong_to_wait_until_the/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6wxpr/spacexspcx_ipo_am_i_wrong_to_wait_until_the/",
-      "createdAt": "2026-06-15T23:26:04.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U6WZX7",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "How are institutional investors buying SpaceX at the absurd valuation?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6wzx7/how_are_institutional_investors_buying_spacex_at/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6wzx7/how_are_institutional_investors_buying_spacex_at/",
-      "createdAt": "2026-06-15T23:28:41.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U63G6O",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "US stock futures jump 2% on Iran deal to end the war; Japan’s Nikkei surges 5%",
-      "url": "https://www.reddit.com/r/stocks/comments/1u63g6o/us_stock_futures_jump_2_on_iran_deal_to_end_the/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u63g6o/us_stock_futures_jump_2_on_iran_deal_to_end_the/",
-      "createdAt": "2026-06-15T02:06:05.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U6E5DN",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "What $10k invested in 8 major indices would be worth today *PART 2*",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6e5dn/what_10k_invested_in_8_major_indices_would_be/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6e5dn/what_10k_invested_in_8_major_indices_would_be/",
-      "createdAt": "2026-06-15T11:41:44.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "QQQ"
-      ],
-      "tickerWeights": {
-        "QQQ": 1.6
-      },
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U6M4MW",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Cunning 1T revenue promise by Musk. SEC rules not for his special highness!?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6m4mw/cunning_1t_revenue_promise_by_musk_sec_rules_not/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6m4mw/cunning_1t_revenue_promise_by_musk_sec_rules_not/",
-      "createdAt": "2026-06-15T16:50:09.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U5XQOA",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "U.S. and Iran agree on peace deal to end the war, Pakistan Prime Minister Shehbaz Sharif says",
-      "url": "https://www.reddit.com/r/stocks/comments/1u5xqoa/us_and_iran_agree_on_peace_deal_to_end_the_war/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u5xqoa/us_and_iran_agree_on_peace_deal_to_end_the_war/",
-      "createdAt": "2026-06-14T21:45:56.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U5YJG5",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "What $10k invested in 8 major indices in 2011 would be worth today",
-      "url": "https://www.reddit.com/r/stocks/comments/1u5yjg5/what_10k_invested_in_8_major_indices_in_2011/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u5yjg5/what_10k_invested_in_8_major_indices_in_2011/",
-      "createdAt": "2026-06-14T22:19:39.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "VTI"
-      ],
-      "tickerWeights": {
-        "VTI": 1.6
-      },
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
       "id": "T31U6YN8D",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -549,47 +685,12 @@
       "directTickers": [],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U6N1JE",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Polish ETF called EPOL is up over 100%",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6n1je/polish_etf_called_epol_is_up_over_100/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6n1je/polish_etf_called_epol_is_up_over_100/",
-      "createdAt": "2026-06-15T17:21:51.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U703AB",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Intel UMC 12nm (satellite systems) + SpaceX",
-      "url": "https://www.reddit.com/r/stocks/comments/1u703ab/intel_umc_12nm_satellite_systems_spacex/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u703ab/intel_umc_12nm_satellite_systems_spacex/",
-      "createdAt": "2026-06-16T01:47:20.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
     }
   ],
   "currentFetchErrors": [
     "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
     "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-    "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
+    "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+    "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
   ]
 }
