@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-15T17:30:01.147Z",
+  "generatedAt": "2026-06-16T01:51:01.126Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
@@ -129,7 +129,7 @@
       "segment": "Options sentiment",
       "status": "ready",
       "error": null,
-      "postCount": 6,
+      "postCount": 11,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -150,12 +150,40 @@
           "status": "ready",
           "method": "rss:old.reddit.com",
           "error": null,
-          "postCount": 6
+          "postCount": 11
         }
       ]
     }
   ],
   "topTickers": [
+    {
+      "symbol": "SPY",
+      "mentions": 2,
+      "signalStrength": 5.4,
+      "directMentions": 2,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "When Iran war started SPY was at $686 and today $756 (Nearly +10%)",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u6payq/when_iran_war_started_spy_was_at_686_and_today/"
+        },
+        {
+          "title": "RSUs and ESPP, cash out and invest in ETFs, Dividends, SPY, or leave it?",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u5xwgx/rsus_and_espp_cash_out_and_invest_in_etfs/"
+        }
+      ],
+      "attentionScore": 102
+    },
     {
       "symbol": "QQQ",
       "mentions": 2,
@@ -186,9 +214,9 @@
       "attentionScore": 81
     },
     {
-      "symbol": "BKNG",
+      "symbol": "AMZN",
       "mentions": 1,
-      "signalStrength": 2.5,
+      "signalStrength": 2.9,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
@@ -197,32 +225,53 @@
       ],
       "posts": [
         {
-          "title": "BKNG is on sale now",
+          "title": "SPCX & AMZN..",
           "subreddit": "stocks",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1u6igsg/bkng_is_on_sale_now/"
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u6nuo6/spcx_amzn/"
         }
       ],
-      "attentionScore": 49
+      "attentionScore": 53
     },
     {
-      "symbol": "SPY",
+      "symbol": "SOXX",
+      "mentions": 1,
+      "signalStrength": 2.9,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "options"
+      ],
+      "posts": [
+        {
+          "title": "SOXX or SMH",
+          "subreddit": "options",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://old.reddit.com/r/options/comments/1u6qxgw/soxx_or_smh/"
+        }
+      ],
+      "attentionScore": 53
+    },
+    {
+      "symbol": "RDDT",
       "mentions": 1,
       "signalStrength": 2.5,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "stocks"
+        "investing"
       ],
       "posts": [
         {
-          "title": "RSUs and ESPP, cash out and invest in ETFs, Dividends, SPY, or leave it?",
-          "subreddit": "stocks",
+          "title": "RDDT is insanely under valued, Price Target: 428",
+          "subreddit": "investing",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1u5xwgx/rsus_and_espp_cash_out_and_invest_in_etfs/"
+          "permalink": "https://old.reddit.com/r/investing/comments/1u6wa65/rddt_is_insanely_under_valued_price_target_428/"
         }
       ],
       "attentionScore": 49
@@ -266,6 +315,48 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31U6PAYQ",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "When Iran war started SPY was at $686 and today $756 (Nearly +10%)",
+      "url": "https://www.reddit.com/r/stocks/comments/1u6payq/when_iran_war_started_spy_was_at_686_and_today/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u6payq/when_iran_war_started_spy_was_at_686_and_today/",
+      "createdAt": "2026-06-15T18:41:09.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "SPY"
+      ],
+      "tickerWeights": {
+        "SPY": 2.9
+      },
+      "directTickers": [
+        "SPY"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U6RXOQ",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Rocket Lab just put up its best quarter ever and the stock is down ~25% from its June high. What am I missing?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u6rxoq/rocket_lab_just_put_up_its_best_quarter_ever_and/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u6rxoq/rocket_lab_just_put_up_its_best_quarter_ever_and/",
+      "createdAt": "2026-06-15T20:13:24.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31U6F1CC",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -284,13 +375,37 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U63G6O",
+      "id": "T31U6NUO6",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "US stock futures jump 2% on Iran deal to end the war; Japan’s Nikkei surges 5%",
-      "url": "https://www.reddit.com/r/stocks/comments/1u63g6o/us_stock_futures_jump_2_on_iran_deal_to_end_the/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u63g6o/us_stock_futures_jump_2_on_iran_deal_to_end_the/",
-      "createdAt": "2026-06-15T02:06:05.000Z",
+      "title": "SPCX & AMZN..",
+      "url": "https://www.reddit.com/r/stocks/comments/1u6nuo6/spcx_amzn/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u6nuo6/spcx_amzn/",
+      "createdAt": "2026-06-15T17:51:02.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "AMZN"
+      ],
+      "tickerWeights": {
+        "AMZN": 2.9
+      },
+      "directTickers": [
+        "AMZN"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U6WXPR",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "SpaceX/SPCX IPO: Am I wrong to wait until the lock-up sell pressure becomes clear?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u6wxpr/spacexspcx_ipo_am_i_wrong_to_wait_until_the/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u6wxpr/spacexspcx_ipo_am_i_wrong_to_wait_until_the/",
+      "createdAt": "2026-06-15T23:26:04.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -302,13 +417,31 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U5XQOA",
+      "id": "T31U6WZX7",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "U.S. and Iran agree on peace deal to end the war, Pakistan Prime Minister Shehbaz Sharif says",
-      "url": "https://www.reddit.com/r/stocks/comments/1u5xqoa/us_and_iran_agree_on_peace_deal_to_end_the_war/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u5xqoa/us_and_iran_agree_on_peace_deal_to_end_the_war/",
-      "createdAt": "2026-06-14T21:45:56.000Z",
+      "title": "How are institutional investors buying SpaceX at the absurd valuation?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u6wzx7/how_are_institutional_investors_buying_spacex_at/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u6wzx7/how_are_institutional_investors_buying_spacex_at/",
+      "createdAt": "2026-06-15T23:28:41.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U63G6O",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "US stock futures jump 2% on Iran deal to end the war; Japan’s Nikkei surges 5%",
+      "url": "https://www.reddit.com/r/stocks/comments/1u63g6o/us_stock_futures_jump_2_on_iran_deal_to_end_the/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u63g6o/us_stock_futures_jump_2_on_iran_deal_to_end_the/",
+      "createdAt": "2026-06-15T02:06:05.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -342,6 +475,42 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31U6M4MW",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Cunning 1T revenue promise by Musk. SEC rules not for his special highness!?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u6m4mw/cunning_1t_revenue_promise_by_musk_sec_rules_not/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u6m4mw/cunning_1t_revenue_promise_by_musk_sec_rules_not/",
+      "createdAt": "2026-06-15T16:50:09.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U5XQOA",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "U.S. and Iran agree on peace deal to end the war, Pakistan Prime Minister Shehbaz Sharif says",
+      "url": "https://www.reddit.com/r/stocks/comments/1u5xqoa/us_and_iran_agree_on_peace_deal_to_end_the_war/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u5xqoa/us_and_iran_agree_on_peace_deal_to_end_the_war/",
+      "createdAt": "2026-06-14T21:45:56.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31U5YJG5",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -364,13 +533,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U6M4MW",
+      "id": "T31U6YN8D",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "Cunning 1T revenue promise by Musk. SEC rules not for his special highness!?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6m4mw/cunning_1t_revenue_promise_by_musk_sec_rules_not/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6m4mw/cunning_1t_revenue_promise_by_musk_sec_rules_not/",
-      "createdAt": "2026-06-15T16:50:09.000Z",
+      "title": "Best stocks to help teach a 10 year old?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u6yn8d/best_stocks_to_help_teach_a_10_year_old/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u6yn8d/best_stocks_to_help_teach_a_10_year_old/",
+      "createdAt": "2026-06-16T00:41:22.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -400,137 +569,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U5VPG2",
+      "id": "T31U703AB",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "Does anyone know the actual dates for the forced-buys of SPACE X by the various indexes?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u5vpg2/does_anyone_know_the_actual_dates_for_the/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u5vpg2/does_anyone_know_the_actual_dates_for_the/",
-      "createdAt": "2026-06-14T20:24:11.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U6IGSG",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "BKNG is on sale now",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6igsg/bkng_is_on_sale_now/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6igsg/bkng_is_on_sale_now/",
-      "createdAt": "2026-06-15T14:38:19.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "BKNG"
-      ],
-      "tickerWeights": {
-        "BKNG": 2.5
-      },
-      "directTickers": [
-        "BKNG"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U5CT14",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "400k inheritance, should i invest now?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u5ct14/400k_inheritance_should_i_invest_now/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u5ct14/400k_inheritance_should_i_invest_now/",
-      "createdAt": "2026-06-14T05:44:03.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U5XWGX",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "RSUs and ESPP, cash out and invest in ETFs, Dividends, SPY, or leave it?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u5xwgx/rsus_and_espp_cash_out_and_invest_in_etfs/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u5xwgx/rsus_and_espp_cash_out_and_invest_in_etfs/",
-      "createdAt": "2026-06-14T21:52:42.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "SPY"
-      ],
-      "tickerWeights": {
-        "SPY": 2.5
-      },
-      "directTickers": [
-        "SPY"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U64FMF",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Looking for a serious bull vs bear discussion on IREN (AI infrastructure/data center thesis)",
-      "url": "https://www.reddit.com/r/stocks/comments/1u64fmf/looking_for_a_serious_bull_vs_bear_discussion_on/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u64fmf/looking_for_a_serious_bull_vs_bear_discussion_on/",
-      "createdAt": "2026-06-15T02:53:30.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U6LQKE",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Does most of the analysis on this sub miss the key point? What can be done to answer the key question?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6lqke/does_most_of_the_analysis_on_this_sub_miss_the/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6lqke/does_most_of_the_analysis_on_this_sub_miss_the/",
-      "createdAt": "2026-06-15T16:36:06.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "MSFT"
-      ],
-      "tickerWeights": {
-        "MSFT": 1.2
-      },
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U6MJSI",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Is anyone else looking at this perfect storm hitting by November? ($150 oil, US debt spiral, and the IPO index drain)",
-      "url": "https://www.reddit.com/r/stocks/comments/1u6mjsi/is_anyone_else_looking_at_this_perfect_storm/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u6mjsi/is_anyone_else_looking_at_this_perfect_storm/",
-      "createdAt": "2026-06-15T17:04:20.000Z",
+      "title": "Intel UMC 12nm (satellite systems) + SpaceX",
+      "url": "https://www.reddit.com/r/stocks/comments/1u703ab/intel_umc_12nm_satellite_systems_spacex/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u703ab/intel_umc_12nm_satellite_systems_spacex/",
+      "createdAt": "2026-06-16T01:47:20.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
