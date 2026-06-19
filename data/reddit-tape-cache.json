@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-19T02:09:54.808Z",
+  "generatedAt": "2026-06-19T15:44:47.839Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
@@ -67,9 +67,9 @@
     {
       "subreddit": "investing",
       "segment": "Retail investing",
-      "status": "error",
-      "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-      "postCount": 0,
+      "status": "ready",
+      "error": null,
+      "postCount": 25,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -80,10 +80,10 @@
         },
         {
           "sort": "new",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
+          "status": "ready",
+          "method": "rss:www.reddit.com",
+          "error": null,
+          "postCount": 25
         },
         {
           "sort": "top",
@@ -97,16 +97,16 @@
     {
       "subreddit": "SecurityAnalysis",
       "segment": "Fundamental research",
-      "status": "ready",
-      "error": null,
-      "postCount": 25,
+      "status": "error",
+      "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+      "postCount": 0,
       "sortStatuses": [
         {
           "sort": "hot",
-          "status": "ready",
-          "method": "rss:old.reddit.com",
-          "error": null,
-          "postCount": 25
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
         },
         {
           "sort": "new",
@@ -157,9 +157,38 @@
   ],
   "topTickers": [
     {
+      "symbol": "META",
+      "mentions": 2,
+      "signalStrength": 7.4,
+      "directMentions": 2,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks",
+        "investing"
+      ],
+      "posts": [
+        {
+          "title": "[DD] Make the Bear case for META",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u9fbit/dd_make_the_bear_case_for_meta/"
+        },
+        {
+          "title": "[DD] Make the Bear case for META",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/investing/comments/1u9f84m/dd_make_the_bear_case_for_meta/"
+        }
+      ],
+      "attentionScore": 122
+    },
+    {
       "symbol": "VG",
       "mentions": 1,
-      "signalStrength": 5.7,
+      "signalStrength": 6.1,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
@@ -168,77 +197,35 @@
       ],
       "posts": [
         {
-          "title": "Venture Global ($VG): High-Risk LNG Infrastructure Play or Mispriced Growth Story?",
+          "title": "Venture Global ($VG): messy LNG stock, but I think the market may be too focused on the lawsuit",
           "subreddit": "stocks",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1u9o5ks/venture_global_vg_highrisk_lng_infrastructure/"
+          "permalink": "https://www.reddit.com/r/stocks/comments/1u9vtsf/venture_global_vg_messy_lng_stock_but_i_think_the/"
+        }
+      ],
+      "attentionScore": 85
+    },
+    {
+      "symbol": "DRAM",
+      "mentions": 1,
+      "signalStrength": 5.7,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "investing"
+      ],
+      "posts": [
+        {
+          "title": "$DRAM Daily Megathread - $DRAM Skyrockets after FOMC meeting to $76",
+          "subreddit": "investing",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/investing/comments/1u96pww/dram_daily_megathread_dram_skyrockets_after_fomc/"
         }
       ],
       "attentionScore": 81
-    },
-    {
-      "symbol": "TSN",
-      "mentions": 1,
-      "signalStrength": 4.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "SecurityAnalysis"
-      ],
-      "posts": [
-        {
-          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-          "subreddit": "SecurityAnalysis",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
-        }
-      ],
-      "attentionScore": 69
-    },
-    {
-      "symbol": "SFD",
-      "mentions": 1,
-      "signalStrength": 4.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "SecurityAnalysis"
-      ],
-      "posts": [
-        {
-          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-          "subreddit": "SecurityAnalysis",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
-        }
-      ],
-      "attentionScore": 69
-    },
-    {
-      "symbol": "PPC",
-      "mentions": 1,
-      "signalStrength": 4.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "SecurityAnalysis"
-      ],
-      "posts": [
-        {
-          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-          "subreddit": "SecurityAnalysis",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
-        }
-      ],
-      "attentionScore": 69
     },
     {
       "symbol": "MSFT",
@@ -262,46 +249,46 @@
       "attentionScore": 61
     },
     {
-      "symbol": "META",
+      "symbol": "NBIS",
       "mentions": 1,
-      "signalStrength": 3.7,
+      "signalStrength": 3.3,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "stocks"
+        "investing"
       ],
       "posts": [
         {
-          "title": "[DD] Make the Bear case for META",
-          "subreddit": "stocks",
+          "title": "NBIS and RKLB getting listed on June 22",
+          "subreddit": "investing",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1u9fbit/dd_make_the_bear_case_for_meta/"
+          "permalink": "https://www.reddit.com/r/investing/comments/1u9xhol/nbis_and_rklb_getting_listed_on_june_22/"
         }
       ],
-      "attentionScore": 61
+      "attentionScore": 57
     },
     {
-      "symbol": "ADBE",
+      "symbol": "RKLB",
       "mentions": 1,
-      "signalStrength": 3.7,
+      "signalStrength": 3.3,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "stocks"
+        "investing"
       ],
       "posts": [
         {
-          "title": "What is everyones thoughts on ADBE?",
-          "subreddit": "stocks",
+          "title": "NBIS and RKLB getting listed on June 22",
+          "subreddit": "investing",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1u9llj7/what_is_everyones_thoughts_on_adbe/"
+          "permalink": "https://www.reddit.com/r/investing/comments/1u9xhol/nbis_and_rklb_getting_listed_on_june_22/"
         }
       ],
-      "attentionScore": 61
+      "attentionScore": 57
     },
     {
       "symbol": "AMD",
@@ -344,27 +331,6 @@
         }
       ],
       "attentionScore": 49
-    },
-    {
-      "symbol": "INTC",
-      "mentions": 1,
-      "signalStrength": 2.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "SecurityAnalysis"
-      ],
-      "posts": [
-        {
-          "title": "Yes, INTC Should Raise Equity",
-          "subreddit": "SecurityAnalysis",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1u6cvvc/yes_intc_should_raise_equity/"
-        }
-      ],
-      "attentionScore": 49
     }
   ],
   "topPosts": [
@@ -387,13 +353,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U91LR7",
+      "id": "T31U9XBSH",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "r/Stocks Daily Discussion & Options Trading Thursday - Jun 18, 2026",
-      "url": "https://www.reddit.com/r/stocks/comments/1u91lr7/rstocks_daily_discussion_options_trading_thursday/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u91lr7/rstocks_daily_discussion_options_trading_thursday/",
-      "createdAt": "2026-06-18T09:30:06.000Z",
+      "title": "r/Stocks Daily Discussion & Fundamentals Friday Jun 19, 2026",
+      "url": "https://www.reddit.com/r/stocks/comments/1u9xbsh/rstocks_daily_discussion_fundamentals_friday_jun/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u9xbsh/rstocks_daily_discussion_fundamentals_friday_jun/",
+      "createdAt": "2026-06-19T09:30:07.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -402,6 +368,24 @@
       "tickerWeights": {},
       "directTickers": [],
       "filteredAsGeneric": true,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U9X42Q",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Intel Stock Price Miracle",
+      "url": "https://www.reddit.com/r/stocks/comments/1u9x42q/intel_stock_price_miracle/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u9x42q/intel_stock_price_miracle/",
+      "createdAt": "2026-06-19T09:17:21.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
     {
@@ -425,6 +409,24 @@
       "directTickers": [
         "AMD"
       ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31U9S7NM",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "At what point do you sell a loser?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u9s7nm/at_what_point_do_you_sell_a_loser/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u9s7nm/at_what_point_do_you_sell_a_loser/",
+      "createdAt": "2026-06-19T04:35:10.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
@@ -489,6 +491,30 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31U9VTSF",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Venture Global ($VG): messy LNG stock, but I think the market may be too focused on the lawsuit",
+      "url": "https://www.reddit.com/r/stocks/comments/1u9vtsf/venture_global_vg_messy_lng_stock_but_i_think_the/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u9vtsf/venture_global_vg_messy_lng_stock_but_i_think_the/",
+      "createdAt": "2026-06-19T07:59:12.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "VG"
+      ],
+      "tickerWeights": {
+        "VG": 6.1
+      },
+      "directTickers": [
+        "VG"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31U9BUR3",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -525,6 +551,24 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31U9THA9",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Thoughts on how to use Roth IRA?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u9tha9/thoughts_on_how_to_use_roth_ira/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u9tha9/thoughts_on_how_to_use_roth_ira/",
+      "createdAt": "2026-06-19T05:42:44.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31U8SR16",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -543,13 +587,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U95ZEW",
+      "id": "T31U9Z4Z9",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "K shaped stock market?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u95zew/k_shaped_stock_market/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u95zew/k_shaped_stock_market/",
-      "createdAt": "2026-06-18T13:15:23.000Z",
+      "title": "Qualcomm is Ascendant",
+      "url": "https://www.reddit.com/r/stocks/comments/1u9z4z9/qualcomm_is_ascendant/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u9z4z9/qualcomm_is_ascendant/",
+      "createdAt": "2026-06-19T11:12:35.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -561,13 +605,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31U9DQAO",
+      "id": "T31U95ZEW",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "Nasdaq stock standards. Are they ever enforced?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u9dqao/nasdaq_stock_standards_are_they_ever_enforced/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u9dqao/nasdaq_stock_standards_are_they_ever_enforced/",
-      "createdAt": "2026-06-18T18:08:41.000Z",
+      "title": "K shaped stock market?",
+      "url": "https://www.reddit.com/r/stocks/comments/1u95zew/k_shaped_stock_market/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1u95zew/k_shaped_stock_market/",
+      "createdAt": "2026-06-18T13:15:23.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -601,96 +645,12 @@
       ],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U9O5KS",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Venture Global ($VG): High-Risk LNG Infrastructure Play or Mispriced Growth Story?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u9o5ks/venture_global_vg_highrisk_lng_infrastructure/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u9o5ks/venture_global_vg_highrisk_lng_infrastructure/",
-      "createdAt": "2026-06-19T01:14:21.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "VG"
-      ],
-      "tickerWeights": {
-        "VG": 5.7
-      },
-      "directTickers": [
-        "VG"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U9FBIT",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "[DD] Make the Bear case for META",
-      "url": "https://www.reddit.com/r/stocks/comments/1u9fbit/dd_make_the_bear_case_for_meta/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u9fbit/dd_make_the_bear_case_for_meta/",
-      "createdAt": "2026-06-18T19:07:06.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "META"
-      ],
-      "tickerWeights": {
-        "META": 3.7
-      },
-      "directTickers": [
-        "META"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U8P834",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "What do you think of \"forgotten\" tech stocks that are past their peak/cultural popularity?",
-      "url": "https://www.reddit.com/r/stocks/comments/1u8p834/what_do_you_think_of_forgotten_tech_stocks_that/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u8p834/what_do_you_think_of_forgotten_tech_stocks_that/",
-      "createdAt": "2026-06-17T22:48:55.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31U8L1Z2",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Jeffrey Gundlach says Fed’s Warsh is not going to be the ‘easy money’ chairman many hoped for",
-      "url": "https://www.reddit.com/r/stocks/comments/1u8l1z2/jeffrey_gundlach_says_feds_warsh_is_not_going_to/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1u8l1z2/jeffrey_gundlach_says_feds_warsh_is_not_going_to/",
-      "createdAt": "2026-06-17T20:06:10.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
     }
   ],
   "currentFetchErrors": [
     "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
     "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-    "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+    "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
     "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
   ]
 }
