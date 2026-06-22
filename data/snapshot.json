@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-22T01:49:26.773Z",
+  "generatedAt": "2026-06-22T17:20:48.113Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-06-22T01:43:12.516969+00:00",
+    "generatedAt": "2026-06-22T17:14:34.189925+00:00",
     "asOfDate": "2026-06-18",
     "expectedAsOfDate": "2026-06-18",
     "isStale": false,
@@ -1382,21 +1382,21 @@
     }
   },
   "note": {
-    "headline": "Oil and geopolitical risk keep position sizing tighter.",
-    "body": "Inflation data are running hot, so rates remain the main constraint on crowded momentum. Less than a week after the U.S. and Iran signed their \"memorandum of understanding\" aimed at ending the conflict, tensions have flared once again. Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver. Retail attention is concentrated in MU, TSN, SFD, PPC; treat that as sentiment, not verified news. Breadth is not strong enough for a blanket risk-on call; use the model to choose single names rather than reaching for broad beta. Confirmed momentum leadership is INTC, MU, WDC, SNDK, TER. 15 of the top 25 model-ranked stocks are in Information Technology. ETF confirmation is strongest in Information Technology. Reddit attention is a crowding check, not a trade trigger. Keep sizing modest until breadth improves.",
+    "headline": "Sticky inflation risk keeps high-beta momentum on a shorter leash.",
+    "body": "The yield on the 10-year U.S. Treasury note - the key benchmark for U.S. government borrowing - rose four basis points, to 4.491%. U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver. Retail attention is concentrated in MU, CHWY, RDDT, SNDK; treat that as sentiment, not verified news. Breadth is not strong enough for a blanket risk-on call; use the model to choose single names rather than reaching for broad beta. Confirmed momentum leadership is INTC, MU, WDC, SNDK, TER. 15 of the top 25 model-ranked stocks are in Information Technology. ETF confirmation is strongest in Information Technology. Reddit attention is a crowding check, not a trade trigger. Keep sizing modest until breadth improves.",
     "changed": [
-      "Policy/geopolitics: Less than a week after the U.S. and Iran signed their \"memorandum of understanding\" aimed at ending the conflict, tensions have flared once again. (M1)",
-      "Rates: Inflation data are running hot, so rates remain the main constraint on crowded momentum. (M2)",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M3)",
+      "Rates: The yield on the 10-year U.S. Treasury note - the key benchmark for U.S. government borrowing - rose four basis points, to 4.491%. (M1)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: MU, TSN, SFD, PPC are drawing the most filtered ticker concentration; treat this as sentiment, not verified news.",
+      "Retail attention: MU, CHWY, RDDT, SNDK are drawing the most filtered ticker concentration; treat this as sentiment, not verified news.",
       "Breadth: 56% of the screened universe is above the 50-day average, 62% is above the 200-day, and 46% clears both trend lines.",
-      "Research tape: CNBC Markets: CNBC Daily Open: Markets feeling that deja vu as Iran deal under strain, once again | CNBC Top News RSS: Oil rises after Trump threatens fresh strikes on Iran, overshadowing peace talks | MarketWatch Top Stories RSS: This bull market isn’t going to end because of Fed rate hikes under Warsh."
+      "Research tape: CNBC Top News RSS: 2-year Treasury note yield hits highest since February 2025 | MarketWatch Top Stories RSS: Alphabet sees $269 billion market-cap wipeout as investors fear it’s losing the war for AI talent | CNBC Top News RSS: Alphabet paces for worst day in a year on AI concerns after high-profile exits."
     ],
     "watch": [
       "Macro risk: GDP Third Estimate on 2026-06-25; Personal Income and Outlays on 2026-06-25; Employment Situation on 2026-07-02.",
       "Momentum risk: 1 top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.",
       "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
-      "5 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
+      "6 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
     ],
     "generatedBy": "deterministic"
   },
@@ -1405,12 +1405,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 97355,
+      "inputTokens": 99599,
       "cachedInputTokens": 0,
-      "outputTokens": 2223,
+      "outputTokens": 2202,
       "reasoningTokens": 0,
-      "totalTokens": 99578,
-      "estimatedCostUsd": 0.005757,
+      "totalTokens": 101801,
+      "estimatedCostUsd": 0.005861,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1418,40 +1418,38 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Momentum leadership in IT semis carries the tape; macro backdrops skew rate risk, so tread with tight risk controls.",
-    "macroView": "Macro regime: growth remains under pressure with elevated rates risk; markets are sensitive to Fed path and Iran-related geopolitical risk. Upcoming GDP third estimate and BEA income data on June 25 could re-anchor growth expectations. Oil volatility creeping higher on Middle East tension supports energy input costs and inflation risks.",
+    "headline": "Momentum leadership intact in semis / information tech; macro backdrop hawkish but choppiness awaits Fed path and GDP data",
+    "macroView": "Macro regime remains risk-on with momentum intact in top IT names, but near-term volatility tied to hawkish rate expectations and upcoming macro prints. The market is pricing higher rates into year-end, with the front end sensitive to upcoming GDP third estimate, personal income, and PCE data. Fed policy expectations and oil moves are the key swing factors for risk appetite going into late June.",
     "dailyRead": {
-      "headline": "Momentum leadership in IT semis carries the tape; macro backdrops tilt toward rate risk.",
-      "body": "IT hardware names with strong long-horizon momentum are leading the tape, particularly INTC, MU, WDC, SNDK, and MRVL, even as a few names show rebound-watch risk. Heightened rate and geopolitical tensions keep inflation persistence in focus; macro events later this week (GDP third estimate, BEA income, and the FOMC calendar) are key for risk reversals. The strongest signal comes from cross-horizon confirmation: several top names show momentum confirmed in the 14-day horizon and strong long-horizon momentum; this suggests selective exposure in semis / equipment and memory beneficiaries, with careful position sizing given elevated sector volatility. In equities, the core exposure rests with INTC and MU as solidity in earnings trajectory supports, while Ciena remains high-ranked by model but not momentum-confirmed, implying caution on chasing. The model landscape also flags Model Rebound Watch names (CHTR, NOW, TTD) as potential setups if activation conditions trigger, but current momentum remains subdued. Price-action risk remains elevated where RSI is stretched (e.g., CIEN at RSI 28) and new highs are not yet in place. Portfolio implication: prefer high-conviction, momentum-confirmed IT names with strong sector leadership; avoid crowded or rebound-watch names without activation signals. Expected catalysts: GDP third estimate and PPI and CPI backdrop around July, plus Fed decisions in late July.",
+      "headline": "Momentum leadership intact in semis / IT; macro hawkish tilt keeps risk-balanced stance",
+      "body": "A hawkish tilt from rates, ongoing inflation persistence, and key GDP and PCE prints over the next week heighten near-term volatility, but model-led momentum remains concentrated in Information Technology leaders (INTC, MU, WDC, SNDK) with long-horizon conviction. The strongest signals come from cross-horizon momentum in the sector leadership cluster, aided by above-average sector returns and robust 60d trends, even as RSI remains cool for several names. Expect dips to be met with selective buying in high-quality, liquid tech names, provided they maintain trend and don’t break key risk-control trigger levels. The highest-conviction tactical names (INTC, MU, WDC, SNDK) show durable up-move potential on 14-day and 252-day horizons, while rebound-watch names (CHTR, NOW, TTD, QCOM) require activation signals before adding risk. The macro backdrop and earnings / tape drivers suggest staying long the IT cycle with careful risk controls around volatility spikes and sector leadership shifts.",
       "keyTakeaways": [
-        "Macro release: Higher risk from rate path and geopolitical tensions; GDP third estimate and BEA income data due later this week could reprice growth expectations (BEA releases June 25).",
-        "Breadth: Momentum is concentrated in IT, with others showing rebound-watch signals; CIEN shows high rank but lacks momentum confirmation.",
-        "Risk: Above-sector volatility in top names; RSI stretch in CIEN; rebound-watch names require activation to be actionable."
+        "Macro release: No immediate official macro read yet today, but the 2-year / 10-year yield backdrop remains supportive of rate-flexible equities; CNB C rates and Fed path expectations remain the key risk.",
+        "Market drivers: Information Technology leadership dominates flows; INTC, MU, WDC, SNDK up in tactical and long-horizon scans, with 14-day momentum confirming for INTC and MU and SNDK and WDC."
       ],
       "watchItems": [
-        "Cross-horizon confirmation status for rebound-watch names CHTR, NOW, TTD; activation signals to be monitored.",
-        "Reddit sentiment shows MU and SNDK fan concentration; monitor crowding risk vs model leaders."
+        "invalidationsignal: If Treasury yields surge and wage data surprise to the upside, or if 14-day momentum breaks below key moving averages, reduce risk and tighten risk controls."
       ]
     },
     "recommendations": [
       {
         "symbol": "INTC",
-        "action": "Buy",
+        "action": "Buy/Research Now",
         "conviction": "High",
         "setup": "Momentum Confirmed",
-        "whyNow": "Strong 14-day momentum with long-horizon upside; within 8% of 52w high; above 200d trend; SPY-relative momentum favorable (+189% over 60d).",
-        "rationale": "The 14-day tactical model ranks INTC #3 in a 501-name universe; one-year horizon also supportive with top sector momentum, suggesting durable upside given AI / memory cycle relevance.",
+        "whyNow": "Industrial IT leader shows durable multi-horizon momentum; 14-day momentum supportive; Near-term macro risk manageable with above-50d trend still intact.",
+        "rationale": "Intel remains at the core of the IT sector leadership with strong 120d return and outperformance versus SPY; risk flags are elevated but trend remains positive.",
         "companyOverview": "Intel (Nasdaq: INTC) designs and manufactures advanced semiconductors that connect and power the modern world. Every day, our engineers create new technologies that enhance and shape the future of computing to enable new possibilities for every customer we serve. Learn more at intel.com .",
-        "marketCap": "$673.4B",
+        "marketCap": "$707.1B",
         "earningsContext": "Last reported 2026-04-23 for the Mar 2026 fiscal quarter; EPS 0.17 versus consensus -0.1; surprise 270%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 0.1.",
-        "recentNews": "No new company-specific catalysts beyond typical schedule.",
-        "macroLink": "(M4)",
-        "macroEvidence": "Markets pricing in Fed path risk; rate expectations remain a core driver of tech momentum.",
-        "modelEvidence": "Rank 3 in 14-day model; percentile 99.6; long-horizon model aligns.",
-        "technicalEvidence": "Price near 52w high, RSI 61; volume robust.",
-        "momentumEvidence": "Top-decile momentum across 60d / 120d windows; 60d beta exposure.",
-        "risk": "Above-sector volatility.",
-        "invalidation": "If price closes below trend confirmation layer or 50d / 200d downtrend accelerates.",
+        "recentNews": "Intel momentum supported by sector growth; no fresh negative news.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "model rank 3; percentile 99.6; long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend. RSI 61; volatility 0.062.",
+        "technicalEvidence": "Price action holding above key trend; risk-control trigger; distance to 52wk high 0.",
+        "momentumEvidence": "14-day momentum confirmed; 60d return strong; 120d return explosive.",
+        "risk": "Above-sector volatility; potential pullback if growth / sentiment deteriorates.",
+        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
           "C3-EARNINGS",
           "C3-IR",
@@ -1460,124 +1458,130 @@
       },
       {
         "symbol": "MU",
-        "action": "Buy",
+        "action": "Buy/Research Now",
         "conviction": "High",
         "setup": "Momentum Confirmed",
-        "whyNow": "Strong 14-day momentum, within 8% of 52w high; AI memory cycle beneficiaries.",
-        "rationale": "Model ranks MU at #4 with top-decile score; long-horizon momentum and top sector 120d return rank support continued upside; 60d SPY-relative return +172%.",
+        "whyNow": "Memory leader with multi-horizon momentum; sector leadership intact; 60d / 120d returns robust.",
+        "rationale": "MU shows strong multi-timeframe momentum and high percentile rank; 60d SPY-relative outperformance; 52w high within reach.",
         "companyOverview": "Micron Technology, Inc. is an industry leader in innovative memory and storage solutions transforming how the world uses information to enrich life for all. With a relentless focus on our customers, technology leadership, and manufacturing and operational excellence, Micron delivers a rich portfolio of high-performa...",
-        "marketCap": "$1.28T",
-        "earningsContext": "Last reported 2026-03-18 for the Feb 2026 fiscal quarter; EPS 12.08 versus consensus 8.64; surprise 39.81%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as May 2026 with consensus 19.54.",
-        "recentNews": "Micron earnings narrative being pivotal for semis; AI-infrastructure demand supportive.",
-        "macroLink": "(M3) Oil and geopolitics backdrop support semi cycle.",
-        "macroEvidence": "Global demand for memory tied to AI and data center expansion.",
-        "modelEvidence": "14-day rank 4, long-horizon momentum confirm; percentile 99.4.",
-        "technicalEvidence": "RSI ~59; price near all-time highs historically; strong volume.",
-        "momentumEvidence": "Top sector 120d return rank; momentum confirmed.",
-        "risk": "Above-sector volatility.",
-        "invalidation": "Weakening price action or breakdown through key trend lines.",
+        "marketCap": "$1.34T",
+        "earningsContext": "Last reported 2026-03-18 for the Feb 2026 fiscal quarter; EPS 12.08 versus consensus 8.64; surprise 39.81%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as May 2026 with consensus 20.81.",
+        "recentNews": "MU momentum driven by AI / data center themes; no negative headlines.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "model rank 4; percentile 99.4; long-horizon momentum; Top-sector 120d return rank; Above200d trend.",
+        "technicalEvidence": "RSI ~59; trend positive; stopSell 904.53; distance to 52w high 0.",
+        "momentumEvidence": "14-day momentum confirmed; 60d / 120d returns robust.",
+        "risk": "Above-sector volatility; potential drawdown if AI demand softens.",
+        "invalidation": "Close below 50d moving average or break of 50d / 200d trend.",
         "sourceRefs": [
           "C4-EARNINGS",
-          "C4-MARKETCAP",
-          "C4-IR"
+          "C4-IR",
+          "C4-MARKETCAP"
         ]
       },
       {
         "symbol": "WDC",
-        "action": "Buy",
+        "action": "Buy/Research Now",
         "conviction": "High",
         "setup": "Momentum Confirmed",
-        "whyNow": "Clear IT sector leadership; long-horizon momentum intact; RSI 74; near 52w high.",
-        "rationale": "Top-decile model rank #5; momentum confirmed; 60d SPY-relative return +133%.",
+        "whyNow": "Storage leader with high momentum; 60d / 120d returns strong; end-demand for AI storage continues.",
+        "rationale": "WDC shows strong long-horizon momentum and top sector return; RSI elevated but manageable.",
         "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to enable reliable storage solutions that are proven and trusted at sca...",
-        "marketCap": "$257.2B",
+        "marketCap": "$251.1B",
         "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 2.62 versus consensus 2.28; surprise 14.91%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 3.22.",
-        "recentNews": "MD of AI-ready storage demand; Computex 2026 events.",
-        "macroLink": "(M8) Weekly Trader's Outlook notes energy demand synergy.",
-        "macroEvidence": "Storage capacity needs driven by AI workload growth.",
-        "modelEvidence": "Rank #5 with momentum; long-horizon confirmation.",
-        "technicalEvidence": "RSI 74; price at recent high; volume elevated.",
-        "momentumEvidence": "Momentum Confirmed; Top Sector 120d return rank.",
-        "risk": "Above-sector volatility.",
-        "invalidation": "Break below trend confirmation threshold 671.80.",
+        "recentNews": "WD momentum supported by AI / data demands; no triggering headlines.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "model rank 5; percentile 99.2; long-horizon momentum; Top-sector 120d return rank; Above200d trend.",
+        "technicalEvidence": "RSI 74; trend strong; stopSell 671.8.",
+        "momentumEvidence": "14 / 60d momentum confirmed; 120d return strong.",
+        "risk": "Higher volatility within sector; potential pullback if tech cycle cools.",
+        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
         "sourceRefs": [
           "C5-EARNINGS",
-          "C5-MARKETCAP",
-          "C5-IR"
+          "C5-IR",
+          "C5-MARKETCAP"
         ]
       },
       {
         "symbol": "SNDK",
-        "action": "Buy",
+        "action": "Buy/Research Now",
         "conviction": "High",
         "setup": "Momentum Confirmed",
-        "whyNow": "Memory sector leadership; high 60d SPY-relative return; long-horizon momentum.",
-        "rationale": "Rank #6 with top decile; 60d return vs SPY +196%; within 8% of 52w high.",
+        "whyNow": "Sandisk momentum mirrors MU and WDC; AI / Memory cycle remains favorable.",
+        "rationale": "Sandisk shows near-peak momentum with substantial 120d gains; 60d SPY-relative outperformance.",
         "companyOverview": "Sandisk (Nasdaq: SNDK) delivers innovative Flash solutions and advanced memory technologies that meet people and businesses at the intersection of their aspirations and the moment, enabling them to keep moving and pushing possibility forward.",
-        "marketCap": "$323.5B",
+        "marketCap": "$341.6B",
         "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 31.81.",
-        "recentNews": "AI / data-center memory demand tailwinds; earnings upside potential.",
-        "macroLink": "(M6) High memory cycle signals; AI adoption.",
-        "macroEvidence": "Memory cycle benefiting data center / AI infrastructure.",
-        "modelEvidence": "Long-horizon and 14-day confirm; top decile.",
-        "technicalEvidence": "RSI 67; near highs; volume active.",
-        "momentumEvidence": "Momentum Confirmed; Top Sector 120d return rank.",
-        "risk": "Above-sector volatility.",
-        "invalidation": "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.",
+        "recentNews": "Strong memory cycle supports upside.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "model rank 6; percentile 99; long-horizon momentum; Top-sector 120d return rank; Above200d trend.",
+        "technicalEvidence": "RSI 67; price near 52w high; stopSell 1742.3.",
+        "momentumEvidence": "6 / 60d momentum confirmed; 120d gains.",
+        "risk": "Volatility spikes in semis; careful position sizing.",
+        "invalidation": "Price breaks below 50d trend.",
         "sourceRefs": [
           "C6-EARNINGS",
           "C6-MARKETCAP",
           "C6-IR"
         ]
+      },
+      {
+        "symbol": "CIEN",
+        "action": "Watch/Partial, not momentum confirmed",
+        "conviction": "Low",
+        "setup": "Not Momentum Confirmed",
+        "whyNow": "High rank but not momentum confirmed; RSI 28; volatility high; price near 52w low relative to high.",
+        "rationale": "Despite top decile rank, CIEN is not momentum-confirmed and carries above-sector volatility with RSI oversold.",
+        "companyOverview": "Ciena is the global leader in high-speed connectivity. We build the world's most advanced networks to support exponential growth in bandwidth demand. By harnessing the power of our networking systems, interconnects, automation software, and services, Ciena revolutionizes data transmission and network management. Wit...",
+        "marketCap": "$63.0B",
+        "earningsContext": "Last reported 2026-06-04 for the Apr 2026 fiscal quarter; EPS 1.34 versus consensus 1.2; surprise 11.67%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jul 2026 with consensus 1.45.",
+        "recentNews": "Positive earnings but momentum lacking.",
+        "macroLink": "",
+        "macroEvidence": "",
+        "modelEvidence": "topRankings show high rank but setup is not momentum-confirmed; riskFlags present.",
+        "technicalEvidence": "RSI 28; near 200d trend; stopSell 370.51.",
+        "momentumEvidence": "Not Momentum Confirmed; activation pending.",
+        "risk": "High volatility; potential drawdown on strength in other names.",
+        "invalidation": "Break of above-50d trend with confirmation.",
+        "sourceRefs": [
+          "C1-EARNINGS",
+          "C1-MARKETCAP",
+          "C1-IR"
+        ]
       }
     ],
     "avoidList": {
-      "summary": "Avoid the Financials / Utilities Real Estate clusters that house the weakest model-ranked names; risk shows up as volatility, weak trend, and mixed reactions in the crowding signal.",
+      "summary": "Avoid stretched financials / real-estate-heavy names with weak momentum signals and weak model score within the risk / reward; the weakest model-ranked names cluster in Financials, Industrials, Utilities, Real Estate and Health Care in this window.",
       "sectors": [
         {
           "sector": "Financials",
-          "rationale": "23 of the weakest model-ranked names are in Financials; examples AMP,AON,USB,V."
-        },
-        {
-          "sector": "Industrials",
-          "rationale": "14 of the weakest model-ranked names are in Industrials; examples UNP,ALLE,AME,VLTO."
-        },
-        {
-          "sector": "Utilities",
-          "rationale": "9 weak names in Utilities; examples AES,FE,AEE,ATO."
-        },
-        {
-          "sector": "Real Estate",
-          "rationale": "8 weak in Real Estate; examples AMT,VICI,AVB,FRT."
+          "rationale": "23 weak names; fundamentals and momentum lag.”"
         }
       ],
       "companies": [
         {
-          "symbol": "AMT",
-          "rationale": "Ranked in weakest pool; poor momentum; RSI 39; volatility profile.",
-          "modelEvidence": "Ranked; below momentum signals."
-        },
-        {
           "symbol": "AMP",
-          "rationale": "Low momentum; governance risk not supported by momentum.",
-          "modelEvidence": "Ranked; volatility concerns."
+          "rationale": "Low momentum, below-200d trend; within avoid list due to rank and volatility",
+          "modelEvidence": "Ranked 500 / 501; volatility risk."
         }
       ]
     },
     "portfolioNotes": [
-      "Leverage-mitigated IT concentration; risk controls on CIEN due to RSI and volatility flag.",
-      "openQuestionsForTodayRequestedQuestionsOfTheDeskNotesForFurtherDiscussion"
+      "Top decile momentum across IT names; risk controls around CIEN due to non-momentum setup.",
+      "Reddit attention skew toward MU and SNDK but model leaders favor INTC and MU / WDC and SNDK."
     ],
     "openQuestions": [
-      "Are we comfortable with IT concentration given elevated risk flags?",
-      "What are the precise activation signals for rebound-watch names like CHTR, NOW, TTD?",
-      "Do macro prints around GDP and inflation shift Fed expectations sufficiently to reprice semis?"
+      "How will GDP Third Estimate and Personal Income data shape tech earnings and capex cycle?",
+      "Will FOMC July path surprise markets?",
+      "Do rebound-watch stocks deliver activation signals within 5 days?"
     ],
     "sourceRefs": [
-      "S1",
       "S2",
       "S3",
-      "S4",
+      "S6",
       "C3-EARNINGS",
       "C4-EARNINGS",
       "C5-EARNINGS",
@@ -1590,16 +1594,31 @@
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Focused, differentiated reads from recent sources. Prioritizes thematic angles that diverge from broad recaps, aiming to illuminate policy signals, geopolitics, and AI-driven capital shifts as they affect risk premia and cross-border exposure.",
+      "summary": "Concise, source-driven angles from recent candidate articles highlighting differentiated themes. Avoids generic recaps and previously used sources except where alternatives are scarce.",
       "cards": [
+        {
+          "sourceRef": "S7",
+          "sourceName": "Schwab Weekly Market Outlook",
+          "title": "Stocks Flat Early Aside from Tech as Oil Falls",
+          "thesis": "Oil weakness and tech-led resilience imply a bifurcated risk backdrop: energy drag on cyclical breadth, while tech stays a focal point for multiple compression and earnings sensitivities.",
+          "whyItMatters": "Oil’s move can amplify mixed reactions in sector fortunes; tech leadership may anchor drawdown protection if rates stabilize.",
+          "marketReadThrough": "Monitor energy price signals and tech earnings guidance for near-term mixed reactions; potential hedge signals if energy rebounds but tech remains resilient.",
+          "variantAngle": "Oil-tilt tension vs. tech resilience may create mixed reactions-driven alpha in select mega-cap and energy-adjacent names.",
+          "confidence": "Medium",
+          "url": "https://www.schwab.com/learn/story/stock-market-update-open",
+          "publishedAt": "2026-06-22T16:40:12.000Z",
+          "sourceRefs": [
+            "S7"
+          ]
+        },
         {
           "sourceRef": "S11",
           "sourceName": "Axios Markets RSS",
           "title": "How markets reacted to the new Fed chairman's policy committee debut - Axios",
-          "thesis": "Markets are pricing in a hawkish tilt on inflation risk despite a steady rate stance, with sharper sensitivity to committee communications and transparency changes.",
-          "whyItMatters": "The debut sets a directional bias on rate path expectations and the pace of balance-sheet normalization, influencing sector rotations and carry trades.",
-          "marketReadThrough": "Potential narrowing of rate vol around inflation surprises; risk of earlier regime shifts in duration and credit exposures.",
-          "variantAngle": "Policy signaling vs. actual rate moves: markets react more to communication cues than to immediate rate changes; implied volatility around Fed communications may be a secondary pressure point.",
+          "thesis": "Markets priced-in policy committee dynamics rather than incoming inflation surprises, suggesting a muted immediate reaction to leadership signals.",
+          "whyItMatters": "Entrenched expectations around policy committee composition can shape rate-risk sensitivity and equity-beta exposures in the near term.",
+          "marketReadThrough": "Potential for compressed volatility if committee guidance remains data-dependent; hedges may focus on duration and rate-exposure shortlegs.",
+          "variantAngle": "Policy-committee leadership dynamics as a cross-asset risk lens, diverging from headline rate moves.",
           "confidence": "Medium",
           "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1xMi1UNUh3c0pxNU5nU3Q2aGQ2ZTdJemdDX1ZHLU9KcUNta0xNbGxzd05BcEZ2ejNyOFVST2lqTzJma1hHUTJVOWtxWVoxX1RpdXJEQXRUNE5nS2lfVTNuazJsNjlLRXh5eUkzb0RwZw?oc=5",
           "publishedAt": "2026-06-18T11:23:49.000Z",
@@ -1608,29 +1627,14 @@
           ]
         },
         {
-          "sourceRef": "S8",
-          "sourceName": "Schwab Weekly Market Outlook",
-          "title": "Reading the Markets After Fed Chair Warsh’s Debut",
-          "thesis": "A hawkish inflation stance with less transparency creates global growth uncertainty and short-term risk-off pulses, particularly in rate-sensitive equities.",
-          "whyItMatters": "Guides tactical exposures to sectors with pricing power and slower inflation sensitivity; informs hedging needs.",
-          "marketReadThrough": "Possible spread between equities and duration risk; watch for shifts in credit spreads and dividend equities.",
-          "variantAngle": "Transparency and communication as key risk factor, beyond the rate level itself.",
-          "confidence": "Medium",
-          "url": "https://www.schwab.com/learn/story/reading-markets-after-fed-chair-warshs-debut",
-          "publishedAt": "2026-06-19T08:56:22.000Z",
-          "sourceRefs": [
-            "S8"
-          ]
-        },
-        {
           "sourceRef": "S14",
           "sourceName": "Fidelity Market Insights",
           "title": "AI opportunity in international stocks | 2026 outlook | Fidelity",
-          "thesis": "AI-driven productivity and geopolitics are reshaping international equity opportunities, with tech / semis exposure benefiting from global AI adoption despite regulatory headwinds.",
-          "whyItMatters": "Expands the international risk notebook: currency and policy risk intertwined with tech-cap cycles, creating divergence versus US equities.",
-          "marketReadThrough": "Cross-border portfolios may show idiosyncratic volatility as AI-related capex cycles diverge by region; potential for regional leadership in Asia / EM over DM ex-US.",
-          "variantAngle": "AI globalization and regional policy risk as a driver of cross-border equity mixed reactions.",
-          "confidence": "Medium",
+          "thesis": "AI acceleration abroad could re-rate international equities even as US tech dominates headlines, offering a diversification impulse amid global policy and geopolitics tension.",
+          "whyItMatters": "Global AI adoption paths may decouple international equity performance from US-centric narratives, impacting cross-border capital flows.",
+          "marketReadThrough": "Assess international AI-capable sectors and policy shifts; potential hedges via global tech and semis exposure with currency considerations.",
+          "variantAngle": "Global AI-cycle differentiation versus US-focused tech tone, highlighting idiosyncratic international opportunities.",
+          "confidence": "Low",
           "url": "https://www.fidelity.com/learning-center/trading-investing/international-stocks-outlook",
           "publishedAt": "2026-06-17T14:04:00.000Z",
           "sourceRefs": [
@@ -1641,10 +1645,10 @@
           "sourceRef": "S12",
           "sourceName": "Axios Macro RSS",
           "title": "Fed leaves rates steady in Warsh's first meeting - Axios",
-          "thesis": "Steady rates with a hawkish tilt on inflation suggests a cautious stance toward growth acceleration and a slower policy normalization pace.",
-          "whyItMatters": "Reinforces a cautious macro backdrop; may cap growth-sensitive equities while supporting duration protection strategies.",
-          "marketReadThrough": "Watch for marked-to-market adjustments in rate-sensitive sectors and fix-income hedges; potential move in USD strength.",
-          "variantAngle": "Communication-led risk not just rate level; look for evolving language in policy statements.",
+          "thesis": "A hold in rates nudges yield curves to flatten the short end, reducing immediate FOMC-driven volatility while maintaining data-dependency risk.",
+          "whyItMatters": "Rate-path ambiguity persists for equities; near-term risk / reward tilts depend on inflation trajectory and growth signals.",
+          "marketReadThrough": "Expect subdued short-rate moves with attention on inflation surprises and growth data; hedges may focus on duration and curve steepening / flattening trades.",
+          "variantAngle": "First-rate-path dynamics under new leadership shaping cross-asset volatility more than rate heights.",
           "confidence": "Low",
           "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE15MTBDeUdsRFpSN2JDX3pjNHk2QVpqc0FFRG5pRDR1VzNRc3lRT0ZvNGpvcHdlMnIzbkpjUjFiRWE2NjQ3XzBUZE9uMHFzeVVXM3FtcWpobmpOMTlmTnZ5WXlBWFo4T3VV?oc=5",
           "publishedAt": "2026-06-18T00:16:00.000Z",
@@ -1658,16 +1662,31 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Focused, differentiated reads from recent sources. Prioritizes thematic angles that diverge from broad recaps, aiming to illuminate policy signals, geopolitics, and AI-driven capital shifts as they affect risk premia and cross-border exposure.",
+    "summary": "Concise, source-driven angles from recent candidate articles highlighting differentiated themes. Avoids generic recaps and previously used sources except where alternatives are scarce.",
     "cards": [
+      {
+        "sourceRef": "S7",
+        "sourceName": "Schwab Weekly Market Outlook",
+        "title": "Stocks Flat Early Aside from Tech as Oil Falls",
+        "thesis": "Oil weakness and tech-led resilience imply a bifurcated risk backdrop: energy drag on cyclical breadth, while tech stays a focal point for multiple compression and earnings sensitivities.",
+        "whyItMatters": "Oil’s move can amplify mixed reactions in sector fortunes; tech leadership may anchor drawdown protection if rates stabilize.",
+        "marketReadThrough": "Monitor energy price signals and tech earnings guidance for near-term mixed reactions; potential hedge signals if energy rebounds but tech remains resilient.",
+        "variantAngle": "Oil-tilt tension vs. tech resilience may create mixed reactions-driven alpha in select mega-cap and energy-adjacent names.",
+        "confidence": "Medium",
+        "url": "https://www.schwab.com/learn/story/stock-market-update-open",
+        "publishedAt": "2026-06-22T16:40:12.000Z",
+        "sourceRefs": [
+          "S7"
+        ]
+      },
       {
         "sourceRef": "S11",
         "sourceName": "Axios Markets RSS",
         "title": "How markets reacted to the new Fed chairman's policy committee debut - Axios",
-        "thesis": "Markets are pricing in a hawkish tilt on inflation risk despite a steady rate stance, with sharper sensitivity to committee communications and transparency changes.",
-        "whyItMatters": "The debut sets a directional bias on rate path expectations and the pace of balance-sheet normalization, influencing sector rotations and carry trades.",
-        "marketReadThrough": "Potential narrowing of rate vol around inflation surprises; risk of earlier regime shifts in duration and credit exposures.",
-        "variantAngle": "Policy signaling vs. actual rate moves: markets react more to communication cues than to immediate rate changes; implied volatility around Fed communications may be a secondary pressure point.",
+        "thesis": "Markets priced-in policy committee dynamics rather than incoming inflation surprises, suggesting a muted immediate reaction to leadership signals.",
+        "whyItMatters": "Entrenched expectations around policy committee composition can shape rate-risk sensitivity and equity-beta exposures in the near term.",
+        "marketReadThrough": "Potential for compressed volatility if committee guidance remains data-dependent; hedges may focus on duration and rate-exposure shortlegs.",
+        "variantAngle": "Policy-committee leadership dynamics as a cross-asset risk lens, diverging from headline rate moves.",
         "confidence": "Medium",
         "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1xMi1UNUh3c0pxNU5nU3Q2aGQ2ZTdJemdDX1ZHLU9KcUNta0xNbGxzd05BcEZ2ejNyOFVST2lqTzJma1hHUTJVOWtxWVoxX1RpdXJEQXRUNE5nS2lfVTNuazJsNjlLRXh5eUkzb0RwZw?oc=5",
         "publishedAt": "2026-06-18T11:23:49.000Z",
@@ -1676,29 +1695,14 @@
         ]
       },
       {
-        "sourceRef": "S8",
-        "sourceName": "Schwab Weekly Market Outlook",
-        "title": "Reading the Markets After Fed Chair Warsh’s Debut",
-        "thesis": "A hawkish inflation stance with less transparency creates global growth uncertainty and short-term risk-off pulses, particularly in rate-sensitive equities.",
-        "whyItMatters": "Guides tactical exposures to sectors with pricing power and slower inflation sensitivity; informs hedging needs.",
-        "marketReadThrough": "Possible spread between equities and duration risk; watch for shifts in credit spreads and dividend equities.",
-        "variantAngle": "Transparency and communication as key risk factor, beyond the rate level itself.",
-        "confidence": "Medium",
-        "url": "https://www.schwab.com/learn/story/reading-markets-after-fed-chair-warshs-debut",
-        "publishedAt": "2026-06-19T08:56:22.000Z",
-        "sourceRefs": [
-          "S8"
-        ]
-      },
-      {
         "sourceRef": "S14",
         "sourceName": "Fidelity Market Insights",
         "title": "AI opportunity in international stocks | 2026 outlook | Fidelity",
-        "thesis": "AI-driven productivity and geopolitics are reshaping international equity opportunities, with tech / semis exposure benefiting from global AI adoption despite regulatory headwinds.",
-        "whyItMatters": "Expands the international risk notebook: currency and policy risk intertwined with tech-cap cycles, creating divergence versus US equities.",
-        "marketReadThrough": "Cross-border portfolios may show idiosyncratic volatility as AI-related capex cycles diverge by region; potential for regional leadership in Asia / EM over DM ex-US.",
-        "variantAngle": "AI globalization and regional policy risk as a driver of cross-border equity mixed reactions.",
-        "confidence": "Medium",
+        "thesis": "AI acceleration abroad could re-rate international equities even as US tech dominates headlines, offering a diversification impulse amid global policy and geopolitics tension.",
+        "whyItMatters": "Global AI adoption paths may decouple international equity performance from US-centric narratives, impacting cross-border capital flows.",
+        "marketReadThrough": "Assess international AI-capable sectors and policy shifts; potential hedges via global tech and semis exposure with currency considerations.",
+        "variantAngle": "Global AI-cycle differentiation versus US-focused tech tone, highlighting idiosyncratic international opportunities.",
+        "confidence": "Low",
         "url": "https://www.fidelity.com/learning-center/trading-investing/international-stocks-outlook",
         "publishedAt": "2026-06-17T14:04:00.000Z",
         "sourceRefs": [
@@ -1709,10 +1713,10 @@
         "sourceRef": "S12",
         "sourceName": "Axios Macro RSS",
         "title": "Fed leaves rates steady in Warsh's first meeting - Axios",
-        "thesis": "Steady rates with a hawkish tilt on inflation suggests a cautious stance toward growth acceleration and a slower policy normalization pace.",
-        "whyItMatters": "Reinforces a cautious macro backdrop; may cap growth-sensitive equities while supporting duration protection strategies.",
-        "marketReadThrough": "Watch for marked-to-market adjustments in rate-sensitive sectors and fix-income hedges; potential move in USD strength.",
-        "variantAngle": "Communication-led risk not just rate level; look for evolving language in policy statements.",
+        "thesis": "A hold in rates nudges yield curves to flatten the short end, reducing immediate FOMC-driven volatility while maintaining data-dependency risk.",
+        "whyItMatters": "Rate-path ambiguity persists for equities; near-term risk / reward tilts depend on inflation trajectory and growth signals.",
+        "marketReadThrough": "Expect subdued short-rate moves with attention on inflation surprises and growth data; hedges may focus on duration and curve steepening / flattening trades.",
+        "variantAngle": "First-rate-path dynamics under new leadership shaping cross-asset volatility more than rate heights.",
         "confidence": "Low",
         "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE15MTBDeUdsRFpSN2JDX3pjNHk2QVpqc0FFRG5pRDR1VzNRc3lRT0ZvNGpvcHdlMnIzbkpjUjFiRWE2NjQ3XzBUZE9uMHFzeVVXM3FtcWpobmpOMTlmTnZ5WXlBWFo4T3VV?oc=5",
         "publishedAt": "2026-06-18T00:16:00.000Z",
@@ -1731,12 +1735,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-06-22T01:48:17.531Z",
+    "generatedAt": "2026-06-22T17:19:38.165Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-06-21T14:39:45.274Z"
+      "previousRefreshAt": "2026-06-22T01:49:26.773Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1747,20 +1751,24 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-06-22T01:43:14.473Z",
+      "generatedAt": "2026-06-22T17:14:35.827Z",
       "lookbackHours": 96,
       "releases": []
     },
     "sourceHealth": {
       "checked": 26,
-      "live": 21,
+      "live": 20,
       "blockedOrFailed": [
         {
-          "name": "Raymond James Commentary And Insights",
+          "name": "Merrill Capital Market Outlook",
           "reason": "Source check failed: This operation was aborted"
         },
         {
-          "name": "EIA Today In Energy",
+          "name": "Bank of America Institute",
+          "reason": "Source check failed: 403 Forbidden"
+        },
+        {
+          "name": "Raymond James Commentary And Insights",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -1780,139 +1788,159 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "CNBC Daily Open: Markets feeling that deja vu as Iran deal under strain, once again",
-        "sourceName": "CNBC Markets",
-        "sourceCategory": "News",
+        "title": "2-year Treasury note yield hits highest since February 2025",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/06/22/cnbc-daily-open-iran-ceasefire-deal-trump-israel-lebanon.html",
-        "publishedAt": "2026-06-22T01:17:21.000Z",
-        "summary": "Less than a week after the U.S. and Iran signed their \"memorandum of understanding\" aimed at ending the conflict, tensions have flared once again.",
-        "excerpt": "CNBC Daily Open: Markets feeling that deja vu as Iran deal under strain, once again Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Iran and the U.S. are trading claims over if the Straits of Hormuz is open. Oil jumps, markets slip in response to the tension flare up. UK Prime Minister Keir Starmer reportedly looks poised to resign. Investors will be awaiting MSCI's annual market-classification review. In this article .N225 @LCO.1 @CL.1 Follow your favorite stocks CREATE FREE ACCOUNT U.S. Vice President JD Vance (L) speaks next to Pakistan's Prime Minister Shehbaz Sharif (C) and Qatar's Prime Minister and Minister for Foreign Affairs Sheikh Mohammed bin Abdulrahman bin Jassim Al-Thani at the start of a quadrilateral meeting between the U.S., Iran, Pakistan and Qatar at the Burgenstock luxury hotel complex overlooking Lake Lucerne, Switzerland, on June 21, 2026, as part of high-level talks aimed at advancing a deal to end the Middle East conflict. Fabrice Coffrini | Afp | Getty Images Hello, this is Hui Jie writing to you from Singapore. Welcome to another edition of CNBC's Daily Open. Would it be too late to say: here we go again? Less than a week after the U.S. and Iran signed their memorandum of understanding aimed at ending the conflict in the Middle East, tensions have flared once again, with the status of the Strait of Hormuz up in the air. Meanwhile, UK Prime Minister Keir Starmer is poised to resign, according to media reports, following a decisive election victory by his rival Andy Burnham. What you need to know today Iran claimed it shut the Straits of Hormuz again, saying the U.S. failed to meet its commitment to stopping the fighting in Lebanon and U.S. President Donald Trump started threa",
+        "url": "https://www.cnbc.com/2026/06/22/treasury-yields-investors-look-ahead-to-key-inflation-data.html",
+        "publishedAt": "2026-06-22T17:13:03.000Z",
+        "summary": "The yield on the 10-year U.S. Treasury note - the key benchmark for U.S. government borrowing - rose four basis points, to 4.491%.",
+        "excerpt": "The yield on the 10-year U.S. Treasury note — the key benchmark for U.S. government borrowing — rose four basis points, to 4.491%.",
         "themes": [
-          "Geopolitics and policy",
-          "Commodities and energy",
-          "Macro and growth"
+          "Rates and central banks"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 0.5,
+        "ageHours": 0.1,
         "score": 100,
         "tickers": []
       },
       {
         "id": "M2",
-        "title": "Stock futures fall as oil prices rise; investors await key reading on inflation: Live updates",
-        "sourceName": "CNBC Markets",
-        "sourceCategory": "News",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/06/21/stock-market-today-live-updates.html",
-        "publishedAt": "2026-06-21T22:03:04.000Z",
-        "summary": "U.S. equity futures were lower on Sunday as Wall Street awaited the release of inflation data that is closely watched by the Federal Reserve.",
-        "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu A trader works on the floor at the New York Stock Exchange (NYSE) in New York City, U.S., June 18, 2026. Jeenah Moon | Reuters U.S. equity futures slipped and oil prices rose on Sunday as Wall Street watched the latest developments in the Iran war negotiations and awaited the release of inflation data that is closely watched by the Federal Reserve. S&P 500 futures traded down 0.4%, while Nasdaq-100 futures were 0.6% lower. Futures tied to the Dow Jones Industrial Average dropped 183 points, or 0.4%. Asia-Pacific markets traded higher early Monday after opening mixed. Japan's Nikkei 225 added 1.82% while the Topix rose 1.28%. The Kospi advanced 1.58% at open, while the small-cap Kosdaq slipped 0.51%. Australia's benchmark S&P/ASX 200 was marginally higher. Hong Kong Hang Seng index futures were at 23,846, lower than the index's last close of 23,924.81. Oil prices climbed amid uncertainty about the conflict in the Middle East. U.S. West Texas Intermediate futures gained nearly 3% to around $78 per barrel, while international benchmark Brent crude futures added more than 1% to roughly $81 a barrel. The moves come after President Donald Trump on Sunday threatened fresh strikes on Iran if the country's leaders don't \"immediately stop their highly paid PROXIES in Lebanon from causing trouble.\" His remarks came as Vice President JD Vance met with Iranian officials for the first round of negotiations in Switzerland, after talks had earlier been called off. The three leading U.S. indexes staged a comeback Thursday after a sell-off on Wednesday , with the declines fueled by investor uncertainty about the trajectory of monetary policy . Thurs",
-        "themes": [
-          "Rates and central banks",
-          "Geopolitics and policy",
-          "Commodities and energy"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 3.8,
-        "score": 100,
-        "tickers": []
-      },
-      {
-        "id": "M3",
-        "title": "Oil rises after Trump threatens fresh strikes on Iran, overshadowing peace talks",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/06/22/oil-prices-wti-brent-crude-trump-iran-threat-strait-hormuz-closure.html",
-        "publishedAt": "2026-06-22T00:05:08.000Z",
-        "summary": "Oil prices climbed on Monday after U.S. President Donald Trump threatened renewed military action against Iran.",
-        "excerpt": "Oil prices climbed on Monday after U.S. President Donald Trump threatened renewed military action against Iran.",
-        "themes": [
-          "Geopolitics and policy",
-          "Commodities and energy"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 1.7,
-        "score": 100,
-        "tickers": []
-      },
-      {
-        "id": "M4",
-        "title": "This bull market isn’t going to end because of Fed rate hikes under Warsh",
+        "title": "Alphabet sees $269 billion market-cap wipeout as investors fear it’s losing the war for AI talent",
         "sourceName": "MarketWatch Top Stories RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/this-bull-market-isnt-going-to-end-because-of-fed-rate-hikes-under-warsh-8f63fa85?mod=mw_rss_topstories",
-        "publishedAt": "2026-06-21T22:41:00.000Z",
-        "summary": "Trump-selected Fed chair Kevin Warsh may hope the threat of rate hikes is enough.",
-        "excerpt": "Trump-selected Fed chair Kevin Warsh may hope the threat of rate hikes is enough. But stocks might gain ground if he does. Past rate-hike cycles can be a guide.",
+        "url": "https://www.marketwatch.com/story/alphabet-sees-269-billion-market-cap-wipeout-as-investors-fear-its-losing-the-war-for-ai-talent-497aa378?mod=mw_rss_topstories",
+        "publishedAt": "2026-06-22T17:12:00.000Z",
+        "summary": "Two AI leaders, including a Nobel laureate, recently said they would leave Google for rival labs.",
+        "excerpt": "Two AI leaders, including a Nobel laureate, recently said they would leave Google for rival labs.",
         "themes": [
-          "Rates and central banks"
+          "Geopolitics and policy",
+          "AI and semis"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 3.1,
+        "ageHours": 0.1,
         "score": 92,
         "tickers": []
       },
       {
+        "id": "M3",
+        "title": "China’s growth engine has a weird new spark: buying ‘feelings’ to cope with a property crash",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/chinas-new-economic-drivers-a-sad-toy-elf-and-a-robot-police-force-8759daf9?mod=mw_rss_topstories",
+        "publishedAt": "2026-06-22T16:44:00.000Z",
+        "summary": "Toy elves and robot police are exposing the bizarre true state of China’s fractured economy.",
+        "excerpt": "Toy elves and robot police are exposing the bizarre true state of China’s fractured economy.",
+        "themes": [
+          "Geopolitics and policy",
+          "Macro and growth"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 0.6,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M4",
+        "title": "Caterpillar’s stock hits a milestone as roaring industrials rally sweeps up Wall Street",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/caterpillars-stock-hits-a-milestone-as-roaring-industrials-rally-sweeps-up-wall-street-391057f7?mod=mw_rss_topstories",
+        "publishedAt": "2026-06-22T16:47:00.000Z",
+        "summary": "Caterpillar is the hottest stock in the Dow this year, and now one of just two in the index with a price above $1,000.",
+        "excerpt": "Caterpillar is the hottest stock in the Dow this year, and now one of just two in the index with a price above $1,000.",
+        "themes": [
+          "Market color"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 0.5,
+        "score": 86,
+        "tickers": []
+      },
+      {
         "id": "M5",
-        "title": "No one wants AI data centers on Earth. Do they make sense in space?",
+        "title": "Alphabet paces for worst day in a year on AI concerns after high-profile exits",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/06/21/do-space-based-ai-data-centers-make-economic-sense.html",
-        "publishedAt": "2026-06-21T21:22:53.000Z",
-        "summary": "Elon Musk's SpaceX is betting big on orbital AI data centers.",
-        "excerpt": "Elon Musk's SpaceX is betting big on orbital AI data centers. The public doesn't want them on Earth, but the economic case for space-based is questionable.",
+        "url": "https://www.cnbc.com/2026/06/22/alphabet-goog-stock-ai-departures.html",
+        "publishedAt": "2026-06-22T17:11:01.000Z",
+        "summary": "Google parent Alphabet has seen consecutive high-profile artificial intelligence researchers leave.",
+        "excerpt": "Google parent Alphabet has seen consecutive high-profile artificial intelligence researchers leave.",
         "themes": [
           "AI and semis"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 4.4,
+        "ageHours": 0.1,
         "score": 78,
         "tickers": []
       },
       {
         "id": "M6",
-        "title": "Micron’s earnings are a must-watch market event — with profit growth approaching 1,000%",
-        "sourceName": "MarketWatch Top Stories RSS",
+        "title": "Can anyone join Musk in the trillionaire club? Zuckerberg has best shot, according to prediction markets",
+        "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/microns-earnings-are-a-must-watch-market-event-with-profit-growth-approaching-1-000-78ec4549?mod=mw_rss_topstories",
-        "publishedAt": "2026-06-21T14:00:00.000Z",
-        "summary": "Micron’s massive growth is “coming at nearly pure profit,” and that’s starting to have real implications for the S&P 500.",
-        "excerpt": "Micron’s massive growth is “coming at nearly pure profit,” and that’s starting to have real implications for the S&P 500.",
+        "url": "https://www.cnbc.com/2026/06/22/zuckerberg-seen-as-next-to-join-trillionaire-club-say-kalshi-traders.html",
+        "publishedAt": "2026-06-22T16:45:37.000Z",
+        "summary": "The Meta CEO is seen as next to join the Tesla and SpaceX CEO.",
+        "excerpt": "The Meta CEO is seen as next to join the Tesla and SpaceX CEO. Nvidia CEO Jensen Huang is seen as the second-most-likely.",
         "themes": [
-          "Earnings",
-          "Macro and growth"
+          "Market color"
         ],
-        "freshness": "Last 24 hours",
-        "ageHours": 11.8,
-        "score": 70,
+        "freshness": "Since prior refresh",
+        "ageHours": 0.6,
+        "score": 78,
         "tickers": []
       },
       {
         "id": "M7",
-        "title": "Reading the Markets After Fed Chair Warsh’s Debut",
-        "sourceName": "Schwab Weekly Market Outlook",
-        "sourceCategory": "Institution research",
-        "trust": "High",
-        "url": "https://www.schwab.com/learn/story/reading-markets-after-fed-chair-warshs-debut",
-        "publishedAt": "2026-06-19T08:56:22.000Z",
-        "summary": "Fed chair Warsh’s first meeting kept rates steady but struck a hawkish tone on inflation while signaling less transparency, driving market uncertainty.",
-        "excerpt": "Reading the Markets After Fed Chair Warsh’s Debut | Charles Schwab Search Learn Reading the Markets After Fed Chair Warsh’s Debut Fed chair Warsh’s first meeting kept rates steady but struck a hawkish tone on inflation while signaling less transparency, driving market uncertainty. June 19, 2026 • Liz Ann Sonders • Collin Martin : opens in a new window : opens in a new window : opens in a new window On Investing | EP119 Reading the Markets After Fed Chair Warsh’s Debut Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript After you listen Follow Collin and Liz Ann on social media: Liz Ann Sonders on X and LinkedIn . Collin Martin on X and LinkedIn . At his first Fed meeting as chair, Kevin Warsh signaled a more hawkish stance focused squarely on inflation, while launching a sweeping reform agenda. Policymakers are split between holding and potentially hiking, with strong emphasis on restoring price stability. Warsh introduced a significant shift in Fed governance and communication: shorter statements, less forward guidance, and five task forces aimed at rethinking policy frameworks. Liz Ann Sonders and Collin Martin explore the implications of that shift, particularly the risk that reduced transparency could lead to greater market volatility as investors react more sharply to incoming data. They also assess market dynamics: Rising short-term yields pressured equities, while longer-term yields may remain range-bound if inflation expectations stabilize. Finally, they offer practical portfolio takeaways—emphasizing diversification within equities, a focus on quality and earnings strength, and a disciplined approach to asset allocation in a higher-rate, more-uncertain policy regime. On Investing ",
+        "title": "S&P 500 runs out of steam, falls into the red as Big Tech, SpaceX struggle: Live updates",
+        "sourceName": "CNBC Markets",
+        "sourceCategory": "News",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/06/21/stock-market-today-live-updates.html",
+        "publishedAt": "2026-06-21T22:03:04.000Z",
+        "summary": "The S&P 500 was relatively unchanged on Monday, while oil prices fell, as Wall Street assessed the latest developments in the Iran war negotiations.",
+        "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Traders work on the floor of the New York Stock Exchange. NYSE The S&P 500 fell on Monday, weighed down by declines in technology stocks and SpaceX. Wall Street also assessed the latest developments in the Iran war negotiations and awaited the release of inflation data closely watched by the Federal Reserve. The broad market index fell 0.4%, while the Nasdaq Composite declined 1.3%. The Dow Jones Industrial Average added 151 points, or 0.3%. Major tech names pulled the market into negative territory. Shares of Alphabet dropped 6%, spurred by concerns around artificial intelligence talent departures . Amazon and Meta Platforms lost 4% and 2%, respectively. Microsoft shares also declined 2%. SpaceX was another laggard. The stock fell 10%, putting it on pace for its third straight daily decline . However, Micron Technology was one of the outperformers, rising 5%. The move comes ahead of the chipmaker's quarterly report , due Wednesday after the bell. Fellow chipmakers also saw gains, with Advanced Micro Devices moving up 1% and Intel adding 4%. Brent oil futures turned negative on Monday after mediators Qatar and Pakistan said that U.S. and Iranian officials had agreed on a roadmap to reach a final deal within 60 days. Oil prices later traded around session lows after the Treasury Department authorized the sale of Iranian oil for 60 days. International benchmark Brent crude futures for August fell more than 3% to around $77 a barrel. U.S. West Texas Intermediate futures for July were more than 2% lower at roughly $74. A key test for the market this week will be the release on Thursday of May's reading on the personal consumption expen",
         "themes": [
-          "Earnings",
-          "Rates and central banks"
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "Commodities and energy",
+          "AI and semis"
         ],
-        "freshness": "Important older item",
-        "ageHours": 64.9,
-        "score": 62,
+        "freshness": "Last 24 hours",
+        "ageHours": 19.3,
+        "score": 70,
         "tickers": []
       },
       {
         "id": "M8",
+        "title": "Stocks Flat Early Aside from Tech as Oil Falls",
+        "sourceName": "Schwab Weekly Market Outlook",
+        "sourceCategory": "Institution research",
+        "trust": "High",
+        "url": "https://www.schwab.com/learn/story/stock-market-update-open",
+        "publishedAt": "2026-06-22T16:40:12.000Z",
+        "summary": "Learn what's trending before the opening bell with Schwab's market open report.",
+        "excerpt": "Schwab Market Update | Charles Schwab Search Learn Markets and Economy Stocks Flat Early Aside from Tech as Oil Falls Early gains in chip stocks were a feature today amid positive signals from peace talks that pushed oil prices lower. The week ahead features PCE inflation data and Micron results. June 22, 2026 • Joe Mazzola Published as of: June 22, 2026, 9:15 a.m. ET Listen to this update Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,500.58 +80.48 +1.08% Dow Jones Industrial Average ® 51,564.70 +72.15 +0.14% Nasdaq Composite ® 26,517.93 +496.28 +1.91% 10-year Treasury yield 4.49% +0.04 -- U.S. Dollar Index 100.81 -0.03 -0.03% Cboe Volatility Index ® 17.04 +0.26 +1.55% WTI Crude Oil $75.87 -$0.73 -0.95% Bitcoin $65,050 +2,120 +3.37% Disclosure (Monday market open) Major indexes wobbled early, seeking direction after a long weekend that included tense negotiations between the U.S. and Iran and mixed signals on the Strait of Hormuz, where shipping traffic remains sparse. Today's calendar is devoid of major economic and earnings news, but things ramp up as the week progresses. Thursday brings May Personal Consumption Expenditures (PCE) prices as well as the third estimate of first quarter GDP . Earnings are light from a calendar perspective but potentially heavy in terms of impact this week thanks to scheduled reports from FedEx (FDX) late Tuesday and Micron (MU) late Wednesday. Chip shares rose this morning, giving the Nasdaq Composite a tailwind. This week includes several large Treasury auctions beginning with one for $69 billion in 2-year notes ",
+        "themes": [
+          "Earnings",
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "Commodities and energy",
+          "Macro and growth"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 0.7,
+        "score": 68,
+        "tickers": []
+      },
+      {
+        "id": "M9",
         "title": "Weekly Trader's Outlook",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1927,12 +1955,12 @@
           "Commodities and energy"
         ],
         "freshness": "Important older item",
-        "ageHours": 76.8,
+        "ageHours": 92.3,
         "score": 62,
         "tickers": []
       },
       {
-        "id": "M9",
+        "id": "M10",
         "title": "What Is Stagflation? Causes, Examples, and Impact",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1947,90 +1975,46 @@
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 77.8,
+        "ageHours": 93.3,
         "score": 62,
-        "tickers": []
-      },
-      {
-        "id": "M10",
-        "title": "Raising the minimum wage has been a big political winner. Now it&apos;s running into resistance",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/06/21/raise-minimum-wage-inflation-politics.html",
-        "publishedAt": "2026-06-21T14:07:29.000Z",
-        "summary": "Raising the minimum wage has been a progressive policy winner at the ballot box, but recent losses suggest an economic mood slowing its political momentum.",
-        "excerpt": "Raising the minimum wage has been a progressive policy winner at the ballot box, but recent losses suggest an economic mood slowing its political momentum.",
-        "themes": [
-          "Market color"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 11.7,
-        "score": 48,
-        "tickers": []
-      },
-      {
-        "id": "M11",
-        "title": "How markets reacted to the new Fed chairman's policy committee debut - Axios",
-        "sourceName": "Axios Markets RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1xMi1UNUh3c0pxNU5nU3Q2aGQ2ZTdJemdDX1ZHLU9KcUNta0xNbGxzd05BcEZ2ejNyOFVST2lqTzJma1hHUTJVOWtxWVoxX1RpdXJEQXRUNE5nS2lfVTNuazJsNjlLRXh5eUkzb0RwZw?oc=5",
-        "publishedAt": "2026-06-18T11:23:49.000Z",
-        "summary": "How markets reacted to the new Fed chairman's policy committee debut Axios",
-        "excerpt": "How markets reacted to the new Fed chairman's policy committee debut Axios",
-        "themes": [
-          "Rates and central banks"
-        ],
-        "freshness": "Important older item",
-        "ageHours": 86.4,
-        "score": 46,
         "tickers": []
       }
     ],
     "topThemes": [
       {
         "theme": "Rates and central banks",
-        "count": 6
+        "count": 5
       },
       {
         "theme": "Geopolitics and policy",
-        "count": 4
+        "count": 5
       },
       {
-        "theme": "Commodities and energy",
-        "count": 4
+        "theme": "AI and semis",
+        "count": 3
       },
       {
         "theme": "Macro and growth",
         "count": 3
       },
       {
-        "theme": "Earnings",
+        "theme": "Commodities and energy",
         "count": 3
       },
       {
-        "theme": "AI and semis",
-        "count": 1
+        "theme": "Market color",
+        "count": 2
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-06-22T01:48:17.522Z",
+      "generatedAt": "2026-06-22T17:19:38.156Z",
       "dates": [
-        "2026-06-20",
         "2026-06-21",
-        "2026-06-22"
+        "2026-06-22",
+        "2026-06-23"
       ],
       "calendars": [
-        {
-          "date": "2026-06-20",
-          "asOf": "Sat, Jun 20, 2026",
-          "status": "ready",
-          "error": null,
-          "rowCount": 0,
-          "rows": []
-        },
         {
           "date": "2026-06-21",
           "asOf": "Sun, Jun 21, 2026",
@@ -2044,58 +2028,16 @@
           "asOf": "Mon, Jun 22, 2026",
           "status": "ready",
           "error": null,
-          "rowCount": 9,
+          "rowCount": 6,
           "rows": [
             {
               "date": "2026-06-22",
               "symbol": "WDS",
               "name": "Woodside Energy Group Limited",
               "time": "time-not-supplied",
-              "marketCap": "$38,212,112,874",
+              "marketCap": "$38,117,057,867",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
-              "noOfEsts": "2",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-22"
-            },
-            {
-              "date": "2026-06-22",
-              "symbol": "FRVO",
-              "name": "Fervo Energy Company",
-              "time": "time-pre-market",
-              "marketCap": "$10,347,189,531",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.09)",
-              "noOfEsts": "2",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-22"
-            },
-            {
-              "date": "2026-06-22",
-              "symbol": "EBF",
-              "name": "Ennis, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$507,230,354",
-              "fiscalQuarterEnding": "May/2026",
-              "epsForecast": "",
-              "noOfEsts": "2",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "$0.38",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-22"
-            },
-            {
-              "date": "2026-06-22",
-              "symbol": "POWW",
-              "name": "Outdoor Holding Company",
-              "time": "time-pre-market",
-              "marketCap": "$227,540,121",
-              "fiscalQuarterEnding": "Mar/2026",
-              "epsForecast": "($0.02)",
               "noOfEsts": "2",
               "lastYearReportDate": "N/A",
               "lastYearEps": "N/A",
@@ -2107,7 +2049,7 @@
               "symbol": "MOB",
               "name": "Mobilicom Limited",
               "time": "time-not-supplied",
-              "marketCap": "$70,115,209",
+              "marketCap": "$71,883,881",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
               "noOfEsts": "2",
@@ -2121,7 +2063,7 @@
               "symbol": "GNS",
               "name": "Genius Group Limited",
               "time": "time-not-supplied",
-              "marketCap": "$43,802,594",
+              "marketCap": "$40,551,468",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
               "noOfEsts": "2",
@@ -2135,7 +2077,7 @@
               "symbol": "RYOJ",
               "name": "rYojbaba Co., Ltd.",
               "time": "time-not-supplied",
-              "marketCap": "$27,489,000",
+              "marketCap": "$27,951,000",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
               "noOfEsts": "2",
@@ -2149,7 +2091,7 @@
               "symbol": "VSTD",
               "name": "Vestand Inc. ",
               "time": "time-not-supplied",
-              "marketCap": "$4,226,242",
+              "marketCap": "$2,987,246",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
               "noOfEsts": "2",
@@ -2163,7 +2105,7 @@
               "symbol": "IMTE",
               "name": "Integrated Media Technology Limited",
               "time": "time-not-supplied",
-              "marketCap": "$1,799,039",
+              "marketCap": "$1,765,953",
               "fiscalQuarterEnding": "Mar/2026",
               "epsForecast": "",
               "noOfEsts": "2",
@@ -2173,35 +2115,464 @@
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-22"
             }
           ]
+        },
+        {
+          "date": "2026-06-23",
+          "asOf": "Tue, Jun 23, 2026",
+          "status": "ready",
+          "error": null,
+          "rowCount": 30,
+          "rows": [
+            {
+              "date": "2026-06-23",
+              "symbol": "FDX",
+              "name": "FedEx Corporation",
+              "time": "time-after-hours",
+              "marketCap": "$77,833,523,807",
+              "fiscalQuarterEnding": "May/2026",
+              "epsForecast": "$5.91",
+              "noOfEsts": "9",
+              "lastYearReportDate": "6/24/2025",
+              "lastYearEps": "$6.07",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "CBRS",
+              "name": "Cerebras Systems Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$50,516,290,858",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.14)",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "CCEP",
+              "name": "Coca-Cola Europacific Partners plc",
+              "time": "time-not-supplied",
+              "marketCap": "$44,125,451,341",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "CCL",
+              "name": "Carnival Corporation Ltd.",
+              "time": "time-pre-market",
+              "marketCap": "$44,082,849,259",
+              "fiscalQuarterEnding": "May/2026",
+              "epsForecast": "$0.34",
+              "noOfEsts": "6",
+              "lastYearReportDate": "6/24/2025",
+              "lastYearEps": "$0.35",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "SUNB",
+              "name": "Sunbelt Rentals Holdings, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$35,568,581,046",
+              "fiscalQuarterEnding": "Apr/2026",
+              "epsForecast": "$0.73",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "ICLR",
+              "name": "ICON plc",
+              "time": "time-after-hours",
+              "marketCap": "$11,178,829,450",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "$2.18",
+              "noOfEsts": "3",
+              "lastYearReportDate": "4/30/2025",
+              "lastYearEps": "$3.07",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "KFY",
+              "name": "Korn Ferry ",
+              "time": "time-pre-market",
+              "marketCap": "$3,707,851,237",
+              "fiscalQuarterEnding": "Apr/2026",
+              "epsForecast": "$1.37",
+              "noOfEsts": "1",
+              "lastYearReportDate": "6/18/2025",
+              "lastYearEps": "$1.32",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "KBH",
+              "name": "KB Home",
+              "time": "time-after-hours",
+              "marketCap": "$3,395,534,933",
+              "fiscalQuarterEnding": "May/2026",
+              "epsForecast": "$0.44",
+              "noOfEsts": "7",
+              "lastYearReportDate": "6/23/2025",
+              "lastYearEps": "$1.50",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "WOR",
+              "name": "Worthington Enterprises, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$2,974,880,838",
+              "fiscalQuarterEnding": "May/2026",
+              "epsForecast": "$1.04",
+              "noOfEsts": "2",
+              "lastYearReportDate": "6/24/2025",
+              "lastYearEps": "$1.06",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "CYD",
+              "name": "China Yuchai International Limited",
+              "time": "time-not-supplied",
+              "marketCap": "$1,827,142,281",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "CURR",
+              "name": "Currenc Group Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$340,214,112",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.13)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "AVXL",
+              "name": "Anavex Life Sciences Corp.",
+              "time": "time-not-supplied",
+              "marketCap": "$252,993,899",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.07)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "5/13/2025",
+              "lastYearEps": "($0.13)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "JFIN",
+              "name": "Jiayin Group Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$209,841,479",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$1.40",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "ALPS",
+              "name": "ALPS Group Inc",
+              "time": "time-not-supplied",
+              "marketCap": "$119,808,235",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.18)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "KEQU",
+              "name": "Kewaunee Scientific Corporation",
+              "time": "time-after-hours",
+              "marketCap": "$107,575,392",
+              "fiscalQuarterEnding": "Apr/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$1.95",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "ATLN",
+              "name": "Atlantic International Corp.",
+              "time": "time-not-supplied",
+              "marketCap": "$41,955,236",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "5/13/2025",
+              "lastYearEps": "($0.20)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "AAME",
+              "name": "Atlantic American Corporation",
+              "time": "time-not-supplied",
+              "marketCap": "$38,142,816",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.01",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "FTHM",
+              "name": "Fathom Holdings Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$35,077,129",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "($0.10)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "5/13/2025",
+              "lastYearEps": "($0.24)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "BRLS",
+              "name": "Borealis Foods Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$28,116,931",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.20)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "UTSI",
+              "name": "UTStarcom Holdings Corp",
+              "time": "time-not-supplied",
+              "marketCap": "$25,064,450",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "RGNT",
+              "name": "Regentis Biomaterials Ltd.",
+              "time": "time-not-supplied",
+              "marketCap": "$22,219,532",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "REBN",
+              "name": "Reborn Coffee, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$13,223,663",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.47)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "RTB",
+              "name": "RTB Digital, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$13,130,342",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($10.14)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "GAUZ",
+              "name": "Gauzy Ltd.",
+              "time": "time-not-supplied",
+              "marketCap": "$11,994,940",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.54)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "CETY",
+              "name": "Clean Energy Technologies, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$10,648,993",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.15)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "GURE",
+              "name": "Gulf Resources, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$5,927,194",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$4",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "GITS",
+              "name": "Global Interactive Technologies, Inc. Common Stock",
+              "time": "time-not-supplied",
+              "marketCap": "$5,437,828",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.20)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "XAIR",
+              "name": "Beyond Air, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$4,569,366",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($1.80)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "IVF",
+              "name": "INVO Fertility, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$2,679,053",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($99.99)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            },
+            {
+              "date": "2026-06-23",
+              "symbol": "UK",
+              "name": "Ucommune International Ltd ",
+              "time": "time-not-supplied",
+              "marketCap": "$1,444,036",
+              "fiscalQuarterEnding": "Mar/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-06-23"
+            }
+          ]
         }
       ],
       "earningsMovers": [],
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "CNBC Daily Open: Markets feeling that deja vu as Iran deal under strain, once again",
-          "sourceName": "CNBC Markets",
-          "url": "https://www.cnbc.com/2026/06/22/cnbc-daily-open-iran-ceasefire-deal-trump-israel-lebanon.html",
-          "publishedAt": "2026-06-22T01:17:21.000Z",
-          "summary": "Less than a week after the U.S. and Iran signed their \"memorandum of understanding\" aimed at ending the conflict, tensions have flared once again.",
+          "title": "Caterpillar’s stock hits a milestone as roaring industrials rally sweeps up Wall Street",
+          "sourceName": "MarketWatch Top Stories RSS",
+          "url": "https://www.marketwatch.com/story/caterpillars-stock-hits-a-milestone-as-roaring-industrials-rally-sweeps-up-wall-street-391057f7?mod=mw_rss_topstories",
+          "publishedAt": "2026-06-22T16:47:00.000Z",
+          "summary": "Caterpillar is the hottest stock in the Dow this year, and now one of just two in the index with a price above $1,000.",
           "tickers": []
         },
         {
           "id": "E2",
-          "title": "Micron’s earnings are a must-watch market event — with profit growth approaching 1,000%",
-          "sourceName": "MarketWatch Top Stories RSS",
-          "url": "https://www.marketwatch.com/story/microns-earnings-are-a-must-watch-market-event-with-profit-growth-approaching-1-000-78ec4549?mod=mw_rss_topstories",
-          "publishedAt": "2026-06-21T14:00:00.000Z",
-          "summary": "Micron’s massive growth is “coming at nearly pure profit,” and that’s starting to have real implications for the S&P 500.",
+          "title": "Stocks Flat Early Aside from Tech as Oil Falls",
+          "sourceName": "Schwab Weekly Market Outlook",
+          "url": "https://www.schwab.com/learn/story/stock-market-update-open",
+          "publishedAt": "2026-06-22T16:40:12.000Z",
+          "summary": "Learn what's trending before the opening bell with Schwab's market open report. Find out about macroeconomic reports, company earnings, and other events.",
           "tickers": []
         },
         {
           "id": "E3",
-          "title": "Reading the Markets After Fed Chair Warsh’s Debut",
-          "sourceName": "Schwab Weekly Market Outlook",
-          "url": "https://www.schwab.com/learn/story/reading-markets-after-fed-chair-warshs-debut",
-          "publishedAt": "2026-06-19T08:56:22.000Z",
-          "summary": "Fed chair Warsh’s first meeting kept rates steady but struck a hawkish tone on inflation while signaling less transparency, driving market uncertainty.",
+          "title": "S&P 500 runs out of steam, falls into the red as Big Tech, SpaceX struggle: Live updates",
+          "sourceName": "CNBC Markets",
+          "url": "https://www.cnbc.com/2026/06/21/stock-market-today-live-updates.html",
+          "publishedAt": "2026-06-21T22:03:04.000Z",
+          "summary": "The S&P 500 was relatively unchanged on Monday, while oil prices fell, as Wall Street assessed the latest developments in the Iran war negotiations.",
           "tickers": []
         },
         {
@@ -2230,13 +2601,22 @@
           "publishedAt": "2026-06-12T07:49:22.000Z",
           "summary": "Chow Tai Fook surged after posting a record high profit in its latest financial year.",
           "tickers": []
+        },
+        {
+          "id": "E7",
+          "title": "Weekly Natural Gas Storage Report - EIA",
+          "sourceName": "EIA Today In Energy",
+          "url": "http://ir.eia.gov/ngs/ngs.html",
+          "publishedAt": "2026-06-12T00:00:00.000Z",
+          "summary": "Weekly Natural Gas Storage Report - EIA",
+          "tickers": []
         }
       ],
       "sourceNote": "Nasdaq earnings calendar plus Yahoo Finance daily mover screeners and earnings-related article headlines."
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-06-22T01:44:55.009Z",
+      "generatedAt": "2026-06-22T17:16:05.897Z",
       "authMode": "public",
       "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
       "subreddits": [
@@ -2275,7 +2655,7 @@
           "segment": "Retail investing",
           "status": "ready",
           "error": null,
-          "postCount": 25,
+          "postCount": 27,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2293,10 +2673,10 @@
             },
             {
               "sort": "top",
-              "status": "error",
-              "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-              "postCount": 0
+              "status": "ready",
+              "method": "rss:www.reddit.com",
+              "error": null,
+              "postCount": 17
             }
           ]
         },
@@ -2333,36 +2713,6 @@
         {
           "subreddit": "SecurityAnalysis",
           "segment": "Fundamental research",
-          "status": "ready",
-          "error": null,
-          "postCount": 25,
-          "sortStatuses": [
-            {
-              "sort": "hot",
-              "status": "ready",
-              "method": "rss:old.reddit.com",
-              "error": null,
-              "postCount": 25
-            },
-            {
-              "sort": "new",
-              "status": "error",
-              "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-              "postCount": 0
-            },
-            {
-              "sort": "top",
-              "status": "error",
-              "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-              "postCount": 0
-            }
-          ]
-        },
-        {
-          "subreddit": "options",
-          "segment": "Options sentiment",
           "status": "error",
           "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
           "postCount": 0,
@@ -2389,18 +2739,49 @@
               "postCount": 0
             }
           ]
+        },
+        {
+          "subreddit": "options",
+          "segment": "Options sentiment",
+          "status": "ready",
+          "error": null,
+          "postCount": 5,
+          "sortStatuses": [
+            {
+              "sort": "hot",
+              "status": "error",
+              "method": "none",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "postCount": 0
+            },
+            {
+              "sort": "new",
+              "status": "error",
+              "method": "none",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "postCount": 0
+            },
+            {
+              "sort": "top",
+              "status": "ready",
+              "method": "rss:www.reddit.com",
+              "error": null,
+              "postCount": 5
+            }
+          ]
         }
       ],
       "topTickers": [
         {
           "symbol": "MU",
-          "mentions": 3,
-          "signalStrength": 9,
-          "directMentions": 2,
+          "mentions": 4,
+          "signalStrength": 13.1,
+          "directMentions": 3,
           "score": 0,
           "comments": 0,
           "subreddits": [
-            "stocks"
+            "stocks",
+            "options"
           ],
           "posts": [
             {
@@ -2425,70 +2806,49 @@
               "permalink": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/"
             }
           ],
-          "attentionScore": 146
+          "attentionScore": 211
         },
         {
-          "symbol": "TSN",
+          "symbol": "CHWY",
           "mentions": 1,
-          "signalStrength": 4.5,
+          "signalStrength": 5.7,
           "directMentions": 1,
           "score": 0,
           "comments": 0,
           "subreddits": [
-            "SecurityAnalysis"
+            "stocks"
           ],
           "posts": [
             {
-              "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-              "subreddit": "SecurityAnalysis",
+              "title": "$CHWY is an Acquisition Target at these Levels",
+              "subreddit": "stocks",
               "score": 0,
               "comments": 0,
-              "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+              "permalink": "https://www.reddit.com/r/stocks/comments/1ucmier/chwy_is_an_acquisition_target_at_these_levels/"
             }
           ],
-          "attentionScore": 69
+          "attentionScore": 81
         },
         {
-          "symbol": "SFD",
+          "symbol": "RDDT",
           "mentions": 1,
-          "signalStrength": 4.5,
+          "signalStrength": 5.7,
           "directMentions": 1,
           "score": 0,
           "comments": 0,
           "subreddits": [
-            "SecurityAnalysis"
+            "stocks"
           ],
           "posts": [
             {
-              "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-              "subreddit": "SecurityAnalysis",
+              "title": "$RDDT is not undervalued. Don't fall for the trap.",
+              "subreddit": "stocks",
               "score": 0,
               "comments": 0,
-              "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+              "permalink": "https://www.reddit.com/r/stocks/comments/1ucdwhv/rddt_is_not_undervalued_dont_fall_for_the_trap/"
             }
           ],
-          "attentionScore": 69
-        },
-        {
-          "symbol": "PPC",
-          "mentions": 1,
-          "signalStrength": 4.5,
-          "directMentions": 1,
-          "score": 0,
-          "comments": 0,
-          "subreddits": [
-            "SecurityAnalysis"
-          ],
-          "posts": [
-            {
-              "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-              "subreddit": "SecurityAnalysis",
-              "score": 0,
-              "comments": 0,
-              "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
-            }
-          ],
-          "attentionScore": 69
+          "attentionScore": 81
         },
         {
           "symbol": "SNDK",
@@ -2512,22 +2872,64 @@
           "attentionScore": 61
         },
         {
-          "symbol": "INTC",
+          "symbol": "QQQ",
+          "mentions": 1,
+          "signalStrength": 3.7,
+          "directMentions": 1,
+          "score": 0,
+          "comments": 0,
+          "subreddits": [
+            "options"
+          ],
+          "posts": [
+            {
+              "title": "QQQ Gamma Levels Set Up For MU Earnings Move",
+              "subreddit": "options",
+              "score": 0,
+              "comments": 0,
+              "permalink": "https://www.reddit.com/r/options/comments/1uch89o/qqq_gamma_levels_set_up_for_mu_earnings_move/"
+            }
+          ],
+          "attentionScore": 61
+        },
+        {
+          "symbol": "MSFT",
           "mentions": 1,
           "signalStrength": 2.5,
           "directMentions": 1,
           "score": 0,
           "comments": 0,
           "subreddits": [
-            "SecurityAnalysis"
+            "stocks"
           ],
           "posts": [
             {
-              "title": "Yes, INTC Should Raise Equity",
-              "subreddit": "SecurityAnalysis",
+              "title": "Semis vs. Software & MSFT's conundrum",
+              "subreddit": "stocks",
               "score": 0,
               "comments": 0,
-              "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1u6cvvc/yes_intc_should_raise_equity/"
+              "permalink": "https://www.reddit.com/r/stocks/comments/1ucp36c/semis_vs_software_msfts_conundrum/"
+            }
+          ],
+          "attentionScore": 49
+        },
+        {
+          "symbol": "XLF",
+          "mentions": 1,
+          "signalStrength": 2.5,
+          "directMentions": 1,
+          "score": 0,
+          "comments": 0,
+          "subreddits": [
+            "options"
+          ],
+          "posts": [
+            {
+              "title": "The XLF volume action last Thursday was telling a completely different story than price",
+              "subreddit": "options",
+              "score": 0,
+              "comments": 0,
+              "permalink": "https://www.reddit.com/r/options/comments/1uci3cj/the_xlf_volume_action_last_thursday_was_telling_a/"
             }
           ],
           "attentionScore": 49
@@ -2553,13 +2955,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T31UAS8AS",
+          "id": "T31UCH9CK",
           "subreddit": "stocks",
           "segment": "Retail investing",
-          "title": "/r/Stocks Weekend Discussion Saturday - Jun 20, 2026",
-          "url": "https://www.reddit.com/r/stocks/comments/1uas8as/rstocks_weekend_discussion_saturday_jun_20_2026/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1uas8as/rstocks_weekend_discussion_saturday_jun_20_2026/",
-          "createdAt": "2026-06-20T09:30:09.000Z",
+          "title": "r/Stocks Daily Discussion Monday - Jun 22, 2026",
+          "url": "https://www.reddit.com/r/stocks/comments/1uch9ck/rstocks_daily_discussion_monday_jun_22_2026/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1uch9ck/rstocks_daily_discussion_monday_jun_22_2026/",
+          "createdAt": "2026-06-22T10:50:05.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2571,6 +2973,90 @@
           "fetchMethod": "rss"
         },
         {
+          "id": "T31UCJ1KK",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "SK Hynix overtakes Samsung to become South Korea's most valuable company",
+          "url": "https://www.reddit.com/r/stocks/comments/1ucj1kk/sk_hynix_overtakes_samsung_to_become_south_koreas/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ucj1kk/sk_hynix_overtakes_samsung_to_become_south_koreas/",
+          "createdAt": "2026-06-22T12:20:36.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T31UCMIER",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "$CHWY is an Acquisition Target at these Levels",
+          "url": "https://www.reddit.com/r/stocks/comments/1ucmier/chwy_is_an_acquisition_target_at_these_levels/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ucmier/chwy_is_an_acquisition_target_at_these_levels/",
+          "createdAt": "2026-06-22T14:43:57.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [
+            "CHWY"
+          ],
+          "tickerWeights": {
+            "CHWY": 5.7
+          },
+          "directTickers": [
+            "CHWY"
+          ],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T31UCP36C",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Semis vs. Software & MSFT's conundrum",
+          "url": "https://www.reddit.com/r/stocks/comments/1ucp36c/semis_vs_software_msfts_conundrum/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ucp36c/semis_vs_software_msfts_conundrum/",
+          "createdAt": "2026-06-22T16:17:08.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [
+            "MSFT"
+          ],
+          "tickerWeights": {
+            "MSFT": 2.5
+          },
+          "directTickers": [
+            "MSFT"
+          ],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T31UCA77Q",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Stocks rally in Asia as Iran cites progress in talks",
+          "url": "https://www.reddit.com/r/stocks/comments/1uca77q/stocks_rally_in_asia_as_iran_cites_progress_in/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1uca77q/stocks_rally_in_asia_as_iran_cites_progress_in/",
+          "createdAt": "2026-06-22T04:02:16.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
           "id": "T31UC1HWN",
           "subreddit": "stocks",
           "segment": "Retail investing",
@@ -2578,6 +3064,24 @@
           "url": "https://www.reddit.com/r/stocks/comments/1uc1hwn/last_quarter_lululemon_sold_more_but_made_way/",
           "permalink": "https://www.reddit.com/r/stocks/comments/1uc1hwn/last_quarter_lululemon_sold_more_but_made_way/",
           "createdAt": "2026-06-21T21:16:18.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T31UCKW79",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Wall Street spent decades escaping the casino label. Are we going back?\"",
+          "url": "https://www.reddit.com/r/stocks/comments/1uckw79/wall_street_spent_decades_escaping_the_casino/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1uckw79/wall_street_spent_decades_escaping_the_casino/",
+          "createdAt": "2026-06-22T13:40:30.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2611,6 +3115,24 @@
           "fetchMethod": "rss"
         },
         {
+          "id": "T31UCKY2Y",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Power/Energy Sector growth visibility",
+          "url": "https://www.reddit.com/r/stocks/comments/1ucky2y/powerenergy_sector_growth_visibility/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ucky2y/powerenergy_sector_growth_visibility/",
+          "createdAt": "2026-06-22T13:42:40.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
           "id": "T31UBW0YF",
           "subreddit": "stocks",
           "segment": "Retail investing",
@@ -2634,6 +3156,24 @@
             "MU",
             "SNDK"
           ],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T31UCN34P",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Snapchat Spins off dotomo AI, a generative video effort to improve profit margins",
+          "url": "https://www.reddit.com/r/stocks/comments/1ucn34p/snapchat_spins_off_dotomo_ai_a_generative_video/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ucn34p/snapchat_spins_off_dotomo_ai_a_generative_video/",
+          "createdAt": "2026-06-22T15:05:06.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
           "filteredAsGeneric": false,
           "fetchMethod": "rss"
         },
@@ -2662,6 +3202,24 @@
           "fetchMethod": "rss"
         },
         {
+          "id": "T31UCLNO1",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "TRIP – how big do you think buyback could be after TheFork sale, and could this trigger a squeeze?",
+          "url": "https://www.reddit.com/r/stocks/comments/1uclno1/trip_how_big_do_you_think_buyback_could_be_after/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1uclno1/trip_how_big_do_you_think_buyback_could_be_after/",
+          "createdAt": "2026-06-22T14:11:10.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
           "id": "T31UB1QVJ",
           "subreddit": "stocks",
           "segment": "Retail investing",
@@ -2680,161 +3238,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T31UB8YUX",
+          "id": "T31UCABEM",
           "subreddit": "stocks",
           "segment": "Retail investing",
-          "title": "Google loses two top AI researchers to OpenAI and Anthropic",
-          "url": "https://www.reddit.com/r/stocks/comments/1ub8yux/google_loses_two_top_ai_researchers_to_openai_and/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1ub8yux/google_loses_two_top_ai_researchers_to_openai_and/",
-          "createdAt": "2026-06-20T22:09:19.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T31UBPPHG",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "How do fractional shares work",
-          "url": "https://www.reddit.com/r/stocks/comments/1ubpphg/how_do_fractional_shares_work/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1ubpphg/how_do_fractional_shares_work/",
-          "createdAt": "2026-06-21T13:11:10.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T31UBERRM",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "Memory stocks - next play?",
-          "url": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/",
-          "createdAt": "2026-06-21T02:52:43.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [
-            "MU"
-          ],
-          "tickerWeights": {
-            "MU": 1.6
-          },
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T31UBJP1G",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "KVYO: High growth, profitable, trading at under 3x sales while slower peers trade higher",
-          "url": "https://www.reddit.com/r/stocks/comments/1ubjp1g/kvyo_high_growth_profitable_trading_at_under_3x/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1ubjp1g/kvyo_high_growth_profitable_trading_at_under_3x/",
-          "createdAt": "2026-06-21T07:28:09.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T31UBOGJ5",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "What Is the price of global leadership?",
-          "url": "https://www.reddit.com/r/stocks/comments/1ubogj5/what_is_the_price_of_global_leadership/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1ubogj5/what_is_the_price_of_global_leadership/",
-          "createdAt": "2026-06-21T12:09:29.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T31UBDOLE",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "Do Institutional traders have an edge over retail traders ?",
-          "url": "https://www.reddit.com/r/stocks/comments/1ubdole/do_institutional_traders_have_an_edge_over_retail/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1ubdole/do_institutional_traders_have_an_edge_over_retail/",
-          "createdAt": "2026-06-21T01:56:37.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T31UB8136",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "Question from a young investor",
-          "url": "https://www.reddit.com/r/stocks/comments/1ub8136/question_from_a_young_investor/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1ub8136/question_from_a_young_investor/",
-          "createdAt": "2026-06-20T21:27:25.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T31UBT7Q2",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "Portfolio suggestions long term",
-          "url": "https://www.reddit.com/r/stocks/comments/1ubt7q2/portfolio_suggestions_long_term/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1ubt7q2/portfolio_suggestions_long_term/",
-          "createdAt": "2026-06-21T15:41:14.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T31UBVWWD",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "Oil reserves and incoming oil crisis",
-          "url": "https://www.reddit.com/r/stocks/comments/1ubvwwd/oil_reserves_and_incoming_oil_crisis/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1ubvwwd/oil_reserves_and_incoming_oil_crisis/",
-          "createdAt": "2026-06-21T17:30:02.000Z",
+          "title": "What is your strategy around these developing sectors?",
+          "url": "https://www.reddit.com/r/stocks/comments/1ucabem/what_is_your_strategy_around_these_developing/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ucabem/what_is_your_strategy_around_these_developing/",
+          "createdAt": "2026-06-22T04:08:23.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2850,7 +3260,7 @@
         "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
         "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
         "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-        "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
+        "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
       ]
     },
     "marketMovers": {
@@ -2858,402 +3268,402 @@
       "status": "ready",
       "gainers": [
         {
-          "symbol": "BFLY",
-          "name": "Butterfly Network, Inc.",
-          "price": 8.9,
-          "changePct": 55.87,
-          "change": 3.19,
-          "volume": 59731176,
-          "marketCap": 2328603904,
+          "symbol": "DFTX",
+          "name": "Definium Therapeutics, Inc.",
+          "price": 38.5259,
+          "changePct": 57.38,
+          "change": 14.05,
+          "volume": 15762670,
+          "marketCap": 4201896192,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "WOLF",
-          "name": "Wolfspeed, Inc.",
-          "price": 57.41,
-          "changePct": 17.91,
-          "change": 8.72,
-          "volume": 9484883,
-          "marketCap": 2983718144,
+          "symbol": "APGE",
+          "name": "Apogee Therapeutics, Inc.",
+          "price": 132.615,
+          "changePct": 46.73,
+          "change": 42.24,
+          "volume": 45880044,
+          "marketCap": 9997762560,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "QS",
-          "name": "QuantumScape Corporation",
-          "price": 8.04,
-          "changePct": 16.52,
-          "change": 1.14,
-          "volume": 85585773,
-          "marketCap": 4945766400,
+          "symbol": "ORKA",
+          "name": "Oruka Therapeutics, Inc.",
+          "price": 88.74,
+          "changePct": 22.67,
+          "change": 16.4,
+          "volume": 2341867,
+          "marketCap": 5352095744,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "BE",
-          "name": "Bloom Energy Corporation",
-          "price": 328.91,
-          "changePct": 15.41,
-          "change": 43.92,
-          "volume": 15927664,
-          "marketCap": 93556432896,
+          "symbol": "BWIN",
+          "name": "The Baldwin Insurance Group, In",
+          "price": 24.61,
+          "changePct": 21.59,
+          "change": 4.37,
+          "volume": 2432441,
+          "marketCap": 2399227904,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "OUST",
-          "name": "Ouster, Inc.",
-          "price": 46.57,
-          "changePct": 14.37,
-          "change": 5.85,
-          "volume": 8412368,
-          "marketCap": 2965249280,
+          "symbol": "HQ",
+          "name": "Horizon Quantum Holdings Ltd.",
+          "price": 38.72,
+          "changePct": 21,
+          "change": 6.72,
+          "volume": 1597537,
+          "marketCap": 1997105536,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "ACMR",
-          "name": "ACM Research, Inc.",
-          "price": 109.87,
-          "changePct": 14.22,
-          "change": 13.68,
-          "volume": 2986972,
-          "marketCap": 7593059840,
+          "symbol": "SMCI",
+          "name": "Super Micro Computer, Inc.",
+          "price": 35.2251,
+          "changePct": 14.89,
+          "change": 4.57,
+          "volume": 78971508,
+          "marketCap": 22786168832,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "ENTG",
-          "name": "Entegris, Inc.",
-          "price": 178.77,
-          "changePct": 13.62,
-          "change": 21.43,
-          "volume": 5933481,
-          "marketCap": 27226671104,
+          "symbol": "BHVN",
+          "name": "Biohaven Ltd.",
+          "price": 15.5412,
+          "changePct": 14.53,
+          "change": 1.97,
+          "volume": 3097865,
+          "marketCap": 2339898368,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "SMR",
-          "name": "NuScale Power Corporation",
-          "price": 11.74,
-          "changePct": 13.54,
-          "change": 1.4,
-          "volume": 48584275,
-          "marketCap": 4063281920,
+          "symbol": "UMC",
+          "name": "United Microelectronics Corpora",
+          "price": 27.565,
+          "changePct": 14.47,
+          "change": 3.49,
+          "volume": 17931792,
+          "marketCap": 69168488448,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "CHRN",
-          "name": "ChronoScale Corporation",
-          "price": 23.33,
-          "changePct": 13.2,
-          "change": 2.72,
-          "volume": 551963,
-          "marketCap": 3338368512,
+          "symbol": "INIO",
+          "name": "INNIO N.V.",
+          "price": 42.44,
+          "changePct": 13.32,
+          "change": 4.99,
+          "volume": 3058360,
+          "marketCap": 31829999616,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "KMX",
-          "name": "CarMax Inc",
-          "price": 53.66,
-          "changePct": 13.14,
-          "change": 6.23,
-          "volume": 7330039,
-          "marketCap": 7614842368,
+          "symbol": "SYRE",
+          "name": "Spyre Therapeutics, Inc.",
+          "price": 99.7,
+          "changePct": 12.86,
+          "change": 11.36,
+          "volume": 1570022,
+          "marketCap": 8658072576,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "IMOS",
-          "name": "ChipMOS TECHNOLOGIES INC.",
-          "price": 66.58,
-          "changePct": 12.85,
-          "change": 7.58,
-          "volume": 178471,
-          "marketCap": 2315046912,
+          "symbol": "TE",
+          "name": "T1 Energy Inc.",
+          "price": 10.3259,
+          "changePct": 10.44,
+          "change": 0.98,
+          "volume": 29961504,
+          "marketCap": 2883728384,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "EQPT",
-          "name": "EquipmentShare.com Inc",
-          "price": 26.32,
-          "changePct": 12.67,
-          "change": 2.96,
-          "volume": 3225908,
-          "marketCap": 6642512896,
+          "symbol": "KEEL",
+          "name": "Keel Infrastructure Corp.",
+          "price": 6.9374,
+          "changePct": 10.29,
+          "change": 0.65,
+          "volume": 80080336,
+          "marketCap": 4189000960,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         }
       ],
       "losers": [
         {
+          "symbol": "AGI",
+          "name": "Alamos Gold Inc.",
+          "price": 31.2,
+          "changePct": -14.14,
+          "change": -5.14,
+          "volume": 10950812,
+          "marketCap": 13102920704,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "SPCX",
+          "name": "Space Exploration Technologies ",
+          "price": 165.02,
+          "changePct": -10.8,
+          "change": -19.98,
+          "volume": 89832277,
+          "marketCap": 2174004363264,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "NN",
+          "name": "NextNav Inc.",
+          "price": 16.245,
+          "changePct": -10.64,
+          "change": -1.93,
+          "volume": 2199425,
+          "marketCap": 2216418304,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "RBLX",
+          "name": "Roblox Corporation",
+          "price": 46.275,
+          "changePct": -10.2,
+          "change": -5.25,
+          "volume": 11319842,
+          "marketCap": 33131917312,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "AVAV",
+          "name": "AeroVironment, Inc.",
+          "price": 152.24,
+          "changePct": -10.24,
+          "change": -17.37,
+          "volume": 1315213,
+          "marketCap": 7704116224,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "GFI",
+          "name": "Gold Fields Limited",
+          "price": 34.7199,
+          "changePct": -10.05,
+          "change": -3.88,
+          "volume": 3508996,
+          "marketCap": 31054120960,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "VOYG",
+          "name": "Voyager Technologies, Inc.",
+          "price": 33.9,
+          "changePct": -9.77,
+          "change": -3.67,
+          "volume": 1468628,
+          "marketCap": 2008986880,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "RDW",
+          "name": "Redwire Corporation",
+          "price": 13.0701,
+          "changePct": -8.92,
+          "change": -1.28,
+          "volume": 22317637,
+          "marketCap": 2599887616,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "ASTS",
+          "name": "AST SpaceMobile, Inc.",
+          "price": 73.63,
+          "changePct": -8.72,
+          "change": -7.03,
+          "volume": 16996622,
+          "marketCap": 28577611776,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "DOCN",
+          "name": "DigitalOcean Holdings, Inc.",
+          "price": 158.55,
+          "changePct": -8.5,
+          "change": -14.72,
+          "volume": 1382471,
+          "marketCap": 16546941952,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
           "symbol": "RGC",
           "name": "Regencell Bioscience Holdings L",
-          "price": 12.01,
-          "changePct": -18.96,
-          "change": -2.81,
-          "volume": 380694,
-          "marketCap": 5938811904,
+          "price": 11.0417,
+          "changePct": -8.06,
+          "change": -0.97,
+          "volume": 346083,
+          "marketCap": 5459998208,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
-          "symbol": "ACN",
-          "name": "Accenture plc",
-          "price": 127.98,
-          "changePct": -17.97,
-          "change": -28.03,
-          "volume": 41630037,
-          "marketCap": 78316347392,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "LEGN",
-          "name": "Legend Biotech Corporation",
-          "price": 27.93,
-          "changePct": -16.68,
-          "change": -5.59,
-          "volume": 13608396,
-          "marketCap": 5187712512,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "TNGX",
-          "name": "Tango Therapeutics, Inc.",
-          "price": 27.97,
-          "changePct": -13.38,
-          "change": -4.32,
-          "volume": 12095877,
-          "marketCap": 4553925632,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "EPAM",
-          "name": "EPAM Systems, Inc.",
-          "price": 76.64,
-          "changePct": -12.61,
-          "change": -11.06,
-          "volume": 4084770,
-          "marketCap": 4004014848,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "NVA",
-          "name": "Nova Minerals Corp",
-          "price": 5.76,
-          "changePct": -11.38,
-          "change": -0.74,
-          "volume": 591634,
-          "marketCap": 2627218944,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "CTSH",
-          "name": "Cognizant Technology Solutions ",
-          "price": 43.7,
-          "changePct": -10.49,
-          "change": -5.12,
-          "volume": 61312375,
-          "marketCap": 20670099456,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "INFY",
-          "name": "Infosys Limited",
-          "price": 10.57,
-          "changePct": -9.66,
-          "change": -1.13,
-          "volume": 41059210,
-          "marketCap": 42793754624,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "SLBT",
-          "name": "SL Science Holding Limited",
-          "price": 5.79,
-          "changePct": -9.25,
-          "change": -0.59,
-          "volume": 488769,
-          "marketCap": 3246798848,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "AAMI",
-          "name": "Acadian Asset Management Inc.",
-          "price": 75.15,
-          "changePct": -9.15,
-          "change": -7.57,
-          "volume": 2999510,
-          "marketCap": 2677518592,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "KR",
-          "name": "Kroger Company (The)",
-          "price": 56.61,
-          "changePct": -8.43,
-          "change": -5.21,
-          "volume": 26634405,
-          "marketCap": 34701930496,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "AXTI",
-          "name": "AXT Inc",
-          "price": 84.57,
-          "changePct": -8.19,
-          "change": -7.54,
-          "volume": 12348704,
-          "marketCap": 5532838400,
+          "symbol": "YSS",
+          "name": "York Space Systems Inc.",
+          "price": 28.35,
+          "changePct": -7.95,
+          "change": -2.45,
+          "volume": 922718,
+          "marketCap": 3676837888,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         }
       ],
       "mostActive": [
         {
-          "symbol": "SPCX",
-          "name": "Space Exploration Technologies ",
-          "price": 185,
-          "changePct": -3.56,
-          "change": -6.82,
-          "volume": 272126781,
-          "marketCap": 2437224595456,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "MRVL",
-          "name": "Marvell Technology, Inc.",
-          "price": 310.58,
-          "changePct": 7.27,
-          "change": 21.04,
-          "volume": 250989360,
-          "marketCap": 271695364096,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "NVDA",
-          "name": "NVIDIA Corporation",
-          "price": 210.69,
-          "changePct": 2.95,
-          "change": 6.04,
-          "volume": 241272013,
-          "marketCap": 5103122644992,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "INTC",
-          "name": "Intel Corporation",
-          "price": 133.99,
-          "changePct": 10.64,
-          "change": 12.89,
-          "volume": 233906555,
-          "marketCap": 673433780224,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "CDE",
-          "name": "Coeur Mining, Inc.",
-          "price": 17.51,
-          "changePct": -0.11,
-          "change": -0.02,
-          "volume": 45025801,
-          "marketCap": 18044659712,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "NOK",
-          "name": "Nokia Corporation Sponsored",
-          "price": 13.49,
-          "changePct": -2.46,
-          "change": -0.34,
-          "volume": 125181134,
-          "marketCap": 75308384256,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
           "symbol": "AAL",
           "name": "American Airlines Group, Inc.",
-          "price": 15.99,
-          "changePct": 3.7,
-          "change": 0.57,
-          "volume": 126278445,
-          "marketCap": 10575548416,
+          "price": 16.455,
+          "changePct": 2.91,
+          "change": 0.47,
+          "volume": 105004326,
+          "marketCap": 10883092480,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "PFE",
-          "name": "Pfizer, Inc.",
-          "price": 25.21,
-          "changePct": -2.74,
-          "change": -0.71,
-          "volume": 67907094,
-          "marketCap": 143682977792,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "T",
-          "name": "AT&T Inc.",
-          "price": 22.01,
-          "changePct": -1.92,
-          "change": -0.43,
-          "volume": 55132557,
-          "marketCap": 152932941824,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "NFLX",
-          "name": "Netflix, Inc.",
-          "price": 77.38,
-          "changePct": 0.55,
-          "change": 0.42,
-          "volume": 91920414,
-          "marketCap": 325831589888,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "F",
-          "name": "Ford Motor Company",
-          "price": 14.06,
-          "changePct": 0.72,
-          "change": 0.1,
-          "volume": 88662416,
-          "marketCap": 56024780800,
+          "symbol": "SPCX",
+          "name": "Space Exploration Technologies ",
+          "price": 165.02,
+          "changePct": -10.8,
+          "change": -19.98,
+          "volume": 89832277,
+          "marketCap": 2174004363264,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "KEEL",
           "name": "Keel Infrastructure Corp.",
-          "price": 6.29,
-          "changePct": 5.36,
-          "change": 0.32,
-          "volume": 87302077,
-          "marketCap": 3798082304,
+          "price": 6.9374,
+          "changePct": 10.29,
+          "change": 0.65,
+          "volume": 80080336,
+          "marketCap": 4189000960,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "INTC",
+          "name": "Intel Corporation",
+          "price": 139.7401,
+          "changePct": 4.29,
+          "change": 5.75,
+          "volume": 79478086,
+          "marketCap": 702333714432,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "SMCI",
+          "name": "Super Micro Computer, Inc.",
+          "price": 35.2251,
+          "changePct": 14.89,
+          "change": 4.57,
+          "volume": 78971508,
+          "marketCap": 22786168832,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "NOK",
+          "name": "Nokia Corporation Sponsored",
+          "price": 14.085,
+          "changePct": 4.41,
+          "change": 0.6,
+          "volume": 77869903,
+          "marketCap": 78629994496,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corporation",
+          "price": 208.945,
+          "changePct": -0.83,
+          "change": -1.74,
+          "volume": 68639579,
+          "marketCap": 5060857167872,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "APGE",
+          "name": "Apogee Therapeutics, Inc.",
+          "price": 132.615,
+          "changePct": 46.73,
+          "change": 42.24,
+          "volume": 45880044,
+          "marketCap": 9997762560,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "MARA",
+          "name": "MARA Holdings, Inc.",
+          "price": 15.0101,
+          "changePct": 5.55,
+          "change": 0.79,
+          "volume": 44683031,
+          "marketCap": 5722908160,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "NFLX",
+          "name": "Netflix, Inc.",
+          "price": 72.535,
+          "changePct": -6.26,
+          "change": -4.84,
+          "volume": 44719695,
+          "marketCap": 305430298624,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "SOFI",
+          "name": "SoFi Technologies, Inc.",
+          "price": 17.255,
+          "changePct": -3.66,
+          "change": -0.66,
+          "volume": 44267724,
+          "marketCap": 22133698560,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "ONDS",
+          "name": "Ondas Inc",
+          "price": 9,
+          "changePct": -2.91,
+          "change": -0.27,
+          "volume": 37881819,
+          "marketCap": 4681956864,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         }
@@ -3261,17 +3671,17 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: Less than a week after the U.S. and Iran signed their \"memorandum of understanding\" aimed at ending the conflict, tensions have flared once again. (M1)",
-      "Rates: Inflation data are running hot, so rates remain the main constraint on crowded momentum. (M2)",
-      "Commodities: Oil prices climbed on Monday after U.S. President Donald Trump threatened renewed military action against Iran. (M3)",
-      "Macro: Micron’s earnings are a must-watch market event - with profit growth approaching 1,000% (M6)",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M3)",
+      "Rates: The yield on the 10-year U.S. Treasury note - the key benchmark for U.S. government borrowing - rose four basis points, to 4.491%. (M1)",
+      "Commodities: Schwab Market Update | Charles Schwab Search Learn Markets and Economy Stocks Flat Early Aside from Tech as Oil Falls Early gains in chip stocks were a feature today amid positive signals from peace talks that pushed oil prices lower. (M8)",
+      "Macro: Stagflation is a mix of high inflation, slow growth, and rising unemployment. (M10)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: MU, TSN, SFD, PPC are drawing the most filtered ticker concentration; treat this as sentiment, not verified news."
+      "Retail attention: MU, CHWY, RDDT, SNDK are drawing the most filtered ticker concentration; treat this as sentiment, not verified news."
     ]
   },
   "avoidList": {
     "status": "ready",
-    "summary": "Avoid the Financials / Utilities Real Estate clusters that house the weakest model-ranked names; risk shows up as volatility, weak trend, and mixed reactions in the crowding signal.",
+    "summary": "Avoid stretched financials / real-estate-heavy names with weak momentum signals and weak model score within the risk / reward; the weakest model-ranked names cluster in Financials, Industrials, Utilities, Real Estate and Health Care in this window.",
     "sectors": [
       {
         "sector": "Financials",
@@ -3282,7 +3692,7 @@
           "USB",
           "V"
         ],
-        "rationale": "23 of the weakest model-ranked names are in Financials; examples AMP,AON,USB,V."
+        "rationale": "23 weak names; fundamentals and momentum lag.”"
       },
       {
         "sector": "Industrials",
@@ -3293,7 +3703,7 @@
           "AME",
           "VLTO"
         ],
-        "rationale": "14 of the weakest model-ranked names are in Industrials; examples UNP,ALLE,AME,VLTO."
+        "rationale": "14 of the weakest model-ranked names are in Industrials; examples include UNP, ALLE, AME, VLTO."
       },
       {
         "sector": "Utilities",
@@ -3304,7 +3714,7 @@
           "AEE",
           "ATO"
         ],
-        "rationale": "9 weak names in Utilities; examples AES,FE,AEE,ATO."
+        "rationale": "9 of the weakest model-ranked names are in Utilities; examples include AES, FE, AEE, ATO."
       },
       {
         "sector": "Real Estate",
@@ -3315,7 +3725,7 @@
           "AVB",
           "FRT"
         ],
-        "rationale": "8 weak in Real Estate; examples AMT,VICI,AVB,FRT."
+        "rationale": "8 of the weakest model-ranked names are in Real Estate; examples include AMT, VICI, AVB, FRT."
       }
     ],
     "companies": [
@@ -3337,7 +3747,7 @@
           "Below 200d trend"
         ],
         "modelEvidence": "AMT ranks #501 of 501 with -9.25% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
-        "rationale": "Ranked in weakest pool; poor momentum; RSI 39; volatility profile."
+        "rationale": "AMT sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves."
       },
       {
         "symbol": "AMP",
@@ -3355,7 +3765,7 @@
           "Below 200d trend"
         ],
         "modelEvidence": "AMP ranks #500 of 501 with -9.94% 60-day relative return versus SPY, rules score 0.0, and weak or mixed trend alignment.",
-        "rationale": "Low momentum; governance risk not supported by momentum."
+        "rationale": "Low momentum, below-200d trend; within avoid list due to rank and volatility"
       },
       {
         "symbol": "AON",
@@ -56007,11 +56417,11 @@
       "cadence": "Weekly",
       "trust": "High",
       "notes": "Public Merrill / Bank of America capital markets outlook.",
-      "title": "Capital Market Outlook: Weekly Market Insights From the CIO",
-      "summary": "No recent dated articles found in the last 30 days.",
+      "title": "Merrill Capital Market Outlook",
+      "summary": "Source check failed: This operation was aborted",
       "articles": [],
       "articleCount": 0,
-      "ok": true
+      "ok": false
     },
     {
       "name": "Bank of America Institute",
@@ -56020,11 +56430,11 @@
       "cadence": "Weekly",
       "trust": "High",
       "notes": "Public consumer, macro, and market research.",
-      "title": "Bank of America Institute – Where Thought Finds Leadership",
-      "summary": "No recent dated articles found in the last 30 days.",
+      "title": "Bank of America Institute",
+      "summary": "Source check failed: 403 Forbidden",
       "articles": [],
       "articleCount": 0,
-      "ok": true
+      "ok": false
     },
     {
       "name": "Raymond James Commentary And Insights",
@@ -56051,11 +56461,11 @@
       "articles": [
         {
           "sourceName": "Schwab Weekly Market Outlook",
-          "title": "Reading the Markets After Fed Chair Warsh’s Debut",
-          "url": "https://www.schwab.com/learn/story/reading-markets-after-fed-chair-warshs-debut",
-          "publishedAt": "2026-06-19T08:56:22.000Z",
-          "summary": "Fed chair Warsh’s first meeting kept rates steady but struck a hawkish tone on inflation while signaling less transparency, driving market uncertainty.",
-          "excerpt": "Reading the Markets After Fed Chair Warsh’s Debut | Charles Schwab Search Learn Reading the Markets After Fed Chair Warsh’s Debut Fed chair Warsh’s first meeting kept rates steady but struck a hawkish tone on inflation while signaling less transparency, driving market uncertainty. June 19, 2026 • Liz Ann Sonders • Collin Martin : opens in a new window : opens in a new window : opens in a new window On Investing | EP119 Reading the Markets After Fed Chair Warsh’s Debut Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript After you listen Follow Collin and Liz Ann on social media: Liz Ann Sonders on X and LinkedIn . Collin Martin on X and LinkedIn . At his first Fed meeting as chair, Kevin Warsh signaled a more hawkish stance focused squarely on inflation, while launching a sweeping reform agenda. Policymakers are split between holding and potentially hiking, with strong emphasis on restoring price stability. Warsh introduced a significant shift in Fed governance and communication: shorter statements, less forward guidance, and five task forces aimed at rethinking policy frameworks. Liz Ann Sonders and Collin Martin explore the implications of that shift, particularly the risk that reduced transparency could lead to greater market volatility as investors react more sharply to incoming data. They also assess market dynamics: Rising short-term yields pressured equities, while longer-term yields may remain range-bound if inflation expectations stabilize. Finally, they offer practical portfolio takeaways—emphasizing diversification within equities, a focus on quality and earnings strength, and a disciplined approach to asset allocation in a higher-rate, more-uncertain policy regime. On Investing ",
+          "title": "Stocks Flat Early Aside from Tech as Oil Falls",
+          "url": "https://www.schwab.com/learn/story/stock-market-update-open",
+          "publishedAt": "2026-06-22T16:40:12.000Z",
+          "summary": "Learn what's trending before the opening bell with Schwab's market open report. Find out about macroeconomic reports, company earnings, and other events.",
+          "excerpt": "Schwab Market Update | Charles Schwab Search Learn Markets and Economy Stocks Flat Early Aside from Tech as Oil Falls Early gains in chip stocks were a feature today amid positive signals from peace talks that pushed oil prices lower. The week ahead features PCE inflation data and Micron results. June 22, 2026 • Joe Mazzola Published as of: June 22, 2026, 9:15 a.m. ET Listen to this update Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,500.58 +80.48 +1.08% Dow Jones Industrial Average ® 51,564.70 +72.15 +0.14% Nasdaq Composite ® 26,517.93 +496.28 +1.91% 10-year Treasury yield 4.49% +0.04 -- U.S. Dollar Index 100.81 -0.03 -0.03% Cboe Volatility Index ® 17.04 +0.26 +1.55% WTI Crude Oil $75.87 -$0.73 -0.95% Bitcoin $65,050 +2,120 +3.37% Disclosure (Monday market open) Major indexes wobbled early, seeking direction after a long weekend that included tense negotiations between the U.S. and Iran and mixed signals on the Strait of Hormuz, where shipping traffic remains sparse. Today's calendar is devoid of major economic and earnings news, but things ramp up as the week progresses. Thursday brings May Personal Consumption Expenditures (PCE) prices as well as the third estimate of first quarter GDP . Earnings are light from a calendar perspective but potentially heavy in terms of impact this week thanks to scheduled reports from FedEx (FDX) late Tuesday and Micron (MU) late Wednesday. Chip shares rose this morning, giving the Nasdaq Composite a tailwind. This week includes several large Treasury auctions beginning with one for $69 billion in 2-year notes ",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56201,11 +56611,21 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "EIA Today In Energy",
-      "summary": "Source check failed: This operation was aborted",
-      "articles": [],
-      "articleCount": 0,
-      "ok": false
+      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
+      "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
+      "articles": [
+        {
+          "sourceName": "EIA Today In Energy",
+          "title": "Weekly Natural Gas Storage Report - EIA",
+          "url": "http://ir.eia.gov/ngs/ngs.html",
+          "publishedAt": "2026-06-12T00:00:00.000Z",
+          "summary": "Weekly Natural Gas Storage Report - EIA",
+          "excerpt": "Weekly Natural Gas Storage Report - EIA &lsaquo; See All Natural Gas Reports Weekly Natural Gas Storage Report for week ending June 12, 2026 | Released: June 18, 2026 at 10:30 a.m. | Next Release: June 25, 2026 Working gas in underground storage, Lower 48 states Summary text CSV JSN Historical Comparisons Stocks billion cubic feet (Bcf) Year ago (06/12/25) 5-year average (2021-25) Region 06/12/26 06/05/26 net change implied flow Bcf % change Bcf % change East 532 514 18 18 558 -4.7 529 0.6 Midwest 638 610 28 28 634 0.6 614 3.9 Mountain 226 222 4 4 215 5.1 177 27.7 Pacific 309 304 5 5 273 13.2 239 29.3 South Central 1,053 1,037 16 16 1,108 -5.0 1,050 0.3 Salt 325 322 3 3 350 -7.1 312 4.2 Nonsalt 728 715 13 13 758 -4.0 737 -1.2 Total 2,759 2,686 73 73 2,788 -1.0 2,608 5.8 Totals may not equal sum of components because of independent rounding. Summary Working gas in storage was 2,759 Bcf as of Friday, June 12, 2026, according to EIA estimates. This represents a net increase of 73 Bcf from the previous week. Stocks were 29 Bcf less than last year at this time and 151 Bcf above the five-year average of 2,608 Bcf. At 2,759 Bcf, total working gas is within the five-year historical range. For information on sampling error in this report, see Estimated Measures of Sampling Variability table below. Note: The shaded area indicates the range between the historical minimum and maximum values for the weekly series from 2021 through 2025. The dashed vertical lines indicate current and year-ago weekly periods. Source: Form EIA-912, \"Weekly Underground Natural Gas Storage Report.\" --> Estimated measures of sampling variability Download History (April 2015 to Present) Coefficient of Variation for Stocks % of working gas Standard Error for Net Change billion cubic feet (Bcf) Region 06/12/",
+          "discoveredFrom": "https://www.eia.gov/todayinenergy/"
+        }
+      ],
+      "articleCount": 1,
+      "ok": true
     },
     {
       "name": "BLS Economic News Releases",
@@ -56353,20 +56773,11 @@
       "articles": [
         {
           "sourceName": "CNBC Markets",
-          "title": "CNBC Daily Open: Markets feeling that deja vu as Iran deal under strain, once again",
-          "url": "https://www.cnbc.com/2026/06/22/cnbc-daily-open-iran-ceasefire-deal-trump-israel-lebanon.html",
-          "publishedAt": "2026-06-22T01:17:21.000Z",
-          "summary": "Less than a week after the U.S. and Iran signed their \"memorandum of understanding\" aimed at ending the conflict, tensions have flared once again.",
-          "excerpt": "CNBC Daily Open: Markets feeling that deja vu as Iran deal under strain, once again Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points Iran and the U.S. are trading claims over if the Straits of Hormuz is open. Oil jumps, markets slip in response to the tension flare up. UK Prime Minister Keir Starmer reportedly looks poised to resign. Investors will be awaiting MSCI's annual market-classification review. In this article .N225 @LCO.1 @CL.1 Follow your favorite stocks CREATE FREE ACCOUNT U.S. Vice President JD Vance (L) speaks next to Pakistan's Prime Minister Shehbaz Sharif (C) and Qatar's Prime Minister and Minister for Foreign Affairs Sheikh Mohammed bin Abdulrahman bin Jassim Al-Thani at the start of a quadrilateral meeting between the U.S., Iran, Pakistan and Qatar at the Burgenstock luxury hotel complex overlooking Lake Lucerne, Switzerland, on June 21, 2026, as part of high-level talks aimed at advancing a deal to end the Middle East conflict. Fabrice Coffrini | Afp | Getty Images Hello, this is Hui Jie writing to you from Singapore. Welcome to another edition of CNBC's Daily Open. Would it be too late to say: here we go again? Less than a week after the U.S. and Iran signed their memorandum of understanding aimed at ending the conflict in the Middle East, tensions have flared once again, with the status of the Strait of Hormuz up in the air. Meanwhile, UK Prime Minister Keir Starmer is poised to resign, according to media reports, following a decisive election victory by his rival Andy Burnham. What you need to know today Iran claimed it shut the Straits of Hormuz again, saying the U.S. failed to meet its commitment to stopping the fighting in Lebanon and U.S. President Donald Trump started threa",
-          "discoveredFrom": "https://www.cnbc.com/markets/"
-        },
-        {
-          "sourceName": "CNBC Markets",
-          "title": "Stock futures fall as oil prices rise; investors await key reading on inflation: Live updates",
+          "title": "S&P 500 runs out of steam, falls into the red as Big Tech, SpaceX struggle: Live updates",
           "url": "https://www.cnbc.com/2026/06/21/stock-market-today-live-updates.html",
           "publishedAt": "2026-06-21T22:03:04.000Z",
-          "summary": "U.S. equity futures were lower on Sunday as Wall Street awaited the release of inflation data that is closely watched by the Federal Reserve.",
-          "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu A trader works on the floor at the New York Stock Exchange (NYSE) in New York City, U.S., June 18, 2026. Jeenah Moon | Reuters U.S. equity futures slipped and oil prices rose on Sunday as Wall Street watched the latest developments in the Iran war negotiations and awaited the release of inflation data that is closely watched by the Federal Reserve. S&P 500 futures traded down 0.4%, while Nasdaq-100 futures were 0.6% lower. Futures tied to the Dow Jones Industrial Average dropped 183 points, or 0.4%. Asia-Pacific markets traded higher early Monday after opening mixed. Japan's Nikkei 225 added 1.82% while the Topix rose 1.28%. The Kospi advanced 1.58% at open, while the small-cap Kosdaq slipped 0.51%. Australia's benchmark S&P/ASX 200 was marginally higher. Hong Kong Hang Seng index futures were at 23,846, lower than the index's last close of 23,924.81. Oil prices climbed amid uncertainty about the conflict in the Middle East. U.S. West Texas Intermediate futures gained nearly 3% to around $78 per barrel, while international benchmark Brent crude futures added more than 1% to roughly $81 a barrel. The moves come after President Donald Trump on Sunday threatened fresh strikes on Iran if the country's leaders don't \"immediately stop their highly paid PROXIES in Lebanon from causing trouble.\" His remarks came as Vice President JD Vance met with Iranian officials for the first round of negotiations in Switzerland, after talks had earlier been called off. The three leading U.S. indexes staged a comeback Thursday after a sell-off on Wednesday , with the declines fueled by investor uncertainty about the trajectory of monetary policy . Thurs",
+          "summary": "The S&P 500 was relatively unchanged on Monday, while oil prices fell, as Wall Street assessed the latest developments in the Iran war negotiations.",
+          "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Traders work on the floor of the New York Stock Exchange. NYSE The S&P 500 fell on Monday, weighed down by declines in technology stocks and SpaceX. Wall Street also assessed the latest developments in the Iran war negotiations and awaited the release of inflation data closely watched by the Federal Reserve. The broad market index fell 0.4%, while the Nasdaq Composite declined 1.3%. The Dow Jones Industrial Average added 151 points, or 0.3%. Major tech names pulled the market into negative territory. Shares of Alphabet dropped 6%, spurred by concerns around artificial intelligence talent departures . Amazon and Meta Platforms lost 4% and 2%, respectively. Microsoft shares also declined 2%. SpaceX was another laggard. The stock fell 10%, putting it on pace for its third straight daily decline . However, Micron Technology was one of the outperformers, rising 5%. The move comes ahead of the chipmaker's quarterly report , due Wednesday after the bell. Fellow chipmakers also saw gains, with Advanced Micro Devices moving up 1% and Intel adding 4%. Brent oil futures turned negative on Monday after mediators Qatar and Pakistan said that U.S. and Iranian officials had agreed on a roadmap to reach a final deal within 60 days. Oil prices later traded around session lows after the Treasury Department authorized the sale of Iranian oil for 60 days. International benchmark Brent crude futures for August fell more than 3% to around $77 a barrel. U.S. West Texas Intermediate futures for July were more than 2% lower at roughly $74. A key test for the market this week will be the release on Thursday of May's reading on the personal consumption expen",
           "discoveredFrom": "https://www.cnbc.com/markets/"
         },
         {
@@ -56379,7 +56790,7 @@
           "discoveredFrom": "https://www.cnbc.com/markets/"
         }
       ],
-      "articleCount": 3,
+      "articleCount": 2,
       "ok": true
     },
     {
@@ -56394,29 +56805,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Oil rises after Trump threatens fresh strikes on Iran, overshadowing peace talks",
-          "url": "https://www.cnbc.com/2026/06/22/oil-prices-wti-brent-crude-trump-iran-threat-strait-hormuz-closure.html",
-          "publishedAt": "2026-06-22T00:05:08.000Z",
-          "summary": "Oil prices climbed on Monday after U.S. President Donald Trump threatened renewed military action against Iran.",
-          "excerpt": "Oil prices climbed on Monday after U.S. President Donald Trump threatened renewed military action against Iran.",
+          "title": "2-year Treasury note yield hits highest since February 2025",
+          "url": "https://www.cnbc.com/2026/06/22/treasury-yields-investors-look-ahead-to-key-inflation-data.html",
+          "publishedAt": "2026-06-22T17:13:03.000Z",
+          "summary": "The yield on the 10-year U.S. Treasury note — the key benchmark for U.S. government borrowing — rose four basis points, to 4.491%.",
+          "excerpt": "The yield on the 10-year U.S. Treasury note — the key benchmark for U.S. government borrowing — rose four basis points, to 4.491%.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "No one wants AI data centers on Earth. Do they make sense in space?",
-          "url": "https://www.cnbc.com/2026/06/21/do-space-based-ai-data-centers-make-economic-sense.html",
-          "publishedAt": "2026-06-21T21:22:53.000Z",
-          "summary": "Elon Musk's SpaceX is betting big on orbital AI data centers. The public doesn't want them on Earth, but the economic case for space-based is questionable.",
-          "excerpt": "Elon Musk's SpaceX is betting big on orbital AI data centers. The public doesn't want them on Earth, but the economic case for space-based is questionable.",
+          "title": "Alphabet paces for worst day in a year on AI concerns after high-profile exits",
+          "url": "https://www.cnbc.com/2026/06/22/alphabet-goog-stock-ai-departures.html",
+          "publishedAt": "2026-06-22T17:11:01.000Z",
+          "summary": "Google parent Alphabet has seen consecutive high-profile artificial intelligence researchers leave.",
+          "excerpt": "Google parent Alphabet has seen consecutive high-profile artificial intelligence researchers leave.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Raising the minimum wage has been a big political winner. Now it&apos;s running into resistance",
-          "url": "https://www.cnbc.com/2026/06/21/raise-minimum-wage-inflation-politics.html",
-          "publishedAt": "2026-06-21T14:07:29.000Z",
-          "summary": "Raising the minimum wage has been a progressive policy winner at the ballot box, but recent losses suggest an economic mood slowing its political momentum.",
-          "excerpt": "Raising the minimum wage has been a progressive policy winner at the ballot box, but recent losses suggest an economic mood slowing its political momentum.",
+          "title": "Can anyone join Musk in the trillionaire club? Zuckerberg has best shot, according to prediction markets",
+          "url": "https://www.cnbc.com/2026/06/22/zuckerberg-seen-as-next-to-join-trillionaire-club-say-kalshi-traders.html",
+          "publishedAt": "2026-06-22T16:45:37.000Z",
+          "summary": "The Meta CEO is seen as next to join the Tesla and SpaceX CEO. Nvidia CEO Jensen Huang is seen as the second-most-likely.",
+          "excerpt": "The Meta CEO is seen as next to join the Tesla and SpaceX CEO. Nvidia CEO Jensen Huang is seen as the second-most-likely.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56476,24 +56887,33 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "This bull market isn’t going to end because of Fed rate hikes under Warsh",
-          "url": "https://www.marketwatch.com/story/this-bull-market-isnt-going-to-end-because-of-fed-rate-hikes-under-warsh-8f63fa85?mod=mw_rss_topstories",
-          "publishedAt": "2026-06-21T22:41:00.000Z",
-          "summary": "Trump-selected Fed chair Kevin Warsh may hope the threat of rate hikes is enough. But stocks might gain ground if he does. Past rate-hike cycles can be a guide.",
-          "excerpt": "Trump-selected Fed chair Kevin Warsh may hope the threat of rate hikes is enough. But stocks might gain ground if he does. Past rate-hike cycles can be a guide.",
+          "title": "Alphabet sees $269 billion market-cap wipeout as investors fear it’s losing the war for AI talent",
+          "url": "https://www.marketwatch.com/story/alphabet-sees-269-billion-market-cap-wipeout-as-investors-fear-its-losing-the-war-for-ai-talent-497aa378?mod=mw_rss_topstories",
+          "publishedAt": "2026-06-22T17:12:00.000Z",
+          "summary": "Two AI leaders, including a Nobel laureate, recently said they would leave Google for rival labs.",
+          "excerpt": "Two AI leaders, including a Nobel laureate, recently said they would leave Google for rival labs.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Micron’s earnings are a must-watch market event — with profit growth approaching 1,000%",
-          "url": "https://www.marketwatch.com/story/microns-earnings-are-a-must-watch-market-event-with-profit-growth-approaching-1-000-78ec4549?mod=mw_rss_topstories",
-          "publishedAt": "2026-06-21T14:00:00.000Z",
-          "summary": "Micron’s massive growth is “coming at nearly pure profit,” and that’s starting to have real implications for the S&P 500.",
-          "excerpt": "Micron’s massive growth is “coming at nearly pure profit,” and that’s starting to have real implications for the S&P 500.",
+          "title": "Caterpillar’s stock hits a milestone as roaring industrials rally sweeps up Wall Street",
+          "url": "https://www.marketwatch.com/story/caterpillars-stock-hits-a-milestone-as-roaring-industrials-rally-sweeps-up-wall-street-391057f7?mod=mw_rss_topstories",
+          "publishedAt": "2026-06-22T16:47:00.000Z",
+          "summary": "Caterpillar is the hottest stock in the Dow this year, and now one of just two in the index with a price above $1,000.",
+          "excerpt": "Caterpillar is the hottest stock in the Dow this year, and now one of just two in the index with a price above $1,000.",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
+          "title": "China’s growth engine has a weird new spark: buying ‘feelings’ to cope with a property crash",
+          "url": "https://www.marketwatch.com/story/chinas-new-economic-drivers-a-sad-toy-elf-and-a-robot-police-force-8759daf9?mod=mw_rss_topstories",
+          "publishedAt": "2026-06-22T16:44:00.000Z",
+          "summary": "Toy elves and robot police are exposing the bizarre true state of China’s fractured economy.",
+          "excerpt": "Toy elves and robot police are exposing the bizarre true state of China’s fractured economy.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
-      "articleCount": 2,
+      "articleCount": 3,
       "ok": true
     },
     {

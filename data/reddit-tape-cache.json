@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-22T01:44:55.009Z",
+  "generatedAt": "2026-06-22T17:16:05.897Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
@@ -39,7 +39,7 @@
       "segment": "Retail investing",
       "status": "ready",
       "error": null,
-      "postCount": 25,
+      "postCount": 27,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -57,10 +57,10 @@
         },
         {
           "sort": "top",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
+          "status": "ready",
+          "method": "rss:www.reddit.com",
+          "error": null,
+          "postCount": 17
         }
       ]
     },
@@ -97,36 +97,6 @@
     {
       "subreddit": "SecurityAnalysis",
       "segment": "Fundamental research",
-      "status": "ready",
-      "error": null,
-      "postCount": 25,
-      "sortStatuses": [
-        {
-          "sort": "hot",
-          "status": "ready",
-          "method": "rss:old.reddit.com",
-          "error": null,
-          "postCount": 25
-        },
-        {
-          "sort": "new",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
-        },
-        {
-          "sort": "top",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
-        }
-      ]
-    },
-    {
-      "subreddit": "options",
-      "segment": "Options sentiment",
       "status": "error",
       "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
       "postCount": 0,
@@ -153,18 +123,49 @@
           "postCount": 0
         }
       ]
+    },
+    {
+      "subreddit": "options",
+      "segment": "Options sentiment",
+      "status": "ready",
+      "error": null,
+      "postCount": 5,
+      "sortStatuses": [
+        {
+          "sort": "hot",
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
+        },
+        {
+          "sort": "new",
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
+        },
+        {
+          "sort": "top",
+          "status": "ready",
+          "method": "rss:www.reddit.com",
+          "error": null,
+          "postCount": 5
+        }
+      ]
     }
   ],
   "topTickers": [
     {
       "symbol": "MU",
-      "mentions": 3,
-      "signalStrength": 9,
-      "directMentions": 2,
+      "mentions": 4,
+      "signalStrength": 13.1,
+      "directMentions": 3,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "stocks"
+        "stocks",
+        "options"
       ],
       "posts": [
         {
@@ -189,70 +190,49 @@
           "permalink": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/"
         }
       ],
-      "attentionScore": 146
+      "attentionScore": 211
     },
     {
-      "symbol": "TSN",
+      "symbol": "CHWY",
       "mentions": 1,
-      "signalStrength": 4.5,
+      "signalStrength": 5.7,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "SecurityAnalysis"
+        "stocks"
       ],
       "posts": [
         {
-          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-          "subreddit": "SecurityAnalysis",
+          "title": "$CHWY is an Acquisition Target at these Levels",
+          "subreddit": "stocks",
           "score": 0,
           "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ucmier/chwy_is_an_acquisition_target_at_these_levels/"
         }
       ],
-      "attentionScore": 69
+      "attentionScore": 81
     },
     {
-      "symbol": "SFD",
+      "symbol": "RDDT",
       "mentions": 1,
-      "signalStrength": 4.5,
+      "signalStrength": 5.7,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "SecurityAnalysis"
+        "stocks"
       ],
       "posts": [
         {
-          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-          "subreddit": "SecurityAnalysis",
+          "title": "$RDDT is not undervalued. Don't fall for the trap.",
+          "subreddit": "stocks",
           "score": 0,
           "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ucdwhv/rddt_is_not_undervalued_dont_fall_for_the_trap/"
         }
       ],
-      "attentionScore": 69
-    },
-    {
-      "symbol": "PPC",
-      "mentions": 1,
-      "signalStrength": 4.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "SecurityAnalysis"
-      ],
-      "posts": [
-        {
-          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-          "subreddit": "SecurityAnalysis",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
-        }
-      ],
-      "attentionScore": 69
+      "attentionScore": 81
     },
     {
       "symbol": "SNDK",
@@ -276,22 +256,64 @@
       "attentionScore": 61
     },
     {
-      "symbol": "INTC",
+      "symbol": "QQQ",
+      "mentions": 1,
+      "signalStrength": 3.7,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "options"
+      ],
+      "posts": [
+        {
+          "title": "QQQ Gamma Levels Set Up For MU Earnings Move",
+          "subreddit": "options",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/options/comments/1uch89o/qqq_gamma_levels_set_up_for_mu_earnings_move/"
+        }
+      ],
+      "attentionScore": 61
+    },
+    {
+      "symbol": "MSFT",
       "mentions": 1,
       "signalStrength": 2.5,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "SecurityAnalysis"
+        "stocks"
       ],
       "posts": [
         {
-          "title": "Yes, INTC Should Raise Equity",
-          "subreddit": "SecurityAnalysis",
+          "title": "Semis vs. Software & MSFT's conundrum",
+          "subreddit": "stocks",
           "score": 0,
           "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1u6cvvc/yes_intc_should_raise_equity/"
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ucp36c/semis_vs_software_msfts_conundrum/"
+        }
+      ],
+      "attentionScore": 49
+    },
+    {
+      "symbol": "XLF",
+      "mentions": 1,
+      "signalStrength": 2.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "options"
+      ],
+      "posts": [
+        {
+          "title": "The XLF volume action last Thursday was telling a completely different story than price",
+          "subreddit": "options",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/options/comments/1uci3cj/the_xlf_volume_action_last_thursday_was_telling_a/"
         }
       ],
       "attentionScore": 49
@@ -317,13 +339,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UAS8AS",
+      "id": "T31UCH9CK",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "/r/Stocks Weekend Discussion Saturday - Jun 20, 2026",
-      "url": "https://www.reddit.com/r/stocks/comments/1uas8as/rstocks_weekend_discussion_saturday_jun_20_2026/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1uas8as/rstocks_weekend_discussion_saturday_jun_20_2026/",
-      "createdAt": "2026-06-20T09:30:09.000Z",
+      "title": "r/Stocks Daily Discussion Monday - Jun 22, 2026",
+      "url": "https://www.reddit.com/r/stocks/comments/1uch9ck/rstocks_daily_discussion_monday_jun_22_2026/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1uch9ck/rstocks_daily_discussion_monday_jun_22_2026/",
+      "createdAt": "2026-06-22T10:50:05.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -335,6 +357,90 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31UCJ1KK",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "SK Hynix overtakes Samsung to become South Korea's most valuable company",
+      "url": "https://www.reddit.com/r/stocks/comments/1ucj1kk/sk_hynix_overtakes_samsung_to_become_south_koreas/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ucj1kk/sk_hynix_overtakes_samsung_to_become_south_koreas/",
+      "createdAt": "2026-06-22T12:20:36.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UCMIER",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "$CHWY is an Acquisition Target at these Levels",
+      "url": "https://www.reddit.com/r/stocks/comments/1ucmier/chwy_is_an_acquisition_target_at_these_levels/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ucmier/chwy_is_an_acquisition_target_at_these_levels/",
+      "createdAt": "2026-06-22T14:43:57.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "CHWY"
+      ],
+      "tickerWeights": {
+        "CHWY": 5.7
+      },
+      "directTickers": [
+        "CHWY"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UCP36C",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Semis vs. Software & MSFT's conundrum",
+      "url": "https://www.reddit.com/r/stocks/comments/1ucp36c/semis_vs_software_msfts_conundrum/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ucp36c/semis_vs_software_msfts_conundrum/",
+      "createdAt": "2026-06-22T16:17:08.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "MSFT"
+      ],
+      "tickerWeights": {
+        "MSFT": 2.5
+      },
+      "directTickers": [
+        "MSFT"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UCA77Q",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Stocks rally in Asia as Iran cites progress in talks",
+      "url": "https://www.reddit.com/r/stocks/comments/1uca77q/stocks_rally_in_asia_as_iran_cites_progress_in/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1uca77q/stocks_rally_in_asia_as_iran_cites_progress_in/",
+      "createdAt": "2026-06-22T04:02:16.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31UC1HWN",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -342,6 +448,24 @@
       "url": "https://www.reddit.com/r/stocks/comments/1uc1hwn/last_quarter_lululemon_sold_more_but_made_way/",
       "permalink": "https://www.reddit.com/r/stocks/comments/1uc1hwn/last_quarter_lululemon_sold_more_but_made_way/",
       "createdAt": "2026-06-21T21:16:18.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UCKW79",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Wall Street spent decades escaping the casino label. Are we going back?\"",
+      "url": "https://www.reddit.com/r/stocks/comments/1uckw79/wall_street_spent_decades_escaping_the_casino/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1uckw79/wall_street_spent_decades_escaping_the_casino/",
+      "createdAt": "2026-06-22T13:40:30.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -375,6 +499,24 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31UCKY2Y",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Power/Energy Sector growth visibility",
+      "url": "https://www.reddit.com/r/stocks/comments/1ucky2y/powerenergy_sector_growth_visibility/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ucky2y/powerenergy_sector_growth_visibility/",
+      "createdAt": "2026-06-22T13:42:40.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31UBW0YF",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -398,6 +540,24 @@
         "MU",
         "SNDK"
       ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UCN34P",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Snapchat Spins off dotomo AI, a generative video effort to improve profit margins",
+      "url": "https://www.reddit.com/r/stocks/comments/1ucn34p/snapchat_spins_off_dotomo_ai_a_generative_video/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ucn34p/snapchat_spins_off_dotomo_ai_a_generative_video/",
+      "createdAt": "2026-06-22T15:05:06.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
@@ -426,6 +586,24 @@
       "fetchMethod": "rss"
     },
     {
+      "id": "T31UCLNO1",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "TRIP – how big do you think buyback could be after TheFork sale, and could this trigger a squeeze?",
+      "url": "https://www.reddit.com/r/stocks/comments/1uclno1/trip_how_big_do_you_think_buyback_could_be_after/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1uclno1/trip_how_big_do_you_think_buyback_could_be_after/",
+      "createdAt": "2026-06-22T14:11:10.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
       "id": "T31UB1QVJ",
       "subreddit": "stocks",
       "segment": "Retail investing",
@@ -444,161 +622,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UB8YUX",
+      "id": "T31UCABEM",
       "subreddit": "stocks",
       "segment": "Retail investing",
-      "title": "Google loses two top AI researchers to OpenAI and Anthropic",
-      "url": "https://www.reddit.com/r/stocks/comments/1ub8yux/google_loses_two_top_ai_researchers_to_openai_and/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1ub8yux/google_loses_two_top_ai_researchers_to_openai_and/",
-      "createdAt": "2026-06-20T22:09:19.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UBPPHG",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "How do fractional shares work",
-      "url": "https://www.reddit.com/r/stocks/comments/1ubpphg/how_do_fractional_shares_work/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1ubpphg/how_do_fractional_shares_work/",
-      "createdAt": "2026-06-21T13:11:10.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UBERRM",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Memory stocks - next play?",
-      "url": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/",
-      "createdAt": "2026-06-21T02:52:43.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "MU"
-      ],
-      "tickerWeights": {
-        "MU": 1.6
-      },
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UBJP1G",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "KVYO: High growth, profitable, trading at under 3x sales while slower peers trade higher",
-      "url": "https://www.reddit.com/r/stocks/comments/1ubjp1g/kvyo_high_growth_profitable_trading_at_under_3x/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1ubjp1g/kvyo_high_growth_profitable_trading_at_under_3x/",
-      "createdAt": "2026-06-21T07:28:09.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UBOGJ5",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "What Is the price of global leadership?",
-      "url": "https://www.reddit.com/r/stocks/comments/1ubogj5/what_is_the_price_of_global_leadership/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1ubogj5/what_is_the_price_of_global_leadership/",
-      "createdAt": "2026-06-21T12:09:29.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UBDOLE",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Do Institutional traders have an edge over retail traders ?",
-      "url": "https://www.reddit.com/r/stocks/comments/1ubdole/do_institutional_traders_have_an_edge_over_retail/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1ubdole/do_institutional_traders_have_an_edge_over_retail/",
-      "createdAt": "2026-06-21T01:56:37.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UB8136",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Question from a young investor",
-      "url": "https://www.reddit.com/r/stocks/comments/1ub8136/question_from_a_young_investor/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1ub8136/question_from_a_young_investor/",
-      "createdAt": "2026-06-20T21:27:25.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UBT7Q2",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Portfolio suggestions long term",
-      "url": "https://www.reddit.com/r/stocks/comments/1ubt7q2/portfolio_suggestions_long_term/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1ubt7q2/portfolio_suggestions_long_term/",
-      "createdAt": "2026-06-21T15:41:14.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UBVWWD",
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "title": "Oil reserves and incoming oil crisis",
-      "url": "https://www.reddit.com/r/stocks/comments/1ubvwwd/oil_reserves_and_incoming_oil_crisis/",
-      "permalink": "https://www.reddit.com/r/stocks/comments/1ubvwwd/oil_reserves_and_incoming_oil_crisis/",
-      "createdAt": "2026-06-21T17:30:02.000Z",
+      "title": "What is your strategy around these developing sectors?",
+      "url": "https://www.reddit.com/r/stocks/comments/1ucabem/what_is_your_strategy_around_these_developing/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ucabem/what_is_your_strategy_around_these_developing/",
+      "createdAt": "2026-06-22T04:08:23.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -614,6 +644,6 @@
     "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
     "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
     "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-    "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
+    "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
   ]
 }
