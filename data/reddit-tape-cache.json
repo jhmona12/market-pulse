@@ -1,12 +1,42 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-21T14:35:13.695Z",
+  "generatedAt": "2026-06-22T01:44:55.009Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
     {
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
+      "status": "error",
+      "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+      "postCount": 0,
+      "sortStatuses": [
+        {
+          "sort": "hot",
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
+        },
+        {
+          "sort": "new",
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
+        },
+        {
+          "sort": "top",
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
+        }
+      ]
+    },
+    {
+      "subreddit": "stocks",
+      "segment": "Retail investing",
       "status": "ready",
       "error": null,
       "postCount": 25,
@@ -31,36 +61,6 @@
           "method": "none",
           "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
           "postCount": 0
-        }
-      ]
-    },
-    {
-      "subreddit": "stocks",
-      "segment": "Retail investing",
-      "status": "ready",
-      "error": null,
-      "postCount": 12,
-      "sortStatuses": [
-        {
-          "sort": "hot",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
-        },
-        {
-          "sort": "new",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
-        },
-        {
-          "sort": "top",
-          "status": "ready",
-          "method": "rss:www.reddit.com",
-          "error": null,
-          "postCount": 12
         }
       ]
     },
@@ -97,6 +97,36 @@
     {
       "subreddit": "SecurityAnalysis",
       "segment": "Fundamental research",
+      "status": "ready",
+      "error": null,
+      "postCount": 25,
+      "sortStatuses": [
+        {
+          "sort": "hot",
+          "status": "ready",
+          "method": "rss:old.reddit.com",
+          "error": null,
+          "postCount": 25
+        },
+        {
+          "sort": "new",
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
+        },
+        {
+          "sort": "top",
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
+        }
+      ]
+    },
+    {
+      "subreddit": "options",
+      "segment": "Options sentiment",
       "status": "error",
       "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
       "postCount": 0,
@@ -123,65 +153,26 @@
           "postCount": 0
         }
       ]
-    },
-    {
-      "subreddit": "options",
-      "segment": "Options sentiment",
-      "status": "ready",
-      "error": null,
-      "postCount": 25,
-      "sortStatuses": [
-        {
-          "sort": "hot",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
-        },
-        {
-          "sort": "new",
-          "status": "ready",
-          "method": "rss:old.reddit.com",
-          "error": null,
-          "postCount": 25
-        },
-        {
-          "sort": "top",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
-        }
-      ]
     }
   ],
   "topTickers": [
     {
       "symbol": "MU",
-      "mentions": 6,
-      "signalStrength": 15,
+      "mentions": 3,
+      "signalStrength": 9,
       "directMentions": 2,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "wallstreetbets",
-        "stocks",
-        "options"
+        "stocks"
       ],
       "posts": [
         {
-          "title": "Memory stocks - next play?",
-          "subreddit": "wallstreetbets",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ubezr3/memory_stocks_next_play/"
-        },
-        {
-          "title": "Memory stocks - next play?",
+          "title": "MU or SNDK which one looks better going forward?",
           "subreddit": "stocks",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/"
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ubw0yf/mu_or_sndk_which_one_looks_better_going_forward/"
         },
         {
           "title": "The top has yet to come for MU and DRAM",
@@ -189,188 +180,118 @@
           "score": 0,
           "comments": 0,
           "permalink": "https://www.reddit.com/r/stocks/comments/1ubo4yf/the_top_has_yet_to_come_for_mu_and_dram/"
-        }
-      ],
-      "attentionScore": 230
-    },
-    {
-      "symbol": "QQQ",
-      "mentions": 2,
-      "signalStrength": 6.2,
-      "directMentions": 2,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "options"
-      ],
-      "posts": [
-        {
-          "title": "QQQ 100% hedge costs per year",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/options/comments/1uas5v0/qqq_100_hedge_costs_per_year/"
         },
         {
-          "title": "First Week Trading SPX/QQQ 0DTE Live – Seeking Advice",
-          "subreddit": "options",
+          "title": "Memory stocks - next play?",
+          "subreddit": "stocks",
           "score": 0,
           "comments": 0,
-          "permalink": "https://old.reddit.com/r/options/comments/1u9mjy7/first_week_trading_spxqqq_0dte_live_seeking_advice/"
+          "permalink": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/"
         }
       ],
-      "attentionScore": 110
+      "attentionScore": 146
     },
     {
-      "symbol": "SPY",
-      "mentions": 2,
-      "signalStrength": 5.8,
-      "directMentions": 2,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "options"
-      ],
-      "posts": [
-        {
-          "title": "1dte ATM SPY straddles",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/options/comments/1ub18z0/1dte_atm_spy_straddles/"
-        },
-        {
-          "title": "SPY Dividend Risk for Upcoming Dividend",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/options/comments/1u9fdyy/spy_dividend_risk_for_upcoming_dividend/"
-        }
-      ],
-      "attentionScore": 106
-    },
-    {
-      "symbol": "RKLB",
+      "symbol": "TSN",
       "mentions": 1,
-      "signalStrength": 5.7,
+      "signalStrength": 4.5,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "options"
+        "SecurityAnalysis"
       ],
       "posts": [
         {
-          "title": "Executed the Stock Repair Strategy after a CSP assignment ($RKLB drawdown -25%)",
-          "subreddit": "options",
+          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
+          "subreddit": "SecurityAnalysis",
           "score": 0,
           "comments": 0,
-          "permalink": "https://old.reddit.com/r/options/comments/1u99560/executed_the_stock_repair_strategy_after_a_csp/"
+          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
         }
       ],
-      "attentionScore": 81
+      "attentionScore": 69
     },
     {
-      "symbol": "ARM",
+      "symbol": "SFD",
       "mentions": 1,
-      "signalStrength": 2.9,
+      "signalStrength": 4.5,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "wallstreetbets"
+        "SecurityAnalysis"
       ],
       "posts": [
         {
-          "title": "Long gamble in ARM turned into regret",
-          "subreddit": "wallstreetbets",
+          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
+          "subreddit": "SecurityAnalysis",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uagkol/long_gamble_in_arm_turned_into_regret/"
+          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
         }
       ],
-      "attentionScore": 53
+      "attentionScore": 69
     },
     {
-      "symbol": "MSFT",
+      "symbol": "PPC",
       "mentions": 1,
-      "signalStrength": 2.9,
+      "signalStrength": 4.5,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "options"
+        "SecurityAnalysis"
       ],
       "posts": [
         {
-          "title": "MSFT in the last 10 years",
-          "subreddit": "options",
+          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
+          "subreddit": "SecurityAnalysis",
           "score": 0,
           "comments": 0,
-          "permalink": "https://old.reddit.com/r/options/comments/1u9aj0a/msft_in_the_last_10_years/"
+          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
         }
       ],
-      "attentionScore": 53
+      "attentionScore": 69
     },
     {
-      "symbol": "MSCI",
+      "symbol": "SNDK",
+      "mentions": 1,
+      "signalStrength": 3.7,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "stocks"
+      ],
+      "posts": [
+        {
+          "title": "MU or SNDK which one looks better going forward?",
+          "subreddit": "stocks",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/stocks/comments/1ubw0yf/mu_or_sndk_which_one_looks_better_going_forward/"
+        }
+      ],
+      "attentionScore": 61
+    },
+    {
+      "symbol": "INTC",
       "mentions": 1,
       "signalStrength": 2.5,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "wallstreetbets"
+        "SecurityAnalysis"
       ],
       "posts": [
         {
-          "title": "SpaceX handed lowest possible ESG rating by MSCI",
-          "subreddit": "wallstreetbets",
+          "title": "Yes, INTC Should Raise Equity",
+          "subreddit": "SecurityAnalysis",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ubojvl/spacex_handed_lowest_possible_esg_rating_by_msci/"
-        }
-      ],
-      "attentionScore": 49
-    },
-    {
-      "symbol": "ASML",
-      "mentions": 1,
-      "signalStrength": 2.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "wallstreetbets"
-      ],
-      "posts": [
-        {
-          "title": "The US says ASML's top chip tool may be in China | TechCrunch",
-          "subreddit": "wallstreetbets",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ua7mug/the_us_says_asmls_top_chip_tool_may_be_in_china/"
-        }
-      ],
-      "attentionScore": 49
-    },
-    {
-      "symbol": "EEM",
-      "mentions": 1,
-      "signalStrength": 2.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "options"
-      ],
-      "posts": [
-        {
-          "title": "EEM New Buy Signal",
-          "subreddit": "options",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/options/comments/1uahf7l/eem_new_buy_signal/"
+          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1u6cvvc/yes_intc_should_raise_equity/"
         }
       ],
       "attentionScore": 49
@@ -378,13 +299,31 @@
   ],
   "topPosts": [
     {
-      "id": "T31U9DRSX",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Weekly Earnings Thread 6/22 - 6/26",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u9drsx/weekly_earnings_thread_622_626/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u9drsx/weekly_earnings_thread_622_626/",
-      "createdAt": "2026-06-18T18:10:16.000Z",
+      "id": "T31TTMG2B",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Rate My Portfolio - r/Stocks Quarterly Thread June 2026",
+      "url": "https://www.reddit.com/r/stocks/comments/1ttmg2b/rate_my_portfolio_rstocks_quarterly_thread_june/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ttmg2b/rate_my_portfolio_rstocks_quarterly_thread_june/",
+      "createdAt": "2026-06-01T09:00:12.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UAS8AS",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "/r/Stocks Weekend Discussion Saturday - Jun 20, 2026",
+      "url": "https://www.reddit.com/r/stocks/comments/1uas8as/rstocks_weekend_discussion_saturday_jun_20_2026/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1uas8as/rstocks_weekend_discussion_saturday_jun_20_2026/",
+      "createdAt": "2026-06-20T09:30:09.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -396,13 +335,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UAC4FX",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Weekend Discussion Thread for the Weekend of June 20-21",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uac4fx/weekend_discussion_thread_for_the_weekend_of_june/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uac4fx/weekend_discussion_thread_for_the_weekend_of_june/",
-      "createdAt": "2026-06-19T20:00:37.000Z",
+      "id": "T31UC1HWN",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Last quarter Lululemon sold more but made way less money",
+      "url": "https://www.reddit.com/r/stocks/comments/1uc1hwn/last_quarter_lululemon_sold_more_but_made_way/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1uc1hwn/last_quarter_lululemon_sold_more_but_made_way/",
+      "createdAt": "2026-06-21T21:16:18.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -410,41 +349,90 @@
       "tickers": [],
       "tickerWeights": {},
       "directTickers": [],
-      "filteredAsGeneric": true,
+      "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UBOJVL",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "SpaceX handed lowest possible ESG rating by MSCI",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ubojvl/spacex_handed_lowest_possible_esg_rating_by_msci/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ubojvl/spacex_handed_lowest_possible_esg_rating_by_msci/",
-      "createdAt": "2026-06-21T12:14:21.000Z",
+      "id": "T31UBZL4L",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Semis vs Memory stocks, can anyone point out the difference to me?",
+      "url": "https://www.reddit.com/r/stocks/comments/1ubzl4l/semis_vs_memory_stocks_can_anyone_point_out_the/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ubzl4l/semis_vs_memory_stocks_can_anyone_point_out_the/",
+      "createdAt": "2026-06-21T19:57:30.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
       "flair": null,
       "tickers": [
-        "MSCI"
+        "NVDA"
       ],
       "tickerWeights": {
-        "MSCI": 2.5
+        "NVDA": 1.2
+      },
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UBW0YF",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "MU or SNDK which one looks better going forward?",
+      "url": "https://www.reddit.com/r/stocks/comments/1ubw0yf/mu_or_sndk_which_one_looks_better_going_forward/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ubw0yf/mu_or_sndk_which_one_looks_better_going_forward/",
+      "createdAt": "2026-06-21T17:34:28.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "MU",
+        "SNDK"
+      ],
+      "tickerWeights": {
+        "MU": 4.1,
+        "SNDK": 3.7
       },
       "directTickers": [
-        "MSCI"
+        "MU",
+        "SNDK"
       ],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UBPH76",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "So what’s your investing strategy?",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ubph76/so_whats_your_investing_strategy/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ubph76/so_whats_your_investing_strategy/",
-      "createdAt": "2026-06-21T13:00:36.000Z",
+      "id": "T31UBO4YF",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "The top has yet to come for MU and DRAM",
+      "url": "https://www.reddit.com/r/stocks/comments/1ubo4yf/the_top_has_yet_to_come_for_mu_and_dram/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ubo4yf/the_top_has_yet_to_come_for_mu_and_dram/",
+      "createdAt": "2026-06-21T11:52:46.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "MU"
+      ],
+      "tickerWeights": {
+        "MU": 3.3
+      },
+      "directTickers": [
+        "MU"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UB1QVJ",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "BREAKING: Iran Says Hormuz Is Closed Again",
+      "url": "https://www.reddit.com/r/stocks/comments/1ub1qvj/breaking_iran_says_hormuz_is_closed_again/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ub1qvj/breaking_iran_says_hormuz_is_closed_again/",
+      "createdAt": "2026-06-20T17:05:26.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -456,13 +444,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UBE9U3",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "I've made loss in every AI stock!",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ube9u3/ive_made_loss_in_every_ai_stock/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ube9u3/ive_made_loss_in_every_ai_stock/",
-      "createdAt": "2026-06-21T02:26:38.000Z",
+      "id": "T31UB8YUX",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Google loses two top AI researchers to OpenAI and Anthropic",
+      "url": "https://www.reddit.com/r/stocks/comments/1ub8yux/google_loses_two_top_ai_researchers_to_openai_and/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ub8yux/google_loses_two_top_ai_researchers_to_openai_and/",
+      "createdAt": "2026-06-20T22:09:19.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -474,13 +462,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UBHDD2",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "It’s a choice",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ubhdd2/its_a_choice/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ubhdd2/its_a_choice/",
-      "createdAt": "2026-06-21T05:12:57.000Z",
+      "id": "T31UBPPHG",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "How do fractional shares work",
+      "url": "https://www.reddit.com/r/stocks/comments/1ubpphg/how_do_fractional_shares_work/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ubpphg/how_do_fractional_shares_work/",
+      "createdAt": "2026-06-21T13:11:10.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -492,13 +480,35 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UB65B3",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Me, an American, waiting for Market Monday after a 3 day weekend",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ub65b3/me_an_american_waiting_for_market_monday_after_a/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ub65b3/me_an_american_waiting_for_market_monday_after_a/",
-      "createdAt": "2026-06-20T20:06:20.000Z",
+      "id": "T31UBERRM",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Memory stocks - next play?",
+      "url": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1uberrm/memory_stocks_next_play/",
+      "createdAt": "2026-06-21T02:52:43.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "MU"
+      ],
+      "tickerWeights": {
+        "MU": 1.6
+      },
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UBJP1G",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "KVYO: High growth, profitable, trading at under 3x sales while slower peers trade higher",
+      "url": "https://www.reddit.com/r/stocks/comments/1ubjp1g/kvyo_high_growth_profitable_trading_at_under_3x/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ubjp1g/kvyo_high_growth_profitable_trading_at_under_3x/",
+      "createdAt": "2026-06-21T07:28:09.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -510,13 +520,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UBIJ8W",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Loss Porn",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ubij8w/loss_porn/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ubij8w/loss_porn/",
-      "createdAt": "2026-06-21T06:19:22.000Z",
+      "id": "T31UBOGJ5",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "What Is the price of global leadership?",
+      "url": "https://www.reddit.com/r/stocks/comments/1ubogj5/what_is_the_price_of_global_leadership/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ubogj5/what_is_the_price_of_global_leadership/",
+      "createdAt": "2026-06-21T12:09:29.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -528,13 +538,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UBJO5E",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Gold is done. (for now)",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ubjo5e/gold_is_done_for_now/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ubjo5e/gold_is_done_for_now/",
-      "createdAt": "2026-06-21T07:26:37.000Z",
+      "id": "T31UBDOLE",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Do Institutional traders have an edge over retail traders ?",
+      "url": "https://www.reddit.com/r/stocks/comments/1ubdole/do_institutional_traders_have_an_edge_over_retail/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ubdole/do_institutional_traders_have_an_edge_over_retail/",
+      "createdAt": "2026-06-21T01:56:37.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -546,13 +556,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UBOO8R",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Bears what are you waiting on? A 5, 10, 15, 30 or 50% drop are you perma bearish and will only buy puts and shorts?",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uboo8r/bears_what_are_you_waiting_on_a_5_10_15_30_or_50/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uboo8r/bears_what_are_you_waiting_on_a_5_10_15_30_or_50/",
-      "createdAt": "2026-06-21T12:20:39.000Z",
+      "id": "T31UB8136",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Question from a young investor",
+      "url": "https://www.reddit.com/r/stocks/comments/1ub8136/question_from_a_young_investor/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ub8136/question_from_a_young_investor/",
+      "createdAt": "2026-06-20T21:27:25.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -564,13 +574,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UBMD31",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Go big or go home amirite?",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ubmd31/go_big_or_go_home_amirite/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ubmd31/go_big_or_go_home_amirite/",
-      "createdAt": "2026-06-21T10:11:26.000Z",
+      "id": "T31UBT7Q2",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Portfolio suggestions long term",
+      "url": "https://www.reddit.com/r/stocks/comments/1ubt7q2/portfolio_suggestions_long_term/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ubt7q2/portfolio_suggestions_long_term/",
+      "createdAt": "2026-06-21T15:41:14.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -582,85 +592,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UB60WZ",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Europoor discovers WSB",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ub60wz/europoor_discovers_wsb/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ub60wz/europoor_discovers_wsb/",
-      "createdAt": "2026-06-20T20:01:11.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UB9TYP",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Metaverse CEO",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ub9typ/metaverse_ceo/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ub9typ/metaverse_ceo/",
-      "createdAt": "2026-06-20T22:48:34.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UAX8O6",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "SNAP can only go up from here",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uax8o6/snap_can_only_go_up_from_here/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uax8o6/snap_can_only_go_up_from_here/",
-      "createdAt": "2026-06-20T13:55:03.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UAWFJV",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "One Million Dollars. One Brain Cell.",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uawfjv/one_million_dollars_one_brain_cell/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uawfjv/one_million_dollars_one_brain_cell/",
-      "createdAt": "2026-06-20T13:18:07.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UBEL5U",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Cashing out on LEAPs",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ubel5u/cashing_out_on_leaps/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ubel5u/cashing_out_on_leaps/",
-      "createdAt": "2026-06-21T02:42:57.000Z",
+      "id": "T31UBVWWD",
+      "subreddit": "stocks",
+      "segment": "Retail investing",
+      "title": "Oil reserves and incoming oil crisis",
+      "url": "https://www.reddit.com/r/stocks/comments/1ubvwwd/oil_reserves_and_incoming_oil_crisis/",
+      "permalink": "https://www.reddit.com/r/stocks/comments/1ubvwwd/oil_reserves_and_incoming_oil_crisis/",
+      "createdAt": "2026-06-21T17:30:02.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -674,7 +612,8 @@
   ],
   "currentFetchErrors": [
     "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
+    "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
     "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-    "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
+    "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
   ]
 }
