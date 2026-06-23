@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-23T01:25:04.311Z",
+  "generatedAt": "2026-06-23T15:24:11.227Z",
   "window": {
-    "today": "2026-06-22",
+    "today": "2026-06-23",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-06-15",
-    "endDate": "2026-12-22"
+    "startDate": "2026-06-16",
+    "endDate": "2026-12-23"
   },
   "sources": [
     {
@@ -29,7 +29,7 @@
     {
       "source": "BEA release schedule",
       "status": "ready",
-      "eventCount": 13,
+      "eventCount": 15,
       "scraper": "bea-release-schedule"
     },
     {
@@ -476,6 +476,28 @@
       "upstreamSource": "BLS",
       "scraper": "fred-release-calendar",
       "note": "FRED calendar for the BLS PPI release. Direct BLS schedule pages can block automated requests."
+    },
+    {
+      "date": "2026-12-23",
+      "time": "8:30 AM ET",
+      "event": "GDP Third Estimate",
+      "title": "GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 3rd Quarter 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2026-12-23",
+      "time": "8:30 AM ET",
+      "event": "Personal Income and Outlays",
+      "title": "Personal Income and Outlays, November 2026",
+      "source": "BEA",
+      "importance": "High",
+      "sourceUrl": "https://www.bea.gov/news/schedule",
+      "sourceName": "BEA release schedule",
+      "scraper": "bea-release-schedule"
     }
   ]
 }
