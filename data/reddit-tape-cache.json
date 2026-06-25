@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-24T15:09:45.869Z",
+  "generatedAt": "2026-06-25T01:30:59.599Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
@@ -67,16 +67,16 @@
     {
       "subreddit": "investing",
       "segment": "Retail investing",
-      "status": "error",
-      "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-      "postCount": 0,
+      "status": "ready",
+      "error": null,
+      "postCount": 25,
       "sortStatuses": [
         {
           "sort": "hot",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
+          "status": "ready",
+          "method": "rss:www.reddit.com",
+          "error": null,
+          "postCount": 25
         },
         {
           "sort": "new",
@@ -97,9 +97,9 @@
     {
       "subreddit": "SecurityAnalysis",
       "segment": "Fundamental research",
-      "status": "ready",
-      "error": null,
-      "postCount": 25,
+      "status": "error",
+      "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+      "postCount": 0,
       "sortStatuses": [
         {
           "sort": "hot",
@@ -110,10 +110,10 @@
         },
         {
           "sort": "new",
-          "status": "ready",
-          "method": "rss:old.reddit.com",
-          "error": null,
-          "postCount": 25
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
         },
         {
           "sort": "top",
@@ -157,10 +157,10 @@
   ],
   "topTickers": [
     {
-      "symbol": "GOOGL",
-      "mentions": 1,
-      "signalStrength": 5.3,
-      "directMentions": 1,
+      "symbol": "MU",
+      "mentions": 2,
+      "signalStrength": 7,
+      "directMentions": 2,
       "score": 0,
       "comments": 0,
       "subreddits": [
@@ -168,14 +168,21 @@
       ],
       "posts": [
         {
-          "title": "My wife wants to divorce because I all in $GOOGL at ath",
+          "title": "If $MU opens above 1250 I will get an MU tattoo",
           "subreddit": "wallstreetbets",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueb3z1/my_wife_wants_to_divorce_because_i_all_in_googl/"
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueq24o/if_mu_opens_above_1250_i_will_get_an_mu_tattoo/"
+        },
+        {
+          "title": "For the people that thought the world was ending and MU earnings would be negative",
+          "subreddit": "wallstreetbets",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueptjt/for_the_people_that_thought_the_world_was_ending/"
         }
       ],
-      "attentionScore": 77
+      "attentionScore": 118
     },
     {
       "symbol": "WEN",
@@ -189,95 +196,32 @@
       ],
       "posts": [
         {
-          "title": "Loaded up 🫡 $WEN ready to blast off",
+          "title": "$WEN to the moon - 350K YOLO",
           "subreddit": "wallstreetbets",
           "score": 0,
           "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uebw9w/loaded_up_wen_ready_to_blast_off/"
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uerxoo/wen_to_the_moon_350k_yolo/"
         }
       ],
       "attentionScore": 69
     },
     {
-      "symbol": "TSN",
-      "mentions": 1,
-      "signalStrength": 4.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "SecurityAnalysis"
-      ],
-      "posts": [
-        {
-          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-          "subreddit": "SecurityAnalysis",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
-        }
-      ],
-      "attentionScore": 69
-    },
-    {
-      "symbol": "SFD",
-      "mentions": 1,
-      "signalStrength": 4.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "SecurityAnalysis"
-      ],
-      "posts": [
-        {
-          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-          "subreddit": "SecurityAnalysis",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
-        }
-      ],
-      "attentionScore": 69
-    },
-    {
-      "symbol": "PPC",
-      "mentions": 1,
-      "signalStrength": 4.5,
-      "directMentions": 1,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "SecurityAnalysis"
-      ],
-      "posts": [
-        {
-          "title": "US Meatpacking ($TSN, $SFD, $PPC): Cheap enough?",
-          "subreddit": "SecurityAnalysis",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1teuojt/us_meatpacking_tsn_sfd_ppc_cheap_enough/"
-        }
-      ],
-      "attentionScore": 69
-    },
-    {
-      "symbol": "INTC",
+      "symbol": "MSTR",
       "mentions": 1,
       "signalStrength": 2.5,
       "directMentions": 1,
       "score": 0,
       "comments": 0,
       "subreddits": [
-        "SecurityAnalysis"
+        "wallstreetbets"
       ],
       "posts": [
         {
-          "title": "Yes, INTC Should Raise Equity",
-          "subreddit": "SecurityAnalysis",
+          "title": "MSTR is currently sitting on a $12.5B unrealized loss, exceeding the largest trading loss in history (Bill Hwang/Archegos) by $2.5B",
+          "subreddit": "wallstreetbets",
           "score": 0,
           "comments": 0,
-          "permalink": "https://old.reddit.com/r/SecurityAnalysis/comments/1u6cvvc/yes_intc_should_raise_equity/"
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uetpvv/mstr_is_currently_sitting_on_a_125b_unrealized/"
         }
       ],
       "attentionScore": 49
@@ -303,13 +247,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UE985S",
+      "id": "T31UEO8E6",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Daily Discussion Thread for June 24, 2026",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ue985s/daily_discussion_thread_for_june_24_2026/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ue985s/daily_discussion_thread_for_june_24_2026/",
-      "createdAt": "2026-06-24T10:00:37.000Z",
+      "title": "What Are Your Moves Tomorrow, June 25, 2026",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueo8e6/what_are_your_moves_tomorrow_june_25_2026/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueo8e6/what_are_your_moves_tomorrow_june_25_2026/",
+      "createdAt": "2026-06-24T20:00:37.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -318,6 +262,24 @@
       "tickerWeights": {},
       "directTickers": [],
       "filteredAsGeneric": true,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UEOPCS",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "WEN bagholders tomorrow",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueopcs/wen_bagholders_tomorrow/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueopcs/wen_bagholders_tomorrow/",
+      "createdAt": "2026-06-24T20:18:11.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
     {
@@ -339,13 +301,121 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UE93ED",
+      "id": "T31UEONCJ",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "it kinda looks like a rocket tip",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ue93ed/it_kinda_looks_like_a_rocket_tip/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ue93ed/it_kinda_looks_like_a_rocket_tip/",
-      "createdAt": "2026-06-24T09:52:48.000Z",
+      "title": "Micron stock jumps 9% as soaring prices from memory crunch lead to quadrupling of revenue",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueoncj/micron_stock_jumps_9_as_soaring_prices_from/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueoncj/micron_stock_jumps_9_as_soaring_prices_from/",
+      "createdAt": "2026-06-24T20:16:06.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UERXOO",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "$WEN to the moon - 350K YOLO",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uerxoo/wen_to_the_moon_350k_yolo/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uerxoo/wen_to_the_moon_350k_yolo/",
+      "createdAt": "2026-06-24T22:21:41.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "WEN"
+      ],
+      "tickerWeights": {
+        "WEN": 4.5
+      },
+      "directTickers": [
+        "WEN"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UEHPGH",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "I just got approved for options trading",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uehpgh/i_just_got_approved_for_options_trading/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uehpgh/i_just_got_approved_for_options_trading/",
+      "createdAt": "2026-06-24T16:05:05.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UETPVV",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "MSTR is currently sitting on a $12.5B unrealized loss, exceeding the largest trading loss in history (Bill Hwang/Archegos) by $2.5B",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uetpvv/mstr_is_currently_sitting_on_a_125b_unrealized/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uetpvv/mstr_is_currently_sitting_on_a_125b_unrealized/",
+      "createdAt": "2026-06-24T23:36:22.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "MSTR"
+      ],
+      "tickerWeights": {
+        "MSTR": 2.5
+      },
+      "directTickers": [
+        "MSTR"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UEQ24O",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "If $MU opens above 1250 I will get an MU tattoo",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueq24o/if_mu_opens_above_1250_i_will_get_an_mu_tattoo/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueq24o/if_mu_opens_above_1250_i_will_get_an_mu_tattoo/",
+      "createdAt": "2026-06-24T21:09:17.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [
+        "MU"
+      ],
+      "tickerWeights": {
+        "MU": 4.5
+      },
+      "directTickers": [
+        "MU"
+      ],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UEIZ49",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "I’m as dumb as the rest of you.",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueiz49/im_as_dumb_as_the_rest_of_you/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueiz49/im_as_dumb_as_the_rest_of_you/",
+      "createdAt": "2026-06-24T16:51:08.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -375,73 +445,37 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UDYGXI",
+      "id": "T31UEPTJT",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "We need to save Wendy’s",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1udygxi/we_need_to_save_wendys/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1udygxi/we_need_to_save_wendys/",
-      "createdAt": "2026-06-24T00:30:20.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UEBLE6",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Wendy tendie yolo",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueble6/wendy_tendie_yolo/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueble6/wendy_tendie_yolo/",
-      "createdAt": "2026-06-24T12:03:35.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UEBW9W",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Loaded up 🫡 $WEN ready to blast off",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uebw9w/loaded_up_wen_ready_to_blast_off/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uebw9w/loaded_up_wen_ready_to_blast_off/",
-      "createdAt": "2026-06-24T12:17:47.000Z",
+      "title": "For the people that thought the world was ending and MU earnings would be negative",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueptjt/for_the_people_that_thought_the_world_was_ending/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueptjt/for_the_people_that_thought_the_world_was_ending/",
+      "createdAt": "2026-06-24T21:00:24.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
       "flair": null,
       "tickers": [
-        "WEN"
+        "MU"
       ],
       "tickerWeights": {
-        "WEN": 4.5
+        "MU": 2.5
       },
       "directTickers": [
-        "WEN"
+        "MU"
       ],
       "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UED78L",
+      "id": "T31UE93ED",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Fixing Her: A Wendys (WEN) DD",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ued78l/fixing_her_a_wendys_wen_dd/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ued78l/fixing_her_a_wendys_wen_dd/",
-      "createdAt": "2026-06-24T13:14:43.000Z",
+      "title": "it kinda looks like a rocket tip",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ue93ed/it_kinda_looks_like_a_rocket_tip/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ue93ed/it_kinda_looks_like_a_rocket_tip/",
+      "createdAt": "2026-06-24T09:52:48.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -453,13 +487,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UEEFGV",
+      "id": "T31UEMSOF",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Wendy’s (WEN) 70x CALLS",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueefgv/wendys_wen_70x_calls/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueefgv/wendys_wen_70x_calls/",
-      "createdAt": "2026-06-24T14:03:32.000Z",
+      "title": "I like the stock",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uemsof/i_like_the_stock/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uemsof/i_like_the_stock/",
+      "createdAt": "2026-06-24T19:08:45.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -471,13 +505,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UEE2JW",
+      "id": "T31UERHDG",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Heard you have to buy your position at Wendy’s now?",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uee2jw/heard_you_have_to_buy_your_position_at_wendys_now/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uee2jw/heard_you_have_to_buy_your_position_at_wendys_now/",
-      "createdAt": "2026-06-24T13:49:42.000Z",
+      "title": "When will the Pain stop?",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uerhdg/when_will_the_pain_stop/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uerhdg/when_will_the_pain_stop/",
+      "createdAt": "2026-06-24T22:03:37.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -489,85 +523,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UEBONS",
+      "id": "T31UENARP",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "JAPAN $2.3 TRILLION INVESTMENT PLAN FOR AI AND SEMICONDUCTORS OVER THE NEXT 14 YEARS",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uebons/japan_23_trillion_investment_plan_for_ai_and/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uebons/japan_23_trillion_investment_plan_for_ai_and/",
-      "createdAt": "2026-06-24T12:07:52.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UE7ZXD",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "South Korea's SK Hynix says to raise up to $29 bln in ADR listing",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ue7zxd/south_koreas_sk_hynix_says_to_raise_up_to_29_bln/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ue7zxd/south_koreas_sk_hynix_says_to_raise_up_to_29_bln/",
-      "createdAt": "2026-06-24T08:47:07.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UEAET8",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "What happened to WEN Memes?",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueaet8/what_happened_to_wen_memes/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueaet8/what_happened_to_wen_memes/",
-      "createdAt": "2026-06-24T11:04:27.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UECLJ1",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "SK Hynix Seeks $29 Billion With US Listing to Fund AI Boom",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueclj1/sk_hynix_seeks_29_billion_with_us_listing_to_fund/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueclj1/sk_hynix_seeks_29_billion_with_us_listing_to_fund/",
-      "createdAt": "2026-06-24T12:49:24.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UDUC49",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Alphabet added to Dow Jones Industrial Average, replacing Verizon",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uduc49/alphabet_added_to_dow_jones_industrial_average/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uduc49/alphabet_added_to_dow_jones_industrial_average/",
-      "createdAt": "2026-06-23T21:37:29.000Z",
+      "title": "Just put the fries in the bag 🍟",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uenarp/just_put_the_fries_in_the_bag/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uenarp/just_put_the_fries_in_the_bag/",
+      "createdAt": "2026-06-24T19:26:39.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -582,7 +544,7 @@
   "currentFetchErrors": [
     "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
     "stocks: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-    "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+    "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
     "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
   ]
 }
