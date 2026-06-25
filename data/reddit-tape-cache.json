@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "generatedAt": "2026-06-25T01:30:59.599Z",
+  "generatedAt": "2026-06-25T15:14:38.171Z",
   "authMode": "public",
   "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
   "subreddits": [
@@ -69,14 +69,14 @@
       "segment": "Retail investing",
       "status": "ready",
       "error": null,
-      "postCount": 25,
+      "postCount": 21,
       "sortStatuses": [
         {
           "sort": "hot",
-          "status": "ready",
-          "method": "rss:www.reddit.com",
-          "error": null,
-          "postCount": 25
+          "status": "error",
+          "method": "none",
+          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "postCount": 0
         },
         {
           "sort": "new",
@@ -87,10 +87,10 @@
         },
         {
           "sort": "top",
-          "status": "error",
-          "method": "none",
-          "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-          "postCount": 0
+          "status": "ready",
+          "method": "rss:www.reddit.com",
+          "error": null,
+          "postCount": 21
         }
       ]
     },
@@ -157,34 +157,6 @@
   ],
   "topTickers": [
     {
-      "symbol": "MU",
-      "mentions": 2,
-      "signalStrength": 7,
-      "directMentions": 2,
-      "score": 0,
-      "comments": 0,
-      "subreddits": [
-        "wallstreetbets"
-      ],
-      "posts": [
-        {
-          "title": "If $MU opens above 1250 I will get an MU tattoo",
-          "subreddit": "wallstreetbets",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueq24o/if_mu_opens_above_1250_i_will_get_an_mu_tattoo/"
-        },
-        {
-          "title": "For the people that thought the world was ending and MU earnings would be negative",
-          "subreddit": "wallstreetbets",
-          "score": 0,
-          "comments": 0,
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueptjt/for_the_people_that_thought_the_world_was_ending/"
-        }
-      ],
-      "attentionScore": 118
-    },
-    {
       "symbol": "WEN",
       "mentions": 1,
       "signalStrength": 4.5,
@@ -225,17 +197,38 @@
         }
       ],
       "attentionScore": 49
+    },
+    {
+      "symbol": "MSFT",
+      "mentions": 1,
+      "signalStrength": 2.5,
+      "directMentions": 1,
+      "score": 0,
+      "comments": 0,
+      "subreddits": [
+        "wallstreetbets"
+      ],
+      "posts": [
+        {
+          "title": "760k MSFT YOLO",
+          "subreddit": "wallstreetbets",
+          "score": 0,
+          "comments": 0,
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ufb6m8/760k_msft_yolo/"
+        }
+      ],
+      "attentionScore": 49
     }
   ],
   "topPosts": [
     {
-      "id": "T31U9DRSX",
+      "id": "T31UF5RDV",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Weekly Earnings Thread 6/22 - 6/26",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1u9drsx/weekly_earnings_thread_622_626/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1u9drsx/weekly_earnings_thread_622_626/",
-      "createdAt": "2026-06-18T18:10:16.000Z",
+      "title": "Daily Discussion Thread for June 25, 2026",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uf5rdv/daily_discussion_thread_for_june_25_2026/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uf5rdv/daily_discussion_thread_for_june_25_2026/",
+      "createdAt": "2026-06-25T10:00:37.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -247,13 +240,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UEO8E6",
+      "id": "T31UF9T1D",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "What Are Your Moves Tomorrow, June 25, 2026",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueo8e6/what_are_your_moves_tomorrow_june_25_2026/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueo8e6/what_are_your_moves_tomorrow_june_25_2026/",
-      "createdAt": "2026-06-24T20:00:37.000Z",
+      "title": "Micron situation",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uf9t1d/micron_situation/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uf9t1d/micron_situation/",
+      "createdAt": "2026-06-25T13:18:54.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -261,7 +254,133 @@
       "tickers": [],
       "tickerWeights": {},
       "directTickers": [],
-      "filteredAsGeneric": true,
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UF6AY8",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "When you only buy one meals worth of wendys stocks",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uf6ay8/when_you_only_buy_one_meals_worth_of_wendys_stocks/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uf6ay8/when_you_only_buy_one_meals_worth_of_wendys_stocks/",
+      "createdAt": "2026-06-25T10:31:45.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UFAPH0",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Wendy’s Temporarily Halted",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ufaph0/wendys_temporarily_halted/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ufaph0/wendys_temporarily_halted/",
+      "createdAt": "2026-06-25T13:53:53.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UF6QK5",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Basically everyone on this sub this morning",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uf6qk5/basically_everyone_on_this_sub_this_morning/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uf6qk5/basically_everyone_on_this_sub_this_morning/",
+      "createdAt": "2026-06-25T10:56:05.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UEY161",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Down $240k in less than a month at 23 thanks to ASTS",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uey161/down_240k_in_less_than_a_month_at_23_thanks_to/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uey161/down_240k_in_less_than_a_month_at_23_thanks_to/",
+      "createdAt": "2026-06-25T02:54:30.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UF9EFZ",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Its a sign",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uf9efz/its_a_sign/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uf9efz/its_a_sign/",
+      "createdAt": "2026-06-25T13:02:25.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UFABS3",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "For the cause",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ufabs3/for_the_cause/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ufabs3/for_the_cause/",
+      "createdAt": "2026-06-25T13:39:19.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
+      "fetchMethod": "rss"
+    },
+    {
+      "id": "T31UF9UC1",
+      "subreddit": "wallstreetbets",
+      "segment": "Retail momentum",
+      "title": "Day 2: Never not go full regard",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uf9uc1/day_2_never_not_go_full_regard/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uf9uc1/day_2_never_not_go_full_regard/",
+      "createdAt": "2026-06-25T13:20:18.000Z",
+      "score": 0,
+      "comments": 0,
+      "upvoteRatio": 0,
+      "flair": null,
+      "tickers": [],
+      "tickerWeights": {},
+      "directTickers": [],
+      "filteredAsGeneric": false,
       "fetchMethod": "rss"
     },
     {
@@ -283,13 +402,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UEF0LG",
+      "id": "T31UF0UJM",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Always go full regard",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uef0lg/always_go_full_regard/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uef0lg/always_go_full_regard/",
-      "createdAt": "2026-06-24T14:25:47.000Z",
+      "title": "New Wendy’s employee",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uf0ujm/new_wendys_employee/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uf0ujm/new_wendys_employee/",
+      "createdAt": "2026-06-25T05:16:00.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -301,13 +420,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UEONCJ",
+      "id": "T31UFBSOL",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "Micron stock jumps 9% as soaring prices from memory crunch lead to quadrupling of revenue",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueoncj/micron_stock_jumps_9_as_soaring_prices_from/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueoncj/micron_stock_jumps_9_as_soaring_prices_from/",
-      "createdAt": "2026-06-24T20:16:06.000Z",
+      "title": "I belong here",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ufbsol/i_belong_here/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ufbsol/i_belong_here/",
+      "createdAt": "2026-06-25T14:34:49.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -319,37 +438,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UERXOO",
+      "id": "T31UFCBCG",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "$WEN to the moon - 350K YOLO",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uerxoo/wen_to_the_moon_350k_yolo/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uerxoo/wen_to_the_moon_350k_yolo/",
-      "createdAt": "2026-06-24T22:21:41.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "WEN"
-      ],
-      "tickerWeights": {
-        "WEN": 4.5
-      },
-      "directTickers": [
-        "WEN"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UEHPGH",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "I just got approved for options trading",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uehpgh/i_just_got_approved_for_options_trading/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uehpgh/i_just_got_approved_for_options_trading/",
-      "createdAt": "2026-06-24T16:05:05.000Z",
+      "title": "WEN you buy even more.",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ufcbcg/wen_you_buy_even_more/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ufcbcg/wen_you_buy_even_more/",
+      "createdAt": "2026-06-25T14:53:36.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -361,61 +456,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UETPVV",
+      "id": "T31UFBNO4",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "MSTR is currently sitting on a $12.5B unrealized loss, exceeding the largest trading loss in history (Bill Hwang/Archegos) by $2.5B",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uetpvv/mstr_is_currently_sitting_on_a_125b_unrealized/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uetpvv/mstr_is_currently_sitting_on_a_125b_unrealized/",
-      "createdAt": "2026-06-24T23:36:22.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "MSTR"
-      ],
-      "tickerWeights": {
-        "MSTR": 2.5
-      },
-      "directTickers": [
-        "MSTR"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UEQ24O",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "If $MU opens above 1250 I will get an MU tattoo",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueq24o/if_mu_opens_above_1250_i_will_get_an_mu_tattoo/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueq24o/if_mu_opens_above_1250_i_will_get_an_mu_tattoo/",
-      "createdAt": "2026-06-24T21:09:17.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "MU"
-      ],
-      "tickerWeights": {
-        "MU": 4.5
-      },
-      "directTickers": [
-        "MU"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UEIZ49",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "I’m as dumb as the rest of you.",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueiz49/im_as_dumb_as_the_rest_of_you/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueiz49/im_as_dumb_as_the_rest_of_you/",
-      "createdAt": "2026-06-24T16:51:08.000Z",
+      "title": "Yoooo lolol",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ufbno4/yoooo_lolol/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ufbno4/yoooo_lolol/",
+      "createdAt": "2026-06-25T14:29:38.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -427,13 +474,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UEDYK9",
+      "id": "T31UF95N6",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "In on WEN!!!",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uedyk9/in_on_wen/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uedyk9/in_on_wen/",
-      "createdAt": "2026-06-24T13:45:19.000Z",
+      "title": "Fed's preferred inflation measure hits three-year high, keeping talk of possible rate hike in play",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uf95n6/feds_preferred_inflation_measure_hits_threeyear/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uf95n6/feds_preferred_inflation_measure_hits_threeyear/",
+      "createdAt": "2026-06-25T12:52:21.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
@@ -445,91 +492,13 @@
       "fetchMethod": "rss"
     },
     {
-      "id": "T31UEPTJT",
+      "id": "T31UF9WSO",
       "subreddit": "wallstreetbets",
       "segment": "Retail momentum",
-      "title": "For the people that thought the world was ending and MU earnings would be negative",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ueptjt/for_the_people_that_thought_the_world_was_ending/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ueptjt/for_the_people_that_thought_the_world_was_ending/",
-      "createdAt": "2026-06-24T21:00:24.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [
-        "MU"
-      ],
-      "tickerWeights": {
-        "MU": 2.5
-      },
-      "directTickers": [
-        "MU"
-      ],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UE93ED",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "it kinda looks like a rocket tip",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1ue93ed/it_kinda_looks_like_a_rocket_tip/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ue93ed/it_kinda_looks_like_a_rocket_tip/",
-      "createdAt": "2026-06-24T09:52:48.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UEMSOF",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "I like the stock",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uemsof/i_like_the_stock/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uemsof/i_like_the_stock/",
-      "createdAt": "2026-06-24T19:08:45.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UERHDG",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "When will the Pain stop?",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uerhdg/when_will_the_pain_stop/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uerhdg/when_will_the_pain_stop/",
-      "createdAt": "2026-06-24T22:03:37.000Z",
-      "score": 0,
-      "comments": 0,
-      "upvoteRatio": 0,
-      "flair": null,
-      "tickers": [],
-      "tickerWeights": {},
-      "directTickers": [],
-      "filteredAsGeneric": false,
-      "fetchMethod": "rss"
-    },
-    {
-      "id": "T31UENARP",
-      "subreddit": "wallstreetbets",
-      "segment": "Retail momentum",
-      "title": "Just put the fries in the bag 🍟",
-      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uenarp/just_put_the_fries_in_the_bag/",
-      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uenarp/just_put_the_fries_in_the_bag/",
-      "createdAt": "2026-06-24T19:26:39.000Z",
+      "title": "Wendy employees right now",
+      "url": "https://www.reddit.com/r/wallstreetbets/comments/1uf9wso/wendy_employees_right_now/",
+      "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1uf9wso/wendy_employees_right_now/",
+      "createdAt": "2026-06-25T13:23:01.000Z",
       "score": 0,
       "comments": 0,
       "upvoteRatio": 0,
