@@ -60,6 +60,15 @@ function collectStrings(value, strings = []) {
   return strings;
 }
 
+function hasRepeatedTickerList(value) {
+  if (typeof value !== "string") return false;
+  const matches = value.match(/\b[A-Z][A-Z0-9.]{0,5}(?:,\s*[A-Z][A-Z0-9.]{0,5}){2,}\b/g) || [];
+  return matches.some((match) => {
+    const tickers = match.split(",").map((item) => item.trim()).filter(Boolean);
+    return new Set(tickers).size < tickers.length;
+  });
+}
+
 run(node, ["--check", "app.js"]);
 run(node, ["--check", "scripts/verify.mjs"]);
 run(node, ["--check", "scripts/update-data.mjs"]);
@@ -174,6 +183,9 @@ const missingActivations = scorebook.rows.filter((row) => row.setupType === "mod
 if (missingActivations.length) fail(`${missingActivations.length} Model Rebound Watch rows are missing reboundActivationPrice`);
 
 const serializedDashboard = JSON.stringify({ snapshot, scorebook, monitoring, longHorizonResearch });
+if (/[\u3400-\u9FFF]/.test(serializedDashboard)) {
+  fail("dashboard data contains non-English CJK characters; AI/prompt output should be English-only");
+}
 [
   { token: "NaN", pattern: /(^|[^A-Za-z0-9])NaN([^A-Za-z0-9]|$)/ },
   { token: "undefined", pattern: /(^|[^A-Za-z0-9])undefined([^A-Za-z0-9]|$)/ },
@@ -187,6 +199,15 @@ const serializedDashboard = JSON.stringify({ snapshot, scorebook, monitoring, lo
 const aiMemoText = collectStrings(snapshot.aiRecommendations || {}).join(" ");
 if (/\bstop(?:-loss)?(?:\s+(?:level|price))?\s*(?:of|at|near|below|under|:)?\s*\$?\d+(?:\.\d+)?\b/i.test(aiMemoText)) {
   fail("AI Strategy Memo contains a stop-loss metric that should be rendered only as a deterministic dashboard label");
+}
+if (/\bstopSell\b/i.test(aiMemoText)) {
+  fail("AI Strategy Memo contains internal stopSell terminology");
+}
+if (/fed\s*\/\s*yields noise|dominant arbiter|above-avg|coming up in late july|drives tech sentiment|sets the market tone|supports the whole sector|mega-cap reporters|high-profile earnings|activation signals.*\?/i.test(aiMemoText)) {
+  fail("AI Strategy Memo contains low-quality shorthand or unsupported broad-read-through language");
+}
+if (hasRepeatedTickerList(aiMemoText)) {
+  fail("AI Strategy Memo contains a repeated ticker list");
 }
 
 const validSourceRefs = new Set(sortedSourceArticles(snapshot.sources).map((_, index) => `S${index + 1}`));

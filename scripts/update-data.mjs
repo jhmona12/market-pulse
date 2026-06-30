@@ -2261,12 +2261,14 @@ function percentChange(now, before) {
 }
 
 function formatPercent(value) {
+  if (value === null || value === undefined || value === "") return "n/a";
   const number = Number(value);
   if (!Number.isFinite(number)) return "n/a";
   return `${number >= 0 ? "+" : ""}${number.toFixed(2)}%`;
 }
 
 function formatNumber(value, decimals = 1) {
+  if (value === null || value === undefined || value === "") return "n/a";
   const number = Number(value);
   return Number.isFinite(number) ? number.toFixed(decimals) : "n/a";
 }
@@ -2410,7 +2412,7 @@ async function mapLimit(items, limit, worker) {
 
 async function fetchFredSeries(series) {
   try {
-    const csv = await fetchText(`https://fred.stlouisfed.org/graph/fredgraph.csv?id=${series.id}`, { timeout: 12000 });
+    const csv = await fetchText(`https://fred.stlouisfed.org/graph/fredgraph.csv?id=${series.id}`, { timeout: 20000, retries: 2 });
     const [, ...lines] = csv.trim().split(/\r?\n/);
     const valid = lines
       .map((line) => {
@@ -2430,10 +2432,21 @@ async function fetchFredSeries(series) {
     return {
       label: series.label,
       value: `${last.toFixed(series.suffix === "B" ? 0 : 2)}${series.suffix === "B" ? "B" : series.suffix}`,
-      delta: deltaText
+      delta: deltaText,
+      status: "ready",
+      source: "FRED",
+      seriesId: series.id
     };
   } catch (error) {
-    return { label: series.label, value: "n/a", delta: error.message };
+    return {
+      label: series.label,
+      value: null,
+      delta: null,
+      status: "unavailable",
+      source: "FRED",
+      seriesId: series.id,
+      error: /aborted/i.test(error.message) ? "FRED request timed out" : error.message
+    };
   }
 }
 
@@ -2661,10 +2674,24 @@ function isMediaMetaArticle(article = {}) {
   return /\b(newsletter|co-author|coauthor|returns to|joins|hires|appointed|promoted|media post|mediapost|journalist|editor|coverage team|will author|will co-author)\b/i.test(text);
 }
 
+function hasBroadMarketChannel(article = {}) {
+  const text = `${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`;
+  return /\b(s&p|nasdaq|dow|russell|index|indices|futures|sector|industry|semiconductor|semis|chip|chips|ai infrastructure|data center|hyperscaler|oil|crude|brent|wti|energy|gasoline|gold|copper|treasury|yield|yields|fed|fomc|ecb|boj|boe|inflation|cpi|ppi|pce|jobs|payroll|unemployment|claims|gdp|consumer spending|retail sales|tariff|trade|china|iran|israel|hormuz|credit|spreads|banks|financials|housing|dollar|rates|defense sector|aerospace|supply chain)\b/i.test(text);
+}
+
+function isSingleNameActionHeadline(article = {}) {
+  const text = `${article.title || ""} ${article.summary || ""}`;
+  return /\b(stock|shares?)\s+(?:soars?|surges?|jumps?|rips?|pops?|rallies|tumbles|plunges|slides|falls)\b/i.test(text)
+    || /\b(?:soars?|surges?|jumps?|rips?|pops?|rallies|tumbles|plunges|slides|falls)\s+\d+%?\s+(?:on|after|as)\b/i.test(text)
+    || /\bearnings beat\b/i.test(text);
+}
+
 function isLowSignalMarketDriver(article = {}) {
   const text = `${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`;
   if (isMediaMetaArticle(article)) return true;
+  if (/\b(social security|medicare|401\(k\)|401k|ira|retirement|estate plan|mortgage|payroll taxes|my husband|my wife|i claimed|i'm working|i am working|should i|personal finance)\b/i.test(text)) return true;
   if (/\b(Dulux maker|takeover bid from major rival|stock soars 20% after takeover bid)\b/i.test(text)) return true;
+  if (isSingleNameActionHeadline(article) && !hasBroadMarketChannel(article)) return true;
   if (/\b(live updates|stock market today|daily open|before the bell)\b/i.test(article.title || "") && !/\b(oil|yield|fed|cpi|ppi|payroll|earnings|guidance|hormuz|tariff|credit)\b/i.test(text)) return true;
   return false;
 }
@@ -2680,6 +2707,8 @@ function articleImportanceScore(article, source, previousRefreshAt, now = new Da
   else if (age != null && age <= marketIntelImportantHours) score += 8;
   if (themes.some((theme) => ["Earnings", "Rates and central banks", "Geopolitics and policy", "Commodities and energy"].includes(theme))) score += 14;
   if (/breaking|daily open|market pulse|stock market today|before the bell|after hours|wall street|yields?|oil|earnings|central bank/i.test(text)) score += 8;
+  if (themes.includes("Earnings") && !hasBroadMarketChannel(article)) score -= 26;
+  if (isSingleNameActionHeadline(article) && !hasBroadMarketChannel(article)) score -= 35;
   if (!article.publishedAt) score -= 12;
   if (isMediaMetaArticle({ ...article, sourceName: source.name })) score -= 80;
   if (isLowSignalMarketDriver({ ...article, sourceName: source.name })) score -= 45;
@@ -3046,6 +3075,8 @@ function isUsefulTakeaway(value) {
 
 function cleanMemoText(value) {
   return cleanDailyReadText(value)
+    .replace(/[\u3400-\u9FFF]+/g, " ")
+    .replace(/\bstopSell\b/gi, "risk-control")
     .replace(/\bMacro regime:\s*inflation cooling remains (?:a|the)?\s*(key|major|primary)?\s*risk\b/gi, "Macro regime: the key risk is that inflation does not cool fast enough")
     .replace(/\binflation cooling remains (?:a|the)?\s*(key|major|primary)?\s*risk\b/gi, "the key risk is that inflation does not cool fast enough")
     .replace(/\bcooling inflation remains (?:a|the)?\s*(key|major|primary)?\s*risk\b/gi, "the key risk is that inflation does not cool fast enough")
@@ -3077,6 +3108,7 @@ function removeAiStopMetricText(value) {
   const text = cleanMemoText(value);
   if (!text) return "";
   return text
+    .replace(/\bstopSell(?:\s+(?:thresholds?|levels?|prices?))?\b/gi, "risk-control trigger")
     .replace(/\b(?:if\s+)?(?:the\s+)?close\s+(?:fails|falls|breaks|closes)\s+(?:below|under)\s+(?:the\s+)?stop(?:-loss)?(?:\s+(?:level|price))?\s*\$?\d+(?:\.\d+)?\b[^.;]*/gi, "if price loses trend confirmation")
     .replace(/\bstop(?:-loss)?(?:\s+(?:level|price))?\s*(?:of|at|near|below|under|:)?\s*\$?\d+(?:\.\d+)?\b/gi, "risk-control trigger")
     .replace(/\b(?:below|under)\s+(?:the\s+)?stop(?:-loss)?(?:\s+(?:level|price))?\b/gi, "below trend confirmation")
@@ -3085,8 +3117,39 @@ function removeAiStopMetricText(value) {
     .trim();
 }
 
+function dedupeTickerLists(value) {
+  if (typeof value !== "string") return value;
+  return value.replace(/\b[A-Z][A-Z0-9.]{0,5}(?:,\s*[A-Z][A-Z0-9.]{0,5}){2,}\b/g, (match) => {
+    const seen = new Set();
+    const tickers = match
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .filter((ticker) => {
+        if (seen.has(ticker)) return false;
+        seen.add(ticker);
+        return true;
+      });
+    return tickers.join(", ");
+  });
+}
+
+function hasRepeatedTickerList(value) {
+  if (typeof value !== "string") return false;
+  const matches = value.match(/\b[A-Z][A-Z0-9.]{0,5}(?:,\s*[A-Z][A-Z0-9.]{0,5}){2,}\b/g) || [];
+  return matches.some((match) => {
+    const tickers = match.split(",").map((item) => item.trim()).filter(Boolean);
+    return new Set(tickers).size < tickers.length;
+  });
+}
+
+function lowQualityMemoLanguage(value) {
+  if (typeof value !== "string") return false;
+  return /fed\s*\/\s*yields noise|dominant arbiter|above-avg|coming up in late july|drives tech sentiment|sets the market tone|supports the whole sector|mega-cap reporters|high-profile earnings|activation signals.*\?/i.test(value);
+}
+
 function sanitizeAiRecommendationText(field, value) {
-  const text = removeAiStopMetricText(value);
+  const text = dedupeTickerLists(removeAiStopMetricText(value));
   if (!text) return text;
   if (field === "invalidation" && /risk-control trigger/i.test(text)) {
     return "Downgrade if price loses trend confirmation, volume deteriorates, or the model rank falls materially.";
@@ -3133,21 +3196,30 @@ function dailyReadPassesFactGuardrails(dailyRead) {
   if (/forward return|SHAP|cross-asset liquidity|sector monolith|risk-on bid|свеж/i.test(text)) return false;
   if (/\bdispersion\b/i.test(text)) return false;
   if (/\bstop(?:-loss)?\b|chandelier/i.test(text)) return false;
+  if (/\bstopSell\b/i.test(text)) return false;
   if (/\binflation cooling (?:is|remains)\b.*\brisk\b/i.test(text)) return false;
   if (/\bcooling inflation (?:is|remains)\b.*\brisk\b/i.test(text)) return false;
-  if (/[\u0400-\u04FF]/.test(text)) return false;
+  if (hasRepeatedTickerList(text)) return false;
+  if (lowQualityMemoLanguage(text)) return false;
+  if (/[\u0400-\u04FF\u3400-\u9FFF]/.test(text)) return false;
   return true;
 }
 
 function cleanDailyRead(dailyRead) {
   if (!dailyRead) return null;
-  const cleanItem = (value) => removeAiStopMetricText(cleanMemoText(value)).replace(/[\][]/g, "").trim();
+  const cleanItem = (value) => dedupeTickerLists(removeAiStopMetricText(cleanMemoText(value))).replace(/[\][]/g, "").trim();
   return {
     headline: firstSentence(cleanItem(dailyRead.headline), 150),
     body: cleanItem(dailyRead.body),
     keyTakeaways: (dailyRead.keyTakeaways || []).map(cleanItem).filter(Boolean).filter(usableDailyReadItem).filter(isUsefulTakeaway),
     watchItems: (dailyRead.watchItems || []).map(cleanItem).filter(Boolean).filter(usableDailyReadItem).filter(isUsefulTakeaway)
   };
+}
+
+function cleanAiMemoField(value) {
+  const text = dedupeTickerLists(removeAiStopMetricText(cleanMemoText(value)));
+  if (!text || lowQualityMemoLanguage(text)) return "";
+  return text;
 }
 
 function headlineFromDriver(driver, fallbackHeadline) {
@@ -3415,6 +3487,21 @@ function buildAvoidList(opportunities, aiRecommendations) {
   }
 
   const sectors = bottomModelSectorClusters(opportunities, 4);
+  const bottomEvidence = (item) => {
+    const parts = [
+      `${item.symbol} ranks #${item.modelRank} of ${item.modelUniverseCount || "the scored universe"}`,
+      `${formatPercent(item.relativeReturn60VsSpy)} 60-day return versus SPY`
+    ];
+    if (item.rulesScore !== null && item.rulesScore !== undefined && Number.isFinite(Number(item.rulesScore))) {
+      parts.push(`rules score ${formatNumber(item.rulesScore)}`);
+    }
+    if (item.above50 && item.above200) {
+      parts.push("price remains above both major moving averages, so the caution is model rank and relative strength rather than a broken absolute trend");
+    } else {
+      parts.push("trend alignment is weak or mixed");
+    }
+    return `${parts.join("; ")}.`;
+  };
   const worst = bottomCompanies.slice(0, 8).map((item) => ({
     symbol: item.symbol,
     name: item.name,
@@ -3428,32 +3515,22 @@ function buildAvoidList(opportunities, aiRecommendations) {
     above50: item.above50,
     above200: item.above200,
     riskFlags: item.riskFlags || [],
-    modelEvidence: `${item.symbol} ranks #${item.modelRank} of ${item.modelUniverseCount || "the scored universe"} with ${formatPercent(item.relativeReturn60VsSpy)} 60-day relative return versus SPY, rules score ${formatNumber(item.rulesScore)}, and ${item.above50 && item.above200 ? "positive" : "weak or mixed"} trend alignment.`,
-    rationale: `${item.symbol} sits near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves.`
+    modelEvidence: bottomEvidence(item),
+    rationale: "Ranks near the bottom of the model book; avoid fresh long exposure unless the trend and relative-strength setup materially improves."
   }));
-
-  const aiAvoid = aiRecommendations?.status === "ready" ? aiRecommendations.avoidList : null;
-  const aiSectors = new Map((aiAvoid?.sectors || []).map((item) => [item.sector, item]));
-  const aiCompanies = new Map((aiAvoid?.companies || []).map((item) => [item.symbol, item]));
-  const aiSummary = cleanMemoText(aiAvoid?.summary);
 
   return {
     status: "ready",
-    summary:
-      aiSummary ||
-      `Avoid list is driven by the bottom of the XGBoost rank model: ${worst.map((item) => item.symbol).slice(0, 5).join(", ")} are the weakest current long candidates, with sector pressure most visible in ${sectors.map((item) => item.sector).slice(0, 2).join(" and ")}.`,
+    summary: `Avoid list is driven by the bottom of the XGBoost rank model: ${worst.map((item) => item.symbol).slice(0, 5).join(", ")} are the weakest current long candidates, with sector pressure most visible in ${sectors.map((item) => item.sector).slice(0, 2).join(" and ")}.`,
     sectors: sectors.map((item) => ({
       ...item,
-      rationale: cleanMemoText(aiSectors.get(item.sector)?.rationale) || item.rationale
+      rationale: item.rationale
     })),
-    companies: worst.map((item) => {
-      const aiItem = aiCompanies.get(item.symbol);
-      return {
-        ...item,
-        rationale: cleanMemoText(aiItem?.rationale) || item.rationale,
-        modelEvidence: item.modelEvidence
-      };
-    })
+    companies: worst.map((item) => ({
+      ...item,
+      rationale: item.rationale,
+      modelEvidence: item.modelEvidence
+    }))
   };
 }
 
@@ -3635,9 +3712,14 @@ function compactCandidate(item) {
     modelAsOfDate: item.modelAsOfDate || null,
     close: roundedNumber(item.close, 2),
     changePct: roundedNumber(item.changePct, 2),
+    return7: roundedNumber(item.return7, 2),
+    return14: roundedNumber(item.return14, 2),
+    return30: roundedNumber(item.return30, 2),
     return20: roundedNumber(item.return20, 2),
     return60: roundedNumber(item.return60, 2),
+    return90: roundedNumber(item.return90, 2),
     return120: roundedNumber(item.return120, 2),
+    ytdReturn: roundedNumber(item.ytdReturn, 2),
     relativeStrength: roundedNumber(item.relativeStrength, 2),
     relativeReturn60VsSpy: roundedNumber(item.relativeReturn60VsSpy, 2),
     sectorReturn60: roundedNumber(item.sectorReturn60, 2),
@@ -3769,17 +3851,89 @@ function normalizeDeeperReadPayload(deeperRead, sourceTape = [], validSourceRefs
     seenSources.add(key);
     uniqueDeeperCards.push(card);
   });
+  const cleanedSummary = cleanMemoText(deeperRead?.summary);
+  const summaryMentionsMechanics = /candidate|quality filter|source rotation|recently used|routinely used|last 7 days|seven days|past week|exclude model|momentum labels/i.test(cleanedSummary);
   return {
     status: uniqueDeeperCards.length ? deeperRead?.status || "ready" : "thin",
     lookbackDays: deeperReadLookbackDays,
-    summary: cleanMemoText(deeperRead?.summary) || "No differentiated source analysis cleared the quality filter in this refresh.",
+    summary: cleanedSummary && !summaryMentionsMechanics
+      ? cleanedSummary
+      : "Deeper Read highlights the source pieces with a differentiated market angle, focusing on second-order implications for rates, policy, labor, commodities, sectors, and positioning.",
     cards: uniqueDeeperCards.slice(0, 5)
+  };
+}
+
+function candidateAction(candidate = {}) {
+  if (candidate.setupType === "model_rebound_watch") return "Watch for activation";
+  if (candidate.setupType === "model_ranked_not_momentum_confirmed") return "Watch, do not chase";
+  if (candidate.setupType === "momentum_confirmed") return "Research long setup";
+  return "Review setup";
+}
+
+function candidateSetupLabel(candidate = {}) {
+  if (candidate.setupType === "model_rebound_watch") return "Model rebound watch";
+  if (candidate.setupType === "model_ranked_not_momentum_confirmed") return "Not momentum confirmed";
+  if (candidate.setupType === "momentum_confirmed") return "Momentum confirmed";
+  return candidate.setupType ? candidate.setupType.replaceAll("_", " ") : "Model-ranked setup";
+}
+
+function candidateTrendText(candidate = {}) {
+  if (candidate.above50 && candidate.above200) return "above both the 50-day and 200-day moving averages";
+  if (candidate.above200 && !candidate.above50) return "above the 200-day average but below the 50-day average";
+  if (candidate.above50 && !candidate.above200) return "above the 50-day average but below the 200-day average";
+  return "below one or both major moving averages";
+}
+
+function deterministicRecommendationFields(candidate = {}) {
+  if (!candidate?.symbol) return {};
+  const rankText = candidate.modelRank
+    ? `Rank #${candidate.modelRank} of ${candidate.modelUniverseCount || "the scored universe"}`
+    : "Current model rank unavailable";
+  const percentileText = candidate.modelPercentile == null ? "n/a" : `${formatNumber(candidate.modelPercentile)} percentile`;
+  const reasons = (candidate.modelReasons || []).slice(0, 3).join("; ") || "model score and technical inputs";
+  const riskFlags = (candidate.riskFlags || []).filter(Boolean);
+  const setup = candidateSetupLabel(candidate);
+  const action = candidateAction(candidate);
+  const activation = candidate.setupType === "model_rebound_watch" && candidate.reboundActivationPrice
+    ? ` Requires a close above $${Number(candidate.reboundActivationPrice).toFixed(2)} within ${candidate.reboundActivationWindowDays || 5} trading days before it is actionable.`
+    : "";
+  const trend = candidateTrendText(candidate);
+  const setupText = candidate.setupType === "model_rebound_watch"
+    ? `The model ranks ${candidate.symbol} highly, but price has not confirmed a rebound.${activation}`
+    : candidate.setupType === "model_ranked_not_momentum_confirmed"
+      ? `The model ranks ${candidate.symbol} highly, but the setup is not clean momentum yet.`
+      : `${candidate.symbol} is momentum confirmed by the dashboard rules.`;
+  const whyNow = `${rankText}; ${formatPercent(candidate.relativeReturn60VsSpy)} 60-day return versus SPY; ${trend}.`;
+  const technical = [
+    `7D ${formatPercent(candidate.return7)}`,
+    `14D ${formatPercent(candidate.return14)}`,
+    `30D ${formatPercent(candidate.return30)}`,
+    `60D vs SPY ${formatPercent(candidate.relativeReturn60VsSpy)}`,
+    `RSI ${formatNumber(candidate.rsi14, 0)}`,
+    trend
+  ].join("; ");
+  const risk = riskFlags.length
+    ? riskFlags.join("; ")
+    : candidate.setupType === "momentum_confirmed"
+      ? "Primary risk is momentum reversal if macro pressure or sector confirmation deteriorates."
+      : "Requires better price confirmation before treating it as an active momentum trade.";
+  return {
+    action,
+    setup,
+    whyNow,
+    rationale: `${setupText} ${whyNow}`,
+    modelEvidence: `${rankText}; ${percentileText}; reasons: ${reasons}.`,
+    technicalEvidence: technical,
+    momentumEvidence: `${setup}; ${riskFlags.length ? `risk flags: ${riskFlags.join("; ")}` : "no major model risk flags supplied"}.`,
+    risk,
+    invalidation: "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens."
   };
 }
 
 function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRefs, sourceTape = []) {
   const bySymbol = new Map(companyContexts.map((context) => [context.symbol, context]));
   const validRefSet = new Set(validSourceRefs);
+  const cleanedDailyRead = cleanDailyRead(parsed.dailyRead);
   const recommendations = (parsed.recommendations || []).map((recommendation) => {
     const context = bySymbol.get(recommendation.symbol);
     if (!context) return sanitizeAiRecommendation(recommendation);
@@ -3791,12 +3945,18 @@ function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRe
       context.earnings?.sourceId
     ].filter((ref, index, refs) => ref && validRefSet.has(ref) && refs.indexOf(ref) === index);
 
+    const candidateFields = deterministicRecommendationFields(context.candidate || context);
     return sanitizeAiRecommendation({
       ...recommendation,
+      ...candidateFields,
       companyOverview: companyOverviewSummary(context) || recommendation.companyOverview || "",
       marketCap: context.marketCap?.text || recommendation.marketCap || "",
       earningsContext: context.earnings?.summary || recommendation.earningsContext || "",
-      sourceRefs
+      recentNews: cleanAiMemoField(recommendation.recentNews) || "No clear recent company-specific catalyst was found in the supplied headlines.",
+      macroLink: cleanAiMemoField(recommendation.macroLink),
+      macroEvidence: cleanAiMemoField(recommendation.macroEvidence || recommendation.macroLink),
+      sourceRefs,
+      setupTags: context.candidate?.setupTags || []
     });
   });
   const deeperRead = normalizeDeeperReadPayload(parsed.deeperRead, sourceTape, validSourceRefs);
@@ -3817,11 +3977,11 @@ function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRe
     : parsed.avoidList;
   return {
     ...parsed,
-    headline: cleanMemoText(parsed.headline),
-    macroView: cleanMemoText(parsed.macroView),
-    dailyRead: cleanDailyRead(parsed.dailyRead) || parsed.dailyRead,
-    portfolioNotes: (parsed.portfolioNotes || []).map(cleanMemoText).filter(Boolean),
-    openQuestions: (parsed.openQuestions || []).map(cleanMemoText).filter(Boolean),
+    headline: cleanAiMemoField(parsed.headline) || "AI strategy memo available; use the sections below for the sourced view.",
+    macroView: cleanAiMemoField(parsed.macroView),
+    dailyRead: process.env.AI_DAILY_READ === "1" && dailyReadPassesFactGuardrails(cleanedDailyRead) ? cleanedDailyRead : null,
+    portfolioNotes: (parsed.portfolioNotes || []).map(cleanAiMemoField).filter(Boolean),
+    openQuestions: (parsed.openQuestions || []).map(cleanAiMemoField).filter(Boolean),
     avoidList,
     deeperRead,
     recommendations
@@ -3995,6 +4155,7 @@ async function fetchCompanyContext(candidate, index) {
     id: sourcePrefix,
     symbol,
     name: candidate.name,
+    candidate,
     modelRank: candidate.modelRank,
     modelPercentile: candidate.modelPercentile,
     recentReturns: {
@@ -4170,6 +4331,52 @@ async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sour
   }
 }
 
+function deterministicStrategyOverview({ marketIntelligence, modelCandidates, macro, calendar, sectorPerformance }) {
+  const drivers = marketIntelligence?.professionalDrivers || [];
+  const driverHeadline = drivers[0]
+    ? headlineFromDriver(drivers[0], "Current source tape is thin; rely more heavily on model and macro checks.")
+    : "Current source tape is thin; rely more heavily on model and macro checks.";
+  const driverBody = marketDriverBodySentence(drivers) || "No fresh professional market driver cleared the filter for this refresh.";
+  const leaders = (modelCandidates || [])
+    .filter((item) => item.setupType === "momentum_confirmed")
+    .slice(0, 4)
+    .map((item) => item.symbol);
+  const watchNames = (modelCandidates || [])
+    .filter((item) => item.setupType !== "momentum_confirmed")
+    .slice(0, 3)
+    .map((item) => item.symbol);
+  const tenYear = (macro || []).find((item) => /10Y/i.test(item.label));
+  const nextEvents = (calendar || []).slice(0, 3).map((event) => `${event.event} on ${event.date}`).join("; ");
+  const firstEvent = (calendar || [])[0];
+  const sectorText = topSectorText(sectorPerformance);
+  const headline = leaders.length
+    ? `${driverHeadline.replace(/\.$/, "")}; confirmed leadership is ${leaders.join(", ")}.`
+    : driverHeadline;
+  const macroView = [
+    driverBody,
+    tenYear?.value ? `Rates check: the 10Y Treasury is ${tenYear.value}${tenYear.delta ? ` (${tenYear.delta})` : ""}.` : "",
+    nextEvents ? `Next macro decision points: ${nextEvents}.` : "",
+    sectorText ? `Sector confirmation: ${sectorText}.` : "",
+    leaders.length ? `Action bias: research confirmed momentum leaders ${leaders.join(", ")}; ${watchNames.length ? `keep ${watchNames.join(", ")} in the watch bucket until confirmation improves.` : "avoid forcing rebound names without confirmation."}` : ""
+  ].filter(Boolean).join(" ");
+  const portfolioNotes = [
+    leaders.length ? `Keep tactical research focused on confirmed momentum leaders ${leaders.join(", ")} while the market-driver tape remains policy-sensitive.` : "",
+    watchNames.length ? `Keep ${watchNames.join(", ")} in the watch bucket until price confirmation improves; do not treat them as clean momentum plays yet.` : "",
+    sectorText ? `Use sector confirmation as a check on single-name risk: ${sectorText}.` : ""
+  ].filter(Boolean);
+  const openQuestions = [
+    firstEvent ? `Does ${firstEvent.event} on ${firstEvent.date} move yields or sector leadership enough to change the confirmed momentum list?` : "",
+    leaders.length ? `Do ${leaders.slice(0, 3).join(", ")} keep their model rank and 50-day/200-day confirmation at the next refresh?` : "",
+    watchNames.length ? `Do watch names ${watchNames.join(", ")} regain the missing trend confirmation, or should they stay out of the active book?` : ""
+  ].filter(Boolean);
+  return {
+    headline: firstSentence(headline, 170),
+    macroView,
+    portfolioNotes,
+    openQuestions
+  };
+}
+
 async function buildAiRecommendations({ opportunities, macro, calendar, sources, deskRecommendations, sectorPerformance, model: modelSummary, marketIntelligence, longHorizonContext, promptText }) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (process.env.SKIP_AI === "1") return fallbackAiRecommendations("skipped_by_env");
@@ -4303,6 +4510,11 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       const text = responseText(json);
       if (!text) throw new Error("OpenAI response did not include final text; try a larger max_output_tokens value or a lower reasoning effort.");
       const parsed = normalizeAiRecommendationContext(JSON.parse(text), companyContexts, sourceRefIds, sourceTape);
+      const overview = deterministicStrategyOverview({ marketIntelligence, modelCandidates, macro, calendar, sectorPerformance });
+      parsed.headline = overview.headline;
+      parsed.macroView = overview.macroView;
+      parsed.portfolioNotes = overview.portfolioNotes;
+      parsed.openQuestions = overview.openQuestions;
       const deeperRead = await buildAiDeeperRead({
         apiKey,
         aiModel,

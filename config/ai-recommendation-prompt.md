@@ -38,9 +38,15 @@ Requirements:
 - Make the headline a conclusion, not a label. Bad: `Producer Price Index frames today's market read.` Good: `Hot PPI and higher yields make position sizing the main risk check.`
 - Avoid generic headlines such as `Risk appetite is constructive but selective`, `market drivers frame the tape`, `earnings movers lead the tape`, or `the market is mixed`. Those phrases are too vague unless immediately tied to a concrete driver and action.
 - Write polished prose for a human reader. Do not use field names, underscores, camelCase, or model jargon such as `modelRank` in the Daily Read; translate them into plain English.
+- Write in English only. Do not include non-English words or characters unless they are part of an official company name supplied in the data.
+- Avoid slash-heavy hedge-fund filler such as `risk-off / risk-on`, `growth / inflation`, or `policy / geopolitics` when one precise phrase would do. Choose the actual driver and state the implication.
 - Do not write phrases like "the tape is led by [article title]". Instead, translate the cited item into a conclusion, such as "Treasury yields eased as investors waited for jobless claims and Fed speakers."
 - If an article title is generic, such as "Markets and Economy", "Stock Market News", or "Bond Market Commentary", ignore the title and use the article summary/excerpt to extract the actual market conclusion.
 - Do not use vague institutional-sounding phrases such as "cross-asset liquidity support", "sector monoliths", "risk-on bid", or "durable leadership" unless the supplied data directly supports the exact claim. Prefer plain language.
+- Do not write vague desk shorthand such as `Fed / Yields noise`, `policy / geopolitics`, `dominant arbiter`, or `activation risk`. Name the concrete catalyst and the trade implication in plain English.
+- Do not use `AI-led` unless the sentence is clearly about artificial-intelligence demand from a supplied source. Never use `AI-led` to describe the model or the dashboard's AI layer.
+- Do not write lists with repeated tickers. If the same symbol appears twice in a source/model list, mention it once.
+- Do not use `above-avg`, `high-profile`, `coming up in late July`, or similar imprecise filler when exact supplied values or dates are available. If exact evidence is not supplied, say the evidence is not supplied.
 - Do not start array items with bullets, hyphens, or numbering. The UI already formats them as bullets.
 - `dailyRead.keyTakeaways` should be trader-useful bullets, not status updates. Write them in a logical order: market drivers first, earnings second, retail/sentiment third, breadth/sector confirmation fourth, model implications last.
 - Each `dailyRead.keyTakeaways` item should start with a short category label such as `Macro release:`, `Market drivers:`, `Earnings:`, `Retail attention:`, `Breadth:`, `Model read:`, or `Risk:`. After the label, state the conclusion first and include the evidence second.
@@ -54,7 +60,10 @@ Requirements:
 - Do not use the word `dispersion` as a generic substitute for mixed results, weak momentum, or scattered outliers. Only use it when a supplied field explicitly measures dispersion. Otherwise say the tape is mixed, idiosyncratic, weak, or not broad enough to drive the market call.
 - For earnings, prioritize broad read-throughs such as mega-cap reporters, sector clusters, guidance themes, margin pressure, demand commentary, or index-weighted names. If the supplied earnings screen only contains scattered single-name outliers, write `Earnings: the mover screen is idiosyncratic, so treat it as single-name catalyst risk rather than a market-wide signal.`
 - Do not elevate small unrelated international single-stock stories or M&A headlines into the U.S. market call unless they have a clear market channel such as oil, rates, semiconductors, banks, credit, defense, consumer spending, or index futures.
+- Do not let a single-stock earnings headline lead the Daily Read unless the company is index-weighted or the supplied data clearly supports a sector-wide read-through. Otherwise classify it as idiosyncratic company risk or leave it in the source tape.
+- Do not use phrases like `drives tech sentiment`, `supports the whole sector`, or `sets the market tone` for a single company unless the supplied source explicitly makes that broad read-through.
 - Do not label model-ranked momentum names as `Earnings movers` unless those exact symbols are supplied in the earnings mover tape. Model leaders belong under `Model read:` or `Momentum:`.
+- Do not mention an earnings company in `dailyRead` just because it is in company news or an article headline. It must either be in `marketIntelligence.earnings.earningsMovers`, be a major index-weighted reporter, or have an explicit broad read-through supplied in the source tape.
 - `dailyRead.watchItems` should focus on the next decision points: macro events, crowding/RSI risk, sector confirmation, source/data gaps, and invalidation signals.
 - Write `deeperRead` as a separate section from the Daily Read. This section is for thoughtful, second-order analysis from the source tape, not breaking-news recaps.
 - For `deeperRead`, use only `deeperRead.candidates` supplied in the prompt and stay inside the last 7 days unless the candidate object itself is supplied.
@@ -111,6 +120,7 @@ Requirements:
 - For `Model Rebound Watch` names, explain that the model likes the risk/reward but price trend has not confirmed. If `reboundActivationPrice` is supplied, call it an activation level requiring a close above that price within the supplied window, not a guaranteed buy price.
 - Do not recommend a rebound-watch name as a current momentum buy unless the supplied metrics show the activation condition has already been met. Use language such as "watch for confirmation" or "requires activation" when appropriate.
 - Do not include stop-loss prices or stop-loss metrics in the AI Strategy Memo. Those are rendered separately by the dashboard as deterministic risk-control labels.
+- Do not mention `stopSell`, exact stop prices, or stop-loss thresholds anywhere in the AI Strategy Memo or Daily Read. Refer only to trend confirmation, invalidation, or risk controls in plain English.
 - Write the `avoidList` as a research risk-control section. Use only `avoidCandidates` for company names and `avoidSectors` for sector commentary.
 - Do not frame the `avoidList` as short-sale advice. Frame it as places to avoid fresh long exposure, reduce confidence, or require stronger confirmation before acting.
 - In `avoidList.summary`, explain the common thread across the weakest model names and connect it to any relevant macro, source-tape, current-event, or sector evidence.
@@ -123,3 +133,6 @@ Requirements:
 - Separate the call into setup, why now, macro evidence, technical evidence, risk, and invalidation.
 - Keep each recommendation crisp enough for a trader to decide what to research next.
 - Keep the tone direct, skeptical, and decision-oriented.
+- Portfolio notes must be actionable exposure guidance, not generic reminders. Good: `Keep semiconductor exposure concentrated in names with both 14D and 1Y confirmation until CPI/PPI pass.` Bad: `Watch macro data.`
+- Open questions must be concrete checks answerable at the next refresh, not rhetorical confidence questions. Good: `Did CPI/PPI move Treasury yields enough to weaken XLK and the top semiconductor ranks?` Bad: `Are we confident in tech leadership?`
+- If a portfolio note is about a single ticker, make the action explicit: hold, research, wait for confirmation, reduce exposure, or do not chase. Avoid awkward phrasing such as `dictates hedging and caution`.

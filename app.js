@@ -487,6 +487,14 @@ function commandStat(label, value, note = "", tone = "") {
   `;
 }
 
+function commandDriverText(item) {
+  const priorityThemes = ["Rates and central banks", "Geopolitics and policy", "Commodities and energy", "Macro and growth", "Credit and liquidity", "AI and semis", "Earnings"];
+  const theme = priorityThemes.find((candidate) => (item?.themes || []).includes(candidate)) || item?.themes?.[0] || "Market driver";
+  const summary = item?.summary || item?.title || "";
+  const source = item?.sourceName ? ` (${item.sourceName})` : "";
+  return `${theme}: ${summary}${source}`;
+}
+
 function topModelRows(limit = 25) {
   return [...(state.scorebook.rows || [])]
     .filter((row) => Number.isFinite(Number(row.modelRank)))
@@ -626,7 +634,7 @@ function renderCommandCenter() {
 
   const changedSymbols = recentEntrants.slice(0, 2).map((row) => `${row.symbol} #${row.modelRank}`).join(", ");
   const freshDriverText = freshDriverItems.length
-    ? freshDriverItems.slice(0, 2).map((item) => `${item.title || "Market driver"} (${item.sourceName || "source"})`).join(" · ")
+    ? freshDriverItems.slice(0, 2).map(commandDriverText).join(" · ")
     : noteChangeItems.map((item) => item.replace(/\s+\(M\d+\)\s*$/, "")).join(" · ");
   $("#commandChangeTape").innerHTML = commandCard(
     "Refresh delta",
@@ -1876,12 +1884,40 @@ function renderCalendar() {
 function renderMacro() {
   const grid = $("#macroGrid");
   grid.innerHTML = "";
-  state.snapshot.macro.slice(0, 9).forEach((item) => {
+  const macroItems = (state.snapshot.macro || []).slice(0, 9);
+  const validItems = macroItems.filter((item) => {
+    const value = String(item.value ?? "").trim();
+    return value && !/^(n\/a|null|undefined)$/i.test(value);
+  });
+  const failedItems = macroItems.filter((item) => !validItems.includes(item));
+
+  if (!validItems.length) {
+    const detail = failedItems
+      .map((item) => item.error || item.delta)
+      .filter(Boolean)
+      .slice(0, 2)
+      .join(" | ");
+    grid.innerHTML = `
+      <div class="empty-state macro-empty">
+        Macro indicator values were unavailable from FRED in this refresh${detail ? ` (${esc(detail)})` : ""}. Use the release calendar and official macro-release section; rerun the refresh to restore these indicator tiles.
+      </div>
+    `;
+    return;
+  }
+
+  validItems.forEach((item) => {
     const card = document.createElement("div");
     card.className = "macro-card";
     card.innerHTML = `<span>${esc(item.label)}</span><strong>${esc(item.value)}</strong><span>${esc(item.delta || "")}</span>`;
     grid.appendChild(card);
   });
+
+  if (failedItems.length) {
+    const card = document.createElement("div");
+    card.className = "macro-card warning";
+    card.innerHTML = `<span>Unavailable</span><strong>${esc(failedItems.length)} series</strong><span>FRED fetch failed this run</span>`;
+    grid.appendChild(card);
+  }
 }
 
 function renderSources() {

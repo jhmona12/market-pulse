@@ -531,27 +531,21 @@ h3 {
   color: var(--ink);
   font-size: 0.9rem;
   line-height: 1.25;
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  display: block;
+  overflow-wrap: anywhere;
 }
 
 .command-card p {
   margin: 0;
   font-size: 0.8rem;
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  overflow-wrap: anywhere;
 }
 
 .command-card small {
   display: block;
-  overflow: hidden;
   text-transform: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .note-panel {
@@ -1594,10 +1588,20 @@ li {
   font-style: normal;
 }
 
+.macro-card.warning {
+  border-color: rgba(242, 193, 78, 0.36);
+  color: #ffe6a6;
+  background: linear-gradient(180deg, rgba(242, 193, 78, 0.06), rgba(7, 16, 12, 0.96));
+}
+
 .macro-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+}
+
+.macro-grid .empty-state {
+  grid-column: 1 / -1;
 }
 
 .source-panel {
