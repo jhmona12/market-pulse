@@ -5,6 +5,7 @@ import { dirname, extname, join, relative, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { parseTickerInput } from "../src/dashboard/ticker-input.js";
 
 const root = resolve(dirname(dirname(fileURLToPath(import.meta.url))));
 const port = Number.parseInt(process.env.PORT || "4173", 10);
@@ -42,6 +43,10 @@ const publicStaticFiles = new Set([
   "data/refresh-status.json",
   "data/refresh-ledger.json"
 ]);
+
+function isPublicStaticPath(relativePath) {
+  return publicStaticFiles.has(relativePath) || /^src\/dashboard\/[a-z0-9-]+\.js$/.test(relativePath);
+}
 
 function corsHeaders() {
   return {
@@ -91,13 +96,7 @@ function authorized(request) {
 
 function cleanTickerInput(value) {
   const text = Array.isArray(value) ? value.join(" ") : String(value || "");
-  const tokens = text
-    .replace(/[,\n\r\t;]+/g, " ")
-    .split(/\s+/)
-    .map((token) => token.trim().toUpperCase().replace(/^\$/, ""))
-    .filter(Boolean)
-    .filter((token) => /^[A-Z0-9][A-Z0-9.^=\-]{0,18}$/.test(token));
-  return [...new Set(tokens)].slice(0, maxTickers);
+  return parseTickerInput(text, maxTickers);
 }
 
 async function readRequestBody(request) {
@@ -203,7 +202,7 @@ async function serveStatic(request, response) {
   const pathname = decodeURIComponent(url.pathname === "/" ? "/index.html" : url.pathname);
   const filePath = resolve(root, `.${pathname}`);
   const relativePath = relative(root, filePath).replaceAll("\\", "/");
-  if (relativePath.startsWith("../") || relativePath === ".." || !publicStaticFiles.has(relativePath)) {
+  if (relativePath.startsWith("../") || relativePath === ".." || !isPublicStaticPath(relativePath)) {
     response.writeHead(403);
     response.end("Forbidden");
     return;

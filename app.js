@@ -1,3 +1,25 @@
+import { $, on } from "./src/dashboard/dom.js";
+import { fetchJson } from "./src/dashboard/fetch-json.js";
+import {
+  displayMarketCap,
+  displayPct,
+  displayPercentile,
+  displayPercentilePoint,
+  displayReturnDecimal,
+  displayScore,
+  esc,
+  formatDate,
+  formatShortDate,
+  hasNumericValue,
+  money,
+  pct,
+  percentilePoint,
+  returnClass
+} from "./src/dashboard/formatters.js";
+import { createInitialState } from "./src/dashboard/state.js";
+import { buildSourceRefMap, sourceRefLabels } from "./src/dashboard/source-refs.js";
+import { normalizeApiBaseUrl, parseTickerInput as parseTickerText } from "./src/dashboard/ticker-input.js";
+
 const fallbackSnapshot = {
   generatedAt: new Date().toISOString(),
   model: {
@@ -176,230 +198,18 @@ const fallbackSnapshot = {
   sources: []
 };
 
-const state = {
-  snapshot: fallbackSnapshot,
-  activeView: "briefing",
-  scorebook: {
-    status: "loading",
-    generatedAt: null,
-    asOfDate: null,
-    rows: [],
-    rowCount: 0,
-    returnNotes: "",
-    query: "",
-    sector: "",
-    sortKey: "modelScore",
-    sortDirection: "desc"
-  },
-  monitoring: {
-    status: "loading",
-    generatedAt: null,
-    asOfDate: null,
-    rowCount: 0,
-    topDecileCutoff: 0,
-    topDecileCount: 0,
-    recentEntrantCount: 0,
-    trailingReturnStatus: "",
-    marketDataStatus: null,
-    currentTopDecile: [],
-    recentEntrants: [],
-    methodology: []
-  },
-  longHorizon: {
-    status: "loading",
-    generatedAt: null,
-    sourceGeneratedAt: null,
-    asOfDate: null,
-    modelMetadata: {},
-    labelSummaries: [],
-    labelComparison: [],
-    rows: [],
-    rowCount: 0,
-    topCandidates: [],
-    trends: {},
-    baselineComparison: {},
-    shapTopFeatures: [],
-    methodology: [],
-    query: "",
-    sector: "",
-    sortKey: "longModelRank",
-    sortDirection: "asc"
-  },
-  tickerLab: {
-    enabled: true,
-    apiReady: false,
-    apiBaseUrl: "",
-    requiresAccessCode: false,
-    loading: false,
-    status: "",
-    result: null,
-    error: null,
-    maxTickers: 25
-  }
-};
-
-const $ = (selector) => document.querySelector(selector);
-
-function on(selector, eventName, handler) {
-  const element = $(selector);
-  if (element) element.addEventListener(eventName, handler);
-}
-
-function esc(value) {
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll("\"", "&quot;")
-    .replaceAll("'", "&#39;");
-}
-
-function formatDate(value) {
-  return new Intl.DateTimeFormat("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit"
-  }).format(new Date(value));
-}
-
-function formatShortDate(value) {
-  if (!value) return "Date unavailable";
-  const date = /^\d{4}-\d{2}-\d{2}$/.test(String(value)) ? new Date(`${value}T12:00:00`) : new Date(value);
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric"
-  }).format(date);
-}
-
-function pct(value) {
-  const number = Number(value);
-  if (!Number.isFinite(number)) return "n/a";
-  return `${number >= 0 ? "+" : ""}${number.toFixed(2)}%`;
-}
-
-function displayPct(value) {
-  if (!Number.isFinite(Number(value))) return "n/a";
-  return pct(value);
-}
-
-function displayReturnDecimal(value) {
-  if (!Number.isFinite(Number(value))) return "n/a";
-  return pct(Number(value) * 100);
-}
-
-function displayPercentile(value) {
-  const number = Number(value);
-  if (!Number.isFinite(number)) return "n/a";
-  return `${(number * 100).toFixed(1)}%`;
-}
-
-function displayScore(value) {
-  if (!Number.isFinite(Number(value))) return "n/a";
-  return Number(value).toFixed(6);
-}
-
-function displayMarketCap(value, fallbackText) {
-  if (fallbackText) return fallbackText;
-  const number = Number(value);
-  if (!Number.isFinite(number)) return "n/a";
-  if (number >= 1_000_000_000_000) return `$${(number / 1_000_000_000_000).toFixed(2)}T`;
-  if (number >= 1_000_000_000) return `$${(number / 1_000_000_000).toFixed(1)}B`;
-  if (number >= 1_000_000) return `$${(number / 1_000_000).toFixed(1)}M`;
-  return `$${number.toLocaleString("en-US")}`;
-}
-
-function returnClass(value) {
-  if (!Number.isFinite(Number(value))) return "";
-  return Number(value) < 0 ? "negative" : "positive";
-}
+const state = createInitialState(fallbackSnapshot);
 
 function hasModelRank(item) {
   return Number.isFinite(Number(item?.modelRank));
 }
 
-function sortedSourceArticles() {
-  return (state.snapshot.sources || [])
-    .flatMap((source) => (source.articles || []).map((article) => ({ ...article, sourceName: article.sourceName || source.name })))
-    .filter((article) => article.title && article.url)
-    .filter((article) => !/(pardon our interruption|privacy|terms|sign in|login|subscribe)/i.test(`${article.title} ${article.summary || ""}`))
-    .sort((a, b) => {
-      const aTime = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-      const bTime = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-      if (aTime !== bTime) return bTime - aTime;
-      return String(a.title || "").localeCompare(String(b.title || ""));
-    })
-    .slice(0, 36);
-}
-
 function sourceRefMap() {
-  const map = new Map(sortedSourceArticles().map((article, index) => [`S${index + 1}`, article]));
-  (state.snapshot.marketIntelligence?.officialMacro?.releases || []).forEach((release) => {
-    if (!release.id) return;
-    map.set(release.id, {
-      sourceName: release.sourceName,
-      title: release.title || release.event,
-      url: release.sourceUrl,
-      publishedAt: release.publishedAt || release.releaseAt,
-      summary: release.marketRead
-    });
-  });
-  return map;
-}
-
-function compactSourceName(value) {
-  return String(value || "")
-    .replace(/\s*\|\s*.*/, "")
-    .replace(/\s*-\s*.*$/, "")
-    .replace(/\s+Research$/, "")
-    .trim();
-}
-
-function sourceRefLabel(ref, symbol, researchSources) {
-  const research = String(ref).match(/^S(\d+)$/);
-  if (research) {
-    const article = researchSources.get(ref);
-    return compactSourceName(article?.sourceName) || `Research Source ${research[1]}`;
-  }
-
-  const officialMacro = String(ref).match(/^O(\d+)$/);
-  if (officialMacro) {
-    const release = researchSources.get(ref);
-    return compactSourceName(release?.sourceName) || `Official Macro ${officialMacro[1]}`;
-  }
-
-  const companyRef = String(ref).match(/^C\d+-(N\d+|IR|MARKETCAP|EARNINGS)$/);
-  if (!companyRef) return ref;
-
-  const prefix = symbol ? `${symbol} ` : "";
-  if (companyRef[1].startsWith("N")) return `${prefix}News`;
-  if (companyRef[1] === "IR") return `${prefix}Investor Relations`;
-  if (companyRef[1] === "MARKETCAP") return `${prefix}Market Cap`;
-  if (companyRef[1] === "EARNINGS") return `${prefix}Earnings`;
-  return ref;
-}
-
-function sourceRefLabels(refs, symbol, researchSources) {
-  return [...new Set((refs || []).map((ref) => sourceRefLabel(ref, symbol, researchSources)).filter(Boolean))];
+  return buildSourceRefMap(state.snapshot);
 }
 
 function parseTickerInput(value) {
-  return [
-    ...new Set(
-      String(value || "")
-        .replace(/[,\n\r\t;]+/g, " ")
-        .split(/\s+/)
-        .map((token) => token.trim().toUpperCase().replace(/^\$/, ""))
-        .filter(Boolean)
-        .filter((token) => /^[A-Z0-9][A-Z0-9.^=\-]{0,18}$/.test(token))
-    )
-  ].slice(0, state.tickerLab.maxTickers || 25);
-}
-
-function normalizeApiBaseUrl(value) {
-  return String(value || "").trim().replace(/\/+$/, "");
+  return parseTickerText(value, state.tickerLab.maxTickers || 25);
 }
 
 function tickerLabUrl(path) {
@@ -428,19 +238,6 @@ function tickerNarrative(item) {
     ? " This is a model rebound watch, not a confirmed momentum setup."
     : "";
   return `${item.symbol} ranks ${rank} versus the S&P 500 reference universe, with ${relative}; it is ${trend}.${setup}${activation}`;
-}
-
-function money(value) {
-  if (!Number.isFinite(Number(value))) return "n/a";
-  return Number(value).toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: Number(value) > 100 ? 2 : 2
-  });
-}
-
-function hasNumericValue(value) {
-  return value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value));
 }
 
 function stopSellForSymbol(symbol) {
@@ -524,18 +321,6 @@ function opportunitySetupCallout(item) {
       ${riskFlags ? `<small>Risk flags: ${esc(riskFlags)}</small>` : ""}
     </div>
   `;
-}
-
-function percentilePoint(value) {
-  const number = Number(value);
-  if (!Number.isFinite(number)) return null;
-  return number <= 1 ? number * 100 : number;
-}
-
-function displayPercentilePoint(value) {
-  const number = percentilePoint(value);
-  if (!Number.isFinite(number)) return "n/a";
-  return `${number.toFixed(0)}%`;
 }
 
 function isNotMomentumSetup(item) {
@@ -2238,11 +2023,8 @@ function wireControls() {
 
 async function loadRuntimeConfig() {
   try {
-    const response = await fetch(`config/runtime.json?ts=${Date.now()}`);
-    if (response.ok) {
-      const payload = await response.json();
-      state.tickerLab.apiBaseUrl = normalizeApiBaseUrl(payload.tickerLabApiBaseUrl || "");
-    }
+    const payload = await fetchJson("config/runtime.json", "Runtime config");
+    state.tickerLab.apiBaseUrl = normalizeApiBaseUrl(payload.tickerLabApiBaseUrl || "");
   } catch (error) {
     console.warn(error);
   }
@@ -2324,9 +2106,7 @@ async function submitTickerLab(event) {
 
 async function loadSnapshot() {
   try {
-    const response = await fetch(`data/snapshot.json?ts=${Date.now()}`);
-    if (!response.ok) throw new Error(`Snapshot unavailable: ${response.status}`);
-    state.snapshot = await response.json();
+    state.snapshot = await fetchJson("data/snapshot.json", "Snapshot");
   } catch (error) {
     console.warn(error);
     state.snapshot = fallbackSnapshot;
@@ -2336,9 +2116,7 @@ async function loadSnapshot() {
 
 async function loadScorebook() {
   try {
-    const response = await fetch(`data/model-scorebook.json?ts=${Date.now()}`);
-    if (!response.ok) throw new Error(`Scoreboard unavailable: ${response.status}`);
-    const payload = await response.json();
+    const payload = await fetchJson("data/model-scorebook.json", "Scoreboard");
     state.scorebook = {
       ...state.scorebook,
       status: payload.status || "ready",
@@ -2367,9 +2145,7 @@ async function loadScorebook() {
 
 async function loadModelMonitoring() {
   try {
-    const response = await fetch(`data/model-monitoring.json?ts=${Date.now()}`);
-    if (!response.ok) throw new Error(`Model monitoring unavailable: ${response.status}`);
-    const payload = await response.json();
+    const payload = await fetchJson("data/model-monitoring.json", "Model monitoring");
     state.monitoring = {
       ...state.monitoring,
       status: payload.status || "ready",
@@ -2401,9 +2177,7 @@ async function loadModelMonitoring() {
 
 async function loadLongHorizonResearch() {
   try {
-    const response = await fetch(`data/long-horizon-research.json?ts=${Date.now()}`);
-    if (!response.ok) throw new Error(`Long-horizon research unavailable: ${response.status}`);
-    const payload = await response.json();
+    const payload = await fetchJson("data/long-horizon-research.json", "Long-horizon research");
     state.longHorizon = {
       ...state.longHorizon,
       status: payload.status || "ready",

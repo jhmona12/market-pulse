@@ -44,7 +44,7 @@ flowchart TD
   longResearch --> pages
   refreshStatus --> pages
   ledger --> pages
-  appFiles["index.html + app.js + styles.css<br/>Browser dashboard UI"] --> pages
+  appFiles["index.html + app.js + src/dashboard/* + styles.css<br/>Browser dashboard UI"] --> pages
   runtime["config/runtime.json<br/>Optional private Ticker Lab backend URL"] --> pages
   pages --> browser["Laptop or mobile browser<br/>Briefing, Tactical, Strategic, Intel, Model Lab"]
 
@@ -976,7 +976,13 @@ Backtest reports compare XGBoost predictions against simple momentum and sector-
 ```text
 index.html                         Static dashboard shell
 styles.css                         Dashboard styling
-app.js                             Browser rendering logic
+app.js                             Browser dashboard entry point and view renderers
+src/dashboard/dom.js               Browser DOM helpers
+src/dashboard/fetch-json.js        Shared static JSON fetch helper
+src/dashboard/formatters.js        Shared display, money, percent, and escaping helpers
+src/dashboard/source-refs.js       Shared source-reference sorting and labels for UI/verify
+src/dashboard/state.js             Initial browser UI state factory
+src/dashboard/ticker-input.js      Ticker Lab input parsing and API URL normalization
 scripts/update-data.mjs            Data refresh, source ingestion, screening, AI call
 scripts/update-macro-calendar.mjs  Scrapes rolling BLS/FRED, BEA, and Fed release calendars
 scripts/check-refresh-window.mjs   GitHub Actions Pacific refresh gate and duplicate-run guard

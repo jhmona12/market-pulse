@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import { validateDashboardSchemas } from "./snapshot/schemas.mjs";
+import { sortedSourceArticles } from "../src/dashboard/source-refs.js";
 
 const root = process.cwd();
 const node = process.execPath;
@@ -59,20 +60,6 @@ function collectStrings(value, strings = []) {
   return strings;
 }
 
-function sortedSourceArticles(sources) {
-  return (sources || [])
-    .flatMap((source) => (source.articles || []).map((article) => ({ ...article, sourceName: article.sourceName || source.name })))
-    .filter((article) => article.title && article.url)
-    .filter((article) => !/(pardon our interruption|privacy|terms|sign in|login|subscribe)/i.test(`${article.title} ${article.summary || ""}`))
-    .sort((a, b) => {
-      const aTime = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-      const bTime = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-      if (aTime !== bTime) return bTime - aTime;
-      return String(a.title || "").localeCompare(String(b.title || ""));
-    })
-    .slice(0, 36);
-}
-
 run(node, ["--check", "app.js"]);
 run(node, ["--check", "scripts/verify.mjs"]);
 run(node, ["--check", "scripts/update-data.mjs"]);
@@ -85,6 +72,7 @@ run(node, ["--check", "scripts/monitor-refreshes.mjs"]);
 run(node, ["--check", "scripts/ingest/sources.mjs"]);
 run(node, ["--check", "scripts/snapshot/ai-memo.mjs"]);
 run(node, ["--check", "scripts/snapshot/schemas.mjs"]);
+filesIn(join(root, "src"), (path) => path.endsWith(".js")).forEach((path) => run(node, ["--check", path]));
 run(node, ["--test", ...filesIn(join(root, "tests"), (path) => path.endsWith(".test.mjs"))]);
 
 const python = process.env.PYTHON || "python3";
@@ -212,6 +200,9 @@ const badRefs = collectSourceRefs(snapshot.aiRecommendations || {}).filter((ref)
 if (badRefs.length) fail(`AI Strategy Memo contains unresolved source refs: ${[...new Set(badRefs)].slice(0, 12).join(", ")}`);
 
 const pagesWorkflow = readFileSync(join(root, ".github/workflows/pages.yml"), "utf8");
+if (!pagesWorkflow.includes("cp -R src public/src")) {
+  fail(".github/workflows/pages.yml does not publish browser modules from src/");
+}
 if (!pagesWorkflow.includes("data/model-monitoring.json public/data/model-monitoring.json")) {
   fail(".github/workflows/pages.yml does not publish data/model-monitoring.json");
 }
@@ -241,6 +232,9 @@ if (!refreshWorkflow.includes("data/refresh-ledger.json")) {
 if (refreshWorkflow.includes("data/model-reference-cache.json") || refreshWorkflow.includes("data/market-cap-cache.json") || refreshWorkflow.includes("data/reddit-tape-cache.json") || refreshWorkflow.includes("data/deeper-read-history.json")) {
   fail(".github/workflows/refresh-data.yml should not commit legacy runtime cache files");
 }
+if (!refreshWorkflow.includes("cp -R src public/src")) {
+  fail(".github/workflows/refresh-data.yml does not publish browser modules from src/");
+}
 
 const monitorWorkflow = readFileSync(join(root, ".github/workflows/monitor-refresh.yml"), "utf8");
 if (!monitorWorkflow.includes("node scripts/monitor-refreshes.mjs")) {
@@ -264,6 +258,9 @@ if (!localServer.includes('"data/macro-calendar.json"')) {
 }
 if (!localServer.includes('"data/refresh-ledger.json"')) {
   fail("scripts/local-dashboard-server.mjs does not allow data/refresh-ledger.json");
+}
+if (!/src\\\/dashboard|src\/dashboard/.test(localServer)) {
+  fail("scripts/local-dashboard-server.mjs does not allow browser modules under src/dashboard/");
 }
 
 const macroEvents = macroCalendar.events.filter((event) => event?.date && event?.time && event?.event && event?.source);

@@ -40,6 +40,7 @@ jobs:
         run: |
           mkdir -p public/data public/config
           cp index.html styles.css app.js public/
+          cp -R src public/src
           cp data/snapshot.json public/data/snapshot.json
           cp data/model-scorebook.json public/data/model-scorebook.json
           cp data/model-monitoring.json public/data/model-monitoring.json
