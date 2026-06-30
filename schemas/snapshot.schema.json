@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jhmona12.github.io/market-pulse/schemas/snapshot.schema.json",
+  "title": "Market Pulse Snapshot",
+  "type": "object",
+  "required": [
+    "generatedAt",
+    "model",
+    "note",
+    "marketDataStatus",
+    "marketIntelligence",
+    "aiRecommendations",
+    "avoidList",
+    "recommendations",
+    "sectorPerformance",
+    "marketStrip",
+    "opportunities",
+    "macro",
+    "calendar",
+    "sources"
+  ],
+  "properties": {
+    "generatedAt": { "type": "string" },
+    "model": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string" },
+        "asOfDate": { "type": ["string", "null"] },
+        "expectedAsOfDate": { "type": ["string", "null"] },
+        "scoredCount": { "type": ["number", "null"] }
+      }
+    },
+    "note": {
+      "type": "object",
+      "required": ["headline", "body", "changed", "watch"],
+      "properties": {
+        "headline": { "type": "string" },
+        "body": { "type": "string" },
+        "changed": { "type": "array", "items": { "type": "string" } },
+        "watch": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "marketDataStatus": {
+      "type": "object",
+      "required": ["status", "expectedAsOfDate", "staleDataReused"],
+      "properties": {
+        "status": { "type": "string" },
+        "message": { "type": ["string", "null"] },
+        "expectedAsOfDate": { "type": ["string", "null"] },
+        "asOfDate": { "type": ["string", "null"] },
+        "staleDataReused": { "type": "boolean" }
+      }
+    },
+    "marketIntelligence": { "type": "object" },
+    "aiRecommendations": { "type": "object" },
+    "avoidList": { "type": "object" },
+    "recommendations": { "type": "array" },
+    "sectorPerformance": { "type": "array" },
+    "marketStrip": { "type": "array" },
+    "opportunities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["symbol", "name", "type"],
+        "properties": {
+          "symbol": { "type": "string" },
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "modelRank": { "type": ["number", "null"] },
+          "modelScore": { "type": ["number", "null"] },
+          "modelPercentile": { "type": ["number", "null"] },
+          "setupType": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "macro": { "type": "array" },
+    "calendar": { "type": "array" },
+    "sources": { "type": "array" }
+  }
+}

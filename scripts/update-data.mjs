@@ -1,18 +1,35 @@
 import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  decodeHtml,
+  extractArticleCandidates,
+  extractFeedItems,
+  looksLikeFeed,
+  normalizeDate,
+  parseMarkdownSources,
+  publishedDateFromHtml,
+  sortArticlesNewestFirst,
+  stripTags,
+  summaryFromFeed,
+  summaryFromHtml,
+  titleFromFeed,
+  titleFromHtml,
+  visibleTextFromHtml
+} from "./ingest/sources.mjs";
+import { buildAiMemoInputPayload, buildAiRecommendationResponseSchema } from "./snapshot/ai-memo.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const maxTickers = Number.parseInt(process.env.MAX_TICKERS || "0", 10);
 const articlesPerSource = Number.parseInt(process.env.SOURCE_ARTICLES_PER_SOURCE || "3", 10);
-const maxArticleCandidates = Number.parseInt(process.env.SOURCE_ARTICLE_CANDIDATES || "6", 10);
 const sourceMaxArticleAgeDays = Number.parseFloat(process.env.SOURCE_MAX_ARTICLE_AGE_DAYS || "30");
 const companyContextCount = Number.parseInt(process.env.COMPANY_CONTEXT_COUNT || "12", 10);
 const marketIntelArticleLimit = Number.parseInt(process.env.MARKET_INTEL_ARTICLE_LIMIT || "48", 10);
 const marketIntelFreshHours = Number.parseFloat(process.env.MARKET_INTEL_FRESH_HOURS || "24");
 const marketIntelImportantHours = Number.parseFloat(process.env.MARKET_INTEL_IMPORTANT_HOURS || "96");
 const redditPostLimit = Number.parseInt(process.env.REDDIT_POST_LIMIT || "40", 10);
-const redditCachePath = process.env.REDDIT_TAPE_CACHE_PATH || "data/reddit-tape-cache.json";
+const cacheDir = process.env.DATA_CACHE_DIR || "data/cache";
+const redditCachePath = process.env.REDDIT_TAPE_CACHE_PATH || `${cacheDir}/reddit-tape-cache.json`;
 const redditCacheMaxAgeHours = Number.parseFloat(process.env.REDDIT_CACHE_MAX_AGE_HOURS || "24");
 const redditClientId = process.env.REDDIT_CLIENT_ID || "";
 const redditClientSecret = process.env.REDDIT_CLIENT_SECRET || "";
@@ -33,7 +50,8 @@ const marketCapCacheMaxAgeHours = Number.parseFloat(process.env.MARKET_CAP_CACHE
 const deeperReadLookbackDays = Number.parseFloat(process.env.DEEPER_READ_LOOKBACK_DAYS || "7");
 const deeperReadCandidateLimit = Number.parseInt(process.env.DEEPER_READ_CANDIDATE_LIMIT || "14", 10);
 const macroReleaseLookbackHours = Number.parseFloat(process.env.MACRO_RELEASE_LOOKBACK_HOURS || "96");
-const deeperReadHistoryPath = "data/deeper-read-history.json";
+const deeperReadHistoryPath = process.env.DEEPER_READ_HISTORY_PATH || `${cacheDir}/deeper-read-history.json`;
+const marketCapCachePath = process.env.MARKET_CAP_CACHE_PATH || `${cacheDir}/market-cap-cache.json`;
 const macroCalendarPath = process.env.MACRO_CALENDAR_PATH || "data/macro-calendar.json";
 const today = new Date();
 const startDate = new Date(today);
@@ -782,209 +800,6 @@ function constituentMetadataBySymbol(stocks) {
   );
 }
 
-function parseMarkdownSources(markdown) {
-  return markdown
-    .split("\n")
-    .filter((line) => line.trim().startsWith("|") && !line.includes("---"))
-    .slice(1)
-    .map((line) => line.split("|").slice(1, -1).map((cell) => cell.trim()))
-    .filter((cells) => cells.length >= 6 && cells[1]?.startsWith("http"))
-    .map(([name, url, category, cadence, trust, notes]) => ({ name, url, category, cadence, trust, notes }));
-}
-
-function decodeHtml(value) {
-  let decoded = value;
-  for (let index = 0; index < 3; index += 1) {
-    const next = decoded
-      .replaceAll("&amp;", "&")
-      .replaceAll("&quot;", "\"")
-      .replaceAll("&#39;", "'")
-      .replaceAll("&nbsp;", " ")
-      .replaceAll("&lt;", "<")
-      .replaceAll("&gt;", ">")
-      .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(Number.parseInt(hex, 16)))
-      .replace(/&#(\d+);/g, (_, value) => String.fromCodePoint(Number.parseInt(value, 10)));
-    if (next === decoded) break;
-    decoded = next;
-  }
-  return decoded;
-}
-
-function stripTags(value) {
-  return decodeHtml(value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
-}
-
-function stripCdata(value) {
-  return String(value || "")
-    .replace(/^<!\[CDATA\[/, "")
-    .replace(/\]\]>$/, "")
-    .trim();
-}
-
-function xmlText(block, tagNames) {
-  const names = Array.isArray(tagNames) ? tagNames : [tagNames];
-  for (const name of names) {
-    const match = block.match(new RegExp(`<${name}\\b[^>]*>([\\s\\S]*?)<\\/${name}>`, "i"));
-    if (match) return stripTags(stripCdata(match[1]));
-  }
-  return "";
-}
-
-function xmlRaw(block, tagNames) {
-  const names = Array.isArray(tagNames) ? tagNames : [tagNames];
-  for (const name of names) {
-    const match = block.match(new RegExp(`<${name}\\b[^>]*>([\\s\\S]*?)<\\/${name}>`, "i"));
-    if (match) return stripCdata(match[1]);
-  }
-  return "";
-}
-
-function xmlLink(block) {
-  const atomLink = block.match(/<link\b[^>]*href=["']([^"']+)["'][^>]*>/i)?.[1];
-  if (atomLink) return decodeHtml(atomLink);
-  return xmlText(block, "link");
-}
-
-function attrValue(tag, name) {
-  return tag.match(new RegExp(`${name}\\s*=\\s*["']([^"']+)["']`, "i"))?.[1] || "";
-}
-
-function metaContent(html, names) {
-  const lowered = names.map((name) => name.toLowerCase());
-  for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
-    const tag = match[0];
-    const property = attrValue(tag, "property").toLowerCase();
-    const name = attrValue(tag, "name").toLowerCase();
-    const itemprop = attrValue(tag, "itemprop").toLowerCase();
-    if (lowered.includes(property) || lowered.includes(name) || lowered.includes(itemprop)) {
-      return attrValue(tag, "content");
-    }
-  }
-  return "";
-}
-
-function titleFromHtml(html, fallback) {
-  return stripTags(
-    metaContent(html, ["og:title", "twitter:title", "headline"]) ||
-      html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ||
-      html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ||
-      fallback
-  ).slice(0, 160);
-}
-
-function summaryFromHtml(html, fallback) {
-  return stripTags(
-    metaContent(html, ["description", "og:description", "twitter:description"]) ||
-      html.match(/<p[^>]*>([\s\S]*?)<\/p>/i)?.[1] ||
-      fallback
-  ).slice(0, 320);
-}
-
-function looksLikeFeed(text) {
-  return /<(rss|feed)\b/i.test(text) || /<item\b[\s\S]*<\/item>/i.test(text) || /<entry\b[\s\S]*<\/entry>/i.test(text);
-}
-
-function titleFromFeed(feed, fallback) {
-  return xmlText(feed, "title") || fallback;
-}
-
-function summaryFromFeed(feed, fallback) {
-  return xmlText(feed, ["description", "subtitle", "summary"])?.slice(0, 320) || fallback;
-}
-
-function extractFeedItems(feed, source) {
-  if (!looksLikeFeed(feed)) return [];
-  const blocks = [
-    ...[...feed.matchAll(/<item\b[\s\S]*?<\/item>/gi)].map((match) => match[0]),
-    ...[...feed.matchAll(/<entry\b[\s\S]*?<\/entry>/gi)].map((match) => match[0])
-  ];
-
-  return blocks
-    .map((block) => {
-      let url = xmlLink(block) || source.url;
-      try {
-        url = new URL(url, source.url).href;
-      } catch {
-        url = source.url;
-      }
-      const rawSummary = xmlRaw(block, ["description", "summary", "content:encoded", "content"]);
-      const summary = stripTags(decodeHtml(rawSummary || source.notes)).slice(0, 420);
-      const excerpt = stripTags(decodeHtml(rawSummary || block)).slice(0, 1800);
-      return {
-        sourceName: source.name,
-        title: xmlText(block, "title").slice(0, 180),
-        url,
-        publishedAt: normalizeDate(xmlText(block, ["pubDate", "published", "updated", "dc:date"])),
-        summary,
-        excerpt,
-        discoveredFrom: source.url
-      };
-    })
-    .filter((article) => article.title && article.url);
-}
-
-function extractJsonLdDates(html) {
-  const dates = [];
-  for (const match of html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
-    try {
-      const parsed = JSON.parse(stripTags(match[1]));
-      const nodes = Array.isArray(parsed) ? parsed : [parsed, ...(parsed["@graph"] || [])];
-      nodes.forEach((node) => {
-        const value = node?.datePublished || node?.dateModified || node?.uploadDate;
-        if (value) dates.push(value);
-      });
-    } catch {
-      // Some publishers include invalid JSON-LD; date meta tags still cover those pages.
-    }
-  }
-  return dates;
-}
-
-function normalizeDate(value) {
-  if (!value) return null;
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return null;
-  if (date.getFullYear() < 2000 || date.getFullYear() > today.getFullYear() + 1) return null;
-  return date.toISOString();
-}
-
-function publishedDateFromHtml(html, fallbackText = "") {
-  const candidates = [
-    metaContent(html, [
-      "article:published_time",
-      "datePublished",
-      "date",
-      "publishdate",
-      "pubdate",
-      "sailthru.date",
-      "parsely-pub-date",
-      "dc.date",
-      "dc.date.issued"
-    ]),
-    html.match(/<time[^>]+datetime=["']([^"']+)["'][^>]*>/i)?.[1],
-    ...extractJsonLdDates(html)
-  ];
-
-  const textDate = fallbackText.match(/\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+\d{1,2},\s+20\d{2}\b/i)?.[0];
-  if (textDate) candidates.push(textDate);
-
-  for (const candidate of candidates) {
-    const normalized = normalizeDate(candidate);
-    if (normalized) return normalized;
-  }
-  return null;
-}
-
-function visibleTextFromHtml(html) {
-  const withoutNoise = html
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<nav[\s\S]*?<\/nav>/gi, " ")
-    .replace(/<footer[\s\S]*?<\/footer>/gi, " ")
-    .replace(/<header[\s\S]*?<\/header>/gi, " ");
-  return stripTags(withoutNoise).replace(/\s+/g, " ").trim();
-}
-
 function cleanReleaseSentence(value) {
   return String(value || "")
     .replace(/\s+/g, " ")
@@ -1298,56 +1113,6 @@ async function fetchOfficialMacroReleases(calendarItems, now = new Date()) {
   };
 }
 
-function sameHostOrSubdomain(sourceHost, candidateHost) {
-  return candidateHost === sourceHost || candidateHost.endsWith(`.${sourceHost}`) || sourceHost.endsWith(`.${candidateHost}`);
-}
-
-function articleScore(url, text, source) {
-  const haystack = `${url.pathname} ${url.search} ${text}`.toLowerCase();
-  let score = 0;
-  if (/(commentary|insight|research|market|outlook|weekly|capital-market|strategy|economic|macro|article|blog)/i.test(haystack)) score += 8;
-  if (/(login|sign-in|privacy|terms|careers|contact|subscribe|podcast|webinar|event|video|pdf|mailto|javascript|archive|award|recognition|about|account|solution|product|fund|529|college|advisor|client|why-|alternative-investments|benefits-of|financial-plan|personal-finance|retirement|estate-planning)/i.test(haystack)) score -= 10;
-  if (/20\d{2}[/-]\d{1,2}[/-]\d{1,2}|\d{1,2}[/-]\d{1,2}[/-]20\d{2}/.test(haystack)) score += 5;
-  if (haystack.includes(source.name.toLowerCase().split(" ")[0])) score += 1;
-  if (url.pathname.split("/").filter(Boolean).length >= 2) score += 2;
-  if (url.pathname === "/" || url.hash) score -= 3;
-  return score;
-}
-
-function extractArticleCandidates(html, source) {
-  const sourceUrl = new URL(source.url);
-  const seen = new Set();
-  const candidates = [];
-
-  for (const match of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
-    const href = attrValue(match[1], "href");
-    if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("javascript:")) continue;
-
-    let url;
-    try {
-      url = new URL(decodeHtml(href), sourceUrl);
-    } catch {
-      continue;
-    }
-
-    url.hash = "";
-    if (!["http:", "https:"].includes(url.protocol)) continue;
-    if (!sameHostOrSubdomain(sourceUrl.hostname.replace(/^www\./, ""), url.hostname.replace(/^www\./, ""))) continue;
-    if (seen.has(url.href)) continue;
-
-    const text = stripTags(match[2]).slice(0, 180);
-    const score = articleScore(url, text, source);
-    if (score < 4) continue;
-
-    seen.add(url.href);
-    candidates.push({ url: url.href, linkText: text, score });
-  }
-
-  return candidates
-    .sort((a, b) => b.score - a.score)
-    .slice(0, Math.max(articlesPerSource, maxArticleCandidates));
-}
-
 async function fetchArticle(source, candidate) {
   const html = await fetchText(candidate.url, { timeout: 9000, retries: 1 });
   const text = visibleTextFromHtml(html);
@@ -1364,15 +1129,6 @@ async function fetchArticle(source, candidate) {
     excerpt: text.slice(0, 1800),
     discoveredFrom: source.url
   };
-}
-
-function sortArticlesNewestFirst(articles) {
-  return articles.sort((a, b) => {
-    const aTime = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-    const bTime = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-    if (aTime !== bTime) return bTime - aTime;
-    return a.title.localeCompare(b.title);
-  });
 }
 
 function isUsableSourceArticle(article, maxAgeDays = sourceMaxArticleAgeDays) {
@@ -1478,22 +1234,26 @@ async function fetchSp500Constituents() {
 }
 
 async function loadMarketCapCache() {
-  try {
-    const text = await readFile(join(root, "data/market-cap-cache.json"), "utf8");
-    const payload = JSON.parse(text);
-    return {
-      generatedAt: payload.generatedAt || null,
-      bySymbol: new Map(Object.entries(payload.bySymbol || {}))
-    };
-  } catch {
-    return { generatedAt: null, bySymbol: new Map() };
+  for (const path of [marketCapCachePath, "data/market-cap-cache.json"]) {
+    try {
+      const text = await readFile(join(root, path), "utf8");
+      const payload = JSON.parse(text);
+      return {
+        generatedAt: payload.generatedAt || null,
+        bySymbol: new Map(Object.entries(payload.bySymbol || {}))
+      };
+    } catch {
+      // Try the next cache location; the committed legacy cache is a read-only fallback.
+    }
   }
+  return { generatedAt: null, bySymbol: new Map() };
 }
 
 async function writeMarketCapCache(cache) {
   const bySymbol = Object.fromEntries([...cache.bySymbol.entries()].sort(([a], [b]) => a.localeCompare(b)));
+  await mkdir(dirname(join(root, marketCapCachePath)), { recursive: true });
   await writeFile(
-    join(root, "data/market-cap-cache.json"),
+    join(root, marketCapCachePath),
     `${JSON.stringify({ generatedAt: new Date().toISOString(), bySymbol }, null, 2)}\n`
   );
 }
@@ -1743,11 +1503,14 @@ async function buildEarningsTape({ sources, marketMovers, knownSymbols }) {
 }
 
 async function loadRedditCache() {
-  try {
-    return JSON.parse(await readFile(join(root, redditCachePath), "utf8"));
-  } catch {
-    return null;
+  for (const path of [redditCachePath, "data/reddit-tape-cache.json"]) {
+    try {
+      return JSON.parse(await readFile(join(root, path), "utf8"));
+    } catch {
+      // Try the next cache location; the committed legacy cache is a read-only fallback.
+    }
   }
+  return null;
 }
 
 async function writeRedditCache(tape) {
@@ -2586,19 +2349,6 @@ function hasFreshModelTechnicalTape(modelRankings, expectedAsOfDate) {
   );
 }
 
-function technicalRowScore(row) {
-  let score = 42;
-  const return30 = finiteNumber(row.return30 ?? row.change30d);
-  const return60 = finiteNumber(row.return60 ?? row.change60d);
-  const rsi14 = finiteNumber(row.rsi14);
-  if (row.above50) score += 12;
-  if (row.above200) score += 14;
-  if (return30 != null && return30 > 0) score += Math.min(14, return30);
-  if (return60 != null && return60 > 0) score += Math.min(10, return60 / 2);
-  if (rsi14 != null && rsi14 >= 50 && rsi14 <= 76) score += 8;
-  return Math.max(0, Math.min(100, score));
-}
-
 function technicalRowOpportunity(row, etfMetadata = new Map()) {
   const metadata = etfMetadata.get(row.symbol) || {};
   return {
@@ -2606,7 +2356,7 @@ function technicalRowOpportunity(row, etfMetadata = new Map()) {
     name: row.name || metadata.name || row.label || row.symbol,
     type: "etf",
     sector: row.sector || metadata.sector || metadata.assetClass || "ETF",
-    score: technicalRowScore(row),
+    score: finiteNumber(row.score ?? row.modelScore ?? row.modelPercentile),
     close: finiteNumber(row.close ?? row.price),
     changePct: finiteNumber(row.changePct ?? row.change1d),
     rsi14: finiteNumber(row.rsi14),
@@ -3824,17 +3574,20 @@ async function appendUsageLog(entry) {
 }
 
 async function loadDeeperReadHistory() {
-  try {
-    return JSON.parse(await readFile(join(root, deeperReadHistoryPath), "utf8"));
-  } catch {
-    return { generatedAt: null, lastCards: [], runs: [] };
+  for (const path of [deeperReadHistoryPath, "data/deeper-read-history.json"]) {
+    try {
+      return JSON.parse(await readFile(join(root, path), "utf8"));
+    } catch {
+      // Try the next cache location; the committed legacy cache is a read-only fallback.
+    }
   }
+  return { generatedAt: null, lastCards: [], runs: [] };
 }
 
 async function writeDeeperReadHistory(deeperRead, previousHistory = {}) {
   const cards = (deeperRead?.cards || []).filter((card) => card.sourceRef || card.url || card.sourceName);
   if (!cards.length) return;
-  await mkdir(join(root, "data"), { recursive: true });
+  await mkdir(dirname(join(root, deeperReadHistoryPath)), { recursive: true });
   const run = {
     generatedAt: new Date().toISOString(),
     cards: cards.map((card) => ({
@@ -4481,92 +4234,28 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
     ...officialMacroSourceRefs.map((source) => source.id),
     ...companySourceRefs.map((source) => source.id)
   ].filter(Boolean);
-  const sourceRefSchema = sourceRefIds.length
-    ? { type: "string", enum: sourceRefIds }
-    : { type: "string" };
   const validAvoidSymbols = avoidCandidates.map((item) => item.symbol).filter(Boolean);
-  const payload = {
-    generatedAt: new Date().toISOString(),
-    model: modelSummary,
+  const payload = buildAiMemoInputPayload({
+    modelSummary,
     macro,
-    upcomingEvents: calendar.slice(0, 8),
-    marketIntelligence: {
-      window: marketIntelligence?.window || null,
-      marketDataStatus: marketIntelligence?.marketDataStatus || null,
-      sourceHealth: marketIntelligence?.sourceHealth || null,
-      topThemes: marketIntelligence?.topThemes || [],
-      professionalDrivers: (marketIntelligence?.professionalDrivers || []).slice(0, 12),
-      officialMacro: {
-        generatedAt: marketIntelligence?.officialMacro?.generatedAt || null,
-        lookbackHours: marketIntelligence?.officialMacro?.lookbackHours || macroReleaseLookbackHours,
-        releases: (marketIntelligence?.officialMacro?.releases || []).slice(0, 6)
-      },
-      earnings: {
-        dates: marketIntelligence?.earnings?.dates || [],
-        calendars: (marketIntelligence?.earnings?.calendars || []).map((item) => ({
-          date: item.date,
-          asOf: item.asOf,
-          status: item.status,
-          rowCount: item.rowCount,
-          rows: (item.rows || []).slice(0, 18)
-        })),
-        earningsMovers: (marketIntelligence?.earnings?.earningsMovers || []).slice(0, 10),
-        articleHeadlines: (marketIntelligence?.earnings?.articleHeadlines || []).slice(0, 10)
-      },
-      reddit: {
-        status: marketIntelligence?.reddit?.status || "missing",
-        sourceNote: marketIntelligence?.reddit?.sourceNote || "",
-        subreddits: marketIntelligence?.reddit?.subreddits || [],
-        topTickers: (marketIntelligence?.reddit?.topTickers || []).slice(0, 12),
-        topPosts: (marketIntelligence?.reddit?.topPosts || []).slice(0, 10)
-      },
-      marketMovers: {
-        gainers: (marketIntelligence?.marketMovers?.gainers || []).slice(0, 8),
-        losers: (marketIntelligence?.marketMovers?.losers || []).slice(0, 8),
-        mostActive: (marketIntelligence?.marketMovers?.mostActive || []).slice(0, 8)
-      }
-    },
+    calendar,
+    marketIntelligence,
     sourceTape,
     officialMacroSourceRefs,
     companyContexts,
     companySourceRefs,
-    sourceStatus: sources.map(({ name, url, category, trust, ok, articleCount, summary }) => ({
-      name,
-      url,
-      category,
-      trust,
-      ok,
-      articleCount,
-      summary
-    })),
+    sources,
     deskRecommendations,
-    sectorPerformance: sectorPerformance.map(({ sector, symbol, change1d, change5d, change30d, ytd, relative30d, above50, above200, rsi14 }) => ({
-      sector,
-      symbol,
-      change1d: Number(change1d.toFixed(2)),
-      change5d: Number(change5d.toFixed(2)),
-      change30d: Number(change30d.toFixed(2)),
-      ytd: Number(ytd.toFixed(2)),
-      relative30d: Number(relative30d.toFixed(2)),
-      above50,
-      above200,
-      rsi14: Math.round(rsi14)
-    })),
+    sectorPerformance,
     modelCandidates,
     longHorizonContext,
     avoidCandidates,
     avoidSectors,
-    topMomentum: opportunities.slice(0, 18).map(compactCandidate),
-    extendedMomentum: opportunities
-      .filter((item) => item.score >= 70 && item.rsi14 > 76)
-      .slice(0, 8)
-      .map(compactCandidate),
-    etfMomentum: opportunities
-      .filter((item) => item.type === "etf")
-      .slice(0, 10)
-      .map(compactCandidate),
+    opportunities,
+    compactCandidate,
+    macroReleaseLookbackHours,
     validRecommendationSymbols: validSymbols
-  };
+  });
 
   const requestBody = {
     model: aiModel,
@@ -4587,142 +4276,7 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
         type: "json_schema",
         name: "morning_desk_ai_recommendations",
         strict: true,
-        schema: {
-          type: "object",
-          additionalProperties: false,
-          required: ["headline", "macroView", "dailyRead", "recommendations", "avoidList", "portfolioNotes", "openQuestions", "sourceRefs"],
-          properties: {
-            headline: { type: "string" },
-            macroView: { type: "string" },
-            dailyRead: {
-              type: "object",
-              additionalProperties: false,
-              required: ["headline", "body", "keyTakeaways", "watchItems"],
-              properties: {
-                headline: { type: "string" },
-                body: { type: "string" },
-                keyTakeaways: {
-                  type: "array",
-                  minItems: 4,
-                  maxItems: 6,
-                  items: { type: "string" }
-                },
-                watchItems: {
-                  type: "array",
-                  minItems: 3,
-                  maxItems: 5,
-                  items: { type: "string" }
-                }
-              }
-            },
-            recommendations: {
-              type: "array",
-              minItems: 3,
-              maxItems: 6,
-              items: {
-                type: "object",
-                additionalProperties: false,
-                required: [
-                  "symbol",
-                  "action",
-                  "conviction",
-                  "setup",
-                  "whyNow",
-                  "rationale",
-                  "companyOverview",
-                  "marketCap",
-                  "earningsContext",
-                  "recentNews",
-                  "macroLink",
-                  "macroEvidence",
-                  "modelEvidence",
-                  "technicalEvidence",
-                  "momentumEvidence",
-                  "risk",
-                  "invalidation",
-                  "sourceRefs"
-                ],
-                properties: {
-                  symbol: validSymbols.length ? { type: "string", enum: validSymbols } : { type: "string" },
-                  action: { type: "string" },
-                  conviction: { type: "string", enum: ["High", "Medium", "Low", "Review"] },
-                  setup: { type: "string" },
-                  whyNow: { type: "string" },
-                  rationale: { type: "string" },
-                  companyOverview: { type: "string" },
-                  marketCap: { type: "string" },
-                  earningsContext: { type: "string" },
-                  recentNews: { type: "string" },
-                  macroLink: { type: "string" },
-                  macroEvidence: { type: "string" },
-                  modelEvidence: { type: "string" },
-                  technicalEvidence: { type: "string" },
-                  momentumEvidence: { type: "string" },
-                  risk: { type: "string" },
-                  invalidation: { type: "string" },
-                  sourceRefs: {
-                    type: "array",
-                    minItems: sourceRefIds.length ? 1 : 0,
-                    maxItems: 6,
-                    items: sourceRefSchema
-                  }
-                }
-              }
-            },
-            avoidList: {
-              type: "object",
-              additionalProperties: false,
-              required: ["summary", "sectors", "companies"],
-              properties: {
-                summary: { type: "string" },
-                sectors: {
-                  type: "array",
-                  maxItems: 4,
-                  items: {
-                    type: "object",
-                    additionalProperties: false,
-                    required: ["sector", "rationale"],
-                    properties: {
-                      sector: { type: "string" },
-                      rationale: { type: "string" }
-                    }
-                  }
-                },
-                companies: {
-                  type: "array",
-                  maxItems: 8,
-                  items: {
-                    type: "object",
-                    additionalProperties: false,
-                    required: ["symbol", "rationale", "modelEvidence"],
-                    properties: {
-                      symbol: validAvoidSymbols.length ? { type: "string", enum: validAvoidSymbols } : { type: "string" },
-                      rationale: { type: "string" },
-                      modelEvidence: { type: "string" }
-                    }
-                  }
-                }
-              }
-            },
-            portfolioNotes: {
-              type: "array",
-              minItems: 2,
-              maxItems: 5,
-              items: { type: "string" }
-            },
-            openQuestions: {
-              type: "array",
-              minItems: 2,
-              maxItems: 5,
-              items: { type: "string" }
-            },
-            sourceRefs: {
-              type: "array",
-              maxItems: 12,
-              items: sourceRefSchema
-            }
-          }
-        }
+        schema: buildAiRecommendationResponseSchema({ validSymbols, validAvoidSymbols, sourceRefIds })
       }
     },
     reasoning: { effort: "minimal" },
@@ -4870,7 +4424,7 @@ async function main() {
   let sectorPerformance;
   let marketDataStatus = {
     status: "fresh",
-    message: "Fresh end-of-day chart history was fetched for this refresh.",
+    message: "Fresh end-of-day technical tape is expected from the Python model scoring pass.",
     expectedAsOfDate: expectedTechnicalAsOfDate,
     staleDataReused: false
   };

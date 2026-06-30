@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jhmona12.github.io/market-pulse/schemas/long-horizon-research.schema.json",
+  "title": "Market Pulse Long Horizon Research",
+  "type": "object",
+  "required": [
+    "status",
+    "generatedAt",
+    "asOfDate",
+    "marketDataStatus",
+    "rowCount",
+    "rows",
+    "topCandidates",
+    "trends",
+    "labelSummaries",
+    "methodology"
+  ],
+  "properties": {
+    "status": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "asOfDate": { "type": ["string", "null"] },
+    "expectedAsOfDate": { "type": ["string", "null"] },
+    "marketDataStatus": { "type": "object" },
+    "rowCount": { "type": "number" },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "symbol",
+          "name",
+          "longModelRank",
+          "longModelScore",
+          "longModelPercentile",
+          "agreementLabel",
+          "asOfDate"
+        ],
+        "properties": {
+          "symbol": { "type": "string" },
+          "name": { "type": "string" },
+          "sector": { "type": ["string", "null"] },
+          "industry": { "type": ["string", "null"] },
+          "marketCap": { "type": ["string", "null"] },
+          "marketCapValue": { "type": ["number", "null"] },
+          "longModelRank": { "type": "number" },
+          "longModelScore": { "type": "number" },
+          "longModelPercentile": { "type": "number" },
+          "tacticalModelRank": { "type": ["number", "null"] },
+          "tacticalModelPercentile": { "type": ["number", "null"] },
+          "agreementLabel": { "type": "string" },
+          "beta60d": { "type": ["number", "null"] },
+          "return7": { "type": ["number", "null"] },
+          "return14": { "type": ["number", "null"] },
+          "return30": { "type": ["number", "null"] },
+          "return60": { "type": ["number", "null"] },
+          "return90": { "type": ["number", "null"] },
+          "ytdReturn": { "type": ["number", "null"] },
+          "asOfDate": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "topCandidates": { "type": "array" },
+    "trends": { "type": "object" },
+    "labelSummaries": { "type": "array" },
+    "methodology": { "type": "array", "items": { "type": "string" } }
+  }
+}

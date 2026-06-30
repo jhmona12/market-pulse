@@ -1,0 +1,85 @@
+{
+  "modelSummary": {
+    "status": "ready",
+    "asOfDate": "2026-06-29",
+    "scoredCount": 502
+  },
+  "macro": [
+    { "label": "10Y Treasury", "value": "4.25%", "delta": "+4 bps" }
+  ],
+  "calendar": [
+    { "date": "2026-07-02", "event": "Employment Situation", "importance": "High" }
+  ],
+  "marketIntelligence": {
+    "window": { "lookbackHours": 24 },
+    "marketDataStatus": { "status": "fresh", "asOfDate": "2026-06-29" },
+    "sourceHealth": { "ok": 2, "total": 2 },
+    "topThemes": ["Rates and central banks"],
+    "professionalDrivers": [
+      { "id": "M1", "title": "Yields rise after inflation surprise", "themes": ["Rates and central banks"] }
+    ],
+    "officialMacro": {
+      "generatedAt": "2026-06-29T14:00:00Z",
+      "lookbackHours": 96,
+      "releases": [
+        { "id": "M4", "event": "Consumer Price Index", "marketRead": "CPI was hotter than expected." }
+      ]
+    },
+    "earnings": {
+      "dates": ["2026-06-29"],
+      "calendars": [],
+      "earningsMovers": [{ "symbol": "ABC", "changePct": 8.2 }],
+      "articleHeadlines": []
+    },
+    "reddit": {
+      "status": "ready",
+      "sourceNote": "Live Reddit sample.",
+      "subreddits": ["wallstreetbets"],
+      "topTickers": [{ "symbol": "NVDA", "mentions": 12 }],
+      "topPosts": []
+    },
+    "marketMovers": {
+      "gainers": [],
+      "losers": [],
+      "mostActive": []
+    }
+  },
+  "sourceTape": [
+    { "id": "S1", "sourceName": "Example Markets", "title": "Rates matter again", "url": "https://example.com/rates" }
+  ],
+  "officialMacroSourceRefs": [
+    { "id": "M4", "title": "Consumer Price Index", "url": "https://bls.gov/cpi" }
+  ],
+  "companyContexts": [
+    { "symbol": "ABC", "sources": [{ "id": "C1-IR", "title": "Investor relations" }] }
+  ],
+  "companySourceRefs": [
+    { "id": "C1-IR", "title": "Investor relations" }
+  ],
+  "sources": [
+    { "name": "Example Markets", "url": "https://example.com", "category": "Professional commentary", "trust": "High", "ok": true, "articleCount": 1, "summary": "Live" }
+  ],
+  "deskRecommendations": [
+    { "symbol": "ABC", "label": "Model Ranked" }
+  ],
+  "sectorPerformance": [
+    { "sector": "Technology", "symbol": "XLK", "change1d": 0.1234, "change5d": 1.2, "change30d": 4.567, "ytd": 12.34, "relative30d": 2.22, "above50": true, "above200": true, "rsi14": 61.4 }
+  ],
+  "modelCandidates": [
+    { "symbol": "ABC", "score": 94, "rsi14": 61, "type": "stock" }
+  ],
+  "longHorizonContext": {
+    "status": "ready",
+    "topCandidates": []
+  },
+  "avoidCandidates": [
+    { "symbol": "XYZ" }
+  ],
+  "avoidSectors": [
+    { "sector": "Utilities", "count": 4 }
+  ],
+  "opportunities": [
+    { "symbol": "ABC", "score": 94, "rsi14": 61, "type": "stock" },
+    { "symbol": "XLK", "score": null, "rsi14": 62, "type": "etf" }
+  ]
+}

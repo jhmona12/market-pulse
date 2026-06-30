@@ -164,7 +164,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--reference-cache",
-        default="data/model-reference-cache.json",
+        default="data/cache/model-reference-cache.json",
         help="Reusable S&P 500 reference cache path for fast focus-symbol scoring.",
     )
     parser.add_argument(
@@ -1428,7 +1428,7 @@ def main() -> None:
     }
     output_path = ROOT / args.output
     write_json(payload, output_path)
-    should_write_cache = args.max_symbols == 0 or args.reference_cache != "data/model-reference-cache.json"
+    should_write_cache = args.max_symbols == 0 or args.reference_cache != "data/cache/model-reference-cache.json"
     if should_write_cache:
         write_reference_cache(
             cache_path,

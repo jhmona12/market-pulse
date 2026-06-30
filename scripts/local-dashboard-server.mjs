@@ -1,4 +1,4 @@
-import { createReadStream } from "node:fs";
+import { createReadStream, existsSync } from "node:fs";
 import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { dirname, extname, join, relative, resolve } from "node:path";
@@ -10,7 +10,9 @@ const root = resolve(dirname(dirname(fileURLToPath(import.meta.url))));
 const port = Number.parseInt(process.env.PORT || "4173", 10);
 const python = process.env.MODEL_PYTHON || join(root, ".venv-model/bin/python");
 const outputDir = join(root, "data/ticker-lab");
-const referenceCachePath = join(root, "data/model-reference-cache.json");
+const referenceCachePath = existsSync(join(root, "data/cache/model-reference-cache.json"))
+  ? join(root, "data/cache/model-reference-cache.json")
+  : join(root, "data/model-reference-cache.json");
 const maxTickers = Number.parseInt(process.env.TICKER_LAB_MAX_TICKERS || "25", 10);
 const accessCode = process.env.TICKER_LAB_ACCESS_CODE || "";
 const allowOpenTickerLab = process.env.TICKER_LAB_ALLOW_OPEN === "1";

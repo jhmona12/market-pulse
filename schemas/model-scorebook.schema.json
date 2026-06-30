@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jhmona12.github.io/market-pulse/schemas/model-scorebook.schema.json",
+  "title": "Market Pulse Model Scorebook",
+  "type": "object",
+  "required": [
+    "generatedAt",
+    "asOfDate",
+    "status",
+    "marketDataStatus",
+    "trailingReturnStatus",
+    "rowCount",
+    "columns",
+    "rows"
+  ],
+  "properties": {
+    "generatedAt": { "type": "string" },
+    "asOfDate": { "type": ["string", "null"] },
+    "status": { "type": "string" },
+    "marketDataStatus": { "type": ["object", "null"] },
+    "trailingReturnStatus": { "type": "string" },
+    "rowCount": { "type": "number" },
+    "model": { "type": ["object", "null"] },
+    "columns": { "type": "array", "items": { "type": "string" } },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "symbol",
+          "name",
+          "modelRank",
+          "modelScore",
+          "modelPercentile",
+          "setupType",
+          "asOfDate"
+        ],
+        "properties": {
+          "symbol": { "type": "string" },
+          "name": { "type": "string" },
+          "sector": { "type": ["string", "null"] },
+          "industry": { "type": ["string", "null"] },
+          "marketCap": { "type": ["string", "null"] },
+          "marketCapValue": { "type": ["number", "null"] },
+          "modelRank": { "type": "number" },
+          "modelScore": { "type": "number" },
+          "modelPercentile": { "type": "number" },
+          "setupType": { "type": ["string", "null"] },
+          "setupTags": { "type": "array" },
+          "reboundActivationPrice": { "type": ["number", "null"] },
+          "stopSellPrice": { "type": ["number", "null"] },
+          "beta60d": { "type": ["number", "null"] },
+          "return7": { "type": ["number", "null"] },
+          "return14": { "type": ["number", "null"] },
+          "return30": { "type": ["number", "null"] },
+          "return60": { "type": ["number", "null"] },
+          "return90": { "type": ["number", "null"] },
+          "ytdReturn": { "type": ["number", "null"] },
+          "asOfDate": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

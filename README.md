@@ -15,9 +15,12 @@ flowchart TD
   modelFiles["models/rank/*<br/>Production model, metadata, explainability"] --> scorer
   universe["config/universe.json<br/>ETF universe and fallback stocks"] --> scorer
   scorer --> modelScores["data/model-rank-scores.json<br/>Intermediate model rankings, ignored by git"]
-  scorer --> referenceCache["data/model-reference-cache.json<br/>Daily S&P 500 reference cache"]
+  scorer --> referenceCache["data/cache/model-reference-cache.json<br/>Daily S&P 500 reference cache, ignored by git"]
 
   gate --> refresh["scripts/update-data.mjs<br/>Builds the market briefing"]
+  sourceParser["scripts/ingest/sources.mjs<br/>Markdown, RSS, HTML article extraction"] --> refresh
+  aiMemoBuilder["scripts/snapshot/ai-memo.mjs<br/>AI memo payload + response schema"] --> refresh
+  schemas["schemas/*.schema.json<br/>Dashboard JSON contracts"] --> refresh
   newsSources["config/news-sources.md<br/>Research and news source registry"] --> refresh
   aiPrompt["config/ai-recommendation-prompt.md<br/>AI memo instructions"] --> refresh
   universe --> refresh
@@ -29,9 +32,10 @@ flowchart TD
   refresh --> scorebook["data/model-scorebook.json<br/>Tactical Book full S&P 500 scoreboard"]
   refresh --> monitoring["data/model-monitoring.json<br/>Model Lab top-decile monitor"]
   refresh --> longResearch["data/long-horizon-research.json<br/>Strategic Book one-year model lens"]
-  refresh --> marketCaps["data/market-cap-cache.json<br/>Reusable market-cap lookups"]
+  refresh --> runtimeCache["data/cache/*<br/>Runtime caches, ignored by git"]
   gate --> refreshStatus["data/refresh-status.json<br/>Last run status, delay, model date, row counts"]
   refreshStatus --> ledger
+  monitor[".github/workflows/monitor-refresh.yml<br/>Missed-run dead-man check"] --> ledger
 
   snapshot --> command["Browser decision layer<br/>Command Center, action queue, contradictions"]
   command --> pages["GitHub Pages static site"]
@@ -168,26 +172,26 @@ The refresh script:
 - Builds `marketIntelligence` with rolling 24-hour professional drivers, important older context, earnings movers, market movers, and Reddit sentiment
 - Treats Reddit / WallStreetBets as attention and sentiment only, separated from professional commentary
 - Pulls Reddit through the free OAuth API when `REDDIT_CLIENT_ID` and `REDDIT_CLIENT_SECRET` are configured; otherwise it attempts public JSON, `old.reddit.com`, and RSS fallbacks
-- Writes `data/reddit-tape-cache.json` only when a clean Reddit ticker sample is extracted, then uses that last-good sample for up to 24 hours if the next refresh is blocked; cached sentiment is explicitly labeled as cached in the briefing
+- Writes `data/cache/reddit-tape-cache.json` only when a clean Reddit ticker sample is extracted, then uses that last-good sample for up to 24 hours if the next refresh is blocked; cached sentiment is explicitly labeled as cached in the briefing
 - Filters low-signal source items such as media-industry meta stories, publisher staffing announcements, and unrelated single-stock headlines before they can influence the Daily Read or Deeper Read
 - Builds a deterministic decision layer in the browser that turns the snapshot into stance, action queue, contradiction flags, sector/portfolio concentration, and retail-overlap checks
 - Reuses the fresh technical tape exported by `scripts/modeling/score_live_rank_model.py`; if that tape is unavailable and Yahoo chart history is temporarily rate-limited, stale technical values are left unavailable while sources, earnings, Reddit, macro, and eligible model context continue to refresh
 - Pulls S&P 500 constituents from Wikipedia when available
 - Adds ETFs from `config/universe.json`
-- Fetches delayed/end-of-day chart history from Yahoo Finance's public chart endpoint
+- Lets the Python scorer fetch delayed/end-of-day chart history from Yahoo Finance's public chart endpoint
 - Pulls selected macro series from FRED
 - Refreshes `data/macro-calendar.json` with the next six months of macro release dates from FRED release calendars, BEA's release schedule, and the Fed's FOMC calendar
 - Pulls same-day or recent official macro releases from primary-source pages once scheduled releases have occurred
-- Computes momentum, trend, breadth, RSI, volume, and relative-strength metrics
+- Computes momentum, trend, breadth, RSI, volume, relative-strength metrics, stop prices, activation prices, and sector/market technical rows in Python
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
 - Adds setup tags from the model scorer, including `Momentum Confirmed`, `Model Rebound Watch`, and `Not Momentum Confirmed`
 - Adds a rebound activation price for qualifying rebound-watch names, calculated as current close plus `0.75 x 20-day realized daily volatility`
 - Adds a stop-sell price for all current top-decile model names, plus other surfaced non-confirmed model candidates, during the model scorer's fresh price-history pass so the briefing builder does not make a second Yahoo request for the same names
-- Writes `data/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
+- Writes `data/cache/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
 - Re-scores the same fresh S&P 500 feature cache with the tuned 252-day model so `data/long-horizon-research.json` can show a full searchable Strategic Book without making a second Yahoo history pass
 - Writes fresh market-strip and sector-performance rows during the model scoring step so the dashboard has complete technical sections even when the later briefing builder avoids another large price-history fetch
 - Writes `data/model-scorebook.json` with every model-scored S&P 500 company, including rank, company metadata, market cap, model score, percentile, 60-day beta to SPY, trailing 7D, 14D, 30D, 60D, 90D calendar-lookback returns, and YTD return when fresh price history is available
-- Updates `data/market-cap-cache.json` from free public quote data and reuses recent values to keep the daily job reliable
+- Updates `data/cache/market-cap-cache.json` from free public quote data and reuses recent values to keep the daily job reliable
 - Enriches the top model candidates with company context from Nasdaq, company investor relations pages, and Yahoo Finance news RSS
 - Builds a lowest-ranked model book for the Stay Away section
 - Writes the dashboard snapshot to `data/snapshot.json`
@@ -200,7 +204,7 @@ To refresh model rankings before the dashboard snapshot:
   --model-dir models/long-horizon \
   --model-name xgboost_rank_sector252_15y_monthly_tuned_research \
   --output data/model-rank-scores-long-horizon.json \
-  --reference-cache data/model-reference-cache.json \
+  --reference-cache data/cache/model-reference-cache.json \
   --score-reference-cache
 node scripts/update-data.mjs
 ```
@@ -211,7 +215,7 @@ Or run both model scoring passes with:
 npm run score:models
 ```
 
-`data/model-rank-scores.json` and `data/model-rank-scores-long-horizon.json` are intermediate files and are ignored by git. The generated `data/snapshot.json` contains the briefing, tactical-card, market-intelligence, macro, and source-tape data needed by the static site. The generated `data/model-scorebook.json` powers the Tactical Book scoreboard. The generated `data/long-horizon-research.json` powers the Strategic Book. The generated `data/model-monitoring.json` powers the Model Lab monitor. The generated `data/model-reference-cache.json` is intentionally committed because it gives the private Ticker Lab and the long-horizon scoring pass a fresh daily S&P 500 baseline without rebuilding the full universe on every request.
+`data/model-rank-scores.json` and `data/model-rank-scores-long-horizon.json` are intermediate files and are ignored by git. The generated `data/snapshot.json` contains the briefing, tactical-card, market-intelligence, macro, and source-tape data needed by the static site. The generated `data/model-scorebook.json` powers the Tactical Book scoreboard. The generated `data/long-horizon-research.json` powers the Strategic Book. The generated `data/model-monitoring.json` powers the Model Lab monitor. Runtime caches now live under ignored `data/cache/` and are restored/saved by GitHub Actions cache rather than committed as dashboard artifacts.
 
 Some current constituents may be fetched but not scored if they do not have enough clean trailing data to populate every required feature. The scorer records those symbols in the snapshot model metadata.
 
@@ -229,6 +233,22 @@ SOURCE_ARTICLE_CANDIDATES=10
 COMPANY_CONTEXT_COUNT=12
 ```
 
+## Verification And Tests
+
+The main verification command is:
+
+```bash
+npm run verify
+```
+
+It runs JavaScript syntax checks, Python compile checks, fixture tests, dashboard JSON schema validation, freshness/rank/stop/activation assertions, and workflow contract checks. The fast fixture tests can also be run directly:
+
+```bash
+npm test
+```
+
+Current fixture coverage focuses on source-ingestion parsing and AI memo input construction, so parser and prompt-payload regressions fail quickly without requiring a full market refresh.
+
 ## AI Strategy Memo
 
 The AI layer is optional. If `OPENAI_API_KEY` is available, the refresh script calls the OpenAI Responses API and writes structured AI output into `data/snapshot.json`.
@@ -241,7 +261,7 @@ The intended division of labor is:
 - Same-day official macro releases are fed into the AI context separately from the future calendar, so a released payrolls/CPI/PPI/GDP/PCE report can drive the Daily Read before research publications have reacted.
 - The Daily Read is AI-written when available, but it is anchored to deterministic facts and falls back to a deterministic executive snapshot if the AI call fails.
 - The Daily Read is deterministic by default so the top of the report stays tightly grounded in the source tape, earnings movers, Reddit attention, macro calendar, and model facts. Set `AI_DAILY_READ=1` to let AI write the Daily Read when its output passes local fact-language guardrails.
-- The Deeper Read section asks the AI to choose the most interesting non-obvious source analysis from the last 7 days, explain the second-order market implication, and avoid repeating sources used in the prior refresh when enough alternatives exist. Rotation memory is stored in `data/deeper-read-history.json`.
+- The Deeper Read section asks the AI to choose the most interesting non-obvious source analysis from the last 7 days, explain the second-order market implication, and avoid repeating sources used in the prior refresh when enough alternatives exist. Rotation memory is stored in `data/cache/deeper-read-history.json`.
 - The Stay Away section is seeded deterministically from the lowest-ranked model names; AI may add concise commentary, but it cannot choose symbols outside that supplied avoid-candidate list.
 
 Create a local `.env` file:
@@ -285,7 +305,7 @@ REDDIT_CLIENT_SECRET=your_reddit_app_secret
 REDDIT_USER_AGENT="MarketPulse/0.1 by your-reddit-username"
 ```
 
-If OAuth is not configured, the script tries Reddit's public JSON endpoints, `old.reddit.com`, and RSS feeds. Those unauthenticated paths can work locally but are frequently blocked from hosted runners, which is why OAuth is the preferred reliable setup. When a live Reddit pull fails, the dashboard can show `data/reddit-tape-cache.json` for up to 24 hours, clearly labeled as a cached sentiment sample.
+If OAuth is not configured, the script tries Reddit's public JSON endpoints, `old.reddit.com`, and RSS feeds. Those unauthenticated paths can work locally but are frequently blocked from hosted runners, which is why OAuth is the preferred reliable setup. When a live Reddit pull fails, the dashboard can show `data/cache/reddit-tape-cache.json` for up to 24 hours, clearly labeled as a cached sentiment sample.
 
 ## Source Registry
 
@@ -313,7 +333,7 @@ Some sites block automated requests or hide publication data. In those cases, th
 
 ## Momentum Screen
 
-The screener ranks S&P 500 stocks and selected ETFs using end-of-day technical metrics, including:
+The Python scorer ranks S&P 500 stocks and selected ETFs using end-of-day technical metrics, including:
 
 - Price versus 20-day, 50-day, 100-day, and 200-day moving averages
 - Recent moving-average crossovers
@@ -397,7 +417,7 @@ The local server runs:
 
 The scorer:
 
-- Uses `data/model-reference-cache.json` when available for the daily S&P 500 reference scores
+- Uses `data/cache/model-reference-cache.json` when available for the daily S&P 500 reference scores
 - Fetches pasted non-reference tickers plus SPY and sector ETFs for live focus-ticker context
 - Falls back to rebuilding the full S&P 500 reference universe if the cache is unavailable or invalid
 - Scores the focus tickers with the same production XGBoost rank model
@@ -453,18 +473,19 @@ The workflow uses GitHub Actions timezone-aware schedules with `timezone: "Ameri
 
 `scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. On success, `scripts/write-refresh-status.mjs` records the completed target in `data/refresh-ledger.json`. That ledger prevents a delayed backup slot from rerunning a window that already succeeded, and it is more reliable than using only `data/refresh-status.json` because manual refreshes can update the status file without erasing prior scheduled-window history.
 
+`.github/workflows/monitor-refresh.yml` runs after the morning and evening cutoff windows. It calls `scripts/monitor-refreshes.mjs` and fails if the expected Pacific target is missing from `data/refresh-ledger.json`, giving the project a visible dead-man check for skipped or severely delayed refreshes.
+
 When the refresh runs successfully, it:
 
 - Regenerates `data/macro-calendar.json` before the dashboard snapshot so macro dates are not hand-keyed
 - Scores the current S&P 500 universe with the committed XGBoost rank model when dependencies and free data endpoints are available
-- Refreshes `data/model-reference-cache.json` for fast Ticker Lab scoring
+- Restores and saves ignored runtime caches under `data/cache/`, including the reference cache, market-cap cache, Reddit fallback sample, and Deeper Read rotation memory
 - Regenerates `data/snapshot.json`
-- Regenerates `data/model-scorebook.json` and `data/market-cap-cache.json`
-- Updates `data/deeper-read-history.json` so the next AI Deeper Read can avoid repeating the same source mix when enough alternatives exist
-- Updates `data/reddit-tape-cache.json` when Reddit ingestion produces clean ticker concentration, giving scheduled refreshes a transparent last-good fallback when Reddit blocks a runner
+- Regenerates `data/model-scorebook.json`
+- Updates ignored cache files under `data/cache/` when reusable runtime state changes
 - Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, model date, and row counts
 - Updates `data/refresh-ledger.json` after successful scheduled runs so delayed backup attempts can detect already-completed morning/evening windows
-- Commits the updated snapshot, scorebook, refresh status, market-cap cache, and reference cache back to `main` if any changed
+- Commits only the static-site JSON artifacts and scheduler state back to `main` if any changed
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
 - Skips its own commit/deploy cleanly if `main` advanced while a delayed refresh was running, which prevents an older scheduled run from overwriting a newer manual refresh
 
@@ -959,22 +980,26 @@ app.js                             Browser rendering logic
 scripts/update-data.mjs            Data refresh, source ingestion, screening, AI call
 scripts/update-macro-calendar.mjs  Scrapes rolling BLS/FRED, BEA, and Fed release calendars
 scripts/check-refresh-window.mjs   GitHub Actions Pacific refresh gate and duplicate-run guard
+scripts/monitor-refreshes.mjs      Missed-refresh dead-man monitor
+scripts/ingest/sources.mjs         Markdown, RSS, and source-page article extraction helpers
+scripts/snapshot/ai-memo.mjs       AI memo input payload and response-schema helpers
+scripts/snapshot/schemas.mjs       Local schema validator for dashboard JSON artifacts
 scripts/local-dashboard-server.mjs Static server and private Ticker Lab API
 config/news-sources.md             Editable public source registry
 config/universe.json               ETF and fallback universe configuration
 config/ai-recommendation-prompt.md AI memo prompt
 config/runtime.json                Public runtime config for optional hosted Ticker Lab API URL
+schemas/*.schema.json              Dashboard JSON contracts for generated page artifacts
 data/snapshot.json                 Generated dashboard data
 data/macro-calendar.json           Generated next-six-month macro release calendar
 data/model-scorebook.json          Generated full S&P 500 model scoreboard
 data/model-monitoring.json         Generated top-decile dashboard monitoring snapshot
 data/long-horizon-research.json    Generated Strategic Book dashboard snapshot
 data/model-rank-scores-long-horizon.json Ignored intermediate live one-year model scores
-data/model-reference-cache.json    Generated daily S&P 500 model reference cache
-data/market-cap-cache.json         Generated market-cap lookup cache for scorebook rows
-data/reddit-tape-cache.json        Generated last-good Reddit ticker attention cache
+data/cache/                        Ignored runtime caches restored/saved by GitHub Actions cache
 data/refresh-status.json           Generated refresh diagnostics and last-run health status
 data/refresh-ledger.json           Generated successful scheduled-window ledger
+tests/                             Fast fixture tests for source ingestion and AI memo inputs
 analysis/model-monitoring/         Local model monitoring analyses and charts
 Dockerfile                         Container image for the private Ticker Lab backend
 render.yaml                        Render-style backend service blueprint

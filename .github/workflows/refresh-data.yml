@@ -75,6 +75,19 @@ jobs:
         if: steps.pacific_time.outputs.run_refresh == 'true'
         run: python -m pip install -r scripts/modeling/requirements.txt
 
+      - name: Restore runtime cache
+        if: steps.pacific_time.outputs.run_refresh == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: data/cache
+          key: market-pulse-runtime-cache-${{ github.ref_name }}-${{ github.run_id }}
+          restore-keys: |
+            market-pulse-runtime-cache-${{ github.ref_name }}-
+
+      - name: Prepare runtime cache directory
+        if: steps.pacific_time.outputs.run_refresh == 'true'
+        run: mkdir -p data/cache
+
       - name: Update macro calendar
         if: steps.pacific_time.outputs.run_refresh == 'true'
         run: npm run refresh:calendar
@@ -94,7 +107,7 @@ jobs:
           --model-dir models/long-horizon
           --model-name xgboost_rank_sector252_15y_monthly_tuned_research
           --output data/model-rank-scores-long-horizon.json
-          --reference-cache data/model-reference-cache.json
+          --reference-cache data/cache/model-reference-cache.json
           --score-reference-cache
 
       - name: Stop if model scoring failed
@@ -151,7 +164,7 @@ jobs:
             exit 0
           fi
           echo "remote_changed=false" >> "$GITHUB_OUTPUT"
-          git add data/snapshot.json data/model-scorebook.json data/model-monitoring.json data/long-horizon-research.json data/model-reference-cache.json data/market-cap-cache.json data/deeper-read-history.json data/reddit-tape-cache.json data/refresh-status.json data/refresh-ledger.json data/macro-calendar.json
+          git add data/snapshot.json data/model-scorebook.json data/model-monitoring.json data/long-horizon-research.json data/refresh-status.json data/refresh-ledger.json data/macro-calendar.json
           if git diff --cached --quiet; then
             echo "No refresh output changes to commit."
           else
@@ -181,6 +194,13 @@ jobs:
             git commit -m "Record failed refresh status"
             git push
           fi
+
+      - name: Save runtime cache
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: data/cache
+          key: market-pulse-runtime-cache-${{ github.ref_name }}-${{ github.run_id }}
 
       - name: Prepare static site
         if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_success_outputs.outputs.remote_changed != 'true'

@@ -1,0 +1,31 @@
+name: Monitor Refresh Health
+
+on:
+  schedule:
+    - cron: "45 7 * * *"
+      timezone: "America/Los_Angeles"
+    - cron: "45 18 * * *"
+      timezone: "America/Los_Angeles"
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  SCHEDULE_TIMEZONE: America/Los_Angeles
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Check for missed refresh targets
+        run: node scripts/monitor-refreshes.mjs

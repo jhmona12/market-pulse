@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "python3 -m http.server 4173",
     "dev:local": "node scripts/local-dashboard-server.mjs",
-    "score:models": "python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json --max-workers 4 && python scripts/modeling/score_live_rank_model.py --model-dir models/long-horizon --model-name xgboost_rank_sector252_15y_monthly_tuned_research --output data/model-rank-scores-long-horizon.json --reference-cache data/model-reference-cache.json --score-reference-cache",
+    "score:models": "python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json --max-workers 4 && python scripts/modeling/score_live_rank_model.py --model-dir models/long-horizon --model-name xgboost_rank_sector252_15y_monthly_tuned_research --output data/model-rank-scores-long-horizon.json --reference-cache data/cache/model-reference-cache.json --score-reference-cache",
     "refresh": "node scripts/update-macro-calendar.mjs && node scripts/update-data.mjs",
     "refresh:calendar": "node scripts/update-macro-calendar.mjs",
     "refresh:sample": "node scripts/update-macro-calendar.mjs && MAX_TICKERS=80 node scripts/update-data.mjs",
     "configure:ticker-backend": "node scripts/configure-ticker-backend.mjs",
-    "verify": "node scripts/verify.mjs"
+    "monitor:refresh": "node scripts/monitor-refreshes.mjs",
+    "verify": "node scripts/verify.mjs",
+    "test": "node --test tests/*.test.mjs"
   }
 }

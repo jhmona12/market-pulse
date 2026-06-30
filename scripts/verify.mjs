@@ -1,8 +1,10 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
+import { validateDashboardSchemas } from "./snapshot/schemas.mjs";
 
 const root = process.cwd();
+const node = process.execPath;
 
 function fail(message) {
   console.error(message);
@@ -71,14 +73,19 @@ function sortedSourceArticles(sources) {
     .slice(0, 36);
 }
 
-run("node", ["--check", "app.js"]);
-run("node", ["--check", "scripts/verify.mjs"]);
-run("node", ["--check", "scripts/update-data.mjs"]);
-run("node", ["--check", "scripts/update-macro-calendar.mjs"]);
-run("node", ["--check", "scripts/local-dashboard-server.mjs"]);
-run("node", ["--check", "scripts/configure-ticker-backend.mjs"]);
-run("node", ["--check", "scripts/write-refresh-status.mjs"]);
-run("node", ["--check", "scripts/check-refresh-window.mjs"]);
+run(node, ["--check", "app.js"]);
+run(node, ["--check", "scripts/verify.mjs"]);
+run(node, ["--check", "scripts/update-data.mjs"]);
+run(node, ["--check", "scripts/update-macro-calendar.mjs"]);
+run(node, ["--check", "scripts/local-dashboard-server.mjs"]);
+run(node, ["--check", "scripts/configure-ticker-backend.mjs"]);
+run(node, ["--check", "scripts/write-refresh-status.mjs"]);
+run(node, ["--check", "scripts/check-refresh-window.mjs"]);
+run(node, ["--check", "scripts/monitor-refreshes.mjs"]);
+run(node, ["--check", "scripts/ingest/sources.mjs"]);
+run(node, ["--check", "scripts/snapshot/ai-memo.mjs"]);
+run(node, ["--check", "scripts/snapshot/schemas.mjs"]);
+run(node, ["--test", ...filesIn(join(root, "tests"), (path) => path.endsWith(".test.mjs"))]);
 
 const python = process.env.PYTHON || "python3";
 const pythonFiles = [
@@ -93,7 +100,6 @@ const requiredJsonFiles = [
   "data/model-scorebook.json",
   "data/model-monitoring.json",
   "data/long-horizon-research.json",
-  "data/model-reference-cache.json",
   "data/macro-calendar.json",
   "data/refresh-status.json",
   "data/refresh-ledger.json"
@@ -107,6 +113,8 @@ const monitoring = readJson("data/model-monitoring.json");
 const longHorizonResearch = readJson("data/long-horizon-research.json");
 const macroCalendar = readJson("data/macro-calendar.json");
 const refreshLedger = readJson("data/refresh-ledger.json");
+const schemaErrors = validateDashboardSchemas(root);
+if (schemaErrors.length) fail(`dashboard schema validation failed:\n${schemaErrors.slice(0, 25).join("\n")}`);
 if (!Array.isArray(snapshot?.opportunities)) fail("data/snapshot.json is missing opportunities[]");
 if (!Array.isArray(scorebook?.rows)) fail("data/model-scorebook.json is missing rows[]");
 if (!Array.isArray(monitoring?.currentTopDecile)) fail("data/model-monitoring.json is missing currentTopDecile[]");
@@ -218,8 +226,8 @@ const refreshWorkflow = readFileSync(join(root, ".github/workflows/refresh-data.
 if (!refreshWorkflow.includes("REDDIT_CLIENT_ID")) {
   fail(".github/workflows/refresh-data.yml does not pass Reddit OAuth secrets to the refresh script");
 }
-if (!refreshWorkflow.includes("data/reddit-tape-cache.json")) {
-  fail(".github/workflows/refresh-data.yml does not preserve data/reddit-tape-cache.json");
+if (!refreshWorkflow.includes("actions/cache/restore@v4") || !refreshWorkflow.includes("actions/cache/save@v4")) {
+  fail(".github/workflows/refresh-data.yml does not restore/save data/cache runtime state");
 }
 if (!refreshWorkflow.includes("timezone: \"America/Los_Angeles\"")) {
   fail(".github/workflows/refresh-data.yml does not use Pacific timezone-aware schedules");
@@ -229,6 +237,19 @@ if (!refreshWorkflow.includes("node scripts/check-refresh-window.mjs")) {
 }
 if (!refreshWorkflow.includes("data/refresh-ledger.json")) {
   fail(".github/workflows/refresh-data.yml does not preserve or publish data/refresh-ledger.json");
+}
+if (refreshWorkflow.includes("data/model-reference-cache.json") || refreshWorkflow.includes("data/market-cap-cache.json") || refreshWorkflow.includes("data/reddit-tape-cache.json") || refreshWorkflow.includes("data/deeper-read-history.json")) {
+  fail(".github/workflows/refresh-data.yml should not commit legacy runtime cache files");
+}
+
+const monitorWorkflow = readFileSync(join(root, ".github/workflows/monitor-refresh.yml"), "utf8");
+if (!monitorWorkflow.includes("node scripts/monitor-refreshes.mjs")) {
+  fail(".github/workflows/monitor-refresh.yml does not run scripts/monitor-refreshes.mjs");
+}
+
+const updateDataSource = readFileSync(join(root, "scripts/update-data.mjs"), "utf8");
+if (/query1\.finance\.yahoo\.com\/v8\/finance\/chart|technicalRowScore/.test(updateDataSource)) {
+  fail("scripts/update-data.mjs is reintroducing price/technical ownership that belongs in Python");
 }
 
 const localServer = readFileSync(join(root, "scripts/local-dashboard-server.mjs"), "utf8");
