@@ -1,6 +1,6 @@
 # Market Pulse
 
-Market Pulse is a static market research dashboard for scheduled personal market reviews. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note, with redundant refresh attempts shortly after 5 AM and 4 PM Pacific.
+Market Pulse is a static market research dashboard for scheduled personal market reviews. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note, with redundant refresh attempts shortly after 5 AM and 4 PM Pacific and live-site confirmation before a scheduled window is marked complete.
 
 The project is built to run cheaply with free data sources. It is not an intraday trading terminal and it is not financial advice.
 
@@ -33,9 +33,11 @@ flowchart TD
   refresh --> monitoring["data/model-monitoring.json<br/>Model Lab top-decile monitor"]
   refresh --> longResearch["data/long-horizon-research.json<br/>Strategic Book one-year model lens"]
   refresh --> runtimeCache["data/cache/*<br/>Runtime caches, ignored by git"]
-  gate --> refreshStatus["data/refresh-status.json<br/>Last run status, delay, model date, row counts"]
-  refreshStatus --> ledger
-  monitor[".github/workflows/monitor-refresh.yml<br/>Missed-run dead-man check"] --> ledger
+  gate --> refreshStatus["data/refresh-status.json<br/>Last run status, publish state, delay, model date, row counts"]
+  pages --> publishCheck["Refresh workflow<br/>Deploy + live status confirmation"]
+  publishCheck --> ledger
+  monitor[".github/workflows/monitor-refresh.yml<br/>Missed-run + stale-site dead-man check"] --> ledger
+  monitor --> pages
 
   snapshot --> command["Browser decision layer<br/>Command Center, action queue, contradictions"]
   command --> pages["GitHub Pages static site"]
@@ -154,7 +156,7 @@ PORT=4174 npm run dev:local
 
 ## Refreshing Data
 
-GitHub Actions runs the full refresh from `.github/workflows/refresh-data.yml`. Because GitHub's scheduled runner is best-effort and can delay or drop individual scheduled runs, the workflow uses two attempts for each target window: shortly after 5 AM Pacific and shortly after 4 PM Pacific, with a 30-minute backup attempt for each. `scripts/check-refresh-window.mjs` checks `data/refresh-ledger.json` first and `data/refresh-status.json` as a fallback, so each Pacific morning/evening window refreshes only once even when a scheduled runner starts hours late.
+GitHub Actions runs the full refresh from `.github/workflows/refresh-data.yml`. Because GitHub's scheduled runner is best-effort and can delay or drop individual scheduled runs, the workflow uses two attempts for each target window: shortly after 5 AM Pacific and shortly after 4 PM Pacific, with a 30-minute backup attempt for each. `scripts/check-refresh-window.mjs` checks `data/refresh-ledger.json` first and only treats `data/refresh-status.json` as a fallback when it explicitly says `publishStatus: "published"`, so a data-generation success cannot block a backup retry if GitHub Pages publication failed.
 
 Run the refresh script:
 
@@ -471,9 +473,9 @@ It is configured to refresh twice daily shortly after 5 AM Pacific and 4 PM Paci
 
 The workflow uses GitHub Actions timezone-aware schedules with `timezone: "America/Los_Angeles"`, so the cron entries stay tied to Pacific time across daylight saving changes. The schedule intentionally avoids minute `0`. GitHub documents that scheduled workflows may be delayed during high-load periods, especially at the start of every hour, and that queued scheduled jobs can be dropped. Running at minutes `17` and `47` gives each target window a backup attempt while keeping the schedule easier to audit.
 
-`scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. On success, `scripts/write-refresh-status.mjs` records the completed target in `data/refresh-ledger.json`. That ledger prevents a delayed backup slot from rerunning a window that already succeeded, and it is more reliable than using only `data/refresh-status.json` because manual refreshes can update the status file without erasing prior scheduled-window history.
+`scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. The refresh workflow writes a local success status before packaging the Pages artifact, deploys the artifact, confirms that the live site serves the expected `data/refresh-status.json` run id, and only then commits `data/refresh-ledger.json` back to `main`. If Pages deployment or live confirmation fails, the target is not recorded as complete, which lets the backup scheduled slot retry the same morning/evening window.
 
-`.github/workflows/monitor-refresh.yml` runs after the morning and evening cutoff windows. It calls `scripts/monitor-refreshes.mjs` and fails if the expected Pacific target is missing from `data/refresh-ledger.json`, giving the project a visible dead-man check for skipped or severely delayed refreshes.
+`.github/workflows/monitor-refresh.yml` runs after the morning and evening cutoff windows. It calls `scripts/monitor-refreshes.mjs` and fails if the expected Pacific target is missing from the committed ledger or from the live GitHub Pages dashboard, giving the project a visible dead-man check for skipped, severely delayed, or stale-site refreshes.
 
 When the refresh runs successfully, it:
 
@@ -483,13 +485,14 @@ When the refresh runs successfully, it:
 - Regenerates `data/snapshot.json`
 - Regenerates `data/model-scorebook.json`
 - Updates ignored cache files under `data/cache/` when reusable runtime state changes
-- Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, model date, and row counts
-- Updates `data/refresh-ledger.json` after successful scheduled runs so delayed backup attempts can detect already-completed morning/evening windows
-- Commits only the static-site JSON artifacts and scheduler state back to `main` if any changed
+- Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, publish status, model date, and row counts
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
+- Confirms the live site serves the expected refresh-status run id before the run is treated as complete
+- Updates and commits `data/refresh-ledger.json` only after successful scheduled runs have published, so delayed backup attempts can retry failed publishes but skip already-completed morning/evening windows
+- Commits only the static-site JSON artifacts and scheduler state back to `main` after live publish confirmation
 - Skips its own commit/deploy cleanly if `main` advanced while a delayed refresh was running, which prevents an older scheduled run from overwriting a newer manual refresh
 
-If model scoring fails, the workflow writes a failure status and deploys that diagnostic file with the last available dashboard data instead of silently publishing a model-less "success" snapshot.
+If model scoring or publication fails, the workflow records a failure status without marking the scheduled target complete. That keeps the failure visible in Actions and lets the backup scheduled slot retry instead of silently treating a non-published run as successful.
 
 GitHub scheduled workflows may start late; GitHub does not guarantee exact cron start time. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
 
@@ -1003,8 +1006,8 @@ data/model-monitoring.json         Generated top-decile dashboard monitoring sna
 data/long-horizon-research.json    Generated Strategic Book dashboard snapshot
 data/model-rank-scores-long-horizon.json Ignored intermediate live one-year model scores
 data/cache/                        Ignored runtime caches restored/saved by GitHub Actions cache
-data/refresh-status.json           Generated refresh diagnostics and last-run health status
-data/refresh-ledger.json           Generated successful scheduled-window ledger
+data/refresh-status.json           Generated refresh diagnostics, publish status, and last-run health status
+data/refresh-ledger.json           Generated successfully published scheduled-window ledger
 tests/                             Fast fixture tests for source ingestion and AI memo inputs
 analysis/model-monitoring/         Local model monitoring analyses and charts
 Dockerfile                         Container image for the private Ticker Lab backend

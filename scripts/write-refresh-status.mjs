@@ -23,10 +23,13 @@ const snapshot = await readJson("data/snapshot.json");
 const scorebook = await readJson("data/model-scorebook.json");
 const repository = process.env.GITHUB_REPOSITORY || null;
 const runId = process.env.GITHUB_RUN_ID || null;
+const publishStatus = process.env.PAGES_PUBLISH_STATUS
+  || (status === "success" ? "published" : status === "failure" ? "not_published" : null);
 
 const payload = {
   generatedAt: new Date().toISOString(),
   status,
+  publishStatus,
   message,
   workflow: process.env.GITHUB_WORKFLOW || "Refresh Market Data",
   eventName: process.env.GITHUB_EVENT_NAME || null,
@@ -61,12 +64,13 @@ const payload = {
 await writeFile(join(root, "data/refresh-status.json"), `${JSON.stringify(payload, null, 2)}\n`);
 
 const targetKey = payload.refreshTargetKey;
-if (status === "success" && targetKey && targetKey !== "manual") {
+if (status === "success" && publishStatus === "published" && targetKey && targetKey !== "manual") {
   const existingLedger = (await readJson("data/refresh-ledger.json")) || {};
   const successfulTargets = Array.isArray(existingLedger.successfulTargets) ? existingLedger.successfulTargets : [];
   const nextEntry = {
     targetKey,
     targetWindow: payload.refreshTargetWindow,
+    publishStatus,
     statusGeneratedAt: payload.generatedAt,
     scheduledPacific: payload.scheduledPacific,
     scheduledUtc: payload.scheduledUtc,

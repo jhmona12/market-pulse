@@ -78,10 +78,14 @@ function targetWindowForHour(hour) {
 function ledgerHasTarget(targetKey) {
   const ledger = readJson("data/refresh-ledger.json") || {};
   const successfulTargets = Array.isArray(ledger.successfulTargets) ? ledger.successfulTargets : [];
-  if (successfulTargets.some((entry) => entry === targetKey || entry?.targetKey === targetKey)) return true;
+  if (successfulTargets.some((entry) => {
+    if (entry === targetKey) return true;
+    if (entry?.targetKey !== targetKey) return false;
+    return !entry.publishStatus || entry.publishStatus === "published";
+  })) return true;
 
   const prior = readJson("data/refresh-status.json") || {};
-  return prior.status === "success" && prior.refreshTargetKey === targetKey;
+  return prior.status === "success" && prior.publishStatus === "published" && prior.refreshTargetKey === targetKey;
 }
 
 function writeOutputs(values) {

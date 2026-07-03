@@ -250,6 +250,20 @@ if (!refreshWorkflow.includes("node scripts/check-refresh-window.mjs")) {
 if (!refreshWorkflow.includes("data/refresh-ledger.json")) {
   fail(".github/workflows/refresh-data.yml does not preserve or publish data/refresh-ledger.json");
 }
+const deployIndex = refreshWorkflow.indexOf("name: Deploy Pages");
+const liveConfirmIndex = refreshWorkflow.indexOf("name: Confirm live Pages status");
+const commitPublishedIndex = refreshWorkflow.indexOf("name: Commit published refresh outputs");
+if (deployIndex === -1 || liveConfirmIndex === -1 || commitPublishedIndex === -1) {
+  fail(".github/workflows/refresh-data.yml must deploy, confirm the live Pages status, then commit published refresh outputs");
+} else if (!(deployIndex < liveConfirmIndex && liveConfirmIndex < commitPublishedIndex)) {
+  fail(".github/workflows/refresh-data.yml must not commit the successful refresh ledger before Pages deploy and live confirmation");
+}
+if (!refreshWorkflow.includes("PAGES_PUBLISH_STATUS: published") || !refreshWorkflow.includes("PAGES_PUBLISH_STATUS: not_published")) {
+  fail(".github/workflows/refresh-data.yml does not record published/not_published refresh status states");
+}
+if (!refreshWorkflow.includes("group: pages")) {
+  fail(".github/workflows/refresh-data.yml must share the Pages concurrency group with the deploy workflow");
+}
 if (refreshWorkflow.includes("data/model-reference-cache.json") || refreshWorkflow.includes("data/market-cap-cache.json") || refreshWorkflow.includes("data/reddit-tape-cache.json") || refreshWorkflow.includes("data/deeper-read-history.json")) {
   fail(".github/workflows/refresh-data.yml should not commit legacy runtime cache files");
 }
@@ -260,6 +274,9 @@ if (!refreshWorkflow.includes("cp -R src public/src")) {
 const monitorWorkflow = readFileSync(join(root, ".github/workflows/monitor-refresh.yml"), "utf8");
 if (!monitorWorkflow.includes("node scripts/monitor-refreshes.mjs")) {
   fail(".github/workflows/monitor-refresh.yml does not run scripts/monitor-refreshes.mjs");
+}
+if (!monitorWorkflow.includes("LIVE_DASHBOARD_BASE_URL")) {
+  fail(".github/workflows/monitor-refresh.yml does not check the live GitHub Pages dashboard");
 }
 
 const updateDataSource = readFileSync(join(root, "scripts/update-data.mjs"), "utf8");

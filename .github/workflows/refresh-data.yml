@@ -25,7 +25,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: refresh-market-data
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -140,18 +140,101 @@ jobs:
         env:
           MODEL_SCORING_OUTCOME: ${{ steps.score_model.outcome }}
           LONG_HORIZON_SCORING_OUTCOME: ${{ steps.score_long_horizon_model.outcome }}
-        run: node scripts/write-refresh-status.mjs success "Refresh completed and generated dashboard artifacts. Check modelStatus and marketDataStatus for freshness guardrails."
+          PAGES_PUBLISH_STATUS: published
+        run: node scripts/write-refresh-status.mjs success "Refresh completed, passed verification, and was packaged for GitHub Pages publication. Check modelStatus and marketDataStatus for freshness guardrails."
 
-      - name: Write failed refresh status
-        if: failure() && steps.pacific_time.outputs.run_refresh == 'true'
-        env:
-          MODEL_SCORING_OUTCOME: ${{ steps.score_model.outcome }}
-          LONG_HORIZON_SCORING_OUTCOME: ${{ steps.score_long_horizon_model.outcome }}
-        run: node scripts/write-refresh-status.mjs failure "Refresh workflow failed before completion; inspect the linked GitHub Actions run."
-
-      - name: Commit successful refresh outputs
-        id: commit_success_outputs
+      - name: Check remote branch before publish
+        id: publish_guard
         if: success() && steps.pacific_time.outputs.run_refresh == 'true'
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          remote_sha="$(git rev-parse "origin/$GITHUB_REF_NAME")"
+          local_sha="$(git rev-parse HEAD)"
+          if [ "$local_sha" != "$remote_sha" ]; then
+            echo "Remote branch advanced during this refresh; skipping commit and Pages deploy to avoid overwriting newer output."
+            echo "remote_changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "remote_changed=false" >> "$GITHUB_OUTPUT"
+
+      - name: Save runtime cache
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: data/cache
+          key: market-pulse-runtime-cache-${{ github.ref_name }}-${{ github.run_id }}
+
+      - name: Prepare static site
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
+        run: |
+          mkdir -p public/data public/config
+          cp index.html styles.css app.js public/
+          cp -R src public/src
+          cp data/snapshot.json public/data/snapshot.json
+          cp data/model-scorebook.json public/data/model-scorebook.json
+          cp data/model-monitoring.json public/data/model-monitoring.json
+          if [ -f data/long-horizon-research.json ]; then
+            cp data/long-horizon-research.json public/data/long-horizon-research.json
+          fi
+          cp data/macro-calendar.json public/data/macro-calendar.json
+          cp data/refresh-status.json public/data/refresh-status.json
+          cp data/refresh-ledger.json public/data/refresh-ledger.json
+          cp config/runtime.json public/config/runtime.json
+
+      - name: Configure Pages
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy Pages
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Confirm live Pages status
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_RUN_ID: ${{ github.run_id }}
+        run: |
+          node --input-type=module <<'NODE'
+          const pageUrl = process.env.PAGE_URL;
+          const expectedRunId = String(process.env.EXPECTED_RUN_ID || "");
+          if (!pageUrl) throw new Error("Deploy Pages did not return a page_url.");
+          const statusUrl = new URL("data/refresh-status.json", pageUrl).toString();
+
+          let lastError = null;
+          for (let attempt = 1; attempt <= 12; attempt += 1) {
+            try {
+              const response = await fetch(statusUrl, { cache: "no-store" });
+              if (!response.ok) throw new Error(`HTTP ${response.status}`);
+              const status = await response.json();
+              if (
+                String(status.runId || "") === expectedRunId
+                && status.status === "success"
+                && status.publishStatus === "published"
+              ) {
+                console.log(`Confirmed live Pages status for run ${expectedRunId} at ${statusUrl}`);
+                process.exit(0);
+              }
+              lastError = new Error(`live status has runId=${status.runId || "missing"} status=${status.status || "missing"} publishStatus=${status.publishStatus || "missing"}`);
+            } catch (error) {
+              lastError = error;
+            }
+            console.log(`Waiting for live Pages status (${attempt}/12): ${lastError.message}`);
+            await new Promise((resolve) => setTimeout(resolve, 10000));
+          }
+          throw new Error(`Live Pages status did not reflect run ${expectedRunId}: ${lastError?.message || "unknown error"}`);
+          NODE
+
+      - name: Commit published refresh outputs
+        id: commit_success_outputs
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -159,7 +242,7 @@ jobs:
           remote_sha="$(git rev-parse "origin/$GITHUB_REF_NAME")"
           local_sha="$(git rev-parse HEAD)"
           if [ "$local_sha" != "$remote_sha" ]; then
-            echo "Remote branch advanced during this refresh; skipping commit and Pages deploy to avoid overwriting newer output."
+            echo "Remote branch advanced after Pages deploy; skipping commit to avoid overwriting newer output."
             echo "remote_changed=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -171,6 +254,14 @@ jobs:
             git commit -m "Refresh market snapshot"
             git push
           fi
+
+      - name: Write failed refresh status
+        if: failure() && steps.pacific_time.outputs.run_refresh == 'true'
+        env:
+          MODEL_SCORING_OUTCOME: ${{ steps.score_model.outcome }}
+          LONG_HORIZON_SCORING_OUTCOME: ${{ steps.score_long_horizon_model.outcome }}
+          PAGES_PUBLISH_STATUS: not_published
+        run: node scripts/write-refresh-status.mjs failure "Refresh workflow failed before the dashboard was published; inspect the linked GitHub Actions run."
 
       - name: Commit failed refresh status
         id: commit_failure_status
@@ -194,42 +285,3 @@ jobs:
             git commit -m "Record failed refresh status"
             git push
           fi
-
-      - name: Save runtime cache
-        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: data/cache
-          key: market-pulse-runtime-cache-${{ github.ref_name }}-${{ github.run_id }}
-
-      - name: Prepare static site
-        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_success_outputs.outputs.remote_changed != 'true'
-        run: |
-          mkdir -p public/data public/config
-          cp index.html styles.css app.js public/
-          cp -R src public/src
-          cp data/snapshot.json public/data/snapshot.json
-          cp data/model-scorebook.json public/data/model-scorebook.json
-          cp data/model-monitoring.json public/data/model-monitoring.json
-          if [ -f data/long-horizon-research.json ]; then
-            cp data/long-horizon-research.json public/data/long-horizon-research.json
-          fi
-          cp data/macro-calendar.json public/data/macro-calendar.json
-          cp data/refresh-status.json public/data/refresh-status.json
-          cp data/refresh-ledger.json public/data/refresh-ledger.json
-          cp config/runtime.json public/config/runtime.json
-
-      - name: Configure Pages
-        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_success_outputs.outputs.remote_changed != 'true'
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_success_outputs.outputs.remote_changed != 'true'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
-
-      - name: Deploy Pages
-        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.commit_success_outputs.outputs.remote_changed != 'true'
-        id: deployment
-        uses: actions/deploy-pages@v4
