@@ -1,6 +1,6 @@
 # Market Pulse
 
-Market Pulse is a static market research dashboard for scheduled personal market reviews. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note, with redundant refresh attempts shortly after 5 AM and 4 PM Pacific and live-site confirmation before a scheduled window is marked complete.
+Market Pulse is a static market research dashboard for scheduled personal market reviews. It combines macro data, public market commentary, sector performance, and momentum screens into a hedge-fund-style research note, with redundant refresh attempts shortly after 5 AM and 4 PM Pacific plus live-site monitoring for stale publishes.
 
 The project is built to run cheaply with free data sources. It is not an intraday trading terminal and it is not financial advice.
 
@@ -34,7 +34,7 @@ flowchart TD
   refresh --> longResearch["data/long-horizon-research.json<br/>Strategic Book one-year model lens"]
   refresh --> runtimeCache["data/cache/*<br/>Runtime caches, ignored by git"]
   gate --> refreshStatus["data/refresh-status.json<br/>Last run status, publish state, delay, model date, row counts"]
-  pages --> publishCheck["Refresh workflow<br/>Deploy + live status confirmation"]
+  pages --> publishCheck["Refresh workflow<br/>Deploy + non-blocking live status probe"]
   publishCheck --> ledger
   monitor[".github/workflows/monitor-refresh.yml<br/>Missed-run + stale-site dead-man check"] --> ledger
   monitor --> pages
@@ -473,7 +473,7 @@ It is configured to refresh twice daily shortly after 5 AM Pacific and 4 PM Paci
 
 The workflow uses GitHub Actions timezone-aware schedules with `timezone: "America/Los_Angeles"`, so the cron entries stay tied to Pacific time across daylight saving changes. The schedule intentionally avoids minute `0`. GitHub documents that scheduled workflows may be delayed during high-load periods, especially at the start of every hour, and that queued scheduled jobs can be dropped. Running at minutes `17` and `47` gives each target window a backup attempt while keeping the schedule easier to audit.
 
-`scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. The refresh workflow writes a local success status before packaging the Pages artifact, deploys the artifact, confirms that the live site serves the expected `data/refresh-status.json` run id, and only then commits `data/refresh-ledger.json` back to `main`. If Pages deployment or live confirmation fails, the target is not recorded as complete, which lets the backup scheduled slot retry the same morning/evening window.
+`scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. The refresh workflow writes a local success status before packaging the Pages artifact, deploys the artifact, and then runs a non-blocking live-site probe against `data/refresh-status.json`. The ledger is committed only after `actions/deploy-pages` succeeds, so true publication failures remain retryable, while normal GitHub Pages/CDN propagation lag does not turn an otherwise successful refresh into a failed workflow.
 
 `.github/workflows/monitor-refresh.yml` runs after the morning and evening cutoff windows. It calls `scripts/monitor-refreshes.mjs` and fails if the expected Pacific target is missing from the committed ledger or from the live GitHub Pages dashboard, giving the project a visible dead-man check for skipped, severely delayed, or stale-site refreshes.
 
@@ -487,9 +487,9 @@ When the refresh runs successfully, it:
 - Updates ignored cache files under `data/cache/` when reusable runtime state changes
 - Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, publish status, model date, and row counts
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
-- Confirms the live site serves the expected refresh-status run id before the run is treated as complete
-- Updates and commits `data/refresh-ledger.json` only after successful scheduled runs have published, so delayed backup attempts can retry failed publishes but skip already-completed morning/evening windows
-- Commits only the static-site JSON artifacts and scheduler state back to `main` after live publish confirmation
+- Probes whether the live site already serves the expected refresh-status run id; this is diagnostic because GitHub Pages can lag briefly after deployment
+- Updates and commits `data/refresh-ledger.json` only after `actions/deploy-pages` succeeds, so delayed backup attempts can retry true failed publishes but skip already-completed morning/evening windows
+- Commits only the static-site JSON artifacts and scheduler state back to `main` after successful Pages deployment
 - Skips its own commit/deploy cleanly if `main` advanced while a delayed refresh was running, which prevents an older scheduled run from overwriting a newer manual refresh
 
 If model scoring or publication fails, the workflow records a failure status without marking the scheduled target complete. That keeps the failure visible in Actions and lets the backup scheduled slot retry instead of silently treating a non-published run as successful.

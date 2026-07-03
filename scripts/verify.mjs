@@ -78,6 +78,7 @@ run(node, ["--check", "scripts/configure-ticker-backend.mjs"]);
 run(node, ["--check", "scripts/write-refresh-status.mjs"]);
 run(node, ["--check", "scripts/check-refresh-window.mjs"]);
 run(node, ["--check", "scripts/monitor-refreshes.mjs"]);
+run(node, ["--check", "scripts/refresh/confirm-live-pages.mjs"]);
 run(node, ["--check", "scripts/ingest/sources.mjs"]);
 run(node, ["--check", "scripts/snapshot/ai-memo.mjs"]);
 run(node, ["--check", "scripts/snapshot/schemas.mjs"]);
@@ -251,12 +252,15 @@ if (!refreshWorkflow.includes("data/refresh-ledger.json")) {
   fail(".github/workflows/refresh-data.yml does not preserve or publish data/refresh-ledger.json");
 }
 const deployIndex = refreshWorkflow.indexOf("name: Deploy Pages");
-const liveConfirmIndex = refreshWorkflow.indexOf("name: Confirm live Pages status");
+const liveConfirmIndex = refreshWorkflow.indexOf("name: Probe live Pages status");
 const commitPublishedIndex = refreshWorkflow.indexOf("name: Commit published refresh outputs");
 if (deployIndex === -1 || liveConfirmIndex === -1 || commitPublishedIndex === -1) {
-  fail(".github/workflows/refresh-data.yml must deploy, confirm the live Pages status, then commit published refresh outputs");
+  fail(".github/workflows/refresh-data.yml must deploy, probe the live Pages status, then commit published refresh outputs");
 } else if (!(deployIndex < liveConfirmIndex && liveConfirmIndex < commitPublishedIndex)) {
-  fail(".github/workflows/refresh-data.yml must not commit the successful refresh ledger before Pages deploy and live confirmation");
+  fail(".github/workflows/refresh-data.yml must not commit the successful refresh ledger before Pages deploy and live probing");
+}
+if (!refreshWorkflow.includes("node scripts/refresh/confirm-live-pages.mjs")) {
+  fail(".github/workflows/refresh-data.yml must use the tested non-blocking live Pages probe");
 }
 if (!refreshWorkflow.includes("PAGES_PUBLISH_STATUS: published") || !refreshWorkflow.includes("PAGES_PUBLISH_STATUS: not_published")) {
   fail(".github/workflows/refresh-data.yml does not record published/not_published refresh status states");

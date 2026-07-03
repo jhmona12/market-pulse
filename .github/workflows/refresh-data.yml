@@ -196,41 +196,15 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Confirm live Pages status
+      - name: Probe live Pages status
         if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
+        id: live_pages
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
           EXPECTED_RUN_ID: ${{ github.run_id }}
-        run: |
-          node --input-type=module <<'NODE'
-          const pageUrl = process.env.PAGE_URL;
-          const expectedRunId = String(process.env.EXPECTED_RUN_ID || "");
-          if (!pageUrl) throw new Error("Deploy Pages did not return a page_url.");
-          const statusUrl = new URL("data/refresh-status.json", pageUrl).toString();
-
-          let lastError = null;
-          for (let attempt = 1; attempt <= 12; attempt += 1) {
-            try {
-              const response = await fetch(statusUrl, { cache: "no-store" });
-              if (!response.ok) throw new Error(`HTTP ${response.status}`);
-              const status = await response.json();
-              if (
-                String(status.runId || "") === expectedRunId
-                && status.status === "success"
-                && status.publishStatus === "published"
-              ) {
-                console.log(`Confirmed live Pages status for run ${expectedRunId} at ${statusUrl}`);
-                process.exit(0);
-              }
-              lastError = new Error(`live status has runId=${status.runId || "missing"} status=${status.status || "missing"} publishStatus=${status.publishStatus || "missing"}`);
-            } catch (error) {
-              lastError = error;
-            }
-            console.log(`Waiting for live Pages status (${attempt}/12): ${lastError.message}`);
-            await new Promise((resolve) => setTimeout(resolve, 10000));
-          }
-          throw new Error(`Live Pages status did not reflect run ${expectedRunId}: ${lastError?.message || "unknown error"}`);
-          NODE
+          LIVE_CONFIRM_ATTEMPTS: 12
+          LIVE_CONFIRM_DELAY_MS: 10000
+        run: node scripts/refresh/confirm-live-pages.mjs
 
       - name: Commit published refresh outputs
         id: commit_success_outputs
