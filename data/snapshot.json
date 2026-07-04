@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-03T15:02:54.271Z",
+  "generatedAt": "2026-07-04T00:23:08.026Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-07-03T14:59:16.812587+00:00",
+    "generatedAt": "2026-07-04T00:19:35.298004+00:00",
     "asOfDate": "2026-07-02",
     "expectedAsOfDate": "2026-07-02",
     "isStale": false,
@@ -83,7 +83,7 @@
         "return30": -32.62,
         "return90": -5.65,
         "ytdReturn": 71.69,
-        "volumeRatio": 0.51,
+        "volumeRatio": 0.52,
         "above100": false,
         "history": [
           577.15,
@@ -183,7 +183,7 @@
         "return30": 1.67,
         "return90": 148.72,
         "ytdReturn": 533.99,
-        "volumeRatio": 1.43,
+        "volumeRatio": 1.44,
         "above100": true,
         "history": [
           1452.02,
@@ -283,7 +283,7 @@
         "return30": -4.25,
         "return90": 82.78,
         "ytdReturn": 187.37,
-        "volumeRatio": 0.83,
+        "volumeRatio": 0.84,
         "above100": true,
         "history": [
           488.61,
@@ -1370,13 +1370,14 @@
     }
   },
   "note": {
-    "headline": "AI earnings are supporting leaders, but guidance risk remains name-specific.",
+    "headline": "U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite.",
     "body": "U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Small Caps Lead, Mag 7 Lags, Yields Steer | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Small Caps Lead, Mag 7 Lags, Yields Steer As buying power rotates away from Mag 7 stocks, it is rotating toward everything else-small ca... Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver. Reddit attention data was unavailable or did not produce clean ticker concentration. Breadth supports taking model-ranked longs, but macro risk still sets position size; use the model to choose single names rather than reaching for broad beta. Confirmed momentum leadership is INTC, AMAT, LRCX, KLAC, HOOD. 18 of the top 25 model-ranked stocks are in Information Technology. ETF confirmation is strongest in Health Care.",
     "changed": [
-      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M8)",
-      "Commodities: Small Caps Lead, Mag 7 Lags, Yields Steer | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Small Caps Lead, Mag 7 Lags, Yields Steer As buying power rotates away from Mag 7 stocks, it is rotating toward everything else-small ca... (M2)",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M1)",
+      "Commodities: Small Caps Lead, Mag 7 Lags, Yields Steer | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Small Caps Lead, Mag 7 Lags, Yields Steer As buying power rotates away from Mag 7 stocks, it is rotating toward everything else-small ca... (M7)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Breadth: 68% of the screened universe is above the 50-day average, 68% is above the 200-day, and 55% clears both trend lines."
+      "Breadth: 68% of the screened universe is above the 50-day average, 68% is above the 200-day, and 55% clears both trend lines.",
+      "Research tape: CNBC Top News RSS: Feds seek lower prison term for $100 million New Jersey deli fraudster — but some reasons why are hidden | MarketWatch Top Stories RSS: Opening a ‘Trump account’ for your children? Here is the risk you need to reckon with first. | MarketWatch Top Stories RSS: Nvidia is betting on a trillion-dollar robotics boom. Here is the hidden way to trade it.."
     ],
     "watch": [
       "Macro risk: Consumer Price Index on 2026-07-14; Producer Price Index on 2026-07-15; FOMC Rate Decision on 2026-07-29.",
@@ -1391,12 +1392,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 107267,
+      "inputTokens": 107274,
       "cachedInputTokens": 0,
-      "outputTokens": 2775,
+      "outputTokens": 2560,
       "reasoningTokens": 0,
-      "totalTokens": 110042,
-      "estimatedCostUsd": 0.006473,
+      "totalTokens": 109834,
+      "estimatedCostUsd": 0.006388,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1404,37 +1405,37 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "AI earnings are supporting leaders, but guidance risk remains name-specific; confirmed leadership is INTC, AMAT, LRCX, KLAC.",
+    "headline": "U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite; confirmed leadership is INTC, AMAT, LRCX,...",
     "macroView": "U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Small Caps Lead, Mag 7 Lags, Yields Steer | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Small Caps Lead, Mag 7 Lags, Yields Steer As buying power rotates away from Mag 7 stocks, it is rotating toward everything else-small ca... Next macro decision points: Consumer Price Index on 2026-07-14; Producer Price Index on 2026-07-15; FOMC Rate Decision on 2026-07-29. Sector confirmation: Health Care +12.34% over 30D, +14.03% vs SPY; Financials +8.46% over 30D, +10.15% vs SPY; Industrials +5.84% over 30D, +7.53% vs SPY. Action bias: research confirmed momentum leaders INTC, AMAT, LRCX, KLAC; keep CIEN, SNDK, WDC in the watch bucket until confirmation improves.",
     "dailyRead": null,
     "recommendations": [
       {
-        "symbol": "CIEN",
-        "action": "Watch, do not chase",
+        "symbol": "INTC",
+        "action": "Research long setup",
         "conviction": "High",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #1 of 500; -18.95% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks CIEN highly, but the setup is not clean momentum yet. Rank #1 of 500; -18.95% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "Ciena is the global leader in high-speed connectivity. We build the world's most advanced networks to support exponential growth in bandwidth demand. By harnessing the power of our networking systems, interconnects, automation software, and services, Ciena revolutionizes data transmission and network management. Wit...",
-        "marketCap": "$59.8B",
-        "earningsContext": "Last reported 2026-06-04 for the Apr 2026 fiscal quarter; EPS 1.34 versus consensus 1.2; surprise 11.67%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jul 2026 with consensus 1.45.",
-        "recentNews": "CIEN earnings beat in Apr quarter; strong guidance implied in 1H2026",
-        "macroLink": "N / A",
-        "macroEvidence": "N / A",
-        "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D -12.84%; 14D -1.35%; 30D -32.62%; 60D vs SPY -18.95%; RSI 45; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Below 50d trend; Weak volume confirmation",
+        "setup": "Momentum confirmed",
+        "whyNow": "Rank #6 of 500; +114.19% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "rationale": "INTC is momentum confirmed by the dashboard rules. Rank #6 of 500; +114.19% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "companyOverview": "Intel (Nasdaq: INTC) designs and manufactures advanced semiconductors that connect and power the modern world. Every day, our engineers create new technologies that enhance and shape the future of computing to enable new possibilities for every customer we serve. Learn more at intel.com .",
+        "marketCap": "$604.9B",
+        "earningsContext": "Last reported 2026-04-23 for the Mar 2026 fiscal quarter; EPS 0.17 versus consensus -0.1; surprise 270%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 0.1.",
+        "recentNews": "No immediate downside catalyst; favorable trend.",
+        "macroLink": "(M1)",
+        "macroEvidence": "Macro stability not yet tested; inflation data pending.",
+        "modelEvidence": "Rank #6 of 500; 99.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D -9.42%; 14D -10.18%; 30D +11.51%; 60D vs SPY +114.19%; RSI 52; above both the 50-day and 200-day moving averages",
+        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
+        "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "S1",
-          "S2",
-          "C1-EARNINGS",
-          "C1-MARKETCAP",
-          "C1-IR"
+          "C6-EARNINGS",
+          "C6-IR",
+          "S4",
+          "S6",
+          "C6-MARKETCAP"
         ],
         "setupTags": [
-          "Not Momentum Confirmed"
+          "Momentum Confirmed"
         ]
       },
       {
@@ -1447,9 +1448,9 @@
         "companyOverview": "Sandisk (Nasdaq: SNDK) delivers innovative Flash solutions and advanced memory technologies that meet people and businesses at the intersection of their aspirations and the moment, enabling them to keep moving and pushing possibility forward.",
         "marketCap": "$258.4B",
         "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 31.81.",
-        "recentNews": "Positive earnings surprise in Mar quarter; strong backlog implied",
-        "macroLink": "N / A",
-        "macroEvidence": "N / A",
+        "recentNews": "Earnings beat in Q1; high backlog impetus.",
+        "macroLink": "(M2)",
+        "macroEvidence": "IT demand tailwinds; AI data growth supportive.",
         "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -25.27%; 14D -20.13%; 30D +1.67%; 60D vs SPY +132.23%; RSI 47; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
@@ -1458,7 +1459,6 @@
         "sourceRefs": [
           "C2-EARNINGS",
           "C2-MARKETCAP",
-          "S2",
           "C2-IR"
         ],
         "setupTags": []
@@ -1473,9 +1473,9 @@
         "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to enable reliable storage solutions that are proven and trusted at sca...",
         "marketCap": "$185.8B",
         "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 2.62 versus consensus 2.28; surprise 14.91%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 3.22.",
-        "recentNews": "Earnings beat earlier quarter; growth expectations intact",
-        "macroLink": "N / A",
-        "macroEvidence": "N / A",
+        "recentNews": "Strong data-center demand backdrop.",
+        "macroLink": "(M3)",
+        "macroEvidence": "AI / data center demand underpinning storage names.",
         "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -20.19%; 14D -27.77%; 30D -4.25%; 60D vs SPY +59.55%; RSI 51; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
@@ -1498,9 +1498,9 @@
         "companyOverview": "Micron Technology, Inc. is an industry leader in innovative memory and storage solutions, transforming how the world uses information to enrich life for all. With a relentless focus on our customers, technology leadership and manufacturing and operational excellence, Micron delivers a rich portfolio of high-performa...",
         "marketCap": "$1.10T",
         "earningsContext": "Last reported 2026-06-24 for the May 2026 fiscal quarter; EPS 24.89 versus consensus 20.98; surprise 18.64%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Aug 2026 with consensus 31.06.",
-        "recentNews": "Earnings beat; strategic AI memory demand catalyst",
-        "macroLink": "N / A",
-        "macroEvidence": "N / A",
+        "recentNews": "Strong earnings momentum; AI memory demand.",
+        "macroLink": "(M5)",
+        "macroEvidence": "AI / data center cycle supportive; 1H25 strong demand.",
         "modelEvidence": "Rank #5 of 500; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -19.61%; 14D -13.97%; 30D -8.32%; 60D vs SPY +145.10%; RSI 49; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
@@ -1523,9 +1523,9 @@
         "companyOverview": "Intel (Nasdaq: INTC) designs and manufactures advanced semiconductors that connect and power the modern world. Every day, our engineers create new technologies that enhance and shape the future of computing to enable new possibilities for every customer we serve. Learn more at intel.com .",
         "marketCap": "$604.9B",
         "earningsContext": "Last reported 2026-04-23 for the Mar 2026 fiscal quarter; EPS 0.17 versus consensus -0.1; surprise 270%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 0.1.",
-        "recentNews": "Strong EPS surprise in prior quarter; AI demand tailwinds",
-        "macroLink": "N / A",
-        "macroEvidence": "N / A",
+        "recentNews": "Positive earnings surprise; AI data center demand.",
+        "macroLink": "(M6)",
+        "macroEvidence": "AI / semis cycle supportive; macro remains constructive but choppier.",
         "modelEvidence": "Rank #6 of 500; 99.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -9.42%; 14D -10.18%; 30D +11.51%; 60D vs SPY +114.19%; RSI 52; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
@@ -1533,8 +1533,8 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C6-EARNINGS",
-          "C6-MARKETCAP",
-          "C6-IR"
+          "C6-IR",
+          "C6-MARKETCAP"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1543,16 +1543,16 @@
       {
         "symbol": "MRVL",
         "action": "Review setup",
-        "conviction": "High",
+        "conviction": "Medium",
         "setup": "model ranked",
         "whyNow": "Rank #8 of 500; +111.10% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
         "rationale": "MRVL is momentum confirmed by the dashboard rules. Rank #8 of 500; +111.10% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
         "companyOverview": "To deliver the data infrastructure technology that connects the world, we're building solutions on the most powerful foundation: our partnerships with our customers. Trusted by the world's leading technology companies for over 30 years, we move, store, process and secure the world's data with semiconductor solutions...",
         "marketCap": "$214.6B",
         "earningsContext": "Last reported 2026-05-27 for the Apr 2026 fiscal quarter; EPS 0.59 versus consensus 0.61; surprise -3.28%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jul 2026 with consensus 0.66.",
-        "recentNews": "Earnings beat moderate; AI demand tailwinds",
-        "macroLink": "N / A",
-        "macroEvidence": "N / A",
+        "recentNews": "Memory / AI cycle demand; earnings.",
+        "macroLink": "(M7)",
+        "macroEvidence": "AI / semis demand backdrop intact.",
         "modelEvidence": "Rank #8 of 500; 98.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -12.79%; 14D -21.02%; 30D -15.65%; 60D vs SPY +111.10%; RSI 42; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "model ranked; risk flags: Above-sector volatility; Weak volume confirmation.",
@@ -1560,37 +1560,42 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C8-EARNINGS",
-          "C8-MARKETCAP",
-          "C8-IR"
+          "C8-IR",
+          "C8-MARKETCAP"
         ],
         "setupTags": []
       }
     ],
     "avoidList": {
-      "summary": "Weakest model-ranked names concentrated in Financials, Industrials, Utilities, Real Estate, and Health Care; elevated risk in those sectors suggests avoiding fresh long exposure until momentum confirms.",
+      "summary": "Weakest model-ranked sectors dominate the avoid list: Financials, Industrials, and Utilities are crowded with many low-confidence names; overweight exposure should be avoided there until deeper confirmation arises.",
       "sectors": [
         {
           "sector": "Financials",
-          "rationale": "17 of the weakest model-ranked names reside here; e.g., L, MA, MCO, PNC."
+          "rationale": "17 weak names; examples include L, MA, MCO, PNC."
         },
         {
           "sector": "Industrials",
-          "rationale": "15 weakest names are here; e.g., LMT, LHX, FAST, EXPD."
+          "rationale": "15 weak names; examples LMT, LHX, FAST, EXPD."
         },
         {
           "sector": "Utilities",
-          "rationale": "12 weakest names; e.g., LNT, EXC, EVRG, ETR."
+          "rationale": "12 weak names; examples LNT, EXC, EVRG, ETR."
         },
         {
           "sector": "Real Estate",
-          "rationale": "9 weakest names; e.g., O, ESS, MAA, EXR."
+          "rationale": "9 weak names; examples O, ESS, MAA, EXR."
         }
       ],
       "companies": [
         {
           "symbol": "LYV",
-          "rationale": "Live Nation appears weakly ranked; RSI extended; momentum indicators show strength in other sectors; not included in validRecommendationsSymbols.",
-          "modelEvidence": "Ranked; RSI 75; Top sector momentum present but volatility high."
+          "rationale": "Live Nation Leadership rank poor (Rank 500 / 500) but RSI elevated; avoid fresh long exposure.",
+          "modelEvidence": "Ranked, low momentum; RSI 75; solid rally in 60d but not confirmed by momentum signals."
+        },
+        {
+          "symbol": "OKE",
+          "rationale": "Oneok low model score; avoid new long exposure; volatility flag.",
+          "modelEvidence": "Ranked 499; volatility risk; 60d momentum weak."
         }
       ]
     },
@@ -1605,47 +1610,41 @@
       "Do watch names CIEN, SNDK, WDC regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
+      "O1",
       "S1",
       "S2",
       "S3",
       "S4",
-      "S5",
-      "S6",
-      "S7",
-      "S8",
-      "S9",
-      "S10",
-      "O1",
-      "C1-EARNINGS"
+      "S5"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Premium, differentiated readings from a tight set of sources. Focused on emergent policy-friction around AI, and the real-economy constraints shaping tech and policy responses rather than generic price moves.",
+      "summary": "Deeper Read highlights the source pieces with a differentiated market angle, focusing on second-order implications for rates, policy, labor, commodities, sectors, and positioning.",
       "cards": [
         {
-          "sourceRef": "S5",
+          "sourceRef": "S1",
           "sourceName": "CNBC Top News RSS",
-          "title": "AI is outpacing the rules, Europe’s top bankers and regulators warn",
-          "thesis": "Regulatory risk from rapid AI deployment is migrating from abstract guidelines to concrete supervisory actions in Europe, potentially constraining large AI-capability investments and accelerating self-imposed risk controls by banks.",
-          "whyItMatters": "If regulators tighten AI-risk rules or impose liability frameworks, banks’ willingness to fund aggressive AI / semis capex could roll over into tighter credit conditions and slower deployment cycles, impacting AI and semiconductor demand under a policy shield.",
-          "marketReadThrough": "Credit markets may reprice AI / tech exposure to reflect higher regulatory risk; banks could shift balance sheets toward compliance-heavy, slower-growth pockets. Tech leadership bets may face increased hurdle rates or delayed capex, especially in Europe.",
-          "variantAngle": "Regulatory edges: contrast Europe’s proactive supervisory stance with US posture, probing how cross-border AI deployments affect global capital allocation and semis ecosystems.",
+          "title": "Feds seek lower prison term for $100 million New Jersey deli fraudster — but some reasons why are hidden",
+          "thesis": "Regulatory / legal narratives around market integrity and enforcement risk could reprice small-cap and micro-cap stocks with concrete governance vulnerabilities.",
+          "whyItMatters": "Legal outcomes in niche financial fraud cases can signal broader investor skepticism toward thinly traded names and SPAC-like structures; potential spillovers to small-cap liquidity and coverage by smaller brokers.",
+          "marketReadThrough": "Watch for increased volatility in micro-cap indexes and any repricing of governance-risk premiums; episodic moves around similar fraud cases may create idiosyncratic trading opportunities.",
+          "variantAngle": "From deli to diligence: how enforcement of governance standards in obscure micro-caps creates a notch of systemic risk in overlooked segments.",
           "confidence": "Medium",
-          "url": "https://www.cnbc.com/2026/07/03/ai-outpacing-rules-europe-top-bankers-regulators-warn.html",
-          "publishedAt": "2026-07-03T12:21:15.000Z",
+          "url": "https://www.cnbc.com/2026/07/03/new-jersey-deli-stockfraud-sentence-patten.html",
+          "publishedAt": "2026-07-03T19:33:26.000Z",
           "sourceRefs": [
-            "S5"
+            "S1"
           ]
         },
         {
           "sourceRef": "S7",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Weekly Trader's Outlook",
-          "thesis": "Geopolitical and policy developments, combined with earnings signals and AI / semis momentum, will set a bifurcated path for risk assets next week - tech-heavy equities may hinge on how policy and earnings surprises interact with AI supply-chain dynamics.",
-          "whyItMatters": "The week-ahead framing links earnings trajectories with policy constraints and AI / semis risk sentiment, highlighting mispricings where AI capex cycles intersect with geopolitical risk that can alter risk premia for tech exposures.",
-          "marketReadThrough": "Expect pockets of mixed reactions: tech and AI-driven equities under higher beta but with potential rotation into less rate-sensitive pockets if policy signals tilt dovish; volatility could remain elevated around policy / earnings events.",
-          "variantAngle": "Differentiated view: compare the immediate policy-firewall concerns (regulatory AI risk) with earnings-driven AI demand narratives to identify where equities may reprice first.",
+          "thesis": "Geopolitical policy shifts and AI / semis demand a combined lens; supply-demand imbalances in semiconductors could drive disproportionate moves in related equities",
+          "whyItMatters": "Policy signals and AI demand trajectories are not always aligned with price; mispricings in AI-related weights and chip equipment makers may persist as policy and tech cycles diverge.",
+          "marketReadThrough": "Potential for stock-specific beta changes in AI / semis, with longer-duration hedges in related ETFs if policy rhetoric tightens or subsidy programs expand.",
+          "variantAngle": "Differentiated angle: policy tinkering and AI demand create decoupled risk / return profiles between pure-play AI names and legacy chipmakers.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-07-02T21:09:18.000Z",
@@ -1657,10 +1656,10 @@
           "sourceRef": "S13",
           "sourceName": "Axios Macro RSS",
           "title": "Trump's Supreme Court wins hit one wall: the economy - Axios",
-          "thesis": "US political-economy dynamics create a friction between legal wins and economic momentum, suggesting that policy stability may lag earnings catalysts, keeping macro drivers in flux and elevating the importance of data surprises.",
-          "whyItMatters": "Macro clarity is crucial for capex and AI investment plans. If economic momentum stalls despite regulatory signals in other regions, global AI / semis investment could re-center on where policy is clearer, influencing cross-border supply chains.",
-          "marketReadThrough": "Currency and rate expectations may stay sensitive to political risk and economic data, with potential risk-off episodes if macro momentum disappoints even as tech / regulatory headlines evolve.",
-          "variantAngle": "Anchor a cross-regional lens: juxtapose Axios’ US-centric political-economy read with Europe’s regulatory push to locate where policy clarity will most shape AI / semis capex cycles.",
+          "thesis": "Macro-legal tensions around budget / escalation constraints could shape durable demand for risk assets vs. safety assets; market structure may tilt toward liquidity-driven flows",
+          "whyItMatters": "Economy-wide constraints can alter the risk appetite engine, especially around consumer-spending-sensitive sectors and credit markets.",
+          "marketReadThrough": "Expect occasional regime-like shifts in risk-on / risk-off dynamics tied to fiscal policy updates; liquidity conditions could tighten near policy milestones.",
+          "variantAngle": "Macro-legal constraints as a driver of liquidity regime shifts, not just headline economic data.",
           "confidence": "Low",
           "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1HWUUwb19pcl9ybGtWRkZKUGRuYzJvUzlMaEJjdXFBLU1pOVNBZ2dnZ3lvNEdKVzdqVGNyVDhtaFVDTk1fLXFkUlZQdWZqWnpMY1dXRVoxVU1LMjFfbUViSlJ3SzdfczI3b2hSRQ?oc=5",
           "publishedAt": "2026-06-30T12:31:52.000Z",
@@ -1674,31 +1673,31 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Premium, differentiated readings from a tight set of sources. Focused on emergent policy-friction around AI, and the real-economy constraints shaping tech and policy responses rather than generic price moves.",
+    "summary": "Deeper Read highlights the source pieces with a differentiated market angle, focusing on second-order implications for rates, policy, labor, commodities, sectors, and positioning.",
     "cards": [
       {
-        "sourceRef": "S5",
+        "sourceRef": "S1",
         "sourceName": "CNBC Top News RSS",
-        "title": "AI is outpacing the rules, Europe’s top bankers and regulators warn",
-        "thesis": "Regulatory risk from rapid AI deployment is migrating from abstract guidelines to concrete supervisory actions in Europe, potentially constraining large AI-capability investments and accelerating self-imposed risk controls by banks.",
-        "whyItMatters": "If regulators tighten AI-risk rules or impose liability frameworks, banks’ willingness to fund aggressive AI / semis capex could roll over into tighter credit conditions and slower deployment cycles, impacting AI and semiconductor demand under a policy shield.",
-        "marketReadThrough": "Credit markets may reprice AI / tech exposure to reflect higher regulatory risk; banks could shift balance sheets toward compliance-heavy, slower-growth pockets. Tech leadership bets may face increased hurdle rates or delayed capex, especially in Europe.",
-        "variantAngle": "Regulatory edges: contrast Europe’s proactive supervisory stance with US posture, probing how cross-border AI deployments affect global capital allocation and semis ecosystems.",
+        "title": "Feds seek lower prison term for $100 million New Jersey deli fraudster — but some reasons why are hidden",
+        "thesis": "Regulatory / legal narratives around market integrity and enforcement risk could reprice small-cap and micro-cap stocks with concrete governance vulnerabilities.",
+        "whyItMatters": "Legal outcomes in niche financial fraud cases can signal broader investor skepticism toward thinly traded names and SPAC-like structures; potential spillovers to small-cap liquidity and coverage by smaller brokers.",
+        "marketReadThrough": "Watch for increased volatility in micro-cap indexes and any repricing of governance-risk premiums; episodic moves around similar fraud cases may create idiosyncratic trading opportunities.",
+        "variantAngle": "From deli to diligence: how enforcement of governance standards in obscure micro-caps creates a notch of systemic risk in overlooked segments.",
         "confidence": "Medium",
-        "url": "https://www.cnbc.com/2026/07/03/ai-outpacing-rules-europe-top-bankers-regulators-warn.html",
-        "publishedAt": "2026-07-03T12:21:15.000Z",
+        "url": "https://www.cnbc.com/2026/07/03/new-jersey-deli-stockfraud-sentence-patten.html",
+        "publishedAt": "2026-07-03T19:33:26.000Z",
         "sourceRefs": [
-          "S5"
+          "S1"
         ]
       },
       {
         "sourceRef": "S7",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Weekly Trader's Outlook",
-        "thesis": "Geopolitical and policy developments, combined with earnings signals and AI / semis momentum, will set a bifurcated path for risk assets next week - tech-heavy equities may hinge on how policy and earnings surprises interact with AI supply-chain dynamics.",
-        "whyItMatters": "The week-ahead framing links earnings trajectories with policy constraints and AI / semis risk sentiment, highlighting mispricings where AI capex cycles intersect with geopolitical risk that can alter risk premia for tech exposures.",
-        "marketReadThrough": "Expect pockets of mixed reactions: tech and AI-driven equities under higher beta but with potential rotation into less rate-sensitive pockets if policy signals tilt dovish; volatility could remain elevated around policy / earnings events.",
-        "variantAngle": "Differentiated view: compare the immediate policy-firewall concerns (regulatory AI risk) with earnings-driven AI demand narratives to identify where equities may reprice first.",
+        "thesis": "Geopolitical policy shifts and AI / semis demand a combined lens; supply-demand imbalances in semiconductors could drive disproportionate moves in related equities",
+        "whyItMatters": "Policy signals and AI demand trajectories are not always aligned with price; mispricings in AI-related weights and chip equipment makers may persist as policy and tech cycles diverge.",
+        "marketReadThrough": "Potential for stock-specific beta changes in AI / semis, with longer-duration hedges in related ETFs if policy rhetoric tightens or subsidy programs expand.",
+        "variantAngle": "Differentiated angle: policy tinkering and AI demand create decoupled risk / return profiles between pure-play AI names and legacy chipmakers.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-07-02T21:09:18.000Z",
@@ -1710,10 +1709,10 @@
         "sourceRef": "S13",
         "sourceName": "Axios Macro RSS",
         "title": "Trump's Supreme Court wins hit one wall: the economy - Axios",
-        "thesis": "US political-economy dynamics create a friction between legal wins and economic momentum, suggesting that policy stability may lag earnings catalysts, keeping macro drivers in flux and elevating the importance of data surprises.",
-        "whyItMatters": "Macro clarity is crucial for capex and AI investment plans. If economic momentum stalls despite regulatory signals in other regions, global AI / semis investment could re-center on where policy is clearer, influencing cross-border supply chains.",
-        "marketReadThrough": "Currency and rate expectations may stay sensitive to political risk and economic data, with potential risk-off episodes if macro momentum disappoints even as tech / regulatory headlines evolve.",
-        "variantAngle": "Anchor a cross-regional lens: juxtapose Axios’ US-centric political-economy read with Europe’s regulatory push to locate where policy clarity will most shape AI / semis capex cycles.",
+        "thesis": "Macro-legal tensions around budget / escalation constraints could shape durable demand for risk assets vs. safety assets; market structure may tilt toward liquidity-driven flows",
+        "whyItMatters": "Economy-wide constraints can alter the risk appetite engine, especially around consumer-spending-sensitive sectors and credit markets.",
+        "marketReadThrough": "Expect occasional regime-like shifts in risk-on / risk-off dynamics tied to fiscal policy updates; liquidity conditions could tighten near policy milestones.",
+        "variantAngle": "Macro-legal constraints as a driver of liquidity regime shifts, not just headline economic data.",
         "confidence": "Low",
         "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1HWUUwb19pcl9ybGtWRkZKUGRuYzJvUzlMaEJjdXFBLU1pOVNBZ2dnZ3lvNEdKVzdqVGNyVDhtaFVDTk1fLXFkUlZQdWZqWnpMY1dXRVoxVU1LMjFfbUViSlJ3SzdfczI3b2hSRQ?oc=5",
         "publishedAt": "2026-06-30T12:31:52.000Z",
@@ -1732,12 +1731,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-07-03T15:01:35.327Z",
+    "generatedAt": "2026-07-04T00:21:53.566Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-07-03T14:36:08.576Z"
+      "previousRefreshAt": "2026-07-03T15:02:54.271Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1748,7 +1747,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-07-03T14:59:26.946Z",
+      "generatedAt": "2026-07-04T00:19:45.840Z",
       "lookbackHours": 96,
       "releases": [
         {
@@ -1796,6 +1795,96 @@
     "professionalDrivers": [
       {
         "id": "M1",
+        "title": "Nvidia is betting on a trillion-dollar robotics boom. Here is the hidden way to trade it.",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/nvidia-is-betting-on-a-trillion-dollar-robotics-boom-here-is-the-hidden-way-to-trade-it-c5b10c4e?mod=mw_rss_topstories",
+        "publishedAt": "2026-07-03T18:52:00.000Z",
+        "summary": "CEO Jensen Huang has called humanoid robots a “multitrillion-dollar economic opportunity.”",
+        "excerpt": "CEO Jensen Huang has called humanoid robots a “multitrillion-dollar economic opportunity.”",
+        "themes": [
+          "Geopolitics and policy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 5.5,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M2",
+        "title": "Feds seek lower prison term for $100 million New Jersey deli fraudster — but some reasons why are hidden",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/07/03/new-jersey-deli-stockfraud-sentence-patten.html",
+        "publishedAt": "2026-07-03T19:33:26.000Z",
+        "summary": "James Patten is the third person who will be sentenced in the stock manipulation scheme related to Hometown International, a company that owned just one deli.",
+        "excerpt": "James Patten is the third person who will be sentenced in the stock manipulation scheme related to Hometown International, a company that owned just one deli.",
+        "themes": [
+          "Market color"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 4.8,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M3",
+        "title": "First known congressional SpaceX stock buys surface after record IPO",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/07/03/spacex-stock-congress-meuser-cisneros-ipo-disclosure.html",
+        "publishedAt": "2026-07-03T18:16:43.000Z",
+        "summary": "The SpaceX stock purchases come as Elon Musk’s company deepens its role in federal contracting and remains closely tied to President Donald Trump’s Washington.",
+        "excerpt": "The SpaceX stock purchases come as Elon Musk’s company deepens its role in federal contracting and remains closely tied to President Donald Trump’s Washington.",
+        "themes": [
+          "Market color"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 6.1,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M4",
+        "title": "American Express and Chase move luxury lounge wars beyond the airport",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/07/03/amex-chase-credit-card-lounges.html",
+        "publishedAt": "2026-07-03T18:03:34.000Z",
+        "summary": "Credit card companies are increasingly offering access to lounges and perks at festivals and sporting events, often exclusively for premium cardholders.",
+        "excerpt": "Credit card companies are increasingly offering access to lounges and perks at festivals and sporting events, often exclusively for premium cardholders.",
+        "themes": [
+          "Credit and liquidity"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 6.3,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M5",
+        "title": "Opening a ‘Trump account’ for your children? Here is the risk you need to reckon with first.",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/opening-a-trump-account-for-your-children-here-is-the-risk-you-need-to-recognize-first-fe206bc0?mod=mw_rss_topstories",
+        "publishedAt": "2026-07-03T19:10:00.000Z",
+        "summary": "The new accounts ban bonds and international stocks, forcing parents to bet their children’s financial future entirely on U.S. equities.",
+        "excerpt": "The new accounts ban bonds and international stocks, forcing parents to bet their children’s financial future entirely on U.S. equities.",
+        "themes": [
+          "Market color"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 5.2,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M6",
         "title": "Weekly Trader's Outlook",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1803,20 +1892,20 @@
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-07-02T21:09:18.000Z",
         "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-        "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Investors Take Some Chips Off the Table as Rally Broadens Out Selling pressure continued in the tech sector as investors rotate out of the momentum trade into other areas of the market. July 2, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Moderately Bearish\" forecast on the technology sector this week, citing concerns around quarter-end rebalancing and signs of speculative excess (stretched margin debt) and concentrated positioning in the AI infrastructure cohort of the market. The first two days of this week the technology sector rebounded nicely, which may have been due to some quarter-end \"window dressing\" by fund managers. However, once the calendar flipped to the new quarter, selling began to emerge in the tech space (perhaps partly fueled by money rotating into other areas of the market) and particularly in the semiconductor space. The PHLX Semiconductor Index (SOX) is down 12% over the last two days, in part due to a sharp overnight drop (-7.89%) in the Korea Composite Stock Price Index (KOSPI). Perhaps chip stocks are finally encountering a solid mean reversion correction given the 100% rally in the SOX for the first six months of this year. However, the sharp pullback could end up being another buying opportunity in a longer-term uptrend, we should have a better sense next week. Regarding the U.S.-Iran negotiations, the ceasefire is not going great, but oil prices remain below $70/barrel and markets remain hopeful of a resolution. Reports indicated that \"positive progress\" was established during this week's indirect technical talks between the two countries in Doha, but the status of the Strai",
+        "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Investors Take Some Chips Off the Table as Rally Broadens Out Selling pressure continued in the tech sector as investors rotate out of the momentum trade into other areas of the market. July 2, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Moderately Bearish\" forecast on the technology sector this week, citing concerns around quarter-end rebalancing and signs of speculative excess (stretched margin debt) and concentrated positioning in the AI infrastructure cohort of the market. The first two days of this week the technology sector rebounded nicely, which may have been due to some quarter-end \"window dressing\" by fund managers. However, once the calendar flipped to the new quarter, selling began to emerge in the tech space (perhaps partly fueled by money rotating into other areas of the market) and particularly in the semiconductor space. The PHLX Semiconductor Index (SOX) is down 12% over the last two days, in part due to a sharp overnight drop (-7.89%) in the Korea Composite Stock Price Index (KOSPI). Perhaps chip stocks are finally encountering a solid mean reversion correction given the 100% rally in the SOX for the first six months of this year. However, the sharp pullback could end up being another buying opportunity in a longer-term uptrend, we should have a better sense next week. Regarding the U.S.-Iran negotiations, the ceasefire is not going great, but oil prices remain below $70/barrel and markets remain hopeful of a resolution. Reports indicated that \"positive progress\" was established during this week's indirect technical talks between the two countries in Doha, but the statu",
         "themes": [
           "Earnings",
           "Geopolitics and policy",
           "Commodities and energy",
           "AI and semis"
         ],
-        "freshness": "Last 24 hours",
-        "ageHours": 17.9,
-        "score": 78,
+        "freshness": "Important older item",
+        "ageHours": 27.2,
+        "score": 62,
         "tickers": []
       },
       {
-        "id": "M2",
+        "id": "M7",
         "title": "Small Caps Lead, Mag 7 Lags, Yields Steer",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1832,99 +1921,9 @@
           "Macro and growth",
           "AI and semis"
         ],
-        "freshness": "Last 24 hours",
-        "ageHours": 23,
-        "score": 78,
-        "tickers": []
-      },
-      {
-        "id": "M3",
-        "title": "A looming AI disappointment and rising yields. Why one research firm is hitting the brakes on U.S. stocks.",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/a-looming-ai-disappointment-and-rising-yields-why-one-research-firm-is-hitting-the-brakes-on-u-s-stocks-4bfaa67b?mod=mw_rss_topstories",
-        "publishedAt": "2026-07-03T14:17:00.000Z",
-        "summary": "In a market dominated by tech stocks, a big test is facing investors in the next 12 months, warns MacroResearchBoard",
-        "excerpt": "In a market dominated by tech stocks, a big test is facing investors in the next 12 months, warns MacroResearchBoard",
-        "themes": [
-          "AI and semis"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 0.7,
-        "score": 56,
-        "tickers": []
-      },
-      {
-        "id": "M4",
-        "title": "Don&apos;t throw away your shot to speak to an AI Alexander Hamilton at Boston&apos;s new finance museum",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/07/03/the-museum-of-american-finance-opens-its-doors-in-boston.html",
-        "publishedAt": "2026-07-03T13:16:09.000Z",
-        "summary": "Nearly a decade after leaving its former home, the Museum of American Finance is opening its new doors to the public.",
-        "excerpt": "Nearly a decade after leaving its former home, the Museum of American Finance is opening its new doors to the public.",
-        "themes": [
-          "AI and semis"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 1.8,
-        "score": 48,
-        "tickers": []
-      },
-      {
-        "id": "M5",
-        "title": "The Tech Download: Amazon’s devices chief Panos Panay on tech giant&apos;s AI gadget push",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/07/03/the-tech-download-amazon-devices-chief-panos-panay.html",
-        "publishedAt": "2026-07-03T12:41:22.000Z",
-        "summary": "CNBC's Arjun Kharpal sits down Amazon's Panay on the latest episode of The Tech Download podcast.",
-        "excerpt": "CNBC's Arjun Kharpal sits down Amazon's Panay on the latest episode of The Tech Download podcast.",
-        "themes": [
-          "AI and semis"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 2.3,
-        "score": 48,
-        "tickers": []
-      },
-      {
-        "id": "M6",
-        "title": "AI is outpacing the rules, Europe’s top bankers and regulators warn",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/07/03/ai-outpacing-rules-europe-top-bankers-regulators-warn.html",
-        "publishedAt": "2026-07-03T12:21:15.000Z",
-        "summary": "Europe's top bankers and financial regulators are grappling with how to better regulate AI risks.",
-        "excerpt": "Europe's top bankers and financial regulators are grappling with how to better regulate AI risks.",
-        "themes": [
-          "AI and semis"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 2.7,
-        "score": 48,
-        "tickers": []
-      },
-      {
-        "id": "M7",
-        "title": "U.S. stocks have delivered 8.7% a year since independence was declared in 1776",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/u-s-stocks-have-delivered-8-7-a-year-since-independence-was-declared-in-1776-7513ae04?mod=mw_rss_topstories",
-        "publishedAt": "2026-07-03T13:52:00.000Z",
-        "summary": "What 250 years of independence have meant for America’s investors.",
-        "excerpt": "What 250 years of independence have meant for America’s investors.",
-        "themes": [
-          "Market color"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 1.2,
-        "score": 48,
+        "freshness": "Important older item",
+        "ageHours": 32.4,
+        "score": 62,
         "tickers": []
       },
       {
@@ -1942,22 +1941,22 @@
           "Geopolitics and policy"
         ],
         "freshness": "Important older item",
-        "ageHours": 64.9,
+        "ageHours": 74.2,
         "score": 46,
         "tickers": []
       }
     ],
     "topThemes": [
       {
-        "theme": "AI and semis",
-        "count": 6
+        "theme": "Geopolitics and policy",
+        "count": 4
       },
       {
-        "theme": "Earnings",
+        "theme": "Market color",
         "count": 3
       },
       {
-        "theme": "Geopolitics and policy",
+        "theme": "Earnings",
         "count": 3
       },
       {
@@ -1965,17 +1964,17 @@
         "count": 2
       },
       {
-        "theme": "Macro and growth",
+        "theme": "AI and semis",
         "count": 2
       },
       {
-        "theme": "Market color",
-        "count": 1
+        "theme": "Macro and growth",
+        "count": 2
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-07-03T15:01:35.318Z",
+      "generatedAt": "2026-07-04T00:21:53.558Z",
       "dates": [
         "2026-07-02",
         "2026-07-03",
@@ -2164,7 +2163,7 @@
     },
     "reddit": {
       "status": "error",
-      "generatedAt": "2026-07-03T15:01:04.485Z",
+      "generatedAt": "2026-07-04T00:21:18.329Z",
       "authMode": "public",
       "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
       "subreddits": [
@@ -2172,7 +2171,7 @@
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: xmlRaw is not defined | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
           "postCount": 0,
           "sortStatuses": [
             {
@@ -2186,7 +2185,7 @@
               "sort": "new",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: xmlRaw is not defined",
               "postCount": 0
             },
             {
@@ -2262,14 +2261,14 @@
           "subreddit": "SecurityAnalysis",
           "segment": "Fundamental research",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
           "postCount": 0,
           "sortStatuses": [
             {
               "sort": "hot",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
               "postCount": 0
             },
             {
@@ -2292,7 +2291,7 @@
           "subreddit": "options",
           "segment": "Options sentiment",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
           "postCount": 0,
           "sortStatuses": [
             {
@@ -2306,14 +2305,14 @@
               "sort": "new",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests",
               "postCount": 0
             },
             {
               "sort": "top",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
               "postCount": 0
             }
           ]
@@ -2323,11 +2322,11 @@
       "topPosts": [],
       "currentFetchErrors": [
         "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
-        "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+        "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: xmlRaw is not defined | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
         "stocks: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
         "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-        "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-        "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests"
+        "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+        "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
       ]
     },
     "marketMovers": {
@@ -2738,9 +2737,10 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M8)",
-      "Commodities: Small Caps Lead, Mag 7 Lags, Yields Steer | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Small Caps Lead, Mag 7 Lags, Yields Steer As buying power rotates away from Mag 7 stocks, it is rotating toward everything else-small ca... (M2)",
-      "AI/semis: A looming AI disappointment and rising yields. Why one research firm is hitting the brakes on U.S. stocks. (M3)",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M1)",
+      "Commodities: Small Caps Lead, Mag 7 Lags, Yields Steer | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Small Caps Lead, Mag 7 Lags, Yields Steer As buying power rotates away from Mag 7 stocks, it is rotating toward everything else-small ca... (M7)",
+      "AI/semis: Cisco's AI infrastructure orders reinforce the spending cycle behind the semiconductor and networking trade. (M6)",
+      "Credit: Credit card companies are increasingly offering access to lounges and perks at festivals and sporting events, often exclusively for premium cardholders. (M4)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver."
     ]
   },
@@ -3629,7 +3629,7 @@
       "close": 422.46,
       "changePct": -8.65,
       "rsi14": 44.6,
-      "volumeRatio": 0.51,
+      "volumeRatio": 0.52,
       "return7": -12.84,
       "return14": -1.35,
       "return20": -31.9,
@@ -3742,7 +3742,7 @@
       "close": 1745,
       "changePct": -14.13,
       "rsi14": 47.3,
-      "volumeRatio": 1.43,
+      "volumeRatio": 1.44,
       "return7": -25.27,
       "return14": -20.13,
       "return20": -4.72,
@@ -3850,7 +3850,7 @@
       "close": 539,
       "changePct": -9.92,
       "rsi14": 50.8,
-      "volumeRatio": 0.83,
+      "volumeRatio": 0.84,
       "return7": -20.19,
       "return14": -27.77,
       "return20": -9.25,
@@ -5057,7 +5057,7 @@
       "close": 165.48,
       "changePct": 3.92,
       "rsi14": 53.4,
-      "volumeRatio": 1.08,
+      "volumeRatio": 1.09,
       "return7": 16.11,
       "return14": 1.36,
       "return20": 1.38,
@@ -5603,7 +5603,7 @@
       "close": 351.41,
       "changePct": -10.19,
       "rsi14": 48.3,
-      "volumeRatio": 1.29,
+      "volumeRatio": 1.3,
       "return7": -12.55,
       "return14": -9.67,
       "return20": 2.31,
@@ -5825,7 +5825,7 @@
       "close": 300.53,
       "changePct": -3.5,
       "rsi14": 50.6,
-      "volumeRatio": 0.79,
+      "volumeRatio": 0.8,
       "return7": -7.69,
       "return14": -9.76,
       "return20": -9.31,
@@ -12240,7 +12240,7 @@
       "close": 166.11,
       "changePct": 1.76,
       "rsi14": 49.6,
-      "volumeRatio": 0.61,
+      "volumeRatio": 0.62,
       "return7": 10.6,
       "return14": 9.44,
       "return20": -12.63,
@@ -21693,7 +21693,7 @@
       "close": 10.39,
       "changePct": 2.16,
       "rsi14": 48.9,
-      "volumeRatio": 0.63,
+      "volumeRatio": 0.64,
       "return7": 10.18,
       "return14": 4.53,
       "return20": -0.1,
@@ -27513,7 +27513,7 @@
       "close": 194.83,
       "changePct": -1.39,
       "rsi14": 40.4,
-      "volumeRatio": 0.9,
+      "volumeRatio": 0.91,
       "return7": -0.46,
       "return14": -7.53,
       "return20": -9.17,
@@ -27925,7 +27925,7 @@
       "close": 76,
       "changePct": 0.64,
       "rsi14": 33.3,
-      "volumeRatio": 0.67,
+      "volumeRatio": 0.68,
       "return7": -3.22,
       "return14": -4.15,
       "return20": -6.78,
@@ -55590,7 +55590,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-07-02T21:09:18.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Investors Take Some Chips Off the Table as Rally Broadens Out Selling pressure continued in the tech sector as investors rotate out of the momentum trade into other areas of the market. July 2, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Moderately Bearish\" forecast on the technology sector this week, citing concerns around quarter-end rebalancing and signs of speculative excess (stretched margin debt) and concentrated positioning in the AI infrastructure cohort of the market. The first two days of this week the technology sector rebounded nicely, which may have been due to some quarter-end \"window dressing\" by fund managers. However, once the calendar flipped to the new quarter, selling began to emerge in the tech space (perhaps partly fueled by money rotating into other areas of the market) and particularly in the semiconductor space. The PHLX Semiconductor Index (SOX) is down 12% over the last two days, in part due to a sharp overnight drop (-7.89%) in the Korea Composite Stock Price Index (KOSPI). Perhaps chip stocks are finally encountering a solid mean reversion correction given the 100% rally in the SOX for the first six months of this year. However, the sharp pullback could end up being another buying opportunity in a longer-term uptrend, we should have a better sense next week. Regarding the U.S.-Iran negotiations, the ceasefire is not going great, but oil prices remain below $70/barrel and markets remain hopeful of a resolution. Reports indicated that \"positive progress\" was established during this week's indirect technical talks between the two countries in Doha, but the status of the Strai",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Investors Take Some Chips Off the Table as Rally Broadens Out Selling pressure continued in the tech sector as investors rotate out of the momentum trade into other areas of the market. July 2, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Moderately Bearish\" forecast on the technology sector this week, citing concerns around quarter-end rebalancing and signs of speculative excess (stretched margin debt) and concentrated positioning in the AI infrastructure cohort of the market. The first two days of this week the technology sector rebounded nicely, which may have been due to some quarter-end \"window dressing\" by fund managers. However, once the calendar flipped to the new quarter, selling began to emerge in the tech space (perhaps partly fueled by money rotating into other areas of the market) and particularly in the semiconductor space. The PHLX Semiconductor Index (SOX) is down 12% over the last two days, in part due to a sharp overnight drop (-7.89%) in the Korea Composite Stock Price Index (KOSPI). Perhaps chip stocks are finally encountering a solid mean reversion correction given the 100% rally in the SOX for the first six months of this year. However, the sharp pullback could end up being another buying opportunity in a longer-term uptrend, we should have a better sense next week. Regarding the U.S.-Iran negotiations, the ceasefire is not going great, but oil prices remain below $70/barrel and markets remain hopeful of a resolution. Reports indicated that \"positive progress\" was established during this week's indirect technical talks between the two countries in Doha, but the statu",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -55844,11 +55844,20 @@
       "articles": [
         {
           "sourceName": "Axios Markets RSS",
-          "title": "Congress passes big housing bill with bipartisan support - Axios",
-          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5ueXNNbnFaUjBBSVl1amFlQ3FvSFZqbHR1S096X25qc0IwS2RQQ2QtakVTUDVxYVU4Wk9xTzB5cWs3YlRPcGJ4V0NpOTVmWW1SQlpLYTlDVkpoZm93cnRFN1c5aXl2Smw4cmhtOXlKdGNSRTAzdHc?oc=5",
-          "publishedAt": "2026-06-23T07:00:00.000Z",
-          "summary": "Congress passes big housing bill with bipartisan support Axios",
-          "excerpt": "Congress passes big housing bill with bipartisan support Axios",
+          "title": "How markets reacted to the new Fed chairman's policy committee debut - Axios",
+          "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1xMi1UNUh3c0pxNU5nU3Q2aGQ2ZTdJemdDX1ZHLU9KcUNta0xNbGxzd05BcEZ2ejNyOFVST2lqTzJma1hHUTJVOWtxWVoxX1RpdXJEQXRUNE5nS2lfVTNuazJsNjlLRXh5eUkzb0RwZw?oc=5",
+          "publishedAt": "2026-06-18T07:00:00.000Z",
+          "summary": "How markets reacted to the new Fed chairman's policy committee debut Axios",
+          "excerpt": "How markets reacted to the new Fed chairman's policy committee debut Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Markets RSS",
+          "title": "The women who run the markets - Axios",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBDd3g5QWU0OU5Vd0toQUU4Q1djeGdwZC1LZmVXUTFYOC1nVFQ2QWZIcG5VLVNCQVdfSV9ocENCajdKaG9VeHBQSE9TQXZEQXBGN2lHX2ZJQlYySmRhT3VieEtuX2FRM0E?oc=5",
+          "publishedAt": "2026-06-17T07:00:00.000Z",
+          "summary": "The women who run the markets Axios",
+          "excerpt": "The women who run the markets Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
         },
         {
@@ -55858,15 +55867,6 @@
           "publishedAt": "2026-06-16T07:00:00.000Z",
           "summary": "U.S. oil stockpile falls to 43-year low Axios",
           "excerpt": "U.S. oil stockpile falls to 43-year low Axios",
-          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-          "sourceName": "Axios Markets RSS",
-          "title": "How SpaceX's arrival impacts the stock market - Axios",
-          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9jM0hlSDgzQnlKQXVpOTJCUElqdGZLRFJpZTBadTNOTUZ4ejMzNG1WaURad19XWVFxYVd5SUZweWNHNGx1T2V5ZkJnSmFZX09Yc1hOS2dTTkgyU1VLN2E5WnM1cEdDNEU?oc=5",
-          "publishedAt": "2026-06-15T07:00:00.000Z",
-          "summary": "How SpaceX's arrival impacts the stock market Axios",
-          "excerpt": "How SpaceX's arrival impacts the stock market Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
         }
       ],
@@ -55967,29 +55967,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Don&apos;t throw away your shot to speak to an AI Alexander Hamilton at Boston&apos;s new finance museum",
-          "url": "https://www.cnbc.com/2026/07/03/the-museum-of-american-finance-opens-its-doors-in-boston.html",
-          "publishedAt": "2026-07-03T13:16:09.000Z",
-          "summary": "Nearly a decade after leaving its former home, the Museum of American Finance is opening its new doors to the public.",
-          "excerpt": "Nearly a decade after leaving its former home, the Museum of American Finance is opening its new doors to the public.",
+          "title": "Feds seek lower prison term for $100 million New Jersey deli fraudster — but some reasons why are hidden",
+          "url": "https://www.cnbc.com/2026/07/03/new-jersey-deli-stockfraud-sentence-patten.html",
+          "publishedAt": "2026-07-03T19:33:26.000Z",
+          "summary": "James Patten is the third person who will be sentenced in the stock manipulation scheme related to Hometown International, a company that owned just one deli.",
+          "excerpt": "James Patten is the third person who will be sentenced in the stock manipulation scheme related to Hometown International, a company that owned just one deli.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "The Tech Download: Amazon’s devices chief Panos Panay on tech giant&apos;s AI gadget push",
-          "url": "https://www.cnbc.com/2026/07/03/the-tech-download-amazon-devices-chief-panos-panay.html",
-          "publishedAt": "2026-07-03T12:41:22.000Z",
-          "summary": "CNBC's Arjun Kharpal sits down Amazon's Panay on the latest episode of The Tech Download podcast.",
-          "excerpt": "CNBC's Arjun Kharpal sits down Amazon's Panay on the latest episode of The Tech Download podcast.",
+          "title": "First known congressional SpaceX stock buys surface after record IPO",
+          "url": "https://www.cnbc.com/2026/07/03/spacex-stock-congress-meuser-cisneros-ipo-disclosure.html",
+          "publishedAt": "2026-07-03T18:16:43.000Z",
+          "summary": "The SpaceX stock purchases come as Elon Musk’s company deepens its role in federal contracting and remains closely tied to President Donald Trump’s Washington.",
+          "excerpt": "The SpaceX stock purchases come as Elon Musk’s company deepens its role in federal contracting and remains closely tied to President Donald Trump’s Washington.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "AI is outpacing the rules, Europe’s top bankers and regulators warn",
-          "url": "https://www.cnbc.com/2026/07/03/ai-outpacing-rules-europe-top-bankers-regulators-warn.html",
-          "publishedAt": "2026-07-03T12:21:15.000Z",
-          "summary": "Europe's top bankers and financial regulators are grappling with how to better regulate AI risks.",
-          "excerpt": "Europe's top bankers and financial regulators are grappling with how to better regulate AI risks.",
+          "title": "American Express and Chase move luxury lounge wars beyond the airport",
+          "url": "https://www.cnbc.com/2026/07/03/amex-chase-credit-card-lounges.html",
+          "publishedAt": "2026-07-03T18:03:34.000Z",
+          "summary": "Credit card companies are increasingly offering access to lounges and perks at festivals and sporting events, often exclusively for premium cardholders.",
+          "excerpt": "Credit card companies are increasingly offering access to lounges and perks at festivals and sporting events, often exclusively for premium cardholders.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56049,29 +56049,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "A looming AI disappointment and rising yields. Why one research firm is hitting the brakes on U.S. stocks.",
-          "url": "https://www.marketwatch.com/story/a-looming-ai-disappointment-and-rising-yields-why-one-research-firm-is-hitting-the-brakes-on-u-s-stocks-4bfaa67b?mod=mw_rss_topstories",
-          "publishedAt": "2026-07-03T14:17:00.000Z",
-          "summary": "In a market dominated by tech stocks, a big test is facing investors in the next 12 months, warns MacroResearchBoard",
-          "excerpt": "In a market dominated by tech stocks, a big test is facing investors in the next 12 months, warns MacroResearchBoard",
+          "title": "Opening a ‘Trump account’ for your children? Here is the risk you need to reckon with first.",
+          "url": "https://www.marketwatch.com/story/opening-a-trump-account-for-your-children-here-is-the-risk-you-need-to-recognize-first-fe206bc0?mod=mw_rss_topstories",
+          "publishedAt": "2026-07-03T19:10:00.000Z",
+          "summary": "The new accounts ban bonds and international stocks, forcing parents to bet their children’s financial future entirely on U.S. equities.",
+          "excerpt": "The new accounts ban bonds and international stocks, forcing parents to bet their children’s financial future entirely on U.S. equities.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "U.S. stocks have delivered 8.7% a year since independence was declared in 1776",
-          "url": "https://www.marketwatch.com/story/u-s-stocks-have-delivered-8-7-a-year-since-independence-was-declared-in-1776-7513ae04?mod=mw_rss_topstories",
-          "publishedAt": "2026-07-03T13:52:00.000Z",
-          "summary": "What 250 years of independence have meant for America’s investors.",
-          "excerpt": "What 250 years of independence have meant for America’s investors.",
+          "title": "Nvidia is betting on a trillion-dollar robotics boom. Here is the hidden way to trade it.",
+          "url": "https://www.marketwatch.com/story/nvidia-is-betting-on-a-trillion-dollar-robotics-boom-here-is-the-hidden-way-to-trade-it-c5b10c4e?mod=mw_rss_topstories",
+          "publishedAt": "2026-07-03T18:52:00.000Z",
+          "summary": "CEO Jensen Huang has called humanoid robots a “multitrillion-dollar economic opportunity.”",
+          "excerpt": "CEO Jensen Huang has called humanoid robots a “multitrillion-dollar economic opportunity.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "‘I claimed Social Security at 62’: At 76, I’m working at Walmart. Why do I still owe payroll taxes?",
-          "url": "https://www.marketwatch.com/story/i-claimed-social-security-at-62-at-76-im-working-at-walmart-why-do-i-still-owe-payroll-taxes-8e22a97c?mod=mw_rss_topstories",
-          "publishedAt": "2026-07-03T12:15:00.000Z",
-          "summary": "“It seems like half of the workforce at our local Walmart is over 65.”",
-          "excerpt": "“It seems like half of the workforce at our local Walmart is over 65.”",
+          "title": "Want to live longer in retirement? This one money move could add years to your life.",
+          "url": "https://www.marketwatch.com/story/want-to-live-longer-in-retirement-this-one-money-move-could-add-years-to-your-life-e8f2b4ba?mod=mw_rss_topstories",
+          "publishedAt": "2026-07-03T18:42:00.000Z",
+          "summary": "A secure retirement portfolio acts like a health shield, calming market anxiety that can actually shorten life expectancy.",
+          "excerpt": "A secure retirement portfolio acts like a health shield, calming market anxiety that can actually shorten life expectancy.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
