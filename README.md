@@ -473,9 +473,9 @@ It is configured to refresh twice daily shortly after 5 AM Pacific and 4 PM Paci
 
 The workflow uses GitHub Actions timezone-aware schedules with `timezone: "America/Los_Angeles"`, so the cron entries stay tied to Pacific time across daylight saving changes. The schedule intentionally avoids minute `0`. GitHub documents that scheduled workflows may be delayed during high-load periods, especially at the start of every hour, and that queued scheduled jobs can be dropped. Running at minutes `17` and `47` gives each target window a backup attempt while keeping the schedule easier to audit.
 
-`scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. The refresh workflow writes a local success status before packaging the Pages artifact, deploys the artifact, and then runs a non-blocking live-site probe against `data/refresh-status.json`. The ledger is committed only after `actions/deploy-pages` succeeds, so true publication failures remain retryable, while normal GitHub Pages/CDN propagation lag does not turn an otherwise successful refresh into a failed workflow.
+`scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. The refresh workflow writes a local success status before packaging the Pages artifact, deploys the artifact, and then runs a non-blocking live-site probe against `data/refresh-status.json`. The snapshot builder and dashboard verifier run through a small retry wrapper because source fetches and AI synthesis can fail transiently. `actions/deploy-pages` also gets one retry after a short pause because Pages deployments can fail independently from data generation. The ledger is committed only after `actions/deploy-pages` succeeds, so true publication failures remain retryable, while normal GitHub Pages/CDN propagation lag does not turn an otherwise successful refresh into a failed workflow.
 
-`.github/workflows/monitor-refresh.yml` runs after the morning and evening cutoff windows. It calls `scripts/monitor-refreshes.mjs` and fails if the expected Pacific target is missing from the committed ledger or from the live GitHub Pages dashboard, giving the project a visible dead-man check for skipped, severely delayed, or stale-site refreshes.
+`.github/workflows/monitor-refresh.yml` runs later in the morning and evening after both scheduled refresh attempts have had time to start despite normal GitHub scheduler delay. Because scheduled monitor jobs can start late from the commit that was current when GitHub queued the run, the monitor fast-forwards to the latest default branch before checking the ledger. It then calls `scripts/monitor-refreshes.mjs` and fails if the expected Pacific target is missing from the committed ledger or from the live GitHub Pages dashboard, giving the project a visible dead-man check for skipped, severely delayed, or stale-site refreshes without raising noise while GitHub is still catching up.
 
 When the refresh runs successfully, it:
 
@@ -485,8 +485,10 @@ When the refresh runs successfully, it:
 - Regenerates `data/snapshot.json`
 - Regenerates `data/model-scorebook.json`
 - Updates ignored cache files under `data/cache/` when reusable runtime state changes
+- Retries the snapshot build plus verification once if a transient source, AI, or quality-gate failure occurs
 - Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, publish status, model date, and row counts
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
+- Retries the GitHub Pages deploy action once if the first deploy fails
 - Probes whether the live site already serves the expected refresh-status run id; this is diagnostic because GitHub Pages can lag briefly after deployment
 - Updates and commits `data/refresh-ledger.json` only after `actions/deploy-pages` succeeds, so delayed backup attempts can retry true failed publishes but skip already-completed morning/evening windows
 - Commits only the static-site JSON artifacts and scheduler state back to `main` after successful Pages deployment
@@ -990,6 +992,8 @@ scripts/update-data.mjs            Data refresh, source ingestion, screening, AI
 scripts/update-macro-calendar.mjs  Scrapes rolling BLS/FRED, BEA, and Fed release calendars
 scripts/check-refresh-window.mjs   GitHub Actions Pacific refresh gate and duplicate-run guard
 scripts/monitor-refreshes.mjs      Missed-refresh dead-man monitor
+scripts/refresh/run-snapshot-refresh.mjs Retry wrapper for snapshot generation plus verification
+scripts/refresh/confirm-live-pages.mjs Non-blocking live GitHub Pages freshness probe
 scripts/ingest/sources.mjs         Markdown, RSS, and source-page article extraction helpers
 scripts/snapshot/ai-memo.mjs       AI memo input payload and response-schema helpers
 scripts/snapshot/schemas.mjs       Local schema validator for dashboard JSON artifacts

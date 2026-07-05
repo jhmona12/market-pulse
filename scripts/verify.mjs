@@ -79,6 +79,7 @@ run(node, ["--check", "scripts/write-refresh-status.mjs"]);
 run(node, ["--check", "scripts/check-refresh-window.mjs"]);
 run(node, ["--check", "scripts/monitor-refreshes.mjs"]);
 run(node, ["--check", "scripts/refresh/confirm-live-pages.mjs"]);
+run(node, ["--check", "scripts/refresh/run-snapshot-refresh.mjs"]);
 run(node, ["--check", "scripts/ingest/sources.mjs"]);
 run(node, ["--check", "scripts/snapshot/ai-memo.mjs"]);
 run(node, ["--check", "scripts/snapshot/schemas.mjs"]);
@@ -262,6 +263,12 @@ if (deployIndex === -1 || liveConfirmIndex === -1 || commitPublishedIndex === -1
 if (!refreshWorkflow.includes("node scripts/refresh/confirm-live-pages.mjs")) {
   fail(".github/workflows/refresh-data.yml must use the tested non-blocking live Pages probe");
 }
+if (!refreshWorkflow.includes("node scripts/refresh/run-snapshot-refresh.mjs") || !refreshWorkflow.includes("SNAPSHOT_REFRESH_ATTEMPTS: 2")) {
+  fail(".github/workflows/refresh-data.yml must use the tested refresh/verify retry wrapper");
+}
+if (!refreshWorkflow.includes("Retry Deploy Pages") || !refreshWorkflow.includes("steps.deployment.outcome != 'success'")) {
+  fail(".github/workflows/refresh-data.yml must retry GitHub Pages deployment once after a failed primary deploy");
+}
 if (!refreshWorkflow.includes("PAGES_PUBLISH_STATUS: published") || !refreshWorkflow.includes("PAGES_PUBLISH_STATUS: not_published")) {
   fail(".github/workflows/refresh-data.yml does not record published/not_published refresh status states");
 }
@@ -278,6 +285,12 @@ if (!refreshWorkflow.includes("cp -R src public/src")) {
 const monitorWorkflow = readFileSync(join(root, ".github/workflows/monitor-refresh.yml"), "utf8");
 if (!monitorWorkflow.includes("node scripts/monitor-refreshes.mjs")) {
   fail(".github/workflows/monitor-refresh.yml does not run scripts/monitor-refreshes.mjs");
+}
+if (!monitorWorkflow.includes("git pull --ff-only origin \"$GITHUB_REF_NAME\"")) {
+  fail(".github/workflows/monitor-refresh.yml must sync the latest default branch before checking refresh health");
+}
+if (!monitorWorkflow.includes('cron: "30 9 * * *"') || !monitorWorkflow.includes('cron: "30 20 * * *"')) {
+  fail(".github/workflows/monitor-refresh.yml should run after a realistic GitHub scheduler delay buffer");
 }
 if (!monitorWorkflow.includes("LIVE_DASHBOARD_BASE_URL")) {
   fail(".github/workflows/monitor-refresh.yml does not check the live GitHub Pages dashboard");

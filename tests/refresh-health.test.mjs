@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { confirmLivePagesStatus } from "../scripts/refresh/confirm-live-pages.mjs";
+import { runSnapshotRefresh } from "../scripts/refresh/run-snapshot-refresh.mjs";
 
 function response(body, ok = true, status = 200) {
   return {
@@ -73,4 +74,65 @@ test("does not throw when the live Pages status endpoint is temporarily unavaila
 
   assert.equal(result.confirmed, false);
   assert.match(result.lastError, /HTTP 503/);
+});
+
+test("retries the snapshot refresh when verification fails once", async () => {
+  const calls = [];
+  const result = await runSnapshotRefresh({
+    attempts: 2,
+    retryDelayMs: 0,
+    runCommand: async (command, args) => {
+      calls.push([command, ...args].join(" "));
+      if (calls.length === 2) return 1;
+      return 0;
+    },
+    sleep: async () => {},
+    logger: { log() {}, warn() {}, error() {} }
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.attemptsUsed, 2);
+  assert.deepEqual(calls, [
+    "node scripts/update-data.mjs",
+    "npm run verify",
+    "node scripts/update-data.mjs",
+    "npm run verify"
+  ]);
+});
+
+test("retries the snapshot refresh when the refresh command fails once", async () => {
+  const calls = [];
+  const result = await runSnapshotRefresh({
+    attempts: 2,
+    retryDelayMs: 0,
+    runCommand: async (command, args) => {
+      calls.push([command, ...args].join(" "));
+      return calls.length === 1 ? 1 : 0;
+    },
+    sleep: async () => {},
+    logger: { log() {}, warn() {}, error() {} }
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.attemptsUsed, 2);
+  assert.deepEqual(calls, [
+    "node scripts/update-data.mjs",
+    "node scripts/update-data.mjs",
+    "npm run verify"
+  ]);
+});
+
+test("reports failure after all snapshot refresh attempts are exhausted", async () => {
+  const result = await runSnapshotRefresh({
+    attempts: 2,
+    retryDelayMs: 0,
+    runCommand: async () => 7,
+    sleep: async () => {},
+    logger: { log() {}, warn() {}, error() {} }
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.attemptsUsed, 2);
+  assert.equal(result.lastPhase, "refresh");
+  assert.equal(result.lastStatus, 7);
 });

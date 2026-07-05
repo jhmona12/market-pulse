@@ -32,7 +32,7 @@ jobs:
   refresh:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -118,9 +118,9 @@ jobs:
           echo "1Y scorer outcome: ${{ steps.score_long_horizon_model.outcome }}"
           exit 1
 
-      - name: Refresh snapshot
+      - name: Refresh and verify snapshot
         if: steps.pacific_time.outputs.run_refresh == 'true'
-        timeout-minutes: 25
+        timeout-minutes: 45
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5-nano
@@ -129,11 +129,9 @@ jobs:
           REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
           MODEL_SCORING_OUTCOME: ${{ steps.score_model.outcome }}
           LONG_HORIZON_SCORING_OUTCOME: ${{ steps.score_long_horizon_model.outcome }}
-        run: node scripts/update-data.mjs
-
-      - name: Verify generated site data
-        if: steps.pacific_time.outputs.run_refresh == 'true'
-        run: npm run verify
+          SNAPSHOT_REFRESH_ATTEMPTS: 2
+          SNAPSHOT_REFRESH_RETRY_DELAY_MS: 5000
+        run: node scripts/refresh/run-snapshot-refresh.mjs
 
       - name: Write successful refresh status
         if: success() && steps.pacific_time.outputs.run_refresh == 'true'
@@ -194,13 +192,29 @@ jobs:
       - name: Deploy Pages
         if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
         id: deployment
+        continue-on-error: true
         uses: actions/deploy-pages@v4
 
+      - name: Pause before deploy retry
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true' && steps.deployment.outcome != 'success'
+        run: sleep 30
+
+      - name: Retry Deploy Pages
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true' && steps.deployment.outcome != 'success'
+        id: deployment_retry
+        uses: actions/deploy-pages@v4
+
+      - name: Stop if Pages deploy failed
+        if: steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true' && steps.deployment.outcome != 'success' && steps.deployment_retry.outcome != 'success'
+        run: |
+          echo "GitHub Pages deployment failed after retry."
+          exit 1
+
       - name: Probe live Pages status
-        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true' && (steps.deployment.outcome == 'success' || steps.deployment_retry.outcome == 'success')
         id: live_pages
         env:
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          PAGE_URL: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
           EXPECTED_RUN_ID: ${{ github.run_id }}
           LIVE_CONFIRM_ATTEMPTS: 12
           LIVE_CONFIRM_DELAY_MS: 10000
@@ -208,7 +222,7 @@ jobs:
 
       - name: Commit published refresh outputs
         id: commit_success_outputs
-        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true'
+        if: success() && steps.pacific_time.outputs.run_refresh == 'true' && steps.publish_guard.outputs.remote_changed != 'true' && (steps.deployment.outcome == 'success' || steps.deployment_retry.outcome == 'success')
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

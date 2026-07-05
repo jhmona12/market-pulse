@@ -2,9 +2,9 @@ name: Monitor Refresh Health
 
 on:
   schedule:
-    - cron: "45 7 * * *"
+    - cron: "30 9 * * *"
       timezone: "America/Los_Angeles"
-    - cron: "45 18 * * *"
+    - cron: "30 20 * * *"
       timezone: "America/Los_Angeles"
   workflow_dispatch:
 
@@ -22,6 +22,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Sync latest default branch
+        run: git pull --ff-only origin "$GITHUB_REF_NAME"
 
       - name: Set up Node
         uses: actions/setup-node@v4
