@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-27T00:17:57.017Z",
+  "generatedAt": "2026-07-27T15:36:09.706Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-07-27T00:14:54.841502+00:00",
+    "generatedAt": "2026-07-27T15:32:34.334034+00:00",
     "asOfDate": "2026-07-24",
     "expectedAsOfDate": "2026-07-24",
     "isStale": false,
@@ -1387,20 +1387,20 @@
     }
   },
   "note": {
-    "headline": "Oil and geopolitical risk keep position sizing tighter.",
-    "body": "It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data. The week ahead will have no shortage of challenges for the major averages. Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation. Reddit attention data was unavailable or did not produce clean ticker concentration. Breadth is not strong enough for a blanket risk-on call; use the model to choose single names rather than reaching for broad beta. Confirmed momentum leadership is DELL, TECH, HPE, DDOG. 18 of the top 25 model-ranked stocks are in Information Technology. ETF confirmation is strongest in Energy.",
+    "headline": "U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite.",
+    "body": "Unlike most central banks, the MAS manages medium-term price stability by managing the Singapore dollar exchange rate against a trade-weighted basket of currencies. U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Earnings: Large-cap reporters are moving enough to affect index tone; focus on guidance read-throughs from TER, F rather than the full mover list. Reddit attention data was unavailable or did not produce clean ticker concentration. Breadth is not strong enough for a blanket risk-on call; use the model to choose single names rather than reaching for broad beta. Confirmed momentum leadership is DELL, TECH, HPE, DDOG. 18 of the top 25 model-ranked stocks are in Information Technology. ETF confirmation is strongest in Energy.",
     "changed": [
-      "Rates: It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data. (M3)",
-      "Commodities: Oil prices fell after Iran reportedly said it would suspend attacks as long as a U.S. pause in hostilities remains in place. (M2)",
-      "Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation.",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M2)",
+      "Rates: Inflation data are running hot, so rates remain the main constraint on crowded momentum. (M5)",
+      "Earnings: Large-cap reporters are moving enough to affect index tone; focus on guidance read-throughs from TER, F rather than the full mover list.",
       "Breadth: 65% of the screened universe is above the 50-day average, 67% is above the 200-day, and 54% clears both trend lines.",
-      "Research tape: CNBC Top News RSS: Oil slides 5% as Iran reportedly signals halt to attacks if U.S. pause holds | MarketWatch Top Stories RSS: Oil prices sink, stock futures rally as U.S. and Iran pause attacks, Wall Street awaits busy week | CNBC Top News RSS: Here&apos;s the tech stock to buy in a market losing patience with tech."
+      "Research tape: CNBC Top News RSS: Sam Altman to meet with Trump administration, senators this week. Here&apos;s what he plans to say | MarketWatch Top Stories RSS: The AI boom shows no sign of slowing — and the U.S. economy is reaping the benefits | MarketWatch Top Stories RSS: College kids are moving into retirement communities for reasons beyond ‘cheap rent’."
     ],
     "watch": [
       "Macro risk: FOMC Rate Decision on 2026-07-29; GDP Advance Estimate on 2026-07-30; Personal Income and Outlays on 2026-07-30.",
       "Momentum risk: 1 top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.",
       "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
-      "4 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
+      "5 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
     ],
     "generatedBy": "deterministic"
   },
@@ -1409,12 +1409,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 106549,
+      "inputTokens": 108306,
       "cachedInputTokens": 0,
-      "outputTokens": 3177,
+      "outputTokens": 2380,
       "reasoningTokens": 0,
-      "totalTokens": 109726,
-      "estimatedCostUsd": 0.006598,
+      "totalTokens": 110686,
+      "estimatedCostUsd": 0.006367,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1422,23 +1422,111 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Oil and geopolitical risk keep position sizing tighter; confirmed leadership is DELL.",
-    "macroView": "It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data. The week ahead will have no shortage of challenges for the major averages. Next macro decision points: FOMC Rate Decision on 2026-07-29; GDP Advance Estimate on 2026-07-30; Personal Income and Outlays on 2026-07-30. Sector confirmation: Energy +11.29% over 30D, +10.51% vs SPY; Health Care +6.01% over 30D, +5.23% vs SPY; Financials +4.82% over 30D, +4.04% vs SPY. Action bias: research confirmed momentum leaders DELL; keep CIEN, SNDK, WDC in the watch bucket until confirmation improves.",
+    "headline": "U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite; confirmed leadership is DELL.",
+    "macroView": "Unlike most central banks, the MAS manages medium-term price stability by managing the Singapore dollar exchange rate against a trade-weighted basket of currencies. U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Next macro decision points: FOMC Rate Decision on 2026-07-29; GDP Advance Estimate on 2026-07-30; Personal Income and Outlays on 2026-07-30. Sector confirmation: Energy +11.29% over 30D, +10.51% vs SPY; Health Care +6.01% over 30D, +5.23% vs SPY; Financials +4.82% over 30D, +4.04% vs SPY. Action bias: research confirmed momentum leaders DELL; keep CIEN, SNDK, WDC in the watch bucket until confirmation improves.",
     "dailyRead": null,
     "recommendations": [
       {
+        "symbol": "DELL",
+        "action": "Research long setup",
+        "conviction": "High",
+        "setup": "Momentum confirmed",
+        "whyNow": "Rank #9 of 500; +108.71% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "rationale": "DELL is momentum confirmed by the dashboard rules. Rank #9 of 500; +108.71% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "companyOverview": "Dell Technologies (NYSE: DELL) helps organizations and individuals build their digital future and transform how they work, live and play. The company provides customers with the industry's broadest and most innovative technology and services portfolio for the AI era.",
+        "marketCap": "$287.9B",
+        "earningsContext": "Last reported 2026-05-28 for the Apr 2026 fiscal quarter; EPS 4.63 versus consensus 2.79; surprise 65.95%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jul 2026 with consensus 4.65.",
+        "recentNews": "Dell beat estimates and guided higher; AI demand remains a tailwind.",
+        "macroLink": "Market macro backdrop remains supportive for IT capex.",
+        "macroEvidence": "None specific in data; macro tape favorable for tech capex.",
+        "modelEvidence": "Rank #9 of 500; 98.4 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D +10.57%; 14D +0.75%; 30D +0.96%; 60D vs SPY +108.71%; RSI 55; above both the 50-day and 200-day moving averages",
+        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
+        "risk": "Above-sector volatility; Weak volume confirmation",
+        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
+        "sourceRefs": [
+          "C9-EARNINGS",
+          "C5-IR",
+          "C9-MARKETCAP",
+          "S9",
+          "S7",
+          "S8",
+          "C9-IR"
+        ],
+        "setupTags": [
+          "Momentum Confirmed"
+        ]
+      },
+      {
+        "symbol": "SNDK",
+        "action": "Watch, do not chase",
+        "conviction": "Medium",
+        "setup": "Not momentum confirmed",
+        "whyNow": "Rank #2 of 500; +39.22% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
+        "rationale": "The model ranks SNDK highly, but the setup is not clean momentum yet. Rank #2 of 500; +39.22% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
+        "companyOverview": "Sandisk (Nasdaq: SNDK) delivers innovative Flash solutions and advanced memory technologies that meet people and businesses at the intersection of their aspirations and the moment, enabling them to keep moving and pushing possibility forward.",
+        "marketCap": "$210.5B",
+        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 33.28.",
+        "recentNews": "Memory demand remains AI-led but cyclical; risk is competitive intensity.",
+        "macroLink": "AI demand supports memory demand; macro data uncertain.",
+        "macroEvidence": "AI demand tailwinds supportive for memory; macro risk from rate path.",
+        "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D +6.03%; 14D -25.02%; 30D -24.96%; 60D vs SPY +39.22%; RSI 40; above the 200-day average but below the 50-day average",
+        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
+        "risk": "Above-sector volatility; Below 50d trend",
+        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
+        "sourceRefs": [
+          "C2-EARNINGS",
+          "C2-MARKETCAP",
+          "C2-IR",
+          "S4",
+          "S3"
+        ],
+        "setupTags": [
+          "Not Momentum Confirmed"
+        ]
+      },
+      {
+        "symbol": "WDC",
+        "action": "Watch, do not chase",
+        "conviction": "Medium",
+        "setup": "Not momentum confirmed",
+        "whyNow": "Rank #3 of 500; +28.88% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
+        "rationale": "The model ranks WDC highly, but the setup is not clean momentum yet. Rank #3 of 500; +28.88% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
+        "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to deliver reliable storage solutions that are proven and trusted at sc...",
+        "marketCap": "$180.3B",
+        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 2.62 versus consensus 2.28; surprise 14.91%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 3.24.",
+        "recentNews": "AI-driven storage demand supporting long-cycle upside.",
+        "macroLink": "AI capex tailwinds; rate path risk.",
+        "macroEvidence": "Implied by data; macro stance ambiguous.",
+        "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D +8.92%; 14D -10.78%; 30D -19.26%; 60D vs SPY +28.88%; RSI 42; above the 200-day average but below the 50-day average",
+        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
+        "risk": "Above-sector volatility; Below 50d trend; Weak volume confirmation",
+        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
+        "sourceRefs": [
+          "C3-EARNINGS",
+          "C3-MARKETCAP",
+          "C3-IR",
+          "S11"
+        ],
+        "setupTags": [
+          "Not Momentum Confirmed"
+        ]
+      },
+      {
         "symbol": "CIEN",
         "action": "Watch, do not chase",
-        "conviction": "High",
+        "conviction": "Review",
         "setup": "Not momentum confirmed",
         "whyNow": "Rank #1 of 500; -21.56% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
         "rationale": "The model ranks CIEN highly, but the setup is not clean momentum yet. Rank #1 of 500; -21.56% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
         "companyOverview": "Ciena is the global leader in high-speed connectivity. We build the world's most advanced networks to support exponential growth in bandwidth demand. By harnessing the power of our networking systems, interconnects, automation software, and services, Ciena revolutionizes data transmission and network management. Wit...",
-        "marketCap": "$55.3B",
+        "marketCap": "$55.8B",
         "earningsContext": "Last reported 2026-06-04 for the Apr 2026 fiscal quarter; EPS 1.34 versus consensus 1.2; surprise 11.67%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jul 2026 with consensus 1.45.",
-        "recentNews": "No new catalysts beyond earnings beat; AI / infra spend tailwinds ongoing.",
-        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / cien / earnings",
-        "macroEvidence": "Long-horizon momentum and sector-top 120d return rank; above-200d trend but volatility flag; volume confirmation weak.",
+        "recentNews": "AI and AI infra demand tailwinds; sector leadership.",
+        "macroLink": "IT capex cycle; geopolitics.",
+        "macroEvidence": "Moderate inflation risk; Fed path uncertain.",
         "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +4.42%; 14D -15.14%; 30D -15.65%; 60D vs SPY -21.56%; RSI 40; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
@@ -1452,169 +1540,38 @@
         "setupTags": [
           "Not Momentum Confirmed"
         ]
-      },
-      {
-        "symbol": "SNDK",
-        "action": "Watch, do not chase",
-        "conviction": "High",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #2 of 500; +39.22% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks SNDK highly, but the setup is not clean momentum yet. Rank #2 of 500; +39.22% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "Sandisk (Nasdaq: SNDK) delivers innovative Flash solutions and advanced memory technologies that meet people and businesses at the intersection of their aspirations and the moment, enabling them to keep moving and pushing possibility forward.",
-        "marketCap": "$212.7B",
-        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 23.22 versus consensus 14.17; surprise 63.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 33.28.",
-        "recentNews": "Strong earnings surprise; AI / data-center momentum.",
-        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / sndk / earnings",
-        "macroEvidence": "Long-horizon momentum ahead of sector median; top sector 120d return rank; above-200d trend.",
-        "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +6.03%; 14D -25.02%; 30D -24.96%; 60D vs SPY +39.22%; RSI 40; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
-        "risk": "Above-sector volatility; Below 50d trend",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C2-EARNINGS",
-          "C2-MARKETCAP",
-          "C2-IR"
-        ],
-        "setupTags": [
-          "Not Momentum Confirmed"
-        ]
-      },
-      {
-        "symbol": "WDC",
-        "action": "Watch, do not chase",
-        "conviction": "High",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #3 of 500; +28.88% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks WDC highly, but the setup is not clean momentum yet. Rank #3 of 500; +28.88% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to deliver reliable storage solutions that are proven and trusted at sc...",
-        "marketCap": "$179.2B",
-        "earningsContext": "Last reported 2026-04-30 for the Mar 2026 fiscal quarter; EPS 2.62 versus consensus 2.28; surprise 14.91%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 3.24.",
-        "recentNews": "AI / data center demand tailwinds; memory chip cycles.",
-        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / wdc / earnings",
-        "macroEvidence": "Long-horizon momentum ahead of sector median; 120d top sector return rank.",
-        "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +8.92%; 14D -10.78%; 30D -19.26%; 60D vs SPY +28.88%; RSI 42; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Below 50d trend; Weak volume confirmation",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C3-EARNINGS",
-          "C3-MARKETCAP",
-          "C3-IR"
-        ],
-        "setupTags": [
-          "Not Momentum Confirmed"
-        ]
-      },
-      {
-        "symbol": "STX",
-        "action": "Watch, do not chase",
-        "conviction": "High",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #4 of 500; +43.10% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks STX highly, but the setup is not clean momentum yet. Rank #4 of 500; +43.10% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "Seagate (NASDAQ: STX) is a pioneer in mass-capacity data storage, accelerating ability to harness the full value of data. Our portfolio of advanced storage solutions helps hyperscale cloud providers, enterprises, and consumers protect, create and manage the data that powers their transformation and growth. For more...",
-        "marketCap": "$191.0B",
-        "earningsContext": "Last reported 2026-04-28 for the Mar 2026 fiscal quarter; EPS 3.92 versus consensus 3.26; surprise 20.25%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jun 2026 with consensus 4.89.",
-        "recentNews": "Storage demand tailwinds; AI era data growth.",
-        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / stx / earnings",
-        "macroEvidence": "Long-horizon momentum ahead of sector median; 120d return rank.",
-        "modelEvidence": "Rank #4 of 500; 99.4 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +8.13%; 14D -6.44%; 30D -14.25%; 60D vs SPY +43.10%; RSI 49; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
-        "risk": "Above-sector volatility; Below 50d trend",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C4-EARNINGS",
-          "C4-MARKETCAP",
-          "C4-IR"
-        ],
-        "setupTags": [
-          "Not Momentum Confirmed"
-        ]
-      },
-      {
-        "symbol": "INTC",
-        "action": "Watch, do not chase",
-        "conviction": "High",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #5 of 500; +5.13% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks INTC highly, but the setup is not clean momentum yet. Rank #5 of 500; +5.13% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "Intel (Nasdaq: INTC) designs and manufactures advanced semiconductors that connect and power the modern world. Every day, our engineers create new technologies that enhance and shape the future of computing to enable new possibilities for every customer we serve. Learn more at www.intel.com.",
-        "marketCap": "$464.0B",
-        "earningsContext": "Last reported 2026-07-23 for the Jun 2026 fiscal quarter; EPS 0.3 versus consensus 0.1; surprise 200%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 0.15.",
-        "recentNews": "AI cycle exposure; turnaround gains; earnings beat.",
-        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / intc / earnings",
-        "macroEvidence": "Long-horizon momentum; 120d sector rank; activation risk.",
-        "modelEvidence": "Rank #5 of 500; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D -2.86%; 14D -15.95%; 30D -29.87%; 60D vs SPY +5.13%; RSI 27; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
-        "risk": "Above-sector volatility; Below 50d trend",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C5-EARNINGS",
-          "C5-MARKETCAP",
-          "C5-IR"
-        ],
-        "setupTags": [
-          "Not Momentum Confirmed"
-        ]
-      },
-      {
-        "symbol": "MU",
-        "action": "Watch, do not chase",
-        "conviction": "High",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #6 of 500; +78.56% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks MU highly, but the setup is not clean momentum yet. Rank #6 of 500; +78.56% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "Micron Technology, Inc. is an industry leader in innovative memory and storage solutions transforming how the world uses information to enrich life for all. With a relentless focus on our customers, technology leadership, and manufacturing and operational excellence, Micron delivers a rich portfolio of high-performa...",
-        "marketCap": "$1.04T",
-        "earningsContext": "Last reported 2026-06-24 for the May 2026 fiscal quarter; EPS 24.89 versus consensus 20.98; surprise 18.64%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Aug 2026 with consensus 31.17.",
-        "recentNews": "AI memory demand; supply chain improvements.",
-        "macroLink": "https: / / www.nasdaq.com / market-activity / stocks / mu / earnings",
-        "macroEvidence": "Long-horizon momentum; top 120d rank; above-200d trend.",
-        "modelEvidence": "Rank #6 of 500; 99.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +8.48%; 14D -5.96%; 30D -12.15%; 60D vs SPY +78.56%; RSI 44; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
-        "risk": "Above-sector volatility; Below 50d trend",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C6-EARNINGS",
-          "C6-MARKETCAP",
-          "C6-IR"
-        ],
-        "setupTags": [
-          "Not Momentum Confirmed"
-        ]
       }
     ],
     "avoidList": {
-      "summary": "Macro / sect: Industrials, Utilities, and Real Estate carry the weakest model-footprint and risk, suggesting to avoid fresh long exposure in these areas until confirmation improves; avoid Expedited Expeditors entirely due to low signals despite some 60d momentum.",
+      "summary": "Avoid Industrials and Utilities with weak momentum signals; crowded or low-velocity names likely to underperform in the near term. The strongest read is IT leadership, with standout risk controls around high-volatility stocks.",
       "sectors": [
         {
           "sector": "Industrials",
-          "rationale": "15 weakest model-ranked names clustered here; examples EXPD, MMM, FTV, PH."
+          "rationale": "15 weakest model-ranked names concentrated here; expect drawdown risk if macro tightening accelerates."
         },
         {
           "sector": "Financials",
-          "rationale": "Weak momentum signals across many financials; manager risk."
+          "rationale": "Weak momentum across Financials; risk of mixed reactions remains high."
         },
         {
           "sector": "Utilities",
-          "rationale": "Utilities show misalignment with momentum signals; avoid ED, ES, ETR, EVRG."
+          "rationale": "Low momentum; risk of multiple names underperforming."
+        },
+        {
+          "sector": "Real Estate",
+          "rationale": "weak confirmation; some leaders ride momentum but many lag."
         }
       ],
       "companies": [
         {
           "symbol": "EXPD",
-          "rationale": "Low model rank and weak momentum despite some 60d momentum; volume weak.",
-          "modelEvidence": "Ranked 500; modelScore negative; RSI 66 but price action weak."
+          "rationale": "ranked near the bottom of the model book signal; weak momentum despite favorable volatility; avoid long exposure.",
+          "modelEvidence": "Ranked 500; volatility low but momentum not confirmed."
         },
         {
           "symbol": "ED",
-          "rationale": "Utility stock with weak momentum and no clear activation; low signal.",
-          "modelEvidence": "Ranked 499; price 113; RSI 54; volatility low."
+          "rationale": "Low confidence due to lack of momentum; avoid long exposure.",
+          "modelEvidence": "Ranked 499; low momentum signals."
         }
       ]
     },
@@ -1629,7 +1586,7 @@
       "Do watch names CIEN, SNDK, WDC regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
-      "C1-EARNINGS",
+      "C9-EARNINGS",
       "C2-EARNINGS",
       "C3-EARNINGS",
       "C4-EARNINGS",
@@ -1637,7 +1594,6 @@
       "C6-EARNINGS",
       "C7-EARNINGS",
       "C8-EARNINGS",
-      "C9-EARNINGS",
       "C10-EARNINGS",
       "C11-EARNINGS",
       "C12-EARNINGS"
@@ -1645,36 +1601,36 @@
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Sourcing from two contenders, this Deeper Read highlights differentiated angles from policy / geopolitics and market reaction under turmoil, avoiding generic moves and prior-used sources where possible.",
+      "summary": "From the last week, two differentiated angles stand out: (1) policy, geopolitics, and liquidity shifts shaping AI / semis and credit spreads in China, and (2) market perception resilience amid global turmoil, with stocks continuing higher even as risk signals persist. Both lines offer distinct angles on macro fragility and policy-driven mixed reactions.",
       "cards": [
         {
-          "sourceRef": "S10",
+          "sourceRef": "S11",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "China's Chips, Crypto Clarity, Creeping Spreads",
-          "thesis": "China’s policy stance on AI semiconductors and crypto clarity, coupled with widening credit spreads, signals a nuanced risk backdrop where liquidity dynamics and policy gaps may reprice growth-sensitive assets.",
-          "whyItMatters": "Geopolitical and policy shifts around AI / chips and crypto governance affect capital allocation, cross-border financing, and risk premia in credit markets. The creeping spreads hint at liquidity frictions that may not be immediately visible in headline indices.",
-          "marketReadThrough": "Expect selective risk-off in credit-sensitive equities and a potential bid for liquidity-proxy instruments if spreads widen further. Watch for policy cues that could alter funding costs for tech and capital goods exporters.",
-          "variantAngle": "Differentiated angle from policy clarity and credit spread dynamics, focusing on how evolving tech-macro policy could create mixed reactions across credit and growth equities.",
+          "thesis": "China’s policy stance on AI / semis, crypto clarity, and creeping credit spreads implies a bifurcated risk signal: improving liquidity windows in some sectors but persistent mixed reactions from policy risk and the potential for policy missteps to abruptly reprice risk assets.",
+          "whyItMatters": "If Chinese policy keeps liquidity flowing selectively while sanctioning or clarifying crypto / AI sectors, credit spreads may compress selectively even as global risk assets face regime shifts. This creates spread between credit-sensitive equities and tech / AI names tied to policy clarity.",
+          "marketReadThrough": "Watch for diverging credit spreads vs. equity multiples; policy clarity in AI / semis may proffer pockets of liquidity that do not translate into broad market breadth. A shift in crypto regulation or AI export rules could reprice risk assets quickly.",
+          "variantAngle": "Policy-driven liquidity asymmetry: which credits and sectors benefit first from China’s policy stance, and where do spreads signal warning despite equity stability.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/chinas-chips-crypto-clarity-creeping-spreads",
           "publishedAt": "2026-07-24T20:54:42.000Z",
           "sourceRefs": [
-            "S10"
+            "S11"
           ]
         },
         {
-          "sourceRef": "S5",
+          "sourceRef": "S9",
           "sourceName": "Axios Markets RSS",
           "title": "Stocks Keep Climbing Despite Global Turmoil. Here's Why Markets Aren't Reacting the Way Many Expected - International Business Times",
-          "thesis": "Markets are behaving as if inflation and policy uncertainty are less constraining than feared, implying a potential mispricing in rate-sensitive assets and a fragile steadiness beneath the surface.",
-          "whyItMatters": "Contrarian read on market mood challenges standard risk models and could signal a tether to liquidity expectations or policy paths that diverge from macro narrative. This has implications for duration risk and defensives.",
-          "marketReadThrough": "Potential for rotation if growth optimism fades; watch for divergences between equity strength and slow-moving macro metrics (inflation, unemployment, capex).",
-          "variantAngle": "Alternative read on market resilience under turmoil that could imply a disconnect between macro signals and asset pricing, with implications for duration and defensives.",
-          "confidence": "Low",
+          "thesis": "Equity markets are exhibiting resilience; traditional risk-off signals are not triggering the expected downside, suggesting a disconnect between macro stress indicators and price action that could precede a regime shift.",
+          "whyItMatters": "The persistence of upside amid turmoil hints at latent demand, central-bank policy accommodation, or beta leadership areas that may not be sustainable if volatility re-prices macro surprises. It flags the risk of a sharp repricing if liquidity conditions tighten or growth surprises disappoint.",
+          "marketReadThrough": "Market breadth may thin as macro risk remains high; pay attention to sector leaders and correlations that might flip if risk sentiment deteriorates. The resilience could unravel quickly with a policy or growth shock.",
+          "variantAngle": "Discrepancy between macro risk signals and equity performance: where is the durability of this strength, and what indicators would precede a regime change?",
+          "confidence": "Medium",
           "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOdHV5OFhZNDhCcHAwdTEtN29NdW0zQ05jajU3aDQtYktnQUtpZGxUY3ZUMzYxQ1hjOXFvQWdnWTF2WmJnOXk2QVJZaVYxYVdZTE9VcHNObTFrM3N4VktCSFlaZjkzS3JkVDlpQkdJV2htWEptS1hnNEZJaVBXR1VBX0NsSHZ2dlV0dGY1a1B5V0Rra25Yc3B0NE5pR3VSQlVHSVBmQXVWd3U1LVExdTVYaUJBU3IwLXlEWnk1Q25YS25QaG9Q?oc=5",
           "publishedAt": "2026-07-26T22:31:52.000Z",
           "sourceRefs": [
-            "S5"
+            "S9"
           ]
         }
       ]
@@ -1683,36 +1639,36 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Sourcing from two contenders, this Deeper Read highlights differentiated angles from policy / geopolitics and market reaction under turmoil, avoiding generic moves and prior-used sources where possible.",
+    "summary": "From the last week, two differentiated angles stand out: (1) policy, geopolitics, and liquidity shifts shaping AI / semis and credit spreads in China, and (2) market perception resilience amid global turmoil, with stocks continuing higher even as risk signals persist. Both lines offer distinct angles on macro fragility and policy-driven mixed reactions.",
     "cards": [
       {
-        "sourceRef": "S10",
+        "sourceRef": "S11",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "China's Chips, Crypto Clarity, Creeping Spreads",
-        "thesis": "China’s policy stance on AI semiconductors and crypto clarity, coupled with widening credit spreads, signals a nuanced risk backdrop where liquidity dynamics and policy gaps may reprice growth-sensitive assets.",
-        "whyItMatters": "Geopolitical and policy shifts around AI / chips and crypto governance affect capital allocation, cross-border financing, and risk premia in credit markets. The creeping spreads hint at liquidity frictions that may not be immediately visible in headline indices.",
-        "marketReadThrough": "Expect selective risk-off in credit-sensitive equities and a potential bid for liquidity-proxy instruments if spreads widen further. Watch for policy cues that could alter funding costs for tech and capital goods exporters.",
-        "variantAngle": "Differentiated angle from policy clarity and credit spread dynamics, focusing on how evolving tech-macro policy could create mixed reactions across credit and growth equities.",
+        "thesis": "China’s policy stance on AI / semis, crypto clarity, and creeping credit spreads implies a bifurcated risk signal: improving liquidity windows in some sectors but persistent mixed reactions from policy risk and the potential for policy missteps to abruptly reprice risk assets.",
+        "whyItMatters": "If Chinese policy keeps liquidity flowing selectively while sanctioning or clarifying crypto / AI sectors, credit spreads may compress selectively even as global risk assets face regime shifts. This creates spread between credit-sensitive equities and tech / AI names tied to policy clarity.",
+        "marketReadThrough": "Watch for diverging credit spreads vs. equity multiples; policy clarity in AI / semis may proffer pockets of liquidity that do not translate into broad market breadth. A shift in crypto regulation or AI export rules could reprice risk assets quickly.",
+        "variantAngle": "Policy-driven liquidity asymmetry: which credits and sectors benefit first from China’s policy stance, and where do spreads signal warning despite equity stability.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/chinas-chips-crypto-clarity-creeping-spreads",
         "publishedAt": "2026-07-24T20:54:42.000Z",
         "sourceRefs": [
-          "S10"
+          "S11"
         ]
       },
       {
-        "sourceRef": "S5",
+        "sourceRef": "S9",
         "sourceName": "Axios Markets RSS",
         "title": "Stocks Keep Climbing Despite Global Turmoil. Here's Why Markets Aren't Reacting the Way Many Expected - International Business Times",
-        "thesis": "Markets are behaving as if inflation and policy uncertainty are less constraining than feared, implying a potential mispricing in rate-sensitive assets and a fragile steadiness beneath the surface.",
-        "whyItMatters": "Contrarian read on market mood challenges standard risk models and could signal a tether to liquidity expectations or policy paths that diverge from macro narrative. This has implications for duration risk and defensives.",
-        "marketReadThrough": "Potential for rotation if growth optimism fades; watch for divergences between equity strength and slow-moving macro metrics (inflation, unemployment, capex).",
-        "variantAngle": "Alternative read on market resilience under turmoil that could imply a disconnect between macro signals and asset pricing, with implications for duration and defensives.",
-        "confidence": "Low",
+        "thesis": "Equity markets are exhibiting resilience; traditional risk-off signals are not triggering the expected downside, suggesting a disconnect between macro stress indicators and price action that could precede a regime shift.",
+        "whyItMatters": "The persistence of upside amid turmoil hints at latent demand, central-bank policy accommodation, or beta leadership areas that may not be sustainable if volatility re-prices macro surprises. It flags the risk of a sharp repricing if liquidity conditions tighten or growth surprises disappoint.",
+        "marketReadThrough": "Market breadth may thin as macro risk remains high; pay attention to sector leaders and correlations that might flip if risk sentiment deteriorates. The resilience could unravel quickly with a policy or growth shock.",
+        "variantAngle": "Discrepancy between macro risk signals and equity performance: where is the durability of this strength, and what indicators would precede a regime change?",
+        "confidence": "Medium",
         "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOdHV5OFhZNDhCcHAwdTEtN29NdW0zQ05jajU3aDQtYktnQUtpZGxUY3ZUMzYxQ1hjOXFvQWdnWTF2WmJnOXk2QVJZaVYxYVdZTE9VcHNObTFrM3N4VktCSFlaZjkzS3JkVDlpQkdJV2htWEptS1hnNEZJaVBXR1VBX0NsSHZ2dlV0dGY1a1B5V0Rra25Yc3B0NE5pR3VSQlVHSVBmQXVWd3U1LVExdTVYaUJBU3IwLXlEWnk1Q25YS25QaG9Q?oc=5",
         "publishedAt": "2026-07-26T22:31:52.000Z",
         "sourceRefs": [
-          "S5"
+          "S9"
         ]
       }
     ]
@@ -1726,12 +1682,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-07-27T00:17:12.957Z",
+    "generatedAt": "2026-07-27T15:34:52.358Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-07-26T14:21:29.411Z"
+      "previousRefreshAt": "2026-07-27T00:17:57.017Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1742,16 +1698,20 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-07-27T00:14:56.582Z",
+      "generatedAt": "2026-07-27T15:32:35.974Z",
       "lookbackHours": 96,
       "releases": []
     },
     "sourceHealth": {
       "checked": 26,
-      "live": 22,
+      "live": 21,
       "blockedOrFailed": [
         {
           "name": "Raymond James Commentary And Insights",
+          "reason": "Source check failed: This operation was aborted"
+        },
+        {
+          "name": "EIA Today In Energy",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -1771,73 +1731,91 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "Stock futures climb, oil prices fall as U.S. and Iran pause attacks: Live updates",
+        "title": "CNBC Daily Open: Markets finally get a calm weekend; Nvidia and SK Hynix announce massive memory deal",
         "sourceName": "CNBC Markets",
         "sourceCategory": "News",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/07/26/stock-market-today-live-updates.html",
-        "publishedAt": "2026-07-26T22:04:38.000Z",
-        "summary": "The week ahead will have no shortage of challenges for the major averages.",
-        "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Traders work at the New York Stock Exchange on July 15, 2026. NYSE U.S. stock futures rallied on Sunday night, and oil prices declined amid a pause in fighting between the U.S. and Iran over the weekend. Traders were also looking ahead to a demanding week of megacap earnings and a potentially surprising Federal Reserve meeting. Dow Jones Industrial Average futures rose by 244 points, or 0.5%. S&P 500 futures gained 0.6%, while Nasdaq 100 futures advanced 1.2%. Oil prices slid after Iran said it will suspend attacks so long as a U.S. pause on fighting also holds following nearly two weeks of escalating attacks. International benchmark Brent crude futures fell more than 5% to around $92 a barrel. U.S. West Texas Intermediate crude futures dropped 5% to roughly $85 a barrel. Tensions elsewhere mounted after Ukraine struck an Iranian commercial vessel in the Caspian Sea, which prompted Tehran to accuse Kyiv of a \"hostile and criminal act.\" U.S. equities are coming off yet another losing week, as a pullback in chip stocks and uncertainty over the war with Iran weighed on investors. On Friday, the S&P 500 and the Nasdaq slid 0.6% and 2.1%, respectively, posting back-to-back weekly losses. The Dow fell 0.4%, notching a third straight week of declines. The week ahead will have no shortage of challenges for the major averages. A succession of quarterly reports from Amazon, Apple, Meta Platforms and Microsoft will either soothe investor fears of rampant artificial intelligence spending, or add to them, after Alphabet's disappointing results in the last week. The results could directly affect semiconductor companies that are the chief benefic",
+        "url": "https://www.cnbc.com/2026/07/27/cnbc-daily-open-markets-calm-weekend-nvidia-sk-hynix-deal.html",
+        "publishedAt": "2026-07-27T01:05:14.000Z",
+        "summary": "It's been a relatively calm weekend. Finally, there was a pause in the fighting in the Middle East instead of an escalation.",
+        "excerpt": "CNBC Daily Open: Markets get a calm weekend; Nvidia-SK Hynix deal Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points A pause in the Iran war sends oil prices lower and stocks higher. Ukraine hits an Iranian cargo ship in long range strike The Trump administration faces lawsuits over its new Section 301 tariffs. Nvidia races to secure more memory from SK Hynix in what could be a $500 billion deal. Why is chocolate still so expensive? A view of destroyed buildings in an area hit by a U.S. airstrike during the U.S.-Israeli military campaign in Tehran, Iran, on July 21, 2026, amid renewed conflicts between Iran and the United States in southern Iran. Morteza Nikoubazl | Nurphoto | Getty Images Hello, this is Hui Jie writing to you from Singapore. Welcome to another edition of CNBC's Daily Open. It's been a relatively calm weekend, with a pause in the fighting in the Middle East instead of an escalation. But that doesn't mean all is smooth sailing. Ukraine, in a far-reaching strike, hit an Iranian commercial vessel, while the Trump administration dealt with tariff lawsuits at home. Nvidia raced to secure more memory from SK Hynix in a deal that could be up to $500 billion, which could serve as a catalyst for the stock that has fallen heavily in the last month. But one of our European reporters asks what might be the most important question today: Why is chocolate so expensive? What you need to know today Investors had a calm weekend on the Middle East front, after a pause in the Iran war sent oil prices lower and stocks higher, giving investors a welcome break from the resumption of hostilites between Tehran and the U.S. But the relief came with plenty of caveats. Ukraine struck an Iranian commercial ship in",
         "themes": [
-          "Earnings",
           "Geopolitics and policy",
-          "Commodities and energy",
-          "AI and semis"
+          "Commodities and energy"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 2.2,
+        "ageHours": 14.5,
         "score": 100,
         "tickers": []
       },
       {
         "id": "M2",
-        "title": "Oil slides 5% as Iran reportedly signals halt to attacks if U.S. pause holds",
+        "title": "Singapore tightens monetary policy in surprise move as rising oil prices rekindle inflation risk",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/07/27/oil-price-wti-brent-slide-as-iran-reportedly-may-halt-attacks.html",
-        "publishedAt": "2026-07-26T23:58:00.000Z",
-        "summary": "Oil prices fell after Iran reportedly said it would suspend attacks as long as a U.S. pause in hostilities remains in place.",
-        "excerpt": "Oil prices fell after Iran reportedly said it would suspend attacks as long as a U.S. pause in hostilities remains in place.",
+        "url": "https://www.cnbc.com/2026/07/27/singapore-mas-july-monetary-policy-middle-east-oil-prices-inflation-.html",
+        "publishedAt": "2026-07-27T14:22:15.000Z",
+        "summary": "Unlike most central banks, the MAS manages medium-term price stability by managing the Singapore dollar exchange rate against a trade-weighted basket of currencies.",
+        "excerpt": "Unlike most central banks, the MAS manages medium-term price stability by managing the Singapore dollar exchange rate against a trade-weighted basket of currencies.",
         "themes": [
+          "Rates and central banks",
           "Geopolitics and policy",
           "Commodities and energy"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 0.3,
+        "ageHours": 1.2,
         "score": 100,
-        "tickers": []
+        "tickers": [
+          "MAS"
+        ]
       },
       {
         "id": "M3",
-        "title": "Here are the 3 big things we&apos;re watching in the stock market in the week ahead",
+        "title": "Sam Altman to meet with Trump administration, senators this week. Here&apos;s what he plans to say",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/07/26/here-are-the-3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
-        "publishedAt": "2026-07-26T20:50:54.000Z",
-        "summary": "It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data.",
-        "excerpt": "It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data.",
+        "url": "https://www.cnbc.com/2026/07/27/altman-trump-china-open-weight-ai.html",
+        "publishedAt": "2026-07-27T15:24:16.000Z",
+        "summary": "Altman will preview the capabilities of the company's upcoming family of AI models and answer questions about cybersecurity and open-weight models.",
+        "excerpt": "Altman will preview the capabilities of the company's upcoming family of AI models and answer questions about cybersecurity and open-weight models.",
         "themes": [
-          "Earnings",
-          "Rates and central banks"
+          "AI and semis"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 3.4,
-        "score": 100,
+        "ageHours": 0.2,
+        "score": 78,
         "tickers": []
       },
       {
         "id": "M4",
-        "title": "Oil prices sink, stock futures rally as U.S. and Iran pause attacks, Wall Street awaits busy week",
-        "sourceName": "MarketWatch Top Stories RSS",
+        "title": "Europe wildfire in pictures: Gigantic fire cloud engulfing France, Spain regions",
+        "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/oil-prices-sink-stock-futures-rally-as-u-s-and-iran-pause-attacks-wall-street-awaits-busy-week-75030e00?mod=mw_rss_topstories",
-        "publishedAt": "2026-07-26T23:45:00.000Z",
-        "summary": "U.S. stock-index futures rallied and oil prices tumbled on Sunday as the U.S. and Iran took a pause from fighting, and as Wall Street gears up for the Fed’s meeting and key earnings reports from Big Tech companies.",
-        "excerpt": "U.S. stock-index futures rallied and oil prices tumbled on Sunday as the U.S. and Iran took a pause from fighting, and as Wall Street gears up for the Fed’s meeting and key earnings reports from Big Tech companies.",
+        "url": "https://www.cnbc.com/2026/07/27/wildfire-pictures-spain-france-bordeaux-heatwave.html",
+        "publishedAt": "2026-07-27T14:20:42.000Z",
+        "summary": "A rare wildfire spreading across France's Bordeaux region and has spread to Western Madrid is fire cloud that can generate its own thunderstorms.",
+        "excerpt": "A rare wildfire spreading across France's Bordeaux region and has spread to Western Madrid is fire cloud that can generate its own thunderstorms.",
+        "themes": [
+          "Credit and liquidity"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 1.2,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M5",
+        "title": "Stocks Rise Early as U.S. and Iran Pause Attacks",
+        "sourceName": "Schwab Weekly Market Outlook",
+        "sourceCategory": "Institution research",
+        "trust": "High",
+        "url": "https://www.schwab.com/learn/story/stock-market-update-open",
+        "publishedAt": "2026-07-27T13:22:36.000Z",
+        "summary": "Learn what's trending before the opening bell with Schwab's market open report.",
+        "excerpt": "Schwab Market Update | Charles Schwab Search Learn Markets and Economy Stocks Rise Early as U.S. and Iran Pause Attacks Crude oil prices tumbled after the U.S. paused attacks in Iran and Iran said it would also pause. The Fed meets this week, and four of the Magnificent 7 report earnings. July 27, 2026 • Joe Mazzola Published as of: July 27, 2026, 9:10 a.m. ET Listen to this update Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,411.98 +3.68 +0.05% Dow Jones Industrial Average ® 51,947.25 +235.60 +0.46% Nasdaq Composite ® 24,975.82 -161.87 -0.64% 10-year Treasury yield 4.65% +0.03 -- U.S. Dollar Index 101.38 -0.09 -0.08% Cboe Volatility Index ® 17.72 -0.86 -4.63% WTI Crude Oil $84.21 -$5.10 -5.71% Bitcoin $65,055 +$840 +1.31% Disclosure (Monday market open) Stocks jumped higher early and oil prices dove more than 5% after President Trump decided against a major escalation in Iran and both sides paused military attacks. Treasury yields fell as concerns about inflation and interest rates eased. Today is relatively quiet on the earnings and economic front, though June's durable goods orders kicked things off, coming in at a gain of 0.4%, well below the consensus estimate of 2%. Earnings ramp up tomorrow and for the remainder of the week, with four of the Magnificent 7— Microsoft (MSFT), Meta (META), Apple (AAPL), and Amazon (AMZN)—visiting the earnings confessional on Wednesday and Thursday. The Federal Reserve rate decision comes Wednesday. Market averages were mixed on Friday, initially rebounding amid cautious hopes for renewed peace talks between ",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -1845,51 +1823,72 @@
           "Commodities and energy"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 0.5,
-        "score": 100,
-        "tickers": []
-      },
-      {
-        "id": "M5",
-        "title": "There’s a technical ‘triple threat’ for stocks, but also places investors can hide",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/theres-a-technical-triple-threat-for-stocks-but-also-places-investors-can-hide-59108c6b?mod=mw_rss_topstories",
-        "publishedAt": "2026-07-26T19:15:00.000Z",
-        "summary": "Treasury yields and oil prices surged, and the dollar confirmed the breakout toward a longer-term uptrend, to push the S&P 500 below key chart support.",
-        "excerpt": "Treasury yields and oil prices surged, and the dollar confirmed the breakout toward a longer-term uptrend, to push the S&P 500 below key chart support.",
-        "themes": [
-          "Rates and central banks",
-          "Commodities and energy"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 5,
-        "score": 100,
+        "ageHours": 2.2,
+        "score": 68,
         "tickers": []
       },
       {
         "id": "M6",
-        "title": "Here's the tech stock to buy in a market losing patience with tech",
-        "sourceName": "CNBC Markets",
-        "sourceCategory": "News",
+        "title": "The AI boom shows no sign of slowing — and the U.S. economy is reaping the benefits",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/07/26/jim-cramer-heres-the-tech-stock-to-buy-in-a-market-losing-patience-with-tech.html",
-        "publishedAt": "2026-07-26T23:37:08.000Z",
-        "summary": "Jim Cramer: Here's the tech stock to buy in a market losing patience with tech Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu It's not the spend, it's the return.",
-        "excerpt": "Jim Cramer: Here's the tech stock to buy in a market losing patience with tech Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu It's not the spend, it's the return. That's what Friday's technology stock plunge said. I think it just might be the most significant tech selloff in more than a year. We need to know — potentially — what we are facing. We need to know if the trillion-dollar spigot is drying up — or it is just a dry spell. For my Charitable Trust, the portfolio we use for the CNBC Investing Club, we have been consolidating and gradually trying to shrink traditional tech — semis, software, data center — and move into other kinds of tech, namely tech-infused pharma and aerospace. We tried to make Intel — not Nvidia — the focal point of the portfolio, concerned that there are not enough new move-the-needle customers still out there for Nvidia. No, I'm not giving up Nvidia. It is still amazing, and I think it will have a bang-up quarter. But the \"action\" in the stock is speaking too loudly. The action in Apple is screaming that its decision, made intentionally or de facto, not to spend hundreds of billions on AI, is brilliant. It's having the best month in three years. Tons of critics second-guess Apple's decision-making. That's wrong. Apple decided a long time ago that much would flow to it if it made the best handhelds. It does. That allowed it to pick and choose which hyperscaler-chat-bot company it wanted to affiliate with, because they have quickly turned into commodities. Google had no choice but to virtually give it away — at least on a net basis — because Google Search has become suspect in its return while Gemini is no Claude from Anthropic. So, we gravitated to a new company, late for now, Intel, ",
+        "url": "https://www.marketwatch.com/story/the-ai-boom-shows-no-sign-of-slowing-and-the-u-s-economy-is-reaping-the-benefits-1728c4e5?mod=mw_rss_topstories",
+        "publishedAt": "2026-07-27T15:22:00.000Z",
+        "summary": "Insatiable demand for computer memory and other technologies needed to build artificial intelligence boomed again in the second quarter, and could spur another above-average increase in economic growth.",
+        "excerpt": "Insatiable demand for computer memory and other technologies needed to build artificial intelligence boomed again in the second quarter, and could spur another above-average increase in economic growth.",
         "themes": [
           "Earnings",
-          "Commodities and energy",
+          "Macro and growth",
           "AI and semis"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 0.7,
-        "score": 92,
+        "ageHours": 0.2,
+        "score": 66,
         "tickers": []
       },
       {
         "id": "M7",
+        "title": "This small-cap stock strategy shines by riding the beat-and-raise trend",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/this-small-cap-stock-strategy-shines-by-riding-the-beat-and-raise-trend-24bee883?mod=mw_rss_topstories",
+        "publishedAt": "2026-07-27T15:08:00.000Z",
+        "summary": "Brandon Nelson of Calamos Investments identifies companies primed for sustainable growth and improving profit margins.",
+        "excerpt": "Brandon Nelson of Calamos Investments identifies companies primed for sustainable growth and improving profit margins.",
+        "themes": [
+          "Earnings",
+          "Macro and growth"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 0.4,
+        "score": 66,
+        "tickers": []
+      },
+      {
+        "id": "M8",
+        "title": "Weekly Trader's Outlook",
+        "sourceName": "Schwab Weekly Market Outlook",
+        "sourceCategory": "Institution research",
+        "trust": "High",
+        "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
+        "publishedAt": "2026-07-24T20:51:58.000Z",
+        "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
+        "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Middle East Tensions, Rising Oil & Yields Weigh on Stocks Stocks are on track for modest weekly losses, particularly in the technology space, as rising oil prices and higher Treasury yields keep investors sidelined, despite strong earnings reports. July 24, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Cautious\" outlook for the market this week, as I believed the jump in oil prices and U.S./Iran re-escalation was not being fully discounted by investors. At the time of this writing (1:34 p.m. ET) all the majors are on track to be down modestly on the week, with the tech-heavy Nasdaq Composite being the worst performer (-1.4%). The exchange of attacks between the U.S. and Iran continued this week and oil prices continued to climb higher. Last week, WTI crude jumped 14% and this week they are on track to be another 8%, and that includes today's 3.6% drop (WTI crude September futures last seen trading at $88.86/barrel). Today's pullback in crude appears to be tied to reports that Pakistan is exploring a path towards a resumption in stalled U.S./Iran negotiations. Sources stated that Iran's Interior Minister Eskandar Momeni traveled to Islamabad earlier this week to conduct exploratory discussions and met with Pakistani government leaders. The relative weakness in tech this week was mostly driven by a post-earnings sell-off in Google-parent Alphabet on Wednesday after the bell. The company delivered strong results, highlighted by an 82% year-over-year increase in cloud revenue (vs. whisper numbers around +70-75%), but heavy capital expenditure (CapEx) guidance appears to have soured investor sentiment. Alphabet raised thei",
+        "themes": [
+          "Earnings",
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "Commodities and energy"
+        ],
+        "freshness": "Important older item",
+        "ageHours": 66.7,
+        "score": 62,
+        "tickers": []
+      },
+      {
+        "id": "M9",
         "title": "Stocks Keep Climbing Despite Global Turmoil. Here's Why Markets Aren't Reacting the Way Many Expected - International Business Times",
         "sourceName": "Axios Markets RSS",
         "sourceCategory": "News RSS",
@@ -1901,49 +1900,9 @@
         "themes": [
           "Market color"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 1.8,
-        "score": 86,
-        "tickers": []
-      },
-      {
-        "id": "M8",
-        "title": "The S&P 500’s earnings growth has gone bonkers thanks to one company",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/the-s-p-500s-earnings-growth-has-gone-bonkers-thanks-to-one-company-1c45b2ba?mod=mw_rss_topstories",
-        "publishedAt": "2026-07-26T14:00:00.000Z",
-        "summary": "Markets are gearing up for the busiest week of second-quarter earnings season.",
-        "excerpt": "Markets are gearing up for the busiest week of second-quarter earnings season.",
-        "themes": [
-          "Earnings",
-          "Macro and growth"
-        ],
         "freshness": "Last 24 hours",
-        "ageHours": 10.3,
-        "score": 70,
-        "tickers": []
-      },
-      {
-        "id": "M9",
-        "title": "Weekly Trader's Outlook",
-        "sourceName": "Schwab Weekly Market Outlook",
-        "sourceCategory": "Institution research",
-        "trust": "High",
-        "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
-        "publishedAt": "2026-07-24T20:51:58.000Z",
-        "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-        "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Middle East Tensions, Rising Oil & Yields Weigh on Stocks Stocks are on track for modest weekly losses, particularly in the technology space, as rising oil prices and higher Treasury yields keep investors sidelined, despite strong earnings reports. July 24, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Cautious\" outlook for the market this week, as I believed the jump in oil prices and U.S./Iran re-escalation was not being fully discounted by investors. At the time of this writing (1:34 p.m. ET) all the majors are on track to be down modestly on the week, with the tech-heavy Nasdaq Composite being the worst performer (-1.4%). The exchange of attacks between the U.S. and Iran continued this week and oil prices continued to climb higher. Last week, WTI crude jumped 14% and this week they are on track to be another 8%, and that includes today's 3.6% drop (WTI crude September futures last seen trading at $88.86/barrel). Today's pullback in crude appears to be tied to reports that Pakistan is exploring a path towards a resumption in stalled U.S./Iran negotiations. Sources stated that Iran's Interior Minister Eskandar Momeni traveled to Islamabad earlier this week to conduct exploratory discussions and met with Pakistani government leaders. The relative weakness in tech this week was mostly driven by a post-earnings sell-off in Google-parent Alphabet on Wednesday after the bell. The company delivered strong results, highlighted by an 82% year-over-year increase in cloud revenue (vs. whisper numbers around +70-75%), but heavy capital expenditure (CapEx) guidance appears to have soured investor se",
-        "themes": [
-          "Earnings",
-          "Rates and central banks",
-          "Geopolitics and policy",
-          "Commodities and energy"
-        ],
-        "freshness": "Important older item",
-        "ageHours": 51.4,
-        "score": 62,
+        "ageHours": 17.1,
+        "score": 56,
         "tickers": []
       },
       {
@@ -1955,7 +1914,7 @@
         "url": "https://www.schwab.com/learn/story/chinas-chips-crypto-clarity-creeping-spreads",
         "publishedAt": "2026-07-24T20:54:42.000Z",
         "summary": "Analysis of China's approach to AI, thoughts on another potential government shutdown, a Clarity Act check-in, and a look at credit spread trends.",
-        "excerpt": "China's Chips, Crypto Clarity, Creeping Spreads | Charles Schwab Search Learn Markets and Economy China's Chips, Crypto Clarity, Creeping Spreads This week's update includes analysis of China's approach to AI, thoughts on another potential government shutdown, a Clarity Act check-in, and a look at credit spread trends. July 24, 2026 Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch,\" and Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Beijing elbows in on U.S. AI dominance China's claims of success building competitive AI models recently became another concern swirling around the volatile chip sector, reminding some of the 2025 \"Deep Seek\" sell-off. China appears to be taking a different tack from the U.S., offering AI models for wide use (\"open source\") rather than as proprietary technology. This has some investors concerned that U.S. companies could turn to cheaper Chinese models for less-advanced AI needs as costs continue growing. The costs are taking a toll, evidenced by S&P Global downgrading Oracle's (ORCL) debt earlier this month to one step above junk status. This turns the focus to free cash flow as competing hyperscalers report in coming weeks. Chinese competition isn't a done deal, as Chinese models aren't widely proven. Even so, cheaper open source technology, even from China, might be tempting amid growing debt levels for U.S. companies heatedly pursuing AI. DIY investing? Trading? Professional advice? See how Schwab can help Turbulence still heavy despite surface c",
+        "excerpt": "China's Chips, Crypto Clarity, Creeping Spreads | Charles Schwab Search all articles, videos, and podcasts Markets and Economy China's Chips, Crypto Clarity, Creeping Spreads This week's update includes analysis of China's approach to AI, thoughts on another potential government shutdown, a Clarity Act check-in, and a look at credit spread trends. July 24, 2026 Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch,\" and Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Beijing elbows in on U.S. AI dominance China's claims of success building competitive AI models recently became another concern swirling around the volatile chip sector, reminding some of the 2025 \"Deep Seek\" sell-off. China appears to be taking a different tack from the U.S., offering AI models for wide use (\"open source\") rather than as proprietary technology. This has some investors concerned that U.S. companies could turn to cheaper Chinese models for less-advanced AI needs as costs continue growing. The costs are taking a toll, evidenced by S&P Global downgrading Oracle's (ORCL) debt earlier this month to one step above junk status. This turns the focus to free cash flow as competing hyperscalers report in coming weeks. Chinese competition isn't a done deal, as Chinese models aren't widely proven. Even so, cheaper open source technology, even from China, might be tempting amid growing debt levels for U.S. companies heatedly pursuing AI. DIY investing? Trading? Professional advice? See how Schwab can help Turbulence ",
         "themes": [
           "Geopolitics and policy",
           "Macro and growth",
@@ -1963,27 +1922,27 @@
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 51.4,
+        "ageHours": 66.7,
         "score": 54,
         "tickers": []
       }
     ],
     "topThemes": [
       {
-        "theme": "Earnings",
-        "count": 6
-      },
-      {
-        "theme": "Commodities and energy",
-        "count": 6
-      },
-      {
         "theme": "Geopolitics and policy",
         "count": 5
       },
       {
-        "theme": "Rates and central banks",
+        "theme": "Commodities and energy",
         "count": 4
+      },
+      {
+        "theme": "Earnings",
+        "count": 4
+      },
+      {
+        "theme": "Rates and central banks",
+        "count": 3
       },
       {
         "theme": "AI and semis",
@@ -1991,26 +1950,18 @@
       },
       {
         "theme": "Macro and growth",
-        "count": 2
+        "count": 3
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-07-27T00:17:12.947Z",
+      "generatedAt": "2026-07-27T15:34:52.349Z",
       "dates": [
-        "2026-07-25",
         "2026-07-26",
-        "2026-07-27"
+        "2026-07-27",
+        "2026-07-28"
       ],
       "calendars": [
-        {
-          "date": "2026-07-25",
-          "asOf": "Sat, Jul 25, 2026",
-          "status": "ready",
-          "error": null,
-          "rowCount": 0,
-          "rows": []
-        },
         {
           "date": "2026-07-26",
           "asOf": "Sun, Jul 26, 2026",
@@ -2022,13 +1973,11 @@
               "date": "2026-07-26",
               "symbol": "BKR",
               "name": "Baker Hughes Company",
-              "time": "time-after-hours",
-              "marketCap": "$55,645,133,215",
+              "time": "time-not-supplied",
+              "marketCap": "$56,795,932,903",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "$0.51",
               "noOfEsts": "6",
-              "lastYearReportDate": "7/22/2025",
-              "lastYearEps": "$0.63",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-26"
             }
@@ -2039,7 +1988,7 @@
           "asOf": "Mon, Jul 27, 2026",
           "status": "ready",
           "error": null,
-          "rowCount": 71,
+          "rowCount": 72,
           "rows": [
             {
               "date": "2026-07-27",
@@ -2342,8 +2291,8 @@
               "time": "time-after-hours",
               "marketCap": "$8,541,651,521",
               "fiscalQuarterEnding": "May/2026",
-              "epsForecast": "($0.20)",
-              "noOfEsts": "2",
+              "epsForecast": "($0.18)",
+              "noOfEsts": "3",
               "lastYearReportDate": "7/30/2025",
               "lastYearEps": "($0.12)",
               "sourceName": "Nasdaq earnings calendar",
@@ -2412,7 +2361,7 @@
               "time": "time-not-supplied",
               "marketCap": "$5,026,960,477",
               "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "$1.70",
+              "epsForecast": "$1.69",
               "noOfEsts": "3",
               "lastYearReportDate": "7/28/2025",
               "lastYearEps": "$1.47",
@@ -2510,7 +2459,7 @@
               "time": "time-pre-market",
               "marketCap": "$3,186,878,501",
               "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "$0.65",
+              "epsForecast": "$0.62",
               "noOfEsts": "2",
               "lastYearReportDate": "7/28/2025",
               "lastYearEps": "$0.55",
@@ -2594,7 +2543,7 @@
               "time": "time-after-hours",
               "marketCap": "$2,313,537,188",
               "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "$0.08",
+              "epsForecast": "($0.20)",
               "noOfEsts": "3",
               "lastYearReportDate": "7/28/2025",
               "lastYearEps": "$1.34",
@@ -2602,91 +2551,675 @@
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-27"
             }
           ]
+        },
+        {
+          "date": "2026-07-28",
+          "asOf": "Tue, Jul 28, 2026",
+          "status": "ready",
+          "error": null,
+          "rowCount": 149,
+          "rows": [
+            {
+              "date": "2026-07-28",
+              "symbol": "V",
+              "name": "Visa Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$673,938,031,023",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$3.23",
+              "noOfEsts": "11",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$2.98",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "KO",
+              "name": "Coca-Cola Company (The)",
+              "time": "time-pre-market",
+              "marketCap": "$354,016,574,133",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.92",
+              "noOfEsts": "7",
+              "lastYearReportDate": "7/22/2025",
+              "lastYearEps": "$0.87",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "KLAC",
+              "name": "KLA Corporation ",
+              "time": "time-after-hours",
+              "marketCap": "$274,997,057,209",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$1",
+              "noOfEsts": "7",
+              "lastYearReportDate": "7/31/2025",
+              "lastYearEps": "$0.94",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "STX",
+              "name": "Seagate Technology Holdings PLC",
+              "time": "time-after-hours",
+              "marketCap": "$190,973,590,196",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$4.89",
+              "noOfEsts": "4",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$2.34",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "BA",
+              "name": "Boeing Company (The)",
+              "time": "time-pre-market",
+              "marketCap": "$165,165,104,391",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "($0.34)",
+              "noOfEsts": "6",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "($1.24)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "SPGI",
+              "name": "S&P Global Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$126,214,400,000",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$4.49",
+              "noOfEsts": "4",
+              "lastYearReportDate": "7/31/2025",
+              "lastYearEps": "$4.43",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "GLW",
+              "name": "Corning Incorporated",
+              "time": "time-pre-market",
+              "marketCap": "$126,212,537,036",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.76",
+              "noOfEsts": "5",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$0.60",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "GSK",
+              "name": "GSK plc",
+              "time": "time-pre-market",
+              "marketCap": "$103,563,669,569",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$1.27",
+              "noOfEsts": "4",
+              "lastYearReportDate": "7/30/2025",
+              "lastYearEps": "$1.23",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "UPS",
+              "name": "United Parcel Service, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$97,572,220,766",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$1.65",
+              "noOfEsts": "9",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$1.55",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "BCS",
+              "name": "Barclays PLC",
+              "time": "time-pre-market",
+              "marketCap": "$97,326,700,290",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.89",
+              "noOfEsts": "1",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$0.62",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "WM",
+              "name": "Waste Management, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$95,876,210,790",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$1.99",
+              "noOfEsts": "9",
+              "lastYearReportDate": "7/28/2025",
+              "lastYearEps": "$1.92",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "ITW",
+              "name": "Illinois Tool Works Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$81,424,854,000",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.80",
+              "noOfEsts": "6",
+              "lastYearReportDate": "7/30/2025",
+              "lastYearEps": "$2.58",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "RCL",
+              "name": "Royal Caribbean Cruises Ltd.",
+              "time": "time-pre-market",
+              "marketCap": "$78,725,953,842",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$3.97",
+              "noOfEsts": "7",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$4.38",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "SHW",
+              "name": "Sherwin-Williams Company (The)",
+              "time": "time-pre-market",
+              "marketCap": "$78,309,276,024",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$3.56",
+              "noOfEsts": "6",
+              "lastYearReportDate": "7/22/2025",
+              "lastYearEps": "$3.38",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "MDLZ",
+              "name": "Mondelez International, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$77,686,483,838",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.67",
+              "noOfEsts": "5",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$0.73",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "AMT",
+              "name": "American Tower Corporation (REIT)",
+              "time": "time-pre-market",
+              "marketCap": "$77,650,397,810",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.65",
+              "noOfEsts": "4",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$2.60",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "ECL",
+              "name": "Ecolab Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$75,636,328,663",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.08",
+              "noOfEsts": "9",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$1.89",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "HLT",
+              "name": "Hilton Worldwide Holdings Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$73,978,891,449",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.29",
+              "noOfEsts": "7",
+              "lastYearReportDate": "7/23/2025",
+              "lastYearEps": "$2.20",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "PCAR",
+              "name": "PACCAR Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$69,596,090,923",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$1.33",
+              "noOfEsts": "5",
+              "lastYearReportDate": "7/22/2025",
+              "lastYearEps": "$1.37",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "NXPI",
+              "name": "NXP Semiconductors N.V.",
+              "time": "time-after-hours",
+              "marketCap": "$67,975,313,310",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$3.20",
+              "noOfEsts": "6",
+              "lastYearReportDate": "7/21/2025",
+              "lastYearEps": "$2.31",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "CARR",
+              "name": "Carrier Global Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$57,572,926,592",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.83",
+              "noOfEsts": "5",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$0.92",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "F",
+              "name": "Ford Motor Company",
+              "time": "time-after-hours",
+              "marketCap": "$57,260,033,093",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.33",
+              "noOfEsts": "6",
+              "lastYearReportDate": "7/30/2025",
+              "lastYearEps": "$0.37",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "TER",
+              "name": "Teradyne, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$54,777,233,327",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.04",
+              "noOfEsts": "5",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$0.57",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "BE",
+              "name": "Bloom Energy Corporation",
+              "time": "time-after-hours",
+              "marketCap": "$52,590,826,755",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.23",
+              "noOfEsts": "3",
+              "lastYearReportDate": "7/31/2025",
+              "lastYearEps": "($0.03)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "PYPL",
+              "name": "PayPal Holdings, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$49,530,223,432",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$1.28",
+              "noOfEsts": "10",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$1.40",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "FMX",
+              "name": "Fomento Economico Mexicano S.A.B. de C.V.",
+              "time": "time-pre-market",
+              "marketCap": "$43,307,428,212",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.81",
+              "noOfEsts": "2",
+              "lastYearReportDate": "7/28/2025",
+              "lastYearEps": "$0.42",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "ACGL",
+              "name": "Arch Capital Group Ltd.",
+              "time": "time-after-hours",
+              "marketCap": "$36,112,907,816",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.49",
+              "noOfEsts": "6",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$2.58",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "IQV",
+              "name": "IQVIA Holdings, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$34,723,545,000",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.72",
+              "noOfEsts": "6",
+              "lastYearReportDate": "7/22/2025",
+              "lastYearEps": "$2.53",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "CNC",
+              "name": "Centene Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$31,311,667,770",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.89",
+              "noOfEsts": "5",
+              "lastYearReportDate": "7/25/2025",
+              "lastYearEps": "($0.16)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "EXR",
+              "name": "Extra Space Storage Inc",
+              "time": "time-after-hours",
+              "marketCap": "$31,205,352,857",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.06",
+              "noOfEsts": "6",
+              "lastYearReportDate": "7/30/2025",
+              "lastYearEps": "$2.05",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "DTE",
+              "name": "DTE Energy Company",
+              "time": "time-pre-market",
+              "marketCap": "$31,091,911,661",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$1.13",
+              "noOfEsts": "4",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$1.36",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "CNP",
+              "name": "CenterPoint Energy, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$29,149,792,029",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.37",
+              "noOfEsts": "5",
+              "lastYearReportDate": "7/24/2025",
+              "lastYearEps": "$0.29",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "FE",
+              "name": "FirstEnergy Corp.",
+              "time": "time-after-hours",
+              "marketCap": "$28,875,284,256",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.49",
+              "noOfEsts": "5",
+              "lastYearReportDate": "7/30/2025",
+              "lastYearEps": "$0.52",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "XYL",
+              "name": "Xylem Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$28,463,795,787",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$1.34",
+              "noOfEsts": "7",
+              "lastYearReportDate": "7/31/2025",
+              "lastYearEps": "$1.26",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "PPG",
+              "name": "PPG Industries, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$25,856,400,000",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.26",
+              "noOfEsts": "8",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$2.22",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "PHG",
+              "name": "Koninklijke Philips N.V.",
+              "time": "time-pre-market",
+              "marketCap": "$25,722,094,876",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.40",
+              "noOfEsts": "2",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$0.41",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "HUBB",
+              "name": "Hubbell Inc",
+              "time": "time-pre-market",
+              "marketCap": "$25,685,859,382",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$5.31",
+              "noOfEsts": "3",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$4.93",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "INCY",
+              "name": "Incyte Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$23,505,494,207",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$1.63",
+              "noOfEsts": "7",
+              "lastYearReportDate": "7/29/2025",
+              "lastYearEps": "$1.31",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "CMS",
+              "name": "CMS Energy Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$23,076,294,269",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.45",
+              "noOfEsts": "5",
+              "lastYearReportDate": "7/31/2025",
+              "lastYearEps": "$0.71",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            },
+            {
+              "date": "2026-07-28",
+              "symbol": "OMC",
+              "name": "Omnicom Group Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$22,703,593,573",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.64",
+              "noOfEsts": "2",
+              "lastYearReportDate": "7/15/2025",
+              "lastYearEps": "$2.05",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-07-28"
+            }
+          ]
         }
       ],
       "earningsMovers": [
         {
-          "symbol": "NVTS",
-          "name": "Navitas Semiconductor Corporati",
-          "price": 10.92,
-          "changePct": -9.23,
-          "change": -1.11,
-          "volume": 13632122,
-          "marketCap": 2659621888,
+          "symbol": "AMKR",
+          "name": "Amkor Technology, Inc.",
+          "price": 59.1505,
+          "changePct": -8.94,
+          "change": -5.81,
+          "volume": 3790789,
+          "marketCap": 14661783552,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
           "moverBucket": "loser"
         },
         {
-          "symbol": "APLD",
-          "name": "Applied Digital Corporation",
-          "price": 27.19,
-          "changePct": -9.03,
-          "change": -2.7,
-          "volume": 20152005,
-          "marketCap": 7770073600,
+          "symbol": "TER",
+          "name": "Teradyne, Inc.",
+          "price": 322.63,
+          "changePct": -7.8,
+          "change": -27.29,
+          "volume": 1181783,
+          "marketCap": 50505199616,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
           "moverBucket": "loser"
+        },
+        {
+          "symbol": "JBLU",
+          "name": "JetBlue Airways Corporation",
+          "price": 5.415,
+          "changePct": 2.75,
+          "change": 0.14,
+          "volume": 14544380,
+          "marketCap": 2014482176,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/",
+          "moverBucket": "most_active"
+        },
+        {
+          "symbol": "F",
+          "name": "Ford Motor Company",
+          "price": 14.435,
+          "changePct": 0.45,
+          "change": 0.07,
+          "volume": 22631671,
+          "marketCap": 57519042560,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/",
+          "moverBucket": "most_active"
         }
       ],
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "Oil slides 5% as Iran reportedly signals halt to attacks if U.S. pause holds",
-          "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/07/27/oil-price-wti-brent-slide-as-iran-reportedly-may-halt-attacks.html",
-          "publishedAt": "2026-07-26T23:58:00.000Z",
-          "summary": "Oil prices fell after Iran reportedly said it would suspend attacks as long as a U.S. pause in hostilities remains in place.",
+          "title": "The AI boom shows no sign of slowing — and the U.S. economy is reaping the benefits",
+          "sourceName": "MarketWatch Top Stories RSS",
+          "url": "https://www.marketwatch.com/story/the-ai-boom-shows-no-sign-of-slowing-and-the-u-s-economy-is-reaping-the-benefits-1728c4e5?mod=mw_rss_topstories",
+          "publishedAt": "2026-07-27T15:22:00.000Z",
+          "summary": "Insatiable demand for computer memory and other technologies needed to build artificial intelligence boomed again in the second quarter, and could spur another above-average increase in economic growth.",
           "tickers": []
         },
         {
           "id": "E2",
-          "title": "Oil prices sink, stock futures rally as U.S. and Iran pause attacks, Wall Street awaits busy week",
+          "title": "This small-cap stock strategy shines by riding the beat-and-raise trend",
           "sourceName": "MarketWatch Top Stories RSS",
-          "url": "https://www.marketwatch.com/story/oil-prices-sink-stock-futures-rally-as-u-s-and-iran-pause-attacks-wall-street-awaits-busy-week-75030e00?mod=mw_rss_topstories",
-          "publishedAt": "2026-07-26T23:45:00.000Z",
-          "summary": "U.S. stock-index futures rallied and oil prices tumbled on Sunday as the U.S. and Iran took a pause from fighting, and as Wall Street gears up for the Fed’s meeting and key earnings reports from Big Tech companies.",
+          "url": "https://www.marketwatch.com/story/this-small-cap-stock-strategy-shines-by-riding-the-beat-and-raise-trend-24bee883?mod=mw_rss_topstories",
+          "publishedAt": "2026-07-27T15:08:00.000Z",
+          "summary": "Brandon Nelson of Calamos Investments identifies companies primed for sustainable growth and improving profit margins.",
           "tickers": []
         },
         {
           "id": "E3",
-          "title": "Here's the tech stock to buy in a market losing patience with tech",
-          "sourceName": "CNBC Markets",
-          "url": "https://www.cnbc.com/2026/07/26/jim-cramer-heres-the-tech-stock-to-buy-in-a-market-losing-patience-with-tech.html",
-          "publishedAt": "2026-07-26T23:37:08.000Z",
-          "summary": "It's not the spend, it's the return.",
+          "title": "Stocks Rise Early as U.S. and Iran Pause Attacks",
+          "sourceName": "Schwab Weekly Market Outlook",
+          "url": "https://www.schwab.com/learn/story/stock-market-update-open",
+          "publishedAt": "2026-07-27T13:22:36.000Z",
+          "summary": "Learn what's trending before the opening bell with Schwab's market open report. Find out about macroeconomic reports, company earnings, and other events.",
           "tickers": []
         },
         {
           "id": "E4",
-          "title": "Stock futures climb, oil prices fall as U.S. and Iran pause attacks: Live updates",
+          "title": "CNBC Daily Open: Markets finally get a calm weekend; Nvidia and SK Hynix announce massive memory deal",
           "sourceName": "CNBC Markets",
-          "url": "https://www.cnbc.com/2026/07/26/stock-market-today-live-updates.html",
-          "publishedAt": "2026-07-26T22:04:38.000Z",
-          "summary": "The week ahead will have no shortage of challenges for the major averages.",
+          "url": "https://www.cnbc.com/2026/07/27/cnbc-daily-open-markets-calm-weekend-nvidia-sk-hynix-deal.html",
+          "publishedAt": "2026-07-27T01:05:14.000Z",
+          "summary": "It's been a relatively calm weekend. Finally, there was a pause in the fighting in the Middle East instead of an escalation.",
           "tickers": []
         },
         {
           "id": "E5",
-          "title": "Here are the 3 big things we&apos;re watching in the stock market in the week ahead",
-          "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/07/26/here-are-the-3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
-          "publishedAt": "2026-07-26T20:50:54.000Z",
-          "summary": "It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data.",
+          "title": "S&P 500 falls into the red despite Iran fighting pause as chip stocks tumble: Live updates",
+          "sourceName": "CNBC Markets",
+          "url": "https://www.cnbc.com/2026/07/26/stock-market-today-live-updates.html",
+          "publishedAt": "2026-07-26T22:04:38.000Z",
+          "summary": "Stocks reacted to a pause in fighting between the U.S. and Iran over the weekend.",
           "tickers": []
         },
         {
           "id": "E6",
-          "title": "The S&P 500’s earnings growth has gone bonkers thanks to one company",
-          "sourceName": "MarketWatch Top Stories RSS",
-          "url": "https://www.marketwatch.com/story/the-s-p-500s-earnings-growth-has-gone-bonkers-thanks-to-one-company-1c45b2ba?mod=mw_rss_topstories",
-          "publishedAt": "2026-07-26T14:00:00.000Z",
-          "summary": "Markets are gearing up for the busiest week of second-quarter earnings season.",
-          "tickers": []
-        },
-        {
-          "id": "E7",
           "title": "China's Chips, Crypto Clarity, Creeping Spreads",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/chinas-chips-crypto-clarity-creeping-spreads",
@@ -2695,7 +3228,7 @@
           "tickers": []
         },
         {
-          "id": "E8",
+          "id": "E7",
           "title": "Weekly Trader's Outlook",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
@@ -2704,7 +3237,7 @@
           "tickers": []
         },
         {
-          "id": "E9",
+          "id": "E8",
           "title": "Intel&apos;s turnaround under CEO Lip-Bu Tan gains steam with another strong quarter",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/07/23/intels-turnaround-under-ceo-lip-bu-tan-gains-steam-with-another-strong-quarter.html",
@@ -2713,7 +3246,7 @@
           "tickers": []
         },
         {
-          "id": "E10",
+          "id": "E9",
           "title": "Intel rides AI boom to fastest revenue growth in almost 15 years, but shares sink",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/07/23/intel-intc-earnings-report-q2-2026.html",
@@ -2722,21 +3255,21 @@
           "tickers": []
         },
         {
-          "id": "E11",
-          "title": "Stocks Stabilize Early as Oil Prices Retreat",
-          "sourceName": "Schwab Weekly Market Outlook",
-          "url": "https://www.schwab.com/learn/story/stock-market-update-open",
-          "publishedAt": "2026-07-24T13:27:28.000Z",
-          "summary": "Learn what's trending before the opening bell with Schwab's market open report. Find out about macroeconomic reports, company earnings, and other events.",
-          "tickers": []
-        },
-        {
-          "id": "E12",
+          "id": "E10",
           "title": "Volkswagen CFO addresses plant closures, job losses as profits sink",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/07/24/volkswagen-earnings-autos-germany.html",
           "publishedAt": "2026-07-24T07:56:12.000Z",
           "summary": "German auto giant Volkswagen on Friday reported weaker-than-expected second-quarter profit and revised down its sales forecast for 2026.",
+          "tickers": []
+        },
+        {
+          "id": "E11",
+          "title": "Jobs report gives labor market a yellow card - Axios",
+          "sourceName": "Axios Macro RSS",
+          "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9iZExoeTNDeThPTUtzQmg5WGdQaTJSSVZFZXlFdG55RElKYkJMMmxORFkzb29RelJrNWVYODQtY1lJMXBWQzhrdmtuOXFlbzVJLWs4dG1WY19BMk9xV1RGRTdtcXQzUkJ5em1pZjNiNA?oc=5",
+          "publishedAt": "2026-07-02T07:00:00.000Z",
+          "summary": "Jobs report gives labor market a yellow card Axios",
           "tickers": []
         }
       ],
@@ -2744,7 +3277,7 @@
     },
     "reddit": {
       "status": "error",
-      "generatedAt": "2026-07-27T00:16:12.770Z",
+      "generatedAt": "2026-07-27T15:33:54.157Z",
       "authMode": "public",
       "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
       "subreddits": [
@@ -2752,14 +3285,14 @@
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
           "postCount": 0,
           "sortStatuses": [
             {
               "sort": "hot",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
@@ -2773,7 +3306,7 @@
               "sort": "top",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
               "postCount": 0
             }
           ]
@@ -2782,14 +3315,14 @@
           "subreddit": "stocks",
           "segment": "Retail investing",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
           "postCount": 0,
           "sortStatuses": [
             {
               "sort": "hot",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
@@ -2872,7 +3405,7 @@
           "subreddit": "options",
           "segment": "Options sentiment",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
           "postCount": 0,
           "sortStatuses": [
             {
@@ -2886,7 +3419,7 @@
               "sort": "new",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
@@ -2903,11 +3436,11 @@
       "topPosts": [],
       "currentFetchErrors": [
         "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
-        "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
-        "stocks: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+        "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
+        "stocks: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
         "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
         "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
-        "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts"
+        "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts"
       ]
     },
     "marketMovers": {
@@ -2915,268 +3448,268 @@
       "status": "ready",
       "gainers": [
         {
+          "symbol": "BMNR",
+          "name": "BitMine Immersion Technologies,",
+          "price": 17.45,
+          "changePct": 10.51,
+          "change": 1.66,
+          "volume": 27490319,
+          "marketCap": 10526300160,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "HUBS",
+          "name": "HubSpot, Inc.",
+          "price": 225.11,
+          "changePct": 9.87,
+          "change": 20.22,
+          "volume": 454235,
+          "marketCap": 11523539968,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "BRZE",
+          "name": "Braze, Inc.",
+          "price": 23.87,
+          "changePct": 9.7,
+          "change": 2.11,
+          "volume": 588954,
+          "marketCap": 2688518144,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "SHOP",
+          "name": "Shopify Inc.",
+          "price": 124.68,
+          "changePct": 9.61,
+          "change": 10.93,
+          "volume": 3757359,
+          "marketCap": 161791590400,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "WIX",
+          "name": "Wix.com Ltd.",
+          "price": 56.335,
+          "changePct": 9.58,
+          "change": 4.92,
+          "volume": 531071,
+          "marketCap": 2357592320,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "PEGA",
+          "name": "Pegasystems Inc.",
+          "price": 29.38,
+          "changePct": 9.55,
+          "change": 2.56,
+          "volume": 1140975,
+          "marketCap": 4830217216,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "TEAM",
+          "name": "Atlassian Corporation",
+          "price": 95.03,
+          "changePct": 9.38,
+          "change": 8.15,
+          "volume": 1782903,
+          "marketCap": 24115558400,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "WDAY",
+          "name": "Workday, Inc.",
+          "price": 147.7901,
+          "changePct": 9.2,
+          "change": 12.45,
+          "volume": 1854833,
+          "marketCap": 36500234240,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
           "symbol": "RNG",
           "name": "Ringcentral, Inc.",
-          "price": 48.31,
-          "changePct": 25.09,
-          "change": 9.69,
-          "volume": 8430019,
-          "marketCap": 4051209472,
+          "price": 52.49,
+          "changePct": 8.65,
+          "change": 4.18,
+          "volume": 1374856,
+          "marketCap": 4401738240,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "THC",
-          "name": "Tenet Healthcare Corporation",
-          "price": 233.2,
-          "changePct": 17.17,
-          "change": 34.18,
-          "volume": 4316007,
-          "marketCap": 20087148544,
+          "symbol": "INTA",
+          "name": "Intapp, Inc.",
+          "price": 29.89,
+          "changePct": 8.81,
+          "change": 2.42,
+          "volume": 189693,
+          "marketCap": 2303371008,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "FRMI",
-          "name": "Fermi Inc.",
-          "price": 7.4,
-          "changePct": 17.09,
-          "change": 1.08,
-          "volume": 40520481,
-          "marketCap": 4721816576,
+          "symbol": "RHI",
+          "name": "Robert Half Inc.",
+          "price": 38.485,
+          "changePct": 9.05,
+          "change": 3.19,
+          "volume": 481356,
+          "marketCap": 3936769024,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
         {
-          "symbol": "IP",
-          "name": "International Paper Company",
-          "price": 42.16,
-          "changePct": 11.21,
-          "change": 4.25,
-          "volume": 11959693,
-          "marketCap": 22324434944,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "SW",
-          "name": "Smurfit WestRock plc",
-          "price": 48.56,
-          "changePct": 11.1,
-          "change": 4.85,
-          "volume": 8921201,
-          "marketCap": 25467975680,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "SLB",
-          "name": "SLB Limited",
-          "price": 52.42,
-          "changePct": 11.01,
-          "change": 5.2,
-          "volume": 26285090,
-          "marketCap": 77791281152,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "DLR",
-          "name": "Digital Realty Trust, Inc.",
-          "price": 199.08,
-          "changePct": 11.01,
-          "change": 19.74,
-          "volume": 10741889,
-          "marketCap": 74907631616,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "SSNC",
-          "name": "SS&C Technologies Holdings, Inc",
-          "price": 73.88,
-          "changePct": 10.35,
-          "change": 6.93,
-          "volume": 3475998,
-          "marketCap": 17792817152,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "BAH",
-          "name": "Booz Allen Hamilton Holding Cor",
-          "price": 72.53,
-          "changePct": 10.11,
-          "change": 6.66,
-          "volume": 4282055,
-          "marketCap": 8698815488,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "OII",
-          "name": "Oceaneering International, Inc.",
-          "price": 52.73,
-          "changePct": 9.81,
-          "change": 4.71,
-          "volume": 3951050,
-          "marketCap": 5248198144,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "SAP",
-          "name": "SAP  SE",
-          "price": 160,
-          "changePct": 9.3,
-          "change": 13.62,
-          "volume": 5948444,
-          "marketCap": 188629172224,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "FAF",
-          "name": "First American Corporation (New",
-          "price": 75.13,
-          "changePct": 8.95,
-          "change": 6.17,
-          "volume": 1492270,
-          "marketCap": 7670772736,
+          "symbol": "LIF",
+          "name": "Life360, Inc.",
+          "price": 53,
+          "changePct": 8.48,
+          "change": 4.14,
+          "volume": 122222,
+          "marketCap": 4294679552,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         }
       ],
       "losers": [
         {
-          "symbol": "MXL",
-          "name": "MaxLinear, Inc",
-          "price": 71.59,
-          "changePct": -21.54,
-          "change": -19.65,
-          "volume": 10482854,
-          "marketCap": 6492725248,
+          "symbol": "LEGN",
+          "name": "Legend Biotech Corporation",
+          "price": 18.915,
+          "changePct": -14.87,
+          "change": -3.3,
+          "volume": 5667929,
+          "marketCap": 3658913792,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
-          "symbol": "NBIS",
-          "name": "Nebius Group N.V.",
-          "price": 187.77,
-          "changePct": -15.02,
-          "change": -33.2,
-          "volume": 24046092,
-          "marketCap": 47674466304,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "BE",
-          "name": "Bloom Energy Corporation",
-          "price": 184.89,
-          "changePct": -14.91,
-          "change": -32.41,
-          "volume": 13738726,
-          "marketCap": 52590825472,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "HIMS",
-          "name": "Hims & Hers Health, Inc.",
-          "price": 28.09,
-          "changePct": -14.2,
-          "change": -4.65,
-          "volume": 28334862,
-          "marketCap": 6501646848,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "AEHR",
-          "name": "Aehr Test Systems",
-          "price": 76.32,
-          "changePct": -13.77,
-          "change": -12.19,
-          "volume": 2720640,
-          "marketCap": 2478873600,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "NVCR",
-          "name": "NovoCure Limited",
-          "price": 17.65,
-          "changePct": -11.71,
-          "change": -2.34,
-          "volume": 3879988,
-          "marketCap": 2044239616,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "LBRT",
-          "name": "Liberty Energy Inc.",
-          "price": 17.36,
-          "changePct": -11.52,
-          "change": -2.26,
-          "volume": 12840555,
-          "marketCap": 2833003264,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "CRWV",
-          "name": "CoreWeave, Inc.",
-          "price": 71.88,
-          "changePct": -11.37,
-          "change": -9.22,
-          "volume": 25408489,
-          "marketCap": 39215595520,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
-        },
-        {
-          "symbol": "ALAB",
-          "name": "Astera Labs, Inc.",
-          "price": 291.58,
-          "changePct": -10.82,
-          "change": -35.39,
-          "volume": 4272717,
-          "marketCap": 49979121664,
+          "symbol": "SIMO",
+          "name": "Silicon Motion Technology Corpo",
+          "price": 238.045,
+          "changePct": -12.13,
+          "change": -32.85,
+          "volume": 443142,
+          "marketCap": 8071590912,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
           "symbol": "SNDK",
           "name": "Sandisk Corporation",
-          "price": 1436.56,
-          "changePct": -10.79,
-          "change": -173.77,
-          "volume": 14044130,
-          "marketCap": 212739833856,
+          "price": 1261.43,
+          "changePct": -12.19,
+          "change": -175.13,
+          "volume": 11411362,
+          "marketCap": 186804879360,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
-          "symbol": "AXTI",
-          "name": "AXT Inc",
-          "price": 47.23,
-          "changePct": -10.77,
-          "change": -5.7,
-          "volume": 5737258,
-          "marketCap": 3089936896,
+          "symbol": "ICHR",
+          "name": "Ichor Holdings",
+          "price": 76.04,
+          "changePct": -12.14,
+          "change": -10.51,
+          "volume": 365623,
+          "marketCap": 2651290624,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
         {
-          "symbol": "AAOI",
-          "name": "Applied Optoelectronics, Inc.",
-          "price": 100.15,
-          "changePct": -10.6,
-          "change": -11.87,
-          "volume": 7077047,
-          "marketCap": 8036313088,
+          "symbol": "MXL",
+          "name": "MaxLinear, Inc",
+          "price": 63.11,
+          "changePct": -11.85,
+          "change": -8.48,
+          "volume": 3437669,
+          "marketCap": 5723647488,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "UCTT",
+          "name": "Ultra Clean Holdings, Inc.",
+          "price": 82.62,
+          "changePct": -10.88,
+          "change": -10.13,
+          "volume": 542810,
+          "marketCap": 3703718656,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "ACMR",
+          "name": "ACM Research, Inc.",
+          "price": 76.01,
+          "changePct": -9.86,
+          "change": -8.31,
+          "volume": 460967,
+          "marketCap": 5253012480,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "VECO",
+          "name": "Veeco Instruments Inc.",
+          "price": 47.06,
+          "changePct": -8.9,
+          "change": -4.6,
+          "volume": 368705,
+          "marketCap": 2872235776,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "COHR",
+          "name": "Coherent Corp.",
+          "price": 257.495,
+          "changePct": -8.82,
+          "change": -24.9,
+          "volume": 1741093,
+          "marketCap": 50376146944,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "BELFA",
+          "name": "Bel Fuse Inc.",
+          "price": 214.78,
+          "changePct": -7.88,
+          "change": -18.37,
+          "volume": 22584,
+          "marketCap": 2732582912,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "AMKR",
+          "name": "Amkor Technology, Inc.",
+          "price": 59.1505,
+          "changePct": -8.94,
+          "change": -5.81,
+          "volume": 3790789,
+          "marketCap": 14661783552,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
+        },
+        {
+          "symbol": "SKHY",
+          "name": "SK hynix Inc.",
+          "price": 140.6,
+          "changePct": -9.04,
+          "change": -13.97,
+          "volume": 27077911,
+          "marketCap": 998056001536,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         }
@@ -3185,132 +3718,132 @@
         {
           "symbol": "INTC",
           "name": "Intel Corporation",
-          "price": 92.32,
-          "changePct": -7.89,
-          "change": -7.91,
-          "volume": 180657060,
-          "marketCap": 465662050304,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "NOK",
-          "name": "Nokia Corporation Sponsored",
-          "price": 9.1,
-          "changePct": -6.47,
-          "change": -0.63,
-          "volume": 112479604,
-          "marketCap": 50801061888,
+          "price": 88.87,
+          "changePct": -3.74,
+          "change": -3.45,
+          "volume": 64595248,
+          "marketCap": 448260276224,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "NVDA",
           "name": "NVIDIA Corporation",
-          "price": 206.84,
-          "changePct": -0.92,
-          "change": -1.92,
-          "volume": 114728583,
-          "marketCap": 5009871732736,
+          "price": 196.475,
+          "changePct": -5.01,
+          "change": -10.36,
+          "volume": 63209819,
+          "marketCap": 4758821142528,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "NOK",
+          "name": "Nokia Corporation Sponsored",
+          "price": 8.96,
+          "changePct": -1.54,
+          "change": -0.14,
+          "volume": 57579912,
+          "marketCap": 50019504128,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "SPCX",
+          "name": "Space Exploration Technologies ",
+          "price": 111.47,
+          "changePct": -3.13,
+          "change": -3.6,
+          "volume": 34095881,
+          "marketCap": 1468526624768,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "ONDS",
           "name": "Ondas Inc",
-          "price": 7.8,
-          "changePct": -1.64,
-          "change": -0.13,
-          "volume": 101110909,
-          "marketCap": 4444741120,
+          "price": 7.765,
+          "changePct": -0.45,
+          "change": -0.04,
+          "volume": 29575391,
+          "marketCap": 4424796672,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "QBTS",
+          "name": "D-Wave Quantum Inc. Common Stock",
+          "price": 18.87,
+          "changePct": 5.07,
+          "change": 0.91,
+          "volume": 28131189,
+          "marketCap": 6990301184,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "SOFI",
           "name": "SoFi Technologies, Inc.",
-          "price": 16.46,
-          "changePct": -1.14,
-          "change": -0.19,
-          "volume": 92936528,
-          "marketCap": 21113919488,
+          "price": 16.975,
+          "changePct": 3.13,
+          "change": 0.52,
+          "volume": 27633063,
+          "marketCap": 21774532608,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "NU",
-          "name": "Nu Holdings Ltd.",
-          "price": 14.09,
-          "changePct": -0.7,
-          "change": -0.1,
-          "volume": 90850481,
-          "marketCap": 68061528064,
+          "symbol": "BMNR",
+          "name": "BitMine Immersion Technologies,",
+          "price": 17.45,
+          "changePct": 10.51,
+          "change": 1.66,
+          "volume": 27490319,
+          "marketCap": 10526300160,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "T",
-          "name": "AT&T Inc.",
-          "price": 24.13,
-          "changePct": 5.1,
-          "change": 1.17,
-          "volume": 80606102,
-          "marketCap": 165348065280,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "F",
-          "name": "Ford Motor Company",
-          "price": 14.37,
-          "changePct": 1.55,
-          "change": 0.22,
-          "volume": 73012077,
-          "marketCap": 57260036096,
+          "symbol": "SKHY",
+          "name": "SK hynix Inc.",
+          "price": 140.6,
+          "changePct": -9.04,
+          "change": -13.97,
+          "volume": 27077990,
+          "marketCap": 998056001536,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
           "symbol": "AAL",
           "name": "American Airlines Group, Inc.",
-          "price": 14.475,
-          "changePct": 6.79,
-          "change": 0.92,
-          "volume": 74211307,
-          "marketCap": 9582014464,
+          "price": 14.715,
+          "changePct": 1.66,
+          "change": 0.24,
+          "volume": 26060010,
+          "marketCap": 9740887040,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "CLF",
-          "name": "Cleveland-Cliffs Inc.",
-          "price": 11.93,
-          "changePct": 8.85,
-          "change": 0.97,
-          "volume": 69852797,
-          "marketCap": 6806542848,
+          "symbol": "F",
+          "name": "Ford Motor Company",
+          "price": 14.435,
+          "changePct": 0.45,
+          "change": 0.07,
+          "volume": 22631671,
+          "marketCap": 57519042560,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "PATH",
-          "name": "UiPath, Inc.",
-          "price": 10.84,
-          "changePct": 6.27,
-          "change": 0.64,
-          "volume": 63724886,
-          "marketCap": 5616423424,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "TSLA",
-          "name": "Tesla, Inc.",
-          "price": 313.03,
-          "changePct": -2.08,
-          "change": -6.66,
-          "volume": 62648724,
-          "marketCap": 1236326809600,
+          "symbol": "MU",
+          "name": "Micron Technology, Inc.",
+          "price": 865.795,
+          "changePct": -5.99,
+          "change": -55.16,
+          "volume": 22264380,
+          "marketCap": 977822941184,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         }
@@ -3318,13 +3851,12 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: The week ahead will have no shortage of challenges for the major averages. (M1)",
-      "Rates: It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data. (M3)",
-      "Commodities: Oil prices fell after Iran reportedly said it would suspend attacks as long as a U.S. pause in hostilities remains in place. (M2)",
-      "Macro: Markets are gearing up for the busiest week of second-quarter earnings season. (M8)",
-      "AI/semis: Cisco's AI infrastructure orders reinforce the spending cycle behind the semiconductor and networking trade. (M6)",
-      "Credit: Analysis of China's approach to AI, thoughts on another potential government shutdown, a Clarity Act check-in, and a look at credit spread trends. (M10)",
-      "Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation."
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M2)",
+      "Rates: Inflation data are running hot, so rates remain the main constraint on crowded momentum. (M5)",
+      "Commodities: CNBC Daily Open: Markets get a calm weekend; Nvidia-SK Hynix deal Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points A pause in the Iran war sends oil prices lower and stocks higher. (M1)",
+      "Macro: Insatiable demand for computer memory and other technologies needed to build artificial intelligence boomed again in the second quarter, and could spur another above-average increase in economic growth. (M6)",
+      "AI/semis: Analysis of China's approach to AI, thoughts on another potential government shutdown, a Clarity Act check-in, and a look at credit spread trends. (M10)",
+      "Earnings: Large-cap reporters are moving enough to affect index tone; focus on guidance read-throughs from TER, F rather than the full mover list."
     ]
   },
   "avoidList": {
@@ -56145,11 +56677,20 @@
       "articles": [
         {
           "sourceName": "Schwab Weekly Market Outlook",
+          "title": "Stocks Rise Early as U.S. and Iran Pause Attacks",
+          "url": "https://www.schwab.com/learn/story/stock-market-update-open",
+          "publishedAt": "2026-07-27T13:22:36.000Z",
+          "summary": "Learn what's trending before the opening bell with Schwab's market open report. Find out about macroeconomic reports, company earnings, and other events.",
+          "excerpt": "Schwab Market Update | Charles Schwab Search Learn Markets and Economy Stocks Rise Early as U.S. and Iran Pause Attacks Crude oil prices tumbled after the U.S. paused attacks in Iran and Iran said it would also pause. The Fed meets this week, and four of the Magnificent 7 report earnings. July 27, 2026 • Joe Mazzola Published as of: July 27, 2026, 9:10 a.m. ET Listen to this update Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,411.98 +3.68 +0.05% Dow Jones Industrial Average ® 51,947.25 +235.60 +0.46% Nasdaq Composite ® 24,975.82 -161.87 -0.64% 10-year Treasury yield 4.65% +0.03 -- U.S. Dollar Index 101.38 -0.09 -0.08% Cboe Volatility Index ® 17.72 -0.86 -4.63% WTI Crude Oil $84.21 -$5.10 -5.71% Bitcoin $65,055 +$840 +1.31% Disclosure (Monday market open) Stocks jumped higher early and oil prices dove more than 5% after President Trump decided against a major escalation in Iran and both sides paused military attacks. Treasury yields fell as concerns about inflation and interest rates eased. Today is relatively quiet on the earnings and economic front, though June's durable goods orders kicked things off, coming in at a gain of 0.4%, well below the consensus estimate of 2%. Earnings ramp up tomorrow and for the remainder of the week, with four of the Magnificent 7— Microsoft (MSFT), Meta (META), Apple (AAPL), and Amazon (AMZN)—visiting the earnings confessional on Wednesday and Thursday. The Federal Reserve rate decision comes Wednesday. Market averages were mixed on Friday, initially rebounding amid cautious hopes for renewed peace talks between ",
+          "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
+        },
+        {
+          "sourceName": "Schwab Weekly Market Outlook",
           "title": "China's Chips, Crypto Clarity, Creeping Spreads",
           "url": "https://www.schwab.com/learn/story/chinas-chips-crypto-clarity-creeping-spreads",
           "publishedAt": "2026-07-24T20:54:42.000Z",
           "summary": "Analysis of China's approach to AI, thoughts on another potential government shutdown, a Clarity Act check-in, and a look at credit spread trends.",
-          "excerpt": "China's Chips, Crypto Clarity, Creeping Spreads | Charles Schwab Search Learn Markets and Economy China's Chips, Crypto Clarity, Creeping Spreads This week's update includes analysis of China's approach to AI, thoughts on another potential government shutdown, a Clarity Act check-in, and a look at credit spread trends. July 24, 2026 Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch,\" and Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Beijing elbows in on U.S. AI dominance China's claims of success building competitive AI models recently became another concern swirling around the volatile chip sector, reminding some of the 2025 \"Deep Seek\" sell-off. China appears to be taking a different tack from the U.S., offering AI models for wide use (\"open source\") rather than as proprietary technology. This has some investors concerned that U.S. companies could turn to cheaper Chinese models for less-advanced AI needs as costs continue growing. The costs are taking a toll, evidenced by S&P Global downgrading Oracle's (ORCL) debt earlier this month to one step above junk status. This turns the focus to free cash flow as competing hyperscalers report in coming weeks. Chinese competition isn't a done deal, as Chinese models aren't widely proven. Even so, cheaper open source technology, even from China, might be tempting amid growing debt levels for U.S. companies heatedly pursuing AI. DIY investing? Trading? Professional advice? See how Schwab can help Turbulence still heavy despite surface c",
+          "excerpt": "China's Chips, Crypto Clarity, Creeping Spreads | Charles Schwab Search all articles, videos, and podcasts Markets and Economy China's Chips, Crypto Clarity, Creeping Spreads This week's update includes analysis of China's approach to AI, thoughts on another potential government shutdown, a Clarity Act check-in, and a look at credit spread trends. July 24, 2026 Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch,\" and Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Beijing elbows in on U.S. AI dominance China's claims of success building competitive AI models recently became another concern swirling around the volatile chip sector, reminding some of the 2025 \"Deep Seek\" sell-off. China appears to be taking a different tack from the U.S., offering AI models for wide use (\"open source\") rather than as proprietary technology. This has some investors concerned that U.S. companies could turn to cheaper Chinese models for less-advanced AI needs as costs continue growing. The costs are taking a toll, evidenced by S&P Global downgrading Oracle's (ORCL) debt earlier this month to one step above junk status. This turns the focus to free cash flow as competing hyperscalers report in coming weeks. Chinese competition isn't a done deal, as Chinese models aren't widely proven. Even so, cheaper open source technology, even from China, might be tempting amid growing debt levels for U.S. companies heatedly pursuing AI. DIY investing? Trading? Professional advice? See how Schwab can help Turbulence ",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56158,16 +56699,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-07-24T20:51:58.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Middle East Tensions, Rising Oil & Yields Weigh on Stocks Stocks are on track for modest weekly losses, particularly in the technology space, as rising oil prices and higher Treasury yields keep investors sidelined, despite strong earnings reports. July 24, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Cautious\" outlook for the market this week, as I believed the jump in oil prices and U.S./Iran re-escalation was not being fully discounted by investors. At the time of this writing (1:34 p.m. ET) all the majors are on track to be down modestly on the week, with the tech-heavy Nasdaq Composite being the worst performer (-1.4%). The exchange of attacks between the U.S. and Iran continued this week and oil prices continued to climb higher. Last week, WTI crude jumped 14% and this week they are on track to be another 8%, and that includes today's 3.6% drop (WTI crude September futures last seen trading at $88.86/barrel). Today's pullback in crude appears to be tied to reports that Pakistan is exploring a path towards a resumption in stalled U.S./Iran negotiations. Sources stated that Iran's Interior Minister Eskandar Momeni traveled to Islamabad earlier this week to conduct exploratory discussions and met with Pakistani government leaders. The relative weakness in tech this week was mostly driven by a post-earnings sell-off in Google-parent Alphabet on Wednesday after the bell. The company delivered strong results, highlighted by an 82% year-over-year increase in cloud revenue (vs. whisper numbers around +70-75%), but heavy capital expenditure (CapEx) guidance appears to have soured investor se",
-          "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
-        },
-        {
-          "sourceName": "Schwab Weekly Market Outlook",
-          "title": "Stocks Stabilize Early as Oil Prices Retreat",
-          "url": "https://www.schwab.com/learn/story/stock-market-update-open",
-          "publishedAt": "2026-07-24T13:27:28.000Z",
-          "summary": "Learn what's trending before the opening bell with Schwab's market open report. Find out about macroeconomic reports, company earnings, and other events.",
-          "excerpt": "Schwab Market Update | Charles Schwab Search Learn Markets and Economy Stocks Stabilize Early as Oil Prices Retreat Stocks looked set to stabilize in early trading as lower oil prices eased inflation concerns. But the market remains jittery over enormous AI spending as earnings season rolls on. July 24, 2026 • Joe Mazzola Published as of: July 24, 2026, 9:09 a.m. ET Listen to this update Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,408.30 -90.66 -1.21% Dow Jones Industrial Average ® 51,711.65 -506.93 -0.97% Nasdaq Composite ® 25,137.69 -553.21 -2.15% 10-year Treasury yield 4.68% +0.02 -- U.S. Dollar Index 101.50 +0.05 +0.05% Cboe Volatility Index ® 18.79 +0.09 +0.48% WTI Crude Oil $89.32 -$2.87 -3.11% Bitcoin $64,870 +$15.00 +0.02% Disclosure (Friday market open) Stocks looked poised to rebound Friday after Brent crude oil slipped below $100 a barrel, reclaiming some of the ground lost after inflation fears and jitters over AI capital spending hit shares Thursday. Today offers a relatively light slate of earnings and economic data, particularly in the tech space. Next week we'll hear from Microsoft (MSFT), Meta (META), and Apple (AAPL). The main event, though, might be the Federal Reserve policy meeting concluding Wednesday, with second-quarter gross domestic product (GDP) and Personal Consumption Expenditures (PCE) price data due the following day. Stocks fell sharply Thursday, with the tech-heavy Nasdaq losing more than 2% for its worst day in more than a month. Alphabet (GOOGL) and Tesla (TSLA) fell roughly 7% and 14%, respectively. It was Te",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Middle East Tensions, Rising Oil & Yields Weigh on Stocks Stocks are on track for modest weekly losses, particularly in the technology space, as rising oil prices and higher Treasury yields keep investors sidelined, despite strong earnings reports. July 24, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Cautious\" outlook for the market this week, as I believed the jump in oil prices and U.S./Iran re-escalation was not being fully discounted by investors. At the time of this writing (1:34 p.m. ET) all the majors are on track to be down modestly on the week, with the tech-heavy Nasdaq Composite being the worst performer (-1.4%). The exchange of attacks between the U.S. and Iran continued this week and oil prices continued to climb higher. Last week, WTI crude jumped 14% and this week they are on track to be another 8%, and that includes today's 3.6% drop (WTI crude September futures last seen trading at $88.86/barrel). Today's pullback in crude appears to be tied to reports that Pakistan is exploring a path towards a resumption in stalled U.S./Iran negotiations. Sources stated that Iran's Interior Minister Eskandar Momeni traveled to Islamabad earlier this week to conduct exploratory discussions and met with Pakistani government leaders. The relative weakness in tech this week was mostly driven by a post-earnings sell-off in Google-parent Alphabet on Wednesday after the bell. The company delivered strong results, highlighted by an 82% year-over-year increase in cloud revenue (vs. whisper numbers around +70-75%), but heavy capital expenditure (CapEx) guidance appears to have soured investor sentiment. Alphabet raised thei",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         }
       ],
@@ -56285,21 +56817,11 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
-      "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
-      "articles": [
-        {
-          "sourceName": "EIA Today In Energy",
-          "title": "Weekly Natural Gas Storage Report - EIA",
-          "url": "http://ir.eia.gov/ngs/ngs.html",
-          "publishedAt": "2026-07-17T00:00:00.000Z",
-          "summary": "Weekly Natural Gas Storage Report - EIA",
-          "excerpt": "Weekly Natural Gas Storage Report - EIA &lsaquo; See All Natural Gas Reports Weekly Natural Gas Storage Report for week ending July 17, 2026 | Released: July 23, 2026 at 10:30 a.m. | Next Release: July 30, 2026 Working gas in underground storage, Lower 48 states Summary text CSV JSN Historical Comparisons Stocks billion cubic feet (Bcf) Year ago (07/17/25) 5-year average (2021-25) Region 07/17/26 07/10/26 net change implied flow Bcf % change Bcf % change East 631 614 17 17 633 -0.3 616 2.4 Midwest 766 749 17 17 744 3.0 723 5.9 Mountain 240 240 0 0 238 0.8 201 19.4 Pacific 314 319 -5 -5 297 5.7 264 18.9 South Central 1,105 1,103 2 2 1,160 -4.7 1,069 3.4 Salt 317 324 -7 -7 326 -2.8 288 10.1 Nonsalt 788 779 9 9 833 -5.4 782 0.8 Total 3,056 3,024 32 32 3,072 -0.5 2,873 6.4 Totals may not equal sum of components because of independent rounding. Summary Working gas in storage was 3,056 Bcf as of Friday, July 17, 2026, according to EIA estimates. This represents a net increase of 32 Bcf from the previous week. Stocks were 16 Bcf less than last year at this time and 183 Bcf above the five-year average of 2,873 Bcf. At 3,056 Bcf, total working gas is within the five-year historical range. For information on sampling error in this report, see Estimated Measures of Sampling Variability table below. Note: The shaded area indicates the range between the historical minimum and maximum values for the weekly series from 2021 through 2025. The dashed vertical lines indicate current and year-ago weekly periods. Source: Form EIA-912, \"Weekly Underground Natural Gas Storage Report.\" --> Estimated measures of sampling variability Download History (April 2015 to Present) Coefficient of Variation for Stocks % of working gas Standard Error for Net Change billion cubic feet (Bcf) Region 07/17/2",
-          "discoveredFrom": "https://www.eia.gov/todayinenergy/"
-        }
-      ],
-      "articleCount": 1,
-      "ok": true
+      "title": "EIA Today In Energy",
+      "summary": "Source check failed: This operation was aborted",
+      "articles": [],
+      "articleCount": 0,
+      "ok": false
     },
     {
       "name": "BLS Economic News Releases",
@@ -56438,20 +56960,20 @@
       "articles": [
         {
           "sourceName": "CNBC Markets",
-          "title": "Here's the tech stock to buy in a market losing patience with tech",
-          "url": "https://www.cnbc.com/2026/07/26/jim-cramer-heres-the-tech-stock-to-buy-in-a-market-losing-patience-with-tech.html",
-          "publishedAt": "2026-07-26T23:37:08.000Z",
-          "summary": "It's not the spend, it's the return.",
-          "excerpt": "Jim Cramer: Here's the tech stock to buy in a market losing patience with tech Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu It's not the spend, it's the return. That's what Friday's technology stock plunge said. I think it just might be the most significant tech selloff in more than a year. We need to know — potentially — what we are facing. We need to know if the trillion-dollar spigot is drying up — or it is just a dry spell. For my Charitable Trust, the portfolio we use for the CNBC Investing Club, we have been consolidating and gradually trying to shrink traditional tech — semis, software, data center — and move into other kinds of tech, namely tech-infused pharma and aerospace. We tried to make Intel — not Nvidia — the focal point of the portfolio, concerned that there are not enough new move-the-needle customers still out there for Nvidia. No, I'm not giving up Nvidia. It is still amazing, and I think it will have a bang-up quarter. But the \"action\" in the stock is speaking too loudly. The action in Apple is screaming that its decision, made intentionally or de facto, not to spend hundreds of billions on AI, is brilliant. It's having the best month in three years. Tons of critics second-guess Apple's decision-making. That's wrong. Apple decided a long time ago that much would flow to it if it made the best handhelds. It does. That allowed it to pick and choose which hyperscaler-chat-bot company it wanted to affiliate with, because they have quickly turned into commodities. Google had no choice but to virtually give it away — at least on a net basis — because Google Search has become suspect in its return while Gemini is no Claude from Anthropic. So, we gravitated to a new company, late for now, Intel, ",
+          "title": "CNBC Daily Open: Markets finally get a calm weekend; Nvidia and SK Hynix announce massive memory deal",
+          "url": "https://www.cnbc.com/2026/07/27/cnbc-daily-open-markets-calm-weekend-nvidia-sk-hynix-deal.html",
+          "publishedAt": "2026-07-27T01:05:14.000Z",
+          "summary": "It's been a relatively calm weekend. Finally, there was a pause in the fighting in the Middle East instead of an escalation.",
+          "excerpt": "CNBC Daily Open: Markets get a calm weekend; Nvidia-SK Hynix deal Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Key Points A pause in the Iran war sends oil prices lower and stocks higher. Ukraine hits an Iranian cargo ship in long range strike The Trump administration faces lawsuits over its new Section 301 tariffs. Nvidia races to secure more memory from SK Hynix in what could be a $500 billion deal. Why is chocolate still so expensive? A view of destroyed buildings in an area hit by a U.S. airstrike during the U.S.-Israeli military campaign in Tehran, Iran, on July 21, 2026, amid renewed conflicts between Iran and the United States in southern Iran. Morteza Nikoubazl | Nurphoto | Getty Images Hello, this is Hui Jie writing to you from Singapore. Welcome to another edition of CNBC's Daily Open. It's been a relatively calm weekend, with a pause in the fighting in the Middle East instead of an escalation. But that doesn't mean all is smooth sailing. Ukraine, in a far-reaching strike, hit an Iranian commercial vessel, while the Trump administration dealt with tariff lawsuits at home. Nvidia raced to secure more memory from SK Hynix in a deal that could be up to $500 billion, which could serve as a catalyst for the stock that has fallen heavily in the last month. But one of our European reporters asks what might be the most important question today: Why is chocolate so expensive? What you need to know today Investors had a calm weekend on the Middle East front, after a pause in the Iran war sent oil prices lower and stocks higher, giving investors a welcome break from the resumption of hostilites between Tehran and the U.S. But the relief came with plenty of caveats. Ukraine struck an Iranian commercial ship in",
           "discoveredFrom": "https://www.cnbc.com/markets/"
         },
         {
           "sourceName": "CNBC Markets",
-          "title": "Stock futures climb, oil prices fall as U.S. and Iran pause attacks: Live updates",
+          "title": "S&P 500 falls into the red despite Iran fighting pause as chip stocks tumble: Live updates",
           "url": "https://www.cnbc.com/2026/07/26/stock-market-today-live-updates.html",
           "publishedAt": "2026-07-26T22:04:38.000Z",
-          "summary": "The week ahead will have no shortage of challenges for the major averages.",
-          "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Traders work at the New York Stock Exchange on July 15, 2026. NYSE U.S. stock futures rallied on Sunday night, and oil prices declined amid a pause in fighting between the U.S. and Iran over the weekend. Traders were also looking ahead to a demanding week of megacap earnings and a potentially surprising Federal Reserve meeting. Dow Jones Industrial Average futures rose by 244 points, or 0.5%. S&P 500 futures gained 0.6%, while Nasdaq 100 futures advanced 1.2%. Oil prices slid after Iran said it will suspend attacks so long as a U.S. pause on fighting also holds following nearly two weeks of escalating attacks. International benchmark Brent crude futures fell more than 5% to around $92 a barrel. U.S. West Texas Intermediate crude futures dropped 5% to roughly $85 a barrel. Tensions elsewhere mounted after Ukraine struck an Iranian commercial vessel in the Caspian Sea, which prompted Tehran to accuse Kyiv of a \"hostile and criminal act.\" U.S. equities are coming off yet another losing week, as a pullback in chip stocks and uncertainty over the war with Iran weighed on investors. On Friday, the S&P 500 and the Nasdaq slid 0.6% and 2.1%, respectively, posting back-to-back weekly losses. The Dow fell 0.4%, notching a third straight week of declines. The week ahead will have no shortage of challenges for the major averages. A succession of quarterly reports from Amazon, Apple, Meta Platforms and Microsoft will either soothe investor fears of rampant artificial intelligence spending, or add to them, after Alphabet's disappointing results in the last week. The results could directly affect semiconductor companies that are the chief benefic",
+          "summary": "Stocks reacted to a pause in fighting between the U.S. and Iran over the weekend.",
+          "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics Video Watchlist Investing Club PRO Livestream Menu Traders work on the floor of the New York Stock Exchange (NYSE) at the opening bell in New York on July 27, 2026. Angela Weiss | Afp | Getty Images The S&P 500 plunged into the red on Monday, although it later retraced its losses, as chip stocks slid, even as the market positively reacted to a pause in fighting between the U.S. and Iran over the weekend. The S&P 500 was last up 0.2%, while the Nasdaq Composite was little changed. The Dow Jones Industrial Average traded 300 points higher, or 0.6%. Semiconductor stocks were down broadly. The VanEck Semiconductor ETF (SMH) traded 3.7% lower, adding to its Friday losses. AMD and Teradyne dropped more than 7% each to lead the declines. Micron Technology shed more than 6%. However, cooling of tensions in the Middle East sent international benchmark Brent crude futures for September delivery down 6.8% to around $90.25 a barrel. U.S. West Texas Intermediate crude futures dropped 6.1% to $83.83 a barrel. Tensions elsewhere mounted after Ukraine struck an Iranian commercial vessel in the Caspian Sea, which prompted Tehran to accuse Kyiv of a \"hostile and criminal act.\" The week ahead will have no shortage of challenges for the major averages. A succession of quarterly reports from Amazon, Apple, Meta Platforms and Microsoft will either soothe investor fears of rampant artificial intelligence spending, or add to them, after Alphabet's disappointing results in the last week. The results could directly affect semiconductor companies that are the chief beneficiaries of the AI spending spree. \"The biggest risk is the continuation of the spend,\" said Ken Mahoney, CEO of Mahoney Asset Management. \"",
           "discoveredFrom": "https://www.cnbc.com/markets/"
         }
       ],
@@ -56470,29 +56992,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Oil slides 5% as Iran reportedly signals halt to attacks if U.S. pause holds",
-          "url": "https://www.cnbc.com/2026/07/27/oil-price-wti-brent-slide-as-iran-reportedly-may-halt-attacks.html",
-          "publishedAt": "2026-07-26T23:58:00.000Z",
-          "summary": "Oil prices fell after Iran reportedly said it would suspend attacks as long as a U.S. pause in hostilities remains in place.",
-          "excerpt": "Oil prices fell after Iran reportedly said it would suspend attacks as long as a U.S. pause in hostilities remains in place.",
+          "title": "Sam Altman to meet with Trump administration, senators this week. Here&apos;s what he plans to say",
+          "url": "https://www.cnbc.com/2026/07/27/altman-trump-china-open-weight-ai.html",
+          "publishedAt": "2026-07-27T15:24:16.000Z",
+          "summary": "Altman will preview the capabilities of the company's upcoming family of AI models and answer questions about cybersecurity and open-weight models.",
+          "excerpt": "Altman will preview the capabilities of the company's upcoming family of AI models and answer questions about cybersecurity and open-weight models.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Here&apos;s the tech stock to buy in a market losing patience with tech",
-          "url": "https://www.cnbc.com/2026/07/26/jim-cramer-heres-the-tech-stock-to-buy-in-a-market-losing-patience-with-tech.html",
-          "publishedAt": "2026-07-26T23:39:46.000Z",
-          "summary": "It's not the spend, it's the return.",
-          "excerpt": "It's not the spend, it's the return.",
+          "title": "Singapore tightens monetary policy in surprise move as rising oil prices rekindle inflation risk",
+          "url": "https://www.cnbc.com/2026/07/27/singapore-mas-july-monetary-policy-middle-east-oil-prices-inflation-.html",
+          "publishedAt": "2026-07-27T14:22:15.000Z",
+          "summary": "Unlike most central banks, the MAS manages medium-term price stability by managing the Singapore dollar exchange rate against a trade-weighted basket of currencies.",
+          "excerpt": "Unlike most central banks, the MAS manages medium-term price stability by managing the Singapore dollar exchange rate against a trade-weighted basket of currencies.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Here are the 3 big things we&apos;re watching in the stock market in the week ahead",
-          "url": "https://www.cnbc.com/2026/07/26/here-are-the-3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
-          "publishedAt": "2026-07-26T20:50:54.000Z",
-          "summary": "It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data.",
-          "excerpt": "It's a busy week filled with Big Tech earnings, a Fed meeting and inflation data.",
+          "title": "Europe wildfire in pictures: Gigantic fire cloud engulfing France, Spain regions",
+          "url": "https://www.cnbc.com/2026/07/27/wildfire-pictures-spain-france-bordeaux-heatwave.html",
+          "publishedAt": "2026-07-27T14:20:42.000Z",
+          "summary": "A rare wildfire spreading across France's Bordeaux region and has spread to Western Madrid is fire cloud that can generate its own thunderstorms.",
+          "excerpt": "A rare wildfire spreading across France's Bordeaux region and has spread to Western Madrid is fire cloud that can generate its own thunderstorms.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56552,29 +57074,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Oil prices sink, stock futures rally as U.S. and Iran pause attacks, Wall Street awaits busy week",
-          "url": "https://www.marketwatch.com/story/oil-prices-sink-stock-futures-rally-as-u-s-and-iran-pause-attacks-wall-street-awaits-busy-week-75030e00?mod=mw_rss_topstories",
-          "publishedAt": "2026-07-26T23:45:00.000Z",
-          "summary": "U.S. stock-index futures rallied and oil prices tumbled on Sunday as the U.S. and Iran took a pause from fighting, and as Wall Street gears up for the Fed’s meeting and key earnings reports from Big Tech companies.",
-          "excerpt": "U.S. stock-index futures rallied and oil prices tumbled on Sunday as the U.S. and Iran took a pause from fighting, and as Wall Street gears up for the Fed’s meeting and key earnings reports from Big Tech companies.",
+          "title": "The AI boom shows no sign of slowing — and the U.S. economy is reaping the benefits",
+          "url": "https://www.marketwatch.com/story/the-ai-boom-shows-no-sign-of-slowing-and-the-u-s-economy-is-reaping-the-benefits-1728c4e5?mod=mw_rss_topstories",
+          "publishedAt": "2026-07-27T15:22:00.000Z",
+          "summary": "Insatiable demand for computer memory and other technologies needed to build artificial intelligence boomed again in the second quarter, and could spur another above-average increase in economic growth.",
+          "excerpt": "Insatiable demand for computer memory and other technologies needed to build artificial intelligence boomed again in the second quarter, and could spur another above-average increase in economic growth.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "There’s a technical ‘triple threat’ for stocks, but also places investors can hide",
-          "url": "https://www.marketwatch.com/story/theres-a-technical-triple-threat-for-stocks-but-also-places-investors-can-hide-59108c6b?mod=mw_rss_topstories",
-          "publishedAt": "2026-07-26T19:15:00.000Z",
-          "summary": "Treasury yields and oil prices surged, and the dollar confirmed the breakout toward a longer-term uptrend, to push the S&P 500 below key chart support.",
-          "excerpt": "Treasury yields and oil prices surged, and the dollar confirmed the breakout toward a longer-term uptrend, to push the S&P 500 below key chart support.",
+          "title": "College kids are moving into retirement communities for reasons beyond ‘cheap rent’",
+          "url": "https://www.marketwatch.com/story/college-kids-are-moving-into-retirement-communities-for-reasons-beyond-cheap-rent-577dc94b?mod=mw_rss_topstories",
+          "publishedAt": "2026-07-27T15:09:00.000Z",
+          "summary": "Students are forging intergenerational bonds while planning game nights and teaching gym classes, but “by 7:30 or 8, things get pretty quiet here.”",
+          "excerpt": "Students are forging intergenerational bonds while planning game nights and teaching gym classes, but “by 7:30 or 8, things get pretty quiet here.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "The S&P 500’s earnings growth has gone bonkers thanks to one company",
-          "url": "https://www.marketwatch.com/story/the-s-p-500s-earnings-growth-has-gone-bonkers-thanks-to-one-company-1c45b2ba?mod=mw_rss_topstories",
-          "publishedAt": "2026-07-26T14:00:00.000Z",
-          "summary": "Markets are gearing up for the busiest week of second-quarter earnings season.",
-          "excerpt": "Markets are gearing up for the busiest week of second-quarter earnings season.",
+          "title": "This small-cap stock strategy shines by riding the beat-and-raise trend",
+          "url": "https://www.marketwatch.com/story/this-small-cap-stock-strategy-shines-by-riding-the-beat-and-raise-trend-24bee883?mod=mw_rss_topstories",
+          "publishedAt": "2026-07-27T15:08:00.000Z",
+          "summary": "Brandon Nelson of Calamos Investments identifies companies primed for sustainable growth and improving profit margins.",
+          "excerpt": "Brandon Nelson of Calamos Investments identifies companies primed for sustainable growth and improving profit margins.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],

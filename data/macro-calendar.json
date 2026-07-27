@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-27T00:13:59.961Z",
+  "generatedAt": "2026-07-27T15:31:40.774Z",
   "window": {
-    "today": "2026-07-26",
+    "today": "2026-07-27",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-07-19",
-    "endDate": "2027-01-26"
+    "startDate": "2026-07-20",
+    "endDate": "2027-01-27"
   },
   "sources": [
     {
@@ -35,7 +35,7 @@
     {
       "source": "Federal Reserve FOMC calendar",
       "status": "ready",
-      "eventCount": 4,
+      "eventCount": 5,
       "scraper": "federal-reserve-fomc-calendar"
     }
   ],
@@ -425,6 +425,18 @@
       "sourceUrl": "https://www.bea.gov/news/schedule",
       "sourceName": "BEA release schedule",
       "scraper": "bea-release-schedule"
+    },
+    {
+      "date": "2027-01-27",
+      "time": "2:00 PM ET",
+      "event": "FOMC Rate Decision",
+      "title": "FOMC meeting decision (January 26-27, 2027)",
+      "source": "Federal Reserve",
+      "importance": "High",
+      "sourceUrl": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "sourceName": "Federal Reserve FOMC calendar",
+      "scraper": "federal-reserve-fomc-calendar",
+      "projectionMaterialsExpected": false
     }
   ]
 }
