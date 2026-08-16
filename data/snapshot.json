@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-16T13:03:48.454Z",
+  "generatedAt": "2026-08-16T23:39:31.334Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-08-16T13:00:43.836808+00:00",
+    "generatedAt": "2026-08-16T23:36:30.461380+00:00",
     "asOfDate": "2026-08-14",
     "expectedAsOfDate": "2026-08-14",
     "isStale": false,
@@ -1385,19 +1385,20 @@
     }
   },
   "note": {
-    "headline": "Breadth supports taking model-ranked longs, but macro risk still sets position size; leadership is concentrated in CIEN, WDC, MU, SNDK, LITE.",
-    "body": "Earnings reports from the two major retailers will show how shoppers are holding up in an era of persistent inflation. U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver. Reddit attention data was unavailable or did not produce clean ticker concentration. Breadth supports taking model-ranked longs, but macro risk still sets position size; use the model to choose single names rather than reaching for broad beta. Confirmed momentum leadership is MU, LITE, DELL, STX, TER. 16 of the top 25 model-ranked stocks are in Information Technology. ETF confirmation is strongest in Energy.",
+    "headline": "Sticky inflation risk keeps high-beta momentum on a shorter leash.",
+    "body": "U.S. stock-index futures were little changed on Sunday after a quiet week on Wall Street, as investors await hints from the Fed concerning the outlook for interest rates. U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver. Reddit attention data was unavailable or did not produce clean ticker concentration. Breadth supports taking model-ranked longs, but macro risk still sets position size; use the model to choose single names rather than reaching for broad beta. Confirmed momentum leadership is MU, LITE, DELL, STX, TER. 16 of the top 25 model-ranked stocks are in Information Technology. ETF confirmation is strongest in Energy.",
     "changed": [
-      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M4)",
-      "Rates: Earnings reports from the two major retailers will show how shoppers are holding up in an era of persistent inflation. (M2)",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M8)",
+      "Rates: U.S. stock-index futures were little changed on Sunday after a quiet week on Wall Street, as investors await hints from the Fed concerning the outlook for interest rates. (M1)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Breadth: 71% of the screened universe is above the 50-day average, 74% is above the 200-day, and 58% clears both trend lines."
+      "Breadth: 71% of the screened universe is above the 50-day average, 74% is above the 200-day, and 58% clears both trend lines.",
+      "Research tape: MarketWatch Top Stories RSS: U.S. stock futures little changed as investors ponder the Fed’s next move | CNBC Top News RSS: Believe the unbelievable in this market — things can be different this time | CNBC Markets: Believe the unbelievable in this market — things can be different this time."
     ],
     "watch": [
       "Macro risk: GDP Second Estimate on 2026-08-26; Personal Income and Outlays on 2026-08-26; Employment Situation on 2026-09-04.",
       "Momentum risk: 1 top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.",
       "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
-      "4 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
+      "5 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
     ],
     "generatedBy": "deterministic"
   },
@@ -1406,12 +1407,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 108493,
+      "inputTokens": 107347,
       "cachedInputTokens": 0,
-      "outputTokens": 2742,
+      "outputTokens": 1902,
       "reasoningTokens": 0,
-      "totalTokens": 111235,
-      "estimatedCostUsd": 0.006521,
+      "totalTokens": 109249,
+      "estimatedCostUsd": 0.006128,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1419,8 +1420,8 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Current source tape is thin; rely more heavily on model and macro checks; confirmed leadership is MU, LITE, DELL, STX.",
-    "macroView": "Earnings reports from the two major retailers will show how shoppers are holding up in an era of persistent inflation. U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Next macro decision points: GDP Second Estimate on 2026-08-26; Personal Income and Outlays on 2026-08-26; Employment Situation on 2026-09-04. Sector confirmation: Energy +9.58% over 30D, +6.73% vs SPY; Health Care +5.74% over 30D, +2.89% vs SPY; Information Technology +4.64% over 30D, +1.79% vs SPY. Action bias: research confirmed momentum leaders MU, LITE, DELL, STX; keep CIEN, WDC, SNDK in the watch bucket until confirmation improves.",
+    "headline": "Sticky inflation risk keeps high-beta momentum on a shorter leash; confirmed leadership is MU, LITE, DELL, STX.",
+    "macroView": "U.S. stock-index futures were little changed on Sunday after a quiet week on Wall Street, as investors await hints from the Fed concerning the outlook for interest rates. U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Next macro decision points: GDP Second Estimate on 2026-08-26; Personal Income and Outlays on 2026-08-26; Employment Situation on 2026-09-04. Sector confirmation: Energy +9.58% over 30D, +6.73% vs SPY; Health Care +5.74% over 30D, +2.89% vs SPY; Information Technology +4.64% over 30D, +1.79% vs SPY. Action bias: research confirmed momentum leaders MU, LITE, DELL, STX; keep CIEN, WDC, SNDK in the watch bucket until confirmation improves.",
     "dailyRead": null,
     "recommendations": [
       {
@@ -1433,9 +1434,9 @@
         "companyOverview": "Micron Technology, Inc. is a global leader in semiconductor memory and storage, powering AI and compute-intensive applications from cloud to edge. With a relentless focus on our customers, technology and product leadership, and manufacturing and operational excellence, Micron's comprehensive portfolio of high-perfor...",
         "marketCap": "$1.10T",
         "earningsContext": "Last reported 2026-06-24 for the May 2026 fiscal quarter; EPS 24.89 versus consensus 20.98; surprise 18.64%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Aug 2026 with consensus 31.17.",
-        "recentNews": "No near-term negative earnings catalysts; positive trajectory from AI demand.",
-        "macroLink": "Rates and AI demand drive MU upside; macro risk is inflationPersistence.",
-        "macroEvidence": "Information Technology leadership intact; higher AI capex signals durable demand.",
+        "recentNews": "Inflation moderation and AI-driven demand referenced in earnings chatter; MU remains a core AI infra name.",
+        "macroLink": "N / A",
+        "macroEvidence": "High; AI infrastructure demand and supply tightness.",
         "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +10.72%; 14D +18.06%; 30D +7.45%; 60D vs SPY +33.00%; RSI 56; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
@@ -1443,10 +1444,8 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C3-EARNINGS",
-          "C3-MARKETCAP",
-          "S7",
-          "S1",
-          "C3-IR"
+          "C3-IR",
+          "C3-MARKETCAP"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1462,174 +1461,79 @@
         "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to enable reliable storage solutions that are proven and trusted at sca...",
         "marketCap": "$175.4B",
         "earningsContext": "Last reported 2026-08-05 for the Jun 2026 fiscal quarter; EPS 3.47 versus consensus 3.24; surprise 7.1%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 3.97.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "",
-        "macroEvidence": "",
+        "recentNews": "Storage demand uptick noted in earnings; still stock remains volatile.",
+        "macroLink": "N / A",
+        "macroEvidence": "Macro backdrop with AI and data demand supportive; risk if macro data surprise shifts rates.",
         "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +17.15%; 14D -6.61%; 30D -0.98%; 60D vs SPY +5.58%; RSI 52; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
         "risk": "Above-sector volatility; Below 50d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
+          "C2-IR",
           "C2-EARNINGS",
-          "C2-MARKETCAP",
-          "C2-IR"
+          "C2-MARKETCAP"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
         ]
       },
       {
-        "symbol": "DELL",
-        "action": "Research long setup",
+        "symbol": "CIEN",
+        "action": "Review setup",
         "conviction": "High",
-        "setup": "Momentum confirmed",
-        "whyNow": "Rank #6 of 500; +102.89% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "rationale": "DELL is momentum confirmed by the dashboard rules. Rank #6 of 500; +102.89% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "companyOverview": "Dell Technologies (NYSE: DELL) helps organizations and individuals build their digital future and transform how they work, live and play. The company provides customers with the industry's broadest and most innovative technology and services portfolio for the AI era.",
-        "marketCap": "$318.1B",
-        "earningsContext": "Last reported 2026-05-28 for the Apr 2026 fiscal quarter; EPS 4.63 versus consensus 2.79; surprise 65.95%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jul 2026 with consensus 4.63.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "",
-        "macroEvidence": "",
-        "modelEvidence": "Rank #6 of 500; 99.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +8.16%; 14D +21.08%; 30D +19.13%; 60D vs SPY +102.89%; RSI 62; above both the 50-day and 200-day moving averages",
-        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Weak volume confirmation",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C6-EARNINGS",
-          "C6-MARKETCAP",
-          "C6-IR"
-        ],
-        "setupTags": [
-          "Momentum Confirmed"
-        ]
-      },
-      {
-        "symbol": "STX",
-        "action": "Research long setup",
-        "conviction": "High",
-        "setup": "Momentum confirmed",
-        "whyNow": "Rank #7 of 500; +26.75% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "rationale": "STX is momentum confirmed by the dashboard rules. Rank #7 of 500; +26.75% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "companyOverview": "Seagate (NASDAQ: STX) is a pioneer in mass-capacity data storage, accelerating ability to harness the full value of data. Our portfolio of advanced storage solutions helps hyperscale cloud providers, enterprises, and consumers protect, create and manage the data that powers their transformation and growth. For more...",
-        "marketCap": "$220.6B",
-        "earningsContext": "Last reported 2026-07-28 for the Jun 2026 fiscal quarter; EPS 5.48 versus consensus 4.89; surprise 12.07%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 7.11.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "",
-        "macroEvidence": "",
-        "modelEvidence": "Rank #7 of 500; 98.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +19.77%; 14D +13.70%; 30D +17.52%; 60D vs SPY +26.75%; RSI 67; above both the 50-day and 200-day moving averages",
-        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
+        "setup": "model ranked",
+        "whyNow": "Rank #1 of 500; -26.96% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "rationale": "CIEN is momentum confirmed by the dashboard rules. Rank #1 of 500; -26.96% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "companyOverview": "Ciena is the global leader in high-speed connectivity. We build the world's most advanced networks to support exponential growth in bandwidth demand. By harnessing the power of our networking systems, interconnects, automation software, and services, Ciena revolutionizes data transmission and network management. Wit...",
+        "marketCap": "$60.7B",
+        "earningsContext": "Last reported 2026-06-04 for the Apr 2026 fiscal quarter; EPS 1.34 versus consensus 1.2; surprise 11.67%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jul 2026 with consensus 1.45.",
+        "recentNews": "AI network infra demand; earnings beat.",
+        "macroLink": "N / A",
+        "macroEvidence": "Rates / Inflation risk remains; macro macro uncertain.",
+        "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Above 200d trend; Liquid versus universe.",
+        "technicalEvidence": "7D +3.97%; 14D +13.72%; 30D +2.46%; 60D vs SPY -26.96%; RSI 61; above both the 50-day and 200-day moving averages",
+        "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C7-EARNINGS",
-          "C7-MARKETCAP",
-          "C7-IR"
+          "C1-EARNINGS",
+          "C1-IR",
+          "C1-MARKETCAP"
         ],
-        "setupTags": [
-          "Momentum Confirmed"
-        ]
-      },
-      {
-        "symbol": "MU",
-        "action": "Research long setup",
-        "conviction": "High",
-        "setup": "Momentum confirmed",
-        "whyNow": "Rank #3 of 500; +33.00% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "rationale": "MU is momentum confirmed by the dashboard rules. Rank #3 of 500; +33.00% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "companyOverview": "Micron Technology, Inc. is a global leader in semiconductor memory and storage, powering AI and compute-intensive applications from cloud to edge. With a relentless focus on our customers, technology and product leadership, and manufacturing and operational excellence, Micron's comprehensive portfolio of high-perfor...",
-        "marketCap": "$1.10T",
-        "earningsContext": "Last reported 2026-06-24 for the May 2026 fiscal quarter; EPS 24.89 versus consensus 20.98; surprise 18.64%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Aug 2026 with consensus 31.17.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "",
-        "macroEvidence": "",
-        "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +10.72%; 14D +18.06%; 30D +7.45%; 60D vs SPY +33.00%; RSI 56; above both the 50-day and 200-day moving averages",
-        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Weak volume confirmation",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C3-EARNINGS",
-          "C3-MARKETCAP",
-          "C3-IR"
-        ],
-        "setupTags": [
-          "Momentum Confirmed"
-        ]
-      },
-      {
-        "symbol": "ECHO",
-        "action": "Watch for activation",
-        "conviction": "Low",
-        "setup": "Model rebound watch",
-        "whyNow": "Rank #10 of 500; -38.77% 60-day return versus SPY; below one or both major moving averages.",
-        "rationale": "The model ranks ECHO highly, but price has not confirmed a rebound. Requires a close above $94.03 within 5 trading days before it is actionable. Rank #10 of 500; -38.77% 60-day return versus SPY; below one or both major moving averages.",
-        "companyOverview": "EchoStar Corporation is a premier provider of technology, networking services, television entertainment and connectivity, offering consumer, enterprise, operator and government solutions worldwide under its EchoStar®, Boost Mobile®, Sling TV, DISH TV, Hughes®, HughesNet®, HughesON, and JUPITER brands. In Europe, Ech...",
-        "marketCap": "$26.7B",
-        "earningsContext": "Last reported 2026-08-03 for the Jun 2026 fiscal quarter; EPS 0.19 versus consensus -0.29; surprise 165.52%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 0.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "",
-        "macroEvidence": "",
-        "modelEvidence": "Rank #10 of 500; 98.2 percentile; reasons: Long-horizon momentum ahead of sector median.",
-        "technicalEvidence": "7D +2.05%; 14D +9.28%; 30D -4.85%; 60D vs SPY -38.77%; RSI 59; below one or both major moving averages",
-        "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Below 50d trend; Below 200d trend; Weak volume confirmation",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C10-EARNINGS",
-          "C10-IR",
-          "C10-MARKETCAP"
-        ],
-        "setupTags": [
-          "Model Rebound Watch",
-          "Not Momentum Confirmed",
-          "Activation Pending"
-        ]
+        "setupTags": []
       }
     ],
     "avoidList": {
-      "summary": "Avoid utilities, certain financials, and select real estate names that populate the weakest model ranks; crowded areas risk amplification amid volatility. Lean toward IT leadership with high cross-horizon confirmation; avoid energy sector crowding and cyclicals lacking momentum.",
+      "summary": "Avoid crowded, low-conviction utilities / financials and low-probability rebound names that show weak momentum or volatility patterns; macro risk and rate volatility threaten crowded long exposures.",
       "sectors": [
         {
           "sector": "Financials",
-          "rationale": "Often weak in model ranks; many weak names sit there."
+          "rationale": "17 of the weakest model-ranked names are in Financials; risk of mixed reactions in sector."
         },
         {
           "sector": "Utilities",
-          "rationale": "Systemic weak ranks in utilities; several names flagged."
+          "rationale": "Utilities show many weak momentum signals; avoid fresh long exposure."
         },
         {
           "sector": "Industrials",
-          "rationale": "Some weak momentum names; avoid over-concentration."
+          "rationale": "Several weak momentum rebound signals; avoid chasing some names."
         },
         {
           "sector": "Real Estate",
-          "rationale": "Weak momentum signals across REITs."
+          "rationale": "Real Estate pockets show weak momentum; risk of drawdown."
         }
       ],
       "companies": [
         {
           "symbol": "DUK",
-          "rationale": "Ranked bottom; below momentum signals; volatility; avoid long exposure.",
-          "modelEvidence": "Rank 500; RSI 38; below trend."
+          "rationale": "ranked near the bottom of the model book momentum and volatility pattern; RSI 38; weak momentum.",
+          "modelEvidence": "Ranked 500; highly volatile risk."
         },
         {
           "symbol": "DTE",
-          "rationale": "Low momentum; above 200d trend but volatility high; avoid long exposure.",
-          "modelEvidence": "Ranked 499; volatility flag."
-        },
-        {
-          "symbol": "EXR",
-          "rationale": "Weak momentum; high risk; avoid long exposure.",
-          "modelEvidence": "Ranked 492; momentum weak."
-        },
-        {
-          "symbol": "WY",
-          "rationale": "Low momentum; RSI extended risk; avoid.",
-          "modelEvidence": "Ranked 491; RSI elevated."
+          "rationale": "Low momentum confirmation; volatility pattern weak.",
+          "modelEvidence": "Ranked 499; below-50d trend risk."
         }
       ]
     },
@@ -1644,46 +1548,52 @@
       "Do watch names CIEN, WDC, SNDK regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
+      "S1",
+      "S2",
+      "S3",
       "O1",
-      "C3-EARNINGS",
+      "C1-EARNINGS",
       "C2-EARNINGS",
-      "S4",
-      "S6",
-      "S7"
+      "C3-EARNINGS",
+      "C4-EARNINGS",
+      "C5-EARNINGS",
+      "C6-EARNINGS",
+      "C7-EARNINGS",
+      "C8-EARNINGS"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Deeper Read highlights the source pieces with a differentiated market angle, focusing on second-order implications for rates, policy, labor, commodities, sectors, and positioning.",
+      "summary": "Two recent pieces offer differentiated angles on policy-driven risks and a novel market-access debate, suggesting investors should weigh scenario planning and regulatory framing as macro inputs alongside traditional inflation / read-through.",
       "cards": [
         {
-          "sourceRef": "S11",
+          "sourceRef": "S12",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Geopolitical Uncertainty and Your Portfolio",
-          "thesis": "Geopolitics and policy flare ups create asymmetric risks to macro stability and sector leadership, potentially shifting risk premia and diversification needs despite broadly constructive macro signals.",
-          "whyItMatters": "The piece foregrounds longer-horizon impacts from geopolitical developments, highlighting policy risk, which can recalibrate hedging and asset-licensing considerations in portfolios.",
-          "marketReadThrough": "Expect episodic volatility in defensives and cyclicals as policy links (trade, defense, energy) realign. Position for higher mixed reactions in returns across regions and sectors, with hedging considered against surprise policy moves.",
-          "variantAngle": "Policy-risk mixed reactions: how localized geopolitical events could cause outsized moves in specific sectors (defense, energy, exporters) even when headline macro looks steady.",
+          "thesis": "Geopolitics remain a structural risk channel, with expert views highlighting policy misalignment and supply-chain fragilities as persistent price accelerants and risk factors that can reorder sector leadership.",
+          "whyItMatters": "Geopolitical frictions can create asymmetric risks: sudden policy shifts, sanctions, or export controls can abruptly raise costs for critical inputs and alter winning sectors. Understanding the policy risk overlay helps explain why correlations may break and traditional cyclicals underperform.",
+          "marketReadThrough": "Portfolio construction should incorporate scenario-based allocations, with hedges or flexible beta to navigate regime shifts rather than relying on standard inflation / growth playbooks.",
+          "variantAngle": "Differentiated angle from a geopolitics lens; emphasizes supply-chain fragility and policy misalignment as active risk drivers rather than macro-growth tilts.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/geopolitical-uncertainty-and-your-portfolio",
           "publishedAt": "2026-08-14T16:44:49.000Z",
           "sourceRefs": [
-            "S11"
+            "S12"
           ]
         },
         {
-          "sourceRef": "S13",
+          "sourceRef": "S14",
           "sourceName": "Axios Markets RSS",
           "title": "Inflation cools slightly; New York City Council probes prediction markets like Kalshi and Polymarket - Modern Ghana",
-          "thesis": "Regulatory scrutiny of prediction markets adds a layer of policy risk to price discovery mechanisms and event-driven exposures that rely on crowd-sourced forecasts.",
-          "whyItMatters": "If regulatory scrutiny intensifies, it could constrain venue-based pricing signals and affect liquidity / volatility in event-driven strategies tied to macro or policy outcomes.",
-          "marketReadThrough": "Expect tighter liquidity or policy-related restrictions to influence prices around real-time macro data releases and policy announcements. Traders may reassess exposure to event-driven bets and hedges tied to government actions.",
-          "variantAngle": "Regulatory risk channel: how imminent oversight or caps on prediction-market-like instruments could alter the supply of hedges and the timing of policy surprise reactions.",
-          "confidence": "Medium",
+          "thesis": "Regulatory scrutiny of prediction markets introduces a potential governance / market-design risk that could affect how prices incorporate information and how easily such instruments can be used for hedging or speculation.",
+          "whyItMatters": "If regulation tightens or alters access to information-into-pricing mechanisms, it could constrain innovative hedging tools and affect market dynamics, especially in periods of uncertain inflation where such tools might be used to hedge expectations.",
+          "marketReadThrough": "Markets may discount policy-environment risk differently; keep an eye on regulatory developments and potential friction in instrument availability that could affect hedging costs and volatility.",
+          "variantAngle": "Non-traditional risk channel: how governance and market design shape information flow and hedging efficacy, distinct from typical inflation / central-bank narratives.",
+          "confidence": "Low",
           "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9wMEdVV0dRaG5fb1VfZ0hZQ0R3TTd2X3BIc1ZvNExPRXhxSHFoMjBGLUg3M3VKNXVBSDhmYzh1TURyT0lwUHFNR0VEY25VVG8yZnphYTBaUUlpM05F0gFcQVVfeXFMT3AwR1VXR1Fobl9vVV9nSFlDRHdNN3ZfcEhzVm80TE9FeHFIcWgyMEYtSDczdUo1dUFIOGZjOHVNRHJPSXBQcU1HRURjblVUbzJmemFhMFpRSWkzTkU?oc=5",
           "publishedAt": "2026-08-12T18:10:00.000Z",
           "sourceRefs": [
-            "S13"
+            "S14"
           ]
         }
       ]
@@ -1692,36 +1602,36 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Deeper Read highlights the source pieces with a differentiated market angle, focusing on second-order implications for rates, policy, labor, commodities, sectors, and positioning.",
+    "summary": "Two recent pieces offer differentiated angles on policy-driven risks and a novel market-access debate, suggesting investors should weigh scenario planning and regulatory framing as macro inputs alongside traditional inflation / read-through.",
     "cards": [
       {
-        "sourceRef": "S11",
+        "sourceRef": "S12",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Geopolitical Uncertainty and Your Portfolio",
-        "thesis": "Geopolitics and policy flare ups create asymmetric risks to macro stability and sector leadership, potentially shifting risk premia and diversification needs despite broadly constructive macro signals.",
-        "whyItMatters": "The piece foregrounds longer-horizon impacts from geopolitical developments, highlighting policy risk, which can recalibrate hedging and asset-licensing considerations in portfolios.",
-        "marketReadThrough": "Expect episodic volatility in defensives and cyclicals as policy links (trade, defense, energy) realign. Position for higher mixed reactions in returns across regions and sectors, with hedging considered against surprise policy moves.",
-        "variantAngle": "Policy-risk mixed reactions: how localized geopolitical events could cause outsized moves in specific sectors (defense, energy, exporters) even when headline macro looks steady.",
+        "thesis": "Geopolitics remain a structural risk channel, with expert views highlighting policy misalignment and supply-chain fragilities as persistent price accelerants and risk factors that can reorder sector leadership.",
+        "whyItMatters": "Geopolitical frictions can create asymmetric risks: sudden policy shifts, sanctions, or export controls can abruptly raise costs for critical inputs and alter winning sectors. Understanding the policy risk overlay helps explain why correlations may break and traditional cyclicals underperform.",
+        "marketReadThrough": "Portfolio construction should incorporate scenario-based allocations, with hedges or flexible beta to navigate regime shifts rather than relying on standard inflation / growth playbooks.",
+        "variantAngle": "Differentiated angle from a geopolitics lens; emphasizes supply-chain fragility and policy misalignment as active risk drivers rather than macro-growth tilts.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/geopolitical-uncertainty-and-your-portfolio",
         "publishedAt": "2026-08-14T16:44:49.000Z",
         "sourceRefs": [
-          "S11"
+          "S12"
         ]
       },
       {
-        "sourceRef": "S13",
+        "sourceRef": "S14",
         "sourceName": "Axios Markets RSS",
         "title": "Inflation cools slightly; New York City Council probes prediction markets like Kalshi and Polymarket - Modern Ghana",
-        "thesis": "Regulatory scrutiny of prediction markets adds a layer of policy risk to price discovery mechanisms and event-driven exposures that rely on crowd-sourced forecasts.",
-        "whyItMatters": "If regulatory scrutiny intensifies, it could constrain venue-based pricing signals and affect liquidity / volatility in event-driven strategies tied to macro or policy outcomes.",
-        "marketReadThrough": "Expect tighter liquidity or policy-related restrictions to influence prices around real-time macro data releases and policy announcements. Traders may reassess exposure to event-driven bets and hedges tied to government actions.",
-        "variantAngle": "Regulatory risk channel: how imminent oversight or caps on prediction-market-like instruments could alter the supply of hedges and the timing of policy surprise reactions.",
-        "confidence": "Medium",
+        "thesis": "Regulatory scrutiny of prediction markets introduces a potential governance / market-design risk that could affect how prices incorporate information and how easily such instruments can be used for hedging or speculation.",
+        "whyItMatters": "If regulation tightens or alters access to information-into-pricing mechanisms, it could constrain innovative hedging tools and affect market dynamics, especially in periods of uncertain inflation where such tools might be used to hedge expectations.",
+        "marketReadThrough": "Markets may discount policy-environment risk differently; keep an eye on regulatory developments and potential friction in instrument availability that could affect hedging costs and volatility.",
+        "variantAngle": "Non-traditional risk channel: how governance and market design shape information flow and hedging efficacy, distinct from typical inflation / central-bank narratives.",
+        "confidence": "Low",
         "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9wMEdVV0dRaG5fb1VfZ0hZQ0R3TTd2X3BIc1ZvNExPRXhxSHFoMjBGLUg3M3VKNXVBSDhmYzh1TURyT0lwUHFNR0VEY25VVG8yZnphYTBaUUlpM05F0gFcQVVfeXFMT3AwR1VXR1Fobl9vVV9nSFlDRHdNN3ZfcEhzVm80TE9FeHFIcWgyMEYtSDczdUo1dUFIOGZjOHVNRHJPSXBQcU1HRURjblVUbzJmemFhMFpRSWkzTkU?oc=5",
         "publishedAt": "2026-08-12T18:10:00.000Z",
         "sourceRefs": [
-          "S13"
+          "S14"
         ]
       }
     ]
@@ -1735,12 +1645,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-08-16T13:03:02.286Z",
+    "generatedAt": "2026-08-16T23:38:48.623Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-08-15T23:40:28.157Z"
+      "previousRefreshAt": "2026-08-16T13:03:48.454Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1751,7 +1661,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-08-16T13:00:53.772Z",
+      "generatedAt": "2026-08-16T23:36:40.253Z",
       "lookbackHours": 96,
       "releases": [
         {
@@ -1776,10 +1686,14 @@
     },
     "sourceHealth": {
       "checked": 26,
-      "live": 22,
+      "live": 21,
       "blockedOrFailed": [
         {
           "name": "Raymond James Commentary And Insights",
+          "reason": "Source check failed: This operation was aborted"
+        },
+        {
+          "name": "EIA Today In Energy",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -1799,6 +1713,60 @@
     "professionalDrivers": [
       {
         "id": "M1",
+        "title": "U.S. stock futures little changed as investors ponder the Fed’s next move",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/u-s-stock-futures-little-changed-as-investors-ponder-the-feds-next-move-27bcbea4?mod=mw_rss_topstories",
+        "publishedAt": "2026-08-16T22:52:00.000Z",
+        "summary": "U.S. stock-index futures were little changed on Sunday after a quiet week on Wall Street, as investors await hints from the Fed concerning the outlook for interest rates.",
+        "excerpt": "U.S. stock-index futures were little changed on Sunday after a quiet week on Wall Street, as investors await hints from the Fed concerning the outlook for interest rates.",
+        "themes": [
+          "Rates and central banks"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 0.8,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M2",
+        "title": "I’m 63, a retired CPA with a $1.2 million 401(k). Do I need to bother with a Roth conversion?",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/im-63-and-a-retired-cpa-i-have-a-1-2-million-401-k-do-i-need-a-roth-conversion-0a227302?mod=mw_rss_topstories",
+        "publishedAt": "2026-08-16T16:22:00.000Z",
+        "summary": "“I don’t expect my marginal tax rate to be materially different in the future.”",
+        "excerpt": "“I don’t expect my marginal tax rate to be materially different in the future.”",
+        "themes": [
+          "Rates and central banks"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 7.3,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M3",
+        "title": "Believe the unbelievable in this market — things can be different this time",
+        "sourceName": "CNBC Markets",
+        "sourceCategory": "News",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/08/16/cramer-believe-the-unbelievable-in-this-market-things-can-be-different.html",
+        "publishedAt": "2026-08-16T21:28:52.000Z",
+        "summary": "Here is what's so amazing: These four unbelievably performing stocks remain the most hated and feared on Wall Street.",
+        "excerpt": "Cramer: Believe the unbelievable in this market — things can be different Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu So many things have never happened before. That's what's so amazing about this market. Everywhere we turn, we see changes made that aren't believed and yet are totally true. Take, for example, the following unbelievable year-to-date performances: SanDisk up 496%, Seagate up 238%, Club name Micron up 208%, and Western Digital up 171%. All four of these storage and memory companies have been, for whole chunks of time, terrible and dangerous investments. There would be periods of spectacular growth followed by horrendous swoons that would wipe out all of the gains. The swoons were often brought on by their own desires to capitalize on demand by putting up new plants. They don't do that anymore. They have long-term supply agreements that amount to what SanDisk calls the \"New Business Model.\" They have all gotten disciplined, so no one pits one against the other. They have all gotten a little more specialized. SanDisk, Seagate, and Western Digital take a huge percentage of their profits and plow them back into buybacks. SanDisk has a $6 billion buyback, while Seagate has a $5 billion buyback, and Western Digital has a $4 billion buyback. Only Micron doesn't buy back stock. MU SNDK,STX,WDC YTD mountain Year to date performances These are now enormous companies: SanDisk has a $244 billion market cap, while Seagate has a $220 billion market cap, and Western Digital has a $195 billion market cap. Micron has a $1 trillion stock market value. The Big 3 with the buybacks should not be able to move their stock with that much buying. But it is integral to people believing that their stocks are ch",
+        "themes": [
+          "Macro and growth"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 2.2,
+        "score": 86,
+        "tickers": []
+      },
+      {
+        "id": "M4",
         "title": "Top Wall Street analysts like these 3 dividend stocks for steady income",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
@@ -1810,71 +1778,31 @@
         "themes": [
           "Commodities and energy"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 1.1,
-        "score": 100,
-        "tickers": []
-      },
-      {
-        "id": "M2",
-        "title": "Walmart and Target are about to reveal the health of the U.S. consumer",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/walmart-and-target-are-about-to-reveal-the-health-of-the-u-s-consumer-d5b89491?mod=mw_rss_topstories",
-        "publishedAt": "2026-08-16T11:00:00.000Z",
-        "summary": "Earnings reports from the two major retailers will show how shoppers are holding up in an era of persistent inflation.",
-        "excerpt": "Earnings reports from the two major retailers will show how shoppers are holding up in an era of persistent inflation.",
-        "themes": [
-          "Earnings",
-          "Rates and central banks",
-          "Macro and growth"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 2.1,
-        "score": 100,
-        "tickers": []
-      },
-      {
-        "id": "M3",
-        "title": "Secret outperformer: Dispelling the &apos;myths&apos; about an unloved stock market",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/08/16/goldman-stock-market-outperformance.html",
-        "publishedAt": "2026-08-16T09:45:45.000Z",
-        "summary": "European markets fly under the radar when compared with larger and more liquid U.S. markets, but Goldman Sachs offered to dispel some of the myths.",
-        "excerpt": "European markets fly under the radar when compared with larger and more liquid U.S. markets, but Goldman Sachs offered to dispel some of the myths.",
-        "themes": [
-          "Market color"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 3.3,
-        "score": 78,
-        "tickers": []
-      },
-      {
-        "id": "M4",
-        "title": "Inflation moderated as Intel and Nvidia fueled the AI trade in last week&apos;s market",
-        "sourceName": "CNBC Earnings RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/08/15/inflation-moderated-as-intel-and-nvidia-fueled-the-ai-trade-in-last-week-market.html",
-        "publishedAt": "2026-08-15T14:22:54.000Z",
-        "summary": "No surprises on inflation and new financing developments in the artificial intelligence trade drove the record-breaking action on Wall Street last week.",
-        "excerpt": "No surprises on inflation and new financing developments in the artificial intelligence trade drove the record-breaking action on Wall Street last week.",
-        "themes": [
-          "Rates and central banks",
-          "Geopolitics and policy",
-          "AI and semis"
-        ],
         "freshness": "Last 24 hours",
-        "ageHours": 22.7,
+        "ageHours": 11.7,
         "score": 70,
         "tickers": []
       },
       {
         "id": "M5",
+        "title": "Here’s the real reason oil prices aren’t moving higher",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/heres-the-real-reason-oil-prices-arent-moving-higher-256afdbc?mod=mw_rss_topstories",
+        "publishedAt": "2026-08-16T13:00:00.000Z",
+        "summary": "Oil prices are not higher largely because the world does not want as much oil as it used to - and that’s arguably the more troubling story.",
+        "excerpt": "Oil prices are not higher largely because the world does not want as much oil as it used to — and that’s arguably the more troubling story.",
+        "themes": [
+          "Commodities and energy"
+        ],
+        "freshness": "Last 24 hours",
+        "ageHours": 10.6,
+        "score": 70,
+        "tickers": []
+      },
+      {
+        "id": "M6",
         "title": "Weekly Trader's Outlook",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1882,7 +1810,7 @@
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-08-14T20:58:27.000Z",
         "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-        "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Stocks in \"Melt Up\" Mode as Low Summer Volatility, Strong Earnings Provide Lift The S&P 500 and Russell 2000 notched fresh all-time highs this week as the continued stream of healthy earnings reports feed investor risk appetite. August 14, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Moderately Bullish\" outlook for stocks this week, citing bullish technicals and the potential for some short covering and/or performance chasing by fund managers. The S&P 500 index (both market weight and equal-weight) and the Russell 2000 index all notched fresh all-time highs this week, while the Dow Jones Industrial Average pulled back modestly week-over-week. Despite the potential risks related to the Iran conflict (i.e. higher oi prices/yields), this continues to be a market driven by strong earnings growth, which continues to be fueled by investment in the AI infrastructure buildout. Stocks appear to be in \"melt-up\" mode, coupled with relatively low volatility (VIX = 14.50) and relatively low summertime volume. Also potentially assisting the recent rise is investor sentiment, which is bullish, but also contains a healthy level of skepticism (i.e. if everyone was bullish I'd be more concerned). Are there potential risks to the bull run? Absolutely. Aside from the Iran conflict, we are in a seasonally bearish time for stocks (August/September), we are in a midterm year (which historically has encountered a market pullback), we have a new Fed Chair who is intentionally opaque, and 30-year Treasury yields have pushed up to fresh cycle highs. Worth mentioning here, yesterday's 30-year Treasury auction went off at a 25-yea",
+        "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Stocks in \"Melt Up\" Mode as Low Summer Volatility, Strong Earnings Provide Lift The S&P 500 and Russell 2000 notched fresh all-time highs this week as the continued stream of healthy earnings reports feed investor risk appetite. August 14, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Moderately Bullish\" outlook for stocks this week, citing bullish technicals and the potential for some short covering and/or performance chasing by fund managers. The S&P 500 index (both market weight and equal-weight) and the Russell 2000 index all notched fresh all-time highs this week, while the Dow Jones Industrial Average pulled back modestly week-over-week. Despite the potential risks related to the Iran conflict (i.e. higher oi prices/yields), this continues to be a market driven by strong earnings growth, which continues to be fueled by investment in the AI infrastructure buildout. Stocks appear to be in \"melt-up\" mode, coupled with relatively low volatility (VIX = 14.50) and relatively low summertime volume. Also potentially assisting the recent rise is investor sentiment, which is bullish, but also contains a healthy level of skepticism (i.e. if everyone was bullish I'd be more concerned). Are there potential risks to the bull run? Absolutely. Aside from the Iran conflict, we are in a seasonally bearish time for stocks (August/September), we are in a midterm year (which historically has encountered a market pullback), we have a new Fed Chair who is intentionally opaque, and 30-year Treasury yields have pushed up to fresh cycle highs. Worth mentioning here, yesterday's 30-year Treasury auction went off at a 25-year high of 5.216",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -1891,66 +1819,12 @@
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 40.1,
-        "score": 62,
-        "tickers": []
-      },
-      {
-        "id": "M6",
-        "title": "Iran rebuffs Trump&apos;s claim over Strait of Hormuz amid report of another ship being struck",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/08/15/iran-rebuffs-trumps-claim-over-hormuz-amid-report-of-ship-strike.html",
-        "publishedAt": "2026-08-15T20:38:29.000Z",
-        "summary": "Iran's deputy foreign minister says Hormuz \"will remain Iranian\" after Trump's claim that the waterway would soon become U.S. territory.",
-        "excerpt": "Iran's deputy foreign minister says Hormuz \"will remain Iranian\" after Trump's claim that the waterway would soon become U.S. territory.",
-        "themes": [
-          "Geopolitics and policy"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 16.4,
+        "ageHours": 50.7,
         "score": 62,
         "tickers": []
       },
       {
         "id": "M7",
-        "title": "I’m 63, a retired CPA with a $1.2 million 401(k). Do I need to bother with a Roth conversion?",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/im-63-and-a-retired-cpa-i-have-a-1-2-million-401-k-do-i-need-a-roth-conversion-0a227302?mod=mw_rss_topstories",
-        "publishedAt": "2026-08-15T20:00:00.000Z",
-        "summary": "“I don’t expect my marginal tax rate to be materially different in the future.”",
-        "excerpt": "“I don’t expect my marginal tax rate to be materially different in the future.”",
-        "themes": [
-          "Rates and central banks"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 17.1,
-        "score": 62,
-        "tickers": []
-      },
-      {
-        "id": "M8",
-        "title": "Think interest rates are high now? These charts offer a different perspective.",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/think-interest-rates-are-high-now-these-charts-offers-a-different-perspective-ae5f28c6?mod=mw_rss_topstories",
-        "publishedAt": "2026-08-15T19:01:00.000Z",
-        "summary": "Also in Weekend Reads: 10 remarkable housing markets, stock picks, and health-insurance battles.",
-        "excerpt": "Also in Weekend Reads: 10 remarkable housing markets, stock picks, and health-insurance battles.",
-        "themes": [
-          "Rates and central banks"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 18,
-        "score": 62,
-        "tickers": []
-      },
-      {
-        "id": "M9",
         "title": "Geopolitical Uncertainty and Your Portfolio",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1964,95 +1838,60 @@
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 44.3,
+        "ageHours": 54.9,
         "score": 54,
         "tickers": []
       },
       {
-        "id": "M10",
-        "title": "Inflation cools slightly; New York City Council probes prediction markets like Kalshi and Polymarket - Modern Ghana",
-        "sourceName": "Axios Markets RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9wMEdVV0dRaG5fb1VfZ0hZQ0R3TTd2X3BIc1ZvNExPRXhxSHFoMjBGLUg3M3VKNXVBSDhmYzh1TURyT0lwUHFNR0VEY25VVG8yZnphYTBaUUlpM05F0gFcQVVfeXFMT3AwR1VXR1Fobl9vVV9nSFlDRHdNN3ZfcEhzVm80TE9FeHFIcWgyMEYtSDczdUo1dUFIOGZjOHVNRHJPSXBQcU1HRURjblVUbzJmemFhMFpRSWkzTkU?oc=5",
-        "publishedAt": "2026-08-12T18:10:00.000Z",
-        "summary": "Inflation cools slightly; New York City Council probes prediction markets like Kalshi and Polymarket Modern Ghana",
-        "excerpt": "Inflation cools slightly; New York City Council probes prediction markets like Kalshi and Polymarket Modern Ghana",
-        "themes": [
-          "Rates and central banks"
-        ],
-        "freshness": "Important older item",
-        "ageHours": 90.9,
-        "score": 46,
-        "tickers": []
-      },
-      {
-        "id": "M11",
-        "title": "Inflation cools slightly; New York City Council probes prediction markets like Kalshi and Polymarket - Yahoo",
-        "sourceName": "Axios Markets RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNTlVsUExORFVLNktTMDBaek5wVVBTaExUQ1Z6XzYyUWJDQ0RkcGpfVmpYdVcxUzM0SVAtbmxUYkNpVUR3UU1tcmhjdE9iSTN6cktDYXhfc0NfdjBBMGNTSlBfRzU3NnliOC00NmlCbUJKOHAxUG0zZ2NtTzY1VlhlYVJRLTVmVmFHRk1j?oc=5",
-        "publishedAt": "2026-08-12T16:36:44.000Z",
-        "summary": "Inflation cools slightly; New York City Council probes prediction markets like Kalshi and Polymarket Yahoo",
-        "excerpt": "Inflation cools slightly; New York City Council probes prediction markets like Kalshi and Polymarket Yahoo",
-        "themes": [
-          "Rates and central banks"
-        ],
-        "freshness": "Important older item",
-        "ageHours": 92.4,
-        "score": 46,
-        "tickers": []
-      },
-      {
-        "id": "M12",
-        "title": "Anthropic revenue reportedly jumps to more than $11.5 billion in second quarter",
+        "id": "M8",
+        "title": "Inflation moderated as Intel and Nvidia fueled the AI trade in last week&apos;s market",
         "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/08/15/anthropic-revenue-jumps-to-over-11point5-billion-in-q2-report.html",
-        "publishedAt": "2026-08-15T14:45:31.000Z",
-        "summary": "The jump in revenue underscores the rapid growth of the Claude chatbot maker as it prepares for a potential blockbuster initial public offering.",
-        "excerpt": "The jump in revenue underscores the rapid growth of the Claude chatbot maker as it prepares for a potential blockbuster initial public offering.",
+        "url": "https://www.cnbc.com/2026/08/15/inflation-moderated-as-intel-and-nvidia-fueled-the-ai-trade-in-last-week-market.html",
+        "publishedAt": "2026-08-15T14:22:54.000Z",
+        "summary": "No surprises on inflation and new financing developments in the artificial intelligence trade drove the record-breaking action on Wall Street last week.",
+        "excerpt": "No surprises on inflation and new financing developments in the artificial intelligence trade drove the record-breaking action on Wall Street last week.",
         "themes": [
-          "Earnings",
-          "Macro and growth"
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "AI and semis"
         ],
-        "freshness": "Last 24 hours",
-        "ageHours": 22.3,
-        "score": 36,
+        "freshness": "Important older item",
+        "ageHours": 33.3,
+        "score": 54,
         "tickers": []
       }
     ],
     "topThemes": [
       {
         "theme": "Rates and central banks",
-        "count": 7
-      },
-      {
-        "theme": "Macro and growth",
-        "count": 5
-      },
-      {
-        "theme": "Geopolitics and policy",
         "count": 4
       },
       {
-        "theme": "Earnings",
+        "theme": "Macro and growth",
+        "count": 4
+      },
+      {
+        "theme": "Geopolitics and policy",
         "count": 3
+      },
+      {
+        "theme": "Commodities and energy",
+        "count": 2
       },
       {
         "theme": "AI and semis",
         "count": 2
       },
       {
-        "theme": "Commodities and energy",
+        "theme": "Earnings",
         "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-08-16T13:03:02.278Z",
+      "generatedAt": "2026-08-16T23:38:48.615Z",
       "dates": [
         "2026-08-15",
         "2026-08-16",
@@ -2160,7 +1999,7 @@
               "marketCap": "$822,913,110",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "$0.20",
               "sourceName": "Nasdaq earnings calendar",
@@ -2216,7 +2055,7 @@
               "marketCap": "$387,175,342",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "($0.04)",
               "sourceName": "Nasdaq earnings calendar",
@@ -2230,7 +2069,7 @@
               "marketCap": "$379,068,304",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "N/A",
               "sourceName": "Nasdaq earnings calendar",
@@ -2384,7 +2223,7 @@
               "marketCap": "$78,545,556",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "($0.11)",
               "sourceName": "Nasdaq earnings calendar",
@@ -2412,7 +2251,7 @@
               "marketCap": "$68,222,217",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "($0.09)",
               "sourceName": "Nasdaq earnings calendar",
@@ -2454,7 +2293,7 @@
               "marketCap": "$41,484,904",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "$0.05",
               "sourceName": "Nasdaq earnings calendar",
@@ -2496,7 +2335,7 @@
               "marketCap": "$27,323,098",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "($99.99)",
               "sourceName": "Nasdaq earnings calendar",
@@ -2510,7 +2349,7 @@
               "marketCap": "$24,769,058",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "($0.12)",
               "sourceName": "Nasdaq earnings calendar",
@@ -2524,7 +2363,7 @@
               "marketCap": "$22,237,264",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "($6.80)",
               "sourceName": "Nasdaq earnings calendar",
@@ -2566,7 +2405,7 @@
               "marketCap": "$7,978,294",
               "fiscalQuarterEnding": "Jun/2026",
               "epsForecast": "",
-              "noOfEsts": "1",
+              "noOfEsts": "N/A",
               "lastYearReportDate": "N/A",
               "lastYearEps": "$0.01",
               "sourceName": "Nasdaq earnings calendar",
@@ -2649,20 +2488,20 @@
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "Walmart and Target are about to reveal the health of the U.S. consumer",
-          "sourceName": "MarketWatch Top Stories RSS",
-          "url": "https://www.marketwatch.com/story/walmart-and-target-are-about-to-reveal-the-health-of-the-u-s-consumer-d5b89491?mod=mw_rss_topstories",
-          "publishedAt": "2026-08-16T11:00:00.000Z",
-          "summary": "Earnings reports from the two major retailers will show how shoppers are holding up in an era of persistent inflation.",
+          "title": "Believe the unbelievable in this market — things can be different this time",
+          "sourceName": "CNBC Markets",
+          "url": "https://www.cnbc.com/2026/08/16/cramer-believe-the-unbelievable-in-this-market-things-can-be-different.html",
+          "publishedAt": "2026-08-16T21:28:52.000Z",
+          "summary": "Here is what's so amazing: These four unbelievably performing stocks remain the most hated and feared on Wall Street.",
           "tickers": []
         },
         {
           "id": "E2",
-          "title": "Iran rebuffs Trump&apos;s claim over Strait of Hormuz amid report of another ship being struck",
+          "title": "What the results of a Connecticut congressional primary race may mean for Social Security",
           "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/08/15/iran-rebuffs-trumps-claim-over-hormuz-amid-report-of-ship-strike.html",
-          "publishedAt": "2026-08-15T20:38:29.000Z",
-          "summary": "Iran's deputy foreign minister says Hormuz \"will remain Iranian\" after Trump's claim that the waterway would soon become U.S. territory.",
+          "url": "https://www.cnbc.com/2026/08/16/social-security-john-larson-connecticut-primary.html",
+          "publishedAt": "2026-08-16T13:30:01.000Z",
+          "summary": "Rep. John Larson of Connecticut, an advocate for expanding Social Security, was ousted in a Democratic primary contest Tuesday.",
           "tickers": []
         },
         {
@@ -2703,15 +2542,6 @@
         },
         {
           "id": "E7",
-          "title": "Weekly Natural Gas Storage Report - EIA",
-          "sourceName": "EIA Today In Energy",
-          "url": "http://ir.eia.gov/ngs/ngs.html",
-          "publishedAt": "2026-08-07T00:00:00.000Z",
-          "summary": "Weekly Natural Gas Storage Report - EIA",
-          "tickers": []
-        },
-        {
-          "id": "E8",
           "title": "Four for the Quarter: Top questions investors are asking right now",
           "sourceName": "Merrill Capital Market Outlook",
           "url": "https://www.ml.com/articles/q3-2026-market-update.html",
@@ -2724,7 +2554,7 @@
     },
     "reddit": {
       "status": "error",
-      "generatedAt": "2026-08-16T13:02:27.375Z",
+      "generatedAt": "2026-08-16T23:37:51.547Z",
       "authMode": "public",
       "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
       "subreddits": [
@@ -2732,28 +2562,28 @@
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
           "postCount": 0,
           "sortStatuses": [
             {
               "sort": "hot",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "new",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "top",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
               "postCount": 0
             }
           ]
@@ -2762,28 +2592,28 @@
           "subreddit": "stocks",
           "segment": "Retail investing",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
           "postCount": 0,
           "sortStatuses": [
             {
               "sort": "hot",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "new",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "top",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             }
           ]
@@ -2792,28 +2622,28 @@
           "subreddit": "investing",
           "segment": "Retail investing",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
           "postCount": 0,
           "sortStatuses": [
             {
               "sort": "hot",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "new",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "top",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             }
           ]
@@ -2822,28 +2652,28 @@
           "subreddit": "SecurityAnalysis",
           "segment": "Fundamental research",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
           "postCount": 0,
           "sortStatuses": [
             {
               "sort": "hot",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "new",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "top",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             }
           ]
@@ -2852,28 +2682,28 @@
           "subreddit": "options",
           "segment": "Options sentiment",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
           "postCount": 0,
           "sortStatuses": [
             {
               "sort": "hot",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "new",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             },
             {
               "sort": "top",
               "status": "error",
               "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             }
           ]
@@ -2883,11 +2713,11 @@
       "topPosts": [],
       "currentFetchErrors": [
         "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
-        "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-        "stocks: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-        "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-        "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests",
-        "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS: 429 Too Many Requests | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS: 429 Too Many Requests"
+        "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
+        "stocks: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+        "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+        "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+        "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts"
       ]
     },
     "marketMovers": {
@@ -2900,7 +2730,7 @@
           "price": 42.08,
           "changePct": 35.7,
           "change": 11.07,
-          "volume": 9897958,
+          "volume": 9913524,
           "marketCap": 3659008768,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2911,7 +2741,7 @@
           "price": 150.28,
           "changePct": 15.53,
           "change": 20.2,
-          "volume": 18618908,
+          "volume": 18774955,
           "marketCap": 12709065728,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2931,9 +2761,9 @@
           "symbol": "WING",
           "name": "Wingstop Inc.",
           "price": 126.12,
-          "changePct": 11.05,
-          "change": 12.55,
-          "volume": 1577625,
+          "changePct": 10.73,
+          "change": 12.22,
+          "volume": 1581512,
           "marketCap": 3435830016,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2944,7 +2774,7 @@
           "price": 84.84,
           "changePct": 10.68,
           "change": 8.19,
-          "volume": 3204215,
+          "volume": 3226205,
           "marketCap": 7694410240,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2966,7 +2796,7 @@
           "price": 31.63,
           "changePct": 9.48,
           "change": 2.74,
-          "volume": 5849304,
+          "volume": 5875763,
           "marketCap": 2279363328,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2988,7 +2818,7 @@
           "price": 12.32,
           "changePct": 9.12,
           "change": 1.03,
-          "volume": 7281332,
+          "volume": 7334205,
           "marketCap": 2682744064,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -2999,7 +2829,7 @@
           "price": 15.09,
           "changePct": 8.95,
           "change": 1.24,
-          "volume": 6155091,
+          "volume": 6341769,
           "marketCap": 4281664768,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3010,7 +2840,7 @@
           "price": 277.68,
           "changePct": 8.88,
           "change": 22.64,
-          "volume": 28829723,
+          "volume": 29024669,
           "marketCap": 70502449152,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3021,7 +2851,7 @@
           "price": 134.06,
           "changePct": 8.73,
           "change": 10.76,
-          "volume": 3267995,
+          "volume": 3314996,
           "marketCap": 4373097472,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3056,7 +2886,7 @@
           "price": 84.93,
           "changePct": -8.59,
           "change": -7.98,
-          "volume": 1908150,
+          "volume": 1922553,
           "marketCap": 3807271936,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3067,7 +2897,7 @@
           "price": 132.83,
           "changePct": -7.82,
           "change": -11.27,
-          "volume": 1062322,
+          "volume": 1065271,
           "marketCap": 6214620160,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3078,7 +2908,7 @@
           "price": 20.975,
           "changePct": -7.72,
           "change": -1.75,
-          "volume": 5752604,
+          "volume": 5787574,
           "marketCap": 6029446656,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3100,7 +2930,7 @@
           "price": 74.13,
           "changePct": -7.41,
           "change": -5.93,
-          "volume": 2080077,
+          "volume": 2081150,
           "marketCap": 3102304256,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3122,7 +2952,7 @@
           "price": 87.52,
           "changePct": -7.18,
           "change": -6.77,
-          "volume": 1227189,
+          "volume": 1230457,
           "marketCap": 3699830784,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3133,7 +2963,7 @@
           "price": 63.585,
           "changePct": -7.18,
           "change": -4.92,
-          "volume": 2575176,
+          "volume": 2614045,
           "marketCap": 16486672384,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3144,7 +2974,7 @@
           "price": 37.07,
           "changePct": -6.86,
           "change": -2.73,
-          "volume": 399411,
+          "volume": 399583,
           "marketCap": 2373441536,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3179,7 +3009,7 @@
           "price": 9.24,
           "changePct": 3.7,
           "change": 0.33,
-          "volume": 96102083,
+          "volume": 96853915,
           "marketCap": 5271903232,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
@@ -3190,7 +3020,7 @@
           "price": 140,
           "changePct": -0.91,
           "change": -1.29,
-          "volume": 94658090,
+          "volume": 96727761,
           "marketCap": 1844386201600,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
@@ -3201,8 +3031,19 @@
           "price": 102.5,
           "changePct": -1.97,
           "change": -2.06,
-          "volume": 94307788,
+          "volume": 95387502,
           "marketCap": 541825761280,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corporation",
+          "price": 225.16,
+          "changePct": -0.06,
+          "change": -0.14,
+          "volume": 75680870,
+          "marketCap": 5453600260096,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -3218,35 +3059,13 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "NVDA",
-          "name": "NVIDIA Corporation",
-          "price": 225.16,
-          "changePct": -0.06,
-          "change": -0.14,
-          "volume": 75161211,
-          "marketCap": 5453600260096,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
           "symbol": "SMCI",
           "name": "Super Micro Computer, Inc.",
           "price": 39.84,
           "changePct": 1.74,
           "change": 0.68,
-          "volume": 61388358,
+          "volume": 61990870,
           "marketCap": 25771421696,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "PLUG",
-          "name": "Plug Power, Inc.",
-          "price": 2.32,
-          "changePct": 0.87,
-          "change": 0.02,
-          "volume": 49573619,
-          "marketCap": 3241492992,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -3262,13 +3081,24 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "AAL",
-          "name": "American Airlines Group, Inc.",
-          "price": 14.83,
-          "changePct": -1.53,
-          "change": -0.23,
-          "volume": 46320021,
-          "marketCap": 9817014272,
+          "symbol": "PLUG",
+          "name": "Plug Power, Inc.",
+          "price": 2.32,
+          "changePct": 0.87,
+          "change": 0.02,
+          "volume": 50250847,
+          "marketCap": 3241492992,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "F",
+          "name": "Ford Motor Company",
+          "price": 14.37,
+          "changePct": 3.46,
+          "change": 0.48,
+          "volume": 45763892,
+          "marketCap": 57301749760,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -3284,13 +3114,13 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "F",
-          "name": "Ford Motor Company",
-          "price": 14.37,
-          "changePct": 3.46,
-          "change": 0.48,
-          "volume": 45763892,
-          "marketCap": 57301749760,
+          "symbol": "AAL",
+          "name": "American Airlines Group, Inc.",
+          "price": 14.83,
+          "changePct": -1.53,
+          "change": -0.23,
+          "volume": 46400805,
+          "marketCap": 9817014272,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         }
@@ -3298,10 +3128,10 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M4)",
-      "Rates: Earnings reports from the two major retailers will show how shoppers are holding up in an era of persistent inflation. (M2)",
-      "Macro: Anthropic revenue reportedly jumps to more than $11.5 billion in second quarter (M12)",
-      "AI/semis: Cisco's AI infrastructure orders reinforce the spending cycle behind the semiconductor and networking trade. (M5)",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M8)",
+      "Rates: U.S. stock-index futures were little changed on Sunday after a quiet week on Wall Street, as investors await hints from the Fed concerning the outlook for interest rates. (M1)",
+      "Commodities: Oil prices are not higher largely because the world does not want as much oil as it used to - and that’s arguably the more troubling story. (M5)",
+      "Macro: Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Stocks in \"Melt Up\" Mode as Low Summer Volatility, Strong Earnings Provide Lift The S&P 500 and Russell 2000 notched fresh all-time highs this week as the con... (M6)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver."
     ]
   },
@@ -52038,7 +51868,7 @@
       "return30": 3.71,
       "return60": 4.21,
       "return90": 11.67,
-      "ytdReturn": -7.47,
+      "ytdReturn": -7.48,
       "beta60d": 0.78,
       "above50": true,
       "above100": true,
@@ -56394,7 +56224,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-08-14T20:58:27.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Stocks in \"Melt Up\" Mode as Low Summer Volatility, Strong Earnings Provide Lift The S&P 500 and Russell 2000 notched fresh all-time highs this week as the continued stream of healthy earnings reports feed investor risk appetite. August 14, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Moderately Bullish\" outlook for stocks this week, citing bullish technicals and the potential for some short covering and/or performance chasing by fund managers. The S&P 500 index (both market weight and equal-weight) and the Russell 2000 index all notched fresh all-time highs this week, while the Dow Jones Industrial Average pulled back modestly week-over-week. Despite the potential risks related to the Iran conflict (i.e. higher oi prices/yields), this continues to be a market driven by strong earnings growth, which continues to be fueled by investment in the AI infrastructure buildout. Stocks appear to be in \"melt-up\" mode, coupled with relatively low volatility (VIX = 14.50) and relatively low summertime volume. Also potentially assisting the recent rise is investor sentiment, which is bullish, but also contains a healthy level of skepticism (i.e. if everyone was bullish I'd be more concerned). Are there potential risks to the bull run? Absolutely. Aside from the Iran conflict, we are in a seasonally bearish time for stocks (August/September), we are in a midterm year (which historically has encountered a market pullback), we have a new Fed Chair who is intentionally opaque, and 30-year Treasury yields have pushed up to fresh cycle highs. Worth mentioning here, yesterday's 30-year Treasury auction went off at a 25-yea",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Stocks in \"Melt Up\" Mode as Low Summer Volatility, Strong Earnings Provide Lift The S&P 500 and Russell 2000 notched fresh all-time highs this week as the continued stream of healthy earnings reports feed investor risk appetite. August 14, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"Moderately Bullish\" outlook for stocks this week, citing bullish technicals and the potential for some short covering and/or performance chasing by fund managers. The S&P 500 index (both market weight and equal-weight) and the Russell 2000 index all notched fresh all-time highs this week, while the Dow Jones Industrial Average pulled back modestly week-over-week. Despite the potential risks related to the Iran conflict (i.e. higher oi prices/yields), this continues to be a market driven by strong earnings growth, which continues to be fueled by investment in the AI infrastructure buildout. Stocks appear to be in \"melt-up\" mode, coupled with relatively low volatility (VIX = 14.50) and relatively low summertime volume. Also potentially assisting the recent rise is investor sentiment, which is bullish, but also contains a healthy level of skepticism (i.e. if everyone was bullish I'd be more concerned). Are there potential risks to the bull run? Absolutely. Aside from the Iran conflict, we are in a seasonally bearish time for stocks (August/September), we are in a midterm year (which historically has encountered a market pullback), we have a new Fed Chair who is intentionally opaque, and 30-year Treasury yields have pushed up to fresh cycle highs. Worth mentioning here, yesterday's 30-year Treasury auction went off at a 25-year high of 5.216",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56412,7 +56242,7 @@
           "url": "https://www.schwab.com/learn/story/stock-market-update-open",
           "publishedAt": "2026-08-14T16:21:49.000Z",
           "summary": "July retail sales surprised, falling 0.6%. Consensus was for a 0.2% rise. Stocks flattened after the data. Sentiment data comes at 10 a.m. ET.",
-          "excerpt": "Retail Sales Take a Dip, Stocks Eye Weekly Gain | Charles Schwab Search Insights & Education Markets and Economy Retail Sales Take a Dip, Stocks Eye Weekly Gain July retail sales surprised, falling 0.6%. Consensus was for a 0.2% rise. Stocks flattened after the data. Sentiment data comes at 10 a.m. ET with stocks tracking for a weekly gain. August 14, 2026 • Joe Mazzola Published as of: August 14, 2026, 9:13 a.m. ET Listen to this update Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,798.99 +50.49 +0.65% Dow Jones Industrial Average ® 53,839.99 +69.72 +0.13% Nasdaq Composite ® 26,803.02 +214.54 +0.81% 10-year Treasury yield 4.64% Unch -- U.S. Dollar Index 99.59 -0.36 -0.37% Cboe Volatility Index ® 14.52 -0.11 -0.75% WTI Crude Oil $81.38 +$0.13 +0.15% Bitcoin $62,765 -$710 -1.12% Disclosure (Friday market open) Retail sales, the last rung on this week's data ladder, fell a surprising 0.6% monthly in July, though the weakness partly reflected lower gas prices and falling car sales. Analysts had expected a 0.2% rise following June's 0.2% increase. Stocks wavered after the data, little changed from yesterday's record high, and Treasury yields initially dipped. \"The retail sales report came in much softer than expected,\" said Collin Martin, head of fixed income research and strategy at the Schwab Center for Financial Research (SCFR). \"Combined with the relatively soft jobs report, it may make people worry about a softening economy, but one month doesn't make a trend. A look under the hood in the second quarter GDP report showed strong underlying growth",
+          "excerpt": "Retail Sales Take a Dip, Stocks Eye Weekly Gain | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Retail Sales Take a Dip, Stocks Eye Weekly Gain July retail sales surprised, falling 0.6%. Consensus was for a 0.2% rise. Stocks flattened after the data. Sentiment data comes at 10 a.m. ET with stocks tracking for a weekly gain. August 14, 2026 • Joe Mazzola Published as of: August 14, 2026, 9:13 a.m. ET Listen to this update Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,798.99 +50.49 +0.65% Dow Jones Industrial Average ® 53,839.99 +69.72 +0.13% Nasdaq Composite ® 26,803.02 +214.54 +0.81% 10-year Treasury yield 4.64% Unch -- U.S. Dollar Index 99.59 -0.36 -0.37% Cboe Volatility Index ® 14.52 -0.11 -0.75% WTI Crude Oil $81.38 +$0.13 +0.15% Bitcoin $62,765 -$710 -1.12% Disclosure (Friday market open) Retail sales, the last rung on this week's data ladder, fell a surprising 0.6% monthly in July, though the weakness partly reflected lower gas prices and falling car sales. Analysts had expected a 0.2% rise following June's 0.2% increase. Stocks wavered after the data, little changed from yesterday's record high, and Treasury yields initially dipped. \"The retail sales report came in much softer than expected,\" said Collin Martin, head of fixed income research and strategy at the Schwab Center for Financial Research (SCFR). \"Combined with the relatively soft jobs report, it may make people worry about a softening economy, but one month doesn't make a trend. A look under the hood in the second quarter GDP report showed strong und",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         }
       ],
@@ -56530,21 +56360,11 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
-      "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
-      "articles": [
-        {
-          "sourceName": "EIA Today In Energy",
-          "title": "Weekly Natural Gas Storage Report - EIA",
-          "url": "http://ir.eia.gov/ngs/ngs.html",
-          "publishedAt": "2026-08-07T00:00:00.000Z",
-          "summary": "Weekly Natural Gas Storage Report - EIA",
-          "excerpt": "Weekly Natural Gas Storage Report - EIA &lsaquo; See All Natural Gas Reports Weekly Natural Gas Storage Report for week ending August 7, 2026 | Released: August 13, 2026 at 10:30 a.m. | Next Release: August 20, 2026 Working gas in underground storage, Lower 48 states Summary text CSV JSN Historical Comparisons Stocks billion cubic feet (Bcf) Year ago (08/07/25) 5-year average (2021-25) Region 08/07/26 07/31/26 net change implied flow Bcf % change Bcf % change East 693 678 15 15 674 2.8 660 5.0 Midwest 829 809 20 20 793 4.5 774 7.1 Mountain 239 237 2 2 252 -5.2 209 14.4 Pacific 300 304 -4 -4 305 -1.6 264 13.6 South Central 1,093 1,090 3 3 1,153 -5.2 1,048 4.3 Salt 286 292 -6 -6 295 -3.1 260 10.0 Nonsalt 807 798 9 9 858 -5.9 787 2.5 Total 3,153 3,117 36 36 3,178 -0.8 2,955 6.7 Totals may not equal sum of components because of independent rounding. Summary Working gas in storage was 3,153 Bcf as of Friday, August 7, 2026, according to EIA estimates. This represents a net increase of 36 Bcf from the previous week. Stocks were 25 Bcf less than last year at this time and 198 Bcf above the five-year average of 2,955 Bcf. At 3,153 Bcf, total working gas is within the five-year historical range. For information on sampling error in this report, see Estimated Measures of Sampling Variability table below. Note: The shaded area indicates the range between the historical minimum and maximum values for the weekly series from 2021 through 2025. The dashed vertical lines indicate current and year-ago weekly periods. Source: Form EIA-912, \"Weekly Underground Natural Gas Storage Report.\" --> Estimated measures of sampling variability Download History (April 2015 to Present) Coefficient of Variation for Stocks % of working gas Standard Error for Net Change billion cubic feet (Bcf) Region ",
-          "discoveredFrom": "https://www.eia.gov/todayinenergy/"
-        }
-      ],
-      "articleCount": 1,
-      "ok": true
+      "title": "EIA Today In Energy",
+      "summary": "Source check failed: This operation was aborted",
+      "articles": [],
+      "articleCount": 0,
+      "ok": false
     },
     {
       "name": "BLS Economic News Releases",
@@ -56660,9 +56480,19 @@
       "trust": "Medium",
       "notes": "Public market news page; respect site terms.",
       "title": "Markets",
-      "summary": "No recent dated articles found in the last 30 days.",
-      "articles": [],
-      "articleCount": 0,
+      "summary": "View up-to-date U.S. market and world market charts. Get the latest on world economy news and global markets in our Market Overview.",
+      "articles": [
+        {
+          "sourceName": "CNBC Markets",
+          "title": "Believe the unbelievable in this market — things can be different this time",
+          "url": "https://www.cnbc.com/2026/08/16/cramer-believe-the-unbelievable-in-this-market-things-can-be-different.html",
+          "publishedAt": "2026-08-16T21:28:52.000Z",
+          "summary": "Here is what's so amazing: These four unbelievably performing stocks remain the most hated and feared on Wall Street.",
+          "excerpt": "Cramer: Believe the unbelievable in this market — things can be different Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu So many things have never happened before. That's what's so amazing about this market. Everywhere we turn, we see changes made that aren't believed and yet are totally true. Take, for example, the following unbelievable year-to-date performances: SanDisk up 496%, Seagate up 238%, Club name Micron up 208%, and Western Digital up 171%. All four of these storage and memory companies have been, for whole chunks of time, terrible and dangerous investments. There would be periods of spectacular growth followed by horrendous swoons that would wipe out all of the gains. The swoons were often brought on by their own desires to capitalize on demand by putting up new plants. They don't do that anymore. They have long-term supply agreements that amount to what SanDisk calls the \"New Business Model.\" They have all gotten disciplined, so no one pits one against the other. They have all gotten a little more specialized. SanDisk, Seagate, and Western Digital take a huge percentage of their profits and plow them back into buybacks. SanDisk has a $6 billion buyback, while Seagate has a $5 billion buyback, and Western Digital has a $4 billion buyback. Only Micron doesn't buy back stock. MU SNDK,STX,WDC YTD mountain Year to date performances These are now enormous companies: SanDisk has a $244 billion market cap, while Seagate has a $220 billion market cap, and Western Digital has a $195 billion market cap. Micron has a $1 trillion stock market value. The Big 3 with the buybacks should not be able to move their stock with that much buying. But it is integral to people believing that their stocks are ch",
+          "discoveredFrom": "https://www.cnbc.com/markets/"
+        }
+      ],
+      "articleCount": 1,
       "ok": true
     },
     {
@@ -56677,29 +56507,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
+          "title": "Believe the unbelievable in this market — things can be different this time",
+          "url": "https://www.cnbc.com/2026/08/16/cramer-believe-the-unbelievable-in-this-market-things-can-be-different.html",
+          "publishedAt": "2026-08-16T21:32:25.000Z",
+          "summary": "Here is what's so amazing: These four unbelievably performing stocks remain the most hated and feared on Wall Street.",
+          "excerpt": "Here is what's so amazing: These four unbelievably performing stocks remain the most hated and feared on Wall Street.",
+          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+        },
+        {
+          "sourceName": "CNBC Top News RSS",
+          "title": "What the results of a Connecticut congressional primary race may mean for Social Security",
+          "url": "https://www.cnbc.com/2026/08/16/social-security-john-larson-connecticut-primary.html",
+          "publishedAt": "2026-08-16T13:30:01.000Z",
+          "summary": "Rep. John Larson of Connecticut, an advocate for expanding Social Security, was ousted in a Democratic primary contest Tuesday.",
+          "excerpt": "Rep. John Larson of Connecticut, an advocate for expanding Social Security, was ousted in a Democratic primary contest Tuesday.",
+          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+        },
+        {
+          "sourceName": "CNBC Top News RSS",
           "title": "Top Wall Street analysts like these 3 dividend stocks for steady income",
           "url": "https://www.cnbc.com/2026/08/16/top-wall-street-analysts-like-these-dividend-stocks-for-steady-income.html",
           "publishedAt": "2026-08-16T11:58:15.000Z",
           "summary": "Investors looking for steady income can add dividend-paying energy stocks to their portfolios.",
           "excerpt": "Investors looking for steady income can add dividend-paying energy stocks to their portfolios.",
-          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
-        },
-        {
-          "sourceName": "CNBC Top News RSS",
-          "title": "Secret outperformer: Dispelling the &apos;myths&apos; about an unloved stock market",
-          "url": "https://www.cnbc.com/2026/08/16/goldman-stock-market-outperformance.html",
-          "publishedAt": "2026-08-16T09:45:45.000Z",
-          "summary": "European markets fly under the radar when compared with larger and more liquid U.S. markets, but Goldman Sachs offered to dispel some of the myths.",
-          "excerpt": "European markets fly under the radar when compared with larger and more liquid U.S. markets, but Goldman Sachs offered to dispel some of the myths.",
-          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
-        },
-        {
-          "sourceName": "CNBC Top News RSS",
-          "title": "Iran rebuffs Trump&apos;s claim over Strait of Hormuz amid report of another ship being struck",
-          "url": "https://www.cnbc.com/2026/08/15/iran-rebuffs-trumps-claim-over-hormuz-amid-report-of-ship-strike.html",
-          "publishedAt": "2026-08-15T20:38:29.000Z",
-          "summary": "Iran's deputy foreign minister says Hormuz \"will remain Iranian\" after Trump's claim that the waterway would soon become U.S. territory.",
-          "excerpt": "Iran's deputy foreign minister says Hormuz \"will remain Iranian\" after Trump's claim that the waterway would soon become U.S. territory.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56759,29 +56589,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Walmart and Target are about to reveal the health of the U.S. consumer",
-          "url": "https://www.marketwatch.com/story/walmart-and-target-are-about-to-reveal-the-health-of-the-u-s-consumer-d5b89491?mod=mw_rss_topstories",
-          "publishedAt": "2026-08-16T11:00:00.000Z",
-          "summary": "Earnings reports from the two major retailers will show how shoppers are holding up in an era of persistent inflation.",
-          "excerpt": "Earnings reports from the two major retailers will show how shoppers are holding up in an era of persistent inflation.",
+          "title": "U.S. stock futures little changed as investors ponder the Fed’s next move",
+          "url": "https://www.marketwatch.com/story/u-s-stock-futures-little-changed-as-investors-ponder-the-feds-next-move-27bcbea4?mod=mw_rss_topstories",
+          "publishedAt": "2026-08-16T22:52:00.000Z",
+          "summary": "U.S. stock-index futures were little changed on Sunday after a quiet week on Wall Street, as investors await hints from the Fed concerning the outlook for interest rates.",
+          "excerpt": "U.S. stock-index futures were little changed on Sunday after a quiet week on Wall Street, as investors await hints from the Fed concerning the outlook for interest rates.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
           "title": "I’m 63, a retired CPA with a $1.2 million 401(k). Do I need to bother with a Roth conversion?",
           "url": "https://www.marketwatch.com/story/im-63-and-a-retired-cpa-i-have-a-1-2-million-401-k-do-i-need-a-roth-conversion-0a227302?mod=mw_rss_topstories",
-          "publishedAt": "2026-08-15T20:00:00.000Z",
+          "publishedAt": "2026-08-16T16:22:00.000Z",
           "summary": "“I don’t expect my marginal tax rate to be materially different in the future.”",
           "excerpt": "“I don’t expect my marginal tax rate to be materially different in the future.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Think interest rates are high now? These charts offer a different perspective.",
-          "url": "https://www.marketwatch.com/story/think-interest-rates-are-high-now-these-charts-offers-a-different-perspective-ae5f28c6?mod=mw_rss_topstories",
-          "publishedAt": "2026-08-15T19:01:00.000Z",
-          "summary": "Also in Weekend Reads: 10 remarkable housing markets, stock picks, and health-insurance battles.",
-          "excerpt": "Also in Weekend Reads: 10 remarkable housing markets, stock picks, and health-insurance battles.",
+          "title": "Here’s the real reason oil prices aren’t moving higher",
+          "url": "https://www.marketwatch.com/story/heres-the-real-reason-oil-prices-arent-moving-higher-256afdbc?mod=mw_rss_topstories",
+          "publishedAt": "2026-08-16T13:00:00.000Z",
+          "summary": "Oil prices are not higher largely because the world does not want as much oil as it used to — and that’s arguably the more troubling story.",
+          "excerpt": "Oil prices are not higher largely because the world does not want as much oil as it used to — and that’s arguably the more troubling story.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],

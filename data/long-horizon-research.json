@@ -1,8 +1,8 @@
 {
   "status": "ready",
-  "generatedAt": "2026-08-16T13:03:48.454Z",
+  "generatedAt": "2026-08-16T23:39:31.334Z",
   "sourceGeneratedAt": "2026-05-22T03:06:23.266882+00:00",
-  "liveGeneratedAt": "2026-08-16T13:00:44.953369+00:00",
+  "liveGeneratedAt": "2026-08-16T23:36:31.576897+00:00",
   "asOfDate": "2026-08-14",
   "expectedAsOfDate": "2026-08-14",
   "dataset": "data/modeling/features/long_horizon_training_dataset_15y.csv.gz",
@@ -572,7 +572,7 @@
       "return30": 3.71,
       "return60": 11.79,
       "return90": 11.67,
-      "ytdReturn": -7.47,
+      "ytdReturn": -7.48,
       "asOfDate": "2026-08-14"
     },
     {
@@ -18733,7 +18733,7 @@
       "return30": 3.71,
       "return60": 11.79,
       "return90": 11.67,
-      "ytdReturn": -7.47,
+      "ytdReturn": -7.48,
       "asOfDate": "2026-08-14"
     },
     {
@@ -19834,6 +19834,8 @@
     "The promoted long-horizon artifact uses 15 years of labeled history, monthly train/validation sampling, and a compact tuned XGBoost rank model.",
     "Baseline agreement labels compare the model with simple sector-relative and 12-1 momentum rules.",
     "The drawdown-adjusted label is experimental until walk-forward results show it improves returns without only selecting low-volatility laggards.",
+    "Live one-year scores are refreshed from the same feature tape as the tactical model and are shown as a separate research lens.",
+    "The AI memo may use long-horizon results as supporting context; a single-name recommendation should rely on them only when tactical and long-horizon evidence both support the setup.",
     "Live one-year scores are refreshed from the same feature tape as the tactical model and are shown as a separate research lens.",
     "The AI memo may use long-horizon results as supporting context; a single-name recommendation should rely on them only when tactical and long-horizon evidence both support the setup.",
     "Live one-year scores are refreshed from the same feature tape as the tactical model and are shown as a separate research lens.",
