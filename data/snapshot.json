@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-22T23:41:06.746Z",
+  "generatedAt": "2026-08-23T13:04:25.950Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-08-22T23:38:09.407734+00:00",
+    "generatedAt": "2026-08-23T13:01:30.179877+00:00",
     "asOfDate": "2026-08-21",
     "expectedAsOfDate": "2026-08-21",
     "isStale": false,
@@ -1384,20 +1384,20 @@
     }
   },
   "note": {
-    "headline": "Rising yields rattled the market, but we’re sticking with our favorite AI and retail stocks",
+    "headline": "Oil and geopolitical risk keep position sizing tighter.",
     "body": "Rates are the constraint: hotter inflation or higher Treasury yields reduce tolerance for crowded long-duration growth. U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver. Reddit attention data was unavailable or did not produce clean ticker concentration. Breadth is not strong enough for a blanket risk-on call; use the model to choose single names rather than reaching for broad beta. Confirmed momentum leadership is MRNA, MU, DELL, MRVL, AXON. 17 of the top 25 model-ranked stocks are in Information Technology. ETF confirmation is strongest in Health Care. Keep sizing modest until breadth improves.",
     "changed": [
-      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M2)",
-      "AI/semis: Rising yields rattled the market, but we’re sticking with our favorite AI and retail stocks (M1)",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M8)",
+      "AI/semis: Rising yields rattled the market, but we’re sticking with our favorite AI and retail stocks (M5)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
       "Breadth: 59% of the screened universe is above the 50-day average, 73% is above the 200-day, and 49% clears both trend lines.",
-      "Research tape: MarketWatch Top Stories RSS: Canada announces retaliatory tariffs on U.S. goods after trade talks break down | CNBC Top News RSS: Nvidia customers reportedly warned about AI-related price hikes | CNBC Top News RSS: As U.S.-Canada trade talks collapse, Carney says retaliatory tariffs will start Sept. 8."
+      "Research tape: CNBC Top News RSS: Small UK power generator shut down after cyberattack linked to Iran: Telegraph | CNBC Top News RSS: After 10 years at United, CEO Scott Kirby is thinking big about the future of his airline from JFK to AI | MarketWatch Top Stories RSS: The Treasury’s bond-market intervention isn’t working. So what comes next?."
     ],
     "watch": [
       "Macro risk: GDP Second Estimate on 2026-08-26; Personal Income and Outlays on 2026-08-26; Employment Situation on 2026-09-04.",
       "Momentum risk: 2 top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.",
       "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
-      "6 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
+      "5 of 26 configured source pages failed the latest check; blocked or stale sources should not drive the call."
     ],
     "generatedBy": "deterministic"
   },
@@ -1406,12 +1406,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 105159,
+      "inputTokens": 107167,
       "cachedInputTokens": 0,
-      "outputTokens": 2578,
+      "outputTokens": 2452,
       "reasoningTokens": 0,
-      "totalTokens": 107737,
-      "estimatedCostUsd": 0.006289,
+      "totalTokens": 109619,
+      "estimatedCostUsd": 0.006339,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1419,7 +1419,7 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Rising yields rattled the market, but we’re sticking with our favorite AI and retail stocks; confirmed leadership is MRNA, MU, DELL, MRVL.",
+    "headline": "Oil and geopolitical risk keep position sizing tighter; confirmed leadership is MRNA, MU, DELL, MRVL.",
     "macroView": "Rates are the constraint: hotter inflation or higher Treasury yields reduce tolerance for crowded long-duration growth. U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Next macro decision points: GDP Second Estimate on 2026-08-26; Personal Income and Outlays on 2026-08-26; Employment Situation on 2026-09-04. Sector confirmation: Health Care +9.53% over 30D, +7.08% vs SPY; Energy +7.50% over 30D, +5.05% vs SPY; Materials +5.35% over 30D, +2.90% vs SPY. Action bias: research confirmed momentum leaders MRNA, MU, DELL, MRVL; keep CIEN, SNDK, LITE in the watch bucket until confirmation improves.",
     "dailyRead": null,
     "recommendations": [
@@ -1433,9 +1433,9 @@
         "companyOverview": "Intismeran autogene (intismeran; V940 or mRNA-4157) is a novel, potential first-in-class investigational messenger RNA (mRNA)-based individualized neoantigen therapy (INT) jointly developed by Merck and Moderna. Intismeran is designed and produced using a patient's tumor sample to identify the unique mutational sign...",
         "marketCap": "$57.9B",
         "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.47.",
-        "recentNews": "MRNA momentum driven by strong pipeline and AI-enabled manufacturing scaling.",
-        "macroLink": "N / A",
-        "macroEvidence": "Health Care leadership supports 2026 growth story; no direct macro shock.",
+        "recentNews": "Q2 / Q3 momentum signals positive for pipeline execution.",
+        "macroLink": "AI in biotech demand could support upside; macro risk via rates remains.",
+        "macroEvidence": "N / A",
         "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +129.20%; 14D +145.28%; 30D +149.92%; 60D vs SPY +202.53%; RSI 75; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
@@ -1460,9 +1460,9 @@
         "companyOverview": "Micron Technology, Inc. is a global leader in semiconductor memory and storage, powering AI and compute-intensive applications from cloud to edge. With a relentless focus on our customers, technology and product leadership, and manufacturing and operational excellence, Micron's comprehensive portfolio of high-perfor...",
         "marketCap": "$1.09T",
         "earningsContext": "Last reported 2026-06-24 for the May 2026 fiscal quarter; EPS 24.89 versus consensus 20.98; surprise 18.64%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Aug 2026 with consensus 31.17.",
-        "recentNews": "Strong daily upside from chip cycle renewal; AI demand tailwinds.",
+        "recentNews": "Solid quarterly beat; AI-driven demand remains a positive catalyst.",
         "macroLink": "N / A",
-        "macroEvidence": "AI / semis strength supports semis exposure.",
+        "macroEvidence": "N / A",
         "modelEvidence": "Rank #5 of 500; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -0.50%; 14D +10.17%; 30D +0.76%; 60D vs SPY +1.85%; RSI 69; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
@@ -1487,9 +1487,9 @@
         "companyOverview": "Dell Technologies (NYSE: DELL) helps organizations and individuals build their digital future and transform how they work, live and play. The company provides customers with the industry's broadest and most innovative technology and services portfolio for the AI era.",
         "marketCap": "$286.5B",
         "earningsContext": "Last reported 2026-05-28 for the Apr 2026 fiscal quarter; EPS 4.63 versus consensus 2.79; surprise 65.95%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jul 2026 with consensus 4.63.",
-        "recentNews": "Positive momentum in earnings and IT demand.",
+        "recentNews": "Q2 momentum suggests resilience in enterprise IT spend.",
         "macroLink": "N / A",
-        "macroEvidence": "Tech hardware cycle intact; rate path remains a risk to multiples.",
+        "macroEvidence": "N / A",
         "modelEvidence": "Rank #9 of 500; 98.4 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -9.93%; 14D -2.58%; 30D +0.06%; 60D vs SPY +42.74%; RSI 53; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
@@ -1507,16 +1507,16 @@
       {
         "symbol": "MNST",
         "action": "Watch for activation",
-        "conviction": "Medium",
+        "conviction": "Low",
         "setup": "Model rebound watch",
         "whyNow": "Rank #11 of 500; -47.63% 60-day return versus SPY; below one or both major moving averages.",
         "rationale": "The model ranks MNST highly, but price has not confirmed a rebound. Requires a close above $60.74 within 5 trading days before it is actionable. Rank #11 of 500; -47.63% 60-day return versus SPY; below one or both major moving averages.",
         "companyOverview": "Based in Corona, California, Monster Energy is the leading marketer of energy drinks and alternative beverages. Refusing to acknowledge the traditional, Monster Energy supports the scene and sport. Whether motocross, off-road, NASCAR, MMA, BMX, surf, snowboard, ski, skateboard, or the rock-and-roll lifestyle, Monste...",
         "marketCap": "$140.4B",
         "earningsContext": "Last reported 2026-08-06 for the Jun 2026 fiscal quarter; EPS 0.3 versus consensus 0.29; surprise 3.45%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 0.29.",
-        "recentNews": "Momentum-driven but brittle; watch for consolidation.",
+        "recentNews": "Monster Q2 results flagged; rebound potential if catalyst hits.",
         "macroLink": "N / A",
-        "macroEvidence": "Consumer staples leadership mixed; growth hinges on brand momentum.",
+        "macroEvidence": "N / A",
         "modelEvidence": "Rank #11 of 500; 98.0 percentile; reasons: Long-horizon momentum ahead of sector median.",
         "technicalEvidence": "7D +2.07%; 14D -47.11%; 30D -0.09%; 60D vs SPY -47.63%; RSI 50; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
@@ -1534,33 +1534,6 @@
         ]
       },
       {
-        "symbol": "CIEN",
-        "action": "Watch, do not chase",
-        "conviction": "Low",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #1 of 500; -34.30% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks CIEN highly, but the setup is not clean momentum yet. Rank #1 of 500; -34.30% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "Ciena is the global leader in high-speed connectivity. We build the world's most advanced networks to support exponential growth in bandwidth demand. By harnessing the power of our networking systems, interconnects, automation software, and services, Ciena revolutionizes data transmission and network management. Wit...",
-        "marketCap": "$56.0B",
-        "earningsContext": "Last reported 2026-06-04 for the Apr 2026 fiscal quarter; EPS 1.34 versus consensus 1.2; surprise 11.67%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Jul 2026 with consensus 1.45.",
-        "recentNews": "Solid long-horizon momentum but risk flags.",
-        "macroLink": "N / A",
-        "macroEvidence": "Tech sector breadth supportive but not a sure bet.",
-        "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Above 200d trend; Liquid versus universe.",
-        "technicalEvidence": "7D -7.69%; 14D -4.03%; 30D -0.34%; 60D vs SPY -34.30%; RSI 51; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Below 50d trend; Weak volume confirmation",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C1-IR",
-          "C1-EARNINGS",
-          "C1-MARKETCAP"
-        ],
-        "setupTags": [
-          "Not Momentum Confirmed"
-        ]
-      },
-      {
         "symbol": "MRNA",
         "action": "Research long setup",
         "conviction": "High",
@@ -1570,9 +1543,9 @@
         "companyOverview": "Intismeran autogene (intismeran; V940 or mRNA-4157) is a novel, potential first-in-class investigational messenger RNA (mRNA)-based individualized neoantigen therapy (INT) jointly developed by Merck and Moderna. Intismeran is designed and produced using a patient's tumor sample to identify the unique mutational sign...",
         "marketCap": "$57.9B",
         "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.47.",
-        "recentNews": "AI-informed manufacturing and pipeline momentum.",
+        "recentNews": "Positive Q2 / pipeline updates.",
         "macroLink": "N / A",
-        "macroEvidence": "Health care leadership enhances risk-adjusted returns.",
+        "macroEvidence": "N / A",
         "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +129.20%; 14D +145.28%; 30D +149.92%; 60D vs SPY +202.53%; RSI 75; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
@@ -1589,40 +1562,35 @@
       }
     ],
     "avoidList": {
-      "summary": "Weakest model-ranked names cluster in Financials, Utilities, Real Estate, Industrials, and Health Care; avoid chasing in those sectors until macro and price action confirm. In particular, crowded, non-momentum names with weak price-action are ruled out.",
+      "summary": "The weakest model-ranked names tilt toward Financials, Utilities, Real Estate, Industrials, and Health Care; avoid fresh long exposure in these crowded areas where risk controls are most needed.",
       "sectors": [
         {
           "sector": "Financials",
-          "rationale": "15 of the weakest model-ranked names are in Financials; evidence includes ACGL, BLK, BEN, BAC."
+          "rationale": "15 of the weakest model-ranked names are in Financials; examples ACGL, BLK, BEN, BAC."
         },
         {
           "sector": "Utilities",
-          "rationale": "13 of the weakest model-ranked names in Utilities; examples AEE, AWK, ATO, SRE."
+          "rationale": "13 weakest model-ranked names in Utilities; examples AEE, AWK, ATO, SRE."
         },
         {
           "sector": "Real Estate",
-          "rationale": "11 of the weakest model-ranked in Real Estate; examples SPG, FRT, EXR, ESS."
+          "rationale": "11 weakest in Real Estate; examples SPG, FRT, EXR, ESS."
         },
         {
           "sector": "Industrials",
-          "rationale": "10 of the weakest model-ranked in Industrials; examples XYL, SNA, GD, FTV."
+          "rationale": "10 weakest in Industrials; examples XYL, SNA, GD, FTV."
         }
       ],
       "companies": [
         {
           "symbol": "ABBV",
-          "rationale": "Stock ranks low in model; RSI elevated; not momentum confirmed; avoid fresh long exposure.",
-          "modelEvidence": "Rank 500; RSI 74; volatility low but momentum not confirmed."
+          "rationale": "Not momentum confirmed; higher risk in Health Care group; RSI high but under leadership risk flags.",
+          "modelEvidence": "Rank 500; Weak momentum signal; low percentile."
         },
         {
           "symbol": "ACGL",
-          "rationale": "Financials chunk has several weak names; avoid until macro confirms.",
-          "modelEvidence": "Ranked 499; volatility mix; not momentum confirmed."
-        },
-        {
-          "symbol": "ADM",
-          "rationale": "Lower 60d volatility and not momentum confirmed; avoid.",
-          "modelEvidence": "Rank 498; volatility low but momentum not confirmed."
+          "rationale": "Low model score; financials crowded and volatility risk.",
+          "modelEvidence": "Rank 499; near-term volatility and trend weak."
         }
       ]
     },
@@ -1638,15 +1606,15 @@
     ],
     "sourceRefs": [
       "S1",
-      "S2",
       "S3",
       "S4",
       "S5",
-      "S7",
+      "S6",
       "S9",
       "S11",
       "S12",
       "S13",
+      "C1-EARNINGS",
       "S14",
       "S15"
     ],
@@ -1659,10 +1627,10 @@
           "sourceRef": "S12",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Should You Consider High-Yield Municipal Bonds?",
-          "thesis": "High-yield municipal bonds may offer attractive after-tax carry for investors in higher tax brackets who can stomach added credit risk and liquidity mixed reactions, particularly when rate volatility pressure compresses taxable-equivalent yields elsewhere.",
-          "whyItMatters": "Tax-advantaged income with potential spread over Treasuries can diversify fixed-income risk, but the trade-off is liquidity and credit sensitivity in a rising-rate environment. This creates a potential hedging niche if municipal spreads widen selectively or if tax considerations shift client demand toward taxable-equivalent alternatives.",
-          "marketReadThrough": "If tax-driven demand for munis remains robust, high-yield muni spreads could widen gradually on credit concerns, potentially supporting selective risk-taking in specialized issuers. Conversely, worsening liquidity or rising defaults could compress after-tax returns for risk-averse accounts.",
-          "variantAngle": "Shift focus from broad muni discussions to a tax-advantaged, higher-risk segment where liquidity and credit risk are the primary differentiators, rather than generic municipal yield comparisons.",
+          "thesis": "High-yield municipal bonds can offer a favorable after-tax carry and diversification benefit when taxable-equivalents compete with taxable credit spreads in a volatile rate regime, but carry increased by credit / liquidity risk and state-specific dynamics.",
+          "whyItMatters": "For investors in higher tax brackets, munis can improve after-tax income without broadening duration risk excessively, potentially acting as a ballast in portfolios sensitive to credit mixed reactions and liquidity crunches.",
+          "marketReadThrough": "As tax-advantaged credit remains a core tool, rising rates press the need for careful credit selection and liquidity planning. The space may outperform in periods of widening taxable spreads and slow muni new issue supply, while risk converges with taxable high-yield on liquidity stress.",
+          "variantAngle": "Focus on the differentiated risk profile of high-yield munis relative to traditional taxable high-yield credit, emphasizing after-tax carry, liquidity risk, and state / local tax variability across issuers.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/should-you-consider-high-yield-municipal-bonds",
           "publishedAt": "2026-08-19T17:08:53.000Z",
@@ -1682,10 +1650,10 @@
         "sourceRef": "S12",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Should You Consider High-Yield Municipal Bonds?",
-        "thesis": "High-yield municipal bonds may offer attractive after-tax carry for investors in higher tax brackets who can stomach added credit risk and liquidity mixed reactions, particularly when rate volatility pressure compresses taxable-equivalent yields elsewhere.",
-        "whyItMatters": "Tax-advantaged income with potential spread over Treasuries can diversify fixed-income risk, but the trade-off is liquidity and credit sensitivity in a rising-rate environment. This creates a potential hedging niche if municipal spreads widen selectively or if tax considerations shift client demand toward taxable-equivalent alternatives.",
-        "marketReadThrough": "If tax-driven demand for munis remains robust, high-yield muni spreads could widen gradually on credit concerns, potentially supporting selective risk-taking in specialized issuers. Conversely, worsening liquidity or rising defaults could compress after-tax returns for risk-averse accounts.",
-        "variantAngle": "Shift focus from broad muni discussions to a tax-advantaged, higher-risk segment where liquidity and credit risk are the primary differentiators, rather than generic municipal yield comparisons.",
+        "thesis": "High-yield municipal bonds can offer a favorable after-tax carry and diversification benefit when taxable-equivalents compete with taxable credit spreads in a volatile rate regime, but carry increased by credit / liquidity risk and state-specific dynamics.",
+        "whyItMatters": "For investors in higher tax brackets, munis can improve after-tax income without broadening duration risk excessively, potentially acting as a ballast in portfolios sensitive to credit mixed reactions and liquidity crunches.",
+        "marketReadThrough": "As tax-advantaged credit remains a core tool, rising rates press the need for careful credit selection and liquidity planning. The space may outperform in periods of widening taxable spreads and slow muni new issue supply, while risk converges with taxable high-yield on liquidity stress.",
+        "variantAngle": "Focus on the differentiated risk profile of high-yield munis relative to traditional taxable high-yield credit, emphasizing after-tax carry, liquidity risk, and state / local tax variability across issuers.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/should-you-consider-high-yield-municipal-bonds",
         "publishedAt": "2026-08-19T17:08:53.000Z",
@@ -1704,12 +1672,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-08-22T23:40:27.352Z",
+    "generatedAt": "2026-08-23T13:03:48.265Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-08-22T13:03:28.793Z"
+      "previousRefreshAt": "2026-08-22T23:41:06.746Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1720,20 +1688,16 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-08-22T23:38:11.099Z",
+      "generatedAt": "2026-08-23T13:01:31.580Z",
       "lookbackHours": 96,
       "releases": []
     },
     "sourceHealth": {
       "checked": 26,
-      "live": 20,
+      "live": 21,
       "blockedOrFailed": [
         {
           "name": "Raymond James Commentary And Insights",
-          "reason": "Source check failed: This operation was aborted"
-        },
-        {
-          "name": "EIA Today In Energy",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -1757,8 +1721,82 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "Rising yields rattled the market, but we’re sticking with our favorite AI and retail stocks",
+        "title": "Small UK power generator shut down after cyberattack linked to Iran: Telegraph",
         "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/08/23/small-uk-power-plant-shut-down-after-iran-linked-cyberattack-report.html",
+        "publishedAt": "2026-08-23T12:46:01.000Z",
+        "summary": "The U.K. government says the incident did not pose a risk to the country's energy system, adding that it briefed CEOs of companies in the sector with advice.",
+        "excerpt": "The U.K. government says the incident did not pose a risk to the country's energy system, adding that it briefed CEOs of companies in the sector with advice.",
+        "themes": [
+          "Geopolitics and policy",
+          "Commodities and energy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 0.3,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M2",
+        "title": "The Treasury’s bond-market intervention isn’t working. So what comes next?",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/the-treasurys-bond-market-intervention-isnt-working-so-what-comes-next-ba5e132a?mod=mw_rss_topstories",
+        "publishedAt": "2026-08-23T12:00:00.000Z",
+        "summary": "You can’t just sweep $40 trillion in U.S. national debt under a rug and forget about it - or so the bond market appears to be telling Treasury Secretary Scott Bessent.",
+        "excerpt": "You can’t just sweep $40 trillion in U.S. national debt under a rug and forget about it — or so the bond market appears to be telling Treasury Secretary Scott Bessent.",
+        "themes": [
+          "Rates and central banks"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 1.1,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M3",
+        "title": "Top Wall Street analysts believe in the growth potential of these 3 stocks",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/08/23/top-analysts-believe-in-the-growth-potential-of-these-3-stocks.html",
+        "publishedAt": "2026-08-23T11:29:05.000Z",
+        "summary": "Analysts are bullish on the prospects of several stocks due to their long-term growth potential and exposure to lucrative areas, such as artificial intelligence.",
+        "excerpt": "Analysts are bullish on the prospects of several stocks due to their long-term growth potential and exposure to lucrative areas, such as artificial intelligence.",
+        "themes": [
+          "Macro and growth",
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 1.6,
+        "score": 86,
+        "tickers": []
+      },
+      {
+        "id": "M4",
+        "title": "After 10 years at United, CEO Scott Kirby is thinking big about the future of his airline from JFK to AI",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/08/23/united-airlines-ceo-scott-kirby.html",
+        "publishedAt": "2026-08-23T12:00:01.000Z",
+        "summary": "United Airlines CEO Scott Kirby talked to CNBC in a wide-ranging interview about his proposed airline megadeals, AI and the future of the carrier.",
+        "excerpt": "United Airlines CEO Scott Kirby talked to CNBC in a wide-ranging interview about his proposed airline megadeals, AI and the future of the carrier.",
+        "themes": [
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 1.1,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M5",
+        "title": "Rising yields rattled the market, but we’re sticking with our favorite AI and retail stocks",
+        "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
         "url": "https://www.cnbc.com/2026/08/22/rising-yields-rattled-the-market-but-were-sticking-with-our-favorite-ai-and-retail-stocks.html",
@@ -1769,31 +1807,52 @@
           "Rates and central banks",
           "AI and semis"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 8.5,
-        "score": 100,
+        "freshness": "Last 24 hours",
+        "ageHours": 21.9,
+        "score": 70,
         "tickers": []
       },
       {
-        "id": "M2",
-        "title": "As U.S.-Canada trade talks collapse, Carney says retaliatory tariffs will start Sept. 8",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/08/22/us-canada-trade-talks-collapse-ushering-in-wave-of-new-tariffs.html",
-        "publishedAt": "2026-08-22T20:18:15.000Z",
-        "summary": "New 50% Trump administration tariffs on some Canadian exports went into place after the U.S. and Canada failed to reach a deal on Friday.",
-        "excerpt": "New 50% Trump administration tariffs on some Canadian exports went into place after the U.S. and Canada failed to reach a deal on Friday.",
+        "id": "M6",
+        "title": "Weekly Trader's Outlook",
+        "sourceName": "Schwab Weekly Market Outlook",
+        "sourceCategory": "Institution research",
+        "trust": "High",
+        "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
+        "publishedAt": "2026-08-21T19:55:21.000Z",
+        "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
+        "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Stocks Attempt to Stabilize as Treasury's Buyback Relief Fades and Yields Resume Their Climb Stocks are attempting to stabilize after a choppy week for risk assets, with Treasury yields pulling back mid-week after the Treasury Department announced plans to increase purchases of longer-term securities. August 21, 2026 • Jim Ferraioli The Week That Was If you read last week's blog, you might recall that Nate had a \"Slightly Bullish\" outlook for the market this week, with a secondary forecast for \"Higher Volatility\" given the potential macro and geopolitical catalysts on the calendar. Overall, that forecast proved reasonably accurate. Stocks largely extended their advance and continued to grind higher, although trading was not without periods of volatility. Treasury yields remained elevated, particularly on the long end of the curve, and investors continued to monitor developments in the Middle East. Despite these concerns, equity markets demonstrated resilience as strong technical trends, supportive sentiment, and continued risk appetite helped offset the headwinds. Volatility remained relatively subdued, with the VIX falling to an eight-month low during the week, suggesting investors have grown increasingly comfortable with both the macro backdrop and geopolitical risks. Looking back, the market largely followed the \"melt-up\" script Nate highlighted last week, with stocks continuing to push higher despite several reasons for caution. Outlook for Next Week At the time of this writing (12:40 PM ET) I will provide an overall “modestly cautious” forecast for stocks next week, since the end of summer tends to be seasonally week time for markets, on top of continue",
         "themes": [
+          "Rates and central banks",
           "Geopolitics and policy"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 3.4,
-        "score": 92,
+        "freshness": "Important older item",
+        "ageHours": 41.1,
+        "score": 62,
         "tickers": []
       },
       {
-        "id": "M3",
+        "id": "M7",
+        "title": "Should You Consider High-Yield Municipal Bonds?",
+        "sourceName": "Schwab Weekly Market Outlook",
+        "sourceCategory": "Institution research",
+        "trust": "High",
+        "url": "https://www.schwab.com/learn/story/should-you-consider-high-yield-municipal-bonds",
+        "publishedAt": "2026-08-19T17:08:53.000Z",
+        "summary": "Learn why high-yield munis might be worth consideration by investors in higher tax brackets who are comfortable taking added risks.",
+        "excerpt": "Are High-Yield Munis Worth the Risk? | Charles Schwab Search Insights & Education Fixed Income Should You Consider High-Yield Municipal Bonds? High-yield municipal bonds might be worth consideration by investors in higher tax brackets who are comfortable taking added risks. August 19, 2026 • Cooper Howard Key takeaways We believe high-yield munis are an asset class that carries additional risks, but a small allocation may be appropriate for some investors, especially those in higher tax brackets with longer investment time horizons. High-yield munis differ from investment-grade municipal bonds because they have credit ratings that are below investment grade, or have no credit rating at all. Although high-yield munis offer some benefits, they do carry additional risks. One such risk is the size of the high-yield muni market. High-yield municipal bonds are one of the best performing asset classes this year but that doesn't mean we think all investors should consider adding them to their portfolio. Generally, they offer higher yields than investment-grade munis, but they also carry higher risks. Even so, we think a small allocation may be appropriate for some investors in higher tax brackets with longer investment horizons. The caveat, however, is that the entry point now isn't that attractive. Valuations are low and if the economy begins to falter, returns for high-yield munis will likely suffer more than investment-grade munis. High-yield munis are the best-performing fixed income asset classes YTD Source: Bloomberg, as of 8/13/2026. See the Disclosures for a list of indices used. Indexes are unmanaged, do not incur management fees, costs and expenses and cannot be invested in directly. Past performance is no guarantee of future results. Shopping for fixed income investm",
+        "themes": [
+          "Earnings",
+          "Rates and central banks",
+          "Credit and liquidity"
+        ],
+        "freshness": "Important older item",
+        "ageHours": 91.9,
+        "score": 62,
+        "tickers": []
+      },
+      {
+        "id": "M8",
         "title": "Canada announces retaliatory tariffs on U.S. goods after trade talks break down",
         "sourceName": "MarketWatch Top Stories RSS",
         "sourceCategory": "News RSS",
@@ -1805,89 +1864,13 @@
         "themes": [
           "Geopolitics and policy"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 3.2,
-        "score": 92,
-        "tickers": []
-      },
-      {
-        "id": "M4",
-        "title": "Nvidia customers reportedly warned about AI-related price hikes",
-        "sourceName": "CNBC Top News RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/08/22/nvidia-customers-reportedly-warned-about-ai-related-price-hikes-.html",
-        "publishedAt": "2026-08-22T20:26:44.000Z",
-        "summary": "The chipmaker has told some of its largest customers that the prices of servers containing its AI chips could move more than 15% higher, Bloomberg News reported.",
-        "excerpt": "The chipmaker has told some of its largest customers that the prices of servers containing its AI chips could move more than 15% higher, Bloomberg News reported.",
-        "themes": [
-          "AI and semis"
-        ],
-        "freshness": "Since prior refresh",
-        "ageHours": 3.2,
-        "score": 78,
-        "tickers": []
-      },
-      {
-        "id": "M5",
-        "title": "Weekly Trader's Outlook",
-        "sourceName": "Schwab Weekly Market Outlook",
-        "sourceCategory": "Institution research",
-        "trust": "High",
-        "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
-        "publishedAt": "2026-08-21T19:55:21.000Z",
-        "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-        "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Stocks Attempt to Stabilize as Treasury's Buyback Relief Fades and Yields Resume Their Climb Stocks are attempting to stabilize after a choppy week for risk assets, with Treasury yields pulling back mid-week after the Treasury Department announced plans to increase purchases of longer-term securities. August 21, 2026 • Jim Ferraioli The Week That Was If you read last week's blog, you might recall that Nate had a \"Slightly Bullish\" outlook for the market this week, with a secondary forecast for \"Higher Volatility\" given the potential macro and geopolitical catalysts on the calendar. Overall, that forecast proved reasonably accurate. Stocks largely extended their advance and continued to grind higher, although trading was not without periods of volatility. Treasury yields remained elevated, particularly on the long end of the curve, and investors continued to monitor developments in the Middle East. Despite these concerns, equity markets demonstrated resilience as strong technical trends, supportive sentiment, and continued risk appetite helped offset the headwinds. Volatility remained relatively subdued, with the VIX falling to an eight-month low during the week, suggesting investors have grown increasingly comfortable with both the macro backdrop and geopolitical risks. Looking back, the market largely followed the \"melt-up\" script Nate highlighted last week, with stocks continuing to push higher despite several reasons for caution. Outlook for Next Week At the time of this writing (12:40 PM ET) I will provide an overall “modestly cautious” forecast for stocks next week, since the end of summer tends to be seasonally week time for markets, on t",
-        "themes": [
-          "Rates and central banks",
-          "Geopolitics and policy"
-        ],
-        "freshness": "Important older item",
-        "ageHours": 27.8,
-        "score": 62,
-        "tickers": []
-      },
-      {
-        "id": "M6",
-        "title": "Should You Consider High-Yield Municipal Bonds?",
-        "sourceName": "Schwab Weekly Market Outlook",
-        "sourceCategory": "Institution research",
-        "trust": "High",
-        "url": "https://www.schwab.com/learn/story/should-you-consider-high-yield-municipal-bonds",
-        "publishedAt": "2026-08-19T17:08:53.000Z",
-        "summary": "Learn why high-yield munis might be worth consideration by investors in higher tax brackets who are comfortable taking added risks.",
-        "excerpt": "Are High-Yield Munis Worth the Risk? | Charles Schwab Search Learn Fixed Income Should You Consider High-Yield Municipal Bonds? High-yield municipal bonds might be worth consideration by investors in higher tax brackets who are comfortable taking added risks. August 19, 2026 • Cooper Howard Key takeaways We believe high-yield munis are an asset class that carries additional risks, but a small allocation may be appropriate for some investors, especially those in higher tax brackets with longer investment time horizons. High-yield munis differ from investment-grade municipal bonds because they have credit ratings that are below investment grade, or have no credit rating at all. Although high-yield munis offer some benefits, they do carry additional risks. One such risk is the size of the high-yield muni market. High-yield municipal bonds are one of the best performing asset classes this year but that doesn't mean we think all investors should consider adding them to their portfolio. Generally, they offer higher yields than investment-grade munis, but they also carry higher risks. Even so, we think a small allocation may be appropriate for some investors in higher tax brackets with longer investment horizons. The caveat, however, is that the entry point now isn't that attractive. Valuations are low and if the economy begins to falter, returns for high-yield munis will likely suffer more than investment-grade munis. High-yield munis are the best-performing fixed income asset classes YTD Source: Bloomberg, as of 8/13/2026. See the Disclosures for a list of indices used. Indexes are unmanaged, do not incur management fees, costs and expenses and cannot be invested in directly. Past performance is no guarantee of future results. Shopping for fixed income investments? See what ",
-        "themes": [
-          "Earnings",
-          "Rates and central banks",
-          "Credit and liquidity"
-        ],
-        "freshness": "Important older item",
-        "ageHours": 78.5,
-        "score": 62,
-        "tickers": []
-      },
-      {
-        "id": "M7",
-        "title": "Why an announcement from the Treasury sparked a rally in gold and bitcoin this week",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/why-an-announcement-from-the-treasury-sparked-a-rally-in-gold-and-bitcoin-this-week-d9d5972b?mod=mw_rss_topstories",
-        "publishedAt": "2026-08-22T13:00:00.000Z",
-        "summary": "Cryptocurrencies and precious metals shot higher, while the U.S. dollar weakened, after the Treasury Department said it planned to double its bond buybacks.",
-        "excerpt": "Cryptocurrencies and precious metals shot higher, while the U.S. dollar weakened, after the Treasury Department said it planned to double its bond buybacks.",
-        "themes": [
-          "Rates and central banks",
-          "Commodities and energy"
-        ],
         "freshness": "Last 24 hours",
-        "ageHours": 10.7,
+        "ageHours": 16.5,
         "score": 62,
         "tickers": []
       },
       {
-        "id": "M8",
+        "id": "M9",
         "title": "Labubu maker Pop Mart shares fall as key ex-China sales data drop, Citi cuts price target",
         "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
@@ -1901,12 +1884,12 @@
           "Geopolitics and policy"
         ],
         "freshness": "Important older item",
-        "ageHours": 40.4,
+        "ageHours": 53.8,
         "score": 54,
         "tickers": []
       },
       {
-        "id": "M9",
+        "id": "M10",
         "title": "Our 4-year-old son has $100,000 in his 529 account. Is a bull market a bad time to buy him stocks instead?",
         "sourceName": "MarketWatch Top Stories RSS",
         "sourceCategory": "News RSS",
@@ -1919,187 +1902,46 @@
           "Market color"
         ],
         "freshness": "Last 24 hours",
-        "ageHours": 10.7,
-        "score": 48,
+        "ageHours": 24,
+        "score": 32,
         "tickers": []
       }
     ],
     "topThemes": [
       {
-        "theme": "Rates and central banks",
-        "count": 4
-      },
-      {
         "theme": "Geopolitics and policy",
         "count": 4
       },
       {
+        "theme": "Rates and central banks",
+        "count": 4
+      },
+      {
         "theme": "AI and semis",
-        "count": 2
+        "count": 3
       },
       {
         "theme": "Earnings",
         "count": 2
       },
       {
-        "theme": "Credit and liquidity",
+        "theme": "Commodities and energy",
         "count": 1
       },
       {
-        "theme": "Commodities and energy",
+        "theme": "Macro and growth",
         "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-08-22T23:40:27.344Z",
+      "generatedAt": "2026-08-23T13:03:48.259Z",
       "dates": [
-        "2026-08-21",
         "2026-08-22",
-        "2026-08-23"
+        "2026-08-23",
+        "2026-08-24"
       ],
       "calendars": [
-        {
-          "date": "2026-08-21",
-          "asOf": "Fri, Aug 21, 2026",
-          "status": "ready",
-          "error": null,
-          "rowCount": 11,
-          "rows": [
-            {
-              "date": "2026-08-21",
-              "symbol": "UI",
-              "name": "Ubiquiti Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$34,731,808,919",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "$3.67",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "BEKE",
-              "name": "KE Holdings Inc",
-              "time": "time-not-supplied",
-              "marketCap": "$19,195,980,139",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "$0.25",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "BJ",
-              "name": "BJ's Wholesale Club Holdings, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$11,658,461,013",
-              "fiscalQuarterEnding": "Jul/2026",
-              "epsForecast": "$1.16",
-              "noOfEsts": "11",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "BKE",
-              "name": "Buckle, Inc. (The)",
-              "time": "time-not-supplied",
-              "marketCap": "$2,196,731,187",
-              "fiscalQuarterEnding": "Jul/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "BXBL",
-              "name": "BOXABL, Inc. ",
-              "time": "time-not-supplied",
-              "marketCap": "$1,021,516,841",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "11",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "NB",
-              "name": "NioCorp Developments Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$624,568,436",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "($0.03)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "ZKH",
-              "name": "ZKH Group Limited",
-              "time": "time-not-supplied",
-              "marketCap": "$460,866,019",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "GDEV",
-              "name": "GDEV Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$203,285,477",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "$1.08",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "PXS",
-              "name": "Pyxis Tankers Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$53,019,717",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "11",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "LNAI",
-              "name": "Lunai Bioworks Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$9,974,558",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "11",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            },
-            {
-              "date": "2026-08-21",
-              "symbol": "GITS",
-              "name": "Global Interactive Technologies, Inc. Common Stock",
-              "time": "time-not-supplied",
-              "marketCap": "$6,099,185",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-21"
-            }
-          ]
-        },
         {
           "date": "2026-08-22",
           "asOf": "Sat, Aug 22, 2026",
@@ -2115,21 +1957,301 @@
           "error": null,
           "rowCount": 0,
           "rows": []
+        },
+        {
+          "date": "2026-08-24",
+          "asOf": "Mon, Aug 24, 2026",
+          "status": "ready",
+          "error": null,
+          "rowCount": 20,
+          "rows": [
+            {
+              "date": "2026-08-24",
+              "symbol": "PDD",
+              "name": "PDD Holdings Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$127,422,451,278",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$2.69",
+              "noOfEsts": "1",
+              "lastYearReportDate": "8/25/2025",
+              "lastYearEps": "$2.90",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "XPEV",
+              "name": "XPeng Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$11,469,951,600",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "8/19/2025",
+              "lastYearEps": "($0.07)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "SSL",
+              "name": "Sasol Ltd.",
+              "time": "time-not-supplied",
+              "marketCap": "$7,967,832,526",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "GRFS",
+              "name": "Grifols, S.A.",
+              "time": "time-not-supplied",
+              "marketCap": "$5,493,563,715",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.27",
+              "noOfEsts": "1",
+              "lastYearReportDate": "7/28/2025",
+              "lastYearEps": "$0.19",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "CHRN",
+              "name": "ChronoScale Holdings Corporation",
+              "time": "time-not-supplied",
+              "marketCap": "$3,509,862,593",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "($0.06)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "7/28/2025",
+              "lastYearEps": "($1.24)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "NSSC",
+              "name": "NAPCO Security Technologies, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$1,349,421,518",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.41",
+              "noOfEsts": "1",
+              "lastYearReportDate": "8/25/2025",
+              "lastYearEps": "$0.33",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "PICS",
+              "name": "PicS N.V.",
+              "time": "time-after-hours",
+              "marketCap": "$1,302,354,807",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.45",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "TUYA",
+              "name": "Tuya Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$1,073,250,682",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.02",
+              "noOfEsts": "1",
+              "lastYearReportDate": "8/26/2025",
+              "lastYearEps": "$0.02",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "CURR",
+              "name": "Currenc Group Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$432,285,257",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.10)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "GRRR",
+              "name": "Gorilla Technology Group Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$423,301,479",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.27",
+              "noOfEsts": "2",
+              "lastYearReportDate": "8/14/2025",
+              "lastYearEps": "($0.20)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "AIV",
+              "name": "Apartment Investment and Management Company",
+              "time": "time-not-supplied",
+              "marketCap": "$379,068,304",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "GASS",
+              "name": "StealthGas, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$354,007,731",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.55",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "XYF",
+              "name": "X Financial",
+              "time": "time-pre-market",
+              "marketCap": "$301,305,620",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$1.85",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "MOLN",
+              "name": "Molecular Partners AG",
+              "time": "time-not-supplied",
+              "marketCap": "$170,735,892",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "($0.45)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "8/25/2025",
+              "lastYearEps": "($0.67)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "HMR",
+              "name": "Heidmar Maritime Holdings Corp.",
+              "time": "time-not-supplied",
+              "marketCap": "$85,538,396",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.10",
+              "noOfEsts": "1",
+              "lastYearReportDate": "8/11/2025",
+              "lastYearEps": "$0.01",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "CBAT",
+              "name": "CBAK Energy Technology Limited",
+              "time": "time-not-supplied",
+              "marketCap": "$72,707,315",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "($0.06)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "8/18/2025",
+              "lastYearEps": "($0.03)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "NCTY",
+              "name": "The9 Limited",
+              "time": "time-pre-market",
+              "marketCap": "$66,591,008",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "GGR",
+              "name": "Gogoro Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$33,240,404",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($1.80)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "LRHC",
+              "name": "La Rosa Holdings Corp.",
+              "time": "time-not-supplied",
+              "marketCap": "$1,188,225",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$77",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            },
+            {
+              "date": "2026-08-24",
+              "symbol": "FRGT",
+              "name": "Freight Technologies, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$938,285",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.50",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-08-24"
+            }
+          ]
         }
       ],
       "earningsMovers": [],
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "Nvidia customers reportedly warned about AI-related price hikes",
-          "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/08/22/nvidia-customers-reportedly-warned-about-ai-related-price-hikes-.html",
-          "publishedAt": "2026-08-22T20:26:44.000Z",
-          "summary": "The chipmaker has told some of its largest customers that the prices of servers containing its AI chips could move more than 15% higher, Bloomberg News reported.",
-          "tickers": []
-        },
-        {
-          "id": "E2",
           "title": "Stocks Rise Early as Yields, Oil Hold Steady",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/stock-market-update-open",
@@ -2138,7 +2260,7 @@
           "tickers": []
         },
         {
-          "id": "E3",
+          "id": "E2",
           "title": "Labubu maker Pop Mart shares fall as key ex-China sales data drop, Citi cuts price target",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/08/21/labubu-maker-pop-mart-shares-fall-after-sales-drop-in-asia-americas-.html",
@@ -2147,7 +2269,7 @@
           "tickers": []
         },
         {
-          "id": "E4",
+          "id": "E3",
           "title": "Walmart stock tumbles 9% after outlook disappoints Wall Street",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/08/20/walmart-wmt-q2-2027-earnings.html",
@@ -2156,12 +2278,21 @@
           "tickers": []
         },
         {
-          "id": "E5",
+          "id": "E4",
           "title": "Should You Consider High-Yield Municipal Bonds?",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/should-you-consider-high-yield-municipal-bonds",
           "publishedAt": "2026-08-19T17:08:53.000Z",
           "summary": "Learn why high-yield munis might be worth consideration by investors in higher tax brackets who are comfortable taking added risks.",
+          "tickers": []
+        },
+        {
+          "id": "E5",
+          "title": "Weekly Natural Gas Storage Report - EIA",
+          "sourceName": "EIA Today In Energy",
+          "url": "http://ir.eia.gov/ngs/ngs.html",
+          "publishedAt": "2026-08-14T00:00:00.000Z",
+          "summary": "Weekly Natural Gas Storage Report - EIA",
           "tickers": []
         },
         {
@@ -2187,43 +2318,13 @@
     },
     "reddit": {
       "status": "error",
-      "generatedAt": "2026-08-22T23:39:30.081Z",
+      "generatedAt": "2026-08-23T13:02:49.447Z",
       "authMode": "public",
       "sourceNote": "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
       "subreddits": [
         {
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
-          "postCount": 0,
-          "sortStatuses": [
-            {
-              "sort": "hot",
-              "status": "error",
-              "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
-              "postCount": 0
-            },
-            {
-              "sort": "new",
-              "status": "error",
-              "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
-              "postCount": 0
-            },
-            {
-              "sort": "top",
-              "status": "error",
-              "method": "none",
-              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
-              "postCount": 0
-            }
-          ]
-        },
-        {
-          "subreddit": "stocks",
-          "segment": "Retail investing",
           "status": "error",
           "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
           "postCount": 0,
@@ -2252,10 +2353,10 @@
           ]
         },
         {
-          "subreddit": "investing",
+          "subreddit": "stocks",
           "segment": "Retail investing",
           "status": "error",
-          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
           "postCount": 0,
           "sortStatuses": [
             {
@@ -2276,7 +2377,37 @@
               "sort": "top",
               "status": "error",
               "method": "none",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+              "postCount": 0
+            }
+          ]
+        },
+        {
+          "subreddit": "investing",
+          "segment": "Retail investing",
+          "status": "error",
+          "error": "hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+          "postCount": 0,
+          "sortStatuses": [
+            {
+              "sort": "hot",
+              "status": "error",
+              "method": "none",
               "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
+              "postCount": 0
+            },
+            {
+              "sort": "new",
+              "status": "error",
+              "method": "none",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+              "postCount": 0
+            },
+            {
+              "sort": "top",
+              "status": "error",
+              "method": "none",
+              "error": "www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
               "postCount": 0
             }
           ]
@@ -2346,9 +2477,9 @@
       "topPosts": [],
       "currentFetchErrors": [
         "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured",
-        "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
-        "stocks: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
-        "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts",
+        "wallstreetbets: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+        "stocks: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
+        "investing: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: xmlRaw is not defined; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
         "SecurityAnalysis: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts",
         "options: hot: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | new: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts | top: www.reddit.com JSON: 403 Blocked; old.reddit.com JSON: 403 Blocked; www.reddit.com RSS: 429 Too Many Requests; old.reddit.com RSS returned no posts"
       ]
@@ -2375,18 +2506,7 @@
           "changePct": 14.77,
           "change": 1.43,
           "volume": 2663546,
-          "marketCap": 5268494336,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
-        },
-        {
-          "symbol": "UEC",
-          "name": "Uranium Energy Corp.",
-          "price": 12.76,
-          "changePct": 14.44,
-          "change": 1.61,
-          "volume": 16591590,
-          "marketCap": 6255217152,
+          "marketCap": 5266454016,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
@@ -2408,7 +2528,7 @@
           "changePct": 12.57,
           "change": 2.15,
           "volume": 21118640,
-          "marketCap": 4712366080,
+          "marketCap": 4713309184,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
@@ -2486,6 +2606,17 @@
           "change": 10.91,
           "volume": 3380176,
           "marketCap": 17333647360,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
+        },
+        {
+          "symbol": "QUBT",
+          "name": "Quantum Computing Inc.",
+          "price": 8.92,
+          "changePct": 9.58,
+          "change": 0.78,
+          "volume": 13865365,
+          "marketCap": 2019014016,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         }
@@ -2687,7 +2818,7 @@
           "changePct": 2.22,
           "change": 2.97,
           "volume": 77453430,
-          "marketCap": 1804468355072,
+          "marketCap": 1805508411392,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -2761,9 +2892,9 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M2)",
-      "Rates: Rates are the constraint: hotter inflation or higher Treasury yields reduce tolerance for crowded long-duration growth. (M6)",
-      "AI/semis: Rising yields rattled the market, but we’re sticking with our favorite AI and retail stocks (M1)",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M8)",
+      "Rates: Rates are the constraint: hotter inflation or higher Treasury yields reduce tolerance for crowded long-duration growth. (M2)",
+      "AI/semis: Rising yields rattled the market, but we’re sticking with our favorite AI and retail stocks (M5)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver."
     ]
   },
@@ -55708,7 +55839,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-08-21T19:55:21.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Stocks Attempt to Stabilize as Treasury's Buyback Relief Fades and Yields Resume Their Climb Stocks are attempting to stabilize after a choppy week for risk assets, with Treasury yields pulling back mid-week after the Treasury Department announced plans to increase purchases of longer-term securities. August 21, 2026 • Jim Ferraioli The Week That Was If you read last week's blog, you might recall that Nate had a \"Slightly Bullish\" outlook for the market this week, with a secondary forecast for \"Higher Volatility\" given the potential macro and geopolitical catalysts on the calendar. Overall, that forecast proved reasonably accurate. Stocks largely extended their advance and continued to grind higher, although trading was not without periods of volatility. Treasury yields remained elevated, particularly on the long end of the curve, and investors continued to monitor developments in the Middle East. Despite these concerns, equity markets demonstrated resilience as strong technical trends, supportive sentiment, and continued risk appetite helped offset the headwinds. Volatility remained relatively subdued, with the VIX falling to an eight-month low during the week, suggesting investors have grown increasingly comfortable with both the macro backdrop and geopolitical risks. Looking back, the market largely followed the \"melt-up\" script Nate highlighted last week, with stocks continuing to push higher despite several reasons for caution. Outlook for Next Week At the time of this writing (12:40 PM ET) I will provide an overall “modestly cautious” forecast for stocks next week, since the end of summer tends to be seasonally week time for markets, on t",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Stocks Attempt to Stabilize as Treasury's Buyback Relief Fades and Yields Resume Their Climb Stocks are attempting to stabilize after a choppy week for risk assets, with Treasury yields pulling back mid-week after the Treasury Department announced plans to increase purchases of longer-term securities. August 21, 2026 • Jim Ferraioli The Week That Was If you read last week's blog, you might recall that Nate had a \"Slightly Bullish\" outlook for the market this week, with a secondary forecast for \"Higher Volatility\" given the potential macro and geopolitical catalysts on the calendar. Overall, that forecast proved reasonably accurate. Stocks largely extended their advance and continued to grind higher, although trading was not without periods of volatility. Treasury yields remained elevated, particularly on the long end of the curve, and investors continued to monitor developments in the Middle East. Despite these concerns, equity markets demonstrated resilience as strong technical trends, supportive sentiment, and continued risk appetite helped offset the headwinds. Volatility remained relatively subdued, with the VIX falling to an eight-month low during the week, suggesting investors have grown increasingly comfortable with both the macro backdrop and geopolitical risks. Looking back, the market largely followed the \"melt-up\" script Nate highlighted last week, with stocks continuing to push higher despite several reasons for caution. Outlook for Next Week At the time of this writing (12:40 PM ET) I will provide an overall “modestly cautious” forecast for stocks next week, since the end of summer tends to be seasonally week time for markets, on top of continue",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -55717,7 +55848,7 @@
           "url": "https://www.schwab.com/learn/story/stock-market-update-open",
           "publishedAt": "2026-08-21T13:23:08.000Z",
           "summary": "Stocks rose in early trading as Treasury yields stabilized near long-term highs. But the major averages were set for weekly declines.",
-          "excerpt": "Stocks Rise Early as Treasury Yields Stabilize | Charles Schwab Search Insights & Education Markets and Economy Stocks Rise Early as Yields, Oil Hold Steady Stocks rose in early trading Friday as Treasury yields stabilized near long-term highs and oil was little changed. But the major averages were on track for weekly declines. August 21, 2026 • Joe Mazzola Published as of: August 21, 2026, 9:05 a.m. ET Listen to this update Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,641.16 -66.82 -0.87% Dow Jones Industrial Average ® 52,759.21 -703.84 -1.32% Nasdaq Composite ® 26,067.17 -263.92 -1.00% 10-year Treasury yield 4.69% Unch -- U.S. Dollar Index 98.74 -0.15 -0.16% Cboe Volatility Index ® 15.42 -0.59 -3.69% WTI Crude Oil $86.91 +0.08 +0.09% Bitcoin $77,490 +$4,700 +6.46% Disclosure (Friday market open) Stocks rose in early trading as Treasury yields stabilized near long-term highs and oil was little changed, but major indexes were poised to register weekly declines for the first time since late July. Despite the calendar turning to late August and earnings season winding down, next week looks to be eventful, at least on the economic and policy fronts. Wednesday brings the July Personal Consumption Expenditures (PCE) price index and Nvidia (NVDA) earnings. The Federal Reserve's annual Jackson Hole symposium kicks off Thursday, with a speech from Chair Kevin Warsh slated for Friday. Stocks slumped Thursday as Treasury yields and oil prices rose again. Yields retraced almost all of Wednesday's drop, despite Treasury Secretary Scott Bessent saying he had",
+          "excerpt": "Stocks Rise Early as Treasury Yields Stabilize | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Stocks Rise Early as Yields, Oil Hold Steady Stocks rose in early trading Friday as Treasury yields stabilized near long-term highs and oil was little changed. But the major averages were on track for weekly declines. August 21, 2026 • Joe Mazzola Published as of: August 21, 2026, 9:05 a.m. ET Listen to this update Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&P 500 ® Index 7,641.16 -66.82 -0.87% Dow Jones Industrial Average ® 52,759.21 -703.84 -1.32% Nasdaq Composite ® 26,067.17 -263.92 -1.00% 10-year Treasury yield 4.69% Unch -- U.S. Dollar Index 98.74 -0.15 -0.16% Cboe Volatility Index ® 15.42 -0.59 -3.69% WTI Crude Oil $86.91 +0.08 +0.09% Bitcoin $77,490 +$4,700 +6.46% Disclosure (Friday market open) Stocks rose in early trading as Treasury yields stabilized near long-term highs and oil was little changed, but major indexes were poised to register weekly declines for the first time since late July. Despite the calendar turning to late August and earnings season winding down, next week looks to be eventful, at least on the economic and policy fronts. Wednesday brings the July Personal Consumption Expenditures (PCE) price index and Nvidia (NVDA) earnings. The Federal Reserve's annual Jackson Hole symposium kicks off Thursday, with a speech from Chair Kevin Warsh slated for Friday. Stocks slumped Thursday as Treasury yields and oil prices rose again. Yields retraced almost all of Wednesday's drop, despite Treasury Secretary Scott Bessent",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -55726,7 +55857,7 @@
           "url": "https://www.schwab.com/learn/story/should-you-consider-high-yield-municipal-bonds",
           "publishedAt": "2026-08-19T17:08:53.000Z",
           "summary": "Learn why high-yield munis might be worth consideration by investors in higher tax brackets who are comfortable taking added risks.",
-          "excerpt": "Are High-Yield Munis Worth the Risk? | Charles Schwab Search Learn Fixed Income Should You Consider High-Yield Municipal Bonds? High-yield municipal bonds might be worth consideration by investors in higher tax brackets who are comfortable taking added risks. August 19, 2026 • Cooper Howard Key takeaways We believe high-yield munis are an asset class that carries additional risks, but a small allocation may be appropriate for some investors, especially those in higher tax brackets with longer investment time horizons. High-yield munis differ from investment-grade municipal bonds because they have credit ratings that are below investment grade, or have no credit rating at all. Although high-yield munis offer some benefits, they do carry additional risks. One such risk is the size of the high-yield muni market. High-yield municipal bonds are one of the best performing asset classes this year but that doesn't mean we think all investors should consider adding them to their portfolio. Generally, they offer higher yields than investment-grade munis, but they also carry higher risks. Even so, we think a small allocation may be appropriate for some investors in higher tax brackets with longer investment horizons. The caveat, however, is that the entry point now isn't that attractive. Valuations are low and if the economy begins to falter, returns for high-yield munis will likely suffer more than investment-grade munis. High-yield munis are the best-performing fixed income asset classes YTD Source: Bloomberg, as of 8/13/2026. See the Disclosures for a list of indices used. Indexes are unmanaged, do not incur management fees, costs and expenses and cannot be invested in directly. Past performance is no guarantee of future results. Shopping for fixed income investments? See what ",
+          "excerpt": "Are High-Yield Munis Worth the Risk? | Charles Schwab Search Insights & Education Fixed Income Should You Consider High-Yield Municipal Bonds? High-yield municipal bonds might be worth consideration by investors in higher tax brackets who are comfortable taking added risks. August 19, 2026 • Cooper Howard Key takeaways We believe high-yield munis are an asset class that carries additional risks, but a small allocation may be appropriate for some investors, especially those in higher tax brackets with longer investment time horizons. High-yield munis differ from investment-grade municipal bonds because they have credit ratings that are below investment grade, or have no credit rating at all. Although high-yield munis offer some benefits, they do carry additional risks. One such risk is the size of the high-yield muni market. High-yield municipal bonds are one of the best performing asset classes this year but that doesn't mean we think all investors should consider adding them to their portfolio. Generally, they offer higher yields than investment-grade munis, but they also carry higher risks. Even so, we think a small allocation may be appropriate for some investors in higher tax brackets with longer investment horizons. The caveat, however, is that the entry point now isn't that attractive. Valuations are low and if the economy begins to falter, returns for high-yield munis will likely suffer more than investment-grade munis. High-yield munis are the best-performing fixed income asset classes YTD Source: Bloomberg, as of 8/13/2026. See the Disclosures for a list of indices used. Indexes are unmanaged, do not incur management fees, costs and expenses and cannot be invested in directly. Past performance is no guarantee of future results. Shopping for fixed income investm",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         }
       ],
@@ -55844,11 +55975,21 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "EIA Today In Energy",
-      "summary": "Source check failed: This operation was aborted",
-      "articles": [],
-      "articleCount": 0,
-      "ok": false
+      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
+      "summary": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
+      "articles": [
+        {
+          "sourceName": "EIA Today In Energy",
+          "title": "Weekly Natural Gas Storage Report - EIA",
+          "url": "http://ir.eia.gov/ngs/ngs.html",
+          "publishedAt": "2026-08-14T00:00:00.000Z",
+          "summary": "Weekly Natural Gas Storage Report - EIA",
+          "excerpt": "Weekly Natural Gas Storage Report - EIA &lsaquo; See All Natural Gas Reports Weekly Natural Gas Storage Report for week ending August 14, 2026 | Released: August 20, 2026 at 10:30 a.m. | Next Release: August 27, 2026 Working gas in underground storage, Lower 48 states Summary text CSV JSN Historical Comparisons Stocks billion cubic feet (Bcf) Year ago (08/14/25) 5-year average (2021-25) Region 08/14/26 08/07/26 net change implied flow Bcf % change Bcf % change East 708 693 15 15 688 2.9 674 5.0 Midwest 848 829 19 19 810 4.7 795 6.7 Mountain 237 239 -2 -2 255 -7.1 212 11.8 Pacific 296 300 -4 -4 302 -2.0 263 12.5 South Central 1,080 1,093 -13 -13 1,143 -5.5 1,040 3.8 Salt 268 286 -18 -18 284 -5.6 252 6.3 Nonsalt 812 807 5 5 859 -5.5 789 2.9 Total 3,169 3,153 16 16 3,197 -0.9 2,984 6.2 Totals may not equal sum of components because of independent rounding. Summary Working gas in storage was 3,169 Bcf as of Friday, August 14, 2026, according to EIA estimates. This represents a net increase of 16 Bcf from the previous week. Stocks were 28 Bcf less than last year at this time and 185 Bcf above the five-year average of 2,984 Bcf. At 3,169 Bcf, total working gas is within the five-year historical range. For information on sampling error in this report, see Estimated Measures of Sampling Variability table below. Note: The shaded area indicates the range between the historical minimum and maximum values for the weekly series from 2021 through 2025. The dashed vertical lines indicate current and year-ago weekly periods. Source: Form EIA-912, \"Weekly Underground Natural Gas Storage Report.\" --> Estimated measures of sampling variability Download History (April 2015 to Present) Coefficient of Variation for Stocks % of working gas Standard Error for Net Change billion cubic feet (Bcf",
+          "discoveredFrom": "https://www.eia.gov/todayinenergy/"
+        }
+      ],
+      "articleCount": 1,
+      "ok": true
     },
     {
       "name": "BLS Economic News Releases",
@@ -55972,29 +56113,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Nvidia customers reportedly warned about AI-related price hikes",
-          "url": "https://www.cnbc.com/2026/08/22/nvidia-customers-reportedly-warned-about-ai-related-price-hikes-.html",
-          "publishedAt": "2026-08-22T20:26:44.000Z",
-          "summary": "The chipmaker has told some of its largest customers that the prices of servers containing its AI chips could move more than 15% higher, Bloomberg News reported.",
-          "excerpt": "The chipmaker has told some of its largest customers that the prices of servers containing its AI chips could move more than 15% higher, Bloomberg News reported.",
+          "title": "Small UK power generator shut down after cyberattack linked to Iran: Telegraph",
+          "url": "https://www.cnbc.com/2026/08/23/small-uk-power-plant-shut-down-after-iran-linked-cyberattack-report.html",
+          "publishedAt": "2026-08-23T12:46:01.000Z",
+          "summary": "The U.K. government says the incident did not pose a risk to the country's energy system, adding that it briefed CEOs of companies in the sector with advice.",
+          "excerpt": "The U.K. government says the incident did not pose a risk to the country's energy system, adding that it briefed CEOs of companies in the sector with advice.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "As U.S.-Canada trade talks collapse, Carney says retaliatory tariffs will start Sept. 8",
-          "url": "https://www.cnbc.com/2026/08/22/us-canada-trade-talks-collapse-ushering-in-wave-of-new-tariffs.html",
-          "publishedAt": "2026-08-22T20:18:15.000Z",
-          "summary": "New 50% Trump administration tariffs on some Canadian exports went into place after the U.S. and Canada failed to reach a deal on Friday.",
-          "excerpt": "New 50% Trump administration tariffs on some Canadian exports went into place after the U.S. and Canada failed to reach a deal on Friday.",
+          "title": "After 10 years at United, CEO Scott Kirby is thinking big about the future of his airline from JFK to AI",
+          "url": "https://www.cnbc.com/2026/08/23/united-airlines-ceo-scott-kirby.html",
+          "publishedAt": "2026-08-23T12:00:01.000Z",
+          "summary": "United Airlines CEO Scott Kirby talked to CNBC in a wide-ranging interview about his proposed airline megadeals, AI and the future of the carrier.",
+          "excerpt": "United Airlines CEO Scott Kirby talked to CNBC in a wide-ranging interview about his proposed airline megadeals, AI and the future of the carrier.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Rising yields rattled the market, but we’re sticking with our favorite AI and retail stocks",
-          "url": "https://www.cnbc.com/2026/08/22/rising-yields-rattled-the-market-but-were-sticking-with-our-favorite-ai-and-retail-stocks.html",
-          "publishedAt": "2026-08-22T15:08:54.000Z",
-          "summary": "Stocks took their cue from the bond market this week.",
-          "excerpt": "Stocks took their cue from the bond market this week.",
+          "title": "Top Wall Street analysts believe in the growth potential of these 3 stocks",
+          "url": "https://www.cnbc.com/2026/08/23/top-analysts-believe-in-the-growth-potential-of-these-3-stocks.html",
+          "publishedAt": "2026-08-23T11:29:05.000Z",
+          "summary": "Analysts are bullish on the prospects of several stocks due to their long-term growth potential and exposure to lucrative areas, such as artificial intelligence.",
+          "excerpt": "Analysts are bullish on the prospects of several stocks due to their long-term growth potential and exposure to lucrative areas, such as artificial intelligence.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56054,6 +56195,15 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
+          "title": "The Treasury’s bond-market intervention isn’t working. So what comes next?",
+          "url": "https://www.marketwatch.com/story/the-treasurys-bond-market-intervention-isnt-working-so-what-comes-next-ba5e132a?mod=mw_rss_topstories",
+          "publishedAt": "2026-08-23T12:00:00.000Z",
+          "summary": "You can’t just sweep $40 trillion in U.S. national debt under a rug and forget about it — or so the bond market appears to be telling Treasury Secretary Scott Bessent.",
+          "excerpt": "You can’t just sweep $40 trillion in U.S. national debt under a rug and forget about it — or so the bond market appears to be telling Treasury Secretary Scott Bessent.",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
           "title": "Canada announces retaliatory tariffs on U.S. goods after trade talks break down",
           "url": "https://www.marketwatch.com/story/canada-announces-retaliatory-tariffs-on-u-s-goods-after-trade-talks-break-down-45081c2f?mod=mw_rss_topstories",
           "publishedAt": "2026-08-22T20:31:00.000Z",
@@ -56068,15 +56218,6 @@
           "publishedAt": "2026-08-22T13:01:00.000Z",
           "summary": "“I’d love for our son to be able to attend college without needing to take out student loans.”",
           "excerpt": "“I’d love for our son to be able to attend college without needing to take out student loans.”",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Why an announcement from the Treasury sparked a rally in gold and bitcoin this week",
-          "url": "https://www.marketwatch.com/story/why-an-announcement-from-the-treasury-sparked-a-rally-in-gold-and-bitcoin-this-week-d9d5972b?mod=mw_rss_topstories",
-          "publishedAt": "2026-08-22T13:00:00.000Z",
-          "summary": "Cryptocurrencies and precious metals shot higher, while the U.S. dollar weakened, after the Treasury Department said it planned to double its bond buybacks.",
-          "excerpt": "Cryptocurrencies and precious metals shot higher, while the U.S. dollar weakened, after the Treasury Department said it planned to double its bond buybacks.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
