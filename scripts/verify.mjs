@@ -96,17 +96,16 @@ run(node, ["--check", "scripts/snapshot/schemas.mjs"]);
 filesIn(join(root, "src"), (path) => path.endsWith(".js")).forEach((path) => run(node, ["--check", path]));
 run(node, ["--test", ...filesIn(join(root, "tests"), (path) => path.endsWith(".test.mjs"))]);
 
-const python = process.env.PYTHON || "python3";
+const python = process.env.PYTHON || (existsSync(join(root, ".venv-model", "bin", "python"))
+  ? join(root, ".venv-model", "bin", "python")
+  : "python3");
 const pythonFiles = [
   ...filesIn(join(root, "scripts/modeling"), (path) => path.endsWith(".py")),
   "analysis/model-monitoring/run_recent_decile_backtest.py"
 ];
 const pythonCacheEnv = { PYTHONPYCACHEPREFIX: join(tmpdir(), "market-pulse-pycache") };
 run(python, ["-m", "py_compile", ...pythonFiles], { env: pythonCacheEnv });
-const modelPython = existsSync(join(root, ".venv-model", "bin", "python"))
-  ? join(root, ".venv-model", "bin", "python")
-  : python;
-run(modelPython, ["-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"], { env: pythonCacheEnv });
+run(python, ["-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"], { env: pythonCacheEnv });
 
 const requiredJsonFiles = [
   "config/runtime.json",

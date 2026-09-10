@@ -254,7 +254,9 @@ It runs JavaScript syntax checks, Python compile checks, Node fixture tests, Pyt
 npm test
 ```
 
-Fixture coverage includes source extraction, Reddit RSS/JSON normalization and freshness, AI memo input construction, refresh retries, partial-market-session rejection, delayed monitors across midnight/DST, live artifact hash checks, and failure recovery against temporary Git repositories. These tests fail quickly without requiring a full market refresh.
+Fixture coverage includes source extraction, Reddit RSS/JSON normalization and freshness, AI memo input construction, refresh retries, partial-market-session rejection, delayed monitors across midnight/DST, live artifact hash checks, failure recovery against temporary Git repositories, and Python dependency setup in both publication workflows. These tests fail quickly without requiring a full market refresh.
+
+Verification requires the Python packages in `scripts/modeling/requirements.txt`, even for a static-only deployment. Both GitHub publication workflows install them. Locally, the verifier uses `PYTHON` when set, otherwise `.venv-model/bin/python` when present, falling back to `python3`; compilation and tests use the same interpreter.
 
 ## AI Strategy Memo
 

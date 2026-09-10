@@ -93,3 +93,13 @@ All 50 JavaScript and nine Python tests passed again. Full artifact verification
 - Six AI memo company-news blurbs failed evidence-grounding checks: MRNA, STX, LITE, MU, DELL, and WDC.
 
 These are legacy generated-output incompatibilities. The code fixes for canonical return fields and grounded company news must run through the full refresh before the new Pages deployment can pass. The gates were not weakened and older local snapshots were not substituted to make the code-only push appear deployable. A code push alone is not evidence that the live dashboard has updated.
+
+## Hosted Failure And Environment Correction
+
+[Pages run #85](https://github.com/jhmona12/market-pulse/actions/runs/34457454107), triggered by commit `6163944`, exposed an additional deployment setup omission: all 50 JavaScript tests passed, but Python test collection failed with `ModuleNotFoundError: No module named 'pandas'`. The Pages workflow installed Node but not the dependencies required by the newly added Python tests. The two legacy-output failures above also appeared. No deployment occurred; the Node deprecation messages were warnings, not the cause.
+
+The correction provisions Python 3.11 and installs the existing model requirements in the Pages workflow, matching the refresh workflow. Two new workflow tests enforce setup/install/verification ordering. The verifier now honors an explicit `PYTHON` selection for both compilation and tests, instead of silently switching test execution to the local model environment.
+
+Validation reproduced the import error using a newly created temporary virtual environment. After installing the declared requirements, 52 JavaScript and nine Python tests passed, along with verification of the preserved local artifacts. This macOS test used the existing native OpenMP runtime via `DYLD_LIBRARY_PATH`; it did not reuse the project's Python packages. The hosted Python/Linux environment still requires its own run. Existing remote JSON still needs regeneration under the new contracts; a clean local test is not a successful public deployment.
+
+Recovery requires a new **Refresh Market Data** workflow dispatch on `main` after the correction is pushed, not a rerun of Pages #85 against its original commit. That refresh must regenerate, verify, deploy, and confirm all four dashboard files before this incident can be considered resolved end to end.

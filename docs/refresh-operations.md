@@ -15,6 +15,8 @@ The live probe uses bounded requests and a different query parameter on each att
 
 Runtime cache saving is optional and only runs after successful model scoring. A cache-service outage must not prevent otherwise verified data from publishing.
 
+Both the refresh and push-to-Pages workflows provision Python 3.11 and install `scripts/modeling/requirements.txt` before verification. The verifier includes Python model tests even when no model scoring is requested; a Node-only Pages job is insufficient. Locally, `PYTHON` explicitly selects the interpreter for both compile checks and tests, otherwise `.venv-model/bin/python` is preferred when available. Workflow fixtures enforce dependency-install ordering in both publication paths.
+
 ## Failure Recovery
 
 `scripts/refresh/recover-dashboard.mjs` checks the remote branch before restoring the seven tracked data/status/ledger artifacts from `HEAD`. Recovery is skipped if the remote advanced or the new dashboard was already confirmed live. In particular, a later Git commit failure must not roll back a successfully published dashboard.
