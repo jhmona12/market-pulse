@@ -51,6 +51,13 @@ MARKET_STRIP_LABELS = {
     "GLD": "Gold",
     "HYG": "High Yield",
 }
+DEFAULT_MIN_SESSION_COVERAGE = 0.90
+DEFAULT_DATA_READINESS_ATTEMPTS = 3
+DEFAULT_DATA_READINESS_DELAY_SECONDS = 30.0
+
+
+class MarketDataNotReadyError(ValueError):
+    """Raised when the expected end-of-day cross-section is not settled yet."""
 
 
 def observed_fixed_holiday(year: int, month: int, day: int) -> date:
@@ -252,6 +259,104 @@ def fetch_symbol_frames(symbols: list[str], years: int, max_workers: int) -> tup
             else:
                 frames[symbol] = frame
     return frames, failures
+
+
+def latest_frame_session(frame: pd.DataFrame | None) -> date | None:
+    if frame is None or frame.empty or "date" not in frame.columns:
+        return None
+    latest = pd.to_datetime(frame["date"], errors="coerce").max()
+    return None if pd.isna(latest) else latest.date()
+
+
+def expected_session_readiness(
+    symbol_frames: dict[str, pd.DataFrame],
+    reference_symbols: set[str],
+    required_context_symbols: list[str],
+    expected_session: date,
+    minimum_coverage: float = DEFAULT_MIN_SESSION_COVERAGE,
+) -> dict:
+    ready_reference = sorted(
+        symbol
+        for symbol in reference_symbols
+        if latest_frame_session(symbol_frames.get(symbol)) == expected_session
+    )
+    stale_reference = sorted(reference_symbols - set(ready_reference))
+    missing_context = sorted(
+        symbol
+        for symbol in required_context_symbols
+        if latest_frame_session(symbol_frames.get(symbol)) != expected_session
+    )
+    reference_count = len(reference_symbols)
+    coverage = len(ready_reference) / reference_count if reference_count else 0.0
+    return {
+        "ready": not missing_context and coverage >= minimum_coverage,
+        "expectedSession": expected_session.isoformat(),
+        "referenceCount": reference_count,
+        "readyReferenceCount": len(ready_reference),
+        "coverage": coverage,
+        "minimumCoverage": minimum_coverage,
+        "missingContext": missing_context,
+        "staleReference": stale_reference,
+    }
+
+
+def readiness_message(readiness: dict) -> str:
+    missing_context = ", ".join(readiness["missingContext"][:12]) or "none"
+    stale_sample = ", ".join(readiness["staleReference"][:12]) or "none"
+    return (
+        f"Yahoo EOD cross-section is not ready for {readiness['expectedSession']}: "
+        f"{readiness['readyReferenceCount']}/{readiness['referenceCount']} current S&P 500 histories "
+        f"({readiness['coverage']:.1%}, minimum {readiness['minimumCoverage']:.0%}); "
+        f"missing/stale required context: {missing_context}; stale stock sample: {stale_sample}"
+    )
+
+
+def wait_for_expected_session_frames(
+    symbol_frames: dict[str, pd.DataFrame],
+    failures: dict[str, str],
+    reference_symbols: set[str],
+    required_context_symbols: list[str],
+    expected_session: date,
+    years: int,
+    max_workers: int,
+) -> tuple[dict[str, pd.DataFrame], dict[str, str], dict]:
+    attempts = max(1, int(os.environ.get("MODEL_DATA_READINESS_ATTEMPTS", DEFAULT_DATA_READINESS_ATTEMPTS)))
+    delay_seconds = max(0.0, float(os.environ.get("MODEL_DATA_READINESS_DELAY_SECONDS", DEFAULT_DATA_READINESS_DELAY_SECONDS)))
+    minimum_coverage = min(1.0, max(0.5, float(os.environ.get("MODEL_MIN_SESSION_COVERAGE", DEFAULT_MIN_SESSION_COVERAGE))))
+    latest_readiness: dict = {}
+
+    for attempt in range(1, attempts + 1):
+        latest_readiness = expected_session_readiness(
+            symbol_frames,
+            reference_symbols,
+            required_context_symbols,
+            expected_session,
+            minimum_coverage,
+        )
+        if latest_readiness["ready"] and (not latest_readiness["staleReference"] or attempt >= attempts):
+            print(
+                f"Yahoo EOD readiness passed for {expected_session.isoformat()}: "
+                f"{latest_readiness['readyReferenceCount']}/{latest_readiness['referenceCount']} "
+                f"current reference histories ({latest_readiness['coverage']:.1%}); "
+                f"{len(latest_readiness['staleReference'])} stale stocks remain excluded from scoring."
+            )
+            return symbol_frames, failures, latest_readiness
+
+        message = readiness_message(latest_readiness)
+        if attempt >= attempts:
+            raise MarketDataNotReadyError(f"{message}. Readiness checks exhausted after {attempts} attempt(s).")
+
+        retry_symbols = sorted(set(latest_readiness["missingContext"]) | set(latest_readiness["staleReference"]))
+        print(f"{message}. Retrying {len(retry_symbols)} affected histories after {delay_seconds:.0f}s.")
+        if delay_seconds:
+            time.sleep(delay_seconds)
+        refreshed_frames, refreshed_failures = fetch_symbol_frames(retry_symbols, years, max_workers)
+        symbol_frames.update(refreshed_frames)
+        for symbol in refreshed_frames:
+            failures.pop(symbol, None)
+        failures.update(refreshed_failures)
+
+    raise MarketDataNotReadyError(readiness_message(latest_readiness))
 
 
 def build_spy_context(spy_frame: pd.DataFrame) -> pd.DataFrame:
@@ -823,10 +928,51 @@ def unique_existing_columns(frame: pd.DataFrame, columns: list[str]) -> list[str
     return result
 
 
-def score_rows(dataset: pd.DataFrame, model_path: Path, feature_columns: list[str]) -> pd.DataFrame:
-    latest_date = dataset["date"].max()
-    latest = dataset[dataset["date"].eq(latest_date)].copy()
-    latest = latest.dropna(subset=feature_columns)
+def scoring_rows_for_date(
+    dataset: pd.DataFrame,
+    feature_columns: list[str],
+    scoring_date: date | pd.Timestamp | None = None,
+    reference_symbols: set[str] | None = None,
+    minimum_coverage: float = 0.0,
+) -> pd.DataFrame:
+    if dataset.empty or "date" not in dataset.columns:
+        raise MarketDataNotReadyError("Live feature matrix is empty or has no date column")
+    target_date = pd.Timestamp(scoring_date) if scoring_date is not None else pd.to_datetime(dataset["date"]).max()
+    available = dataset[pd.to_datetime(dataset["date"]).eq(target_date)].copy()
+    if "symbol" in available and available["symbol"].duplicated().any():
+        raise MarketDataNotReadyError(f"Feature cross-section contains duplicate symbols for {target_date.date().isoformat()}")
+    available[feature_columns] = available[feature_columns].apply(pd.to_numeric, errors="coerce").replace([np.inf, -np.inf], np.nan)
+    complete = available.dropna(subset=feature_columns).copy()
+
+    reference_count = len(reference_symbols or set())
+    complete_reference_count = (
+        int(complete["symbol"].isin(reference_symbols).sum())
+        if reference_symbols and "symbol" in complete.columns
+        else len(complete)
+    )
+    required_count = int(np.ceil(reference_count * minimum_coverage)) if reference_count else 1
+    if complete.empty or complete_reference_count < required_count:
+        all_complete = dataset.dropna(subset=feature_columns)
+        latest_complete = pd.to_datetime(all_complete["date"]).max() if not all_complete.empty else None
+        latest_complete_text = latest_complete.date().isoformat() if latest_complete is not None and not pd.isna(latest_complete) else "none"
+        raise MarketDataNotReadyError(
+            f"Feature cross-section is incomplete for {target_date.date().isoformat()}: "
+            f"{len(available)} rows arrived, {len(complete)} have all {len(feature_columns)} model features, "
+            f"and {complete_reference_count}/{reference_count or len(available)} reference rows are scorable "
+            f"(required {required_count}); latest complete feature date is {latest_complete_text}"
+        )
+    return complete
+
+
+def score_rows(
+    dataset: pd.DataFrame,
+    model_path: Path,
+    feature_columns: list[str],
+    scoring_date: date | pd.Timestamp | None = None,
+    reference_symbols: set[str] | None = None,
+    minimum_coverage: float = 0.0,
+) -> pd.DataFrame:
+    latest = scoring_rows_for_date(dataset, feature_columns, scoring_date, reference_symbols, minimum_coverage)
     booster = xgb.Booster()
     booster.load_model(str(model_path))
     dmatrix = xgb.DMatrix(latest[feature_columns].to_numpy(dtype=float), feature_names=feature_columns)
@@ -1340,6 +1486,20 @@ def main() -> None:
     reference_symbols = set(constituents["symbol"].astype(str))
     required_symbols = list(dict.fromkeys([*constituents["symbol"].tolist(), *focus_symbols, "SPY", *SECTOR_ETFS, *MARKET_STRIP_SYMBOLS]))
     symbol_frames, failures = fetch_symbol_frames(required_symbols, args.years, args.max_workers)
+    expected_session = latest_expected_market_data_date()
+    required_context_symbols = list(dict.fromkeys(["SPY", *SECTOR_ETFS, *MARKET_STRIP_SYMBOLS]))
+    try:
+        symbol_frames, failures, readiness = wait_for_expected_session_frames(
+            symbol_frames,
+            failures,
+            reference_symbols,
+            required_context_symbols,
+            expected_session,
+            args.years,
+            args.max_workers,
+        )
+    except MarketDataNotReadyError as error:
+        raise SystemExit(str(error)) from error
     missing_context = [symbol for symbol in ["SPY", *SECTOR_ETFS] if symbol not in symbol_frames]
     if missing_context:
         raise SystemExit(f"Missing required model context histories: {missing_context}")
@@ -1362,7 +1522,14 @@ def main() -> None:
     if missing_features:
         raise SystemExit(f"Live feature matrix is missing model features: {missing_features}")
 
-    scored = score_rows(dataset, model_path, feature_columns)
+    scored = score_rows(
+        dataset,
+        model_path,
+        feature_columns,
+        scoring_date=expected_session,
+        reference_symbols=reference_symbols,
+        minimum_coverage=readiness["minimumCoverage"],
+    )
     scored["model_universe_count"] = len(scored)
     latest_date = scored["date"].max().date().isoformat() if not scored.empty else None
     try:
@@ -1410,6 +1577,9 @@ def main() -> None:
             "source": "model_scorer_yahoo_history",
             "asOfDate": latest_date,
             "expectedAsOfDate": latest_expected_market_data_date().isoformat(),
+            "sessionCoverage": finite_or_none(readiness["coverage"], 4),
+            "currentReferenceHistories": readiness["readyReferenceCount"],
+            "expectedReferenceHistories": readiness["referenceCount"],
         },
         "marketRows": market_rows,
         "sectorRows": sector_rows,

@@ -33,6 +33,14 @@
     },
     "reddit": {
       "status": "ready",
+      "authMode": "public",
+      "metricMode": "unranked_recent_mentions",
+      "sampleCoverage": {
+        "subredditCount": 1,
+        "sorts": ["hot"],
+        "postCount": 25,
+        "includesVoteAndCommentCounts": false
+      },
       "sourceNote": "Live Reddit sample.",
       "subreddits": ["wallstreetbets"],
       "topTickers": [{ "symbol": "NVDA", "mentions": 12 }],

@@ -15,8 +15,8 @@ import {
   pct,
   percentilePoint,
   returnClass
-} from "./src/dashboard/formatters.js";
-import { createInitialState } from "./src/dashboard/state.js";
+} from "./src/dashboard/formatters.js?v=20260909-briefing-cleanup";
+import { createInitialState } from "./src/dashboard/state.js?v=20260909-briefing-cleanup";
 import { buildSourceRefMap, sourceRefLabels } from "./src/dashboard/source-refs.js";
 import { normalizeApiBaseUrl, parseTickerInput as parseTickerText } from "./src/dashboard/ticker-input.js";
 
@@ -520,9 +520,9 @@ function breadthStats() {
 function commandStance() {
   const breadth = breadthStats();
   const marketStatus = state.snapshot.marketDataStatus || {};
-  const themes = new Set((state.snapshot.marketIntelligence?.topThemes || []).slice(0, 4).map((item) => item.theme));
-  const macroRisk = themes.has("Rates and central banks") || themes.has("Geopolitics and policy") || themes.has("Commodities and energy");
   const dataFresh = marketStatus.status === "fresh";
+  const nextEvent = (state.snapshot.calendar || [])[0];
+  const catalyst = nextEvent ? `Next scheduled catalyst: ${nextEvent.event} on ${formatShortDate(nextEvent.date)} at ${nextEvent.time}.` : "No high-importance macro event is currently listed.";
   if (!dataFresh) {
     return {
       label: "Data Caution",
@@ -531,26 +531,26 @@ function commandStance() {
       tone: "warning"
     };
   }
-  if ((breadth.bothPct ?? 0) >= 55 && !macroRisk) {
+  if ((breadth.bothPct ?? 0) >= 55) {
     return {
       label: "Constructive",
-      headline: "Breadth supports adding risk, but keep single-name quality high.",
-      body: "Use the tactical model for timing and the long-horizon model as confirmation.",
+      headline: `${breadth.bothPct}% of screened names are above both major trend lines.`,
+      body: `Participation is broad enough to support selective long exposure; ${breadth.above50Pct}% are above the 50-day average and ${breadth.above200Pct}% are above the 200-day. ${catalyst}`,
       tone: "positive"
     };
   }
   if ((breadth.bothPct ?? 0) >= 40) {
     return {
       label: "Selective Long Risk",
-      headline: "Stay long the cleanest setups, but size down around macro and energy risk.",
-      body: "The opportunity is in model-confirmed names, not broad market beta. Favor names with trend confirmation and clear risk controls.",
+      headline: `${breadth.bothPct}% of screened names clear both major trend lines.`,
+      body: `Participation is mixed, so favor model leaders with price confirmation over broad market exposure. ${catalyst}`,
       tone: "watch"
     };
   }
   return {
     label: "Defensive",
-    headline: "Breadth is too narrow for broad risk; concentrate only in confirmed leaders.",
-    body: "Avoid rebound-watch names until activation and keep the avoid list out of the long book.",
+    headline: `Only ${breadth.bothPct ?? 0}% of screened names clear both major trend lines.`,
+    body: `Narrow participation argues against broad risk and raises the bar for every single-name setup. ${catalyst}`,
     tone: "risk"
   };
 }
@@ -577,7 +577,6 @@ function renderCommandCenter() {
   const watchRows = topDecile.filter((row) => row.setupType === "model_rebound_watch" || row.setupType === "model_ranked_not_momentum_confirmed");
   const crossHorizon = strongestCrossHorizonRows();
   const sector = dominantSector(top25);
-  const sourceHealth = state.snapshot.marketIntelligence?.sourceHealth || {};
   const reddit = state.snapshot.marketIntelligence?.reddit || {};
   const redditTickers = reddit.topTickers || [];
   const avoidCompanies = state.snapshot.avoidList?.companies || [];
@@ -587,10 +586,10 @@ function renderCommandCenter() {
   const earningsMovers = state.snapshot.marketIntelligence?.earnings?.earningsMovers || [];
   const upcoming = state.snapshot.calendar || [];
   const model = state.snapshot.model || {};
-  const extended = topDecile.filter((row) => Number(row.rsi14) > 76).length;
   const notMomentumTop = topDecile.filter((row) => row.setupType !== "momentum_confirmed").slice(0, 4);
   const redditOverlap = redditTickers.filter((item) => topDecile.some((row) => row.symbol === item.symbol));
   const retailOnly = redditTickers.filter((item) => !topDecile.some((row) => row.symbol === item.symbol)).slice(0, 4);
+  const redditIsUnranked = reddit.metricMode === "unranked_recent_mentions";
 
   meta.textContent = `${model.status === "ready" ? `${model.scoredCount || 0} scored` : "model unavailable"} · ${model.asOfDate || "latest close"}`;
   $("#commandStanceLabel").textContent = stance.label;
@@ -600,15 +599,13 @@ function renderCommandCenter() {
   $("#commandBadges").innerHTML = [
     breadth.bothPct != null ? `${breadth.bothPct}% above both 50D/200D` : null,
     sector ? `${sector.sector}: ${sector.count}/top 25` : null,
-    reddit.status === "ready" ? "Reddit live" : reddit.status === "cache_fallback" ? "Reddit cached" : null,
-    sourceHealth.checked ? `${sourceHealth.live || 0}/${sourceHealth.checked} sources live` : null
+    reddit.status === "ready" ? "Reddit live" : reddit.status === "cache_fallback" ? "Reddit cached" : null
   ].filter(Boolean).map((item) => `<span>${esc(item)}</span>`).join("");
 
   $("#commandStats").innerHTML = [
     commandStat("Breadth", breadth.bothPct == null ? "n/a" : `${breadth.bothPct}%`, `${breadth.above50Pct ?? "n/a"}% above 50D · ${breadth.above200Pct ?? "n/a"}% above 200D`, breadth.bothPct >= 55 ? "positive" : breadth.bothPct >= 40 ? "watch" : "risk"),
     commandStat("Clean Top-Decile", `${momentumRows.length}/${topDecile.length || 0}`, "Momentum confirmed names inside the top model bucket", momentumRows.length >= topDecile.length / 2 ? "positive" : "watch"),
-    commandStat("Cross-Horizon", `${crossHorizon.length}`, "Top 1Y names with tactical confirmation", crossHorizon.length ? "positive" : "watch"),
-    commandStat("Source Health", sourceHealth.checked ? `${sourceHealth.live || 0}/${sourceHealth.checked}` : "n/a", "Live source pages feeding the briefing", sourceHealth.blockedOrFailed?.length ? "warning" : "positive")
+    commandStat("Cross-Horizon", `${crossHorizon.length}`, "Top 1Y names with tactical confirmation", crossHorizon.length ? "positive" : "watch")
   ].join("");
 
   const freshDriverItems = drivers
@@ -620,12 +617,12 @@ function renderCommandCenter() {
   const actionLeaders = momentumRows.slice(0, 3);
   const actionWatch = watchRows[0];
   const actionTitle = actionLeaders.length
-    ? `${actionLeaders.map((row) => row.symbol).join(", ")} are the cleanest tactical longs`
+    ? `Highest-ranked trend-confirmed research: ${actionLeaders.map((row) => row.symbol).join(", ")}`
     : actionWatch
       ? `${actionWatch.symbol} is the first watch-list setup`
       : "No clean tactical queue";
   const actionBody = actionLeaders.length
-    ? `Confirmed momentum with stops: ${actionLeaders.map((row) => `${row.symbol} ${money(row.stopSellPrice)}`).join(" · ")}.`
+    ? `7D return / stop: ${actionLeaders.map((row) => `${row.symbol} ${pct(row.return7)} / ${money(row.stopSellPrice)}`).join(" · ")}.`
     : "No top-decile name currently clears the momentum-confirmed setup filter.";
   const actionMeta = actionWatch
     ? `Watch: ${actionWatch.symbol}${actionWatch.reboundActivationPrice ? ` activation ${money(actionWatch.reboundActivationPrice)}` : " needs trend confirmation"}`
@@ -648,8 +645,8 @@ function renderCommandCenter() {
     "Risk checks",
     drivers[0]?.themes?.slice(0, 2).join(" / ") || (state.snapshot.marketIntelligence?.topThemes || [])[0]?.theme || "No dominant theme",
     `${drivers[0]?.summary || "No fresh professional driver cleared the current filter."} ${earningsMovers.length ? `Earnings watch: ${earningsMovers.slice(0, 3).map((item) => item.symbol).join(", ")}.` : ""}`,
-    `${extended} extended top-decile RSI flags`,
-    extended ? "warning" : "watch"
+    drivers[0]?.freshness || (earningsMovers.length ? `${earningsMovers.length} earnings-linked movers` : "Current risk check"),
+    drivers[0] ? "warning" : "watch"
   );
 
   const contradictionRows = [
@@ -681,12 +678,16 @@ function renderCommandCenter() {
   );
 
   $("#commandRetailSignal").innerHTML = commandCard(
-    redditOverlap.length ? "Retail overlap" : "Retail separate",
+    redditOverlap.length ? "Retail overlap" : redditIsUnranked ? "Recent WSB mentions" : "Retail separate",
     redditOverlap.length ? redditOverlap.map((item) => item.symbol).join(", ") : (retailOnly.map((item) => item.symbol).join(", ") || "No clean ticker concentration"),
     redditOverlap.length
-      ? "Retail attention overlaps with model leadership; treat it as crowding/sentiment, not proof."
-      : "Retail chatter is not setting the model queue. Use it as market color unless price and model confirmation show up.",
-    reddit.status === "ready" ? "Reddit live" : reddit.status === "cache_fallback" ? "Reddit cached" : "Reddit unavailable",
+      ? redditIsUnranked
+        ? "A recent WallStreetBets post overlaps model leadership, but the RSS fallback cannot measure popularity. Treat this as low-confidence crowding context."
+        : "Authenticated retail attention overlaps model leadership; treat it as a crowding check, not proof."
+      : redditIsUnranked
+        ? "These are recent post mentions from one RSS feed, not a popularity ranking or trade signal."
+        : "Retail chatter is not setting the model queue. Use it as market color unless price and model confirmation show up.",
+    reddit.status === "ready" ? (redditIsUnranked ? "RSS sample" : "Reddit live") : reddit.status === "cache_fallback" ? "Reddit cached" : "Reddit unavailable",
     redditOverlap.length ? "warning" : "watch"
   );
 }
@@ -704,12 +705,43 @@ function renderNote() {
   renderList($("#watchList"), note.watch || []);
 }
 
+function renderRefreshHealth() {
+  const target = $("#refreshHealth");
+  if (!target) return;
+  const refresh = state.refreshStatus || {};
+  const snapshotTime = new Date(state.snapshot.generatedAt || 0).getTime();
+  const statusSnapshotTime = new Date(refresh.snapshotGeneratedAt || 0).getTime();
+  const failed = refresh.status === "failure" || refresh.publishStatus === "not_published";
+  const mismatch = Number.isFinite(statusSnapshotTime) && statusSnapshotTime > 0 && Number.isFinite(snapshotTime) && statusSnapshotTime !== snapshotTime;
+
+  target.className = "refresh-health";
+  if (failed) {
+    target.classList.add("failed");
+    target.textContent = "Latest refresh failed";
+  } else if (mismatch) {
+    target.classList.add("warning");
+    target.textContent = "Snapshot mismatch";
+  } else if (refresh.status === "success" && refresh.publishStatus === "published") {
+    target.classList.add("ready");
+    target.textContent = "Published";
+  } else {
+    target.classList.add("warning");
+    target.textContent = refresh.status === "loading" ? "Checking refresh" : "Refresh status unavailable";
+  }
+}
+
 function renderDataStatusBanner() {
   const banner = $("#dataStatusBanner");
   if (!banner) return;
   const messages = [];
   const marketStatus = state.snapshot.marketDataStatus;
   const model = state.snapshot.model || {};
+  const refresh = state.refreshStatus || {};
+
+  if (refresh.status === "failure" || refresh.publishStatus === "not_published") {
+    const failedAt = refresh.generatedAt ? ` at ${formatDate(refresh.generatedAt)}` : "";
+    messages.push(`The latest scheduled refresh failed${failedAt}. This page is preserving the last verified snapshot; inspect the Actions run before treating it as current.${refresh.runUrl ? ` Run: ${refresh.runUrl}` : ""}`);
+  }
 
   if (marketStatus?.status && marketStatus.status !== "fresh") {
     messages.push(marketStatus.message || "Fresh price and technical data is unavailable; stale cached technical data is not shown.");
@@ -761,10 +793,11 @@ function renderMarketIntelligence() {
   const earningsMovers = (intel.earnings?.earningsMovers || []).slice(0, 5);
   const reddit = intel.reddit || {};
   const redditTickers = (reddit.topTickers || []).slice(0, 5);
+  const redditIsUnranked = reddit.metricMode === "unranked_recent_mentions";
   const redditStatusDetail = reddit.status === "cache_fallback"
     ? `Showing last successful Reddit sample from ${formatShortDate(reddit.sourceGeneratedAt || reddit.generatedAt)}.`
     : reddit.status === "error"
-      ? `Reddit fetch failed: ${(reddit.currentFetchErrors || reddit.subreddits?.map((item) => item.error).filter(Boolean) || []).slice(0, 2).join(" | ") || "no clean data returned"}.`
+      ? reddit.statusReason || "Reddit returned no clean ticker concentration during this refresh."
       : "No clean Reddit ticker concentration was extracted in this snapshot.";
 
   renderIntelStack(
@@ -773,8 +806,8 @@ function renderMarketIntelligence() {
     "No fresh professional market-driver items were extracted in this snapshot.",
     (item) => `
       ${intelItemLink(item)}
-      <span>${esc((item.themes || []).slice(0, 2).join(" / ") || "Market driver")} · ${esc(item.sourceName || "")}</span>
-      <small>${esc(item.freshness || "")}${item.publishedAt ? ` · ${esc(formatShortDate(item.publishedAt))}` : ""}</small>
+      ${item.summary ? `<p>${esc(item.summary)}</p>` : ""}
+      <small>${esc((item.themes || []).slice(0, 2).join(" / ") || "Market driver")} · ${esc(item.sourceName || "")}${item.publishedAt ? ` · ${esc(formatShortDate(item.publishedAt))}` : ""}</small>
     `
   );
 
@@ -797,10 +830,15 @@ function renderMarketIntelligence() {
       const topPost = item.posts?.[0]?.title || "";
       const statusNote = reddit.status === "cache_fallback"
         ? `Cached sentiment sample · ${esc(formatShortDate(reddit.sourceGeneratedAt || reddit.generatedAt))}`
-        : "Retail sentiment only; not verified news.";
+        : redditIsUnranked
+          ? "One-feed RSS post mention; popularity metrics unavailable."
+          : "Authenticated retail attention; not verified news.";
+      const metrics = redditIsUnranked
+        ? `${esc(item.mentions || 0)} filtered post mention${Number(item.mentions) === 1 ? "" : "s"} · unranked RSS sample · ${esc((item.subreddits || []).join(", "))}`
+        : `Attention ${esc(item.attentionScore ?? "n/a")} · ${esc(item.mentions || 0)} filtered mentions${item.directMentions != null ? ` · ${esc(item.directMentions)} direct` : ""} · ${esc(item.comments || 0)} comments · ${esc((item.subreddits || []).join(", "))}`;
       return `
       <strong>${esc(item.symbol)}</strong>
-      <span>Attention ${esc(item.attentionScore ?? "n/a")} · ${esc(item.mentions || 0)} filtered mentions${item.directMentions != null ? ` · ${esc(item.directMentions)} direct` : ""} · ${esc(item.comments || 0)} comments · ${esc((item.subreddits || []).join(", "))}</span>
+      <span>${metrics}</span>
       <small>${topPost ? `Top post: ${esc(topPost)}` : statusNote}</small>
     `;
     }
@@ -1952,6 +1990,7 @@ function renderSources() {
                   (article) => `
                     <a class="source-article" href="${esc(article.url)}" target="_blank" rel="noreferrer">
                       <strong>${esc(article.title)}</strong>
+                      ${article.summary ? `<p>${esc(article.summary)}</p>` : ""}
                       <span>${esc(article.sourceName || source.name)} · ${esc(formatShortDate(article.publishedAt))}</span>
                     </a>
                   `
@@ -1967,6 +2006,7 @@ function renderSources() {
 
 function render() {
   renderNote();
+  renderRefreshHealth();
   renderMarketStrip();
   renderDeeperRead();
   renderAiRecommendations();
@@ -2085,12 +2125,11 @@ async function checkTickerLabAvailability() {
     } else {
       state.tickerLab.status = payload.error || "Ticker Lab backend is disabled.";
     }
-  } catch (error) {
+  } catch {
     state.tickerLab.enabled = true;
     state.tickerLab.apiReady = false;
     state.tickerLab.requiresAccessCode = false;
     state.tickerLab.status = "Ticker Lab backend is not connected yet. Add the hosted API URL to config/runtime.json or run npm run dev:local.";
-    console.warn(error);
   }
   renderTickerLab();
 }
@@ -2148,6 +2187,24 @@ async function loadSnapshot() {
     state.snapshot = fallbackSnapshot;
   }
   render();
+}
+
+async function loadRefreshStatus() {
+  try {
+    state.refreshStatus = await fetchJson("data/refresh-status.json", "Refresh status");
+  } catch (error) {
+    console.warn(error);
+    state.refreshStatus = {
+      status: "missing",
+      publishStatus: null,
+      generatedAt: null,
+      message: error.message,
+      runUrl: null,
+      snapshotGeneratedAt: null
+    };
+  }
+  renderRefreshHealth();
+  renderDataStatusBanner();
 }
 
 async function loadScorebook() {
@@ -2249,6 +2306,7 @@ async function loadLongHorizonResearch() {
 
 wireControls();
 loadSnapshot();
+loadRefreshStatus();
 loadScorebook();
 loadModelMonitoring();
 loadLongHorizonResearch();

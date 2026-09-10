@@ -1,4 +1,5 @@
-import { appendFileSync } from "node:fs";
+import { appendFileSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 function positiveInteger(value, fallback) {
@@ -45,6 +46,7 @@ async function defaultSleep(ms) {
 async function confirmLivePagesStatus({
   pageUrl,
   expectedRunId,
+  expectedArtifacts,
   attempts = 12,
   delayMs = 10000,
   fetchImpl = fetch,
@@ -54,21 +56,41 @@ async function confirmLivePagesStatus({
   summaryPath
 } = {}) {
   const normalizedPageUrl = normalizePageUrl(pageUrl);
-  const statusUrl = new URL("data/refresh-status.json", normalizedPageUrl).toString();
   const expected = String(expectedRunId || "");
+  if (!expected) throw new Error("EXPECTED_RUN_ID is required for live Pages confirmation.");
+  if (!expectedArtifacts || !Object.keys(expectedArtifacts).length) throw new Error("Expected dashboard artifact hashes are required.");
+  const statusUrlObject = new URL("data/refresh-status.json", normalizedPageUrl);
+  if (expected) statusUrlObject.searchParams.set("run", expected);
+  const statusUrl = statusUrlObject.toString();
   let lastError = null;
 
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
-      const response = await fetchImpl(statusUrl, { cache: "no-store" });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const probeUrl = new URL(statusUrl);
+      probeUrl.searchParams.set("attempt", String(attempt));
+      const response = await fetchImpl(probeUrl.toString(), { cache: "no-store", signal: AbortSignal.timeout(15000) });
+      if (!response.ok) {
+        await response.body?.cancel?.();
+        throw new Error(`HTTP ${response.status}`);
+      }
       const status = await response.json();
       if (
         String(status.runId || "") === expected
         && status.status === "success"
         && status.publishStatus === "published"
       ) {
-        const result = { confirmed: true, statusUrl, expectedRunId: expected, attemptsUsed: attempt };
+        for (const [path, digest] of Object.entries(expectedArtifacts)) {
+          const artifactUrl = new URL(path, normalizedPageUrl);
+          artifactUrl.search = probeUrl.search;
+          const artifactResponse = await fetchImpl(artifactUrl.toString(), { cache: "no-store", signal: AbortSignal.timeout(15000) });
+          if (!artifactResponse.ok) {
+            await artifactResponse.body?.cancel?.();
+            throw new Error(`HTTP ${artifactResponse.status} for ${path}`);
+          }
+          const servedDigest = createHash("sha256").update(await artifactResponse.text()).digest("hex");
+          if (servedDigest !== digest) throw new Error(`Live artifact does not match verified output: ${path}`);
+        }
+        const result = { confirmed: true, statusUrl, expectedRunId: expected, attemptsUsed: attempt, artifactCount: Object.keys(expectedArtifacts).length };
         logger.log?.(`Confirmed live Pages status for run ${expected} at ${statusUrl}`);
         writeOutput(outputPath, {
           live_confirmed: "true",
@@ -94,7 +116,7 @@ async function confirmLivePagesStatus({
     attemptsUsed: attempts,
     lastError
   };
-  logger.warn?.(`Live Pages status did not confirm run ${expected}; continuing because deploy-pages already succeeded. Monitor Refresh Health will catch a stale live site. Last issue: ${lastError || "unknown"}`);
+  logger.warn?.(`Live Pages status did not confirm run ${expected}; the scheduled target must remain retryable until publication is observed. Last issue: ${lastError || "unknown"}`);
   writeOutput(outputPath, {
     live_confirmed: "false",
     live_status_url: statusUrl,
@@ -106,14 +128,19 @@ async function confirmLivePagesStatus({
 
 async function main() {
   try {
-    await confirmLivePagesStatus({
+    const result = await confirmLivePagesStatus({
       pageUrl: process.env.PAGE_URL,
       expectedRunId: process.env.EXPECTED_RUN_ID,
+      expectedArtifacts: Object.fromEntries([
+        "data/snapshot.json", "data/model-scorebook.json",
+        "data/long-horizon-research.json", "data/model-monitoring.json"
+      ].map((path) => [path, createHash("sha256").update(readFileSync(path)).digest("hex")])),
       attempts: positiveInteger(process.env.LIVE_CONFIRM_ATTEMPTS, 12),
       delayMs: positiveInteger(process.env.LIVE_CONFIRM_DELAY_MS, 10000),
       outputPath: process.env.GITHUB_OUTPUT,
       summaryPath: process.env.GITHUB_STEP_SUMMARY
     });
+    if (!result.confirmed && process.env.LIVE_CONFIRM_STRICT === "1") process.exitCode = 1;
   } catch (error) {
     console.warn(`Live Pages confirmation could not run: ${error.message}`);
     writeOutput(process.env.GITHUB_OUTPUT, {
@@ -121,7 +148,7 @@ async function main() {
       live_status_url: "",
       live_confirmation_error: error.message
     });
-    if (process.env.LIVE_CONFIRM_STRICT === "1") process.exit(1);
+    if (process.env.LIVE_CONFIRM_STRICT === "1") process.exitCode = 1;
   }
 }
 

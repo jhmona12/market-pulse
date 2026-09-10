@@ -117,9 +117,12 @@ function expectedTargetsForNow(date = now) {
   const parts = localParts(date, timezone);
   const dateKey = localDateKey(parts);
   const currentMinutes = parts.hour * 60 + parts.minute;
-  const expected = [];
-  if (currentMinutes >= minutesFromClock(morningCutoff)) expected.push(`${dateKey}-morning`);
-  if (currentMinutes >= minutesFromClock(eveningCutoff)) expected.push(`${dateKey}-evening`);
+  // Calendar subtraction, not 24 elapsed hours, keeps Pacific dates correct at DST boundaries.
+  const priorDate = new Date(Date.UTC(parts.year, parts.month - 1, parts.day - 1)).toISOString().slice(0, 10);
+  const expected = [
+    `${currentMinutes >= minutesFromClock(morningCutoff) ? dateKey : priorDate}-morning`,
+    `${currentMinutes >= minutesFromClock(eveningCutoff) ? dateKey : priorDate}-evening`
+  ];
   return { dateKey, localTime: `${two(parts.hour)}:${two(parts.minute)}:${two(parts.second)}`, expected };
 }
 

@@ -281,5 +281,8 @@ export {
   summaryFromHtml,
   titleFromFeed,
   titleFromHtml,
-  visibleTextFromHtml
+  visibleTextFromHtml,
+  xmlLink,
+  xmlRaw,
+  xmlText
 };

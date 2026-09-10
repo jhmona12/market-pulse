@@ -1,6 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { shouldUpdateRefreshLedger } from "./refresh/status-policy.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const status = process.argv[2] || "unknown";
@@ -64,7 +65,12 @@ const payload = {
 await writeFile(join(root, "data/refresh-status.json"), `${JSON.stringify(payload, null, 2)}\n`);
 
 const targetKey = payload.refreshTargetKey;
-if (status === "success" && publishStatus === "published" && targetKey && targetKey !== "manual") {
+if (shouldUpdateRefreshLedger({
+  status,
+  publishStatus,
+  targetKey,
+  publishConfirmed: process.env.UPDATE_REFRESH_LEDGER === "1"
+})) {
   const existingLedger = (await readJson("data/refresh-ledger.json")) || {};
   const successfulTargets = Array.isArray(existingLedger.successfulTargets) ? existingLedger.successfulTargets : [];
   const nextEntry = {

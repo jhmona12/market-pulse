@@ -55,6 +55,9 @@ function buildAiMemoInputPayload({
       },
       reddit: {
         status: marketIntelligence?.reddit?.status || "missing",
+        authMode: marketIntelligence?.reddit?.authMode || "unknown",
+        metricMode: marketIntelligence?.reddit?.metricMode || "unavailable",
+        sampleCoverage: marketIntelligence?.reddit?.sampleCoverage || null,
         sourceNote: marketIntelligence?.reddit?.sourceNote || "",
         subreddits: marketIntelligence?.reddit?.subreddits || [],
         topTickers: (marketIntelligence?.reddit?.topTickers || []).slice(0, 12),

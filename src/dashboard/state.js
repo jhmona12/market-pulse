@@ -2,6 +2,14 @@ export function createInitialState(fallbackSnapshot) {
   return {
     snapshot: fallbackSnapshot,
     activeView: "briefing",
+    refreshStatus: {
+      status: "loading",
+      publishStatus: null,
+      generatedAt: null,
+      message: null,
+      runUrl: null,
+      snapshotGeneratedAt: null
+    },
     scorebook: {
       status: "loading",
       generatedAt: null,

@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { formatDate } from "../src/dashboard/formatters.js";
 import { parseTickerInput } from "../src/dashboard/ticker-input.js";
 import { buildSourceRefMap, sourceRefLabels, sortedSourceArticles } from "../src/dashboard/source-refs.js";
 
@@ -30,4 +31,11 @@ test("sorts and labels source refs from research and official macro inputs", () 
   assert.deepEqual(sortedSourceArticles(snapshot.sources).map((article) => article.title), ["Newer", "Older"]);
   const refs = buildSourceRefMap(snapshot);
   assert.deepEqual(sourceRefLabels(["S1", "O1", "C1-EARNINGS"], "AAPL", refs), ["Source B", "BLS", "AAPL Earnings"]);
+});
+
+test("formats dashboard refresh timestamps explicitly in Pacific time", () => {
+  const formatted = formatDate("2026-09-08T16:40:00Z");
+  assert.match(formatted, /Sep 8/);
+  assert.match(formatted, /9:40 AM/);
+  assert.match(formatted, /PDT|PST/);
 });

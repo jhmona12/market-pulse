@@ -1,6 +1,7 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
+import { tmpdir } from "node:os";
 import { validateDashboardSchemas } from "./snapshot/schemas.mjs";
 import { sortedSourceArticles } from "../src/dashboard/source-refs.js";
 
@@ -12,8 +13,12 @@ function fail(message) {
   process.exitCode = 1;
 }
 
-function run(command, args) {
-  const result = spawnSync(command, args, { cwd: root, encoding: "utf8" });
+function run(command, args, options = {}) {
+  const result = spawnSync(command, args, {
+    cwd: root,
+    encoding: "utf8",
+    env: { ...process.env, ...(options.env || {}) }
+  });
   if (result.stdout) process.stdout.write(result.stdout);
   if (result.stderr) process.stderr.write(result.stderr);
   if (result.status !== 0) fail(`${command} ${args.join(" ")} failed with exit code ${result.status}`);
@@ -80,7 +85,12 @@ run(node, ["--check", "scripts/check-refresh-window.mjs"]);
 run(node, ["--check", "scripts/monitor-refreshes.mjs"]);
 run(node, ["--check", "scripts/refresh/confirm-live-pages.mjs"]);
 run(node, ["--check", "scripts/refresh/run-snapshot-refresh.mjs"]);
+run(node, ["--check", "scripts/refresh/run-model-scoring.mjs"]);
+run(node, ["--check", "scripts/refresh/status-policy.mjs"]);
+run(node, ["--check", "scripts/refresh/recover-dashboard.mjs"]);
 run(node, ["--check", "scripts/ingest/sources.mjs"]);
+run(node, ["--check", "scripts/ingest/reddit.mjs"]);
+run(node, ["--check", "scripts/ingest/http.mjs"]);
 run(node, ["--check", "scripts/snapshot/ai-memo.mjs"]);
 run(node, ["--check", "scripts/snapshot/schemas.mjs"]);
 filesIn(join(root, "src"), (path) => path.endsWith(".js")).forEach((path) => run(node, ["--check", path]));
@@ -91,7 +101,12 @@ const pythonFiles = [
   ...filesIn(join(root, "scripts/modeling"), (path) => path.endsWith(".py")),
   "analysis/model-monitoring/run_recent_decile_backtest.py"
 ];
-run(python, ["-m", "py_compile", ...pythonFiles]);
+const pythonCacheEnv = { PYTHONPYCACHEPREFIX: join(tmpdir(), "market-pulse-pycache") };
+run(python, ["-m", "py_compile", ...pythonFiles], { env: pythonCacheEnv });
+const modelPython = existsSync(join(root, ".venv-model", "bin", "python"))
+  ? join(root, ".venv-model", "bin", "python")
+  : python;
+run(modelPython, ["-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"], { env: pythonCacheEnv });
 
 const requiredJsonFiles = [
   "config/runtime.json",
@@ -161,6 +176,16 @@ if (longRanks.length && (longRanks[0] !== 1 || longRanks.at(-1) !== longHorizonR
 if (scorebook.asOfDate && longHorizonResearch.asOfDate && scorebook.asOfDate !== longHorizonResearch.asOfDate) {
   fail(`long-horizon asOfDate ${longHorizonResearch.asOfDate} does not match scorebook ${scorebook.asOfDate}`);
 }
+const scorebookBySymbol = new Map(scorebook.rows.map((row) => [row.symbol, row]));
+const inconsistentLongHorizonMetrics = longHorizonResearch.rows.filter((row) => {
+  const tactical = scorebookBySymbol.get(row.symbol);
+  if (!tactical || tactical.asOfDate !== row.asOfDate) return false;
+  return ["beta60d", "return7", "return14", "return30", "return60", "return90", "ytdReturn"]
+    .some((field) => numberOrNull(row[field]) !== numberOrNull(tactical[field]));
+});
+if (inconsistentLongHorizonMetrics.length) {
+  fail(`${inconsistentLongHorizonMetrics.length} long-horizon rows disagree with scorebook beta/return display fields`);
+}
 
 const topDecileCutoff = Math.ceil(scorebook.rows.length * 0.1);
 const expectedTopDecile = scorebook.rows
@@ -199,17 +224,48 @@ if (/[\u3400-\u9FFF]/.test(serializedDashboard)) {
 });
 
 const aiMemoText = collectStrings(snapshot.aiRecommendations || {}).join(" ");
+const dailyReadText = collectStrings(snapshot.note || {}).join(" ");
 if (/\bstop(?:-loss)?(?:\s+(?:level|price))?\s*(?:of|at|near|below|under|:)?\s*\$?\d+(?:\.\d+)?\b/i.test(aiMemoText)) {
   fail("AI Strategy Memo contains a stop-loss metric that should be rendered only as a deterministic dashboard label");
 }
 if (/\bstopSell\b/i.test(aiMemoText)) {
   fail("AI Strategy Memo contains internal stopSell terminology");
 }
-if (/fed\s*\/\s*yields noise|dominant arbiter|above-avg|coming up in late july|drives tech sentiment|sets the market tone|supports the whole sector|mega-cap reporters|high-profile earnings|activation signals.*\?/i.test(aiMemoText)) {
+if (/fed\s*\/\s*yields noise|dominant arbiter|above-avg|coming up in late july|drives tech sentiment|sets the market tone|supports the whole sector|mega-cap reporters|high-profile earnings|activation signals[^.!?]{0,120}\?/i.test(aiMemoText)) {
   fail("AI Strategy Memo contains low-quality shorthand or unsupported broad-read-through language");
+}
+if (/\b(?:HH uncertainty|high-litness|deeperReadCardsCount|openQuestions:|post-OCT|ROIC shifts?|APPL)\b/i.test(aiMemoText)) {
+  fail("AI Strategy Memo contains malformed, unsupported, or typo-prone generated language");
 }
 if (hasRepeatedTickerList(aiMemoText)) {
   fail("AI Strategy Memo contains a repeated ticker list");
+}
+if (/\bSkip Navigation\b/i.test(`${dailyReadText} ${aiMemoText}`)) {
+  fail("Daily Read or AI Strategy Memo contains source-page navigation debris");
+}
+if (/\bResearch tape:\s*[^.]+(?:\||;)[^.]+/i.test(dailyReadText)) {
+  fail("Daily Read contains a source-name or article-title list instead of an investment conclusion");
+}
+if (/\b\d+\/\d+\s+(?:sources?|pages?)\s+live\b/i.test(dailyReadText)) {
+  fail("Daily Read contains source-health telemetry that belongs in diagnostics");
+}
+const unsupportedCompanyNews = (snapshot.aiRecommendations?.recommendations || []).filter((item) => {
+  const text = String(item.recentNews || "");
+  return text && !/^Recent company-specific headline to investigate:|^No clear recent company-specific catalyst was found/i.test(text);
+});
+if (unsupportedCompanyNews.length) {
+  fail(`AI Strategy Memo contains ungrounded company-news prose for: ${unsupportedCompanyNews.map((item) => item.symbol).join(", ")}`);
+}
+const ungroundedMacroRecommendations = (snapshot.aiRecommendations?.recommendations || []).filter((item) => {
+  const text = String(item.macroLink || "");
+  return text && !/^Portfolio backdrop|^No fresh macro or market-driver conclusion/i.test(text);
+});
+if (ungroundedMacroRecommendations.length) {
+  fail(`AI Strategy Memo contains ungrounded recommendation macro prose for: ${ungroundedMacroRecommendations.map((item) => item.symbol).join(", ")}`);
+}
+const aiDailyRead = snapshot.aiRecommendations?.dailyRead;
+if (aiDailyRead && ((aiDailyRead.body || "").length > 500 || /\b(?:top[- ]decile|model[- ]led|model leadership|momentum leads?)\b/i.test(aiDailyRead.headline || ""))) {
+  fail("AI Daily Read violates the concise market-led publication contract");
 }
 
 const validSourceRefs = new Set(sortedSourceArticles(snapshot.sources).map((_, index) => `S${index + 1}`));
@@ -261,10 +317,16 @@ if (deployIndex === -1 || liveConfirmIndex === -1 || commitPublishedIndex === -1
   fail(".github/workflows/refresh-data.yml must not commit the successful refresh ledger before Pages deploy and live probing");
 }
 if (!refreshWorkflow.includes("node scripts/refresh/confirm-live-pages.mjs")) {
-  fail(".github/workflows/refresh-data.yml must use the tested non-blocking live Pages probe");
+  fail(".github/workflows/refresh-data.yml must use the tested live Pages publication probe");
 }
 if (!refreshWorkflow.includes("node scripts/refresh/run-snapshot-refresh.mjs") || !refreshWorkflow.includes("SNAPSHOT_REFRESH_ATTEMPTS: 2")) {
   fail(".github/workflows/refresh-data.yml must use the tested refresh/verify retry wrapper");
+}
+if (!refreshWorkflow.includes("node scripts/refresh/run-model-scoring.mjs") || !refreshWorkflow.includes("MODEL_SCORING_ATTEMPTS: 2")) {
+  fail(".github/workflows/refresh-data.yml must use the tested phase-aware model scoring retry wrapper");
+}
+if (!refreshWorkflow.includes("MODEL_DATA_READINESS_ATTEMPTS: 3") || !refreshWorkflow.includes("MODEL_DATA_READINESS_DELAY_SECONDS: 30") || !refreshWorkflow.includes("MODEL_MIN_SESSION_COVERAGE")) {
+  fail(".github/workflows/refresh-data.yml must configure explicit Yahoo EOD readiness retries");
 }
 if (!refreshWorkflow.includes("Retry Deploy Pages") || !refreshWorkflow.includes("steps.deployment.outcome != 'success'")) {
   fail(".github/workflows/refresh-data.yml must retry GitHub Pages deployment once after a failed primary deploy");
@@ -272,13 +334,28 @@ if (!refreshWorkflow.includes("Retry Deploy Pages") || !refreshWorkflow.includes
 if (!refreshWorkflow.includes("PAGES_PUBLISH_STATUS: published") || !refreshWorkflow.includes("PAGES_PUBLISH_STATUS: not_published")) {
   fail(".github/workflows/refresh-data.yml does not record published/not_published refresh status states");
 }
+if (!refreshWorkflow.includes("UPDATE_REFRESH_LEDGER: \"1\"") || !refreshWorkflow.includes("name: Record confirmed publish in refresh ledger") || !refreshWorkflow.includes("LIVE_CONFIRM_STRICT: \"1\"")) {
+  fail(".github/workflows/refresh-data.yml must mark a refresh target complete only after the live Pages probe succeeds");
+}
+const failedStatusIndex = refreshWorkflow.indexOf("name: Write failed refresh status");
+const failedStatusDeployIndex = refreshWorkflow.indexOf("name: Publish failure status to Pages");
+if (failedStatusIndex === -1 || failedStatusDeployIndex === -1 || failedStatusIndex > failedStatusDeployIndex) {
+  fail(".github/workflows/refresh-data.yml must publish failed refresh status while preserving the last good dashboard snapshot");
+}
+const restoreVerifiedIndex = refreshWorkflow.indexOf("name: Restore last verified dashboard artifacts after failure");
+if (restoreVerifiedIndex === -1 || restoreVerifiedIndex > failedStatusIndex || !refreshWorkflow.includes("artifact_name: github-pages-failure")) {
+  fail(".github/workflows/refresh-data.yml must restore verified artifacts and use a distinct failure-status Pages artifact");
+}
+if (!refreshWorkflow.includes("node scripts/refresh/recover-dashboard.mjs") || !refreshWorkflow.includes("steps.failure_recovery.outputs.recovered == 'true'")) {
+  fail("Failure publication must be gated on recovery that checks the remote branch and preserves confirmed live data");
+}
 if (!refreshWorkflow.includes("group: pages")) {
   fail(".github/workflows/refresh-data.yml must share the Pages concurrency group with the deploy workflow");
 }
 if (refreshWorkflow.includes("data/model-reference-cache.json") || refreshWorkflow.includes("data/market-cap-cache.json") || refreshWorkflow.includes("data/reddit-tape-cache.json") || refreshWorkflow.includes("data/deeper-read-history.json")) {
   fail(".github/workflows/refresh-data.yml should not commit legacy runtime cache files");
 }
-if (!refreshWorkflow.includes("cp -R src public/src")) {
+if (!refreshWorkflow.includes("cp -R src/. public/src/")) {
   fail(".github/workflows/refresh-data.yml does not publish browser modules from src/");
 }
 

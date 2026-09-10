@@ -10,7 +10,8 @@ The project is built to run cheaply with free data sources. It is not an intrada
 flowchart TD
   schedule[".github/workflows/refresh-data.yml<br/>Redundant 5 AM + 4 PM PT attempts"] --> gate["scripts/check-refresh-window.mjs<br/>Pacific window gate + idempotency check"]
   ledger["data/refresh-ledger.json<br/>Successful morning/evening refresh ledger"] --> gate
-  gate --> scorer["scripts/modeling/score_live_rank_model.py<br/>Scores current S&P 500 with XGBoost"]
+  gate --> scorerRetry["scripts/refresh/run-model-scoring.mjs<br/>Retries only the failed scoring phase"]
+  scorerRetry --> scorer["scripts/modeling/score_live_rank_model.py<br/>Validates EOD readiness, then scores both models"]
 
   modelFiles["models/rank/*<br/>Production model, metadata, explainability"] --> scorer
   universe["config/universe.json<br/>ETF universe and fallback stocks"] --> scorer
@@ -19,6 +20,7 @@ flowchart TD
 
   gate --> refresh["scripts/update-data.mjs<br/>Builds the market briefing"]
   sourceParser["scripts/ingest/sources.mjs<br/>Markdown, RSS, HTML article extraction"] --> refresh
+  redditParser["scripts/ingest/reddit.mjs<br/>Reddit JSON/RSS normalization"] --> refresh
   aiMemoBuilder["scripts/snapshot/ai-memo.mjs<br/>AI memo payload + response schema"] --> refresh
   schemas["schemas/*.schema.json<br/>Dashboard JSON contracts"] --> refresh
   newsSources["config/news-sources.md<br/>Research and news source registry"] --> refresh
@@ -30,11 +32,11 @@ flowchart TD
 
   refresh --> snapshot["data/snapshot.json<br/>Briefing, tactical book, market intelligence, macro, source tape"]
   refresh --> scorebook["data/model-scorebook.json<br/>Tactical Book full S&P 500 scoreboard"]
-  refresh --> monitoring["data/model-monitoring.json<br/>Model Lab top-decile monitor"]
+  refresh --> monitoring["data/model-monitoring.json<br/>Lab top-decile monitor"]
   refresh --> longResearch["data/long-horizon-research.json<br/>Strategic Book one-year model lens"]
   refresh --> runtimeCache["data/cache/*<br/>Runtime caches, ignored by git"]
   gate --> refreshStatus["data/refresh-status.json<br/>Last run status, publish state, delay, model date, row counts"]
-  pages --> publishCheck["Refresh workflow<br/>Deploy + non-blocking live status probe"]
+  pages --> publishCheck["Refresh workflow<br/>Deploy + required live status and artifact checks"]
   publishCheck --> ledger
   monitor[".github/workflows/monitor-refresh.yml<br/>Missed-run + stale-site dead-man check"] --> ledger
   monitor --> pages
@@ -48,9 +50,9 @@ flowchart TD
   ledger --> pages
   appFiles["index.html + app.js + src/dashboard/* + styles.css<br/>Browser dashboard UI"] --> pages
   runtime["config/runtime.json<br/>Optional private Ticker Lab backend URL"] --> pages
-  pages --> browser["Laptop or mobile browser<br/>Briefing, Tactical, Strategic, Intel, Model Lab"]
+  pages --> browser["Laptop or mobile browser<br/>Today, Tactical, Strategic, Research, Lab"]
 
-  browser -. optional private scoring .-> tickerUi["Model Lab<br/>Ticker Lab"]
+  browser -. optional private scoring .-> tickerUi["Lab<br/>Ticker Lab"]
   tickerUi -. POST /api/ticker-lab/score .-> backend["scripts/local-dashboard-server.mjs<br/>Local or hosted private API"]
   backend --> scorer
   referenceCache --> backend
@@ -63,7 +65,7 @@ flowchart TD
 - Summarizes the current market setup in a Command Center built around stance, action queue, what changed, risk radar, contradictions, portfolio shape, and retail sentiment.
 - Screens S&P 500 constituents and a curated ETF universe for momentum setups.
 - Scores current S&P 500 stocks with a production XGBoost learning-to-rank model.
-- Organizes the web UI into five primary views: Briefing, Tactical Book, Strategic Book, Market Intel, and Model Lab.
+- Organizes the web UI into five primary views: Today, Tactical, Strategic, Research, and Lab. The Today view stays concise; detailed AI calls and model diagnostics live with the book they support.
 - Publishes a full S&P 500 Model Scoreboard inside the Tactical Book with every scored company ranked from highest model score to lowest.
 - Tags top-ranked names by setup type, separating clean momentum from model-ranked rebound watches that are not yet momentum-confirmed.
 - Shows a volatility-adjusted rebound activation price for high-ranked broken-trend names when the model likes the setup but price action still needs confirmation.
@@ -74,13 +76,14 @@ flowchart TD
 - Ingests public research and commentary sources listed in `config/news-sources.md`.
 - Discovers recent articles from source landing pages and RSS feeds, prioritizes newer dated articles, and builds a top-of-report market intelligence tape.
 - Tracks professional market drivers, earnings calendars, earnings-linked daily movers, Yahoo Finance mover screens, and Reddit ticker attention as separate inputs.
-- Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data into structured research recommendations.
-- Adds a Deeper Read section that uses AI to surface differentiated, thought-provoking source analysis from the last 7 days rather than generic daily market recaps.
-- Keeps the Briefing view decision-first: Command Center first, Market Read second, evidence tape below it, and detailed scoreboards/diagnostics in their own tabs.
+- Optionally generates an AI Strategy Memo that combines article commentary, macro context, sector behavior, model rankings, and momentum data. Deterministic code then restores exact model mechanics, conviction tiers, macro evidence, and risk fields before publication.
+- Adds a Deeper Read section that uses AI to surface differentiated source analysis from the last 7 days. Candidates must include substantive source text; RSS headlines alone are excluded so the AI cannot manufacture a thesis from a title.
+- Keeps the Today view decision-first: Command Center first, Market Read second, evidence tape below it, and detailed scoreboards/diagnostics in their own tabs.
 - Enriches model candidates with company descriptions, market caps, investor relations links, earnings context, and recent ticker-specific news where free sources are available.
-- Uses AI to draft the Daily Read executive snapshot, with deterministic model, sector, macro, and source-tape metrics as guardrails and fallback.
+- Uses AI to draft a two-sentence Daily Read narrative when it clears local quality checks; source-grounded market bullets, catalysts, breadth, and model evidence remain deterministic.
 - Shows a Stay Away section based on the lowest-ranked model names and weakest sector clusters, framed as risk control rather than short-sale advice.
-- Refuses to silently reuse stale model rankings or stale technical tape; the dashboard shows a visible data-status warning when fresh model or price data is unavailable.
+- Refuses to silently reuse stale model rankings or stale technical tape; the dashboard reads `refresh-status.json` and shows a visible header/banner warning when the latest scheduled run failed.
+- Recomputes the header health badge whenever either the snapshot or refresh-status request completes, so asynchronous fetch order cannot create a false `Snapshot mismatch` warning.
 
 ## Live Site
 
@@ -90,19 +93,21 @@ The dashboard is designed to be published as a static GitHub Pages site:
 https://jhmona12.github.io/market-pulse/
 ```
 
-The site reads from `data/snapshot.json` for the briefing, tactical cards, AI memo, market intelligence, macro, and source tape; `data/model-scorebook.json` for the Tactical Book scoreboard; `data/long-horizon-research.json` for the Strategic Book; and `data/model-monitoring.json` for the Model Lab monitor. When those files change, the public page reflects the latest generated market snapshot after GitHub Pages redeploys.
+The site reads from `data/snapshot.json` for the Today briefing, tactical cards, AI memo, market intelligence, macro, and source tape; `data/model-scorebook.json` for the Tactical scoreboard; `data/long-horizon-research.json` for the Strategic book; and `data/model-monitoring.json` for the Lab monitor. When those files change, the public page reflects the latest generated market snapshot after GitHub Pages redeploys.
 
-Ticker Lab lives in the Model Lab view. Scoring requires a separate private model API because GitHub Pages can only serve static files. The browser reads the API base URL from `config/runtime.json`.
+Ticker Lab lives in the Lab view. Scoring requires a separate private model API because GitHub Pages can only serve static files. The browser reads the API base URL from `config/runtime.json`.
 
 ## Freshness Guardrails
 
 Market Pulse is designed to fail visibly rather than publish stale data as if it were current.
 
-- The model scorer checks the latest price date before writing live ranks. By default, after 2 PM Pacific on a weekday it expects that trading day's close; before then it expects the prior business day; on weekends it expects the prior Friday. Set `EXPECTED_MARKET_DATA_DATE=YYYY-MM-DD` only when you intentionally need to override the expected close date.
+- The model scorer checks the latest price date before writing live ranks. It expects the latest completed U.S. market session under its calendar rules (with a 2 PM Pacific availability buffer on trading days). It requires every market/sector context ETF and at least 90% of current S&P 500 histories on that session before feature assembly. Remaining stale stocks are retried even after meeting that minimum. Only current, unique symbol rows with complete finite model features are scored, and at least 90% of the reference universe must remain scorable. Set `EXPECTED_MARKET_DATA_DATE=YYYY-MM-DD` only for an intentional diagnostic override, not to bypass a failed refresh.
+- A partially settled Yahoo session is never selected merely because it is the maximum date. The scorer retries only stale context or stock histories, then emits exact context and coverage diagnostics if the expected cross-section is still unavailable. The workflow retries only the failed tactical or strategic model phase before giving up.
 - The model scorer also writes the dashboard technical tape: scoreboard trailing returns, 60-day beta, momentum stop-sell levels, market-strip ETFs, and sector ETF performance. The dashboard reuses that same fresh price pass instead of making a second large Yahoo request that can be rate-limited.
+- Strategic and tactical views reuse the tactical scorebook's beta and calendar-lookback return fields. The long-horizon artifact contributes its rank, score, percentile, reasons, and risk flags, so a shared return label cannot show two different calculations.
 - `scripts/update-data.mjs` rejects stale `data/model-rank-scores.json` unless `ALLOW_STALE_MODEL_DATA=1` is explicitly set. If model data is stale or missing, model-ranked single-name recommendations are not generated from it.
 - Fresh Yahoo chart history must be available through the expected close date before technical metrics are shown. If Yahoo is rate-limited or returns an old close, the dashboard does not reuse the prior snapshot's technical tape.
-- When fresh price history is unavailable, the dashboard keeps news, macro, Reddit, earnings, and model context flowing where possible, but trailing return columns, sector tiles, and other technical fields are marked unavailable instead of showing stale values.
+- The scheduled workflow stops before briefing assembly if either required model phase fails. It does not publish a news-only refresh as a successful full run. When the builder is run independently, its degraded output omits unavailable technical fields; that is not equivalent to passing the scheduled publication gates.
 - The public dashboard includes a warning banner when price/technical data or model rankings are stale, missing, or unavailable.
 - The private Ticker Lab refuses stale S&P 500 reference caches and rejects external tickers whose fetched price history is older than the current reference date.
 
@@ -140,7 +145,7 @@ Then open:
 http://localhost:4173
 ```
 
-The Ticker Lab section is available in the Model Lab view. It can score tickers when it can reach either the same-origin local API from `npm run dev:local` or a hosted backend configured in `config/runtime.json`.
+The Ticker Lab section is available in the Lab view. It can score tickers when it can reach either the same-origin local API from `npm run dev:local` or a hosted backend configured in `config/runtime.json`.
 
 If port `4173` is already in use for the static server, choose another port:
 
@@ -173,11 +178,11 @@ The refresh script:
 - Requires source articles to have a publication date within the freshness window, 30 days by default, before they can appear in the Source Tape or feed the AI/source briefing
 - Builds `marketIntelligence` with rolling 24-hour professional drivers, important older context, earnings movers, market movers, and Reddit sentiment
 - Treats Reddit / WallStreetBets as attention and sentiment only, separated from professional commentary
-- Pulls Reddit through the free OAuth API when `REDDIT_CLIENT_ID` and `REDDIT_CLIENT_SECRET` are configured; otherwise it attempts public JSON, `old.reddit.com`, and RSS fallbacks
+- Pulls Reddit through the OAuth API when `REDDIT_CLIENT_ID` and `REDDIT_CLIENT_SECRET` are configured; otherwise it uses the WallStreetBets `hot` RSS feed with an alternate-host fallback. Live posts must fall within the trailing 24 hours. Actual transport determines the metric label: any RSS content makes the sample unranked recent mentions, without vote/comment metrics, even if credentials were configured.
 - Writes `data/cache/reddit-tape-cache.json` only when a clean Reddit ticker sample is extracted, then uses that last-good sample for up to 24 hours if the next refresh is blocked; cached sentiment is explicitly labeled as cached in the briefing
-- Filters low-signal source items such as media-industry meta stories, publisher staffing announcements, and unrelated single-stock headlines before they can influence the Daily Read or Deeper Read
+- Filters low-signal source items such as media-industry meta stories, publisher staffing announcements, and earnings-only single-company headlines before they can influence the market-driver stack or Daily Read
 - Builds a deterministic decision layer in the browser that turns the snapshot into stance, action queue, contradiction flags, sector/portfolio concentration, and retail-overlap checks
-- Reuses the fresh technical tape exported by `scripts/modeling/score_live_rank_model.py`; if that tape is unavailable and Yahoo chart history is temporarily rate-limited, stale technical values are left unavailable while sources, earnings, Reddit, macro, and eligible model context continue to refresh
+- Reuses the fresh technical tape exported by `scripts/modeling/score_live_rank_model.py`; the builder leaves unavailable technical values empty rather than reusing stale data. The scheduled workflow requires successful model scoring before running this stage.
 - Pulls S&P 500 constituents from Wikipedia when available
 - Adds ETFs from `config/universe.json`
 - Lets the Python scorer fetch delayed/end-of-day chart history from Yahoo Finance's public chart endpoint
@@ -217,7 +222,7 @@ Or run both model scoring passes with:
 npm run score:models
 ```
 
-`data/model-rank-scores.json` and `data/model-rank-scores-long-horizon.json` are intermediate files and are ignored by git. The generated `data/snapshot.json` contains the briefing, tactical-card, market-intelligence, macro, and source-tape data needed by the static site. The generated `data/model-scorebook.json` powers the Tactical Book scoreboard. The generated `data/long-horizon-research.json` powers the Strategic Book. The generated `data/model-monitoring.json` powers the Model Lab monitor. Runtime caches now live under ignored `data/cache/` and are restored/saved by GitHub Actions cache rather than committed as dashboard artifacts.
+`data/model-rank-scores.json` and `data/model-rank-scores-long-horizon.json` are intermediate files and are ignored by git. The generated `data/snapshot.json` contains the briefing, tactical-card, market-intelligence, macro, and source-tape data needed by the static site. The generated `data/model-scorebook.json` powers the Tactical scoreboard. The generated `data/long-horizon-research.json` powers the Strategic book. The generated `data/model-monitoring.json` powers the Lab monitor. Runtime caches now live under ignored `data/cache/` and are restored/saved by GitHub Actions cache rather than committed as dashboard artifacts.
 
 Some current constituents may be fetched but not scored if they do not have enough clean trailing data to populate every required feature. The scorer records those symbols in the snapshot model metadata.
 
@@ -243,13 +248,13 @@ The main verification command is:
 npm run verify
 ```
 
-It runs JavaScript syntax checks, Python compile checks, fixture tests, dashboard JSON schema validation, freshness/rank/stop/activation assertions, and workflow contract checks. The fast fixture tests can also be run directly:
+It runs JavaScript syntax checks, Python compile checks, Node fixture tests, Python model-readiness unit tests, dashboard JSON schema validation, freshness/rank/stop/activation assertions, and workflow contract checks. The fast Node fixture tests can also be run directly:
 
 ```bash
 npm test
 ```
 
-Current fixture coverage focuses on source-ingestion parsing and AI memo input construction, so parser and prompt-payload regressions fail quickly without requiring a full market refresh.
+Fixture coverage includes source extraction, Reddit RSS/JSON normalization and freshness, AI memo input construction, refresh retries, partial-market-session rejection, delayed monitors across midnight/DST, live artifact hash checks, and failure recovery against temporary Git repositories. These tests fail quickly without requiring a full market refresh.
 
 ## AI Strategy Memo
 
@@ -259,12 +264,11 @@ The intended division of labor is:
 
 - The XGBoost rank model is the deterministic stock-selection engine.
 - The Python model scorer owns price history, technical features, ETF confirmation, stop levels, activation levels, and scorebook rows.
-- The AI Strategy Memo explains the model-ranked candidates against the macro calendar and public source tape.
+- The AI Strategy Memo supplies narrative synthesis and Deeper Read selection. The published strategy headline, macro summary, recommendation mechanics, conviction tier, current macro evidence, and avoid list are rebuilt from deterministic source/model inputs.
 - Same-day official macro releases are fed into the AI context separately from the future calendar, so a released payrolls/CPI/PPI/GDP/PCE report can drive the Daily Read before research publications have reacted.
-- The Daily Read is AI-written when available, but it is anchored to deterministic facts and falls back to a deterministic executive snapshot if the AI call fails.
-- The Daily Read is deterministic by default so the top of the report stays tightly grounded in the source tape, earnings movers, Reddit attention, macro calendar, and model facts. Set `AI_DAILY_READ=1` to let AI write the Daily Read when its output passes local fact-language guardrails.
-- The Deeper Read section asks the AI to choose the most interesting non-obvious source analysis from the last 7 days, explain the second-order market implication, and avoid repeating sources used in the prior refresh when enough alternatives exist. Rotation memory is stored in `data/cache/deeper-read-history.json`.
-- The Stay Away section is seeded deterministically from the lowest-ranked model names; AI may add concise commentary, but it cannot choose symbols outside that supplied avoid-candidate list.
+- The Daily Read uses an AI-written two-sentence narrative only when local fact-language and quality guardrails pass. Its evidence bullets and watch list are deterministic and ordered market-first; the whole narrative falls back to sourced deterministic text if the AI output is vague, malformed, model-dominated, or unsupported.
+- The Deeper Read section asks the AI to choose the most interesting non-obvious source analysis from the last 7 days and avoid recently used sources when enough alternatives exist. Cards require substantive article text, factual theses, observable `Monitor:` checks, and explicitly labeled `Inference:` conclusions; failed cards fall back to source-grounded deterministic analysis. Rotation memory is stored in `data/cache/deeper-read-history.json`.
+- The Stay Away section is generated deterministically from the lowest-ranked model names and weakest bottom-book sector clusters.
 
 Create a local `.env` file:
 
@@ -307,7 +311,7 @@ REDDIT_CLIENT_SECRET=your_reddit_app_secret
 REDDIT_USER_AGENT="MarketPulse/0.1 by your-reddit-username"
 ```
 
-If OAuth is not configured, the script tries Reddit's public JSON endpoints, `old.reddit.com`, and RSS feeds. Those unauthenticated paths can work locally but are frequently blocked from hosted runners, which is why OAuth is the preferred reliable setup. When a live Reddit pull fails, the dashboard can show `data/cache/reddit-tape-cache.json` for up to 24 hours, clearly labeled as a cached sentiment sample.
+If OAuth is not configured, the script uses the WallStreetBets `hot` RSS feed, with an alternate-host fallback on failure. It does not chain public JSON endpoints and additional subreddit feeds in this mode. RSS remains best-effort; OAuth is the supported path for the broader multi-subreddit hot/new/top-day sample, not a guarantee of access. Live posts require valid timestamps within the trailing 24 hours. RSS and mixed OAuth/RSS samples are unranked mentions rather than popularity rankings. When a live pull fails, the dashboard can show `data/cache/reddit-tape-cache.json` for up to 24 hours, clearly labeled as cached; otherwise the UI shows one concise unavailable message and retains diagnostic errors in JSON.
 
 ## Source Registry
 
@@ -473,28 +477,30 @@ It is configured to refresh twice daily shortly after 5 AM Pacific and 4 PM Paci
 
 The workflow uses GitHub Actions timezone-aware schedules with `timezone: "America/Los_Angeles"`, so the cron entries stay tied to Pacific time across daylight saving changes. The schedule intentionally avoids minute `0`. GitHub documents that scheduled workflows may be delayed during high-load periods, especially at the start of every hour, and that queued scheduled jobs can be dropped. Running at minutes `17` and `47` gives each target window a backup attempt while keeping the schedule easier to audit.
 
-`scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. The refresh workflow writes a local success status before packaging the Pages artifact, deploys the artifact, and then runs a non-blocking live-site probe against `data/refresh-status.json`. The snapshot builder and dashboard verifier run through a small retry wrapper because source fetches and AI synthesis can fail transiently. `actions/deploy-pages` also gets one retry after a short pause because Pages deployments can fail independently from data generation. The ledger is committed only after `actions/deploy-pages` succeeds, so true publication failures remain retryable, while normal GitHub Pages/CDN propagation lag does not turn an otherwise successful refresh into a failed workflow.
+`scripts/check-refresh-window.mjs` evaluates the scheduled slot, not the delayed runner start time, and writes the target key into the workflow environment. The refresh workflow packages its success status with the Pages artifact, deploys it, then requires live status to match the run and SHA-256 hashes of all four dashboard JSON files to match the verified local outputs. Probe requests are time-bounded and vary their query parameters between attempts. Model scoring retries only the failed phase; snapshot assembly and verification use a separate retry wrapper. `actions/deploy-pages` also gets one retry. The target enters the committed ledger only after live confirmation, so failed or unconfirmed publication remains eligible for a backup.
 
-`.github/workflows/monitor-refresh.yml` runs later in the morning and evening after both scheduled refresh attempts have had time to start despite normal GitHub scheduler delay. Because scheduled monitor jobs can start late from the commit that was current when GitHub queued the run, the monitor fast-forwards to the latest default branch before checking the ledger. It then calls `scripts/monitor-refreshes.mjs` and fails if the expected Pacific target is missing from the committed ledger or from the live GitHub Pages dashboard, giving the project a visible dead-man check for skipped, severely delayed, or stale-site refreshes without raising noise while GitHub is still catching up.
+`.github/workflows/monitor-refresh.yml` runs later in the morning and evening and fast-forwards to the latest default branch before checking. `scripts/monitor-refreshes.mjs` checks the latest due morning and evening targets independently against repository and live-site records. Before a window's cutoff it checks the previous Pacific calendar day, so a delay past midnight cannot erase yesterday's missed evening. Missing targets fail the monitor. It remains dependent on GitHub's best-effort scheduler and is not an independent uptime guarantee.
 
 When the refresh runs successfully, it:
 
 - Regenerates `data/macro-calendar.json` before the dashboard snapshot so macro dates are not hand-keyed
 - Scores the current S&P 500 universe with the committed XGBoost rank model when dependencies and free data endpoints are available
-- Restores and saves ignored runtime caches under `data/cache/`, including the reference cache, market-cap cache, Reddit fallback sample, and Deeper Read rotation memory
+- Restores ignored runtime caches under `data/cache/` and saves them after successful model scoring; cache-save errors are nonfatal. Caches include model reference data, market caps, Reddit fallback samples, and Deeper Read rotation memory.
+- Rejects a partial Yahoo EOD cross-section, retries affected histories, and reports current-history coverage plus missing context symbols if readiness still fails
 - Regenerates `data/snapshot.json`
 - Regenerates `data/model-scorebook.json`
 - Updates ignored cache files under `data/cache/` when reusable runtime state changes
 - Retries the snapshot build plus verification once if a transient source, AI, or quality-gate failure occurs
+- Retries the failed model-scoring phase without rerunning a tactical pass that has already completed successfully
 - Writes `data/refresh-status.json` with the scheduled time, actual runner start time, delay, run URL, status, publish status, model date, and row counts
 - Deploys GitHub Pages directly from the refresh workflow so dashboard updates do not depend on a second workflow being triggered by a bot commit
 - Retries the GitHub Pages deploy action once if the first deploy fails
-- Probes whether the live site already serves the expected refresh-status run id; this is diagnostic because GitHub Pages can lag briefly after deployment
-- Updates and commits `data/refresh-ledger.json` only after `actions/deploy-pages` succeeds, so delayed backup attempts can retry true failed publishes but skip already-completed morning/evening windows
+- Probes for the expected successful refresh-status run id and matching hashes of all four dashboard JSON artifacts; only then can the target be marked complete
+- Updates and commits `data/refresh-ledger.json` only after live publication is confirmed, so delayed backup attempts can retry true failed publishes but skip already-completed morning/evening windows
 - Commits only the static-site JSON artifacts and scheduler state back to `main` after successful Pages deployment
 - Skips its own commit/deploy cleanly if `main` advanced while a delayed refresh was running, which prevents an older scheduled run from overwriting a newer manual refresh
 
-If model scoring or publication fails, the workflow records a failure status without marking the scheduled target complete. That keeps the failure visible in Actions and lets the backup scheduled slot retry instead of silently treating a non-published run as successful.
+Failure recovery restores the checked-in dashboard artifacts only if the remote branch has not advanced and the new dashboard has not already been confirmed live. It records failure without completing the target. When neither normal deploy succeeded, it also attempts to republish the restored data with a failure status through a distinct Pages artifact. A successful deploy with failed live confirmation is reported as unconfirmed without redeploying older data over it. A Git commit failure after confirmed publication does not roll back the live dashboard. Failure-status publication itself remains best-effort; see Actions when Pages is unavailable.
 
 GitHub scheduled workflows may start late; GitHub does not guarantee exact cron start time. Manual refreshes can also be triggered from the Actions tab with `workflow_dispatch`.
 
@@ -503,6 +509,8 @@ Diagnostic status is published at:
 ```text
 https://jhmona12.github.io/market-pulse/data/refresh-status.json
 ```
+
+Detailed stage ownership, Yahoo EOD readiness rules, Reddit diagnostics, and failure triage are documented in [`docs/refresh-operations.md`](docs/refresh-operations.md). The [September 10 pre-commit audit](docs/refresh-precommit-audit-2026-09-10.md) records reproduced failures, regression tests, and isolated live model/Reddit checks.
 
 Important implementation note: pushes made by GitHub's default `GITHUB_TOKEN` do not trigger other workflows. The refresh workflow therefore performs its own Pages deployment after writing data. The separate Pages workflow remains useful for normal human-authored pushes.
 
@@ -816,7 +824,7 @@ The backtest report also includes `non_overlapping_offsets`, which evaluates eve
 ### Ongoing Model Monitoring
 
 Recent model-health checks live in `analysis/model-monitoring/` for local review.
-The public dashboard also reads the compact generated `data/model-monitoring.json` file for the Model Lab top-decile monitor.
+The public dashboard also reads the compact generated `data/model-monitoring.json` file for the Lab top-decile monitor.
 
 Run the monitor from the repo root:
 
@@ -988,13 +996,17 @@ src/dashboard/formatters.js        Shared display, money, percent, and escaping 
 src/dashboard/source-refs.js       Shared source-reference sorting and labels for UI/verify
 src/dashboard/state.js             Initial browser UI state factory
 src/dashboard/ticker-input.js      Ticker Lab input parsing and API URL normalization
-scripts/update-data.mjs            Data refresh, source ingestion, screening, AI call
+scripts/update-data.mjs            Ingestion orchestration, snapshot assembly, and AI synthesis
 scripts/update-macro-calendar.mjs  Scrapes rolling BLS/FRED, BEA, and Fed release calendars
 scripts/check-refresh-window.mjs   GitHub Actions Pacific refresh gate and duplicate-run guard
 scripts/monitor-refreshes.mjs      Missed-refresh dead-man monitor
 scripts/refresh/run-snapshot-refresh.mjs Retry wrapper for snapshot generation plus verification
-scripts/refresh/confirm-live-pages.mjs Non-blocking live GitHub Pages freshness probe
+scripts/refresh/run-model-scoring.mjs Phase-aware retry wrapper for tactical and long-horizon scoring
+scripts/refresh/confirm-live-pages.mjs Strict live Pages publication confirmation probe
+scripts/refresh/recover-dashboard.mjs Guarded restoration after failed refreshes
 scripts/ingest/sources.mjs         Markdown, RSS, and source-page article extraction helpers
+scripts/ingest/reddit.mjs          Reddit JSON/RSS normalization and fallback policy helpers
+scripts/ingest/http.mjs            Shared timeout/retry policy with failed-response cleanup
 scripts/snapshot/ai-memo.mjs       AI memo input payload and response-schema helpers
 scripts/snapshot/schemas.mjs       Local schema validator for dashboard JSON artifacts
 scripts/local-dashboard-server.mjs Static server and private Ticker Lab API

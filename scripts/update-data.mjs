@@ -17,6 +17,8 @@ import {
   titleFromHtml,
   visibleTextFromHtml
 } from "./ingest/sources.mjs";
+import { parseRedditRssListing, redditListingPostsFromJson, redditSortsForMode, redditSourcesForMode, recentRedditPosts, redditMetricsFromPosts } from "./ingest/reddit.mjs";
+import { cancelResponseBody, fetchJsonWithRetry, fetchTextWithRetry } from "./ingest/http.mjs";
 import { buildAiMemoInputPayload, buildAiRecommendationResponseSchema } from "./snapshot/ai-memo.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -345,133 +347,41 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function retryableHttpStatus(status) {
-  return [408, 429, 500, 502, 503, 504].includes(status);
-}
-
-function retryDelayMs(attempt) {
-  return 2500 * 2 ** attempt + Math.round(Math.random() * 700);
-}
-
 async function fetchText(url, options = {}) {
-  const retries = options.retries ?? 5;
-  let lastError;
-  for (let attempt = 0; attempt <= retries; attempt += 1) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), options.timeout || 14000);
-    try {
-      const response = await fetch(url, {
-        signal: controller.signal,
-        headers: {
-          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36 MarketPulse/0.1",
-          accept: "text/html,application/xhtml+xml,application/xml,text/csv,text/plain;q=0.9,*/*;q=0.8",
-          "accept-language": "en-US,en;q=0.9"
-        }
-      });
-      if (!response.ok) {
-        lastError = new Error(`${response.status} ${response.statusText}`);
-        if (retryableHttpStatus(response.status) && attempt < retries) {
-          clearTimeout(timeout);
-          await sleep(retryDelayMs(attempt));
-          continue;
-        }
-        throw lastError;
-      }
-      return await response.text();
-    } catch (error) {
-      lastError = error;
-      if (attempt < retries) {
-        clearTimeout(timeout);
-        await sleep(retryDelayMs(attempt));
-        continue;
-      }
-      throw lastError;
-    } finally {
-      clearTimeout(timeout);
+  return fetchTextWithRetry(url, {
+    retries: options.retries ?? 5,
+    timeout: options.timeout || 14000,
+    headers: {
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36 MarketPulse/0.1",
+      accept: "text/html,application/xhtml+xml,application/xml,text/csv,text/plain;q=0.9,*/*;q=0.8",
+      "accept-language": "en-US,en;q=0.9"
     }
-  }
-  throw lastError;
+  });
 }
 
 async function fetchJson(url, options = {}) {
-  const retries = options.retries ?? 5;
-  let lastError;
-  for (let attempt = 0; attempt <= retries; attempt += 1) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), options.timeout || 14000);
-    try {
-      const response = await fetch(url, {
-        signal: controller.signal,
-        headers: {
-          "user-agent": "Mozilla/5.0 MarketPulse/0.1 personal research dashboard",
-          accept: "application/json,text/plain,*/*",
-          origin: "https://www.nasdaq.com",
-          referer: "https://www.nasdaq.com/"
-        }
-      });
-      if (!response.ok) {
-        lastError = new Error(`${response.status} ${response.statusText}`);
-        if (retryableHttpStatus(response.status) && attempt < retries) {
-          clearTimeout(timeout);
-          await sleep(retryDelayMs(attempt));
-          continue;
-        }
-        throw lastError;
-      }
-      return await response.json();
-    } catch (error) {
-      lastError = error;
-      if (attempt < retries) {
-        clearTimeout(timeout);
-        await sleep(retryDelayMs(attempt));
-        continue;
-      }
-      throw lastError;
-    } finally {
-      clearTimeout(timeout);
+  return fetchJsonWithRetry(url, {
+    retries: options.retries ?? 5,
+    timeout: options.timeout || 14000,
+    headers: {
+      "user-agent": "Mozilla/5.0 MarketPulse/0.1 personal research dashboard",
+      accept: "application/json,text/plain,*/*",
+      origin: "https://www.nasdaq.com",
+      referer: "https://www.nasdaq.com/"
     }
-  }
-  throw lastError;
+  });
 }
 
 async function fetchPublicJson(url, options = {}) {
-  const retries = options.retries ?? 5;
-  let lastError;
-  for (let attempt = 0; attempt <= retries; attempt += 1) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), options.timeout || 14000);
-    try {
-      const response = await fetch(url, {
-        signal: controller.signal,
-        headers: {
-          "user-agent": options.userAgent || "Mozilla/5.0 MarketPulse/0.1 personal research dashboard",
-          accept: "application/json,text/plain,*/*",
-          ...(options.headers || {})
-        }
-      });
-      if (!response.ok) {
-        lastError = new Error(`${response.status} ${response.statusText}`);
-        if (retryableHttpStatus(response.status) && attempt < retries) {
-          clearTimeout(timeout);
-          await sleep(retryDelayMs(attempt));
-          continue;
-        }
-        throw lastError;
-      }
-      return await response.json();
-    } catch (error) {
-      lastError = error;
-      if (attempt < retries) {
-        clearTimeout(timeout);
-        await sleep(retryDelayMs(attempt));
-        continue;
-      }
-      throw lastError;
-    } finally {
-      clearTimeout(timeout);
+  return fetchJsonWithRetry(url, {
+    retries: options.retries ?? 5,
+    timeout: options.timeout || 14000,
+    headers: {
+      "user-agent": options.userAgent || "Mozilla/5.0 MarketPulse/0.1 personal research dashboard",
+      accept: "application/json,text/plain,*/*",
+      ...(options.headers || {})
     }
-  }
-  throw lastError;
+  });
 }
 
 async function loadLocalEnv() {
@@ -1556,42 +1466,12 @@ async function fetchRedditAccessToken() {
     body
   });
   if (!response.ok) {
+    await cancelResponseBody(response);
     throw new Error(`OAuth token request failed: ${response.status} ${response.statusText}`);
   }
   const payload = await response.json();
   if (!payload.access_token) throw new Error("OAuth token response did not include access_token");
   return { token: payload.access_token, mode: "oauth" };
-}
-
-function redditListingPostsFromJson(payload) {
-  return (payload.data?.children || []).map((child) => child.data).filter(Boolean);
-}
-
-function parseRedditRssListing(xml, subreddit, segment, sort) {
-  const entries = [...xml.matchAll(/<entry\b[\s\S]*?<\/entry>/gi)].map((match) => match[0]);
-  return entries
-    .map((entry) => {
-      const rawContent = xmlRaw(entry, ["content", "summary"]);
-      const content = stripTags(decodeHtml(rawContent || "")).slice(0, 2000);
-      const permalink = xmlLink(entry);
-      return {
-        id: mentionKey(xmlText(entry, "id") || permalink || `${subreddit}-${sort}-${xmlText(entry, "title")}`).slice(0, 80),
-        subreddit,
-        segment,
-        title: xmlText(entry, "title"),
-        selftext: content,
-        url: permalink,
-        permalink,
-        created_utc: null,
-        createdAt: normalizeDate(xmlText(entry, ["published", "updated"])),
-        score: 0,
-        num_comments: 0,
-        upvote_ratio: null,
-        link_flair_text: null,
-        fetchMethod: "rss"
-      };
-    })
-    .filter((post) => post.title);
 }
 
 async function fetchRedditRssListing(subreddit, segment, sort = "hot", limit = redditPostLimit) {
@@ -1634,21 +1514,6 @@ async function fetchRedditListing(subreddit, segment, sort = "hot", limit = redd
     }
   }
 
-  for (const host of ["www.reddit.com", "old.reddit.com"]) {
-    const url = `https://${host}/r/${encodeURIComponent(subreddit)}/${sort}.json?limit=${limit}${topWindow}`;
-    try {
-      const payload = await fetchPublicJson(url, {
-        timeout: 12000,
-        retries: 1,
-        userAgent: redditUserAgent,
-        headers: { "accept-language": "en-US,en;q=0.9" }
-      });
-      return { status: "ready", method: `public_json:${host}`, sort, posts: redditListingPostsFromJson(payload) };
-    } catch (error) {
-      errors.push(`${host} JSON: ${error.message}`);
-    }
-  }
-
   try {
     return await fetchRedditRssListing(subreddit, segment, sort, limit);
   } catch (error) {
@@ -1678,8 +1543,10 @@ async function fetchRedditTape(knownSymbols) {
     oauth = { token: null, mode: "public", error: error.message };
   }
 
-  const results = await mapLimit(redditSources, 2, async (source) => {
-    const listings = await mapLimit(redditSorts, 1, async (sort) => {
+  const effectiveRedditSorts = redditSortsForMode(redditSorts, oauth.token);
+  const effectiveRedditSources = redditSourcesForMode(redditSources, oauth.token);
+  const results = await mapLimit(effectiveRedditSources, oauth.token ? 2 : 1, async (source) => {
+    const listings = await mapLimit(effectiveRedditSorts, 1, async (sort) => {
       try {
         return await fetchRedditListing(source.subreddit, source.segment, sort, redditPostLimit, oauth.token);
       } catch (error) {
@@ -1687,7 +1554,7 @@ async function fetchRedditTape(knownSymbols) {
       }
     });
     const seenPosts = new Set();
-    const posts = listings.flatMap((listing) => listing.posts || []).filter((post) => {
+    const posts = recentRedditPosts(listings.flatMap((listing) => listing.posts || [])).filter((post) => {
       if (!post?.id || seenPosts.has(post.id)) return false;
         seenPosts.add(post.id);
         return true;
@@ -1794,13 +1661,28 @@ async function fetchRedditTape(knownSymbols) {
       .filter((result) => result.status !== "ready")
       .map((result) => `${result.subreddit}: ${result.error || "no posts"}`)
   ];
+  const redditMetrics = redditMetricsFromPosts(posts);
   const liveTape = {
     status: results.some((result) => result.status === "ready") ? "ready" : "error",
     generatedAt: new Date().toISOString(),
     authMode: oauth.token ? "oauth" : "public",
-    sourceNote: oauth.token
+    metricMode: redditMetrics.metricMode,
+    sampleCoverage: {
+      subredditCount: effectiveRedditSources.length,
+      sorts: effectiveRedditSorts,
+      postCount: posts.length,
+      includesVoteAndCommentCounts: redditMetrics.includesVoteAndCommentCounts,
+      oauthPostCount: redditMetrics.oauthPostCount,
+      rssPostCount: redditMetrics.rssPostCount
+    },
+    sourceNote: redditMetrics.includesVoteAndCommentCounts
       ? "Reddit OAuth API across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news."
-      : "Reddit public JSON with old.reddit/RSS fallback across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
+      : "Recent Reddit post mentions include RSS results without vote or comment totals. This sample cannot establish popularity or ticker concentration; use as sentiment context only, not verified news.",
+    statusReason: results.some((result) => result.status === "ready")
+      ? null
+      : oauth.error
+        ? "Reddit OAuth authentication failed and the RSS fallback returned no usable recent posts."
+        : "Reddit returned no usable posts through OAuth or RSS during this refresh.",
     subreddits: results.map(({ subreddit, segment, status, error, posts, sortStatuses }) => ({
       subreddit,
       segment,
@@ -1966,13 +1848,13 @@ function buildLongHorizonRows({ longHorizonRankings, modelScorebook, stockMetada
         tacticalSetupTags: tactical?.setupTags || [],
         agreementLabel: modelAgreementLabel(item, tactical),
         close: finiteNumber(item.close),
-        beta60d: roundedNumber(item.beta60d, 2),
-        return7: roundedNumber(item.return7, 2),
-        return14: roundedNumber(item.return14, 2),
-        return30: roundedNumber(item.return30, 2),
-        return60: roundedNumber(item.return60, 2),
-        return90: roundedNumber(item.return90, 2),
-        ytdReturn: roundedNumber(item.ytdReturn, 2),
+        beta60d: roundedNumber(tactical?.beta60d ?? item.beta60d, 2),
+        return7: roundedNumber(tactical?.return7 ?? item.return7, 2),
+        return14: roundedNumber(tactical?.return14 ?? item.return14, 2),
+        return30: roundedNumber(tactical?.return30 ?? item.return30, 2),
+        return60: roundedNumber(tactical?.return60 ?? item.return60, 2),
+        return90: roundedNumber(tactical?.return90 ?? item.return90, 2),
+        ytdReturn: roundedNumber(tactical?.ytdReturn ?? item.ytdReturn, 2),
         asOfDate: item.asOfDate || longHorizonRankings.asOfDate || null
       };
     })
@@ -2039,8 +1921,8 @@ function buildLongHorizonContext({ longHorizonRankings, tacticalRankings }) {
       agreementLabel: modelAgreementLabel(row, tactical),
       longModelReasons: (row.modelReasons || []).slice(0, 4),
       longRiskFlags: (row.riskFlags || []).slice(0, 4),
-      return60: row.return60,
-      ytdReturn: row.ytdReturn
+      return60: tactical?.return60 ?? row.return60,
+      ytdReturn: tactical?.ytdReturn ?? row.ytdReturn
     };
   });
   return {
@@ -2084,6 +1966,7 @@ function buildLongHorizonResearch({ base, longHorizonRankings, modelScorebook, s
     methodology: [
       ...(base.methodology || []),
       "Live one-year scores are refreshed from the same feature tape as the tactical model and are shown as a separate research lens.",
+      "Displayed beta and trailing returns reuse the tactical scorebook's calendar-lookback fields so identical labels have identical values across dashboard tabs.",
       "The AI memo may use long-horizon results as supporting context; a single-name recommendation should rely on them only when tactical and long-horizon evidence both support the setup."
     ]
   };
@@ -2450,18 +2333,26 @@ async function fetchFredSeries(series) {
   }
 }
 
+const sentenceAbbreviations = [
+  ["U.S.", "US_ABBR"], ["U.K.", "UK_ABBR"], ["E.U.", "EU_ABBR"], ["No.", "NO_ABBR"],
+  ["Inc.", "INC_ABBR"], ["Ltd.", "LTD_ABBR"], ["Corp.", "CORP_ABBR"], ["Co.", "CO_ABBR"],
+  ["Jan.", "JAN_ABBR"], ["Feb.", "FEB_ABBR"], ["Mar.", "MAR_ABBR"], ["Apr.", "APR_ABBR"],
+  ["Jun.", "JUN_ABBR"], ["Jul.", "JUL_ABBR"], ["Aug.", "AUG_ABBR"], ["Sep.", "SEP_ABBR"],
+  ["Sept.", "SEPT_ABBR"], ["Oct.", "OCT_ABBR"], ["Nov.", "NOV_ABBR"], ["Dec.", "DEC_ABBR"]
+];
+
+function protectSentenceAbbreviations(text) {
+  return sentenceAbbreviations.reduce((value, [literal, token]) => value.replaceAll(literal, token), text);
+}
+
+function restoreSentenceAbbreviations(text) {
+  return sentenceAbbreviations.reduce((value, [literal, token]) => value.replaceAll(token, literal), text);
+}
+
 function firstSentence(text, maxLength = 240) {
   if (!text) return "";
   const clean = String(text).replace(/\s+/g, " ").trim();
-  const protectedText = clean
-    .replace(/\bU\.S\./g, "US_ABBR")
-    .replace(/\bU\.K\./g, "UK_ABBR")
-    .replace(/\bE\.U\./g, "EU_ABBR")
-    .replace(/\bNo\./g, "NO_ABBR")
-    .replace(/\bInc\./g, "INC_ABBR")
-    .replace(/\bLtd\./g, "LTD_ABBR")
-    .replace(/\bCorp\./g, "CORP_ABBR")
-    .replace(/\bCo\./g, "CO_ABBR");
+  const protectedText = protectSentenceAbbreviations(clean);
   const parts = protectedText.match(/.*?[.!?](?:\s|$)/g) || [];
   let sentence = "";
   for (const part of parts) {
@@ -2469,27 +2360,21 @@ function firstSentence(text, maxLength = 240) {
     if (sentence.length >= 60) break;
   }
   if (!sentence) sentence = protectedText;
-  sentence = sentence
-    .replace(/US_ABBR/g, "U.S.")
-    .replace(/UK_ABBR/g, "U.K.")
-    .replace(/EU_ABBR/g, "E.U.")
-    .replace(/NO_ABBR/g, "No.")
-    .replace(/INC_ABBR/g, "Inc.")
-    .replace(/LTD_ABBR/g, "Ltd.")
-    .replace(/CORP_ABBR/g, "Corp.")
-    .replace(/CO_ABBR/g, "Co.");
+  sentence = restoreSentenceAbbreviations(sentence);
   return sentence.length > maxLength ? `${sentence.slice(0, maxLength - 3).trim()}...` : sentence;
 }
 
-function articleBriefs(sources, limit = 3) {
-  return sortArticlesNewestFirst(
-    sources
-      .flatMap((source) => (source.articles || []).map((article) => ({ ...article, sourceName: article.sourceName || source.name })))
-      .filter((article) => article.title && article.url)
-      .filter((article) => !/(pardon our interruption|privacy|terms|sign in|login|subscribe)/i.test(`${article.title} ${article.summary || ""}`))
-  )
-    .slice(0, limit)
-    .map((article) => `${article.sourceName}: ${article.title}`);
+function firstSentences(text, sentenceLimit = 2, maxLength = 620) {
+  const clean = String(text || "").replace(/\s+/g, " ").trim();
+  if (!clean) return "";
+  const protectedText = protectSentenceAbbreviations(clean);
+  const parts = protectedText.match(/[^.!?]+(?:[.!?]+|$)/g) || [protectedText];
+  let result = restoreSentenceAbbreviations(parts.slice(0, sentenceLimit).join(" ").trim());
+  if (result.length > maxLength) {
+    const truncated = result.slice(0, maxLength - 3).replace(/\s+\S*$/, "").trim();
+    result = `${truncated || result.slice(0, maxLength - 3).trim()}...`;
+  }
+  return result;
 }
 
 function isGenericArticleText(value) {
@@ -2503,6 +2388,8 @@ function isGenericArticleText(value) {
 
 function cleanArticleConclusion(value, title = "") {
   let text = cleanDailyReadText(value)
+    .replace(/\bSkip Navigation\b[\s\S]*$/i, " ")
+    .replace(/\b(?:Markets|Business|Investing|Tech|Politics|Economy|Videos)\s+(?:Markets|Business|Investing|Tech|Politics|Economy|Videos)(?:\s+(?:Markets|Business|Investing|Tech|Politics|Economy|Videos))+/gi, " ")
     .replace(/Yes A checkmark with a circle around it close/gi, " ")
     .replace(/\bclose\s+(?=[A-Z])/g, "")
     .replace(/\b(data|war|rally|update)\s+(Over in|Stock futures|Earnings season|Investors|The oil)\b/g, "$1. $2")
@@ -2565,6 +2452,21 @@ function deeperReadInterestingness(article) {
   return roundedNumber(score, 1);
 }
 
+function hasSubstantiveDeeperReadEvidence(article = {}) {
+  const title = cleanDailyReadText(article.title || "").toLowerCase();
+  const sourceName = cleanDailyReadText(article.sourceName || "").toLowerCase();
+  const evidenceParts = [article.summary, article.excerpt]
+    .map((value) => cleanArticleConclusion(value || "", article.title || ""))
+    .map((value) => cleanDailyReadText(value))
+    .filter((value) => {
+      const normalized = value.toLowerCase();
+      return value.length >= 80 && normalized !== title && normalized !== `${title} ${sourceName}`.trim();
+    });
+  const evidence = [...new Set(evidenceParts)].join(" ");
+  const words = evidence.match(/[A-Za-z][A-Za-z'-]*/g) || [];
+  return evidence.length >= 180 && words.length >= 30;
+}
+
 function isDeeperReadAnalyticalCandidate(article) {
   const text = `${article.sourceName || ""} ${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`;
   if (isMediaMetaArticle(article)) return false;
@@ -2587,6 +2489,7 @@ function buildDeeperReadCandidates(sourceTape, history = {}) {
         url: article.url,
         publishedAt: article.publishedAt,
         summary: article.summary,
+        excerpt: cleanDailyReadText(article.excerpt || "").slice(0, 1200),
         themes: article.themes || classifyMarketThemes(`${article.title || ""} ${article.summary || ""} ${article.excerpt || ""}`),
         ageHours: ageHours == null ? null : roundedNumber(ageHours, 1),
         recentlyUsedSource: recentSources.has(article.sourceName),
@@ -2596,6 +2499,7 @@ function buildDeeperReadCandidates(sourceTape, history = {}) {
     })
     .filter((item) => item.publishedAt && item.ageHours != null && item.ageHours <= maxAgeHours)
     .filter((item) => !/(pardon our interruption|privacy|terms|sign in|login|subscribe)/i.test(`${item.title || ""} ${item.summary || ""}`))
+    .filter(hasSubstantiveDeeperReadEvidence)
     .filter(isDeeperReadAnalyticalCandidate)
     .sort((a, b) => b.qualityScore - a.qualityScore);
 
@@ -2613,6 +2517,7 @@ function deterministicDeeperRead(candidates = [], reason = "AI Deeper Read was u
   const cards = candidates.slice(0, 4).map((candidate) => {
     const summary = articleBrief({ title: candidate.title, summary: candidate.summary }, 260);
     const themes = (candidate.themes || []).slice(0, 2).join(" and ") || "market structure";
+    const sourceDetail = firstSentences(cleanArticleConclusion(candidate.excerpt || "", candidate.title || ""), 2, 520);
     return {
       sourceRef: candidate.sourceRef || null,
       sourceName: candidate.sourceName || "Source",
@@ -2620,9 +2525,9 @@ function deterministicDeeperRead(candidates = [], reason = "AI Deeper Read was u
       url: candidate.url || null,
       publishedAt: candidate.publishedAt || null,
       thesis: summary || candidate.title || "This source raises a differentiated market question worth reviewing.",
-      whyItMatters: `The angle is tied to ${themes}, so it can affect sector leadership, factor rotation, or risk appetite beyond the headline move.`,
-      marketReadThrough: (candidate.themes || []).length ? `Primary read-through: ${candidate.themes.slice(0, 3).join(", ")}.` : "Review the source for second-order market read-throughs.",
-      variantAngle: "Selected by the deterministic source-quality filter because the AI layer was unavailable.",
+      whyItMatters: sourceDetail || `The source connects ${themes}; review the article for the stated transmission mechanism.`,
+      marketReadThrough: `Monitor: confirm whether the source's stated ${themes} mechanism appears in related prices, yields, margins, or sector-relative performance.`,
+      variantAngle: "Inference: the investable question is whether the source's stated mechanism changes sector margins or policy expectations; the article does not establish that outcome on its own.",
       confidence: Number(candidate.qualityScore) >= 40 ? "High" : "Medium"
     };
   });
@@ -2736,6 +2641,7 @@ function buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols }) 
       if (!article.title || !article.url) return;
       if (isMediaMetaArticle({ ...article, sourceName: source.name }) || isLowSignalMarketDriver({ ...article, sourceName: source.name })) return;
       const ranked = articleImportanceScore(article, source, previousRefreshAt, now);
+      if (ranked.themes.length === 1 && ranked.themes[0] === "Earnings" && !hasBroadMarketChannel(article)) return;
       const keepFresh = ranked.sincePrevious || (ranked.ageHours != null && ranked.ageHours <= marketIntelFreshHours);
       const keepImportant = ranked.ageHours != null && ranked.ageHours <= marketIntelImportantHours && ranked.score >= 44;
       if (!keepFresh && !keepImportant) return;
@@ -2756,6 +2662,7 @@ function buildProfessionalDrivers({ sources, previousRefreshAt, knownSymbols }) 
         score: roundedNumber(ranked.score, 1),
         tickers: extractTickersFromText(`${article.title} ${article.summary || ""}`, knownSymbols).slice(0, 8)
       };
+      if (!usefulMarketSentence(candidate.summary)) return;
       if (!existing || candidate.score > existing.score) byUrl.set(article.url, candidate);
     });
   });
@@ -2797,10 +2704,14 @@ function buildMarketDriverSummary(drivers, earningsTape, redditTape, officialMac
   const earningsTakeaway = earningsSignalTakeaway(earningsTape);
   if (earningsTakeaway) pieces.push(earningsTakeaway);
   if (redditTape.topTickers?.length) {
-    const freshness = redditTape.status === "cache_fallback"
-      ? `Last successful Reddit sample (${redditTape.cacheAgeHours ?? "unknown"} hours old)`
-      : "Retail attention";
-    pieces.push(`${freshness}: ${redditTape.topTickers.slice(0, 4).map((ticker) => ticker.symbol).join(", ")} are drawing the most filtered ticker concentration; treat this as sentiment, not verified news.`);
+    const symbols = redditTape.topTickers.slice(0, 4).map((ticker) => ticker.symbol).join(", ");
+    if (redditTape.status === "cache_fallback") {
+      pieces.push(`Retail attention: The last successful Reddit sample (${redditTape.cacheAgeHours ?? "unknown"} hours old) highlighted ${symbols}; treat this as stale sentiment context, not verified news.`);
+    } else if (redditTape.metricMode === "unranked_recent_mentions") {
+      pieces.push(`Retail attention: Recent WallStreetBets RSS posts mentioned ${symbols}; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking.`);
+    } else {
+      pieces.push(`Retail attention: ${symbols} have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.`);
+    }
   }
   return pieces.slice(0, 10);
 }
@@ -2814,25 +2725,35 @@ function usefulMarketSentence(value, maxLength = 260) {
   if (/^(the\s+u\.?s\.?|the market|stocks|investors|markets)\s*$/i.test(sentence)) return "";
   if (/^what if\b/i.test(sentence)) return "";
   if (isGenericArticleText(sentence)) return "";
-  if (!/\b(rose|fell|climbed|declined|weighs|supports|pressures|tightens|eases|drives|signals|raises|cuts|keeps|threatens|boosts|hurts|limits|confirms|challenges|prices|yields|inflation|oil|earnings|guidance|tariff|conflict|supply|demand|credit|rates?)\b/i.test(sentence)) return "";
+  if (!/\b(rose|fell|climbed|declined|targets|sanctions|bans?|restricts|weighs|supports|pressures|tightens|eases|drives|signals|raises|cuts|keeps|threatens|boosts|hurts|limits|confirms|challenges|prices|yields|inflation|oil|earnings|guidance|tariff|trade|conflict|supply|demand|credit|rates?|invests?|investment|spending)\b/i.test(sentence)) return "";
   return sentence;
 }
 
 function driverConclusion(driver, theme = "") {
-  const combined = [driver.title, driver.summary, driver.excerpt].map(cleanDailyReadText).join(" ");
+  const headlineText = [driver.title, driver.summary].map(cleanDailyReadText).join(" ");
+  const combined = [headlineText, driver.excerpt].map(cleanDailyReadText).join(" ");
   if (theme === "Rates and central banks" && /\binflation problem is getting worse\b/i.test(combined)) {
     return "Inflation pressure is worsening, so long-duration growth needs stricter confirmation before adding exposure.";
   }
-  if (theme === "Rates and central banks" && /\b(producer price|ppi|consumer price|cpi|inflation)\b/i.test(combined) && /\b(worse|hot|higher|rose|increased)\b/i.test(combined)) {
-    return "Inflation data are running hot, so rates remain the main constraint on crowded momentum.";
+  if (
+    theme === "Rates and central banks"
+    && /\b(producer price|ppi|consumer price|cpi)\b/i.test(headlineText)
+    && /\b(worse|hot|higher|rose|increased|accelerat(?:e|ed|ing))\b/i.test(headlineText)
+    && !/\b(upcoming|ahead of|awaiting|due|forecast|expected)\b/i.test(headlineText)
+  ) {
+    return "The latest inflation release was hotter, so rates remain a constraint on long-duration and high-beta exposure.";
   }
-  if (theme === "Geopolitics and policy" && /\b(taiwan|u\.?s\.?-china|china|tariff|trade)\b/i.test(combined)) {
+  if (theme === "Geopolitics and policy" && /\b(taiwan|u\.?s\.?[- ]china|china)\b/i.test(headlineText)) {
     return "U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite.";
   }
   if (theme === "AI and semis" && /\b(cisco|ai infrastructure|hyperscaler|data center|networking supercycle)\b/i.test(combined)) {
     return "Cisco's AI infrastructure orders reinforce the spending cycle behind the semiconductor and networking trade.";
   }
-  const text = [driver.summary, driver.excerpt, driver.title].map(cleanDailyReadText).filter(Boolean);
+  const cleanSummary = cleanArticleConclusion(driver.summary || "", driver.title || "");
+  if (cleanSummary.length >= 45 && !isGenericArticleText(cleanSummary)) {
+    return firstSentence(cleanSummary, 260);
+  }
+  const text = [driver.summary, driver.excerpt, driver.title].map((value) => cleanArticleConclusion(value, driver.title || "")).filter(Boolean);
   for (const value of text) {
     const sentence = usefulMarketSentence(value);
     if (sentence) return sentence;
@@ -3054,6 +2975,9 @@ function cleanDailyReadText(value) {
     .replace(/\(\s+/g, "(")
     .replace(/\s*\/\s*/g, " / ")
     .replace(/RSI \/ volatility/gi, "RSI and volatility")
+    .replace(/AI \/ semis/gi, "AI and semiconductors")
+    .replace(/50 \/ 200-day/gi, "50-day and 200-day")
+    .replace(/risk-control trigger rules/gi, "risk controls")
     .replace(/volume \/ trend/gi, "volume or trend")
     .replace(/weak-mauge/gi, "weak")
     .replace(/drawdowns risk/gi, "drawdown risk")
@@ -3180,7 +3104,7 @@ function sanitizeAiRecommendation(recommendation) {
 }
 
 function usableDailyReadItem(value) {
-  return !/(no names lack|no data gaps|all data complete|no .* unavailable)/i.test(value);
+  return !/(no names lack|no data gaps|all data complete|no .* unavailable|monitor RSI and volume signals|sectors show breadth erosion in weaker names|cross-check for activation)/i.test(value);
 }
 
 function dailyReadPassesFactGuardrails(dailyRead) {
@@ -3193,6 +3117,9 @@ function dailyReadPassesFactGuardrails(dailyRead) {
     .join(" ")
     .trim();
   if (!text) return false;
+  if ((dailyRead?.headline || "").length > 150 || (dailyRead?.body || "").length > 500) return false;
+  if ([...(dailyRead?.keyTakeaways || []), ...(dailyRead?.watchItems || [])].some((item) => item.length > 340)) return false;
+  if (/\b(?:top[- ]decile|model[- ]led|model leadership|momentum leads?)\b/i.test(dailyRead?.headline || "")) return false;
   if (/forward return|SHAP|cross-asset liquidity|sector monolith|risk-on bid|свеж/i.test(text)) return false;
   if (/\bdispersion\b/i.test(text)) return false;
   if (/\bstop(?:-loss)?\b|chandelier/i.test(text)) return false;
@@ -3201,16 +3128,29 @@ function dailyReadPassesFactGuardrails(dailyRead) {
   if (/\bcooling inflation (?:is|remains)\b.*\brisk\b/i.test(text)) return false;
   if (hasRepeatedTickerList(text)) return false;
   if (lowQualityMemoLanguage(text)) return false;
+  if (/\b(?:HH uncertainty|high-litness|ROIC shifts?|robust cross-horizon|post-OCT|deeperReadCardsCount|openQuestions:)\b/i.test(text)) return false;
+  if (/\b(?:if|unless)\s+(?:the\s+)?(?:10Y|Treasury|oil|Brent|WTI)[^.]{0,80}\b\d+(?:\.\s*\d+)?%/i.test(text)) return false;
+  const takeaways = dailyRead?.keyTakeaways || [];
+  const modelHeavy = takeaways.filter((item) => /\b(model|momentum|top[- ]decile|rank(?:ed|ing)?)\b/i.test(item)).length;
+  if (takeaways.length >= 2 && modelHeavy > Math.floor(takeaways.length / 2)) return false;
   if (/[\u0400-\u04FF\u3400-\u9FFF]/.test(text)) return false;
   return true;
 }
 
 function cleanDailyRead(dailyRead) {
   if (!dailyRead) return null;
-  const cleanItem = (value) => dedupeTickerLists(removeAiStopMetricText(cleanMemoText(value))).replace(/[\][]/g, "").trim();
+  const cleanItem = (value) => firstSentences(
+    dedupeTickerLists(removeAiStopMetricText(cleanMemoText(value))).replace(/[\][]/g, "").trim(),
+    2,
+    330
+  );
+  const rawHeadline = cleanItem(dailyRead.headline);
+  const headline = /\bmega-?cap momentum\b|\bmarket drivers frame\b|\brisk appetite is constructive but selective\b|\btop[- ]decile\b|\bmodel[- ]led\b/i.test(rawHeadline)
+    ? ""
+    : firstSentence(rawHeadline, 140);
   return {
-    headline: firstSentence(cleanItem(dailyRead.headline), 150),
-    body: cleanItem(dailyRead.body),
+    headline,
+    body: firstSentences(dedupeTickerLists(removeAiStopMetricText(cleanMemoText(dailyRead.body))), 2, 620),
     keyTakeaways: (dailyRead.keyTakeaways || []).map(cleanItem).filter(Boolean).filter(usableDailyReadItem).filter(isUsefulTakeaway),
     watchItems: (dailyRead.watchItems || []).map(cleanItem).filter(Boolean).filter(usableDailyReadItem).filter(isUsefulTakeaway)
   };
@@ -3225,11 +3165,14 @@ function cleanAiMemoField(value) {
 function headlineFromDriver(driver, fallbackHeadline) {
   const themes = new Set(driver?.themes || []);
   const text = `${driver?.title || ""} ${driver?.summary || ""}`.toLowerCase();
+  if (themes.has("Rates and central banks") && /\b(diesel|refiner|refinery)\b/i.test(text) && /\binflation\b/i.test(text)) {
+    return "Diesel supply pressure is adding to inflation and rates risk.";
+  }
   if (themes.has("Geopolitics and policy") && themes.has("Commodities and energy") && /\b(oil|hormuz|iran)\b/i.test(text)) {
     return "Oil and geopolitical risk keep position sizing tighter.";
   }
   if (themes.has("Rates and central banks") && /\b(inflation|fed|yield|rate)\b/i.test(text)) {
-    return "Sticky inflation risk keeps high-beta momentum on a shorter leash.";
+    return "Inflation and rates risk remain the main constraint on high-beta exposure.";
   }
   if (themes.has("Earnings") && themes.has("AI and semis")) {
     return "AI earnings are supporting leaders, but guidance risk remains name-specific.";
@@ -3242,19 +3185,7 @@ function headlineFromDriver(driver, fallbackHeadline) {
   return fallbackHeadline;
 }
 
-function commandStylePortfolioImplication({ regime, leaderText, confirmedLeaderText, modelSectorText, topSector, redditTickers, breadth }) {
-  const parts = [];
-  parts.push(`${regime}; use the model to choose single names rather than reaching for broad beta.`);
-  if (confirmedLeaderText && confirmedLeaderText !== "none") parts.push(`Confirmed momentum leadership is ${confirmedLeaderText}.`);
-  else if (leaderText && leaderText !== "none") parts.push(`Raw model leadership is ${leaderText}, but wait for trend confirmation where needed.`);
-  if (modelSectorText) parts.push(`${modelSectorText}.`);
-  if (topSector?.sector) parts.push(`ETF confirmation is strongest in ${topSector.sector}.`);
-  if (redditTickers?.length) parts.push(`Reddit attention is a crowding check, not a trade trigger.`);
-  if (Number.isFinite(breadth) && breadth < 50) parts.push("Keep sizing modest until breadth improves.");
-  return parts.join(" ");
-}
-
-function buildNote({ opportunities, macro, calendar, sources, model, sectorPerformance, deskRecommendations, aiRecommendations, marketIntelligence }) {
+function buildNote({ opportunities, calendar, model, sectorPerformance, deskRecommendations, aiRecommendations, marketIntelligence }) {
   const modelReady = model?.status === "ready" && model.scoredCount > 0;
   const modelLeaders = opportunities.filter(hasModelRank);
   const leaders = (modelReady ? modelLeaders : opportunities).slice(0, 5);
@@ -3262,42 +3193,22 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
   const broadTrend = opportunities.filter((item) => item.above50 && item.above200).length;
   const above50 = opportunities.filter((item) => item.above50).length;
   const above200 = opportunities.filter((item) => item.above200).length;
-  const topDecileLimit = modelReady ? Math.max(1, Math.ceil(model.scoredCount * 0.1)) : null;
-  const extended = modelReady
-    ? modelLeaders.filter((item) => item.modelRank <= topDecileLimit && item.rsi14 > 76).length
-    : opportunities.filter((item) => item.score >= 70 && item.rsi14 > 76).length;
-  const cleanCandidates = modelReady
-    ? modelLeaders.filter((item) => item.setupType === "momentum_confirmed").length
-    : opportunities.filter((item) => item.score >= 72 && item.above50 && item.above200 && item.rsi14 <= 76).length;
   const universeCount = opportunities.length || 1;
   const breadth = Math.round((broadTrend / universeCount) * 100);
   const above50Pct = Math.round((above50 / universeCount) * 100);
   const above200Pct = Math.round((above200 / universeCount) * 100);
-  const sourceHits = sources.filter((source) => source.ok).length;
-  const failedSources = sources.length - sourceHits;
-  const articleHits = sources.reduce((total, source) => total + (source.articles?.length || 0), 0);
   const upcomingEvents = (calendar || []).slice(0, 3);
   const leaderText = leaders.map((item) => item.symbol).join(", ") || "none";
   const confirmedLeaderText = modelLeaders.filter((item) => item.setupType === "momentum_confirmed").slice(0, 5).map((item) => item.symbol).join(", ") || "none";
   const etfText = etfLeaders.map((item) => item.symbol).join(", ") || "none";
   const topSector = sectorPerformance?.[0];
   const modelSectorText = dominantModelSectorText(modelLeaders);
-  const sourceBriefs = articleBriefs(sources, 3);
   const marketBullets = marketIntelligence?.briefingBullets || [];
   const topDrivers = marketIntelligence?.professionalDrivers || [];
   const officialMacroReleases = marketIntelligence?.officialMacro?.releases || [];
   const latestOfficialMacro = officialMacroReleases.find((release) => release.status === "ready");
-  const earningsMovers = marketIntelligence?.earnings?.earningsMovers || [];
-  const redditTickers = marketIntelligence?.reddit?.topTickers || [];
   const technicalsFresh = marketIntelligence?.marketDataStatus?.status === "fresh";
   const technicalStatusMessage = marketIntelligence?.marketDataStatus?.message || "Fresh price and technical data is unavailable.";
-  const aiFocus = aiRecommendations?.status === "ready"
-    ? firstSentence(aiRecommendations.headline || aiRecommendations.macroView)
-    : "";
-  const aiSymbols = (aiRecommendations?.recommendations || []).slice(0, 4).map((item) => item.symbol).filter(Boolean).join(", ");
-  const modelText = modelReady
-    ? `${model.scoredCount} S&P 500 names were scored by the XGBoost rank model as of ${model.asOfDate || "the latest available close"}`
-    : "The XGBoost rank model was not available for this refresh";
   const regime = !technicalsFresh
     ? "Fresh technical data is unavailable"
     : breadth >= 55
@@ -3325,19 +3236,12 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
     : driverSentence
       ? driverSentence
       : "The current market-driver read is thin because few configured sources yielded current dated articles.";
-  const secondaryDriverLead = macroReleaseLead && driverSentence ? driverSentence : "";
-  const earningsLead = earningsSignalTakeaway(marketIntelligence?.earnings || {});
-  const redditLead = redditTickers.length
-    ? `${marketIntelligence?.reddit?.status === "cache_fallback" ? `Last successful Reddit sample (${marketIntelligence.reddit.cacheAgeHours ?? "unknown"} hours old)` : "Retail attention"} is concentrated in ${redditTickers.slice(0, 4).map((item) => item.symbol).join(", ")}; treat that as sentiment, not verified news.`
-    : "Reddit attention data was unavailable or did not produce clean ticker concentration.";
+  const positioningLead = modelReady
+    ? `${breadth}% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are ${confirmedLeaderText}.`
+    : `${breadth}% of screened names are above both major trend lines, but current model leadership is unavailable.`;
   const fallbackBody = !technicalsFresh
-    ? [driverLead, secondaryDriverLead, earningsLead, technicalStatusMessage, modelReady ? `The model file reports ${model.scoredCount} scored names as of ${model.asOfDate || "the latest available close"}, but price-derived fields should not be treated as current until the model scorer restores the technical tape.` : "Model-ranked single-name context is unavailable, so do not rely on stale ranks."].filter(Boolean).join(" ")
-    : [
-        [driverLead, secondaryDriverLead].filter(Boolean).join(" "),
-        earningsLead,
-        redditLead,
-        commandStylePortfolioImplication({ regime, leaderText, confirmedLeaderText, modelSectorText, topSector, redditTickers, breadth })
-      ].filter(Boolean).join(" ");
+    ? `${firstSentence(driverLead, 280)} ${firstSentence(technicalStatusMessage, 280)}`.trim()
+    : `${firstSentence(driverLead, 300)} ${firstSentence(positioningLead, 300)}`.trim();
   const macroReleaseBullets = officialMacroReleases
     .filter((release) => release.status === "ready")
     .slice(0, 3)
@@ -3362,28 +3266,32 @@ function buildNote({ opportunities, macro, calendar, sources, model, sectorPerfo
         ? `Model read: ${model.scoredCount} names were scored as of ${model.asOfDate || "the latest available close"}, but technical tape is unavailable so leadership and sector confirmation are suppressed.`
       : "Model rankings were unavailable, so no single-name model read was used.",
     deskRecommendations?.length
-      ? `Desk call summary: ${deskRecommendations.slice(0, 4).map((item) => `${item.symbol} (${item.label})`).join(", ")}.`
-      : "Desk call summary was unavailable in this snapshot.",
-    sourceBriefs.length ? `Research tape: ${sourceBriefs.join(" | ")}.` : "Research tape: no high-quality article briefs were extracted from the configured source pages."
+      ? `Tactical implication: ${deskRecommendations.slice(0, 4).map((item) => `${item.symbol} (${item.label})`).join(", ")} are the setups that currently merit review after the market backdrop is considered.`
+      : "Tactical implication: no model setup currently clears the dashboard's research threshold."
   ].filter(isUsefulTakeaway);
+  const reboundWatchNames = modelLeaders
+    .filter((item) => item.setupType === "model_rebound_watch" || item.setupType === "model_ranked_not_momentum_confirmed")
+    .slice(0, 4)
+    .map((item) => item.symbol);
   const fallbackWatch = [
-    upcomingEvents.length ? `Macro risk: ${upcomingEvents.map((event) => `${event.event} on ${event.date}`).join("; ")}.` : "No upcoming macro events are currently listed in the local calendar.",
-    modelReady && technicalsFresh
-      ? `Momentum risk: ${extended} top-decile model names have RSI above 76; chase risk is highest where model rank is strong but volume/trend confirmation is weak.`
-      : "Momentum risk: fresh technical tape is unavailable, so RSI/chase-risk counts are suppressed.",
+    upcomingEvents.length ? `Next catalyst: ${upcomingEvents.map((event) => `${event.event} on ${event.date} at ${event.time}`).join("; ")}; reassess rates and sector leadership after the release.` : "Next catalyst: no high-importance macro event is currently listed in the local calendar.",
+    modelReady && technicalsFresh && reboundWatchNames.length
+      ? `Confirmation risk: ${reboundWatchNames.join(", ")} rank highly but are not momentum confirmed; keep them in the watch bucket until price trend improves.`
+      : modelReady && technicalsFresh
+        ? "Confirmation risk: the leading model names currently clear the dashboard's main trend checks; reassess if that changes at the next close."
+        : "Confirmation risk: fresh technical data is unavailable, so no current trend judgment is shown.",
     technicalsFresh
       ? `Confirmation check: ETF leaders are ${etfText}; if they roll over while single-name ranks stay high, reduce confidence in the long book.`
-      : "Data check: rerun the Python model scorer before relying on trailing returns, sector tiles, breadth, or moving-average status.",
-    `${failedSources} of ${sources.length} configured source pages failed the latest check; blocked or stale sources should not drive the call.`
+      : "Data check: rerun the Python model scorer before relying on trailing returns, sector tiles, breadth, or moving-average status."
   ];
-  const cleanedAiDailyRead = process.env.AI_DAILY_READ === "1" && aiRecommendations?.status === "ready" ? cleanDailyRead(aiRecommendations.dailyRead) : null;
-  const aiDailyRead = process.env.AI_DAILY_READ === "1" && dailyReadPassesFactGuardrails(cleanedAiDailyRead) ? cleanedAiDailyRead : null;
+  const cleanedAiDailyRead = aiRecommendations?.status === "ready" ? cleanDailyRead(aiRecommendations.dailyRead) : null;
+  const aiDailyRead = dailyReadPassesFactGuardrails(cleanedAiDailyRead) ? cleanedAiDailyRead : null;
 
   return {
     headline: aiDailyRead?.headline || intelligenceHeadline,
     body: aiDailyRead?.body || fallbackBody,
-    changed: boundedList([...(aiDailyRead?.keyTakeaways || []).slice(0, 4), ...fallbackChanged], fallbackChanged, 6),
-    watch: boundedList([...(aiDailyRead?.watchItems || []).slice(0, 3), ...fallbackWatch], fallbackWatch, 5),
+    changed: boundedList([...fallbackChanged, ...(aiDailyRead?.keyTakeaways || []).slice(0, 2)], fallbackChanged, 6),
+    watch: boundedList([...fallbackWatch, ...(aiDailyRead?.watchItems || []).slice(0, 2)], fallbackWatch, 5),
     generatedBy: aiDailyRead ? "ai_with_fact_guardrails" : cleanedAiDailyRead ? "deterministic_ai_daily_read_rejected" : "deterministic"
   };
 }
@@ -3458,6 +3366,11 @@ function bottomModelSectorClusters(opportunities, limit = 4) {
     .filter((item) => item.type === "stock" && hasModelRank(item))
     .sort((a, b) => Number(b.modelRank) - Number(a.modelRank));
   const bottomWindow = ranked.slice(0, Math.max(25, Math.ceil(ranked.length * 0.15)));
+  const universeCounts = new Map();
+  ranked.forEach((item) => {
+    const sector = item.sector || "Unknown";
+    universeCounts.set(sector, (universeCounts.get(sector) || 0) + 1);
+  });
   const sectors = new Map();
   bottomWindow.forEach((item) => {
     const sector = item.sector || "Unknown";
@@ -3467,15 +3380,29 @@ function bottomModelSectorClusters(opportunities, limit = 4) {
     sectors.set(sector, entry);
   });
   return [...sectors.values()]
-    .sort((a, b) => b.count - a.count)
+    .map((entry) => {
+      const universeCount = universeCounts.get(entry.sector) || 0;
+      const bottomSharePct = bottomWindow.length ? (entry.count / bottomWindow.length) * 100 : 0;
+      const universeSharePct = ranked.length ? (universeCount / ranked.length) * 100 : 0;
+      const representationRatio = universeSharePct > 0 ? bottomSharePct / universeSharePct : 0;
+      return {
+        ...entry,
+        universeCount,
+        bottomSharePct: roundedNumber(bottomSharePct, 1),
+        universeSharePct: roundedNumber(universeSharePct, 1),
+        representationRatio: roundedNumber(representationRatio, 2)
+      };
+    })
+    .filter((entry) => entry.count >= 3 && entry.representationRatio >= 1)
+    .sort((a, b) => b.representationRatio - a.representationRatio || b.count - a.count)
     .slice(0, limit)
     .map((entry) => ({
       ...entry,
-      rationale: `${entry.count} of the weakest model-ranked names are in ${entry.sector}; examples include ${entry.examples.join(", ")}.`
+      rationale: `${entry.sector} is ${formatNumber(entry.representationRatio, 2)}x represented in the bottom model window (${entry.count} of ${Math.max(25, Math.ceil(ranked.length * 0.15))} names) versus its share of the full universe; examples include ${entry.examples.join(", ")}.`
     }));
 }
 
-function buildAvoidList(opportunities, aiRecommendations) {
+function buildAvoidList(opportunities) {
   const bottomCompanies = bottomModelCandidates(opportunities, 10);
   if (!bottomCompanies.length) {
     return {
@@ -3521,7 +3448,7 @@ function buildAvoidList(opportunities, aiRecommendations) {
 
   return {
     status: "ready",
-    summary: `Avoid list is driven by the bottom of the XGBoost rank model: ${worst.map((item) => item.symbol).slice(0, 5).join(", ")} are the weakest current long candidates, with sector pressure most visible in ${sectors.map((item) => item.sector).slice(0, 2).join(" and ")}.`,
+    summary: `Avoid list is driven by the bottom of the XGBoost rank model: ${worst.map((item) => item.symbol).slice(0, 5).join(", ")} are the weakest current long candidates${sectors.length ? `; bottom-rank concentration is most elevated versus universe weight in ${sectors.map((item) => item.sector).slice(0, 2).join(" and ")}` : ""}.`,
     sectors: sectors.map((item) => ({
       ...item,
       rationale: item.rationale
@@ -3809,6 +3736,55 @@ function companyOverviewSummary(context) {
   return description.length > 320 ? `${description.slice(0, 317).trim()}...` : description;
 }
 
+function groundedCompanyNews(context) {
+  const recent = (context?.news || [])
+    .filter((item) => item?.title && item?.url)
+    .filter((item) => {
+      const age = articleAgeHours(item.publishedAt);
+      return age == null || (age >= 0 && age <= 30 * 24);
+    })
+    .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0))[0];
+  if (!recent) {
+    return {
+      text: "No clear recent company-specific catalyst was found in the supplied headlines.",
+      sourceId: null
+    };
+  }
+  const dateText = shortDateFromIso(recent.publishedAt);
+  const sourceText = [recent.sourceName, dateText].filter(Boolean).join(", ");
+  return {
+    text: `Recent company-specific headline to investigate: ${cleanMemoText(recent.title)}${sourceText ? ` (${sourceText})` : ""}. Treat it as a possible catalyst, not proof that it caused the price move.`,
+    sourceId: recent.id || null
+  };
+}
+
+function groundedMacroContext(marketIntelligence = {}, sourceTape = []) {
+  const release = (marketIntelligence.officialMacro?.releases || []).find((item) => item.status === "ready" && item.marketRead);
+  if (release) {
+    return {
+      link: `Portfolio backdrop: ${firstSentence(release.marketRead, 240)}`,
+      evidence: `${release.sourceName || release.source || "Official macro release"}${release.releaseAt ? `, released ${shortDateFromIso(release.releaseAt)}` : ""}.`,
+      sourceRef: release.id || null
+    };
+  }
+
+  const driver = (marketIntelligence.professionalDrivers || []).find((item) => item.summary || item.title);
+  if (!driver) {
+    return {
+      link: "No fresh macro or market-driver conclusion cleared the current source filter.",
+      evidence: "No direct company-level macro catalyst is asserted.",
+      sourceRef: null
+    };
+  }
+  const conclusion = driverConclusion(driver, primaryTheme(driver.themes || [])) || driver.summary || driver.title;
+  const sourceRef = sourceTape.find((item) => item.url === driver.url)?.id || null;
+  return {
+    link: `Portfolio backdrop, not a company catalyst: ${firstSentence(conclusion, 240)}`,
+    evidence: `${driver.sourceName || "Professional source"}${driver.publishedAt ? `, ${shortDateFromIso(driver.publishedAt)}` : ""}: ${firstSentence(driver.title, 180)}`,
+    sourceRef
+  };
+}
+
 function marketCapFromSummary(summary, symbol) {
   const raw = nasdaqValue(summary?.data?.summaryData?.MarketCap);
   const value = parseLargeNumber(raw);
@@ -3820,6 +3796,16 @@ function marketCapFromSummary(summary, symbol) {
     sourceName: "Nasdaq quote summary",
     sourceUrl: `https://www.nasdaq.com/market-activity/stocks/${symbol.toLowerCase()}`
   };
+}
+
+function deeperReadCardPassesGuardrails(card = {}) {
+  const text = [card.thesis, card.whyItMatters, card.marketReadThrough, card.variantAngle].map(cleanMemoText).join(" ");
+  if (!text || /\b(export ribbon|supply giveaway|refinery crash-driven|cap real rates|AI-capability spiral|high-litness|HH uncertainty)\b/i.test(text)) return false;
+  if (/\bexpect\b/i.test(card.marketReadThrough || "")) return false;
+  if (!/^Monitor:/i.test(card.marketReadThrough || "")) return false;
+  if (!/^Inference:/i.test(card.variantAngle || "")) return false;
+  if (/\b(will|guarantee(?:s|d)?|definitely)\b/i.test(card.variantAngle || "")) return false;
+  return true;
 }
 
 function normalizeDeeperReadPayload(deeperRead, sourceTape = [], validSourceRefs = []) {
@@ -3842,7 +3828,9 @@ function normalizeDeeperReadPayload(deeperRead, sourceTape = [], validSourceRefs
         sourceRefs: card.sourceRef ? [card.sourceRef] : []
       };
     })
-    .filter((card) => card.sourceRef && validRefSet.has(card.sourceRef));
+    .filter((card) => card.sourceRef && validRefSet.has(card.sourceRef))
+    .filter(deeperReadCardPassesGuardrails)
+    .filter((card) => hasSubstantiveDeeperReadEvidence(sourceRefsById.get(card.sourceRef)));
   const seenSources = new Set();
   const uniqueDeeperCards = [];
   deeperCards.forEach((card) => {
@@ -3851,13 +3839,12 @@ function normalizeDeeperReadPayload(deeperRead, sourceTape = [], validSourceRefs
     seenSources.add(key);
     uniqueDeeperCards.push(card);
   });
-  const cleanedSummary = cleanMemoText(deeperRead?.summary);
-  const summaryMentionsMechanics = /candidate|quality filter|source rotation|recently used|routinely used|last 7 days|seven days|past week|exclude model|momentum labels/i.test(cleanedSummary);
+  const leadThesis = uniqueDeeperCards[0]?.thesis || "";
   return {
     status: uniqueDeeperCards.length ? deeperRead?.status || "ready" : "thin",
     lookbackDays: deeperReadLookbackDays,
-    summary: cleanedSummary && !summaryMentionsMechanics
-      ? cleanedSummary
+    summary: leadThesis
+      ? `Featured source angle: ${firstSentence(leadThesis, 360)}`
       : "Deeper Read highlights the source pieces with a differentiated market angle, focusing on second-order implications for rates, policy, labor, commodities, sectors, and positioning.",
     cards: uniqueDeeperCards.slice(0, 5)
   };
@@ -3894,6 +3881,12 @@ function deterministicRecommendationFields(candidate = {}) {
   const riskFlags = (candidate.riskFlags || []).filter(Boolean);
   const setup = candidateSetupLabel(candidate);
   const action = candidateAction(candidate);
+  const rankShare = Number(candidate.modelRank) / Math.max(1, Number(candidate.modelUniverseCount) || 1);
+  const conviction = candidate.setupType !== "momentum_confirmed"
+    ? "Review"
+    : rankShare <= 0.02
+      ? "High"
+      : "Medium";
   const activation = candidate.setupType === "model_rebound_watch" && candidate.reboundActivationPrice
     ? ` Requires a close above $${Number(candidate.reboundActivationPrice).toFixed(2)} within ${candidate.reboundActivationWindowDays || 5} trading days before it is actionable.`
     : "";
@@ -3919,6 +3912,7 @@ function deterministicRecommendationFields(candidate = {}) {
       : "Requires better price confirmation before treating it as an active momentum trade.";
   return {
     action,
+    conviction,
     setup,
     whyNow,
     rationale: `${setupText} ${whyNow}`,
@@ -3930,19 +3924,24 @@ function deterministicRecommendationFields(candidate = {}) {
   };
 }
 
-function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRefs, sourceTape = []) {
+function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRefs, sourceTape = [], marketIntelligence = {}) {
   const bySymbol = new Map(companyContexts.map((context) => [context.symbol, context]));
   const validRefSet = new Set(validSourceRefs);
   const cleanedDailyRead = cleanDailyRead(parsed.dailyRead);
+  const macroContext = groundedMacroContext(marketIntelligence, sourceTape);
   const recommendations = (parsed.recommendations || []).map((recommendation) => {
     const context = bySymbol.get(recommendation.symbol);
     if (!context) return sanitizeAiRecommendation(recommendation);
+
+    const companyNews = groundedCompanyNews(context);
 
     const sourceRefs = [
       ...(recommendation.sourceRefs || []),
       context.investorRelations?.id,
       context.marketCap?.sourceId,
-      context.earnings?.sourceId
+      context.earnings?.sourceId,
+      companyNews.sourceId,
+      macroContext.sourceRef
     ].filter((ref, index, refs) => ref && validRefSet.has(ref) && refs.indexOf(ref) === index);
 
     const candidateFields = deterministicRecommendationFields(context.candidate || context);
@@ -3952,9 +3951,9 @@ function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRe
       companyOverview: companyOverviewSummary(context) || recommendation.companyOverview || "",
       marketCap: context.marketCap?.text || recommendation.marketCap || "",
       earningsContext: context.earnings?.summary || recommendation.earningsContext || "",
-      recentNews: cleanAiMemoField(recommendation.recentNews) || "No clear recent company-specific catalyst was found in the supplied headlines.",
-      macroLink: cleanAiMemoField(recommendation.macroLink),
-      macroEvidence: cleanAiMemoField(recommendation.macroEvidence || recommendation.macroLink),
+      recentNews: companyNews.text,
+      macroLink: macroContext.link,
+      macroEvidence: macroContext.evidence,
       sourceRefs,
       setupTags: context.candidate?.setupTags || []
     });
@@ -3979,7 +3978,7 @@ function normalizeAiRecommendationContext(parsed, companyContexts, validSourceRe
     ...parsed,
     headline: cleanAiMemoField(parsed.headline) || "AI strategy memo available; use the sections below for the sourced view.",
     macroView: cleanAiMemoField(parsed.macroView),
-    dailyRead: process.env.AI_DAILY_READ === "1" && dailyReadPassesFactGuardrails(cleanedDailyRead) ? cleanedDailyRead : null,
+    dailyRead: dailyReadPassesFactGuardrails(cleanedDailyRead) ? cleanedDailyRead : null,
     portfolioNotes: (parsed.portfolioNotes || []).map(cleanAiMemoField).filter(Boolean),
     openQuestions: (parsed.openQuestions || []).map(cleanAiMemoField).filter(Boolean),
     avoidList,
@@ -4200,7 +4199,7 @@ async function fetchCompanyContext(candidate, index) {
 
 async function buildCompanyContexts(candidates) {
   const selected = candidates.slice(0, Math.max(0, companyContextCount));
-  const contexts = await mapLimit(selected, 3, async (candidate, index) => {
+  const contexts = await mapLimit(selected, 2, async (candidate, index) => {
     try {
       return await fetchCompanyContext(candidate, index);
     } catch (error) {
@@ -4229,6 +4228,13 @@ async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sour
       "Use only the supplied article candidates from the last 7 days.",
       "Do not mention the stock model, XGBoost, model ranks, or momentum leaders. This section is source analysis only.",
       "Choose the most differentiated analytical angles, not generic recaps of stocks, oil, or futures moving.",
+      "Every factual premise must be present in the candidate summary or excerpt. A headline alone is not evidence.",
+      "The thesis must paraphrase an explicit source claim and preserve its qualifications; do not turn a possible outcome into a certain one.",
+      "Start marketReadThrough with 'Monitor:' and frame it as observable confirmation checks, never a directional forecast.",
+      "Start variantAngle with 'Inference:' and keep it to one restrained implication tied directly to source evidence.",
+      "Inference language must remain probabilistic; do not use will, guarantees, definitely, or other certain forecast language.",
+      "Do not invent forecasts, statistics, company winners or losers, future data outcomes, or clever jargon.",
+      "Use direct, plain English; reject a card rather than filling it with abstract finance language.",
       "Avoid repeating sources marked recentlyUsedSource unless there are too few good alternatives.",
       "Return concise but thoughtful cards with thesis, why it matters, market read-through, and the variant angle."
     ].join(" "),
@@ -4314,6 +4320,10 @@ async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sour
         usage
       });
       const parsed = normalizeDeeperReadPayload(JSON.parse(text), sourceTape, sourceRefIds);
+      if (!parsed.cards.length) {
+        console.warn("AI Deeper Read did not pass evidence guardrails; using deterministic source analysis.");
+        return deterministicDeeperRead(candidates, "AI output did not pass the evidence guardrails.");
+      }
       console.log(`Deeper Read generated with ${parsed.cards.length} cards.`);
       return parsed;
     } finally {
@@ -4349,18 +4359,14 @@ function deterministicStrategyOverview({ marketIntelligence, modelCandidates, ma
   const nextEvents = (calendar || []).slice(0, 3).map((event) => `${event.event} on ${event.date}`).join("; ");
   const firstEvent = (calendar || [])[0];
   const sectorText = topSectorText(sectorPerformance);
-  const headline = leaders.length
-    ? `${driverHeadline.replace(/\.$/, "")}; confirmed leadership is ${leaders.join(", ")}.`
-    : driverHeadline;
   const macroView = [
     driverBody,
     tenYear?.value ? `Rates check: the 10Y Treasury is ${tenYear.value}${tenYear.delta ? ` (${tenYear.delta})` : ""}.` : "",
     nextEvents ? `Next macro decision points: ${nextEvents}.` : "",
-    sectorText ? `Sector confirmation: ${sectorText}.` : "",
-    leaders.length ? `Action bias: research confirmed momentum leaders ${leaders.join(", ")}; ${watchNames.length ? `keep ${watchNames.join(", ")} in the watch bucket until confirmation improves.` : "avoid forcing rebound names without confirmation."}` : ""
+    sectorText ? `Sector confirmation: ${sectorText}.` : ""
   ].filter(Boolean).join(" ");
   const portfolioNotes = [
-    leaders.length ? `Keep tactical research focused on confirmed momentum leaders ${leaders.join(", ")} while the market-driver tape remains policy-sensitive.` : "",
+    leaders.length ? `Research trend-confirmed tactical leaders ${leaders.join(", ")} first; model rank sets the review order, while recent returns and current market drivers determine whether and how much to trade.` : "",
     watchNames.length ? `Keep ${watchNames.join(", ")} in the watch bucket until price confirmation improves; do not treat them as clean momentum plays yet.` : "",
     sectorText ? `Use sector confirmation as a check on single-name risk: ${sectorText}.` : ""
   ].filter(Boolean);
@@ -4370,7 +4376,7 @@ function deterministicStrategyOverview({ marketIntelligence, modelCandidates, ma
     watchNames.length ? `Do watch names ${watchNames.join(", ")} regain the missing trend confirmation, or should they stay out of the active book?` : ""
   ].filter(Boolean);
   return {
-    headline: firstSentence(headline, 170),
+    headline: firstSentence(driverHeadline, 170),
     macroView,
     portfolioNotes,
     openQuestions
@@ -4509,12 +4515,13 @@ async function buildAiRecommendations({ opportunities, macro, calendar, sources,
       const usage = estimateOpenAiCost(aiModel, json.usage);
       const text = responseText(json);
       if (!text) throw new Error("OpenAI response did not include final text; try a larger max_output_tokens value or a lower reasoning effort.");
-      const parsed = normalizeAiRecommendationContext(JSON.parse(text), companyContexts, sourceRefIds, sourceTape);
+      const parsed = normalizeAiRecommendationContext(JSON.parse(text), companyContexts, sourceRefIds, sourceTape, marketIntelligence);
       const overview = deterministicStrategyOverview({ marketIntelligence, modelCandidates, macro, calendar, sectorPerformance });
       parsed.headline = overview.headline;
       parsed.macroView = overview.macroView;
       parsed.portfolioNotes = overview.portfolioNotes;
       parsed.openQuestions = overview.openQuestions;
+      parsed.avoidList = buildAvoidList(opportunities);
       const deeperRead = await buildAiDeeperRead({
         apiKey,
         aiModel,
@@ -4711,6 +4718,10 @@ async function main() {
     officialMacro
   });
   console.log(`Market intelligence built: ${(marketIntelligence.professionalDrivers || []).length} professional drivers.`);
+  console.log("Waiting for market-cap cache refresh before company-context requests...");
+  const marketCapCache = await marketCapCachePromise;
+  console.log("Market-cap cache ready.");
+  if (modelRankings.status === "ready") await writeMarketCapCache(marketCapCache);
   const upcomingCalendar = upcomingMacroEvents(macroCalendar);
   const deskRecommendations = buildRecommendations(opportunities);
   const aiRecommendations = await buildAiRecommendations({
@@ -4725,11 +4736,7 @@ async function main() {
     longHorizonContext,
     promptText: aiPromptText
   });
-  const avoidList = buildAvoidList(opportunities, aiRecommendations);
-  console.log("Waiting for market-cap cache refresh...");
-  const marketCapCache = await marketCapCachePromise;
-  console.log("Market-cap cache ready.");
-  if (modelRankings.status === "ready") await writeMarketCapCache(marketCapCache);
+  const avoidList = buildAvoidList(opportunities);
   const modelScorebook = buildModelScorebook({
     modelRankings,
     stockMetadata,
@@ -4789,7 +4796,26 @@ async function main() {
   console.log(`Wrote ${longHorizonOutput} with ${longHorizonResearch.rowCount || 0} long-horizon rows.`);
 }
 
-export { buildModelMonitoring, checkSource, extractArticleCandidates, extractRedditTickerSignals, fetchOfficialMacroReleases, fetchRedditTape, parseMarkdownSources, publishedDateFromHtml, sortArticlesNewestFirst };
+export {
+  buildLongHorizonRows,
+  buildModelMonitoring,
+  bottomModelSectorClusters,
+  checkSource,
+  cleanArticleConclusion,
+  cleanDailyRead,
+  dailyReadPassesFactGuardrails,
+  deeperReadCardPassesGuardrails,
+  extractArticleCandidates,
+  extractRedditTickerSignals,
+  fetchOfficialMacroReleases,
+  fetchRedditTape,
+  groundedCompanyNews,
+  groundedMacroContext,
+  hasSubstantiveDeeperReadEvidence,
+  parseMarkdownSources,
+  publishedDateFromHtml,
+  sortArticlesNewestFirst
+};
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch((error) => {

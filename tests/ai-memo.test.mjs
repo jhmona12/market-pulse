@@ -18,6 +18,8 @@ test("builds a bounded AI memo input payload from deterministic dashboard inputs
 
   assert.equal(payload.generatedAt, "2026-06-29T15:00:00Z");
   assert.equal(payload.marketIntelligence.officialMacro.releases[0].id, "M4");
+  assert.equal(payload.marketIntelligence.reddit.metricMode, "unranked_recent_mentions");
+  assert.equal(payload.marketIntelligence.reddit.sampleCoverage.includesVoteAndCommentCounts, false);
   assert.deepEqual(payload.validRecommendationSymbols, ["ABC"]);
   assert.deepEqual(payload.sectorPerformance[0], {
     sector: "Technology",

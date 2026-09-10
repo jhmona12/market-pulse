@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Morning Desk</title>
-    <link rel="stylesheet" href="styles.css?v=20260528-command-center" />
+    <link rel="stylesheet" href="styles.css?v=20260909-reliability-audit-2" />
   </head>
   <body>
     <main class="shell">
@@ -15,29 +15,30 @@
         </div>
         <div class="asof">
           <span id="asOfDate">Loading</span>
+          <span class="refresh-health" id="refreshHealth">Checking refresh</span>
         </div>
       </header>
 
       <nav class="view-tabs primary-tabs" aria-label="Dashboard views">
         <button class="view-tab active" type="button" data-view-target="briefing">
-          <strong>Briefing</strong>
+          <strong>Today</strong>
           <span>What matters now</span>
         </button>
         <button class="view-tab" type="button" data-view-target="tactical">
-          <strong>Tactical Book</strong>
-          <span>14D model + trades</span>
+          <strong>Tactical</strong>
+          <span>14D trades + risk</span>
         </button>
         <button class="view-tab" type="button" data-view-target="strategic">
-          <strong>Strategic Book</strong>
-          <span>1Y model lens</span>
+          <strong>Strategic</strong>
+          <span>1Y model + agreement</span>
         </button>
         <button class="view-tab" type="button" data-view-target="intelligence">
-          <strong>Market Intel</strong>
-          <span>News + macro tape</span>
+          <strong>Research</strong>
+          <span>News + macro evidence</span>
         </button>
         <button class="view-tab" type="button" data-view-target="model-lab">
-          <strong>Model Lab</strong>
-          <span>Private diagnostics</span>
+          <strong>Lab</strong>
+          <span>Private tools + diagnostics</span>
         </button>
       </nav>
 
@@ -130,12 +131,17 @@
             </div>
           </article>
 
-          <article class="panel model-lens-panel" id="model-lens">
+        </section>
+      </div>
+
+      <section class="view-panel tactical-view" id="tacticalView" hidden>
+        <section class="grid tactical-grid">
+          <article class="panel opportunities-panel" id="momentum-book">
             <div class="panel-title">
-              <span>Model Lens</span>
-              <span id="modelLensMeta">14D + 1Y</span>
+              <span>Tactical Momentum Book</span>
+              <span id="bookMeta">End-of-day</span>
             </div>
-            <div class="model-lens-layout" id="modelLens"></div>
+            <div class="opportunity-list" id="opportunityList"></div>
           </article>
 
           <article class="panel ai-panel" id="ai-memo">
@@ -156,18 +162,6 @@
                 <ul id="aiOpenQuestions"></ul>
               </div>
             </div>
-          </article>
-        </section>
-      </div>
-
-      <section class="view-panel tactical-view" id="tacticalView" hidden>
-        <section class="grid tactical-grid">
-          <article class="panel opportunities-panel" id="momentum-book">
-            <div class="panel-title">
-              <span>Tactical Momentum Book</span>
-              <span id="bookMeta">End-of-day</span>
-            </div>
-            <div class="opportunity-list" id="opportunityList"></div>
           </article>
 
           <article class="panel recommendations-panel" id="desk-calls">
@@ -237,6 +231,14 @@
       </section>
 
       <section class="view-panel strategic-view" id="strategicView" hidden>
+        <article class="panel model-lens-panel" id="model-lens">
+          <div class="panel-title">
+            <span>Cross-Horizon Model Lens</span>
+            <span id="modelLensMeta">14D + 1Y</span>
+          </div>
+          <div class="model-lens-layout" id="modelLens"></div>
+        </article>
+
         <article class="panel scoreboard-panel long-horizon-panel">
           <div class="panel-title">
             <span>Long-Horizon Book</span>
@@ -447,6 +449,6 @@
       </section>
     </main>
 
-    <script type="module" src="app.js?v=20260528-command-center"></script>
+    <script type="module" src="app.js?v=20260909-reliability-audit-2"></script>
   </body>
 </html>
