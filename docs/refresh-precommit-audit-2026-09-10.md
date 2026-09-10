@@ -103,3 +103,19 @@ The correction provisions Python 3.11 and installs the existing model requiremen
 Validation reproduced the import error using a newly created temporary virtual environment. After installing the declared requirements, 52 JavaScript and nine Python tests passed, along with verification of the preserved local artifacts. This macOS test used the existing native OpenMP runtime via `DYLD_LIBRARY_PATH`; it did not reuse the project's Python packages. The hosted Python/Linux environment still requires its own run. Existing remote JSON still needs regeneration under the new contracts; a clean local test is not a successful public deployment.
 
 Recovery requires a new **Refresh Market Data** workflow dispatch on `main` after the correction is pushed, not a rerun of Pages #85 against its original commit. That refresh must regenerate, verify, deploy, and confirm all four dashboard files before this incident can be considered resolved end to end.
+
+Hosted follow-up: correction `a07ad9b` ran in [Pages #86](https://github.com/jhmona12/market-pulse/actions/runs/34459636692). Python setup and dependency installation succeeded, and all 52 JavaScript plus nine Python tests passed on the hosted runner. Verification then rejected only the 499 inconsistent long-horizon rows and six ungrounded legacy company-news blurbs described above. Deployment remained blocked; the full refresh had not yet been dispatched when these results were recorded.
+
+## Successful Full Refresh
+
+[Refresh #746, attempt 2](https://github.com/jhmona12/market-pulse/actions/runs/34425639778/attempts/2) completed successfully on September 10. It retained the original workflow template but its explicit default-branch sync advanced the code from `324a1fb` to `a07ad9b` before execution.
+
+- All 503 reference histories were current through September 9; both models scored 500 names.
+- Full report generation, 52 JavaScript tests, nine Python tests, and dashboard verification passed. The prior return-field and company-news failures were absent from the newly generated output.
+- Pages deployed and the live probe confirmed the run. Independent checks matched SHA-256 hashes of all four public dashboard JSON files against refresh commit `a11eaec`.
+- The published snapshot was generated at `2026-09-10T09:40:28.097Z`, with fresh September 9 price/model data and `staleDataReused: false`.
+- Reddit returned 21 recent RSS posts and nine ticker mentions, explicitly unranked with no vote/comment metrics.
+
+The inherited workflow template predates the ledger-recording step. After confirming publication, its missing `2026-09-09-evening` entry was added from the actual published status so subsequent monitors do not misreport it as missed. New scheduled runs use the current workflow's automatic confirmed-publication ledger step.
+
+The reported 589-minute delay belongs to a manually retried prior evening slot; it is not evidence of a new 589-minute scheduler delay. Runtime cache saving produced a nonfatal warning during the rerun; scoring and publication completed. The local project was synchronized to the published data, with earlier local generated snapshots preserved in the named Git stash `Preserve local snapshots before verified refresh sync 2026-09-10`.
