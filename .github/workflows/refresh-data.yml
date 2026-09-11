@@ -105,6 +105,16 @@ jobs:
           MODEL_SCORING_RETRY_DELAY_MS: 90000
         run: node scripts/refresh/run-model-scoring.mjs
 
+      - name: Retain price readiness diagnostics
+        if: always() && steps.pacific_time.outputs.run_refresh == 'true'
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: price-readiness-${{ github.run_id }}-${{ github.run_attempt }}
+          path: data/diagnostics/price-readiness-*.json
+          if-no-files-found: warn
+          retention-days: 14
+
       - name: Stop if model scoring failed
         if: steps.pacific_time.outputs.run_refresh == 'true' && steps.score_models.outcome != 'success'
         run: |

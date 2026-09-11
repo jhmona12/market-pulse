@@ -15,6 +15,8 @@ from urllib.request import Request, urlopen
 
 import pandas as pd
 
+from price_history import parse_yahoo_history
+
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "data" / "modeling"
@@ -115,55 +117,19 @@ def strip_html(value: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def fetch_yahoo_history(symbol: str, start_date: datetime, end_date: datetime) -> pd.DataFrame:
+def fetch_yahoo_history(symbol: str, start_date: datetime, end_date: datetime, *, host: str = "query1.finance.yahoo.com") -> pd.DataFrame:
+    if host not in {"query1.finance.yahoo.com", "query2.finance.yahoo.com"}:
+        raise ValueError(f"Unsupported Yahoo chart host: {host}")
     period1 = int(start_date.timestamp())
     period2 = int(end_date.timestamp())
     url = (
-        "https://query1.finance.yahoo.com/v8/finance/chart/"
-        f"{quote(yahoo_symbol(symbol))}?period1={period1}&period2={period2}&interval=1d&events=history&includeAdjustedClose=true"
+        f"https://{host}/v8/finance/chart/"
+        f"{quote(yahoo_symbol(symbol))}?period1={period1}&period2={period2}&interval=1d&events=history&includeAdjustedClose=true&includePrePost=false"
     )
     payload = json.loads(fetch_text(url))
-    result = payload["chart"]["result"][0]
-    timestamps = result.get("timestamp", [])
-    quote_data = result.get("indicators", {}).get("quote", [{}])[0]
-    adjusted = result.get("indicators", {}).get("adjclose", [{}])[0].get("adjclose", [])
-
-    rows = []
-    for index, stamp in enumerate(timestamps):
-        raw_close_values = quote_data.get("close", [])
-        raw_close = raw_close_values[index] if index < len(raw_close_values) else None
-        close = adjusted[index] if index < len(adjusted) else raw_close
-        if close is None:
-            continue
-
-        adjustment_factor = 1.0
-        try:
-            if raw_close is not None and float(raw_close) != 0:
-                adjustment_factor = float(close) / float(raw_close)
-        except (TypeError, ValueError):
-            adjustment_factor = 1.0
-
-        def adjusted_value(field: str) -> float | int | None:
-            values = quote_data.get(field, [])
-            raw_value = values[index] if index < len(values) else None
-            if raw_value is None:
-                return None
-            try:
-                return float(raw_value) * adjustment_factor
-            except (TypeError, ValueError):
-                return raw_value
-
-        rows.append(
-            {
-                "date": datetime.fromtimestamp(stamp, tz=timezone.utc).date().isoformat(),
-                "open": adjusted_value("open"),
-                "high": adjusted_value("high"),
-                "low": adjusted_value("low"),
-                "close": close,
-                "volume": quote_data.get("volume", [None])[index] if index < len(quote_data.get("volume", [])) else None,
-            }
-        )
-    return pd.DataFrame(rows)
+    frame = parse_yahoo_history(payload)
+    frame.attrs["priceHistory"].update({"host": host, "requestUrl": url, "fetchedAt": utc_now().isoformat()})
+    return frame
 
 
 def fetch_fred_series(series_id: str) -> pd.DataFrame:

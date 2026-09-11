@@ -14,6 +14,7 @@ import pandas as pd
 
 from build_training_dataset import build_market_context, enrich_price_features, sector_name_for_etf
 from common import ROOT, SECTOR_ETFS, fetch_sp500_constituents, fetch_yahoo_history, run_config_for_years, write_json
+from price_diagnostics import record_price_readiness
 from model_features import (
     MARKET_CONTEXT_FEATURE_COLUMNS,
     RANK_BASE_COLUMNS,
@@ -222,19 +223,20 @@ def load_constituents(max_symbols: int) -> tuple[pd.DataFrame, str]:
     return constituents, source
 
 
-def load_price_frame(symbol: str, years: int) -> tuple[str, pd.DataFrame | None, str | None]:
+def load_price_frame(symbol: str, years: int, yahoo_host: str = "query1.finance.yahoo.com") -> tuple[str, pd.DataFrame | None, str | None]:
     config = run_config_for_years(years)
     expected_as_of = latest_expected_market_data_date()
     last_error: Exception | None = None
     for attempt in range(4):
         try:
-            frame = fetch_yahoo_history(symbol, config.start_date, config.end_date)
+            frame = fetch_yahoo_history(symbol, config.start_date, config.end_date, host=yahoo_host)
+            evidence = frame.attrs.get("priceHistory", {})
             if frame.empty:
-                raise ValueError("empty price history")
+                raise ValueError(f"empty adjusted price history: {json.dumps(evidence)}")
             frame["date"] = pd.to_datetime(frame["date"])
             frame = frame[frame["date"].dt.date <= expected_as_of].copy()
             if frame.empty:
-                raise ValueError(f"empty price history through expected EOD date {expected_as_of.isoformat()}")
+                raise ValueError(f"empty price history through expected EOD date {expected_as_of.isoformat()}: {json.dumps(evidence)}")
             for column in ("open", "high", "low", "close", "volume"):
                 frame[column] = pd.to_numeric(frame[column], errors="coerce")
             frame = frame.dropna(subset=["close"]).sort_values("date").reset_index(drop=True)
@@ -247,11 +249,11 @@ def load_price_frame(symbol: str, years: int) -> tuple[str, pd.DataFrame | None,
     return symbol, None, str(last_error or "unknown error")
 
 
-def fetch_symbol_frames(symbols: list[str], years: int, max_workers: int) -> tuple[dict[str, pd.DataFrame], dict[str, str]]:
+def fetch_symbol_frames(symbols: list[str], years: int, max_workers: int, *, yahoo_host: str = "query1.finance.yahoo.com") -> tuple[dict[str, pd.DataFrame], dict[str, str]]:
     frames: dict[str, pd.DataFrame] = {}
     failures: dict[str, str] = {}
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = [executor.submit(load_price_frame, symbol, years) for symbol in symbols]
+        futures = [executor.submit(load_price_frame, symbol, years, yahoo_host) for symbol in symbols]
         for future in as_completed(futures):
             symbol, frame, error = future.result()
             if frame is None:
@@ -319,6 +321,7 @@ def wait_for_expected_session_frames(
     expected_session: date,
     years: int,
     max_workers: int,
+    diagnostic_dir: Path | None = None,
 ) -> tuple[dict[str, pd.DataFrame], dict[str, str], dict]:
     attempts = max(1, int(os.environ.get("MODEL_DATA_READINESS_ATTEMPTS", DEFAULT_DATA_READINESS_ATTEMPTS)))
     delay_seconds = max(0.0, float(os.environ.get("MODEL_DATA_READINESS_DELAY_SECONDS", DEFAULT_DATA_READINESS_DELAY_SECONDS)))
@@ -333,12 +336,14 @@ def wait_for_expected_session_frames(
             expected_session,
             minimum_coverage,
         )
+        record_price_readiness(latest_readiness, symbol_frames, failures, attempt=attempt, directory=diagnostic_dir)
         if latest_readiness["ready"] and (not latest_readiness["staleReference"] or attempt >= attempts):
             print(
                 f"Yahoo EOD readiness passed for {expected_session.isoformat()}: "
                 f"{latest_readiness['readyReferenceCount']}/{latest_readiness['referenceCount']} "
                 f"current reference histories ({latest_readiness['coverage']:.1%}); "
-                f"{len(latest_readiness['staleReference'])} stale stocks remain excluded from scoring."
+                f"{len(latest_readiness['staleReference'])} stale stocks remain excluded from scoring.",
+                flush=True,
             )
             return symbol_frames, failures, latest_readiness
 
@@ -347,10 +352,13 @@ def wait_for_expected_session_frames(
             raise MarketDataNotReadyError(f"{message}. Readiness checks exhausted after {attempts} attempt(s).")
 
         retry_symbols = sorted(set(latest_readiness["missingContext"]) | set(latest_readiness["staleReference"]))
-        print(f"{message}. Retrying {len(retry_symbols)} affected histories after {delay_seconds:.0f}s.")
+        # Retry the same adjusted history contract on the alternate public chart
+        # endpoint. Never splice a raw quote into an adjusted series.
+        retry_host = "query2.finance.yahoo.com" if attempt % 2 else "query1.finance.yahoo.com"
+        print(f"{message}. Retrying {len(retry_symbols)} affected histories via {retry_host} after {delay_seconds:.0f}s.", flush=True)
         if delay_seconds:
             time.sleep(delay_seconds)
-        refreshed_frames, refreshed_failures = fetch_symbol_frames(retry_symbols, years, max_workers)
+        refreshed_frames, refreshed_failures = fetch_symbol_frames(retry_symbols, years, max_workers, yahoo_host=retry_host)
         symbol_frames.update(refreshed_frames)
         for symbol in refreshed_frames:
             failures.pop(symbol, None)
@@ -1497,6 +1505,7 @@ def main() -> None:
             expected_session,
             args.years,
             args.max_workers,
+            diagnostic_dir=ROOT / "data" / "diagnostics",
         )
     except MarketDataNotReadyError as error:
         raise SystemExit(str(error)) from error

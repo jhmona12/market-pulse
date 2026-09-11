@@ -47,6 +47,22 @@ Feature validation selects the expected session explicitly, rejects duplicate sy
 
 If the feed or feature matrix is incomplete, errors name the expected date, coverage, missing context, or latest complete feature date. There is no silent fallback to an older model date. These controls improve retry behavior and diagnosis; they cannot force Yahoo to supply missing data.
 
+### Price Parsing And Evidence
+
+`scripts/modeling/price_history.py` parses each daily timestamp using the response's IANA `exchangeTimezoneName`, including daylight-saving offsets. A UTC date can differ from its exchange date. Missing exchange metadata fails explicitly. Requests explicitly exclude pre/post-market bars; this is not permission to relabel an intraday quote as an official close.
+
+Both the raw close and adjusted close must be positive and finite. A missing adjusted value, including a missing/short adjustment array, is rejected rather than silently mixed into a total-return series. OHLC fields use the same adjustment factor. No previous-session price is copied forward.
+
+If Yahoo appends a second complete daily bar for the final exchange date, it replaces the earlier bar; volumes are not summed. Other duplicate sessions fail instead of altering rolling windows. This narrow daily-update behavior matches the [yfinance duplicate-bar handler](https://github.com/ranaroussi/yfinance/blob/main/yfinance/utils.py).
+
+The initial history pass uses `query1.finance.yahoo.com`; existing readiness retries use `query2.finance.yahoo.com`, then `query1` again, for affected symbols only. Each replacement is a complete adjusted history. The code does not splice provider quotes or add extra readiness rounds. Both endpoints belong to Yahoo, so this can recover endpoint-specific stale responses but cannot fix a provider-wide outage.
+
+Every readiness check writes `data/diagnostics/price-readiness-*.json` with requested URLs, exchange timezones, the last three raw timestamp/close/adjusted-close values, rejection reasons, accepted-session counts, per-symbol errors, and the readiness decision. A failed check also prints a bounded sample into the job log. Diagnostics are ignored by Git, excluded from Pages and the runtime cache, and retained as Actions artifacts for 14 days. Diagnostic upload/write failures do not invalidate otherwise good market data.
+
+Inspect these records before attributing another failure to feed delay: distinguish an absent session, a present row with a null adjusted close, a date converted incorrectly, and a transport error. The September 10 evening failures predate this evidence capture; their logs prove a nearly empty current-session cross-section but do not prove which of those mechanisms occurred.
+
+Exchange-local interpretation and explicit regular-session requests are also used in the maintained [yfinance history implementation](https://github.com/ranaroussi/yfinance/blob/main/yfinance/scrapers/history.py). Market Pulse retains its existing lightweight loader rather than introducing another dependency in this change.
+
 Operational controls:
 
 ```text
@@ -76,9 +92,11 @@ Detailed transport errors remain in `marketIntelligence.reddit.currentFetchError
 ## First Checks After A Failure
 
 1. Open the failed Actions job and identify the last failed phase reported by `run-model-scoring.mjs` or `run-snapshot-refresh.mjs`.
-2. For model failures, look for `Yahoo EOD readiness` and `Feature cross-section` diagnostics. Do not treat `Empty dataset at worker` as a sufficient root cause.
+2. For model failures, look for `Yahoo EOD readiness`, `Price response diagnostics`, and `Feature cross-section` diagnostics. Download the `price-readiness-<run>-<attempt>` artifact and compare raw versus accepted session dates. Do not treat `Empty dataset at worker` or `not ready` alone as a sufficient root cause.
 3. For Reddit, check whether OAuth secrets are present and then inspect `statusReason`, `currentFetchErrors`, and `sortStatuses` in the generated snapshot.
 4. Run `npm run verify` before publishing any fix. This includes the model-readiness and Reddit parser fixtures.
 5. Check the live `data/refresh-status.json` and `data/refresh-ledger.json`; a generated local snapshot does not count as a published refresh.
 
 See [the September 10 pre-commit audit](refresh-precommit-audit-2026-09-10.md) for reproduced failures, regression coverage, and isolated live checks.
+
+See [the September 11 incident review](refresh-incident-2026-09-11.md) for the subsequent evening recurrence, confirmed evidence, and remaining uncertainty.
