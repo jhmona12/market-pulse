@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-09-11T16:27:06.695Z",
+  "generatedAt": "2026-09-12T15:30:37.451Z",
   "window": {
-    "today": "2026-09-11",
+    "today": "2026-09-12",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-09-04",
-    "endDate": "2027-03-11"
+    "startDate": "2026-09-05",
+    "endDate": "2027-03-12"
   },
   "sources": [
     {
       "source": "BLS Employment Situation",
       "status": "ready",
-      "eventCount": 4,
+      "eventCount": 3,
       "scraper": "fred-release-calendar"
     },
     {
@@ -40,19 +40,6 @@
     }
   ],
   "events": [
-    {
-      "date": "2026-09-04",
-      "time": "8:30 AM ET",
-      "event": "Employment Situation",
-      "title": "Employment Situation",
-      "source": "BLS",
-      "importance": "High",
-      "sourceUrl": "https://fred.stlouisfed.org/releases/calendar?od=asc&rid=50&ve=2026-12-31&view=year&vs=2026-01-01",
-      "sourceName": "FRED release calendar",
-      "upstreamSource": "BLS",
-      "scraper": "fred-release-calendar",
-      "note": "FRED calendar for the BLS Employment Situation release. Direct BLS schedule pages can block automated requests."
-    },
     {
       "date": "2026-09-10",
       "time": "8:30 AM ET",
