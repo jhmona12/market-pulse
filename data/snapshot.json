@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-13T01:07:31.067Z",
+  "generatedAt": "2026-09-13T16:19:20.786Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-09-13T01:04:17.501397+00:00",
+    "generatedAt": "2026-09-13T16:16:08.663280+00:00",
     "asOfDate": "2026-09-11",
     "expectedAsOfDate": "2026-09-11",
     "isStale": false,
@@ -1371,12 +1371,12 @@
     }
   },
   "note": {
-    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
-    "body": "A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level. 33% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, LITE, DELL, AMD, SMCI.",
+    "headline": "Oil and geopolitical risk keep position sizing tighter.",
+    "body": "Rising crop prices are making the current inflation problem bigger than just oil and the Iran war. 33% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, LITE, DELL, AMD, SMCI.",
     "changed": [
-      "Rates: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level. (M1)",
+      "Commodities: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level. (M4)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: The last successful Reddit sample (9.5 hours old) highlighted WOOF, CASY; treat this as stale sentiment context, not verified news.",
+      "Retail attention: Recent WallStreetBets RSS posts mentioned EOSE; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking.",
       "Breadth: 39% of the screened universe is above the 50-day average, 60% is above the 200-day, and 33% clears both trend lines.",
       "Tactical implication: MRNA (Top Decile), LITE (Top Decile), DELL (Top Decile), AMD (Top Decile) are the setups that currently merit review after the market backdrop is considered."
     ],
@@ -1392,12 +1392,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 104666,
+      "inputTokens": 105889,
       "cachedInputTokens": 0,
-      "outputTokens": 2710,
+      "outputTokens": 2657,
       "reasoningTokens": 0,
-      "totalTokens": 107376,
-      "estimatedCostUsd": 0.006317,
+      "totalTokens": 108546,
+      "estimatedCostUsd": 0.006357,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1405,8 +1405,8 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
-    "macroView": "A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level. CNBC's Jim Cramer sees parallels between today’s market and the fall of 2018, when rising rates and geopolitical tensions preceded a 20% S&P 500 sell-off. Next macro decision points: FOMC Rate Decision on 2026-09-16; GDP Third Estimate on 2026-09-30; Personal Income and Outlays on 2026-09-30. Sector confirmation: Energy +6.73% over 30D, +7.79% vs SPY; Communication Services +2.11% over 30D, +3.17% vs SPY; Information Technology -0.63% over 30D, +0.43% vs SPY.",
+    "headline": "Oil and geopolitical risk keep position sizing tighter.",
+    "macroView": "Rising crop prices are making the current inflation problem bigger than just oil and the Iran war. The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures. Next macro decision points: FOMC Rate Decision on 2026-09-16; GDP Third Estimate on 2026-09-30; Personal Income and Outlays on 2026-09-30. Sector confirmation: Energy +6.73% over 30D, +7.79% vs SPY; Communication Services +2.11% over 30D, +3.17% vs SPY; Information Technology -0.63% over 30D, +0.43% vs SPY.",
     "dailyRead": null,
     "recommendations": [
       {
@@ -1420,18 +1420,19 @@
         "marketCap": "$57.5B",
         "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.08.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-09-11: Traders React Pre-Fed as Oil and Rates Climb",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-13: Up 3,600%, this freight fund has posted the biggest gains of all on Iran war oil shock",
         "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -1.09%; 14D +4.33%; 30D +126.12%; 60D vs SPY +157.75%; RSI 49; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
         "risk": "Above-sector volatility; Weak volume confirmation",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C1-IR",
+          "S1",
           "C1-EARNINGS",
+          "C1-IR",
           "C1-MARKETCAP",
-          "S12"
+          "S3"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1448,18 +1449,19 @@
         "marketCap": "$83.2B",
         "earningsContext": "Last reported 2026-08-11 for the Jun 2026 fiscal quarter; EPS 2.64 versus consensus 2.62; surprise 0.76%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 3.82.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-09-11: Traders React Pre-Fed as Oil and Rates Climb",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-13: Up 3,600%, this freight fund has posted the biggest gains of all on Iran war oil shock",
         "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Above 200d trend; Liquid versus universe.",
         "technicalEvidence": "7D +5.19%; 14D +3.58%; 30D -0.58%; 60D vs SPY +3.78%; RSI 56; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
+          "S2",
           "C2-EARNINGS",
-          "C2-MARKETCAP",
           "C2-IR",
-          "S12"
+          "C2-MARKETCAP",
+          "S3"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1476,18 +1478,19 @@
         "marketCap": "$360.7B",
         "earningsContext": "Last reported 2026-09-01 for the Jul 2026 fiscal quarter; EPS 6.76 versus consensus 4.72; surprise 43.22%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 6.42.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-09-11: Traders React Pre-Fed as Oil and Rates Climb",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-13: Up 3,600%, this freight fund has posted the biggest gains of all on Iran war oil shock",
         "modelEvidence": "Rank #7 of 500; 98.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +8.23%; 14D +24.34%; 30D +17.09%; 60D vs SPY +38.50%; RSI 71; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
+          "S7",
           "C7-EARNINGS",
-          "C7-MARKETCAP",
           "C7-IR",
-          "S12"
+          "C7-MARKETCAP",
+          "S3"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1504,8 +1507,8 @@
         "marketCap": "$1.10T",
         "earningsContext": "Last reported 2026-06-24 for the May 2026 fiscal quarter; EPS 24.89 versus consensus 20.98; surprise 18.64%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Aug 2026 with consensus 31.17.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-09-11: Traders React Pre-Fed as Oil and Rates Climb",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-13: Up 3,600%, this freight fund has posted the biggest gains of all on Iran war oil shock",
         "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -4.07%; 14D +4.55%; 30D +7.02%; 60D vs SPY -6.57%; RSI 51; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
@@ -1515,7 +1518,7 @@
           "C3-EARNINGS",
           "C3-MARKETCAP",
           "C3-IR",
-          "S12"
+          "S3"
         ],
         "setupTags": []
       },
@@ -1530,47 +1533,50 @@
         "marketCap": "$239.2B",
         "earningsContext": "Last reported 2026-08-05 for the Jun 2026 fiscal quarter; EPS 38.82 versus consensus 33.28; surprise 16.65%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 45.22.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-09-11: Traders React Pre-Fed as Oil and Rates Climb",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-13: Up 3,600%, this freight fund has posted the biggest gains of all on Iran war oil shock",
         "modelEvidence": "Rank #4 of 500; 99.4 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -6.13%; 14D +9.99%; 30D +21.50%; 60D vs SPY -20.11%; RSI 53; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
+          "S4",
           "C4-EARNINGS",
-          "C4-MARKETCAP",
           "C4-IR",
-          "S12"
+          "C4-MARKETCAP",
+          "S3"
         ],
         "setupTags": []
       },
       {
-        "symbol": "WDC",
-        "action": "Watch, do not chase",
+        "symbol": "CIEN",
+        "action": "Watch for activation",
         "conviction": "Review",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #5 of 500; -36.44% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks WDC highly, but the setup is not clean momentum yet. Rank #5 of 500; -36.44% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to enable reliable storage solutions that are proven and trusted at sca...",
-        "marketCap": "$161.2B",
-        "earningsContext": "Last reported 2026-08-05 for the Jun 2026 fiscal quarter; EPS 3.47 versus consensus 3.24; surprise 7.1%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 3.97.",
+        "setup": "Model rebound watch",
+        "whyNow": "Rank #10 of 500; -20.89% 60-day return versus SPY; below one or both major moving averages.",
+        "rationale": "The model ranks CIEN highly, but price has not confirmed a rebound. Requires a close above $361.54 within 5 trading days before it is actionable. Rank #10 of 500; -20.89% 60-day return versus SPY; below one or both major moving averages.",
+        "companyOverview": "Ciena is the global leader in high-speed connectivity. We build the world's most advanced networks to support exponential growth in bandwidth demand. By harnessing the power of our networking systems, interconnects, automation software, and services, Ciena revolutionizes data transmission and network management. Wit...",
+        "marketCap": "$49.6B",
+        "earningsContext": "Last reported 2026-09-03 for the Jul 2026 fiscal quarter; EPS 1.91 versus consensus 1.46; surprise 30.82%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 1.76.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-09-11: Traders React Pre-Fed as Oil and Rates Climb",
-        "modelEvidence": "Rank #5 of 500; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D -4.31%; 14D -2.64%; 30D -1.49%; 60D vs SPY -36.44%; RSI 46; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
-        "risk": "Above-sector volatility; Below 50d trend",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-13: Up 3,600%, this freight fund has posted the biggest gains of all on Iran war oil shock",
+        "modelEvidence": "Rank #10 of 500; 98.2 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
+        "technicalEvidence": "7D +8.89%; 14D -7.64%; 30D -19.10%; 60D vs SPY -20.89%; RSI 38; below one or both major moving averages",
+        "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
+        "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C5-EARNINGS",
-          "C5-MARKETCAP",
-          "C5-IR",
-          "S12"
+          "C10-EARNINGS",
+          "C10-MARKETCAP",
+          "C10-IR",
+          "S3"
         ],
         "setupTags": [
-          "Not Momentum Confirmed"
+          "Model Rebound Watch",
+          "Not Momentum Confirmed",
+          "Activation Pending"
         ]
       }
     ],
@@ -1793,32 +1799,28 @@
       "Do watch names MU, SNDK, WDC regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
-      "O1",
-      "O2",
       "S1",
       "S2",
       "S3",
       "S4",
       "S5",
       "S6",
-      "S7",
-      "S8",
-      "C1-EARNINGS",
-      "C2-EARNINGS"
+      "O1",
+      "O2"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Featured source angle: The week showed that major indices tested key technical support as volatility remained elevated due to a blend of inflation readings, energy market strength, and higher Treasury yields, with the market likely to stay range-bound as investors position ahead of the FOMC meeting.",
+      "summary": "Featured source angle: The Schwab piece attributes elevated near-term volatility to a combination of inflation data, energy market strength, and rising Treasury yields, with equities stuck in a range as investors await the next FOMC decision, suggesting a cautious posture rather than a directional bet.",
       "cards": [
         {
           "sourceRef": "S10",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Weekly Trader's Outlook",
-          "thesis": "The week showed that major indices tested key technical support as volatility remained elevated due to a blend of inflation readings, energy market strength, and higher Treasury yields, with the market likely to stay range-bound as investors position ahead of the FOMC meeting.",
-          "whyItMatters": "This synthesis ties together the cited drivers-inflation data, energy prices, and yields-that the Schwab piece flags as contributing to cautious market posture and potential rotation among sectors. It highlights what the source itself points to as the atmosphere around price action rather than making external predictions about specific assets.",
-          "marketReadThrough": "Monitor: Inflation data, energy-market moves, and Treasury yield shifts observed in the week align with a cautious, range-bound backdrop and increased volatility signals as markets position for the FOMC meeting.",
-          "variantAngle": "Inference: If volatility remains elevated and range-bound conditions persist, sector rotation toward energy-affiliated exposure may be a observable consequence of the ongoing balance of inflation signals and policy expectations, as suggested by the emphasis on energy prices and yields in the source.",
+          "thesis": "The Schwab piece attributes elevated near-term volatility to a combination of inflation data, energy market strength, and rising Treasury yields, with equities stuck in a range as investors await the next FOMC decision, suggesting a cautious posture rather than a directional bet.",
+          "whyItMatters": "This characterizes the market backdrop as range-bound with structural drivers (inflation, energy prices, yields) influencing participation, which informs risk budgeting and hedging considerations for a portfolio manager.",
+          "marketReadThrough": "Monitor: observed volatility and range-bound trading anchored by inflation, oil prices, and yields; watch how sector rotation and positioning ahead of the FOMC affects liquidity and mixed reactions.",
+          "variantAngle": "Inference: given that energy strength and higher yields contributed to volatility, a plausible implication is that any surprise in inflation or energy prices could tilt mixed reactions within cycles rather than confirm a broad directional breakout.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-09-11T21:17:15.000Z",
@@ -1832,16 +1834,16 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Featured source angle: The week showed that major indices tested key technical support as volatility remained elevated due to a blend of inflation readings, energy market strength, and higher Treasury yields, with the market likely to stay range-bound as investors position ahead of the FOMC meeting.",
+    "summary": "Featured source angle: The Schwab piece attributes elevated near-term volatility to a combination of inflation data, energy market strength, and rising Treasury yields, with equities stuck in a range as investors await the next FOMC decision, suggesting a cautious posture rather than a directional bet.",
     "cards": [
       {
         "sourceRef": "S10",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Weekly Trader's Outlook",
-        "thesis": "The week showed that major indices tested key technical support as volatility remained elevated due to a blend of inflation readings, energy market strength, and higher Treasury yields, with the market likely to stay range-bound as investors position ahead of the FOMC meeting.",
-        "whyItMatters": "This synthesis ties together the cited drivers-inflation data, energy prices, and yields-that the Schwab piece flags as contributing to cautious market posture and potential rotation among sectors. It highlights what the source itself points to as the atmosphere around price action rather than making external predictions about specific assets.",
-        "marketReadThrough": "Monitor: Inflation data, energy-market moves, and Treasury yield shifts observed in the week align with a cautious, range-bound backdrop and increased volatility signals as markets position for the FOMC meeting.",
-        "variantAngle": "Inference: If volatility remains elevated and range-bound conditions persist, sector rotation toward energy-affiliated exposure may be a observable consequence of the ongoing balance of inflation signals and policy expectations, as suggested by the emphasis on energy prices and yields in the source.",
+        "thesis": "The Schwab piece attributes elevated near-term volatility to a combination of inflation data, energy market strength, and rising Treasury yields, with equities stuck in a range as investors await the next FOMC decision, suggesting a cautious posture rather than a directional bet.",
+        "whyItMatters": "This characterizes the market backdrop as range-bound with structural drivers (inflation, energy prices, yields) influencing participation, which informs risk budgeting and hedging considerations for a portfolio manager.",
+        "marketReadThrough": "Monitor: observed volatility and range-bound trading anchored by inflation, oil prices, and yields; watch how sector rotation and positioning ahead of the FOMC affects liquidity and mixed reactions.",
+        "variantAngle": "Inference: given that energy strength and higher yields contributed to volatility, a plausible implication is that any surprise in inflation or energy prices could tilt mixed reactions within cycles rather than confirm a broad directional breakout.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-09-11T21:17:15.000Z",
@@ -1860,12 +1862,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-09-13T01:06:36.378Z",
+    "generatedAt": "2026-09-13T16:18:28.201Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-09-12T15:35:03.464Z"
+      "previousRefreshAt": "2026-09-13T01:07:31.067Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1876,7 +1878,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-09-13T01:04:19.851Z",
+      "generatedAt": "2026-09-13T16:16:11.221Z",
       "lookbackHours": 96,
       "releases": [
         {
@@ -1919,10 +1921,14 @@
     },
     "sourceHealth": {
       "checked": 25,
-      "live": 20,
+      "live": 19,
       "blockedOrFailed": [
         {
           "name": "Merrill Capital Market Outlook",
+          "reason": "Source check failed: This operation was aborted"
+        },
+        {
+          "name": "EIA Today In Energy",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -1946,6 +1952,64 @@
     "professionalDrivers": [
       {
         "id": "M1",
+        "title": "Up 3,600%, this freight fund has posted the biggest gains of all on Iran war oil shock",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/09/13/iran-war-oil-prices-freight-tankers-shipping.html",
+        "publishedAt": "2026-09-13T13:50:00.000Z",
+        "summary": "The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
+        "excerpt": "The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
+        "themes": [
+          "Geopolitics and policy",
+          "Commodities and energy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 2.5,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M2",
+        "title": "Corporate profit forecasts are topping expectations to an unusual degree. AI is a big reason why.",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/corporate-profit-forecasts-are-topping-expectations-to-an-unusual-degree-ai-is-a-big-reason-why-50245409?mod=mw_rss_topstories",
+        "publishedAt": "2026-09-13T14:00:00.000Z",
+        "summary": "The information-technology sector stands out when it comes to issuing upbeat earnings outlooks.",
+        "excerpt": "The information-technology sector stands out when it comes to issuing upbeat earnings outlooks.",
+        "themes": [
+          "Earnings",
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 2.3,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M3",
+        "title": "The price of almost everything on your dinner table is climbing at once — and Wall Street is taking notice",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/the-price-of-almost-everything-on-your-dinner-table-is-climbing-at-once-and-wall-street-is-taking-notice-9623d1fc?mod=mw_rss_topstories",
+        "publishedAt": "2026-09-13T13:00:00.000Z",
+        "summary": "Rising crop prices are making the current inflation problem bigger than just oil and the Iran war.",
+        "excerpt": "Rising crop prices are making the current inflation problem bigger than just oil and the Iran war.",
+        "themes": [
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "Commodities and energy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 3.3,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M4",
         "title": "Traders React Pre-Fed as Oil and Rates Climb",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1953,7 +2017,7 @@
         "url": "https://www.schwab.com/learn/story/weekly-digest",
         "publishedAt": "2026-09-11T15:15:50.000Z",
         "summary": "A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level.",
-        "excerpt": "Traders React Pre-Fed as Oil and Rates Climb | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Traders React Pre-Fed as Oil and Rates Climb A possible Fed hike puts tech in focus, oil climbs past $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a pivotal level. September 11, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Sector implications if Fed hikes A Fed rate hike on Wednesday might influence different stock market sectors, but the impact could depend on whether the Fed hikes once or twice versus embarking on a long cycle. A hike or two might not have much effect if the Fed makes clear these are minor adjustments. And of course, there's no guarantee of a hike at all. If hikes happen, the tech sector likely will be in the spotlight, as its earnings have powered Wall Street this year and high rates tend to hurt perceived future earnings growth. Tech also is a long-duration part of the market, meaning its strength depends on expectations of growth that could take place well into the future and less on the impact of current conditions. \"When you face higher interest rates, it tends to put downward pressure on those longer-duration segments of the equity market,\" said Liz Ann Sonders , chief investment strategist at the Schwab Center for Financial Research, or SCFR, in a recent episode of the Schwab On Investing Podcast . Industrials i",
+        "excerpt": "Traders React Pre-Fed as Oil and Rates Climb | Charles Schwab Search Insights & Education Markets and Economy Traders React Pre-Fed as Oil and Rates Climb A possible Fed hike puts tech in focus, oil climbs past $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a pivotal level. September 11, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Sector implications if Fed hikes A Fed rate hike on Wednesday might influence different stock market sectors, but the impact could depend on whether the Fed hikes once or twice versus embarking on a long cycle. A hike or two might not have much effect if the Fed makes clear these are minor adjustments. And of course, there's no guarantee of a hike at all. If hikes happen, the tech sector likely will be in the spotlight, as its earnings have powered Wall Street this year and high rates tend to hurt perceived future earnings growth. Tech also is a long-duration part of the market, meaning its strength depends on expectations of growth that could take place well into the future and less on the impact of current conditions. \"When you face higher interest rates, it tends to put downward pressure on those longer-duration segments of the equity market,\" said Liz Ann Sonders , chief investment strategist at the Schwab Center for Financial Research, or SCFR, in a recent episode of the Schwab On Investing Podcast . Industrials is another sect",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -1961,12 +2025,12 @@
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 33.8,
+        "ageHours": 49,
         "score": 62,
         "tickers": []
       },
       {
-        "id": "M2",
+        "id": "M5",
         "title": "Cramer: This market has eerie parallels with 2018. Here's what investors should do",
         "sourceName": "CNBC Markets",
         "sourceCategory": "News",
@@ -1982,12 +2046,12 @@
           "Commodities and energy"
         ],
         "freshness": "Important older item",
-        "ageHours": 26,
+        "ageHours": 41.1,
         "score": 54,
         "tickers": []
       },
       {
-        "id": "M3",
+        "id": "M6",
         "title": "CNBC Daily Open: Two market forces battle for dominance",
         "sourceName": "CNBC Markets",
         "sourceCategory": "News",
@@ -2001,12 +2065,12 @@
           "Commodities and energy"
         ],
         "freshness": "Important older item",
-        "ageHours": 42.8,
+        "ageHours": 58,
         "score": 54,
         "tickers": []
       },
       {
-        "id": "M4",
+        "id": "M7",
         "title": "Cramer’s week ahead: Falling oil could help stocks but Fed is the next big test",
         "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
@@ -2020,237 +2084,46 @@
           "Commodities and energy"
         ],
         "freshness": "Important older item",
-        "ageHours": 26.5,
+        "ageHours": 41.7,
         "score": 54,
-        "tickers": []
-      },
-      {
-        "id": "M5",
-        "title": "The Fed could raise interest rates three times. Here’s where the market could face the stiffest test.",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/the-fed-could-raise-interest-rates-three-times-heres-where-the-market-could-face-the-stiffest-test-757872a1?mod=mw_rss_topstories",
-        "publishedAt": "2026-09-11T23:54:00.000Z",
-        "summary": "Economists note that the Fed historically has not been content to raise rates only once.",
-        "excerpt": "Economists note that the Fed historically has not been content to raise rates only once.",
-        "themes": [
-          "Rates and central banks"
-        ],
-        "freshness": "Important older item",
-        "ageHours": 25.2,
-        "score": 46,
         "tickers": []
       }
     ],
     "topThemes": [
       {
+        "theme": "Commodities and energy",
+        "count": 6
+      },
+      {
         "theme": "Rates and central banks",
         "count": 5
       },
       {
-        "theme": "Commodities and energy",
-        "count": 4
+        "theme": "Geopolitics and policy",
+        "count": 3
+      },
+      {
+        "theme": "Earnings",
+        "count": 3
       },
       {
         "theme": "Macro and growth",
         "count": 3
       },
       {
-        "theme": "Earnings",
-        "count": 2
-      },
-      {
-        "theme": "Geopolitics and policy",
+        "theme": "AI and semis",
         "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-09-13T01:06:36.366Z",
+      "generatedAt": "2026-09-13T16:18:28.189Z",
       "dates": [
-        "2026-09-11",
         "2026-09-12",
-        "2026-09-13"
+        "2026-09-13",
+        "2026-09-14"
       ],
       "calendars": [
-        {
-          "date": "2026-09-11",
-          "asOf": "Fri, Sep 11, 2026",
-          "status": "ready",
-          "error": null,
-          "rowCount": 14,
-          "rows": [
-            {
-              "date": "2026-09-11",
-              "symbol": "KR",
-              "name": "Kroger Company (The)",
-              "time": "time-not-supplied",
-              "marketCap": "$34,890,265,000",
-              "fiscalQuarterEnding": "Jul/2026",
-              "epsForecast": "$1.05",
-              "noOfEsts": "8",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "NB",
-              "name": "NioCorp Developments Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$554,686,660",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "($0.03)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "HTLM",
-              "name": "HomesToLife Ltd",
-              "time": "time-not-supplied",
-              "marketCap": "$159,643,744",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "HOFT",
-              "name": "Hooker Furnishings Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$134,968,832",
-              "fiscalQuarterEnding": "Jul/2026",
-              "epsForecast": "($0.02)",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "CMCM",
-              "name": "Cheetah Mobile Inc.",
-              "time": "time-pre-market",
-              "marketCap": "$104,283,176",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "RENT",
-              "name": "Rent the Runway, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$94,713,728",
-              "fiscalQuarterEnding": "Jul/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "ZONE",
-              "name": "Zone Frontier Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$76,116,880",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "PLCE",
-              "name": "Children's Place, Inc. (The)",
-              "time": "time-not-supplied",
-              "marketCap": "$54,036,072",
-              "fiscalQuarterEnding": "Jul/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "CELU",
-              "name": "Celularity Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$41,537,456",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "MNY",
-              "name": "MoneyHero Limited",
-              "time": "time-not-supplied",
-              "marketCap": "$37,323,904",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "($0.02)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "JVA",
-              "name": "Coffee Holding Co., Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$19,580,496",
-              "fiscalQuarterEnding": "Jul/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "ENLV",
-              "name": "Enlivex Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$17,147,992",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "($0.31)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "IHT",
-              "name": "InnSuites Hospitality Trust",
-              "time": "time-not-supplied",
-              "marketCap": "$12,599,798",
-              "fiscalQuarterEnding": "Jul/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            },
-            {
-              "date": "2026-09-11",
-              "symbol": "LNAI",
-              "name": "Lunai Bioworks Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$11,040,022",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-11"
-            }
-          ]
-        },
         {
           "date": "2026-09-12",
           "asOf": "Sat, Sep 12, 2026",
@@ -2266,12 +2139,254 @@
           "error": null,
           "rowCount": 0,
           "rows": []
+        },
+        {
+          "date": "2026-09-14",
+          "asOf": "Mon, Sep 14, 2026",
+          "status": "ready",
+          "error": null,
+          "rowCount": 16,
+          "rows": [
+            {
+              "date": "2026-09-14",
+              "symbol": "GRFS",
+              "name": "Grifols, S.A.",
+              "time": "time-not-supplied",
+              "marketCap": "$5,259,794,900",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.27",
+              "noOfEsts": "1",
+              "lastYearReportDate": "7/28/2025",
+              "lastYearEps": "$0.19",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "CHRN",
+              "name": "ChronoScale Holdings Corporation",
+              "time": "time-not-supplied",
+              "marketCap": "$2,617,104,900",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "($0.06)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "7/28/2025",
+              "lastYearEps": "($1.24)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "KMTS",
+              "name": "Kestra Medical Technologies, Ltd.",
+              "time": "time-after-hours",
+              "marketCap": "$1,381,275,520",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "($0.61)",
+              "noOfEsts": "5",
+              "lastYearReportDate": "9/11/2025",
+              "lastYearEps": "($0.46)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "CSHR",
+              "name": "CoinShares PLC",
+              "time": "time-pre-market",
+              "marketCap": "$691,846,080",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "5",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.06",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "CURR",
+              "name": "Currenc Group Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$401,969,152",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "5",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.10)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "RLGT",
+              "name": "Radiant Logistics, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$384,487,968",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "5",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.11",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "AIV",
+              "name": "Apartment Investment and Management Company",
+              "time": "time-not-supplied",
+              "marketCap": "$354,378,016",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "5",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "PLAY",
+              "name": "Dave & Buster's Entertainment, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$284,223,616",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "$0.19",
+              "noOfEsts": "3",
+              "lastYearReportDate": "9/15/2025",
+              "lastYearEps": "$0.40",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "HITI",
+              "name": "High Tide Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$224,763,680",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "$0.01",
+              "noOfEsts": "3",
+              "lastYearReportDate": "9/15/2025",
+              "lastYearEps": "$0.01",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "CODA",
+              "name": "Coda Octopus Group, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$110,777,008",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "",
+              "noOfEsts": "5",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.11",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "RFIL",
+              "name": "RF Industries, Ltd.",
+              "time": "time-pre-market",
+              "marketCap": "$110,574,392",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "$0.18",
+              "noOfEsts": "2",
+              "lastYearReportDate": "9/11/2025",
+              "lastYearEps": "$0.09",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "CBAT",
+              "name": "CBAK Energy Technology Limited",
+              "time": "time-not-supplied",
+              "marketCap": "$89,532,296",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "($0.06)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "8/18/2025",
+              "lastYearEps": "($0.03)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "HYFT",
+              "name": "MindWalk Holdings Corp.",
+              "time": "time-after-hours",
+              "marketCap": "$61,659,664",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "($0.05)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "9/15/2025",
+              "lastYearEps": "($0.07)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "HAIN",
+              "name": "The Hain Celestial Group, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$57,717,104",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "($0.03)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "9/15/2025",
+              "lastYearEps": "($0.02)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "BIOX",
+              "name": "Bioceres Crop Solutions Corp.",
+              "time": "time-after-hours",
+              "marketCap": "$26,713,932",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "9/09/2025",
+              "lastYearEps": "($0.70)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            },
+            {
+              "date": "2026-09-14",
+              "symbol": "FRGT",
+              "name": "Freight Technologies, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$560,683",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "5",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.50",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-14"
+            }
+          ]
         }
       ],
       "earningsMovers": [],
       "articleHeadlines": [
         {
           "id": "E1",
+          "title": "Corporate profit forecasts are topping expectations to an unusual degree. AI is a big reason why.",
+          "sourceName": "MarketWatch Top Stories RSS",
+          "url": "https://www.marketwatch.com/story/corporate-profit-forecasts-are-topping-expectations-to-an-unusual-degree-ai-is-a-big-reason-why-50245409?mod=mw_rss_topstories",
+          "publishedAt": "2026-09-13T14:00:00.000Z",
+          "summary": "The information-technology sector stands out when it comes to issuing upbeat earnings outlooks.",
+          "tickers": []
+        },
+        {
+          "id": "E2",
           "title": "Cramer: This market has eerie parallels with 2018. Here's what investors should do",
           "sourceName": "CNBC Markets",
           "url": "https://www.cnbc.com/2026/09/11/cramer-market-eerie-parallels-2018-what-it-means-for-investors.html",
@@ -2280,7 +2395,7 @@
           "tickers": []
         },
         {
-          "id": "E2",
+          "id": "E3",
           "title": "Oracle posts 30% revenue growth fueled by AI cloud demand as debts hits $125 billion",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/09/11/oracle-stock-q1-earnings-ai-cloud.html",
@@ -2289,7 +2404,7 @@
           "tickers": []
         },
         {
-          "id": "E3",
+          "id": "E4",
           "title": "Traders React Pre-Fed as Oil and Rates Climb",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-digest",
@@ -2298,7 +2413,7 @@
           "tickers": []
         },
         {
-          "id": "E4",
+          "id": "E5",
           "title": "Stocks Up on Oil Prices as CPI Sets Stage for Fed",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/stock-market-update-open",
@@ -2307,7 +2422,7 @@
           "tickers": []
         },
         {
-          "id": "E5",
+          "id": "E6",
           "title": "Oracle&apos;s stock edges up on earnings beat as cloud infrastructure revenue more than doubles",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/09/10/oracle-orcl-q1-earnings-report-2027.html",
@@ -2316,7 +2431,7 @@
           "tickers": []
         },
         {
-          "id": "E6",
+          "id": "E7",
           "title": "2026 Outlooks: Market and Economic Forecasts | Morgan Stanley",
           "sourceName": "Morgan Stanley Ideas",
           "url": "https://www.morganstanley.com/Themes/outlooks",
@@ -2328,8 +2443,8 @@
       "sourceNote": "Nasdaq earnings calendar plus Yahoo Finance daily mover screeners and earnings-related article headlines."
     },
     "reddit": {
-      "status": "cache_fallback",
-      "generatedAt": "2026-09-13T01:04:20.512Z",
+      "status": "ready",
+      "generatedAt": "2026-09-13T16:16:11.756Z",
       "authMode": "public",
       "metricMode": "unranked_recent_mentions",
       "sampleCoverage": {
@@ -2337,12 +2452,12 @@
         "sorts": [
           "hot"
         ],
-        "postCount": 15,
+        "postCount": 17,
         "includesVoteAndCommentCounts": false,
         "oauthPostCount": 0,
-        "rssPostCount": 15
+        "rssPostCount": 17
       },
-      "sourceNote": "Latest Reddit fetch failed; showing the last successful Reddit attention sample from 2026-09-12T15:31:49.990Z. Treat as stale sentiment context, not live news.",
+      "sourceNote": "Recent Reddit post mentions include RSS results without vote or comment totals. This sample cannot establish popularity or ticker concentration; use as sentiment context only, not verified news.",
       "statusReason": null,
       "subreddits": [
         {
@@ -2350,7 +2465,7 @@
           "segment": "Retail momentum",
           "status": "ready",
           "error": null,
-          "postCount": 15,
+          "postCount": 17,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2364,9 +2479,9 @@
       ],
       "topTickers": [
         {
-          "symbol": "WOOF",
+          "symbol": "EOSE",
           "mentions": 1,
-          "signalStrength": 4.9,
+          "signalStrength": 3.6,
           "directMentions": 1,
           "score": 0,
           "comments": 0,
@@ -2375,82 +2490,25 @@
           ],
           "posts": [
             {
-              "title": "$WOOF: where the regards go",
+              "title": "EOSE",
               "subreddit": "wallstreetbets",
               "score": 0,
               "comments": 0,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdljw0/woof_where_the_regards_go/"
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wfa1l8/eose/"
             }
           ],
-          "attentionScore": 73
-        },
-        {
-          "symbol": "CASY",
-          "mentions": 1,
-          "signalStrength": 2.5,
-          "directMentions": 1,
-          "score": 0,
-          "comments": 0,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
-            {
-              "title": "YOLO: CASY 9/18 $620 strike calls, 60 contracts",
-              "subreddit": "wallstreetbets",
-              "score": 0,
-              "comments": 0,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdjsbr/yolo_casy_918_620_strike_calls_60_contracts/"
-            }
-          ],
-          "attentionScore": 49
+          "attentionScore": 60
         }
       ],
       "topPosts": [
         {
-          "id": "T3_1WDR1CQ",
+          "id": "T3_1WF9KG4",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Weekend Discussion Thread for the Weekend of September 12-13",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdr1cq/weekend_discussion_thread_for_the_weekend_of/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdr1cq/weekend_discussion_thread_for_the_weekend_of/",
-          "createdAt": "2026-09-11T20:00:41.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": true,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WDM0NE",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Weekly Earnings Thread Sep 14 - Sep 18, 2026",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdm0ne/weekly_earnings_thread_sep_14_sep_18_2026/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdm0ne/weekly_earnings_thread_sep_14_sep_18_2026/",
-          "createdAt": "2026-09-11T17:01:00.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": true,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WEECDX",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Tennessee Wendy’s manager fired after tying neurodivergent employee to kitchen equipment",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1weecdx/tennessee_wendys_manager_fired_after_tying/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1weecdx/tennessee_wendys_manager_fired_after_tying/",
-          "createdAt": "2026-09-12T14:39:28.000Z",
+          "title": "I think AI companies are making a play for a bailout",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wf9kg4/i_think_ai_companies_are_making_a_play_for_a/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wf9kg4/i_think_ai_companies_are_making_a_play_for_a/",
+          "createdAt": "2026-09-13T14:43:08.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2462,13 +2520,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WEBPT1",
+          "id": "T3_1WF7UZT",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "80k -> 463k in 8 month, I need a break",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1webpt1/80k_463k_in_8_month_i_need_a_break/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1webpt1/80k_463k_in_8_month_i_need_a_break/",
-          "createdAt": "2026-09-12T12:45:55.000Z",
+          "title": "Title",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wf7uzt/title/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wf7uzt/title/",
+          "createdAt": "2026-09-13T13:35:06.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2480,13 +2538,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDQSEZ",
+          "id": "T3_1WF96ZS",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Saudi Arabia shuts down East-West crude oil pipeline after multiple attacks",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdqsez/saudi_arabia_shuts_down_eastwest_crude_oil/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdqsez/saudi_arabia_shuts_down_eastwest_crude_oil/",
-          "createdAt": "2026-09-11T19:51:16.000Z",
+          "title": "Nothing to see here, keep buying calls",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wf96zs/nothing_to_see_here_keep_buying_calls/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wf96zs/nothing_to_see_here_keep_buying_calls/",
+          "createdAt": "2026-09-13T14:28:40.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2498,13 +2556,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDZ6W5",
+          "id": "T3_1WFBH7A",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Nvidia in talks to invest in Anthropic’s mega IPO, sources say",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdz6w5/nvidia_in_talks_to_invest_in_anthropics_mega_ipo/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdz6w5/nvidia_in_talks_to_invest_in_anthropics_mega_ipo/",
-          "createdAt": "2026-09-12T01:40:43.000Z",
+          "title": "Regards on yall in Monday",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wfbh7a/regards_on_yall_in_monday/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wfbh7a/regards_on_yall_in_monday/",
+          "createdAt": "2026-09-13T15:57:26.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2516,13 +2574,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDSJM1",
+          "id": "T3_1WF4MYC",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "JPMorgan cut off Situational Awareness lending after AI losses",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdsjm1/jpmorgan_cut_off_situational_awareness_lending/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdsjm1/jpmorgan_cut_off_situational_awareness_lending/",
-          "createdAt": "2026-09-11T20:57:02.000Z",
+          "title": "I call bs, Sam Altman is full of shiet. Open ai not doing ipo this year...",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wf4myc/i_call_bs_sam_altman_is_full_of_shiet_open_ai_not/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wf4myc/i_call_bs_sam_altman_is_full_of_shiet_open_ai_not/",
+          "createdAt": "2026-09-13T11:01:03.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2534,13 +2592,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDZGKO",
+          "id": "T3_1WEU05E",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "I am the Leopold of Yoga Pants. Discuss.",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdzgko/i_am_the_leopold_of_yoga_pants_discuss/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdzgko/i_am_the_leopold_of_yoga_pants_discuss/",
-          "createdAt": "2026-09-12T01:53:35.000Z",
+          "title": "Warsh should grow a sack and go full Volcker by hiking 100bps next week.",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1weu05e/warsh_should_grow_a_sack_and_go_full_volcker_by/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1weu05e/warsh_should_grow_a_sack_and_go_full_volcker_by/",
+          "createdAt": "2026-09-13T01:20:06.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2552,13 +2610,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WEF21L",
+          "id": "T3_1WEXU4L",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Bad Omen",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wef21l/bad_omen/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wef21l/bad_omen/",
-          "createdAt": "2026-09-12T15:08:29.000Z",
+          "title": "$236K oil short YOLO- Incoming Trump peace deal soon. All in on 2x leveraged oil short shares. Thank me later poor boys.",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wexu4l/236k_oil_short_yolo_incoming_trump_peace_deal/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wexu4l/236k_oil_short_yolo_incoming_trump_peace_deal/",
+          "createdAt": "2026-09-13T04:31:53.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2570,13 +2628,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDNLV4",
+          "id": "T3_1WFAIP5",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "10k->70k",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdnlv4/10k70k/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdnlv4/10k70k/",
-          "createdAt": "2026-09-11T17:58:25.000Z",
+          "title": "Goatsen is carrying the stock market",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wfaip5/goatsen_is_carrying_the_stock_market/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wfaip5/goatsen_is_carrying_the_stock_market/",
+          "createdAt": "2026-09-13T15:20:26.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2588,13 +2646,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDR1DT",
+          "id": "T3_1WESHPB",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "I have an idea for a sequel to the Big Short",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdr1dt/i_have_an_idea_for_a_sequel_to_the_big_short/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdr1dt/i_have_an_idea_for_a_sequel_to_the_big_short/",
-          "createdAt": "2026-09-11T20:00:42.000Z",
+          "title": "After Koreans piled into us stocks",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1weshpb/after_koreans_piled_into_us_stocks/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1weshpb/after_koreans_piled_into_us_stocks/",
+          "createdAt": "2026-09-13T00:08:52.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2606,13 +2664,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDLFZU",
+          "id": "T3_1WEQSHJ",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "I let my wife's bf trade",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdlfzu/i_let_my_wifes_bf_trade/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdlfzu/i_let_my_wifes_bf_trade/",
-          "createdAt": "2026-09-11T16:40:39.000Z",
+          "title": "This time last month, FedWatch gave a 53.5% chance for 2 or more rate hikes by next July. Today, odds stand at 97.4%.",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1weqshj/this_time_last_month_fedwatch_gave_a_535_chance/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1weqshj/this_time_last_month_fedwatch_gave_a_535_chance/",
+          "createdAt": "2026-09-12T22:52:28.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2624,13 +2682,13 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDQLG3",
+          "id": "T3_1WEJX5Q",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "My mindset must be flawed.",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdqlg3/my_mindset_must_be_flawed/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdqlg3/my_mindset_must_be_flawed/",
-          "createdAt": "2026-09-11T19:44:11.000Z",
+          "title": "Turkish fund returned 4,000% in 2025 and 230% in 2026. How do we short?",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wejx5q/turkish_fund_returned_4000_in_2025_and_230_in/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wejx5q/turkish_fund_returned_4000_in_2025_and_230_in/",
+          "createdAt": "2026-09-12T18:18:12.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2642,59 +2700,105 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDLJW0",
+          "id": "T3_1WFA1L8",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "$WOOF: where the regards go",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdljw0/woof_where_the_regards_go/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdljw0/woof_where_the_regards_go/",
-          "createdAt": "2026-09-11T16:44:24.000Z",
+          "title": "EOSE",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wfa1l8/eose/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wfa1l8/eose/",
+          "createdAt": "2026-09-13T15:01:41.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
           "flair": null,
           "tickers": [
-            "WOOF"
+            "EOSE"
           ],
           "tickerWeights": {
-            "WOOF": 4.9
+            "EOSE": 3.6
           },
           "directTickers": [
-            "WOOF"
+            "EOSE"
           ],
           "filteredAsGeneric": false,
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1WDJSBR",
+          "id": "T3_1WFBUVE",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "YOLO: CASY 9/18 $620 strike calls, 60 contracts",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wdjsbr/yolo_casy_918_620_strike_calls_60_contracts/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wdjsbr/yolo_casy_918_620_strike_calls_60_contracts/",
-          "createdAt": "2026-09-11T15:40:13.000Z",
+          "title": "Was it a coincidence that NVIDIA bought hugging face after OpenAI hack?",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wfbuve/was_it_a_coincidence_that_nvidia_bought_hugging/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wfbuve/was_it_a_coincidence_that_nvidia_bought_hugging/",
+          "createdAt": "2026-09-13T16:11:20.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
           "flair": null,
-          "tickers": [
-            "CASY"
-          ],
-          "tickerWeights": {
-            "CASY": 2.5
-          },
-          "directTickers": [
-            "CASY"
-          ],
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T3_1WFBW7A",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Larry Ellison nixes plan to offload up to $7.5 billion worth of Oracle stock",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wfbw7a/larry_ellison_nixes_plan_to_offload_up_to_75/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wfbw7a/larry_ellison_nixes_plan_to_offload_up_to_75/",
+          "createdAt": "2026-09-13T16:12:44.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T3_1WETFY1",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Apple is cool :)",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wetfy1/apple_is_cool/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wetfy1/apple_is_cool/",
+          "createdAt": "2026-09-13T00:54:13.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T3_1WEJHSW",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Apple 🍎",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wejhsw/apple/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wejhsw/apple/",
+          "createdAt": "2026-09-12T18:01:55.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
           "filteredAsGeneric": false,
           "fetchMethod": "rss"
         }
       ],
       "currentFetchErrors": [
         "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured"
-      ],
-      "sourceGeneratedAt": "2026-09-12T15:31:49.990Z",
-      "cacheAgeHours": 9.5
+      ]
     },
     "marketMovers": {
       "source": "Yahoo Finance predefined screeners",
@@ -3104,11 +3208,12 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: CNBC's Jim Cramer sees parallels between today’s market and the fall of 2018, when rising rates and geopolitical tensions preceded a 20% S&P 500 sell-off. (M2)",
-      "Rates: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level. (M1)",
-      "Commodities: Bond yields and oil prices keep investors' attention ahead of key inflation data that could set the course for the Fed. (M3)",
+      "Policy/geopolitics: The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures. (M1)",
+      "Rates: Rising crop prices are making the current inflation problem bigger than just oil and the Iran war. (M3)",
+      "Commodities: A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level. (M4)",
+      "AI/semis: The information-technology sector stands out when it comes to issuing upbeat earnings outlooks. (M2)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: The last successful Reddit sample (9.5 hours old) highlighted WOOF, CASY; treat this as stale sentiment context, not verified news."
+      "Retail attention: Recent WallStreetBets RSS posts mentioned EOSE; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking."
     ]
   },
   "avoidList": {
@@ -55970,7 +56075,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-digest",
           "publishedAt": "2026-09-11T15:15:50.000Z",
           "summary": "A possible Fed hike puts tech in focus, oil tops $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a key level.",
-          "excerpt": "Traders React Pre-Fed as Oil and Rates Climb | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Traders React Pre-Fed as Oil and Rates Climb A possible Fed hike puts tech in focus, oil climbs past $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a pivotal level. September 11, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Sector implications if Fed hikes A Fed rate hike on Wednesday might influence different stock market sectors, but the impact could depend on whether the Fed hikes once or twice versus embarking on a long cycle. A hike or two might not have much effect if the Fed makes clear these are minor adjustments. And of course, there's no guarantee of a hike at all. If hikes happen, the tech sector likely will be in the spotlight, as its earnings have powered Wall Street this year and high rates tend to hurt perceived future earnings growth. Tech also is a long-duration part of the market, meaning its strength depends on expectations of growth that could take place well into the future and less on the impact of current conditions. \"When you face higher interest rates, it tends to put downward pressure on those longer-duration segments of the equity market,\" said Liz Ann Sonders , chief investment strategist at the Schwab Center for Financial Research, or SCFR, in a recent episode of the Schwab On Investing Podcast . Industrials i",
+          "excerpt": "Traders React Pre-Fed as Oil and Rates Climb | Charles Schwab Search Insights & Education Markets and Economy Traders React Pre-Fed as Oil and Rates Climb A possible Fed hike puts tech in focus, oil climbs past $100 with hurricane risk looming, and retail traders grow more selective while bitcoin holds a pivotal level. September 11, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Sector implications if Fed hikes A Fed rate hike on Wednesday might influence different stock market sectors, but the impact could depend on whether the Fed hikes once or twice versus embarking on a long cycle. A hike or two might not have much effect if the Fed makes clear these are minor adjustments. And of course, there's no guarantee of a hike at all. If hikes happen, the tech sector likely will be in the spotlight, as its earnings have powered Wall Street this year and high rates tend to hurt perceived future earnings growth. Tech also is a long-duration part of the market, meaning its strength depends on expectations of growth that could take place well into the future and less on the impact of current conditions. \"When you face higher interest rates, it tends to put downward pressure on those longer-duration segments of the equity market,\" said Liz Ann Sonders , chief investment strategist at the Schwab Center for Financial Research, or SCFR, in a recent episode of the Schwab On Investing Podcast . Industrials is another sect",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56107,11 +56212,11 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
-      "summary": "No recent dated articles found in the last 30 days.",
+      "title": "EIA Today In Energy",
+      "summary": "Source check failed: This operation was aborted",
       "articles": [],
       "articleCount": 0,
-      "ok": true
+      "ok": false
     },
     {
       "name": "BLS Economic News Releases",
@@ -56218,15 +56323,6 @@
       "articles": [
         {
           "sourceName": "Axios Macro RSS",
-          "title": "America's jobs scare recedes - Axios",
-          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBpd244cmtPNm9YaUplVjFIcmdtWXlGLTRqTmlac185eTVwMjZRQWlvOGMzOWNmZ255d3dJUUdCMXUwYmRiLWRpc0ZmU3NzaWJIbWlPTkRBT2NMUHpvTkhneDN4VlNRZXU4Ty1Vdg?oc=5",
-          "publishedAt": "2026-09-04T07:00:00.000Z",
-          "summary": "America's jobs scare recedes Axios",
-          "excerpt": "America's jobs scare recedes Axios",
-          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-          "sourceName": "Axios Macro RSS",
           "title": "Not so fast on rate hikes, some Fed officials say - Axios",
           "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1xWHBtQmZjbGZySmcteGF0R3VqMVprbjlPbHZhQzdUUi0wRWZNaEhNNmxTWnRqT2ZDdjh5QkV3TGJvTk1PS2FEeW94bFROaTBZbVQzZGg4R3l4aHFWTW1pNWtfc3hWR2VDckxrNXVmZFRWcG0yYnc?oc=5",
           "publishedAt": "2026-09-03T07:00:00.000Z",
@@ -56241,6 +56337,15 @@
           "publishedAt": "2026-08-27T07:00:00.000Z",
           "summary": "Fed governor Lisa Cook: \"No legitimate basis for removal\" on Trump mortgage claims Axios",
           "excerpt": "Fed governor Lisa Cook: \"No legitimate basis for removal\" on Trump mortgage claims Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Macro RSS",
+          "title": "July data points to a mixed-bag U.S. economy - Axios",
+          "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5OdVFSNUNYcnVTNUdIWDVhVEZ1aG1uUnBKVU5hNHFtejRrN3RWNklPS2ZET1RKU0pDOERVVnd6Si01SDl4aGgtQWQ2N2VBMkZPMHRNM29YSmNaR2hXN2l4U2t6YnF4VVJsMlZIelM3dTl1QQ?oc=5",
+          "publishedAt": "2026-08-26T07:00:00.000Z",
+          "summary": "July data points to a mixed-bag U.S. economy Axios",
+          "excerpt": "July data points to a mixed-bag U.S. economy Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
         }
       ],
@@ -56291,29 +56396,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "OpenAI rules out IPO this year as Altman, Musk & Amodei warn AI is moving too fast",
-          "url": "https://www.cnbc.com/2026/09/12/anthropics-amodei-proposes-plan-to-slow-the-pace-of-advancing-ai-capabilities.html",
-          "publishedAt": "2026-09-12T23:20:43.000Z",
-          "summary": "Altman's IPO comments and Amodei's public call for more careful pacing of AI development cap a week of loud AI warnings.",
-          "excerpt": "Altman's IPO comments and Amodei's public call for more careful pacing of AI development cap a week of loud AI warnings.",
+          "title": "Anthropic&apos;s Amodei says China presents &apos;toughest dilemma&apos; for his proposed AI slowdown",
+          "url": "https://www.cnbc.com/2026/09/13/china-dilemma-ai-slowdown-anthropic.html",
+          "publishedAt": "2026-09-13T15:46:56.000Z",
+          "summary": "OpenAI CEO Sam Altman, Demis Hassabis, the chair of Google DeepMind, and Elon Musk have all welcomed Amodei's proposal.",
+          "excerpt": "OpenAI CEO Sam Altman, Demis Hassabis, the chair of Google DeepMind, and Elon Musk have all welcomed Amodei's proposal.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Conversations that AIs are having in the office that may influence your performance review and pay",
-          "url": "https://www.cnbc.com/2026/09/12/ai-manager-coaching-employee-feedback-performanc-review.html",
-          "publishedAt": "2026-09-12T17:39:10.000Z",
-          "summary": "AI tools can help find the right tone and language for difficult workplace conversations about performance and pay, and managers are already using them.",
-          "excerpt": "AI tools can help find the right tone and language for difficult workplace conversations about performance and pay, and managers are already using them.",
+          "title": "Up 3,600%, this freight fund has posted the biggest gains of all on Iran war oil shock",
+          "url": "https://www.cnbc.com/2026/09/13/iran-war-oil-prices-freight-tankers-shipping.html",
+          "publishedAt": "2026-09-13T13:50:00.000Z",
+          "summary": "The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
+          "excerpt": "The U.S.-Iran war has caused oil prices to surge and added to freight stress from tariffs, but no shipping trade has boomed quite like crude oil tanker futures.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Larry Ellison nixes plan to offload up to $7.5 billion worth of Oracle stock",
-          "url": "https://www.cnbc.com/2026/09/12/larry-ellison-nixes-plan-to-offload-up-to-7point5-billion-worth-of-oracle-stock-.html",
-          "publishedAt": "2026-09-12T17:14:56.000Z",
-          "summary": "Oracle founder Larry Ellison has canceled his plan to sell up to $7.5 billion worth of stock in the software company.",
-          "excerpt": "Oracle founder Larry Ellison has canceled his plan to sell up to $7.5 billion worth of stock in the software company.",
+          "title": "Vessel struck in Strait of Hormuz, UKMTO says, as prospects for U.S.-Iran diplomacy appear elusive",
+          "url": "https://www.cnbc.com/2026/09/13/vessel-struck-strait-of-hormuz-ukmto.html",
+          "publishedAt": "2026-09-13T13:38:23.000Z",
+          "summary": "The latest strike happened ahead of an expected meeting between Iranian and Gulf officials in Oman to sign an agreement for shipping through the strait.",
+          "excerpt": "The latest strike happened ahead of an expected meeting between Iranian and Gulf officials in Oman to sign an agreement for shipping through the strait.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56373,29 +56478,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
+          "title": "Corporate profit forecasts are topping expectations to an unusual degree. AI is a big reason why.",
+          "url": "https://www.marketwatch.com/story/corporate-profit-forecasts-are-topping-expectations-to-an-unusual-degree-ai-is-a-big-reason-why-50245409?mod=mw_rss_topstories",
+          "publishedAt": "2026-09-13T14:00:00.000Z",
+          "summary": "The information-technology sector stands out when it comes to issuing upbeat earnings outlooks.",
+          "excerpt": "The information-technology sector stands out when it comes to issuing upbeat earnings outlooks.",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
+          "title": "The price of almost everything on your dinner table is climbing at once — and Wall Street is taking notice",
+          "url": "https://www.marketwatch.com/story/the-price-of-almost-everything-on-your-dinner-table-is-climbing-at-once-and-wall-street-is-taking-notice-9623d1fc?mod=mw_rss_topstories",
+          "publishedAt": "2026-09-13T13:00:00.000Z",
+          "summary": "Rising crop prices are making the current inflation problem bigger than just oil and the Iran war.",
+          "excerpt": "Rising crop prices are making the current inflation problem bigger than just oil and the Iran war.",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
           "title": "Why OpenAI’s Sam Altman says an IPO isn’t in the cards this year",
           "url": "https://www.marketwatch.com/story/why-openais-sam-altman-says-an-ipo-isnt-in-the-cards-this-year-229de89c?mod=mw_rss_topstories",
           "publishedAt": "2026-09-12T21:50:00.000Z",
           "summary": "Concerns about AI safety have ramped up, and OpenAI’s CEO says now would be an ‘ill-advised’ time for the ChatGPT creator to go public",
           "excerpt": "Concerns about AI safety have ramped up, and OpenAI’s CEO says now would be an ‘ill-advised’ time for the ChatGPT creator to go public",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Elon Musk backs Anthropic’s call to slow down AI progress before rogue bots take over the entire internet",
-          "url": "https://www.marketwatch.com/story/elon-musk-backs-anthropics-call-to-slow-down-ai-progress-before-rogue-bots-take-over-the-entire-internet-46f12d98?mod=mw_rss_topstories",
-          "publishedAt": "2026-09-12T17:20:00.000Z",
-          "summary": "Leaders of major AI companies say they agree with Anthropic CEO Dario Amodei, who just called for the tech industry to move more slowly with model development.",
-          "excerpt": "Leaders of major AI companies say they agree with Anthropic CEO Dario Amodei, who just called for the tech industry to move more slowly with model development.",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "The Fed could raise interest rates three times. Here’s where the market could face the stiffest test.",
-          "url": "https://www.marketwatch.com/story/the-fed-could-raise-interest-rates-three-times-heres-where-the-market-could-face-the-stiffest-test-757872a1?mod=mw_rss_topstories",
-          "publishedAt": "2026-09-11T23:54:00.000Z",
-          "summary": "Economists note that the Fed historically has not been content to raise rates only once.",
-          "excerpt": "Economists note that the Fed historically has not been content to raise rates only once.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
