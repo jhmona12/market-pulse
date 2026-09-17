@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-16T16:53:17.683Z",
+  "generatedAt": "2026-09-17T16:59:07.799Z",
   "window": {
-    "today": "2026-09-16",
+    "today": "2026-09-17",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-09-09",
-    "endDate": "2027-03-16"
+    "startDate": "2026-09-10",
+    "endDate": "2027-03-17"
   },
   "sources": [
     {
@@ -35,7 +35,7 @@
     {
       "source": "Federal Reserve FOMC calendar",
       "status": "ready",
-      "eventCount": 4,
+      "eventCount": 5,
       "scraper": "federal-reserve-fomc-calendar"
     }
   ],
@@ -329,6 +329,18 @@
       "sourceName": "Federal Reserve FOMC calendar",
       "scraper": "federal-reserve-fomc-calendar",
       "projectionMaterialsExpected": false
+    },
+    {
+      "date": "2027-03-17",
+      "time": "2:00 PM ET",
+      "event": "FOMC Rate Decision",
+      "title": "FOMC meeting decision (March 16-17*, 2027)",
+      "source": "Federal Reserve",
+      "importance": "High",
+      "sourceUrl": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "sourceName": "Federal Reserve FOMC calendar",
+      "scraper": "federal-reserve-fomc-calendar",
+      "projectionMaterialsExpected": true
     }
   ]
 }
