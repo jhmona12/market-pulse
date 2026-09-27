@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-27T01:34:35.754Z",
+  "generatedAt": "2026-09-27T17:01:17.641Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-09-27T01:31:31.712005+00:00",
+    "generatedAt": "2026-09-27T16:58:12.188921+00:00",
     "asOfDate": "2026-09-25",
     "expectedAsOfDate": "2026-09-25",
     "isStale": false,
@@ -1374,13 +1374,13 @@
     }
   },
   "note": {
-    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
-    "body": "Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now. 24% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are STX, MU, MRNA, DELL, AMD.",
+    "headline": "The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+    "body": "The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more. 24% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are STX, MU, MRNA, DELL, AMD.",
     "changed": [
-      "Policy/geopolitics: Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, and labor data shows early tightening signs. (M2)",
-      "AI/semis: At a time when many college students say they are rethinking their academic focus because of AI, new findings supply hard data on the potential costs of these decisions. (M3)",
-      "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: Recent WallStreetBets RSS posts mentioned MU, SPY; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking.",
+      "Policy/geopolitics: Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, and labor data shows early tightening signs. (M4)",
+      "Rates: The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more. (M1)",
+      "Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation.",
+      "Retail attention: The last successful Reddit sample (15.4 hours old) highlighted MU, SPY; treat this as stale sentiment context, not verified news.",
       "Breadth: 28% of the screened universe is above the 50-day average, 49% is above the 200-day, and 24% clears both trend lines.",
       "Tactical implication: STX (Top Decile), MU (Top Decile), MRNA (Top Decile), DELL (Top Decile) are the setups that currently merit review after the market backdrop is considered."
     ],
@@ -1396,12 +1396,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 101869,
+      "inputTokens": 104549,
       "cachedInputTokens": 0,
-      "outputTokens": 2966,
+      "outputTokens": 2659,
       "reasoningTokens": 0,
-      "totalTokens": 104835,
-      "estimatedCostUsd": 0.00628,
+      "totalTokens": 107208,
+      "estimatedCostUsd": 0.006291,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1409,8 +1409,8 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
-    "macroView": "Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now. Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, and labor data shows early tightening signs. Next macro decision points: GDP Third Estimate on 2026-09-30; Personal Income and Outlays on 2026-09-30; Employment Situation on 2026-10-02. Sector confirmation: Information Technology +7.47% over 30D, +6.53% vs SPY; Communication Services +0.64% over 30D; Energy -0.03% over 30D.",
+    "headline": "The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+    "macroView": "The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more. Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, and labor data shows early tightening signs. Next macro decision points: GDP Third Estimate on 2026-09-30; Personal Income and Outlays on 2026-09-30; Employment Situation on 2026-10-02. Sector confirmation: Information Technology +7.47% over 30D, +6.53% vs SPY; Communication Services +0.64% over 30D; Energy -0.03% over 30D.",
     "dailyRead": null,
     "recommendations": [
       {
@@ -1424,72 +1424,19 @@
         "marketCap": "$84.5B",
         "earningsContext": "Last reported 2026-08-11 for the Jun 2026 fiscal quarter; EPS 2.64 versus consensus 2.62; surprise 0.76%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 3.82.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-09-26: From $6 eggs to $50,000 cars, these charts show how inflation has defined the past 5 years",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-27: Debt-hungry AI companies face increased risk as bond yields spike",
         "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Above 200d trend; Liquid versus universe.",
         "technicalEvidence": "7D +1.15%; 14D +1.58%; 30D +0.28%; 60D vs SPY +13.85%; RSI 56; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C1-IR",
+          "S1",
           "C1-EARNINGS",
           "C1-MARKETCAP",
-          "S3"
-        ],
-        "setupTags": []
-      },
-      {
-        "symbol": "STX",
-        "action": "Research long setup",
-        "conviction": "High",
-        "setup": "Momentum confirmed",
-        "whyNow": "Rank #2 of 500; -3.43% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "rationale": "STX is momentum confirmed by the dashboard rules. Rank #2 of 500; -3.43% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "companyOverview": "Seagate (NASDAQ: STX) is a pioneer in mass-capacity data storage, accelerating ability to harness the full value of data. Our portfolio of advanced storage solutions helps hyperscale cloud providers, enterprises, and consumers protect, create and manage the data that powers their transformation and growth. For more...",
-        "marketCap": "$209.7B",
-        "earningsContext": "Last reported 2026-07-28 for the Jun 2026 fiscal quarter; EPS 5.48 versus consensus 4.89; surprise 12.07%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 7.11.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-09-26: From $6 eggs to $50,000 cars, these charts show how inflation has defined the past 5 years",
-        "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +6.84%; 14D +10.53%; 30D +8.41%; 60D vs SPY -3.43%; RSI 59; above both the 50-day and 200-day moving averages",
-        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
-        "risk": "Above-sector volatility",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C2-IR",
-          "C2-EARNINGS",
-          "C2-MARKETCAP",
-          "S3"
-        ],
-        "setupTags": [
-          "Momentum Confirmed"
-        ]
-      },
-      {
-        "symbol": "SNDK",
-        "action": "Review setup",
-        "conviction": "Review",
-        "setup": "model ranked",
-        "whyNow": "Rank #3 of 500; -16.21% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "rationale": "SNDK is momentum confirmed by the dashboard rules. Rank #3 of 500; -16.21% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "companyOverview": "Built on more than three decades of innovation, Sandisk is a vertically integrated global semiconductor company dedicated to delivering memory technologies that help people and businesses unlock the potential of their data. From the enterprise SSDs powering AI infrastructure to consumer devices and connected systems...",
-        "marketCap": "$260.3B",
-        "earningsContext": "Last reported 2026-08-05 for the Jun 2026 fiscal quarter; EPS 38.82 versus consensus 33.28; surprise 16.65%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 45.22.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-09-26: From $6 eggs to $50,000 cars, these charts show how inflation has defined the past 5 years",
-        "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D -0.78%; 14D +8.84%; 30D +18.57%; 60D vs SPY -16.21%; RSI 52; above both the 50-day and 200-day moving averages",
-        "momentumEvidence": "model ranked; risk flags: Above-sector volatility; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Weak volume confirmation",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C3-IR",
-          "C3-EARNINGS",
-          "C3-MARKETCAP",
-          "S3"
+          "C1-IR",
+          "S5"
         ],
         "setupTags": []
       },
@@ -1504,18 +1451,18 @@
         "marketCap": "$1.22T",
         "earningsContext": "Last reported 2026-06-24 for the May 2026 fiscal quarter; EPS 24.89 versus consensus 20.98; surprise 18.64%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Aug 2026 with consensus 31.24.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-09-26: From $6 eggs to $50,000 cars, these charts show how inflation has defined the past 5 years",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-27: Debt-hungry AI companies face increased risk as bond yields spike",
         "modelEvidence": "Rank #4 of 500; 99.4 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +6.54%; 14D +10.97%; 30D +15.33%; 60D vs SPY +1.17%; RSI 59; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C4-IR",
           "C4-EARNINGS",
           "C4-MARKETCAP",
-          "S3"
+          "C4-IR",
+          "S5"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1532,18 +1479,18 @@
         "marketCap": "$79.4B",
         "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.08.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-09-26: From $6 eggs to $50,000 cars, these charts show how inflation has defined the past 5 years",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-27: Debt-hungry AI companies face increased risk as bond yields spike",
         "modelEvidence": "Rank #5 of 500; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +29.11%; 14D +38.14%; 30D +32.89%; 60D vs SPY +170.63%; RSI 80; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: RSI extended; Above-sector volatility.",
         "risk": "RSI extended; Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C5-IR",
           "C5-EARNINGS",
           "C5-MARKETCAP",
-          "S3"
+          "C5-IR",
+          "S5"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1560,18 +1507,72 @@
         "marketCap": "$357.9B",
         "earningsContext": "Last reported 2026-09-01 for the Jul 2026 fiscal quarter; EPS 6.76 versus consensus 4.72; surprise 43.22%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 6.42.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-09-26: From $6 eggs to $50,000 cars, these charts show how inflation has defined the past 5 years",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-27: Debt-hungry AI companies face increased risk as bond yields spike",
         "modelEvidence": "Rank #7 of 500; 98.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -0.91%; 14D -0.78%; 30D +21.36%; 60D vs SPY +28.90%; RSI 57; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C7-IR",
           "C7-EARNINGS",
           "C7-MARKETCAP",
-          "S3"
+          "C7-IR",
+          "S5"
+        ],
+        "setupTags": [
+          "Momentum Confirmed"
+        ]
+      },
+      {
+        "symbol": "BE",
+        "action": "Review setup",
+        "conviction": "Review",
+        "setup": "model ranked",
+        "whyNow": "Rank #8 of 500; -3.96% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "rationale": "BE is momentum confirmed by the dashboard rules. Rank #8 of 500; -3.96% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "companyOverview": "Bloom Energy empowers enterprises to meet soaring energy demands and responsibly take charge of their power needs. The company's fuel cell systems provide ultra-reliable, clean and highly scalable onsite electricity for Fortune 500 customers around the world, including data centers, semiconductor manufacturing, larg...",
+        "marketCap": "$85.0B",
+        "earningsContext": "Last reported 2026-07-28 for the Jun 2026 fiscal quarter; EPS 0.61 versus consensus 0.23; surprise 165.22%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 0.57.",
+        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-27: Debt-hungry AI companies face increased risk as bond yields spike",
+        "modelEvidence": "Rank #8 of 500; 98.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D +8.69%; 14D +4.70%; 30D +32.30%; 60D vs SPY -3.96%; RSI 61; above both the 50-day and 200-day moving averages",
+        "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
+        "risk": "Above-sector volatility",
+        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
+        "sourceRefs": [
+          "C8-EARNINGS",
+          "C8-MARKETCAP",
+          "C8-IR",
+          "S5"
+        ],
+        "setupTags": []
+      },
+      {
+        "symbol": "AMD",
+        "action": "Research long setup",
+        "conviction": "High",
+        "setup": "Momentum confirmed",
+        "whyNow": "Rank #9 of 500; +12.91% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "rationale": "AMD is momentum confirmed by the dashboard rules. Rank #9 of 500; +12.91% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "companyOverview": "AMD (NASDAQ: AMD ) drives innovation in high-performance and AI computing to solve the world's most important challenges. Today, AMD technology powers billions of experiences across cloud and AI infrastructure, embedded systems, AI PCs and gaming. With a broad portfolio of AI-optimized CPUs, GPUs, networking and sof...",
+        "marketCap": "$1.03T",
+        "earningsContext": "Last reported 2026-08-04 for the Jun 2026 fiscal quarter; EPS 1.44 versus consensus 1.35; surprise 6.67%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 1.64.",
+        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+        "macroEvidence": "CNBC Top News RSS, 2026-09-27: Debt-hungry AI companies face increased risk as bond yields spike",
+        "modelEvidence": "Rank #9 of 500; 98.4 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D +12.65%; 14D +22.18%; 30D +31.13%; 60D vs SPY +12.91%; RSI 80; above both the 50-day and 200-day moving averages",
+        "momentumEvidence": "Momentum confirmed; risk flags: RSI extended; Above-sector volatility.",
+        "risk": "RSI extended; Above-sector volatility",
+        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
+        "sourceRefs": [
+          "C9-EARNINGS",
+          "C9-MARKETCAP",
+          "C9-IR",
+          "S5"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1806,31 +1807,30 @@
     ],
     "sourceRefs": [
       "S1",
-      "S11",
       "S4",
       "S5",
+      "S9",
       "C1-EARNINGS",
-      "C2-EARNINGS",
-      "C3-EARNINGS",
       "C4-EARNINGS",
       "C5-EARNINGS",
-      "C6-EARNINGS",
+      "C8-EARNINGS",
+      "C9-EARNINGS",
       "C7-EARNINGS",
-      "C8-EARNINGS"
+      "C12-EARNINGS"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Featured source angle: In the cited Schwab piece, the week’s performance is described as a tentative alignment where AI-related stocks provide relative strength, helping the S&P 500 and Nasdaq edge higher while other indices lag, even as global bond yields rise and seasonality remains a concern.",
+      "summary": "Featured source angle: Inference: AI-related stock strength is cited as contributing to weekly gains in the S&P 500 and Nasdaq, even as global bond yields rise, indicating a potential decoupling of equity upside from rate pressure in the near term.",
       "cards": [
         {
           "sourceRef": "S8",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Weekly Trader's Outlook",
-          "thesis": "In the cited Schwab piece, the week’s performance is described as a tentative alignment where AI-related stocks provide relative strength, helping the S&P 500 and Nasdaq edge higher while other indices lag, even as global bond yields rise and seasonality remains a concern.",
-          "whyItMatters": "This observation differentiates between broad index moves and selective leadership, suggesting that earnings or policy-driven volatility may persist if high-yield costs continue to influence risk appetite and if AI / semi shares sustain relative momentum.",
-          "marketReadThrough": "Monitor: the commentary frames current gains as a function of relative strength in tech leaders and evolving yields, not as a forecast of continued upside. Confirm whether AI and semiconductors keep leading while other sectors lag as yields move.",
-          "variantAngle": "Inference: if AI-related stocks maintain leadership, the market may show a more pronounced bifurcation between tech-led strength and cyclicals, conditioned on the trajectory of global yields and seasonality factors cited in the week’s review.",
+          "thesis": "Inference: AI-related stock strength is cited as contributing to weekly gains in the S&P 500 and Nasdaq, even as global bond yields rise, indicating a potential decoupling of equity upside from rate pressure in the near term.",
+          "whyItMatters": "This angle highlights a differentiated tension between equities with AI exposure and a rising-rate environment, offering a lens on sector rotation risk and potential resilience in the context of shifting yields without asserting a forecast.",
+          "marketReadThrough": "Monitor: The article notes weekly gains aided by AI-related stock strength amid higher global yields; use this as a check on whether AI-led groups maintain relative performance as yields climb in the coming days.",
+          "variantAngle": "Inference: If AI and semis maintain relative strength as yields rise, it may imply a pattern where earnings visibility or product demand supports select tech groups even as rate expectations tighten, though this remains contingent on macro signals.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-09-25T20:31:59.000Z",
@@ -1844,16 +1844,16 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Featured source angle: In the cited Schwab piece, the week’s performance is described as a tentative alignment where AI-related stocks provide relative strength, helping the S&P 500 and Nasdaq edge higher while other indices lag, even as global bond yields rise and seasonality remains a concern.",
+    "summary": "Featured source angle: Inference: AI-related stock strength is cited as contributing to weekly gains in the S&P 500 and Nasdaq, even as global bond yields rise, indicating a potential decoupling of equity upside from rate pressure in the near term.",
     "cards": [
       {
         "sourceRef": "S8",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Weekly Trader's Outlook",
-        "thesis": "In the cited Schwab piece, the week’s performance is described as a tentative alignment where AI-related stocks provide relative strength, helping the S&P 500 and Nasdaq edge higher while other indices lag, even as global bond yields rise and seasonality remains a concern.",
-        "whyItMatters": "This observation differentiates between broad index moves and selective leadership, suggesting that earnings or policy-driven volatility may persist if high-yield costs continue to influence risk appetite and if AI / semi shares sustain relative momentum.",
-        "marketReadThrough": "Monitor: the commentary frames current gains as a function of relative strength in tech leaders and evolving yields, not as a forecast of continued upside. Confirm whether AI and semiconductors keep leading while other sectors lag as yields move.",
-        "variantAngle": "Inference: if AI-related stocks maintain leadership, the market may show a more pronounced bifurcation between tech-led strength and cyclicals, conditioned on the trajectory of global yields and seasonality factors cited in the week’s review.",
+        "thesis": "Inference: AI-related stock strength is cited as contributing to weekly gains in the S&P 500 and Nasdaq, even as global bond yields rise, indicating a potential decoupling of equity upside from rate pressure in the near term.",
+        "whyItMatters": "This angle highlights a differentiated tension between equities with AI exposure and a rising-rate environment, offering a lens on sector rotation risk and potential resilience in the context of shifting yields without asserting a forecast.",
+        "marketReadThrough": "Monitor: The article notes weekly gains aided by AI-related stock strength amid higher global yields; use this as a check on whether AI-led groups maintain relative performance as yields climb in the coming days.",
+        "variantAngle": "Inference: If AI and semis maintain relative strength as yields rise, it may imply a pattern where earnings visibility or product demand supports select tech groups even as rate expectations tighten, though this remains contingent on macro signals.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-09-25T20:31:59.000Z",
@@ -1872,12 +1872,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-09-27T01:33:51.429Z",
+    "generatedAt": "2026-09-27T17:00:31.134Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-09-26T16:26:42.405Z"
+      "previousRefreshAt": "2026-09-27T01:34:35.754Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1888,7 +1888,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-09-27T01:31:34.245Z",
+      "generatedAt": "2026-09-27T16:58:14.891Z",
       "lookbackHours": 96,
       "releases": []
     },
@@ -1917,25 +1917,63 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "From $6 eggs to $50,000 cars, these charts show how inflation has defined the past 5 years",
-        "sourceName": "MarketWatch Top Stories RSS",
+        "title": "Debt-hungry AI companies face increased risk as bond yields spike",
+        "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/from-6-eggs-to-50-000-cars-these-charts-show-how-inflation-has-defined-the-past-5-years-3c7b9ab9?mod=mw_rss_topstories",
-        "publishedAt": "2026-09-26T17:54:00.000Z",
-        "summary": "Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
-        "excerpt": "Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
+        "url": "https://www.cnbc.com/2026/09/27/debt-hungry-data-center-companies-increased-risk-bond-yields-spike.html",
+        "publishedAt": "2026-09-27T15:35:34.000Z",
+        "summary": "The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+        "excerpt": "The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
         "themes": [
           "Rates and central banks",
-          "Macro and growth"
+          "AI and semis"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 7.7,
-        "score": 92,
+        "ageHours": 1.4,
+        "score": 100,
         "tickers": []
       },
       {
         "id": "M2",
+        "title": "Micron could dethrone Nvidia and become the biggest driver of S&P 500 profit growth",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/micron-could-dethrone-nvidia-and-become-the-biggest-driver-of-s-p-500-profit-growth-d62e0e68?mod=mw_rss_topstories",
+        "publishedAt": "2026-09-27T14:00:00.000Z",
+        "summary": "Micron is increasingly important to the S&P 500, and its earnings report has become “a market event in and of itself.”",
+        "excerpt": "Micron is increasingly important to the S&P 500, and its earnings report has become “a market event in and of itself.”",
+        "themes": [
+          "Earnings",
+          "Macro and growth"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 3,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M3",
+        "title": "Look closer, and Wall Street’s rally is showing cracks",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/look-closer-and-wall-streets-rally-is-showing-cracks-94952048?mod=mw_rss_topstories",
+        "publishedAt": "2026-09-27T13:00:00.000Z",
+        "summary": "Major stock indexes hovering near records are masking a market straining under elevated oil prices, rising Treasury yields and a Federal Reserve bracing for additional interest-rate hikes.",
+        "excerpt": "Major stock indexes hovering near records are masking a market straining under elevated oil prices, rising Treasury yields and a Federal Reserve bracing for additional interest-rate hikes.",
+        "themes": [
+          "Rates and central banks",
+          "Commodities and energy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 4,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M4",
         "title": "Stocks Stall as Yields, Hike Odds Climb",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1943,36 +1981,18 @@
         "url": "https://www.schwab.com/learn/story/weekly-digest",
         "publishedAt": "2026-09-25T15:59:58.000Z",
         "summary": "Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, and labor data shows early tightening signs.",
-        "excerpt": "Stocks Stall as Yields, Hike Odds Climb | Charles Schwab Search Insights & Education Markets and Economy Stocks Stall as Yields, Hike Odds Climb Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, labor data shows early tightening signs, and bitcoin breaks key levels. September 25, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Fed hike possible despite election Though some call a follow-up October hike unlikely because of November's mid-term election, the Fed probably won't let the political calendar interfere. Back in 2022, it hiked rates just before the mid-term vote. Odds of a rate hike next month are 68.6% this morning, according to the CME FedWatch Tool , after Wednesday's data and hawkish words from New York Federal Reserve Chief John C. Williams and Fed Gov. Michael Barr. Even if a Fed meeting weren't on the calendar after last week's hike , caution could define coming weeks. Markets followed a historic pattern recently, lacking direction before the mid-term. \"Markets don't really care who wins the election, they mostly care that the election is over,\" said Michael Townsend , managing director, legal and government affairs at Schwab, noting that markets tend to be flat leading up to an election and average a 5.7% gain in the three months after. \"Markets don't like the uncertainty of elections, but once the election is over, markets can take that piece ",
+        "excerpt": "Stocks Stall as Yields, Hike Odds Climb | Charles Schwab Search Learn Markets and Economy Stocks Stall as Yields, Hike Odds Climb Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, labor data shows early tightening signs, and bitcoin breaks key levels. September 25, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Fed hike possible despite election Though some call a follow-up October hike unlikely because of November's mid-term election, the Fed probably won't let the political calendar interfere. Back in 2022, it hiked rates just before the mid-term vote. Odds of a rate hike next month are 68.6% this morning, according to the CME FedWatch Tool , after Wednesday's data and hawkish words from New York Federal Reserve Chief John C. Williams and Fed Gov. Michael Barr. Even if a Fed meeting weren't on the calendar after last week's hike , caution could define coming weeks. Markets followed a historic pattern recently, lacking direction before the mid-term. \"Markets don't really care who wins the election, they mostly care that the election is over,\" said Michael Townsend , managing director, legal and government affairs at Schwab, noting that markets tend to be flat leading up to an election and average a 5.7% gain in the three months after. \"Markets don't like the uncertainty of elections, but once the election is over, markets can take that piece of uncertainty ",
         "themes": [
           "Rates and central banks",
           "Geopolitics and policy"
         ],
         "freshness": "Important older item",
-        "ageHours": 33.6,
+        "ageHours": 49,
         "score": 62,
         "tickers": []
       },
       {
-        "id": "M3",
-        "title": "Choosing these AI-exposed college majors could dent your job prospects — and lower your pay",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/choosing-these-ai-exposed-college-majors-could-dent-your-job-prospects-and-lower-your-pay-b80576cb?mod=mw_rss_topstories",
-        "publishedAt": "2026-09-26T16:22:00.000Z",
-        "summary": "At a time when many college students say they are rethinking their academic focus because of AI, new findings supply hard data on the potential costs of these decisions.",
-        "excerpt": "At a time when many college students say they are rethinking their academic focus because of AI, new findings supply hard data on the potential costs of these decisions.",
-        "themes": [
-          "AI and semis"
-        ],
-        "freshness": "Last 24 hours",
-        "ageHours": 9.2,
-        "score": 48,
-        "tickers": []
-      },
-      {
-        "id": "M4",
+        "id": "M5",
         "title": "Costco makes progress on a key membership metric. Here&apos;s our new price target on the stock",
         "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
@@ -1985,7 +2005,7 @@
           "Rates and central banks"
         ],
         "freshness": "Important older item",
-        "ageHours": 49.1,
+        "ageHours": 64.5,
         "score": 46,
         "tickers": []
       }
@@ -1993,183 +2013,38 @@
     "topThemes": [
       {
         "theme": "Rates and central banks",
-        "count": 3
+        "count": 4
+      },
+      {
+        "theme": "AI and semis",
+        "count": 1
+      },
+      {
+        "theme": "Earnings",
+        "count": 1
       },
       {
         "theme": "Macro and growth",
         "count": 1
       },
       {
-        "theme": "Geopolitics and policy",
+        "theme": "Commodities and energy",
         "count": 1
       },
       {
-        "theme": "AI and semis",
+        "theme": "Geopolitics and policy",
         "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-09-27T01:33:51.423Z",
+      "generatedAt": "2026-09-27T17:00:31.126Z",
       "dates": [
-        "2026-09-25",
         "2026-09-26",
-        "2026-09-27"
+        "2026-09-27",
+        "2026-09-28"
       ],
       "calendars": [
-        {
-          "date": "2026-09-25",
-          "asOf": "Fri, Sep 25, 2026",
-          "status": "ready",
-          "error": null,
-          "rowCount": 12,
-          "rows": [
-            {
-              "date": "2026-09-25",
-              "symbol": "TBN",
-              "name": "Tamboran Resources Corporation",
-              "time": "time-pre-market",
-              "marketCap": "$1,263,544,960",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "($0.25)",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "IVA",
-              "name": "Inventiva S.A.",
-              "time": "time-after-hours",
-              "marketCap": "$770,273,470",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "($0.20)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "NB",
-              "name": "NioCorp Developments Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$515,378,144",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "($0.03)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "HTLM",
-              "name": "HomesToLife Ltd",
-              "time": "time-not-supplied",
-              "marketCap": "$159,643,744",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "ZONE",
-              "name": "Zone Frontier Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$66,928,632",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "LITS",
-              "name": "Lite Strategy, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$45,592,188",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "IXHL",
-              "name": "Incannex Healthcare Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$40,679,484",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "$0.13",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "CELU",
-              "name": "Celularity Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$38,208,668",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "ASTC",
-              "name": "Astrotech Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$15,132,539",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "ENLV",
-              "name": "Enlivex Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$10,590,944",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "($0.31)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "LNAI",
-              "name": "Lunai Bioworks Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$8,795,747",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            },
-            {
-              "date": "2026-09-25",
-              "symbol": "MARPS",
-              "name": "Marine Petroleum Trust",
-              "time": "time-not-supplied",
-              "marketCap": "$8,740,000",
-              "fiscalQuarterEnding": "Jun/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-25"
-            }
-          ]
-        },
         {
           "date": "2026-09-26",
           "asOf": "Sat, Sep 26, 2026",
@@ -2185,12 +2060,355 @@
           "error": null,
           "rowCount": 0,
           "rows": []
+        },
+        {
+          "date": "2026-09-28",
+          "asOf": "Mon, Sep 28, 2026",
+          "status": "ready",
+          "error": null,
+          "rowCount": 21,
+          "rows": [
+            {
+              "date": "2026-09-28",
+              "symbol": "JEF",
+              "name": "Jefferies Financial Group Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$8,958,661,600",
+              "fiscalQuarterEnding": "Aug/2026",
+              "epsForecast": "$1.04",
+              "noOfEsts": "2",
+              "lastYearReportDate": "9/29/2025",
+              "lastYearEps": "$1.05",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "GRFS",
+              "name": "Grifols, S.A.",
+              "time": "time-not-supplied",
+              "marketCap": "$4,950,395,400",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "$0.27",
+              "noOfEsts": "1",
+              "lastYearReportDate": "7/28/2025",
+              "lastYearEps": "$0.19",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "MTN",
+              "name": "Vail Resorts, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$4,911,012,400",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "($5.37)",
+              "noOfEsts": "6",
+              "lastYearReportDate": "9/29/2025",
+              "lastYearEps": "($5.08)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "CHRN",
+              "name": "ChronoScale Holdings Corporation",
+              "time": "time-not-supplied",
+              "marketCap": "$3,182,178,300",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "($0.06)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "7/28/2025",
+              "lastYearEps": "($1.24)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "IDT",
+              "name": "IDT Corporation",
+              "time": "time-after-hours",
+              "marketCap": "$1,684,845,310",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.76",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "CURR",
+              "name": "Currenc Group Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$337,968,480",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.10)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "AIV",
+              "name": "Apartment Investment and Management Company",
+              "time": "time-not-supplied",
+              "marketCap": "$316,616,448",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "AIAI",
+              "name": "AIAI Holdings Corporation",
+              "time": "time-not-supplied",
+              "marketCap": "$235,916,144",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "TRAK",
+              "name": "ReposiTrak, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$150,295,376",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.09",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "CBAT",
+              "name": "CBAK Energy Technology Limited",
+              "time": "time-not-supplied",
+              "marketCap": "$121,444,792",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "($0.06)",
+              "noOfEsts": "1",
+              "lastYearReportDate": "8/18/2025",
+              "lastYearEps": "($0.03)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "SANG",
+              "name": "Sangoma Technologies Corporation",
+              "time": "time-after-hours",
+              "marketCap": "$119,146,896",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "N/A",
+              "lastYearReportDate": "9/17/2025",
+              "lastYearEps": "$0.02",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "KNDI",
+              "name": "Kandi Technologies Group, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$58,321,244",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "NTWK",
+              "name": "NetSol Technologies Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$56,412,968",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.22",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "POCI",
+              "name": "Precision Optics Corporation, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$52,261,748",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.18)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "GNS",
+              "name": "Genius Group Limited",
+              "time": "time-pre-market",
+              "marketCap": "$29,751,864",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "PBM",
+              "name": "Psyence Biomedical Ltd.",
+              "time": "time-not-supplied",
+              "marketCap": "$22,351,962",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "N/A",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "NCPL",
+              "name": "Netcapital Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$9,966,832",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($1.27)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "MITQ",
+              "name": "Moving iMage Technologies, Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$6,431,874",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($0.02)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "ADXN",
+              "name": "Addex Therapeutics Ltd",
+              "time": "time-pre-market",
+              "marketCap": "$5,894,847",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "($2.91)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "MSS",
+              "name": "Maison Solutions Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$1,471,183",
+              "fiscalQuarterEnding": "Jul/2026",
+              "epsForecast": "$0.57",
+              "noOfEsts": "2",
+              "lastYearReportDate": "9/22/2025",
+              "lastYearEps": "$2",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            },
+            {
+              "date": "2026-09-28",
+              "symbol": "FRGT",
+              "name": "Freight Technologies, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$228,850",
+              "fiscalQuarterEnding": "Jun/2026",
+              "epsForecast": "",
+              "noOfEsts": "1",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$0.50",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-09-28"
+            }
+          ]
         }
       ],
-      "earningsMovers": [],
+      "earningsMovers": [
+        {
+          "symbol": "CHRN",
+          "name": "ChronoScale Holdings Corporatio",
+          "price": 19.85,
+          "changePct": -9.15,
+          "change": -2,
+          "volume": 169003,
+          "marketCap": 2882514432,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
+          "moverBucket": "loser"
+        }
+      ],
       "articleHeadlines": [
         {
           "id": "E1",
+          "title": "Here are the 4 big things we&apos;re watching in the stock market in the week ahead",
+          "sourceName": "CNBC Top News RSS",
+          "url": "https://www.cnbc.com/2026/09/27/here-are-the-4-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
+          "publishedAt": "2026-09-27T16:16:43.000Z",
+          "summary": "Both sides of the Fed's dual mandate are in focus. Plus, Micron reports and Eli Lilly delivers updates on its obesity pipeline.",
+          "tickers": []
+        },
+        {
+          "id": "E2",
+          "title": "Here are the 4 big things we're watching in the stock market in the week ahead",
+          "sourceName": "CNBC Markets",
+          "url": "https://www.cnbc.com/2026/09/27/here-are-the-4-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
+          "publishedAt": "2026-09-27T16:13:03.000Z",
+          "summary": "Both sides of the Fed's dual mandate are in focus. Plus, Micron reports and Eli Lilly delivers updates on its obesity pipeline.",
+          "tickers": []
+        },
+        {
+          "id": "E3",
+          "title": "Micron could dethrone Nvidia and become the biggest driver of S&P 500 profit growth",
+          "sourceName": "MarketWatch Top Stories RSS",
+          "url": "https://www.marketwatch.com/story/micron-could-dethrone-nvidia-and-become-the-biggest-driver-of-s-p-500-profit-growth-d62e0e68?mod=mw_rss_topstories",
+          "publishedAt": "2026-09-27T14:00:00.000Z",
+          "summary": "Micron is increasingly important to the S&P 500, and its earnings report has become “a market event in and of itself.”",
+          "tickers": []
+        },
+        {
+          "id": "E4",
           "title": "Weekly Trader's Outlook",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
@@ -2199,7 +2417,7 @@
           "tickers": []
         },
         {
-          "id": "E2",
+          "id": "E5",
           "title": "Stocks Up on Oil, Yields, Tracking for Weekly Rise",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/stock-market-update-open",
@@ -2208,20 +2426,29 @@
           "tickers": []
         },
         {
-          "id": "E3",
+          "id": "E6",
           "title": "Darden Restaurants stock falls as Olive Garden reports slower growth",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/09/24/darden-restaurants-dri-q1-2027-earnings.html",
           "publishedAt": "2026-09-24T16:13:13.000Z",
           "summary": "Olive Garden's same-store sales growth has slowed in recent quarters.",
           "tickers": []
+        },
+        {
+          "id": "E7",
+          "title": "Fed raises rates a quarter point in first move of Warsh era - Axios",
+          "sourceName": "Axios Macro RSS",
+          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE85ZnR0T2NsdXhob2JuTVRwYnJ4ZGNwcm11ZXcyZVU4b005WUgyWE5zZjhiZXEwaHFtdlowLU92ZUZuMURFTkI5QXpIWHFSUEFvVUhaWURjX2c0MVJTN2ktVkZ3MnM?oc=5",
+          "publishedAt": "2026-09-16T07:00:00.000Z",
+          "summary": "Fed raises rates a quarter point in first move of Warsh era Axios",
+          "tickers": []
         }
       ],
       "sourceNote": "Nasdaq earnings calendar plus Yahoo Finance daily mover screeners and earnings-related article headlines."
     },
     "reddit": {
-      "status": "ready",
-      "generatedAt": "2026-09-27T01:31:34.999Z",
+      "status": "cache_fallback",
+      "generatedAt": "2026-09-27T16:58:16.127Z",
       "authMode": "public",
       "metricMode": "unranked_recent_mentions",
       "sampleCoverage": {
@@ -2234,7 +2461,7 @@
         "oauthPostCount": 0,
         "rssPostCount": 12
       },
-      "sourceNote": "Recent Reddit post mentions include RSS results without vote or comment totals. This sample cannot establish popularity or ticker concentration; use as sentiment context only, not verified news.",
+      "sourceNote": "Latest Reddit fetch failed; showing the last successful Reddit attention sample from 2026-09-27T01:31:34.999Z. Treat as stale sentiment context, not live news.",
       "statusReason": null,
       "subreddits": [
         {
@@ -2530,7 +2757,9 @@
       ],
       "currentFetchErrors": [
         "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured"
-      ]
+      ],
+      "sourceGeneratedAt": "2026-09-27T01:31:34.999Z",
+      "cacheAgeHours": 15.4
     },
     "marketMovers": {
       "source": "Yahoo Finance predefined screeners",
@@ -2940,11 +3169,12 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, and labor data shows early tightening signs. (M2)",
-      "Rates: Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now. (M1)",
-      "AI/semis: At a time when many college students say they are rethinking their academic focus because of AI, new findings supply hard data on the potential costs of these decisions. (M3)",
-      "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: Recent WallStreetBets RSS posts mentioned MU, SPY; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking."
+      "Policy/geopolitics: Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, and labor data shows early tightening signs. (M4)",
+      "Rates: The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more. (M1)",
+      "Commodities: Major stock indexes hovering near records are masking a market straining under elevated oil prices, rising Treasury yields and a Federal Reserve bracing for additional interest-rate hikes. (M3)",
+      "Macro: Micron is increasingly important to the S&P 500, and its earnings report has become “a market event in and of itself.” (M2)",
+      "Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation.",
+      "Retail attention: The last successful Reddit sample (15.4 hours old) highlighted MU, SPY; treat this as stale sentiment context, not verified news."
     ]
   },
   "avoidList": {
@@ -55873,7 +56103,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-09-25T20:31:59.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Tech Stocks Attempt to Regain Market Leadership, Despite Rise in Global Bond Yields The S&P 500 and Nasdaq Composite are on track for weekly gains, assisted by relative strength in AI-related stocks, and despite the march higher in global bond yields. September 25, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"moderately bearish\" outlook for stocks this week, citing bearish seasonality, mixed technicals and uncertainty around the trajectory of oil prices and yields. At the time of this writing, the S&P 500 (market-cap weighted) Index and Nasdaq Composite are on track to be up roughly 1% on the week, while the S&P 500 Equal-Weight, Dow Jones Industrial Average, and Russell 2000 Indices are all on track to be modestly lower. Once again, oil prices and bond yields were important factors for stocks this week. On Monday, oil prices were down roughly 5%, and Treasury yields were also lower, which helped provide a lift to all of the major indices. Also on Monday, reports that AMD will increase prices by 10% in Q4 helped light a fire in chip stocks, which pushed the Philadelphia (PHLX) Semiconductor index (SOX) back above its 50-day Simple Moving Average (SMA) for the first time in over a month (more on the SOX in the \"Technical Take\" section below). The lift in sentiment around tech and the artificial intelligence (AI) complex also sent the Nasdaq Composite to a fresh record high that day. However, stocks were hit with a mid-week surge in Treasury yields following a set of exceptionally strong Purchasing Managers' Index (PMI) reports on Wednesday, which showed both an acceleration in economic activity, coupled with higher in",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Tech Stocks Attempt to Regain Market Leadership, Despite Rise in Global Bond Yields The S&P 500 and Nasdaq Composite are on track for weekly gains, assisted by relative strength in AI-related stocks, and despite the march higher in global bond yields. September 25, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"moderately bearish\" outlook for stocks this week, citing bearish seasonality, mixed technicals and uncertainty around the trajectory of oil prices and yields. At the time of this writing, the S&P 500 (market-cap weighted) Index and Nasdaq Composite are on track to be up roughly 1% on the week, while the S&P 500 Equal-Weight, Dow Jones Industrial Average, and Russell 2000 Indices are all on track to be modestly lower. Once again, oil prices and bond yields were important factors for stocks this week. On Monday, oil prices were down roughly 5%, and Treasury yields were also lower, which helped provide a lift to all of the major indices. Also on Monday, reports that AMD will increase prices by 10% in Q4 helped light a fire in chip stocks, which pushed the Philadelphia (PHLX) Semiconductor index (SOX) back above its 50-day Simple Moving Average (SMA) for the first time in over a month (more on the SOX in the \"Technical Take\" section below). The lift in sentiment around tech and the artificial intelligence (AI) complex also sent the Nasdaq Composite to a fresh record high that day. However, stocks were hit with a mid-week surge in Treasury yields following a set of exceptionally strong Purchasing Managers' Index (PMI) reports on Wednesday, which showed both an acceleration in economic act",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -55882,7 +56112,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-digest",
           "publishedAt": "2026-09-25T15:59:58.000Z",
           "summary": "Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, and labor data shows early tightening signs.",
-          "excerpt": "Stocks Stall as Yields, Hike Odds Climb | Charles Schwab Search Insights & Education Markets and Economy Stocks Stall as Yields, Hike Odds Climb Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, labor data shows early tightening signs, and bitcoin breaks key levels. September 25, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Fed hike possible despite election Though some call a follow-up October hike unlikely because of November's mid-term election, the Fed probably won't let the political calendar interfere. Back in 2022, it hiked rates just before the mid-term vote. Odds of a rate hike next month are 68.6% this morning, according to the CME FedWatch Tool , after Wednesday's data and hawkish words from New York Federal Reserve Chief John C. Williams and Fed Gov. Michael Barr. Even if a Fed meeting weren't on the calendar after last week's hike , caution could define coming weeks. Markets followed a historic pattern recently, lacking direction before the mid-term. \"Markets don't really care who wins the election, they mostly care that the election is over,\" said Michael Townsend , managing director, legal and government affairs at Schwab, noting that markets tend to be flat leading up to an election and average a 5.7% gain in the three months after. \"Markets don't like the uncertainty of elections, but once the election is over, markets can take that piece ",
+          "excerpt": "Stocks Stall as Yields, Hike Odds Climb | Charles Schwab Search Learn Markets and Economy Stocks Stall as Yields, Hike Odds Climb Stocks grind sideways as October hike odds rise, Treasury auctions clear at multi-year high yields, labor data shows early tightening signs, and bitcoin breaks key levels. September 25, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Fed hike possible despite election Though some call a follow-up October hike unlikely because of November's mid-term election, the Fed probably won't let the political calendar interfere. Back in 2022, it hiked rates just before the mid-term vote. Odds of a rate hike next month are 68.6% this morning, according to the CME FedWatch Tool , after Wednesday's data and hawkish words from New York Federal Reserve Chief John C. Williams and Fed Gov. Michael Barr. Even if a Fed meeting weren't on the calendar after last week's hike , caution could define coming weeks. Markets followed a historic pattern recently, lacking direction before the mid-term. \"Markets don't really care who wins the election, they mostly care that the election is over,\" said Michael Townsend , managing director, legal and government affairs at Schwab, noting that markets tend to be flat leading up to an election and average a 5.7% gain in the three months after. \"Markets don't like the uncertainty of elections, but once the election is over, markets can take that piece of uncertainty ",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56081,7 +56311,7 @@
           "sourceName": "Axios Markets RSS",
           "title": "The AI borrowing binge is back in the spotlight - Axios",
           "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5BSXpIVWtIQ05XallfWVF6RG94bXRrQ0NmRXdwWHdFaW1ERGtITVhra0lFU2lFN1RWVXhVekZLZE5WcFpnd0xsN0NudWJ2eXVlTFJzN0U3UGFTeXFKZlpLRmFJN3FKMmlv?oc=5",
-          "publishedAt": "2026-09-26T08:03:35.000Z",
+          "publishedAt": "2026-09-25T11:24:31.000Z",
           "summary": "The AI borrowing binge is back in the spotlight Axios",
           "excerpt": "The AI borrowing binge is back in the spotlight Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
@@ -56120,6 +56350,15 @@
       "articles": [
         {
           "sourceName": "Axios Macro RSS",
+          "title": "Fed raises rates a quarter point in first move of Warsh era - Axios",
+          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE85ZnR0T2NsdXhob2JuTVRwYnJ4ZGNwcm11ZXcyZVU4b005WUgyWE5zZjhiZXEwaHFtdlowLU92ZUZuMURFTkI5QXpIWHFSUEFvVUhaWURjX2c0MVJTN2ktVkZ3MnM?oc=5",
+          "publishedAt": "2026-09-16T07:00:00.000Z",
+          "summary": "Fed raises rates a quarter point in first move of Warsh era Axios",
+          "excerpt": "Fed raises rates a quarter point in first move of Warsh era Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Macro RSS",
           "title": "New research sketches out how AI might reshape the economy - Axios",
           "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE90OUVkRXFka0pqcGgtMFdYLTNXTDdTWTA1X1F2b0VkZkwyNll6LTloMDRDV0NsV09nNF90WW01YUp6MGhtX19XUXRiV1Zfc09PTTVqeUNCS3FManc1Snl3Mmt3ZUd2NHVZc0E?oc=5",
           "publishedAt": "2026-09-09T07:00:00.000Z",
@@ -56135,15 +56374,6 @@
           "summary": "Trump bans some Canadian imports as North America trade war intensifies Axios",
           "excerpt": "Trump bans some Canadian imports as North America trade war intensifies Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-          "sourceName": "Axios Macro RSS",
-          "title": "America's jobs scare recedes - Axios",
-          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBpd244cmtPNm9YaUplVjFIcmdtWXlGLTRqTmlac185eTVwMjZRQWlvOGMzOWNmZ255d3dJUUdCMXUwYmRiLWRpc0ZmU3NzaWJIbWlPTkRBT2NMUHpvTkhneDN4VlNRZXU4Ty1Vdg?oc=5",
-          "publishedAt": "2026-09-04T07:00:00.000Z",
-          "summary": "America's jobs scare recedes Axios",
-          "excerpt": "America's jobs scare recedes Axios",
-          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
         }
       ],
       "articleCount": 3,
@@ -56157,9 +56387,19 @@
       "trust": "Medium",
       "notes": "Public market news page; respect site terms.",
       "title": "Markets",
-      "summary": "No recent dated articles found in the last 30 days.",
-      "articles": [],
-      "articleCount": 0,
+      "summary": "View up-to-date U.S. market and world market charts. Get the latest on world economy news and global markets in our Market Overview.",
+      "articles": [
+        {
+          "sourceName": "CNBC Markets",
+          "title": "Here are the 4 big things we're watching in the stock market in the week ahead",
+          "url": "https://www.cnbc.com/2026/09/27/here-are-the-4-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
+          "publishedAt": "2026-09-27T16:13:03.000Z",
+          "summary": "Both sides of the Fed's dual mandate are in focus. Plus, Micron reports and Eli Lilly delivers updates on its obesity pipeline.",
+          "excerpt": "Here are the 4 big things we're watching in the stock market in the week ahead Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu The labor market, inflation, a weight loss drug update, and earnings from a central figure in the AI trade will take center stage in the week ahead. The fresh jobs and inflation data will arrive as Wall Street debates whether the Federal Reserve's first interest rate hike in three years will be the start of a prolonged tightening cycle, or something shorter-lived. This week's releases cover both sides of the Fed's dual mandate of maximum employment and stable prices, creating the possibility of a volatile stretch for rate-hike expectations . Earnings from Club name Micron on Wednesday night will test the rebound in AI stocks that began in mid-September, in the wake of a brief sell-off stemming from growing concerns about AI safety risks. Those concerns were. Eli Lilly will also shine a spotlight on the next phase of the obesity drug race. Here's a closer look at what to expect. 1. Jobs, jobs, jobs: Friday's nonfarm payrolls report for September is the biggest economic report of the week. It will be preceded by the so-called JOLTS report — the Job Openings and Labor Turnover Survey — on Tuesday morning and payroll processor ADP's private hiring report on Wednesday. The JOLTS, which measures tightness in the labor market and the rate of people quitting their jobs, is relatively stale, covering the month of August; this contributes to it being the least important of the three. The ADP data is for September, making it an appetizer for the government's official release Friday. Consensus is for 58,000 private-sector jobs additions, according to FactSet. For the nonfarm payrolls repor",
+          "discoveredFrom": "https://www.cnbc.com/markets/"
+        }
+      ],
+      "articleCount": 1,
       "ok": true
     },
     {
@@ -56174,29 +56414,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Trump says he approved new fuel economy standards, rolling back Biden-era rules",
-          "url": "https://www.cnbc.com/2026/09/26/trump-fuel-economy-cafe-standards.html",
-          "publishedAt": "2026-09-26T21:21:04.000Z",
-          "summary": "The new fuel economy standards will reverse the Biden administration's stricter policies meant to spur electric vehicle adoption.",
-          "excerpt": "The new fuel economy standards will reverse the Biden administration's stricter policies meant to spur electric vehicle adoption.",
+          "title": "Here are the 4 big things we&apos;re watching in the stock market in the week ahead",
+          "url": "https://www.cnbc.com/2026/09/27/here-are-the-4-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
+          "publishedAt": "2026-09-27T16:16:43.000Z",
+          "summary": "Both sides of the Fed's dual mandate are in focus. Plus, Micron reports and Eli Lilly delivers updates on its obesity pipeline.",
+          "excerpt": "Both sides of the Fed's dual mandate are in focus. Plus, Micron reports and Eli Lilly delivers updates on its obesity pipeline.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "White House moves to block $810 million in funding through pocket rescission",
-          "url": "https://www.cnbc.com/2026/09/26/white-house-810-million-pocket-rescission.html",
-          "publishedAt": "2026-09-26T18:46:48.000Z",
-          "summary": "The White House is moving to block $810 million in appropriated funds days before the fiscal year ends, drawing objections over the maneuver.",
-          "excerpt": "The White House is moving to block $810 million in appropriated funds days before the fiscal year ends, drawing objections over the maneuver.",
+          "title": "Iran&apos;s foreign minister says Tehran ready for &apos;doomsday&apos; war with U.S., but leaves diplomacy on the table",
+          "url": "https://www.cnbc.com/2026/09/27/iran-foreign-minister-keeps-indirect-talks-with-us-open-state-media.html",
+          "publishedAt": "2026-09-27T16:15:45.000Z",
+          "summary": "Iran's foreign minister says talks are the only way to break the deadlock, while its navy says it's analyzing data from a captured U.S. underwater drone.",
+          "excerpt": "Iran's foreign minister says talks are the only way to break the deadlock, while its navy says it's analyzing data from a captured U.S. underwater drone.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Apple faces $5.7 billion patent infringement verdict over iPhone and Apple Watch haptics",
-          "url": "https://www.cnbc.com/2026/09/26/apple-taction-technology-patent-infringement-verdict.html",
-          "publishedAt": "2026-09-26T16:57:57.000Z",
-          "summary": "A federal jury awarded Taction Technology more than $5.7 billion after finding Apple infringed claims from two haptics patents. Apple plans to appeal.",
-          "excerpt": "A federal jury awarded Taction Technology more than $5.7 billion after finding Apple infringed claims from two haptics patents. Apple plans to appeal.",
+          "title": "Debt-hungry AI companies face increased risk as bond yields spike",
+          "url": "https://www.cnbc.com/2026/09/27/debt-hungry-data-center-companies-increased-risk-bond-yields-spike.html",
+          "publishedAt": "2026-09-27T15:35:34.000Z",
+          "summary": "The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
+          "excerpt": "The AI infrastructure buildout shows no sign of slowing, but the surge in Treasury yields means it's at least going to cost more.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56256,29 +56496,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "From $6 eggs to $50,000 cars, these charts show how inflation has defined the past 5 years",
-          "url": "https://www.marketwatch.com/story/from-6-eggs-to-50-000-cars-these-charts-show-how-inflation-has-defined-the-past-5-years-3c7b9ab9?mod=mw_rss_topstories",
-          "publishedAt": "2026-09-26T17:54:00.000Z",
-          "summary": "Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
-          "excerpt": "Rising prices have been crushing consumer confidence and biting at Americans’ wallets for more than five years now.",
+          "title": "‘It doesn’t seem fair’: I’m retired and have plenty of money. Why can’t I qualify for a retail credit card?",
+          "url": "https://www.marketwatch.com/story/it-doesnt-seem-fair-im-retired-and-have-plenty-of-money-why-cant-i-qualify-for-a-retail-credit-card-8a58eda3?mod=mw_rss_topstories",
+          "publishedAt": "2026-09-27T16:00:00.000Z",
+          "summary": "“I draw from my IRA as needed for household repairs, trips and other larger expenses.”",
+          "excerpt": "“I draw from my IRA as needed for household repairs, trips and other larger expenses.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "A 10% risk-free yield? For some, yes.",
-          "url": "https://www.marketwatch.com/story/a-10-risk-free-yield-for-some-yes-0d1fa51a?mod=mw_rss_topstories",
-          "publishedAt": "2026-09-26T16:51:00.000Z",
-          "summary": "This could be a bargain, especially for very high earners and those in high-tax locations.",
-          "excerpt": "This could be a bargain, especially for very high earners and those in high-tax locations.",
+          "title": "Micron could dethrone Nvidia and become the biggest driver of S&P 500 profit growth",
+          "url": "https://www.marketwatch.com/story/micron-could-dethrone-nvidia-and-become-the-biggest-driver-of-s-p-500-profit-growth-d62e0e68?mod=mw_rss_topstories",
+          "publishedAt": "2026-09-27T14:00:00.000Z",
+          "summary": "Micron is increasingly important to the S&P 500, and its earnings report has become “a market event in and of itself.”",
+          "excerpt": "Micron is increasingly important to the S&P 500, and its earnings report has become “a market event in and of itself.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Choosing these AI-exposed college majors could dent your job prospects — and lower your pay",
-          "url": "https://www.marketwatch.com/story/choosing-these-ai-exposed-college-majors-could-dent-your-job-prospects-and-lower-your-pay-b80576cb?mod=mw_rss_topstories",
-          "publishedAt": "2026-09-26T16:22:00.000Z",
-          "summary": "At a time when many college students say they are rethinking their academic focus because of AI, new findings supply hard data on the potential costs of these decisions.",
-          "excerpt": "At a time when many college students say they are rethinking their academic focus because of AI, new findings supply hard data on the potential costs of these decisions.",
+          "title": "Look closer, and Wall Street’s rally is showing cracks",
+          "url": "https://www.marketwatch.com/story/look-closer-and-wall-streets-rally-is-showing-cracks-94952048?mod=mw_rss_topstories",
+          "publishedAt": "2026-09-27T13:00:00.000Z",
+          "summary": "Major stock indexes hovering near records are masking a market straining under elevated oil prices, rising Treasury yields and a Federal Reserve bracing for additional interest-rate hikes.",
+          "excerpt": "Major stock indexes hovering near records are masking a market straining under elevated oil prices, rising Treasury yields and a Federal Reserve bracing for additional interest-rate hikes.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
