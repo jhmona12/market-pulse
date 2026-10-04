@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-03T16:21:17.026Z",
+  "generatedAt": "2026-10-04T02:47:14.552Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-10-03T16:17:41.489081+00:00",
+    "generatedAt": "2026-10-04T02:43:51.096697+00:00",
     "asOfDate": "2026-10-02",
     "expectedAsOfDate": "2026-10-02",
     "isStale": false,
@@ -1388,11 +1388,11 @@
     }
   },
   "note": {
-    "headline": "At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
-    "body": "At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures. 22% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, LITE, MU, DELL, BE.",
+    "headline": "Funding and credit signals argue for tighter risk control.",
+    "body": "“The only debts were utility and credit-card bills, which we will pay off.” 22% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, LITE, MU, DELL, BE.",
     "changed": [
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: Recent WallStreetBets RSS posts mentioned WULF, APP, CHTR, FLUT; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking.",
+      "Retail attention: Recent WallStreetBets RSS posts mentioned WULF, APP, CHTR, MMP; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking.",
       "Breadth: 25% of the screened universe is above the 50-day average, 45% is above the 200-day, and 22% clears both trend lines.",
       "Tactical implication: MRNA (Top Decile), LITE (Top Decile), MU (Top Decile), DELL (Top Decile) are the setups that currently merit review after the market backdrop is considered."
     ],
@@ -1408,12 +1408,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 103712,
+      "inputTokens": 102915,
       "cachedInputTokens": 0,
-      "outputTokens": 2634,
+      "outputTokens": 3112,
       "reasoningTokens": 0,
-      "totalTokens": 106346,
-      "estimatedCostUsd": 0.006239,
+      "totalTokens": 106027,
+      "estimatedCostUsd": 0.006391,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1421,10 +1421,37 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
-    "macroView": "At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures. Next macro decision points: Consumer Price Index on 2026-10-14; Producer Price Index on 2026-10-15; FOMC Rate Decision on 2026-10-28. Sector confirmation: Information Technology +8.96% over 30D, +8.12% vs SPY; Industrials -1.37% over 30D; Communication Services -1.54% over 30D.",
+    "headline": "Funding and credit signals argue for tighter risk control.",
+    "macroView": "“The only debts were utility and credit-card bills, which we will pay off.” Next macro decision points: Consumer Price Index on 2026-10-14; Producer Price Index on 2026-10-15; FOMC Rate Decision on 2026-10-28. Sector confirmation: Information Technology +8.96% over 30D, +8.12% vs SPY; Industrials -1.37% over 30D; Communication Services -1.54% over 30D.",
     "dailyRead": null,
     "recommendations": [
+      {
+        "symbol": "SNDK",
+        "action": "Review setup",
+        "conviction": "Review",
+        "setup": "model ranked",
+        "whyNow": "Rank #1 of 500; -10.08% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "rationale": "SNDK is momentum confirmed by the dashboard rules. Rank #1 of 500; -10.08% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "companyOverview": "Built on more than three decades of innovation, Sandisk is a vertically integrated global semiconductor company dedicated to delivering memory technologies that help people and businesses unlock the potential of their data. From the enterprise SSDs powering AI infrastructure to consumer devices and connected systems...",
+        "marketCap": "$251.8B",
+        "earningsContext": "Last reported 2026-08-05 for the Jun 2026 fiscal quarter; EPS 38.82 versus consensus 33.28; surprise 16.65%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 45.22.",
+        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: “The only debts were utility and credit-card bills, which we will pay off.”",
+        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: ‘I want to make her proud’: My mother, a divorcée, died and I’m her executor.",
+        "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D -3.25%; 14D -4.01%; 30D +10.72%; 60D vs SPY -10.08%; RSI 60; above both the 50-day and 200-day moving averages",
+        "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
+        "risk": "Above-sector volatility",
+        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
+        "sourceRefs": [
+          "S1",
+          "C1-EARNINGS",
+          "C1-MARKETCAP",
+          "C1-IR",
+          "S4"
+        ],
+        "setupTags": []
+      },
       {
         "symbol": "MRNA",
         "action": "Research long setup",
@@ -1436,8 +1463,8 @@
         "marketCap": "$75.9B",
         "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.08.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: Cars have become unaffordable for many Americans. Here’s what the numbers show.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: “The only debts were utility and credit-card bills, which we will pay off.”",
+        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: ‘I want to make her proud’: My mother, a divorcée, died and I’m her executor.",
         "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -4.46%; 14D +23.35%; 30D +25.99%; 60D vs SPY +145.54%; RSI 74; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
@@ -1445,13 +1472,12 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C2-EARNINGS",
+          "S13",
+          "S6",
           "S1",
-          "S2",
-          "S12",
-          "C2-IR",
-          "C7-MARKETCAP",
           "C2-MARKETCAP",
-          "S5"
+          "C2-IR",
+          "S4"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1468,8 +1494,8 @@
         "marketCap": "$97.4B",
         "earningsContext": "Last reported 2026-08-11 for the Jun 2026 fiscal quarter; EPS 2.64 versus consensus 2.62; surprise 0.76%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 3.82.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: Cars have become unaffordable for many Americans. Here’s what the numbers show.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: “The only debts were utility and credit-card bills, which we will pay off.”",
+        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: ‘I want to make her proud’: My mother, a divorcée, died and I’m her executor.",
         "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Above 200d trend; Within 8% of 52w high.",
         "technicalEvidence": "7D +15.27%; 14D +16.60%; 30D +24.68%; 60D vs SPY +35.50%; RSI 82; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: RSI extended; Above-sector volatility.",
@@ -1478,8 +1504,10 @@
         "sourceRefs": [
           "C3-EARNINGS",
           "C3-MARKETCAP",
+          "S12",
+          "S5",
           "C3-IR",
-          "S5"
+          "S4"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1496,8 +1524,8 @@
         "marketCap": "$1.21T",
         "earningsContext": "Last reported 2026-09-30 for the Aug 2026 fiscal quarter; EPS 33.19 versus consensus 31.41; surprise 5.67%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Nov 2026 with consensus 35.17.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: Cars have become unaffordable for many Americans. Here’s what the numbers show.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: “The only debts were utility and credit-card bills, which we will pay off.”",
+        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: ‘I want to make her proud’: My mother, a divorcée, died and I’m her executor.",
         "modelEvidence": "Rank #4 of 500; 99.4 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -0.68%; 14D +5.82%; 30D +12.43%; 60D vs SPY +5.76%; RSI 75; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
@@ -1506,8 +1534,9 @@
         "sourceRefs": [
           "C4-EARNINGS",
           "C4-MARKETCAP",
-          "C4-IR",
-          "S5"
+          "S1",
+          "S4",
+          "C4-IR"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1524,8 +1553,8 @@
         "marketCap": "$357.7B",
         "earningsContext": "Last reported 2026-09-01 for the Jul 2026 fiscal quarter; EPS 6.76 versus consensus 4.72; surprise 43.22%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 6.41.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: Cars have become unaffordable for many Americans. Here’s what the numbers show.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: “The only debts were utility and credit-card bills, which we will pay off.”",
+        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: ‘I want to make her proud’: My mother, a divorcée, died and I’m her executor.",
         "modelEvidence": "Rank #5 of 500; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -0.07%; 14D -0.98%; 30D +14.29%; 60D vs SPY +22.51%; RSI 57; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
@@ -1534,38 +1563,42 @@
         "sourceRefs": [
           "C5-EARNINGS",
           "C5-MARKETCAP",
+          "S1",
           "C5-IR",
-          "S5"
+          "S4"
         ],
         "setupTags": [
           "Momentum Confirmed"
         ]
       },
       {
-        "symbol": "SNDK",
-        "action": "Review setup",
-        "conviction": "Review",
-        "setup": "model ranked",
-        "whyNow": "Rank #1 of 500; -10.08% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "rationale": "SNDK is momentum confirmed by the dashboard rules. Rank #1 of 500; -10.08% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "companyOverview": "Built on more than three decades of innovation, Sandisk is a vertically integrated global semiconductor company dedicated to delivering memory technologies that help people and businesses unlock the potential of their data. From the enterprise SSDs powering AI infrastructure to consumer devices and connected systems...",
-        "marketCap": "$251.8B",
-        "earningsContext": "Last reported 2026-08-05 for the Jun 2026 fiscal quarter; EPS 38.82 versus consensus 33.28; surprise 16.65%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 45.22.",
+        "symbol": "MRVL",
+        "action": "Research long setup",
+        "conviction": "High",
+        "setup": "Momentum confirmed",
+        "whyNow": "Rank #8 of 500; +9.32% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "rationale": "MRVL is momentum confirmed by the dashboard rules. Rank #8 of 500; +9.32% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "companyOverview": "To deliver the data infrastructure technology that connects the world, we're building solutions on the most powerful foundation: our partnerships with our customers. Trusted by the world's leading technology companies for over 30 years, we move, store, process and secure the world's data with semiconductor solutions...",
+        "marketCap": "$238.8B",
+        "earningsContext": "Last reported 2026-08-27 for the Jul 2026 fiscal quarter; EPS 0.62 versus consensus 0.65; surprise -4.62%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.79.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: Cars have become unaffordable for many Americans. Here’s what the numbers show.",
-        "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D -3.25%; 14D -4.01%; 30D +10.72%; 60D vs SPY -10.08%; RSI 60; above both the 50-day and 200-day moving averages",
-        "momentumEvidence": "model ranked; risk flags: Above-sector volatility.",
-        "risk": "Above-sector volatility",
+        "macroLink": "Portfolio backdrop, not a company catalyst: “The only debts were utility and credit-card bills, which we will pay off.”",
+        "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-03: ‘I want to make her proud’: My mother, a divorcée, died and I’m her executor.",
+        "modelEvidence": "Rank #8 of 500; 98.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D +3.95%; 14D +11.48%; 30D +31.87%; 60D vs SPY +9.32%; RSI 83; above both the 50-day and 200-day moving averages",
+        "momentumEvidence": "Momentum confirmed; risk flags: RSI extended; Above-sector volatility.",
+        "risk": "RSI extended; Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C1-EARNINGS",
-          "C1-MARKETCAP",
-          "C1-IR",
-          "S5"
+          "C8-EARNINGS",
+          "C8-MARKETCAP",
+          "S1",
+          "C8-IR",
+          "S4"
         ],
-        "setupTags": []
+        "setupTags": [
+          "Momentum Confirmed"
+        ]
       }
     ],
     "avoidList": {
@@ -1789,28 +1822,28 @@
       "S1",
       "S2",
       "S3",
+      "C1-EARNINGS",
       "C2-EARNINGS",
       "C3-EARNINGS",
       "C4-EARNINGS",
       "C5-EARNINGS",
+      "C6-EARNINGS",
       "C7-EARNINGS",
-      "C9-EARNINGS",
-      "C10-EARNINGS",
-      "C11-EARNINGS"
+      "C8-EARNINGS"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Featured source angle: The article suggests that a continued rise in bond yields has supported tech / AI exposure at the expense of other market areas, and that future movements depend on whether U.S. Treasuries can sustain bid support and yields stop making fresh cycle highs.",
+      "summary": "Featured source angle: The piece notes that a persistent rise in global bond yields has favored the tech / AI complex at the expense of other stock-market areas, suggesting the sectoral divergence is linked to the trajectory of yields rather than broad equity strength.",
       "cards": [
         {
           "sourceRef": "S9",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Weekly Trader's Outlook",
-          "thesis": "The article suggests that a continued rise in bond yields has supported tech / AI exposure at the expense of other market areas, and that future movements depend on whether U.S. Treasuries can sustain bid support and yields stop making fresh cycle highs.",
-          "whyItMatters": "This highlights a potential tilt in relative performance driven by rate dynamics, which can influence sector emphasis and risk appetite without predicting outright winners or losers.",
-          "marketReadThrough": "Monitor: Observe whether Treasury yields hold near cycle highs and whether the tech / AI complex maintains relative strength as yields trend; watch for any shift in market breadth that could indicate changing demand for rate-sensitive tech positions.",
-          "variantAngle": "Inference: If yields pause or level off after a convergence with highs, the tech / AI complex may exhibit resilience relative to other sectors, as suggested by the recent strength tied to higher yields in the themes of the piece.",
+          "thesis": "The piece notes that a persistent rise in global bond yields has favored the tech / AI complex at the expense of other stock-market areas, suggesting the sectoral divergence is linked to the trajectory of yields rather than broad equity strength.",
+          "whyItMatters": "If yields continue to grind higher, the relative weakness outside tech / semis could intensify, potentially reshaping sector leadership and risk premia without relying on a broad market rally.",
+          "marketReadThrough": "Monitor: observable pattern of rising yields and tech / AI leadership within equities as described in the weekly outlook, with attention to whether the tech / AI group maintains relative strength as Treasury yields trend.",
+          "variantAngle": "Inference: the evidence supports a probabilistic view that tech / AI may continue to outperform within a environment of rising yields, but this is contingent on yields sustaining or extending their upward move rather than reversing.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-10-02T20:59:10.000Z",
@@ -1824,16 +1857,16 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Featured source angle: The article suggests that a continued rise in bond yields has supported tech / AI exposure at the expense of other market areas, and that future movements depend on whether U.S. Treasuries can sustain bid support and yields stop making fresh cycle highs.",
+    "summary": "Featured source angle: The piece notes that a persistent rise in global bond yields has favored the tech / AI complex at the expense of other stock-market areas, suggesting the sectoral divergence is linked to the trajectory of yields rather than broad equity strength.",
     "cards": [
       {
         "sourceRef": "S9",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Weekly Trader's Outlook",
-        "thesis": "The article suggests that a continued rise in bond yields has supported tech / AI exposure at the expense of other market areas, and that future movements depend on whether U.S. Treasuries can sustain bid support and yields stop making fresh cycle highs.",
-        "whyItMatters": "This highlights a potential tilt in relative performance driven by rate dynamics, which can influence sector emphasis and risk appetite without predicting outright winners or losers.",
-        "marketReadThrough": "Monitor: Observe whether Treasury yields hold near cycle highs and whether the tech / AI complex maintains relative strength as yields trend; watch for any shift in market breadth that could indicate changing demand for rate-sensitive tech positions.",
-        "variantAngle": "Inference: If yields pause or level off after a convergence with highs, the tech / AI complex may exhibit resilience relative to other sectors, as suggested by the recent strength tied to higher yields in the themes of the piece.",
+        "thesis": "The piece notes that a persistent rise in global bond yields has favored the tech / AI complex at the expense of other stock-market areas, suggesting the sectoral divergence is linked to the trajectory of yields rather than broad equity strength.",
+        "whyItMatters": "If yields continue to grind higher, the relative weakness outside tech / semis could intensify, potentially reshaping sector leadership and risk premia without relying on a broad market rally.",
+        "marketReadThrough": "Monitor: observable pattern of rising yields and tech / AI leadership within equities as described in the weekly outlook, with attention to whether the tech / AI group maintains relative strength as Treasury yields trend.",
+        "variantAngle": "Inference: the evidence supports a probabilistic view that tech / AI may continue to outperform within a environment of rising yields, but this is contingent on yields sustaining or extending their upward move rather than reversing.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-10-02T20:59:10.000Z",
@@ -1852,12 +1885,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-10-03T16:20:01.055Z",
+    "generatedAt": "2026-10-04T02:46:10.859Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-10-03T02:25:35.168Z"
+      "previousRefreshAt": "2026-10-03T16:21:17.026Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1868,7 +1901,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-10-03T16:17:44.435Z",
+      "generatedAt": "2026-10-04T02:43:54.022Z",
       "lookbackHours": 96,
       "releases": [
         {
@@ -1893,12 +1926,8 @@
     },
     "sourceHealth": {
       "checked": 25,
-      "live": 19,
+      "live": 20,
       "blockedOrFailed": [
-        {
-          "name": "Bank of America Institute",
-          "reason": "Source check failed: 403 Forbidden"
-        },
         {
           "name": "EIA Today In Energy",
           "reason": "Source check failed: This operation was aborted"
@@ -1924,26 +1953,26 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "Cars have become unaffordable for many Americans. Here’s what the numbers show.",
+        "title": "‘I want to make her proud’: My mother, a divorcée, died and I’m her executor. Do I need to file for probate?",
         "sourceName": "MarketWatch Top Stories RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/heres-the-most-you-should-be-spending-on-your-car-payment-whether-you-make-60-000-or-over-150-000-ee1c228c?mod=mw_rss_topstories",
-        "publishedAt": "2026-10-03T14:36:00.000Z",
-        "summary": "At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
-        "excerpt": "At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
+        "url": "https://www.marketwatch.com/story/i-want-to-make-her-proud-my-mother-a-divorcee-died-and-im-her-executor-do-i-need-to-file-for-probate-a39b1123?mod=mw_rss_topstories",
+        "publishedAt": "2026-10-03T18:30:00.000Z",
+        "summary": "“The only debts were utility and credit-card bills, which we will pay off.”",
+        "excerpt": "“The only debts were utility and credit-card bills, which we will pay off.”",
         "themes": [
-          "Rates and central banks"
+          "Credit and liquidity"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 1.7,
-        "score": 92,
+        "ageHours": 8.3,
+        "score": 78,
         "tickers": []
       }
     ],
     "topThemes": [
       {
-        "theme": "Rates and central banks",
+        "theme": "Credit and liquidity",
         "count": 1
       },
       {
@@ -1953,7 +1982,7 @@
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-10-03T16:20:01.044Z",
+      "generatedAt": "2026-10-04T02:46:10.848Z",
       "dates": [
         "2026-10-02",
         "2026-10-03",
@@ -2014,17 +2043,17 @@
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "How Nvidia, Micron and a surprising jobs report drove last week&apos;s stock action",
+          "title": "Trump taps Director of National Intelligence Jay Clayton as AI czar: WSJ reports",
           "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/10/03/how-nvidia-micron-and-a-surprising-jobs-report-drove-last-weeks-stock-action.html",
-          "publishedAt": "2026-10-03T15:06:10.000Z",
-          "summary": "Here's a closer look at the three developments that drove the action in our portfolio last week.",
+          "url": "https://www.cnbc.com/2026/10/03/trump-jay-clayton-ai-czar.html",
+          "publishedAt": "2026-10-03T23:37:23.000Z",
+          "summary": "Director of National Intelligence Jay Clayton will lead the administration's AI policy, The Wall Street Journal reported on Saturday.",
           "tickers": []
         },
         {
           "id": "E2",
           "title": "How Nvidia, Micron and a surprising jobs report drove last week&apos;s stock action",
-          "sourceName": "CNBC Earnings RSS",
+          "sourceName": "CNBC Top News RSS",
           "url": "https://www.cnbc.com/2026/10/03/how-nvidia-micron-and-a-surprising-jobs-report-drove-last-weeks-stock-action.html",
           "publishedAt": "2026-10-03T15:06:10.000Z",
           "summary": "Here's a closer look at the three developments that drove the action in our portfolio last week.",
@@ -2032,11 +2061,11 @@
         },
         {
           "id": "E3",
-          "title": "Lula or Bolsonaro: Wall Street braces for two wildly different results in Brazil election",
-          "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/10/03/lula-or-bolsonaro-wall-street-braces-for-two-wildly-different-results-in-brazil-election.html",
-          "publishedAt": "2026-10-03T13:12:27.000Z",
-          "summary": "With the first round of Brazil's presidential election taking place Sunday, Wall Street is gearing up with starkly different market predictions.",
+          "title": "How Nvidia, Micron and a surprising jobs report drove last week&apos;s stock action",
+          "sourceName": "CNBC Earnings RSS",
+          "url": "https://www.cnbc.com/2026/10/03/how-nvidia-micron-and-a-surprising-jobs-report-drove-last-weeks-stock-action.html",
+          "publishedAt": "2026-10-03T15:06:10.000Z",
+          "summary": "Here's a closer look at the three developments that drove the action in our portfolio last week.",
           "tickers": []
         },
         {
@@ -2098,7 +2127,7 @@
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-10-03T16:17:45.049Z",
+      "generatedAt": "2026-10-04T02:43:54.559Z",
       "authMode": "public",
       "metricMode": "unranked_recent_mentions",
       "sampleCoverage": {
@@ -2106,10 +2135,10 @@
         "sorts": [
           "hot"
         ],
-        "postCount": 15,
+        "postCount": 7,
         "includesVoteAndCommentCounts": false,
         "oauthPostCount": 0,
-        "rssPostCount": 15
+        "rssPostCount": 7
       },
       "sourceNote": "Recent Reddit post mentions include RSS results without vote or comment totals. This sample cannot establish popularity or ticker concentration; use as sentiment context only, not verified news.",
       "statusReason": null,
@@ -2119,7 +2148,7 @@
           "segment": "Retail momentum",
           "status": "ready",
           "error": null,
-          "postCount": 15,
+          "postCount": 7,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2196,27 +2225,6 @@
           "attentionScore": 69
         },
         {
-          "symbol": "FLUT",
-          "mentions": 1,
-          "signalStrength": 4.5,
-          "directMentions": 1,
-          "score": 0,
-          "comments": 0,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
-            {
-              "title": "Gambling 24k on Gambling ($FLUT)",
-              "subreddit": "wallstreetbets",
-              "score": 0,
-              "comments": 0,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ww68wq/gambling_24k_on_gambling_flut/"
-            }
-          ],
-          "attentionScore": 69
-        },
-        {
           "symbol": "MMP",
           "mentions": 1,
           "signalStrength": 2.4,
@@ -2240,103 +2248,13 @@
       ],
       "topPosts": [
         {
-          "id": "T3_1WW3MM6",
+          "id": "T3_1WX3ARN",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Weekend Discussion Thread for the Weekend of October 3-4",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1ww3mm6/weekend_discussion_thread_for_the_weekend_of/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ww3mm6/weekend_discussion_thread_for_the_weekend_of/",
-          "createdAt": "2026-10-02T20:00:40.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": true,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WVZ349",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Weekly Earnings Thread Oct 5 - Oct 9, 2026",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wvz349/weekly_earnings_thread_oct_5_oct_9_2026/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wvz349/weekly_earnings_thread_oct_5_oct_9_2026/",
-          "createdAt": "2026-10-02T17:01:01.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": true,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WWQX44",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Congrats everyone!",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wwqx44/congrats_everyone/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wwqx44/congrats_everyone/",
-          "createdAt": "2026-10-03T16:06:46.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WW3NRX",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Nike fumbled so bad that its stock chart created the Jumpman formation. is this a sign?",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1ww3nrx/nike_fumbled_so_bad_that_its_stock_chart_created/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ww3nrx/nike_fumbled_so_bad_that_its_stock_chart_created/",
-          "createdAt": "2026-10-02T20:01:50.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WWAN2R",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "600 > 108k - 14,000% in 15 days",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wwan2r/600_108k_14000_in_15_days/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wwan2r/600_108k_14000_in_15_days/",
-          "createdAt": "2026-10-03T01:20:22.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WWL0ZQ",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "I thought putting $132k into a UK housebuilder was a good idea.",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wwl0zq/i_thought_putting_132k_into_a_uk_housebuilder_was/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wwl0zq/i_thought_putting_132k_into_a_uk_housebuilder_was/",
-          "createdAt": "2026-10-03T11:33:26.000Z",
+          "title": "Houthis acts again",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wx3arn/houthis_acts_again/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wx3arn/houthis_acts_again/",
+          "createdAt": "2026-10-04T01:25:55.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2372,6 +2290,24 @@
           "fetchMethod": "rss"
         },
         {
+          "id": "T3_1WWL0ZQ",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "I thought putting $132k into a UK housebuilder was a good idea.",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wwl0zq/i_thought_putting_132k_into_a_uk_housebuilder_was/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wwl0zq/i_thought_putting_132k_into_a_uk_housebuilder_was/",
+          "createdAt": "2026-10-03T11:33:26.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
           "id": "T3_1WWNBSS",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
@@ -2397,24 +2333,6 @@
           "url": "https://www.reddit.com/r/wallstreetbets/comments/1wwkbfr/think_its_time_to_call_it_in/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wwkbfr/think_its_time_to_call_it_in/",
           "createdAt": "2026-10-03T10:52:01.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WW08G7",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "290k week",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1ww08g7/290k_week/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ww08g7/290k_week/",
-          "createdAt": "2026-10-02T17:46:45.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2473,66 +2391,6 @@
             "CHTR",
             "MMP"
           ],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WWBQ0X",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Getting cucked by AAOI, FMCC/FNMa 😞",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wwbq0x/getting_cucked_by_aaoi_fmccfnma/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wwbq0x/getting_cucked_by_aaoi_fmccfnma/",
-          "createdAt": "2026-10-03T02:18:14.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WW68WQ",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Gambling 24k on Gambling ($FLUT)",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1ww68wq/gambling_24k_on_gambling_flut/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1ww68wq/gambling_24k_on_gambling_flut/",
-          "createdAt": "2026-10-02T21:49:47.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [
-            "FLUT"
-          ],
-          "tickerWeights": {
-            "FLUT": 4.5
-          },
-          "directTickers": [
-            "FLUT"
-          ],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1WVZS5X",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "How did i do",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1wvzs5x/how_did_i_do/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1wvzs5x/how_did_i_do/",
-          "createdAt": "2026-10-02T17:28:21.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
           "filteredAsGeneric": false,
           "fetchMethod": "rss"
         }
@@ -2719,7 +2577,7 @@
           "changePct": -7.57,
           "change": -5.95,
           "volume": 1913139,
-          "marketCap": 3291187200,
+          "marketCap": 3258573056,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         },
@@ -2820,7 +2678,7 @@
           "changePct": -3.64,
           "change": -1.28,
           "volume": 141948809,
-          "marketCap": 50246103040,
+          "marketCap": 50157641728,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -2831,7 +2689,7 @@
           "changePct": 7.35,
           "change": 10.89,
           "volume": 119274773,
-          "marketCap": 2095375843328,
+          "marketCap": 2094168801280,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -2858,6 +2716,17 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
+          "symbol": "CTVA",
+          "name": "Corteva, Inc.",
+          "price": 11.92,
+          "changePct": -5.17,
+          "change": -0.65,
+          "volume": 78665510,
+          "marketCap": 7952976896,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
           "symbol": "NU",
           "name": "Nu Holdings Ltd.",
           "price": 13.43,
@@ -2876,17 +2745,6 @@
           "change": -0.19,
           "volume": 71772533,
           "marketCap": 8565890560,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
-          "symbol": "CTVA",
-          "name": "Corteva, Inc.",
-          "price": 11.92,
-          "changePct": -5.17,
-          "change": -0.65,
-          "volume": 78665510,
-          "marketCap": 7952976896,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -2924,17 +2782,6 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "WBD",
-          "name": "Warner Bros. Discovery, Inc. - ",
-          "price": 30.94,
-          "changePct": -0.03,
-          "change": -0.01,
-          "volume": 49936086,
-          "marketCap": 77570809856,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
           "symbol": "TSLA",
           "name": "Tesla, Inc.",
           "price": 370.59,
@@ -2944,14 +2791,25 @@
           "marketCap": 1463662804992,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "WBD",
+          "name": "Warner Bros. Discovery, Inc. - ",
+          "price": 30.94,
+          "changePct": -0.03,
+          "change": -0.01,
+          "volume": 49936086,
+          "marketCap": 77570809856,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         }
       ],
       "errors": []
     },
     "briefingBullets": [
-      "Rates: At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures. (M1)",
+      "Credit: “The only debts were utility and credit-card bills, which we will pay off.” (M1)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: Recent WallStreetBets RSS posts mentioned WULF, APP, CHTR, FLUT; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking."
+      "Retail attention: Recent WallStreetBets RSS posts mentioned WULF, APP, CHTR, MMP; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking."
     ]
   },
   "avoidList": {
@@ -55860,11 +55718,11 @@
       "cadence": "Weekly",
       "trust": "High",
       "notes": "Public consumer, macro, and market research.",
-      "title": "Bank of America Institute",
-      "summary": "Source check failed: 403 Forbidden",
+      "title": "Bank of America Institute – Where Thought Finds Leadership",
+      "summary": "No recent dated articles found in the last 30 days.",
       "articles": [],
       "articleCount": 0,
-      "ok": false
+      "ok": true
     },
     {
       "name": "Schwab Weekly Market Outlook",
@@ -55882,7 +55740,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-10-02T20:59:10.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Rising Global Bond Yields Direct Money Flow Toward Tech A resilient march higher in bond yields has benefited the tech/AI complex at the expense of other areas of the stock market. Will Treasury yields continue to march higher next week? October 2, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"moderately bearish\" outlook for stocks this week, citing encouraging technicals in the (market-cap weighted) S&P 500, Philadelphia Semiconductor Index (SOX), and Nasdaq Composite, a bearish-to-bullish seasonal shift as we move into October and the potential for U.S. Treasuries to find some bid support (i.e. yields stop making fresh cycle highs). At the time of this writing, the S&P 500 and the Dow Jones Industrial Average are on track to be down slightly on the week, but the Nasdaq Composite and SOX are on track to be up slightly, and the Nasdaq 100 hit a fresh all-time high today. The continued divergence in performance among the majors conveys the impact rising bond yields are having on stocks. The money flow continues to shift towards the tech/artificial intelligence (AI) infrastructure complex, at the expense of the \"non-AI\" areas of the market, which could be impacted be higher interest rates. U.S. Treasury yields, along with global bond yields, hit fresh cycle highs this week, and this occurred despite a relatively benign inflation report and soft monthly jobs report (more on this in the \"Economic Data, Rates & the Fed\" section below). Oil prices are on track to be down slightly on the week, though the Iran conflict persists (U.S. President Trump rejected an Iranian proposal to reopen the Strait of Hormuz la",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Rising Global Bond Yields Direct Money Flow Toward Tech A resilient march higher in bond yields has benefited the tech/AI complex at the expense of other areas of the stock market. Will Treasury yields continue to march higher next week? October 2, 2026 • Nathan Peterson The Week That Was If you read last week's blog, you might recall that I had a \"moderately bearish\" outlook for stocks this week, citing encouraging technicals in the (market-cap weighted) S&P 500, Philadelphia Semiconductor Index (SOX), and Nasdaq Composite, a bearish-to-bullish seasonal shift as we move into October and the potential for U.S. Treasuries to find some bid support (i.e. yields stop making fresh cycle highs). At the time of this writing, the S&P 500 and the Dow Jones Industrial Average are on track to be down slightly on the week, but the Nasdaq Composite and SOX are on track to be up slightly, and the Nasdaq 100 hit a fresh all-time high today. The continued divergence in performance among the majors conveys the impact rising bond yields are having on stocks. The money flow continues to shift towards the tech/artificial intelligence (AI) infrastructure complex, at the expense of the \"non-AI\" areas of the market, which could be impacted be higher interest rates. U.S. Treasury yields, along with global bond yields, hit fresh cycle highs this week, and this occurred despite a relatively benign inflation report and soft monthly jobs report (more on this in the \"Economic Data, Rates & the Fed\" section below). Oil prices are on track to be down slightly on the week, though the Iran conflict persists (U.S. President Trump rejected an Iranian proposal to reopen the Strai",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -55891,7 +55749,7 @@
           "url": "https://www.schwab.com/learn/story/stock-sector-outlook",
           "publishedAt": "2026-10-02T18:04:01.000Z",
           "summary": "Our stock sector outlook is updated monthly and delivers expert insights into the 11 S&P equity sectors, for example Energy, Health Care and Industrials.",
-          "excerpt": "Monthly Stock Sector Outlook | Charles Schwab Search Learn Sectors Sector Views: Monthly Stock Sector Outlook Our outlook on the 11 S&P 500 equity sectors. October 2, 2026 • Schwab Center for Financial Research Schwab Sector Views is our six- to 12-month outlook for stock sectors, which represent broad sectors of the economy. The Schwab Center for Financial Research (SCFR) combines a factor-based approach with a market and economic assessment to determine the ratings. For the basics on sectors, please see Stock Sectors: What Are They? How Are They Used? Industrials are supported by increased capital spending in electricity capacity, construction around the artificial intelligence-related (AI) infrastructure buildout, defense, and energy, although higher costs and possible delays in data center construction could temper growth. These trends also support Materials , where tight supplies of copper and other metals might provide a favorable backdrop, although uneven demand and weakness in areas like lithium remain risks. The Health Care sector is expected to benefit from technological advances and improving operational efficiencies, particularly in groups like biotechnology. However, company results can vary considerably based on clinical trials and regulatory decisions. Financials are seeing upward earnings revisions from a steeper yield curve and solid net interest income, as well as improved capital markets activity. However, uncertainty around central bank policy decisions could weigh on the sector's performance. Communication Services continues to benefit from strong digital advertising and AI-related opportunities, but elevated valuations, heavy investment spending, and an unpredictable return on investment (ROI) may create uncertainty. Energy sector earnings have jum",
+          "excerpt": "Monthly Stock Sector Outlook | Charles Schwab Search all articles, videos, and podcasts Sectors Sector Views: Monthly Stock Sector Outlook Our outlook on the 11 S&P 500 equity sectors. October 2, 2026 • Schwab Center for Financial Research Schwab Sector Views is our six- to 12-month outlook for stock sectors, which represent broad sectors of the economy. The Schwab Center for Financial Research (SCFR) combines a factor-based approach with a market and economic assessment to determine the ratings. For the basics on sectors, please see Stock Sectors: What Are They? How Are They Used? Industrials are supported by increased capital spending in electricity capacity, construction around the artificial intelligence-related (AI) infrastructure buildout, defense, and energy, although higher costs and possible delays in data center construction could temper growth. These trends also support Materials , where tight supplies of copper and other metals might provide a favorable backdrop, although uneven demand and weakness in areas like lithium remain risks. The Health Care sector is expected to benefit from technological advances and improving operational efficiencies, particularly in groups like biotechnology. However, company results can vary considerably based on clinical trials and regulatory decisions. Financials are seeing upward earnings revisions from a steeper yield curve and solid net interest income, as well as improved capital markets activity. However, uncertainty around central bank policy decisions could weigh on the sector's performance. Communication Services continues to benefit from strong digital advertising and AI-related opportunities, but elevated valuations, heavy investment spending, and an unpredictable return on investment (ROI) may create uncertainty. En",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56090,7 +55948,7 @@
           "sourceName": "Axios Markets RSS",
           "title": "The mystery of spiking Treasury yields - Axios",
           "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1ocnhfTHBGODQyMmpLRTM2eDNzZnRXNnJPUE9aZy1fR2lBY2c0ekkzR19SWm93Y1ZiZVFicG9Oa2VfUGFMQ2l1V3NIbW83eVBMdE9NZ0d6THJrc3hHY05OUmFmS2N3bFpvbmVQOVpDenNRNTlTVVYySE4zaw?oc=5",
-          "publishedAt": "2026-10-02T14:31:34.000Z",
+          "publishedAt": "2026-10-03T04:16:13.000Z",
           "summary": "The mystery of spiking Treasury yields Axios",
           "excerpt": "The mystery of spiking Treasury yields Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
@@ -56131,7 +55989,7 @@
           "sourceName": "Axios Macro RSS",
           "title": "DOJ says it won't reopen probe into Fed's Powell - Axios",
           "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1TUjcxNzN0YnNYRC1FdHM3MGxpU2NrTk9KTUFoaVBpRmtSbUQ4VGVfYlkySWRteDN0UjRsLTRHV3RCNWxaczFvQUp0ZjdoV0p1c3g0OTdYMnhRSlhhN1pzQ1NNVTNyeERVajln?oc=5",
-          "publishedAt": "2026-10-03T05:41:31.000Z",
+          "publishedAt": "2026-10-02T20:41:31.000Z",
           "summary": "DOJ says it won't reopen probe into Fed's Powell Axios",
           "excerpt": "DOJ says it won't reopen probe into Fed's Powell Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
@@ -56193,29 +56051,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
+          "title": "Trump taps Director of National Intelligence Jay Clayton as AI czar: WSJ reports",
+          "url": "https://www.cnbc.com/2026/10/03/trump-jay-clayton-ai-czar.html",
+          "publishedAt": "2026-10-03T23:37:23.000Z",
+          "summary": "Director of National Intelligence Jay Clayton will lead the administration's AI policy, The Wall Street Journal reported on Saturday.",
+          "excerpt": "Director of National Intelligence Jay Clayton will lead the administration's AI policy, The Wall Street Journal reported on Saturday.",
+          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+        },
+        {
+          "sourceName": "CNBC Top News RSS",
+          "title": "High mortgage rates are trapping homeowners in place, and making renovations harder to afford",
+          "url": "https://www.cnbc.com/2026/10/03/mortgage-rates-home-equity-heloc-remodeling.html",
+          "publishedAt": "2026-10-03T17:57:40.000Z",
+          "summary": "Homeowners are stuck in houses they might have left by now due to the low mortgage rates of the past, and can't even remodel with HELOCs too expensive to tap.",
+          "excerpt": "Homeowners are stuck in houses they might have left by now due to the low mortgage rates of the past, and can't even remodel with HELOCs too expensive to tap.",
+          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+        },
+        {
+          "sourceName": "CNBC Top News RSS",
           "title": "How Nvidia, Micron and a surprising jobs report drove last week&apos;s stock action",
           "url": "https://www.cnbc.com/2026/10/03/how-nvidia-micron-and-a-surprising-jobs-report-drove-last-weeks-stock-action.html",
           "publishedAt": "2026-10-03T15:06:10.000Z",
           "summary": "Here's a closer look at the three developments that drove the action in our portfolio last week.",
           "excerpt": "Here's a closer look at the three developments that drove the action in our portfolio last week.",
-          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
-        },
-        {
-          "sourceName": "CNBC Top News RSS",
-          "title": "Novig credits Sydney Sweeney-backed campaign for platform’s surge in growth",
-          "url": "https://www.cnbc.com/2026/10/03/novig-credits-sydney-sweeney-backed-campaign-for-platforms-surge-in-growth.html",
-          "publishedAt": "2026-10-03T13:30:48.000Z",
-          "summary": "Novig's \"Just Sports\" campaign drew backlash from some female athletes but also brought in a rush of trading volume.",
-          "excerpt": "Novig's \"Just Sports\" campaign drew backlash from some female athletes but also brought in a rush of trading volume.",
-          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
-        },
-        {
-          "sourceName": "CNBC Top News RSS",
-          "title": "Lula or Bolsonaro: Wall Street braces for two wildly different results in Brazil election",
-          "url": "https://www.cnbc.com/2026/10/03/lula-or-bolsonaro-wall-street-braces-for-two-wildly-different-results-in-brazil-election.html",
-          "publishedAt": "2026-10-03T13:12:27.000Z",
-          "summary": "With the first round of Brazil's presidential election taking place Sunday, Wall Street is gearing up with starkly different market predictions.",
-          "excerpt": "With the first round of Brazil's presidential election taking place Sunday, Wall Street is gearing up with starkly different market predictions.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56275,29 +56133,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "‘I have $400,000 in equity’: I’m 80. Should I sell my house because of dangerous stairs — or spend thousands renovating?",
-          "url": "https://www.marketwatch.com/story/i-have-a-low-interest-rate-im-80-years-old-should-i-move-out-of-my-house-because-of-dangerous-stairs-389c3c7b?mod=mw_rss_topstories",
-          "publishedAt": "2026-10-03T16:00:00.000Z",
-          "summary": "“Generally, the advice I’ve read says not to sell because I have a low-interest-rate mortgage.”",
-          "excerpt": "“Generally, the advice I’ve read says not to sell because I have a low-interest-rate mortgage.”",
+          "title": "Falling wages, soaring energy prices and inflation: It’s beginning to look a lot like the 1970s",
+          "url": "https://www.marketwatch.com/story/falling-wages-soaring-energy-prices-and-inflation-its-beginning-to-look-a-lot-like-the-1970s-d645cbca?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-03T23:58:00.000Z",
+          "summary": "Is it time to dust off the financial playbook from that dismal decade?",
+          "excerpt": "Is it time to dust off the financial playbook from that dismal decade?",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "The Treasury Department started Trump accounts for 60 million kids — but families still have to take this step if they want one",
-          "url": "https://www.marketwatch.com/story/the-treasury-department-started-trump-accounts-for-60-million-kids-but-families-still-have-to-take-this-step-if-they-want-one-003d9282?mod=mw_rss_topstories",
-          "publishedAt": "2026-10-03T15:06:00.000Z",
-          "summary": "Here’s what parents seeking the $1,000 seed money for their child need to know.",
-          "excerpt": "Here’s what parents seeking the $1,000 seed money for their child need to know.",
+          "title": "These bond strategies can help you get a safe 5% return on your cash",
+          "url": "https://www.marketwatch.com/story/these-bond-strategies-can-help-you-get-a-safe-5-return-on-your-cash-5fa45ccd?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-03T18:49:00.000Z",
+          "summary": "With U.S. Treasury yields on the rise, financial planners say they’re seeing a growing interest in bonds, especially among investors looking to secure fixed income in retirement.",
+          "excerpt": "With U.S. Treasury yields on the rise, financial planners say they’re seeing a growing interest in bonds, especially among investors looking to secure fixed income in retirement.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Cars have become unaffordable for many Americans. Here’s what the numbers show.",
-          "url": "https://www.marketwatch.com/story/heres-the-most-you-should-be-spending-on-your-car-payment-whether-you-make-60-000-or-over-150-000-ee1c228c?mod=mw_rss_topstories",
-          "publishedAt": "2026-10-03T14:36:00.000Z",
-          "summary": "At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
-          "excerpt": "At today’s prices and rates, even the average used vehicle can exceed some commonly used affordability measures.",
+          "title": "‘I want to make her proud’: My mother, a divorcée, died and I’m her executor. Do I need to file for probate?",
+          "url": "https://www.marketwatch.com/story/i-want-to-make-her-proud-my-mother-a-divorcee-died-and-im-her-executor-do-i-need-to-file-for-probate-a39b1123?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-03T18:30:00.000Z",
+          "summary": "“The only debts were utility and credit-card bills, which we will pay off.”",
+          "excerpt": "“The only debts were utility and credit-card bills, which we will pay off.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
