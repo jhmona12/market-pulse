@@ -1,7 +1,23 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-09T03:02:41.993Z",
+  "updatedAt": "2026-10-09T18:25:31.020Z",
   "successfulTargets": [
+    {
+      "targetKey": "2026-10-09-morning",
+      "targetWindow": "morning",
+      "publishStatus": "published",
+      "statusGeneratedAt": "2026-10-09T18:25:31.020Z",
+      "scheduledPacific": "2026-10-09T05:17:00[America/Los_Angeles]",
+      "scheduledUtc": "2026-10-09T12:17:00.000Z",
+      "actualStartUtc": "2026-10-09T18:20:26.080Z",
+      "scheduleDelayMinutes": 363,
+      "runId": "37972558158",
+      "runUrl": "https://github.com/jhmona12/market-pulse/actions/runs/37972558158",
+      "headSha": "16d0f36c3dd64f59d237037c7ec975b514ba1fb1",
+      "snapshotGeneratedAt": "2026-10-09T18:25:13.435Z",
+      "modelAsOfDate": "2026-10-08",
+      "marketDataStatus": "fresh"
+    },
     {
       "targetKey": "2026-10-08-evening",
       "targetWindow": "evening",
@@ -1904,22 +1920,6 @@
       "headSha": "29863b8d8c6650c22f2a0d4b071e1ab812882a84",
       "snapshotGeneratedAt": "2026-08-04T00:20:28.866Z",
       "modelAsOfDate": "2026-08-03",
-      "marketDataStatus": "fresh"
-    },
-    {
-      "targetKey": "2026-08-03-morning",
-      "targetWindow": "morning",
-      "publishStatus": "published",
-      "statusGeneratedAt": "2026-08-03T15:18:28.579Z",
-      "scheduledPacific": "2026-08-03T05:17:00[America/Los_Angeles]",
-      "scheduledUtc": "2026-08-03T12:17:00.000Z",
-      "actualStartUtc": "2026-08-03T15:14:02.245Z",
-      "scheduleDelayMinutes": 177,
-      "runId": "30826493533",
-      "runUrl": "https://github.com/jhmona12/market-pulse/actions/runs/30826493533",
-      "headSha": "ac096bd7127f54dae1b9051e0f1638d4b9809940",
-      "snapshotGeneratedAt": "2026-08-03T15:18:27.228Z",
-      "modelAsOfDate": "2026-07-31",
       "marketDataStatus": "fresh"
     }
   ]
