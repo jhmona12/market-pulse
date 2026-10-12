@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-11T17:45:25.607Z",
+  "generatedAt": "2026-10-12T02:31:24.104Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-10-11T17:42:13.857348+00:00",
+    "generatedAt": "2026-10-12T02:28:06.664022+00:00",
     "asOfDate": "2026-10-09",
     "expectedAsOfDate": "2026-10-09",
     "isStale": false,
@@ -1397,34 +1397,35 @@
     }
   },
   "note": {
-    "headline": "High hopes for third-quarter earnings are outweighing concerns around interest rates and oil prices - but one expert warns markets have...",
-    "body": "High hopes for third-quarter earnings are outweighing concerns around interest rates and oil prices - but one expert warns markets have gotten “extremely complacent.” CNBC’s Jim Cramer said next week’s earnings reports will give investors a clearer picture of corporate performance and the strengt... 31% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are LITE, MRNA, MU, DELL, MRVL.",
+    "headline": "AI-driven mega-capids front-run, LITE and MRNA lead with long-horizon momentum into earnings window",
+    "body": "Markets are being driven higher by durable AI and semiconductors momentum and strong 1Y momentum signals in LITE and MRNA, suggesting continued tilt toward Information Technology and Health Care leadership as rate expectations and energy prices remain key cross-currents.  A confirmation that the 14-day tactical leaders align with long-horizon strength supports a constructive stance for tech exposure into earnings, while a mismatch would warn on position sizing.",
     "changed": [
       "Rates: High hopes for third-quarter earnings are outweighing concerns around interest rates and oil prices - but one expert warns markets have gotten “extremely complacent.” (M1)",
       "Commodities: Explore how Fed rate hikes may affect the economy, stocks, bonds, and Treasury yields-and what investors should watch as inflation and growth evolve. (M2)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: Recent WallStreetBets RSS posts mentioned MU, SPY; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking.",
+      "Retail attention: Recent WallStreetBets RSS posts mentioned SPY; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking.",
       "Breadth: 36% of the screened universe is above the 50-day average, 50% is above the 200-day, and 31% clears both trend lines.",
       "Tactical implication: LITE (Top Decile), MRNA (Top Decile), MU (Top Decile), DELL (Top Decile) are the setups that currently merit review after the market backdrop is considered."
     ],
     "watch": [
       "Next catalyst: Consumer Price Index on 2026-10-14 at 8:30 AM ET; Producer Price Index on 2026-10-15 at 8:30 AM ET; FOMC Rate Decision on 2026-10-28 at 2:00 PM ET; reassess rates and sector leadership after the release.",
       "Confirmation risk: SNDK, STX, WDC, FICO rank highly but are not momentum confirmed; keep them in the watch bucket until price trend improves.",
-      "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book."
+      "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
+      "Watch for CPI and PPI prints to assess sticky inflation risk and potential rate path inflection that could shift XLK leadership."
     ],
-    "generatedBy": "deterministic"
+    "generatedBy": "ai_with_fact_guardrails"
   },
   "aiRecommendations": {
     "status": "ready",
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 104764,
+      "inputTokens": 104086,
       "cachedInputTokens": 0,
-      "outputTokens": 2529,
+      "outputTokens": 2229,
       "reasoningTokens": 0,
-      "totalTokens": 107293,
-      "estimatedCostUsd": 0.00625,
+      "totalTokens": 106315,
+      "estimatedCostUsd": 0.006096,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1434,7 +1435,16 @@
     "companyContextCount": 12,
     "headline": "High hopes for third-quarter earnings are outweighing concerns around interest rates and oil prices - but one expert warns markets have...",
     "macroView": "High hopes for third-quarter earnings are outweighing concerns around interest rates and oil prices - but one expert warns markets have gotten “extremely complacent.” CNBC’s Jim Cramer said next week’s earnings reports will give investors a clearer picture of corporate performance and the strength of the AI trade. Next macro decision points: Consumer Price Index on 2026-10-14; Producer Price Index on 2026-10-15; FOMC Rate Decision on 2026-10-28. Sector confirmation: Information Technology +5.93% over 30D, +3.56% vs SPY; Health Care +2.93% over 30D, +0.56% vs SPY; Consumer Staples +1.12% over 30D.",
-    "dailyRead": null,
+    "dailyRead": {
+      "headline": "AI-driven mega-capids front-run, LITE and MRNA lead with long-horizon momentum into earnings window",
+      "body": "Markets are being driven higher by durable AI and semiconductors momentum and strong 1Y momentum signals in LITE and MRNA, suggesting continued tilt toward Information Technology and Health Care leadership as rate expectations and energy prices remain key cross-currents.  A confirmation that the 14-day tactical leaders align with long-horizon strength supports a constructive stance for tech exposure into earnings, while a mismatch would warn on position sizing.",
+      "keyTakeaways": [
+        "Macro / rates: Upcoming CPI and PPI releases (Oct 14-15) and the Oct 28 FOMC decision loom as the primary near-term regime inputs that could reprice growth vs.  inflation and alter sector leadership."
+      ],
+      "watchItems": [
+        "Watch for CPI and PPI prints to assess sticky inflation risk and potential rate path inflection that could shift XLK leadership."
+      ]
+    },
     "recommendations": [
       {
         "symbol": "LITE",
@@ -1456,11 +1466,10 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "S1",
-          "S11",
+          "C1-IR",
           "C1-EARNINGS",
           "C1-MARKETCAP",
-          "C1-IR",
-          "S4"
+          "S5"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1485,10 +1494,10 @@
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "S4",
+          "C2-IR",
           "C2-EARNINGS",
           "C2-MARKETCAP",
-          "C2-IR"
+          "S5"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1513,10 +1522,10 @@
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "S4",
+          "C4-IR",
           "C4-EARNINGS",
           "C4-MARKETCAP",
-          "C4-IR"
+          "S5"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1541,72 +1550,69 @@
         "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "S4",
+          "C5-IR",
           "C5-EARNINGS",
           "C5-MARKETCAP",
-          "C5-IR"
+          "S5"
         ],
         "setupTags": [
           "Momentum Confirmed"
         ]
       },
       {
-        "symbol": "SNDK",
-        "action": "Watch, do not chase",
-        "conviction": "Review",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #3 of 499; +8.13% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks SNDK highly, but the setup is not clean momentum yet. Rank #3 of 499; +8.13% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "Built on more than three decades of innovation, Sandisk is a vertically integrated global semiconductor company dedicated to delivering memory technologies that help people and businesses unlock the potential of their data. From the enterprise SSDs powering AI infrastructure to consumer devices and connected systems...",
-        "marketCap": "$229.9B",
-        "earningsContext": "Last reported 2026-08-05 for the Jun 2026 fiscal quarter; EPS 38.82 versus consensus 33.28; surprise 16.65%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 45.22.",
+        "symbol": "MRVL",
+        "action": "Research long setup",
+        "conviction": "High",
+        "setup": "Momentum confirmed",
+        "whyNow": "Rank #6 of 499; +42.26% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "rationale": "MRVL is momentum confirmed by the dashboard rules. Rank #6 of 499; +42.26% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "companyOverview": "To deliver the data infrastructure technology that connects the world, we're building solutions on the most powerful foundation: our partnerships with our customers. Trusted by the world's leading technology companies for over 30 years, we move, store, process and secure the world's data with semiconductor solutions...",
+        "marketCap": "$241.4B",
+        "earningsContext": "Last reported 2026-08-27 for the Jul 2026 fiscal quarter; EPS 0.62 versus consensus 0.65; surprise -4.62%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.79.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
         "macroLink": "Portfolio backdrop, not a company catalyst: High hopes for third-quarter earnings are outweighing concerns around interest rates and oil prices - but one expert warns markets have gotten “extremely complacent.”",
         "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-11: We’re about to get a huge read on whether earnings can keep propping up the stock market",
-        "modelEvidence": "Rank #3 of 499; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D -8.03%; 14D -11.02%; 30D -10.34%; 60D vs SPY +8.13%; RSI 37; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Below 50d trend; Weak volume confirmation",
+        "modelEvidence": "Rank #6 of 499; 99.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D +1.12%; 14D +5.12%; 30D +17.16%; 60D vs SPY +42.26%; RSI 63; above both the 50-day and 200-day moving averages",
+        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
+        "risk": "Above-sector volatility",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C3-EARNINGS",
-          "C3-MARKETCAP",
-          "C3-IR",
-          "S4"
+          "C6-IR",
+          "C6-EARNINGS",
+          "C6-MARKETCAP",
+          "S5"
         ],
         "setupTags": [
-          "Not Momentum Confirmed"
+          "Momentum Confirmed"
         ]
       },
       {
-        "symbol": "CHTR",
-        "action": "Watch for activation",
-        "conviction": "Review",
-        "setup": "Model rebound watch",
-        "whyNow": "Rank #12 of 499; -26.43% 60-day return versus SPY; below one or both major moving averages.",
-        "rationale": "The model ranks CHTR highly, but price has not confirmed a rebound. Requires a close above $105.07 within 5 trading days before it is actionable. Rank #12 of 499; -26.43% 60-day return versus SPY; below one or both major moving averages.",
-        "companyOverview": "Spectrum is a suite of advanced communications services offered by Charter Communications, Inc. (NASDAQ:CHTR), the leading broadband and video company in the nation and the fastest growing mobile provider in its footprint, with services available to more than 70 million homes and small to large businesses across 45...",
-        "marketCap": "$11.8B",
-        "earningsContext": "Last reported 2026-07-24 for the Jun 2026 fiscal quarter; EPS 10.66 versus consensus 9.96; surprise 7.03%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 10.13.",
+        "symbol": "BE",
+        "action": "Research long setup",
+        "conviction": "High",
+        "setup": "Momentum confirmed",
+        "whyNow": "Rank #7 of 499; +31.72% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "rationale": "BE is momentum confirmed by the dashboard rules. Rank #7 of 499; +31.72% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
+        "companyOverview": "Bloom Energy empowers enterprises to meet soaring energy demands and responsibly take charge of their power needs. The company's fuel cell systems provide ultra-reliable, clean and highly scalable onsite electricity for Fortune 500 customers around the world, including data centers, semiconductor manufacturing, larg...",
+        "marketCap": "$82.6B",
+        "earningsContext": "Last reported 2026-07-28 for the Jun 2026 fiscal quarter; EPS 0.61 versus consensus 0.23; surprise 165.22%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 0.56.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
         "macroLink": "Portfolio backdrop, not a company catalyst: High hopes for third-quarter earnings are outweighing concerns around interest rates and oil prices - but one expert warns markets have gotten “extremely complacent.”",
         "macroEvidence": "MarketWatch Top Stories RSS, 2026-10-11: We’re about to get a huge read on whether earnings can keep propping up the stock market",
-        "modelEvidence": "Rank #12 of 499; 97.8 percentile; reasons: model score and technical inputs.",
-        "technicalEvidence": "7D -5.41%; 14D -8.44%; 30D -22.79%; 60D vs SPY -26.43%; RSI 17; below one or both major moving averages",
-        "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
-        "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
+        "modelEvidence": "Rank #7 of 499; 98.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D -2.99%; 14D -2.84%; 30D +4.17%; 60D vs SPY +31.72%; RSI 52; above both the 50-day and 200-day moving averages",
+        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
+        "risk": "Above-sector volatility; Weak volume confirmation",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "S12",
-          "C12-MARKETCAP",
-          "C12-IR",
-          "C12-EARNINGS",
-          "S4"
+          "C7-IR",
+          "C7-EARNINGS",
+          "C7-MARKETCAP",
+          "S5"
         ],
         "setupTags": [
-          "Model Rebound Watch",
-          "Not Momentum Confirmed",
-          "Activation Pending"
+          "Momentum Confirmed"
         ]
       }
     ],
@@ -1842,37 +1848,37 @@
       "Do watch names SNDK, STX, WDC regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8",
       "C1-EARNINGS",
       "C2-EARNINGS",
-      "C4-EARNINGS",
-      "C5-EARNINGS",
-      "C7-EARNINGS",
-      "C8-EARNINGS",
-      "C9-EARNINGS",
-      "C10-EARNINGS",
-      "S4",
-      "S11",
-      "S12",
-      "S1"
+      "C3-EARNINGS",
+      "C4-EARNINGS"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Featured source angle: The article suggests the Federal Reserve is expected to raise rates only modestly from here, with the pace contingent on whether inflation broadens beyond energy and other supply-driven pressures, while AI-driven growth could support earnings and reduce the need for a prolonged hiking cycle.",
+      "summary": "Featured source angle: The article argues that the Federal Reserve is likely to raise rates only modestly from here, with the trajectory contingent on whether inflation broadens beyond energy- and supply-driven pressures, and that AI-driven growth could reduce the need for a prolonged hiking cycle even if inflation stays elevated.",
       "cards": [
         {
-          "sourceRef": "S9",
+          "sourceRef": "S10",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Fed Rate Hikes: Stocks, Bonds & the Economy",
-          "thesis": "The article suggests the Federal Reserve is expected to raise rates only modestly from here, with the pace contingent on whether inflation broadens beyond energy and other supply-driven pressures, while AI-driven growth could support earnings and reduce the need for a prolonged hiking cycle.",
-          "whyItMatters": "If rate paths stall or pivot because inflation broadens or cools differently than expected, asset sensitivity to rates and credit conditions may shift, influencing equity multiples, duration risk in fixed income, and sector performance.",
-          "marketReadThrough": "Monitor: inflation breadth remains a decisive input for the Fed path; oil prices, inflation trends, and broader credit conditions are identified as focal variables influencing rate expectations and risk premia.",
-          "variantAngle": "Inference: given the emphasis on inflation breadth and its impact on the pace of rate hikes, a modestly higher sensitivity of credit-conditional assets to inflation surprises could emerge, without asserting a forecast about rates or market winners.",
+          "thesis": "The article argues that the Federal Reserve is likely to raise rates only modestly from here, with the trajectory contingent on whether inflation broadens beyond energy- and supply-driven pressures, and that AI-driven growth could reduce the need for a prolonged hiking cycle even if inflation stays elevated.",
+          "whyItMatters": "If the forecast path for rate hikes remains modest, it implies a slower change in financing costs and risk premia, potentially supporting duration-sensitive assets and sectors influenced by AI-related growth without assuming aggressive tightening.",
+          "marketReadThrough": "Monitor: inflation breadth beyond energy, AI-driven growth signals, oil prices, and evolving credit conditions to confirm whether the modest rate path is still plausible and how it aligns with observed tightening or loosening in financial conditions.",
+          "variantAngle": "Inference: evidence that inflation is not solely energy-driven could support a narrative of a shallow, data-dependent hiking cycle, with AI-driven activity offsetting some growth risks from higher funding costs-though this remains contingent on inflation behavior.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/fed-rate-hikes-stocks-bonds-economy",
           "publishedAt": "2026-10-09T17:43:50.000Z",
           "sourceRefs": [
-            "S9"
+            "S10"
           ]
         }
       ]
@@ -1881,21 +1887,21 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Featured source angle: The article suggests the Federal Reserve is expected to raise rates only modestly from here, with the pace contingent on whether inflation broadens beyond energy and other supply-driven pressures, while AI-driven growth could support earnings and reduce the need for a prolonged hiking cycle.",
+    "summary": "Featured source angle: The article argues that the Federal Reserve is likely to raise rates only modestly from here, with the trajectory contingent on whether inflation broadens beyond energy- and supply-driven pressures, and that AI-driven growth could reduce the need for a prolonged hiking cycle even if inflation stays elevated.",
     "cards": [
       {
-        "sourceRef": "S9",
+        "sourceRef": "S10",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Fed Rate Hikes: Stocks, Bonds & the Economy",
-        "thesis": "The article suggests the Federal Reserve is expected to raise rates only modestly from here, with the pace contingent on whether inflation broadens beyond energy and other supply-driven pressures, while AI-driven growth could support earnings and reduce the need for a prolonged hiking cycle.",
-        "whyItMatters": "If rate paths stall or pivot because inflation broadens or cools differently than expected, asset sensitivity to rates and credit conditions may shift, influencing equity multiples, duration risk in fixed income, and sector performance.",
-        "marketReadThrough": "Monitor: inflation breadth remains a decisive input for the Fed path; oil prices, inflation trends, and broader credit conditions are identified as focal variables influencing rate expectations and risk premia.",
-        "variantAngle": "Inference: given the emphasis on inflation breadth and its impact on the pace of rate hikes, a modestly higher sensitivity of credit-conditional assets to inflation surprises could emerge, without asserting a forecast about rates or market winners.",
+        "thesis": "The article argues that the Federal Reserve is likely to raise rates only modestly from here, with the trajectory contingent on whether inflation broadens beyond energy- and supply-driven pressures, and that AI-driven growth could reduce the need for a prolonged hiking cycle even if inflation stays elevated.",
+        "whyItMatters": "If the forecast path for rate hikes remains modest, it implies a slower change in financing costs and risk premia, potentially supporting duration-sensitive assets and sectors influenced by AI-related growth without assuming aggressive tightening.",
+        "marketReadThrough": "Monitor: inflation breadth beyond energy, AI-driven growth signals, oil prices, and evolving credit conditions to confirm whether the modest rate path is still plausible and how it aligns with observed tightening or loosening in financial conditions.",
+        "variantAngle": "Inference: evidence that inflation is not solely energy-driven could support a narrative of a shallow, data-dependent hiking cycle, with AI-driven activity offsetting some growth risks from higher funding costs-though this remains contingent on inflation behavior.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/fed-rate-hikes-stocks-bonds-economy",
         "publishedAt": "2026-10-09T17:43:50.000Z",
         "sourceRefs": [
-          "S9"
+          "S10"
         ]
       }
     ]
@@ -1909,12 +1915,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-10-11T17:44:33.090Z",
+    "generatedAt": "2026-10-12T02:30:25.961Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-10-11T02:01:16.572Z"
+      "previousRefreshAt": "2026-10-11T17:45:25.607Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1925,16 +1931,20 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-10-11T17:42:17.008Z",
+      "generatedAt": "2026-10-12T02:28:09.402Z",
       "lookbackHours": 96,
       "releases": []
     },
     "sourceHealth": {
       "checked": 25,
-      "live": 20,
+      "live": 19,
       "blockedOrFailed": [
         {
           "name": "Merrill Capital Market Outlook",
+          "reason": "Source check failed: This operation was aborted"
+        },
+        {
+          "name": "EIA Today In Energy",
           "reason": "Source check failed: This operation was aborted"
         },
         {
@@ -1971,9 +1981,9 @@
           "Rates and central banks",
           "Commodities and energy"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 3.7,
-        "score": 100,
+        "freshness": "Last 24 hours",
+        "ageHours": 12.5,
+        "score": 70,
         "tickers": []
       },
       {
@@ -1985,7 +1995,7 @@
         "url": "https://www.schwab.com/learn/story/fed-rate-hikes-stocks-bonds-economy",
         "publishedAt": "2026-10-09T17:43:50.000Z",
         "summary": "Explore how Fed rate hikes may affect the economy, stocks, bonds, and Treasury yields-and what investors should watch as inflation and growth evolve.",
-        "excerpt": "Fed Rate Hikes: Stocks, Bonds & the Economy | Charles Schwab Search Insights & Education Fixed Income Fed Rate Hikes: Stocks, Bonds & the Economy Explore how Fed rate hikes may affect the economy, stocks, bonds, and Treasury yields—and what investors should watch as inflation and growth evolve. October 9, 2026 • Jennifer Babchuk • Chris Ferrarone • Collin Martin • Christian Menegatti, Ph.D. Key takeaways We expect the Federal Reserve to raise rates only modestly from here , but the path will depend on whether inflation broadens beyond energy and other supply-driven pressures. The artificial intelligence (AI) investment boom is helping support growth and earnings, potentially reducing the need for a prolonged hiking cycle, even as inflation remains above the Federal Reserve's 2% target. We suggest investors focus on oil prices, inflation trends, and credit conditions, while favoring diversified equity exposure and short- to intermediate-term bonds. The Fed's recent rate increase may not develop into a hiking cycle as extensive as the one that began in 2022 because much of today's inflation pressure comes from supply constraints rather than broad economic overheating, where demand exceeds the economy's productive capacity. However, persistent oil-price pressure, resilient demand, or widening inflation could require additional rate increases and create greater risks for housing, credit, stocks, and long-term bonds. With inflation remaining above its 2% target for more than five years, the Fed recently raised its benchmark rate to support a \"timelier return\" to its inflation goal. This is not a typical rate-hiking campaign triggered solely by excess demand. While the U.S. economy remains resilient and has seen a pick-up in activity recently, according to several leading ind",
+        "excerpt": "Fed Rate Hikes: Stocks, Bonds & the Economy | Charles Schwab Search all articles, videos, and podcasts Fixed Income Fed Rate Hikes: Stocks, Bonds & the Economy Explore how Fed rate hikes may affect the economy, stocks, bonds, and Treasury yields—and what investors should watch as inflation and growth evolve. October 9, 2026 • Jennifer Babchuk • Chris Ferrarone • Collin Martin • Christian Menegatti, Ph.D. Key takeaways We expect the Federal Reserve to raise rates only modestly from here , but the path will depend on whether inflation broadens beyond energy and other supply-driven pressures. The artificial intelligence (AI) investment boom is helping support growth and earnings, potentially reducing the need for a prolonged hiking cycle, even as inflation remains above the Federal Reserve's 2% target. We suggest investors focus on oil prices, inflation trends, and credit conditions, while favoring diversified equity exposure and short- to intermediate-term bonds. The Fed's recent rate increase may not develop into a hiking cycle as extensive as the one that began in 2022 because much of today's inflation pressure comes from supply constraints rather than broad economic overheating, where demand exceeds the economy's productive capacity. However, persistent oil-price pressure, resilient demand, or widening inflation could require additional rate increases and create greater risks for housing, credit, stocks, and long-term bonds. With inflation remaining above its 2% target for more than five years, the Fed recently raised its benchmark rate to support a \"timelier return\" to its inflation goal. This is not a typical rate-hiking campaign triggered solely by excess demand. While the U.S. economy remains resilient and has seen a pick-up in activity recently, according to sever",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -1995,7 +2005,7 @@
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 48,
+        "ageHours": 56.8,
         "score": 62,
         "tickers": []
       },
@@ -2008,14 +2018,14 @@
         "url": "https://www.schwab.com/learn/story/weekly-digest",
         "publishedAt": "2026-10-09T15:27:23.000Z",
         "summary": "Stocks eye record highs as breadth improves, clients diversify exposure, AI reshapes a few industries, and earnings season kicks off with tech in the lead.",
-        "excerpt": "Breadth Stirs as AI's Gains Stay Concentrated | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Breadth Stirs as AI's Gains Stay Concentrated Stocks eye record highs as breadth improves, clients diversify exposure, AI reshapes a few industries, and earnings season kicks off with tech leading the pack. October 9, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Signs of broadening market participation Investors will want to keep an eye on whether recent signs of improved market breadth signal a sustained broadening of participation as the S&P 500 ® Index and Nasdaq Composite ® look to reclaim record highs . Multiple breadth indicators that had fallen to levels not seen since the April 2025 market correction turned higher earlier this week. That's a good sign—any market advance is healthier and likely more durable when more than just a handful of mega-cap stocks participate. Though metrics still point to poor breadth overall, those that have improved recently include the percentages of S&P 500 stocks trading above their 50- and 200-day moving averages, which, respectively, have increased from 19.7% to 31% and from 38.4% to 46.7% so far in October. To this point, the recent market imbalance hasn't marked a classic rotation to defensive sectors such as utilities and consumer staples, said Liz Ann Sonders , chief investment strategist at Schwab Center for Financial Research (SCFR). \"Th",
+        "excerpt": "Breadth Stirs as AI's Gains Stay Concentrated | Charles Schwab Search Insights & Education Markets and Economy Breadth Stirs as AI's Gains Stay Concentrated Stocks eye record highs as breadth improves, clients diversify exposure, AI reshapes a few industries, and earnings season kicks off with tech leading the pack. October 9, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Signs of broadening market participation Investors will want to keep an eye on whether recent signs of improved market breadth signal a sustained broadening of participation as the S&P 500 ® Index and Nasdaq Composite ® look to reclaim record highs . Multiple breadth indicators that had fallen to levels not seen since the April 2025 market correction turned higher earlier this week. That's a good sign—any market advance is healthier and likely more durable when more than just a handful of mega-cap stocks participate. Though metrics still point to poor breadth overall, those that have improved recently include the percentages of S&P 500 stocks trading above their 50- and 200-day moving averages, which, respectively, have increased from 19.7% to 31% and from 38.4% to 46.7% so far in October. To this point, the recent market imbalance hasn't marked a classic rotation to defensive sectors such as utilities and consumer staples, said Liz Ann Sonders , chief investment strategist at Schwab Center for Financial Research (SCFR). \"This is less abo",
         "themes": [
           "Earnings",
           "Macro and growth",
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 50.3,
+        "ageHours": 59.1,
         "score": 62,
         "tickers": []
       },
@@ -2035,7 +2045,7 @@
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 43.4,
+        "ageHours": 52.1,
         "score": 54,
         "tickers": []
       },
@@ -2054,7 +2064,7 @@
           "Geopolitics and policy"
         ],
         "freshness": "Important older item",
-        "ageHours": 75,
+        "ageHours": 83.8,
         "score": 54,
         "tickers": []
       }
@@ -2087,7 +2097,7 @@
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-10-11T17:44:33.080Z",
+      "generatedAt": "2026-10-12T02:30:25.951Z",
       "dates": [
         "2026-10-10",
         "2026-10-11",
@@ -2166,20 +2176,20 @@
       "articleHeadlines": [
         {
           "id": "E1",
+          "title": "‘I feel like a loser’: My stock portfolio is swinging wildly. Is it finally time to worry?",
+          "sourceName": "MarketWatch Top Stories RSS",
+          "url": "https://www.marketwatch.com/story/i-feel-like-a-loser-my-etfs-go-up-one-day-and-crash-the-next-is-this-a-bad-sign-0c9848b2?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-11T20:00:00.000Z",
+          "summary": "“I presume these are sophisticated investors taking a profit.”",
+          "tickers": []
+        },
+        {
+          "id": "E2",
           "title": "We’re about to get a huge read on whether earnings can keep propping up the stock market",
           "sourceName": "MarketWatch Top Stories RSS",
           "url": "https://www.marketwatch.com/story/were-about-to-get-a-huge-read-on-whether-earnings-can-keep-propping-up-the-stock-market-459b565b?mod=mw_rss_topstories",
           "publishedAt": "2026-10-11T14:00:00.000Z",
           "summary": "High hopes for third-quarter earnings are outweighing concerns around interest rates and oil prices — but one expert warns markets have gotten “extremely complacent.”",
-          "tickers": []
-        },
-        {
-          "id": "E2",
-          "title": "‘I feel like a loser’: My stock portfolio is swinging wildly. Is it finally time to worry?",
-          "sourceName": "MarketWatch Top Stories RSS",
-          "url": "https://www.marketwatch.com/story/i-feel-like-a-loser-my-etfs-go-up-one-day-and-crash-the-next-is-this-a-bad-sign-0c9848b2?mod=mw_rss_topstories",
-          "publishedAt": "2026-10-11T12:30:00.000Z",
-          "summary": "“I presume these are sophisticated investors taking a profit.”",
           "tickers": []
         },
         {
@@ -2241,7 +2251,7 @@
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-10-11T17:42:18.219Z",
+      "generatedAt": "2026-10-12T02:28:10.337Z",
       "authMode": "public",
       "metricMode": "unranked_recent_mentions",
       "sampleCoverage": {
@@ -2249,10 +2259,10 @@
         "sorts": [
           "hot"
         ],
-        "postCount": 9,
+        "postCount": 7,
         "includesVoteAndCommentCounts": false,
         "oauthPostCount": 0,
-        "rssPostCount": 9
+        "rssPostCount": 7
       },
       "sourceNote": "Recent Reddit post mentions include RSS results without vote or comment totals. This sample cannot establish popularity or ticker concentration; use as sentiment context only, not verified news.",
       "statusReason": null,
@@ -2262,7 +2272,7 @@
           "segment": "Retail momentum",
           "status": "ready",
           "error": null,
-          "postCount": 9,
+          "postCount": 7,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2275,27 +2285,6 @@
         }
       ],
       "topTickers": [
-        {
-          "symbol": "MU",
-          "mentions": 1,
-          "signalStrength": 3.3,
-          "directMentions": 1,
-          "score": 0,
-          "comments": 0,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
-            {
-              "title": "Why I went 100% in MU: The Memory Wager",
-              "subreddit": "wallstreetbets",
-              "score": 0,
-              "comments": 0,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x2mntt/why_i_went_100_in_mu_the_memory_wager/"
-            }
-          ],
-          "attentionScore": 57
-        },
         {
           "symbol": "SPY",
           "mentions": 1,
@@ -2320,13 +2309,31 @@
       ],
       "topPosts": [
         {
-          "id": "T3_1X38G8P",
+          "id": "T3_1X3HX1E",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Nvidia Funding Puts IonQ Stock And US Quantum Computing Shares On Watch",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x38g8p/nvidia_funding_puts_ionq_stock_and_us_quantum/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x38g8p/nvidia_funding_puts_ionq_stock_and_us_quantum/",
-          "createdAt": "2026-10-11T13:38:24.000Z",
+          "title": "What Are Your Moves Tomorrow, October 12, 2026",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x3hx1e/what_are_your_moves_tomorrow_october_12_2026/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x3hx1e/what_are_your_moves_tomorrow_october_12_2026/",
+          "createdAt": "2026-10-11T20:00:38.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": true,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T3_1X3DPM4",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Anthropic must pull the IPO in few months. What do you play?",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x3dpm4/anthropic_must_pull_the_ipo_in_few_months_what_do/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x3dpm4/anthropic_must_pull_the_ipo_in_few_months_what_do/",
+          "createdAt": "2026-10-11T17:14:24.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2356,13 +2363,31 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1X2PIBB",
+          "id": "T3_1X3LEVX",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Incredible that all this has happened in just 4 years",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x2pibb/incredible_that_all_this_has_happened_in_just_4/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x2pibb/incredible_that_all_this_has_happened_in_just_4/",
-          "createdAt": "2026-10-10T20:41:07.000Z",
+          "title": "Anthropic inks unannounced IREN cloud deal.",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x3levx/anthropic_inks_unannounced_iren_cloud_deal/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x3levx/anthropic_inks_unannounced_iren_cloud_deal/",
+          "createdAt": "2026-10-11T22:28:35.000Z",
+          "score": 0,
+          "comments": 0,
+          "upvoteRatio": 0,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "rss"
+        },
+        {
+          "id": "T3_1X38G8P",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Nvidia Funding Puts IonQ Stock And US Quantum Computing Shares On Watch",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x38g8p/nvidia_funding_puts_ionq_stock_and_us_quantum/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x38g8p/nvidia_funding_puts_ionq_stock_and_us_quantum/",
+          "createdAt": "2026-10-11T13:38:24.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2398,48 +2423,6 @@
           "fetchMethod": "rss"
         },
         {
-          "id": "T3_1X3DPM4",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Anthropic must pull the IPO in few months. What do you play?",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x3dpm4/anthropic_must_pull_the_ipo_in_few_months_what_do/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x3dpm4/anthropic_must_pull_the_ipo_in_few_months_what_do/",
-          "createdAt": "2026-10-11T17:14:24.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1X2MNTT",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Why I went 100% in MU: The Memory Wager",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x2mntt/why_i_went_100_in_mu_the_memory_wager/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x2mntt/why_i_went_100_in_mu_the_memory_wager/",
-          "createdAt": "2026-10-10T18:40:20.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [
-            "MU"
-          ],
-          "tickerWeights": {
-            "MU": 3.3
-          },
-          "directTickers": [
-            "MU"
-          ],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
           "id": "T3_1X3E2BP",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
@@ -2447,42 +2430,6 @@
           "url": "https://www.reddit.com/r/wallstreetbets/comments/1x3e2bp/small_gains/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x3e2bp/small_gains/",
           "createdAt": "2026-10-11T17:28:30.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1X2QS90",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Nvidia in talks to invest further in Reflection AI or buy it, FT reports",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x2qs90/nvidia_in_talks_to_invest_further_in_reflection/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x2qs90/nvidia_in_talks_to_invest_further_in_reflection/",
-          "createdAt": "2026-10-10T21:37:04.000Z",
-          "score": 0,
-          "comments": 0,
-          "upvoteRatio": 0,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "rss"
-        },
-        {
-          "id": "T3_1X2N4V0",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Mean reversion traders - why are you so certain on bonds?",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1x2n4v0/mean_reversion_traders_why_are_you_so_certain_on/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1x2n4v0/mean_reversion_traders_why_are_you_so_certain_on/",
-          "createdAt": "2026-10-10T19:00:18.000Z",
           "score": 0,
           "comments": 0,
           "upvoteRatio": 0,
@@ -2911,7 +2858,7 @@
       "Commodities: Explore how Fed rate hikes may affect the economy, stocks, bonds, and Treasury yields-and what investors should watch as inflation and growth evolve. (M2)",
       "Macro: Stocks eye record highs as breadth improves, clients diversify exposure, AI reshapes a few industries, and earnings season kicks off with tech in the lead. (M3)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: Recent WallStreetBets RSS posts mentioned MU, SPY; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking."
+      "Retail attention: Recent WallStreetBets RSS posts mentioned SPY; the one-feed fallback has no vote or comment totals, so this is a low-confidence watchlist rather than a trend ranking."
     ]
   },
   "avoidList": {
@@ -55840,7 +55787,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-10-09T23:18:01.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Defensive Signals Emerge Beneath New Highs Major indexes reached record highs, but momentum divergences and defensive rotation suggest a more cautious backdrop. Oil prices and Treasury yields remain key variables. October 9, 2026 • Rachel Dashiell The Week That Was Last week, Nate maintained a \"Moderately Bullish\" outlook, citing a potential mean reversion in Treasury yields, pre-earnings season positioning, and favorable October seasonality. That view largely played out, with both the S&P 500 (SPX) and Nasdaq 100 (NDX) reaching new all-time highs. Beneath the surface, however, market leadership showed signs of rotation. Technology reached a new relative high versus the S&P 500 before reversing, while Energy and Health Care maintained relative strength. Meanwhile, Consumer Staples and Utilities, two traditionally defensive sectors, showed signs of improving relative trends. Outlook for Next Week Stocks tested support Thursday as WTI and Brent crude rose more than 4%. Meanwhile, the 10-year Treasury yield consolidated during the week. Recently, crude oil prices and Treasury yields have been sitting at a one-year inverse extreme when looking at the one-month rolling correlation between the two, which deviates from their typical relationship. My outlook for next week is \"cautious.\" The primary considerations are: 1) Potential support beneath oil prices; 2) Negative momentum divergences in major indexes; 3) Improving trends in defensive sectors; and 4) Failed relative breakouts in Technology and High Beta. Evidence that would challenge this view includes lower oil prices or yields, improving index momentum, renewed weakness in defensive sectors, and broader stock participation",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Defensive Signals Emerge Beneath New Highs Major indexes reached record highs, but momentum divergences and defensive rotation suggest a more cautious backdrop. Oil prices and Treasury yields remain key variables. October 9, 2026 • Rachel Dashiell The Week That Was Last week, Nate maintained a \"Moderately Bullish\" outlook, citing a potential mean reversion in Treasury yields, pre-earnings season positioning, and favorable October seasonality. That view largely played out, with both the S&P 500 (SPX) and Nasdaq 100 (NDX) reaching new all-time highs. Beneath the surface, however, market leadership showed signs of rotation. Technology reached a new relative high versus the S&P 500 before reversing, while Energy and Health Care maintained relative strength. Meanwhile, Consumer Staples and Utilities, two traditionally defensive sectors, showed signs of improving relative trends. Outlook for Next Week Stocks tested support Thursday as WTI and Brent crude rose more than 4%. Meanwhile, the 10-year Treasury yield consolidated during the week. Recently, crude oil prices and Treasury yields have been sitting at a one-year inverse extreme when looking at the one-month rolling correlation between the two, which deviates from their typical relationship. My outlook for next week is \"cautious.\" The primary considerations are: 1) Potential support beneath oil prices; 2) Negative momentum divergences in major indexes; 3) Improving trends in defensive sectors; and 4) Failed relative breakouts in Technology and High Beta. Evidence that would challenge this view includes lower oil prices or yields, improving index momentum, renewed weakness in defensive sectors, and broader stoc",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -55849,7 +55796,7 @@
           "url": "https://www.schwab.com/learn/story/fed-rate-hikes-stocks-bonds-economy",
           "publishedAt": "2026-10-09T17:43:50.000Z",
           "summary": "Explore how Fed rate hikes may affect the economy, stocks, bonds, and Treasury yields—and what investors should watch as inflation and growth evolve.",
-          "excerpt": "Fed Rate Hikes: Stocks, Bonds & the Economy | Charles Schwab Search Insights & Education Fixed Income Fed Rate Hikes: Stocks, Bonds & the Economy Explore how Fed rate hikes may affect the economy, stocks, bonds, and Treasury yields—and what investors should watch as inflation and growth evolve. October 9, 2026 • Jennifer Babchuk • Chris Ferrarone • Collin Martin • Christian Menegatti, Ph.D. Key takeaways We expect the Federal Reserve to raise rates only modestly from here , but the path will depend on whether inflation broadens beyond energy and other supply-driven pressures. The artificial intelligence (AI) investment boom is helping support growth and earnings, potentially reducing the need for a prolonged hiking cycle, even as inflation remains above the Federal Reserve's 2% target. We suggest investors focus on oil prices, inflation trends, and credit conditions, while favoring diversified equity exposure and short- to intermediate-term bonds. The Fed's recent rate increase may not develop into a hiking cycle as extensive as the one that began in 2022 because much of today's inflation pressure comes from supply constraints rather than broad economic overheating, where demand exceeds the economy's productive capacity. However, persistent oil-price pressure, resilient demand, or widening inflation could require additional rate increases and create greater risks for housing, credit, stocks, and long-term bonds. With inflation remaining above its 2% target for more than five years, the Fed recently raised its benchmark rate to support a \"timelier return\" to its inflation goal. This is not a typical rate-hiking campaign triggered solely by excess demand. While the U.S. economy remains resilient and has seen a pick-up in activity recently, according to several leading ind",
+          "excerpt": "Fed Rate Hikes: Stocks, Bonds & the Economy | Charles Schwab Search all articles, videos, and podcasts Fixed Income Fed Rate Hikes: Stocks, Bonds & the Economy Explore how Fed rate hikes may affect the economy, stocks, bonds, and Treasury yields—and what investors should watch as inflation and growth evolve. October 9, 2026 • Jennifer Babchuk • Chris Ferrarone • Collin Martin • Christian Menegatti, Ph.D. Key takeaways We expect the Federal Reserve to raise rates only modestly from here , but the path will depend on whether inflation broadens beyond energy and other supply-driven pressures. The artificial intelligence (AI) investment boom is helping support growth and earnings, potentially reducing the need for a prolonged hiking cycle, even as inflation remains above the Federal Reserve's 2% target. We suggest investors focus on oil prices, inflation trends, and credit conditions, while favoring diversified equity exposure and short- to intermediate-term bonds. The Fed's recent rate increase may not develop into a hiking cycle as extensive as the one that began in 2022 because much of today's inflation pressure comes from supply constraints rather than broad economic overheating, where demand exceeds the economy's productive capacity. However, persistent oil-price pressure, resilient demand, or widening inflation could require additional rate increases and create greater risks for housing, credit, stocks, and long-term bonds. With inflation remaining above its 2% target for more than five years, the Fed recently raised its benchmark rate to support a \"timelier return\" to its inflation goal. This is not a typical rate-hiking campaign triggered solely by excess demand. While the U.S. economy remains resilient and has seen a pick-up in activity recently, according to sever",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -55858,7 +55805,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-digest",
           "publishedAt": "2026-10-09T15:27:23.000Z",
           "summary": "Stocks eye record highs as breadth improves, clients diversify exposure, AI reshapes a few industries, and earnings season kicks off with tech in the lead.",
-          "excerpt": "Breadth Stirs as AI's Gains Stay Concentrated | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Breadth Stirs as AI's Gains Stay Concentrated Stocks eye record highs as breadth improves, clients diversify exposure, AI reshapes a few industries, and earnings season kicks off with tech leading the pack. October 9, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Signs of broadening market participation Investors will want to keep an eye on whether recent signs of improved market breadth signal a sustained broadening of participation as the S&P 500 ® Index and Nasdaq Composite ® look to reclaim record highs . Multiple breadth indicators that had fallen to levels not seen since the April 2025 market correction turned higher earlier this week. That's a good sign—any market advance is healthier and likely more durable when more than just a handful of mega-cap stocks participate. Though metrics still point to poor breadth overall, those that have improved recently include the percentages of S&P 500 stocks trading above their 50- and 200-day moving averages, which, respectively, have increased from 19.7% to 31% and from 38.4% to 46.7% so far in October. To this point, the recent market imbalance hasn't marked a classic rotation to defensive sectors such as utilities and consumer staples, said Liz Ann Sonders , chief investment strategist at Schwab Center for Financial Research (SCFR). \"Th",
+          "excerpt": "Breadth Stirs as AI's Gains Stay Concentrated | Charles Schwab Search Insights & Education Markets and Economy Breadth Stirs as AI's Gains Stay Concentrated Stocks eye record highs as breadth improves, clients diversify exposure, AI reshapes a few industries, and earnings season kicks off with tech leading the pack. October 9, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Signs of broadening market participation Investors will want to keep an eye on whether recent signs of improved market breadth signal a sustained broadening of participation as the S&P 500 ® Index and Nasdaq Composite ® look to reclaim record highs . Multiple breadth indicators that had fallen to levels not seen since the April 2025 market correction turned higher earlier this week. That's a good sign—any market advance is healthier and likely more durable when more than just a handful of mega-cap stocks participate. Though metrics still point to poor breadth overall, those that have improved recently include the percentages of S&P 500 stocks trading above their 50- and 200-day moving averages, which, respectively, have increased from 19.7% to 31% and from 38.4% to 46.7% so far in October. To this point, the recent market imbalance hasn't marked a classic rotation to defensive sectors such as utilities and consumer staples, said Liz Ann Sonders , chief investment strategist at Schwab Center for Financial Research (SCFR). \"This is less abo",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         }
       ],
@@ -55976,11 +55923,11 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
-      "summary": "No recent dated articles found in the last 30 days.",
+      "title": "EIA Today In Energy",
+      "summary": "Source check failed: This operation was aborted",
       "articles": [],
       "articleCount": 0,
-      "ok": true
+      "ok": false
     },
     {
       "name": "BLS Economic News Releases",
@@ -56087,6 +56034,15 @@
       "articles": [
         {
           "sourceName": "Axios Macro RSS",
+          "title": "Trump orders new investigation of Fed's Lisa Cook - Axios",
+          "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBaTFduakwwLUdRVWF1SzQ0YTdjX3NTWHFFVEdPeTA1VEkzaVpQclBtLTBMcTFnbFpmVFN4Z0w2N2U0X3pFVzJJZE56LVdGZUhkZndzSFpESXdFc1IwZjM4R3ln?oc=5",
+          "publishedAt": "2026-10-09T17:56:08.000Z",
+          "summary": "Trump orders new investigation of Fed's Lisa Cook Axios",
+          "excerpt": "Trump orders new investigation of Fed's Lisa Cook Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Macro RSS",
           "title": "Tariffs can keep pushing up goods prices for a year, NY Fed finds - Axios",
           "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBXNl9vYlpMb3YyWmZ3SnF6REI1ZWNYaXJJVWRONWhCZDFuMTNrR0NPYzkyVWowbUhBZV95V3haZEYweUY0VU0xYkpjWXVBazVzMVVfZmQwZ3FKVU5HTVozSzlzOExoN2I5SXRrSnVRT3JZVWpUX3c?oc=5",
           "publishedAt": "2026-10-07T16:29:48.000Z",
@@ -56101,15 +56057,6 @@
           "publishedAt": "2026-10-05T16:16:07.000Z",
           "summary": "Eurodrama in currency markets raises U.S. dollar's standing Axios",
           "excerpt": "Eurodrama in currency markets raises U.S. dollar's standing Axios",
-          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-          "sourceName": "Axios Macro RSS",
-          "title": "U.S. adds 29,000 jobs in September, unemployment edges up - Axios",
-          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5pOHRGR0NWdXl0cFE5Q1VHUndnbG9GeDVyZkpCQjMtRjhpWEdoLUZaU1FkV2l2c0VDNkQ4eUNLX3Zudm0yeG1iZzRYdHFTSENtbEh5bmFDUFVuZUc3Vm1mX0xvSjV3TTFMU1oxcHkteUxRT2VMdkpIbA?oc=5",
-          "publishedAt": "2026-10-02T19:11:46.000Z",
-          "summary": "U.S. adds 29,000 jobs in September, unemployment edges up Axios",
-          "excerpt": "U.S. adds 29,000 jobs in September, unemployment edges up Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
         }
       ],
@@ -56141,29 +56088,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "From BJ’s to Lululemon, retailers are trimming assortments to boost business",
-          "url": "https://www.cnbc.com/2026/10/10/from-bjs-to-lululemon-retailers-are-trimming-assortments.html",
-          "publishedAt": "2026-10-11T17:08:30.000Z",
-          "summary": "Retail brands are shrinking assortments to get back to healthy growth, while box stores are culling products to better curate offerings and stabilize business.",
-          "excerpt": "Retail brands are shrinking assortments to get back to healthy growth, while box stores are culling products to better curate offerings and stabilize business.",
+          "title": "Why China is importing a record amount of gold — and what it means for prices",
+          "url": "https://www.cnbc.com/2026/10/12/china-gold-buying-interest-rate-.html",
+          "publishedAt": "2026-10-12T00:51:10.000Z",
+          "summary": "Beijing’s push to diversify away from the dollar and Chinese households’ search for a safe place to put their savings has fueled China’s record gold buying.",
+          "excerpt": "Beijing’s push to diversify away from the dollar and Chinese households’ search for a safe place to put their savings has fueled China’s record gold buying.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Trump says he is &apos;going to look at&apos; joining Saudi Arabia in the fight against Iran-backed Houthis after deadly airport strike",
-          "url": "https://www.cnbc.com/2026/10/11/trump-saudi-arabia-iran-houthis.html",
-          "publishedAt": "2026-10-11T16:29:55.000Z",
-          "summary": "U.S. military involvement in the fight against the Houthis would stretch resources in the Middle East already committed to fighting Iran, analysts said.",
-          "excerpt": "U.S. military involvement in the fight against the Houthis would stretch resources in the Middle East already committed to fighting Iran, analysts said.",
+          "title": "Judge orders Trump admin to stop airing challenged government-funded ads immediately",
+          "url": "https://www.cnbc.com/2026/10/11/trump-ads-dhs-judge-order.html",
+          "publishedAt": "2026-10-12T00:29:50.000Z",
+          "summary": "The ads have been criticized as government propaganda and as aimed at influencing the outcome of the midterm election, which will determine control of Congress.",
+          "excerpt": "The ads have been criticized as government propaganda and as aimed at influencing the outcome of the midterm election, which will determine control of Congress.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "AI’s quiet safety gatekeepers are stepping into the spotlight",
-          "url": "https://www.cnbc.com/2026/10/11/ais-quiet-safety-gatekeepers-are-stepping-into-the-spotlight.html",
-          "publishedAt": "2026-10-11T14:08:44.000Z",
-          "summary": "The intensifying AI safety debate is bringing a small group of third-party evaluators into the center of a multitrillion-dollar industry.",
-          "excerpt": "The intensifying AI safety debate is bringing a small group of third-party evaluators into the center of a multitrillion-dollar industry.",
+          "title": "Plenty is working against this market. Here&apos;s why I&apos;m staying invested anyway",
+          "url": "https://www.cnbc.com/investingclub/2026/10/11/plenty-is-working-against-this-market-why-im-staying-invested-anyway.html",
+          "publishedAt": "2026-10-12T00:23:07.000Z",
+          "summary": "The fact is, I don't have a strong case for owning stocks at the moment.",
+          "excerpt": "The fact is, I don't have a strong case for owning stocks at the moment.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56223,6 +56170,15 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
+          "title": "‘I feel like a loser’: My stock portfolio is swinging wildly. Is it finally time to worry?",
+          "url": "https://www.marketwatch.com/story/i-feel-like-a-loser-my-etfs-go-up-one-day-and-crash-the-next-is-this-a-bad-sign-0c9848b2?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-11T20:00:00.000Z",
+          "summary": "“I presume these are sophisticated investors taking a profit.”",
+          "excerpt": "“I presume these are sophisticated investors taking a profit.”",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
           "title": "We’re about to get a huge read on whether earnings can keep propping up the stock market",
           "url": "https://www.marketwatch.com/story/were-about-to-get-a-huge-read-on-whether-earnings-can-keep-propping-up-the-stock-market-459b565b?mod=mw_rss_topstories",
           "publishedAt": "2026-10-11T14:00:00.000Z",
@@ -56237,15 +56193,6 @@
           "publishedAt": "2026-10-11T13:00:00.000Z",
           "summary": "For four years, tech has been the answer to almost every question about this bull market.",
           "excerpt": "For four years, tech has been the answer to almost every question about this bull market.",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "‘I feel like a loser’: My stock portfolio is swinging wildly. Is it finally time to worry?",
-          "url": "https://www.marketwatch.com/story/i-feel-like-a-loser-my-etfs-go-up-one-day-and-crash-the-next-is-this-a-bad-sign-0c9848b2?mod=mw_rss_topstories",
-          "publishedAt": "2026-10-11T12:30:00.000Z",
-          "summary": "“I presume these are sophisticated investors taking a profit.”",
-          "excerpt": "“I presume these are sophisticated investors taking a profit.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
