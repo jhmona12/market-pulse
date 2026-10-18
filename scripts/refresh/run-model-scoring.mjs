@@ -2,6 +2,10 @@ import { appendFileSync } from "node:fs";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
+// Shared CLI contract with score_live_rank_model.py; never treat stale prices as success.
+const MARKET_DATA_NOT_READY_EXIT_CODE = 75;
+const MAX_DATA_RETRY_DELAY_MS = 15 * 60 * 1000;
+
 const tacticalArgs = [
   "scripts/modeling/score_live_rank_model.py",
   "--output",
@@ -48,6 +52,7 @@ async function defaultSleep(ms) {
 async function runModelScoring({
   attempts = 2,
   retryDelayMs = 90000,
+  readinessRetryDelayMs = MAX_DATA_RETRY_DELAY_MS,
   python = process.env.PYTHON || "python",
   runCommand = defaultRunCommand,
   sleep = defaultSleep,
@@ -86,8 +91,14 @@ async function runModelScoring({
     }
 
     if (attempt < attempts) {
-      logger.warn?.(`Retrying the failed model phase after ${retryDelayMs}ms.`);
-      await sleep(retryDelayMs);
+      const unsettledPrices = lastPhase === "tactical" && lastStatus === MARKET_DATA_NOT_READY_EXIT_CODE;
+      const delayMs = unsettledPrices
+        ? Math.min(positiveInteger(readinessRetryDelayMs, MAX_DATA_RETRY_DELAY_MS), MAX_DATA_RETRY_DELAY_MS)
+        : retryDelayMs;
+      logger.warn?.(unsettledPrices
+        ? `Expected-session prices/features are incomplete. Waiting ${delayMs}ms for the EOD feed before the next model attempt; freshness checks remain required.`
+        : `Retrying the failed model phase after ${delayMs}ms.`);
+      await sleep(delayMs);
     }
   }
 
@@ -111,7 +122,8 @@ function writeGithubOutputs(result) {
 async function main() {
   const result = await runModelScoring({
     attempts: positiveInteger(process.env.MODEL_SCORING_ATTEMPTS, 2),
-    retryDelayMs: positiveInteger(process.env.MODEL_SCORING_RETRY_DELAY_MS, 90000)
+    retryDelayMs: positiveInteger(process.env.MODEL_SCORING_RETRY_DELAY_MS, 90000),
+    readinessRetryDelayMs: positiveInteger(process.env.MODEL_DATA_RETRY_DELAY_MS, MAX_DATA_RETRY_DELAY_MS)
   });
   writeGithubOutputs(result);
   if (!result.ok) process.exit(result.lastStatus || 1);

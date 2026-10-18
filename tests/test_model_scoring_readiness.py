@@ -13,7 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "modeling"))
 
 from score_live_rank_model import (  # noqa: E402
+    MARKET_DATA_NOT_READY_EXIT_CODE,
     MarketDataNotReadyError,
+    cli,
     expected_session_readiness,
     scoring_rows_for_date,
     wait_for_expected_session_frames,
@@ -25,6 +27,25 @@ def frame(*dates: str) -> pd.DataFrame:
 
 
 class SessionReadinessTests(unittest.TestCase):
+    def test_cli_exposes_incomplete_prices_as_retryable_not_successful(self) -> None:
+        with patch("score_live_rank_model.main", side_effect=MarketDataNotReadyError("Missing current prices")), \
+             patch("sys.stderr") as stderr:
+            with self.assertRaises(SystemExit) as error:
+                cli()
+        self.assertEqual(error.exception.code, 75)
+        self.assertEqual(MARKET_DATA_NOT_READY_EXIT_CODE, 75)
+        self.assertIn("Missing current prices", "".join(call.args[0] for call in stderr.write.call_args_list))
+
+    def test_cli_does_not_disguise_a_programming_error_as_delayed_prices(self) -> None:
+        with patch("score_live_rank_model.main", side_effect=RuntimeError("unexpected bug")):
+            with self.assertRaisesRegex(RuntimeError, "unexpected bug"):
+                cli()
+
+    def test_cli_preserves_success(self) -> None:
+        with patch("score_live_rank_model.main") as main:
+            self.assertIsNone(cli())
+        main.assert_called_once_with()
+
     def test_context_and_stocks_are_retried_together(self) -> None:
         frames = {"AAA": frame("2026-09-09"), "BBB": frame("2026-09-08"), "SPY": frame("2026-09-08")}
         with patch.dict("os.environ", {"MODEL_DATA_READINESS_ATTEMPTS": "2", "MODEL_DATA_READINESS_DELAY_SECONDS": "0"}), \

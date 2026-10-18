@@ -10,15 +10,17 @@ The project is built to run cheaply with free data sources. It is not an intrada
 flowchart TD
   schedule[".github/workflows/refresh-data.yml<br/>Redundant 5 AM + 4 PM PT attempts"] --> gate["scripts/check-refresh-window.mjs<br/>Pacific window gate + idempotency check"]
   ledger["data/refresh-ledger.json<br/>Successful morning/evening refresh ledger"] --> gate
-  gate --> scorerRetry["scripts/refresh/run-model-scoring.mjs<br/>Retries only the failed scoring phase"]
+  gate --> preflight["Node + Python unit tests<br/>Fail before external data/AI requests"]
+  preflight --> calendar["scripts/update-macro-calendar.mjs<br/>Official release calendar"]
+  calendar --> scorerRetry["scripts/refresh/run-model-scoring.mjs<br/>Retries only the failed scoring phase"]
   scorerRetry --> scorer["scripts/modeling/score_live_rank_model.py<br/>Validates EOD readiness, then scores both models"]
 
-  modelFiles["models/rank/*<br/>Production model, metadata, explainability"] --> scorer
+  modelFiles["models/rank/* + models/long-horizon/*<br/>Committed models, metadata, explainability"] --> scorer
   universe["config/universe.json<br/>ETF universe and fallback stocks"] --> scorer
-  scorer --> modelScores["data/model-rank-scores.json<br/>Intermediate model rankings, ignored by git"]
+  scorer --> modelScores["data/model-rank-scores*.json<br/>Tactical + strategic rankings, ignored by git"]
   scorer --> referenceCache["data/cache/model-reference-cache.json<br/>Daily S&P 500 reference cache, ignored by git"]
 
-  gate --> refresh["scripts/update-data.mjs<br/>Builds the market briefing"]
+  scorer --> refresh["scripts/update-data.mjs<br/>Builds the market briefing after both scorers pass"]
   sourceParser["scripts/ingest/sources.mjs<br/>Markdown, RSS, HTML article extraction"] --> refresh
   redditParser["scripts/ingest/reddit.mjs<br/>Reddit JSON/RSS normalization"] --> refresh
   aiMemoBuilder["scripts/snapshot/ai-memo.mjs<br/>AI memo payload + response schema"] --> refresh
@@ -102,7 +104,7 @@ Ticker Lab lives in the Lab view. Scoring requires a separate private model API 
 Market Pulse is designed to fail visibly rather than publish stale data as if it were current.
 
 - The model scorer checks the latest price date before writing live ranks. It expects the latest completed U.S. market session under its calendar rules (with a 2 PM Pacific availability buffer on trading days). It requires every market/sector context ETF and at least 90% of current S&P 500 histories on that session before feature assembly. Remaining stale stocks are retried even after meeting that minimum. Only current, unique symbol rows with complete finite model features are scored, and at least 90% of the reference universe must remain scorable. Set `EXPECTED_MARKET_DATA_DATE=YYYY-MM-DD` only for an intentional diagnostic override, not to bypass a failed refresh.
-- A partially settled Yahoo session is never selected merely because it is the maximum date. The scorer retries only stale context or stock histories, then emits exact context and coverage diagnostics if the expected cross-section is still unavailable. The workflow retries only the failed tactical or strategic model phase before giving up.
+- A partially settled Yahoo session is never selected merely because it is the maximum date. The scorer retries only stale context or stock histories, then emits exact context and coverage diagnostics if the expected cross-section is still unavailable. Incomplete tactical prices/features exit with code `75`; the workflow waits 15 minutes before its second and final model attempt. Other failures retain the 90-second retry, and a successful tactical phase is not repeated for a strategic-only failure. The model step remains capped at 35 minutes. A longer wait mitigates delayed data; it cannot guarantee provider availability.
 - Daily bars use Yahoo's exchange timezone. Adjusted prices must be present and finite; a raw quote is not substituted for a missing adjusted close. Stale-history retries alternate the two Yahoo chart endpoints within the existing retry budget. They are the same provider, not independent data sources. Each readiness check retains timestamp/price/rejection evidence in ignored `data/diagnostics/` files; Actions uploads them as `price-readiness-<run>-<attempt>` artifacts for 14 days, including on failure. See [refresh operations](docs/refresh-operations.md).
 - The model scorer also writes the dashboard technical tape: scoreboard trailing returns, 60-day beta, momentum stop-sell levels, market-strip ETFs, and sector ETF performance. The dashboard reuses that same fresh price pass instead of making a second large Yahoo request that can be rate-limited.
 - Strategic and tactical views reuse the tactical scorebook's beta and calendar-lookback return fields. The long-horizon artifact contributes its rank, score, percentile, reasons, and risk flags, so a shared return label cannot show two different calculations.
@@ -164,13 +166,15 @@ PORT=4174 npm run dev:local
 
 GitHub Actions runs the full refresh from `.github/workflows/refresh-data.yml`. Because GitHub's scheduled runner is best-effort and can delay or drop individual scheduled runs, the workflow uses two attempts for each target window: shortly after 5 AM Pacific and shortly after 4 PM Pacific, with a 30-minute backup attempt for each. `scripts/check-refresh-window.mjs` checks `data/refresh-ledger.json` first and only treats `data/refresh-status.json` as a fallback when it explicitly says `publishStatus: "published"`, so a data-generation success cannot block a backup retry if GitHub Pages publication failed.
 
-Run the refresh script:
+For briefing assembly only, using already-generated model inputs:
 
 ```bash
 node scripts/update-data.mjs
 ```
 
-The refresh script:
+This command does not run either model or update the release calendar. `npm run refresh` updates the calendar and briefing, but also does not score the models. For a complete local refresh, use the sequence below. Neither local path publishes to GitHub Pages by itself.
+
+The full refresh pipeline:
 
 - Reads source URLs from `config/news-sources.md`
 - Fetches source landing pages and discovers likely research/commentary articles
@@ -193,7 +197,7 @@ The refresh script:
 - Computes momentum, trend, breadth, RSI, volume, relative-strength metrics, stop prices, activation prices, and sector/market technical rows in Python
 - Reads `data/model-rank-scores.json` when available and promotes the XGBoost model rank as the primary single-name score
 - Adds setup tags from the model scorer, including `Momentum Confirmed`, `Model Rebound Watch`, and `Not Momentum Confirmed`
-- Adds a rebound activation price for qualifying rebound-watch names, calculated as current close plus `0.75 x 20-day realized daily volatility`
+- Adds a rebound activation price for qualifying rebound-watch names, calculated as `current close x (1 + 0.75 x 20-day realized daily volatility)`, with volatility expressed as a decimal daily return
 - Adds a stop-sell price for all current top-decile model names, plus other surfaced non-confirmed model candidates, during the model scorer's fresh price-history pass so the briefing builder does not make a second Yahoo request for the same names
 - Writes `data/cache/model-reference-cache.json` during the model scoring step so ad hoc Ticker Lab requests can reuse the daily S&P 500 reference universe
 - Re-scores the same fresh S&P 500 feature cache with the tuned 252-day model so `data/long-horizon-research.json` can show a full searchable Strategic Book without making a second Yahoo history pass
@@ -204,20 +208,20 @@ The refresh script:
 - Builds a lowest-ranked model book for the Stay Away section
 - Writes the dashboard snapshot to `data/snapshot.json`
 
-To refresh model rankings before the dashboard snapshot:
+For a complete local refresh after [Python environment setup](#modeling-pipeline), run these commands in order and stop if any command fails. Node 24 and the activated model environment must be on `PATH`:
 
 ```bash
-.venv-model/bin/python scripts/modeling/score_live_rank_model.py --output data/model-rank-scores.json
-.venv-model/bin/python scripts/modeling/score_live_rank_model.py \
-  --model-dir models/long-horizon \
-  --model-name xgboost_rank_sector252_15y_monthly_tuned_research \
-  --output data/model-rank-scores-long-horizon.json \
-  --reference-cache data/cache/model-reference-cache.json \
-  --score-reference-cache
-node scripts/update-data.mjs
+source .venv-model/bin/activate
+npm test
+python -m unittest discover -s tests -p 'test_*.py'
+npm run refresh:calendar
+node scripts/refresh/run-model-scoring.mjs
+node scripts/refresh/run-snapshot-refresh.mjs
 ```
 
-Or run both model scoring passes with:
+The scoring wrapper uses the same phase-aware retries as Actions. The snapshot wrapper assembles the briefing and runs full project verification. These commands update local outputs only; successful refresh status, deployment confirmation, and publication-ledger updates belong to the hosted workflow.
+
+To run only the two model scorers without the outer retry wrapper:
 
 ```bash
 npm run score:models
@@ -255,7 +259,7 @@ It runs JavaScript syntax checks, Python compile checks, Node fixture tests, Pyt
 npm test
 ```
 
-Fixture coverage includes source extraction, Reddit RSS/JSON normalization and freshness, AI memo input construction, refresh retries, partial-market-session rejection, delayed monitors across midnight/DST, live artifact hash checks, failure recovery against temporary Git repositories, and Python dependency setup in both publication workflows. These tests fail quickly without requiring a full market refresh.
+Fixture coverage includes source extraction, Reddit RSS/JSON normalization and freshness, AI memo input construction, nonempty Deeper Read fallback after rejected/failed AI output, refresh retries, captured null-price rejection, delayed monitors across midnight/DST, live artifact hash checks, failure recovery against temporary Git repositories, and Python dependency setup in both publication workflows. These tests fail quickly without requiring a full market refresh or a paid AI call. Scheduled refreshes run the unit suites before fetching data/scoring, then run full output verification after generation.
 
 Verification requires the Python packages in `scripts/modeling/requirements.txt`, even for a static-only deployment. Both GitHub publication workflows install them. Locally, the verifier uses `PYTHON` when set, otherwise `.venv-model/bin/python` when present, falling back to `python3`; compilation and tests use the same interpreter.
 
@@ -484,8 +488,11 @@ The workflow uses GitHub Actions timezone-aware schedules with `timezone: "Ameri
 
 `.github/workflows/monitor-refresh.yml` runs later in the morning and evening and fast-forwards to the latest default branch before checking. `scripts/monitor-refreshes.mjs` checks the latest due morning and evening targets independently against repository and live-site records. Before a window's cutoff it checks the previous Pacific calendar day, so a delay past midnight cannot erase yesterday's missed evening. Missing targets fail the monitor. It remains dependent on GitHub's best-effort scheduler and is not an independent uptime guarantee.
 
+A human-authored push to `main` runs `Deploy GitHub Pages`: it verifies and publishes the committed static files, but does not fetch market data or score either model. The updated refresh code takes effect on the next `Refresh Market Data` run. To refresh immediately, run that workflow from Actions on `main`; rerunning an old failed run reuses its original commit and is not a way to test newly pushed code. Manual refreshes use a `manual` target, so they do not complete a scheduled morning/evening ledger entry.
+
 When the refresh runs successfully, it:
 
+- Runs both unit suites before external data fetching and paid AI calls
 - Regenerates `data/macro-calendar.json` before the dashboard snapshot so macro dates are not hand-keyed
 - Scores the current S&P 500 universe with the committed XGBoost rank model when dependencies and free data endpoints are available
 - Restores ignored runtime caches under `data/cache/` and saves them after successful model scoring; cache-save errors are nonfatal. Caches include model reference data, market caps, Reddit fallback samples, and Deeper Read rotation memory.
@@ -514,6 +521,8 @@ https://jhmona12.github.io/market-pulse/data/refresh-status.json
 ```
 
 Detailed stage ownership, Yahoo EOD readiness rules, Reddit diagnostics, and failure triage are documented in [`docs/refresh-operations.md`](docs/refresh-operations.md). The [September 10 pre-commit audit](docs/refresh-precommit-audit-2026-09-10.md) records reproduced failures, regression tests, and isolated live model/Reddit checks.
+
+The [October 18 incident review](docs/refresh-incident-2026-10-18.md) separates confirmed application bugs, provider null prices, and GitHub runner-acquisition failures. Repository tests cannot guarantee scheduler punctuality or external-service availability; the review compares the infrastructure options without treating extra retries as a complete reliability solution.
 
 Important implementation note: pushes made by GitHub's default `GITHUB_TOKEN` do not trigger other workflows. The refresh workflow therefore performs its own Pages deployment after writing data. The separate Pages workflow remains useful for normal human-authored pushes.
 

@@ -155,6 +155,32 @@ class PriceIngestionTests(unittest.TestCase):
         self.assertEqual(len(records), 2)
         self.assertTrue(all(not record["readiness"]["ready"] for record in records))
 
+    def test_october_null_session_is_not_a_timezone_bug_or_a_usable_price(self):
+        fixture = json.loads((ROOT / "tests/fixtures/yahoo-null-session-2026-10-16.json").read_text())
+        rows = fixture["rows"]
+        payload = {"chart": {"error": None, "result": [{
+            "meta": {"exchangeTimezoneName": fixture["exchangeTimezoneName"]},
+            "timestamp": [int(datetime.fromisoformat(row["timestampUtc"]).timestamp()) for row in rows],
+            "indicators": {
+                "quote": [{"close": [row["close"] for row in rows]}],
+                "adjclose": [{"adjclose": [row["adjustedClose"] for row in rows]}],
+            },
+        }]}}
+        expected = date.fromisoformat(fixture["expectedSession"])
+        with patch("common.fetch_text", return_value=json.dumps(payload)) as fetch, \
+             patch("score_live_rank_model.latest_expected_market_data_date", return_value=expected), \
+             patch.dict("os.environ", {"MODEL_DATA_READINESS_ATTEMPTS": "2", "MODEL_DATA_READINESS_DELAY_SECONDS": "0"}):
+            frames, failures = fetch_symbol_frames(["AAPL", "SPY"], 3, 1)
+            self.assertEqual(frames["AAPL"].iloc[-1]["date"].date(), date(2026, 10, 15))
+            rejected = frames["AAPL"].attrs["priceHistory"]["tail"][-1]
+            self.assertEqual(rejected["sessionDate"], "2026-10-16")
+            self.assertIsNone(rejected["close"])
+            self.assertEqual(rejected["rejectedReason"], "missing_or_invalid_adjusted_close")
+            with self.assertRaisesRegex(MarketDataNotReadyError, "2026-10-16.*Readiness checks exhausted"):
+                wait_for_expected_session_frames(frames, failures, {"AAPL"}, ["SPY"], expected, 3, 1)
+        self.assertEqual(fetch.call_count, 4)
+        self.assertTrue(any("query2.finance" in call.args[0] for call in fetch.call_args_list))
+
 
 if __name__ == "__main__":
     unittest.main()

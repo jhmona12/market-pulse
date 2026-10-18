@@ -2515,7 +2515,7 @@ function buildDeeperReadCandidates(sourceTape, history = {}) {
 
 function deterministicDeeperRead(candidates = [], reason = "AI Deeper Read was unavailable for this refresh.") {
   const cards = candidates.slice(0, 4).map((candidate) => {
-    const summary = articleBrief({ title: candidate.title, summary: candidate.summary }, 260);
+    const summary = articleConclusion(candidate, 260);
     const themes = (candidate.themes || []).slice(0, 2).join(" and ") || "market structure";
     const sourceDetail = firstSentences(cleanArticleConclusion(candidate.excerpt || "", candidate.title || ""), 2, 520);
     return {
@@ -4215,7 +4215,7 @@ async function buildCompanyContexts(candidates) {
   return contexts.filter(Boolean);
 }
 
-async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sourceRefIds, history }) {
+async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape = [], sourceRefIds = [], history = {}, fetchImpl = fetch, recordUsage = appendUsageLog }) {
   if (!apiKey || !candidates.length) {
     return deterministicDeeperRead(candidates, !apiKey ? "OPENAI_API_KEY was not configured." : "No differentiated source candidates were available.");
   }
@@ -4294,11 +4294,11 @@ async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sour
     max_output_tokens: 2500
   };
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), openAiTimeoutMs);
   try {
     console.log(`Calling OpenAI ${aiModel} for Deeper Read...`);
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), openAiTimeoutMs);
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    const response = await fetchImpl("https://api.openai.com/v1/responses", {
       method: "POST",
       signal: controller.signal,
       headers: {
@@ -4307,37 +4307,35 @@ async function buildAiDeeperRead({ apiKey, aiModel, candidates, sourceTape, sour
       },
       body: JSON.stringify(requestBody)
     });
-    try {
-      const json = await response.json();
-      if (!response.ok) throw new Error(json.error?.message || `${response.status} ${response.statusText}`);
-      const usage = estimateOpenAiCost(aiModel, json.usage);
-      const text = responseText(json);
-      if (!text) throw new Error("OpenAI response did not include Deeper Read text.");
-      await appendUsageLog({
-        generatedAt: new Date().toISOString(),
-        status: "deeper_read_ready",
-        model: aiModel,
-        usage
-      });
-      const parsed = normalizeDeeperReadPayload(JSON.parse(text), sourceTape, sourceRefIds);
-      if (!parsed.cards.length) {
-        console.warn("AI Deeper Read did not pass evidence guardrails; using deterministic source analysis.");
-        return deterministicDeeperRead(candidates, "AI output did not pass the evidence guardrails.");
-      }
-      console.log(`Deeper Read generated with ${parsed.cards.length} cards.`);
-      return parsed;
-    } finally {
-      clearTimeout(timeout);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.error?.message || `${response.status} ${response.statusText}`);
+    const usage = estimateOpenAiCost(aiModel, json.usage);
+    const text = responseText(json);
+    if (!text) throw new Error("OpenAI response did not include Deeper Read text.");
+    await recordUsage({
+      generatedAt: new Date().toISOString(),
+      status: "deeper_read_ready",
+      model: aiModel,
+      usage
+    });
+    const parsed = normalizeDeeperReadPayload(JSON.parse(text), sourceTape, sourceRefIds);
+    if (!parsed.cards.length) {
+      console.warn("AI Deeper Read did not pass evidence guardrails; using deterministic source analysis.");
+      return deterministicDeeperRead(candidates, "AI output did not pass the evidence guardrails.");
     }
+    console.log(`Deeper Read generated with ${parsed.cards.length} cards.`);
+    return parsed;
   } catch (error) {
     console.warn(`Deeper Read unavailable: ${error.message}`);
-    await appendUsageLog({
+    await recordUsage({
       generatedAt: new Date().toISOString(),
       status: "deeper_read_error",
       model: aiModel,
       error: error.message
     });
     return deterministicDeeperRead(candidates, `Deeper Read AI call failed: ${error.message}`);
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
@@ -4797,6 +4795,7 @@ async function main() {
 }
 
 export {
+  buildAiDeeperRead,
   buildLongHorizonRows,
   buildModelMonitoring,
   bottomModelSectorClusters,
@@ -4805,6 +4804,7 @@ export {
   cleanDailyRead,
   dailyReadPassesFactGuardrails,
   deeperReadCardPassesGuardrails,
+  deterministicDeeperRead,
   extractArticleCandidates,
   extractRedditTickerSignals,
   fetchOfficialMacroReleases,

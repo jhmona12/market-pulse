@@ -217,6 +217,72 @@ test("retries a transient tactical scoring failure before running the strategic 
   assert.deepEqual(calls, ["tactical", "tactical", "strategic"]);
 });
 
+test("a delayed EOD feed gets a bounded settlement wait instead of an immediate repeat", async () => {
+  // Replay first-attempt failure / first observed recovery from the October 15-16 logs.
+  for (const [failedAt, recoveredAt] of [
+    ["2026-10-16T01:26:49Z", "2026-10-16T01:41:15Z"],
+    ["2026-10-17T01:22:47Z", "2026-10-17T01:34:48Z"]
+  ]) {
+    let now = Date.parse(failedAt);
+    const calls = [];
+    const waits = [];
+    const result = await runModelScoring({
+      python: "python", attempts: 2, retryDelayMs: 90000,
+      runCommand: async (_command, args) => {
+        const phase = args.includes("--score-reference-cache") ? "strategic" : "tactical";
+        calls.push(phase);
+        return phase === "tactical" && now < Date.parse(recoveredAt) ? 75 : 0;
+      },
+      sleep: async (ms) => { waits.push(ms); now += ms; },
+      logger: { log() {}, warn() {}, error() {} }
+    });
+    assert.equal(result.ok, true);
+    assert.deepEqual(waits, [15 * 60000]);
+    assert.deepEqual(calls, ["tactical", "tactical", "strategic"]);
+  }
+});
+
+test("persistent incomplete prices never become a successful model refresh", async () => {
+  const calls = [];
+  const waits = [];
+  const result = await runModelScoring({
+    python: "python", attempts: 2,
+    runCommand: async (_command, args) => { calls.push(args); return 75; },
+    sleep: async (ms) => waits.push(ms), logger: { log() {}, warn() {}, error() {} }
+  });
+  assert.equal(result.ok, false);
+  assert.equal(result.lastStatus, 75);
+  assert.equal(result.strategicOutcome, "skipped");
+  assert.equal(calls.length, 2);
+  assert.deepEqual(waits, [15 * 60000]);
+});
+
+test("generic model errors keep the short retry instead of waiting for price settlement", async () => {
+  for (const failedPhase of ["tactical", "strategic"]) {
+    const waits = [];
+    const result = await runModelScoring({
+      runCommand: async (_command, args) => {
+        const phase = args.includes("--score-reference-cache") ? "strategic" : "tactical";
+        return phase === failedPhase ? 1 : 0;
+      },
+      sleep: async (ms) => waits.push(ms), logger: { log() {}, warn() {}, error() {} }
+    });
+    assert.equal(result.ok, false);
+    assert.equal(result.lastPhase, failedPhase);
+    assert.deepEqual(waits, [90000]);
+  }
+});
+
+test("price settlement waits cannot exceed the workflow's fifteen-minute retry budget", async () => {
+  const waits = [];
+  await runModelScoring({
+    readinessRetryDelayMs: 24 * 60 * 60000,
+    runCommand: async () => 75,
+    sleep: async (ms) => waits.push(ms), logger: { log() {}, warn() {}, error() {} }
+  });
+  assert.deepEqual(waits, [15 * 60000]);
+});
+
 test("retries only the strategic scorer after the tactical cache is ready", async () => {
   const calls = [];
   let strategicCalls = 0;

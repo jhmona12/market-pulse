@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta
@@ -55,6 +56,7 @@ MARKET_STRIP_LABELS = {
 DEFAULT_MIN_SESSION_COVERAGE = 0.90
 DEFAULT_DATA_READINESS_ATTEMPTS = 3
 DEFAULT_DATA_READINESS_DELAY_SECONDS = 30.0
+MARKET_DATA_NOT_READY_EXIT_CODE = 75
 
 
 class MarketDataNotReadyError(ValueError):
@@ -1496,19 +1498,16 @@ def main() -> None:
     symbol_frames, failures = fetch_symbol_frames(required_symbols, args.years, args.max_workers)
     expected_session = latest_expected_market_data_date()
     required_context_symbols = list(dict.fromkeys(["SPY", *SECTOR_ETFS, *MARKET_STRIP_SYMBOLS]))
-    try:
-        symbol_frames, failures, readiness = wait_for_expected_session_frames(
-            symbol_frames,
-            failures,
-            reference_symbols,
-            required_context_symbols,
-            expected_session,
-            args.years,
-            args.max_workers,
-            diagnostic_dir=ROOT / "data" / "diagnostics",
-        )
-    except MarketDataNotReadyError as error:
-        raise SystemExit(str(error)) from error
+    symbol_frames, failures, readiness = wait_for_expected_session_frames(
+        symbol_frames,
+        failures,
+        reference_symbols,
+        required_context_symbols,
+        expected_session,
+        args.years,
+        args.max_workers,
+        diagnostic_dir=ROOT / "data" / "diagnostics",
+    )
     missing_context = [symbol for symbol in ["SPY", *SECTOR_ETFS] if symbol not in symbol_frames]
     if missing_context:
         raise SystemExit(f"Missing required model context histories: {missing_context}")
@@ -1629,5 +1628,13 @@ def main() -> None:
     print(f"Wrote {len(rankings)} live model rankings to {output_path.relative_to(ROOT)}")
 
 
+def cli() -> None:
+    try:
+        main()
+    except MarketDataNotReadyError as error:
+        print(str(error), file=sys.stderr, flush=True)
+        raise SystemExit(MARKET_DATA_NOT_READY_EXIT_CODE) from error
+
+
 if __name__ == "__main__":
-    main()
+    cli()

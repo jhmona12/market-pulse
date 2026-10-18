@@ -17,6 +17,16 @@ Runtime cache saving is optional and only runs after successful model scoring. A
 
 Both the refresh and push-to-Pages workflows provision Python 3.11 and install `scripts/modeling/requirements.txt` before verification. The verifier includes Python model tests even when no model scoring is requested; a Node-only Pages job is insufficient. Locally, `PYTHON` explicitly selects the interpreter for both compile checks and tests, otherwise `.venv-model/bin/python` is preferred when available. Workflow fixtures enforce dependency-install ordering in both publication paths.
 
+The refresh workflow additionally runs both unit suites immediately after dependency installation, before calendar requests, price pulls, scoring, or paid AI synthesis. The later full verification remains required because preflight cannot validate outputs that have not been generated yet.
+
+## Code Deployment Versus Data Refresh
+
+A push to `main` triggers `.github/workflows/pages.yml`, which installs verification dependencies, runs the verifier, and deploys the committed static bundle. It does not execute the calendar, model scorers, or briefing generator. Refresh-code changes apply to the next `.github/workflows/refresh-data.yml` run.
+
+For an immediate post-deployment refresh, use Actions > Refresh Market Data > Run workflow on `main`. Confirm the run's commit includes the fix. Rerunning an older failed workflow uses its old commit, not newly pushed code. A manual refresh deliberately has target `manual`; it does not complete a scheduled target or suppress that target's backup attempt.
+
+For rollout verification, inspect the push deployment's commit and successful verification/deployment steps, then compare the live dashboard bundle with the committed files. A later fresh-data run must pass preflight, both scorers, snapshot verification, deployment, and the live artifact probe before it counts as a successful refresh. Publishing a code patch with the existing dataset is not evidence that new model scoring has occurred.
+
 ## Failure Recovery
 
 `scripts/refresh/recover-dashboard.mjs` checks the remote branch before restoring the seven tracked data/status/ledger artifacts from `HEAD`. Recovery is skipped if the remote advanced or the new dashboard was already confirmed live. In particular, a later Git commit failure must not roll back a successfully published dashboard.
@@ -47,6 +57,10 @@ Feature validation selects the expected session explicitly, rejects duplicate sy
 
 If the feed or feature matrix is incomplete, errors name the expected date, coverage, missing context, or latest complete feature date. There is no silent fallback to an older model date. These controls improve retry behavior and diagnosis; they cannot force Yahoo to supply missing data.
 
+The tactical CLI reports `MarketDataNotReadyError` with exit code `75`, distinct from generic failures. The outer wrapper waits 15 minutes for this condition before its second attempt; other errors retain the 90-second retry. `MODEL_DATA_RETRY_DELAY_MS` can shorten the settlement delay but cannot exceed 15 minutes. There are still only two outer attempts, three inner readiness checks per attempt, and a 35-minute workflow step limit. The wait addresses the observed October feed recovery intervals, not a promised Yahoo update time. Persistent missing data still fails, and a strategic-only error never causes another full tactical price pull.
+
+Do not shorten the availability wait by lowering the coverage threshold, substituting raw for adjusted prices, changing the expected date, or relabeling an old snapshot as fresh.
+
 ### Price Parsing And Evidence
 
 `scripts/modeling/price_history.py` parses each daily timestamp using the response's IANA `exchangeTimezoneName`, including daylight-saving offsets. A UTC date can differ from its exchange date. Missing exchange metadata fails explicitly. Requests explicitly exclude pre/post-market bars; this is not permission to relabel an intraday quote as an official close.
@@ -71,9 +85,14 @@ MODEL_DATA_READINESS_DELAY_SECONDS=30
 MODEL_MIN_SESSION_COVERAGE=0.90
 MODEL_SCORING_ATTEMPTS=2
 MODEL_SCORING_RETRY_DELAY_MS=90000
+MODEL_DATA_RETRY_DELAY_MS=900000
 ```
 
 `EXPECTED_MARKET_DATA_DATE=YYYY-MM-DD` is an explicit diagnostic override, not a routine way to bypass freshness checks.
+
+## Optional AI Failure
+
+Deeper Read falls back to cited source summaries when the API key is absent, requests fail, JSON is malformed, or evidence checks reject the response. Its fallback must work with nonempty candidates, not only an empty list. An undefined summary helper previously made this recovery path crash the entire snapshot; regression tests exercise the actual fallback and ensure its request timer is cleared on network errors. No model ranks or technical values are invented to recover an optional narrative section.
 
 ## Reddit Reliability
 
@@ -97,6 +116,10 @@ Detailed transport errors remain in `marketIntelligence.reddit.currentFetchError
 4. Run `npm run verify` before publishing any fix. This includes the model-readiness and Reddit parser fixtures.
 5. Check the live `data/refresh-status.json` and `data/refresh-ledger.json`; a generated local snapshot does not count as a published refresh.
 
+If a failed run has no executed steps, an empty runner name, and no logs, inspect its check annotations. `The job was not acquired by Runner of type hosted even after multiple attempts` identifies GitHub runner allocation, not an application exception. Repository unit tests and source retries cannot repair that failure. The existing GitHub-hosted monitor shares the same infrastructure dependency.
+
 See [the September 10 pre-commit audit](refresh-precommit-audit-2026-09-10.md) for reproduced failures, regression coverage, and isolated live checks.
 
 See [the September 11 incident review](refresh-incident-2026-09-11.md) for the subsequent evening recurrence, confirmed evidence, and remaining uncertainty.
+
+See [the October 18 incident review](refresh-incident-2026-10-18.md) for the 66-attempt audit, captured null prices, reproduced Deeper Read defect, and ranked reliability options.

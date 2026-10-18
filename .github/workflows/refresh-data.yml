@@ -75,6 +75,12 @@ jobs:
         if: steps.pacific_time.outputs.run_refresh == 'true'
         run: python -m pip install -r scripts/modeling/requirements.txt
 
+      - name: Run unit tests before refresh
+        if: steps.pacific_time.outputs.run_refresh == 'true'
+        run: |
+          node --test tests/*.test.mjs
+          python -m unittest discover -s tests -p 'test_*.py'
+
       - name: Restore runtime cache
         if: steps.pacific_time.outputs.run_refresh == 'true'
         uses: actions/cache/restore@v4
@@ -103,6 +109,7 @@ jobs:
           MODEL_MIN_SESSION_COVERAGE: "0.90"
           MODEL_SCORING_ATTEMPTS: 2
           MODEL_SCORING_RETRY_DELAY_MS: 90000
+          MODEL_DATA_RETRY_DELAY_MS: 900000
         run: node scripts/refresh/run-model-scoring.mjs
 
       - name: Retain price readiness diagnostics
