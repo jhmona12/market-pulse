@@ -315,8 +315,12 @@ Reddit is optional and should be treated as retail attention, not verified news.
 ```bash
 REDDIT_CLIENT_ID=your_reddit_app_client_id
 REDDIT_CLIENT_SECRET=your_reddit_app_secret
-REDDIT_USER_AGENT="MarketPulse/0.1 by your-reddit-username"
+REDDIT_USER_AGENT="linux:market-pulse:v0.1 (by /u/your-reddit-username)"
 ```
+
+After saving the three repository secrets, run **Check Reddit OAuth** from GitHub Actions. This small workflow also runs on pushes to its diagnostic/auth files on `main`. It tests the diagnostic, obtains an app-only token, and reads five WallStreetBets posts through the authenticated API. Only aggregate counts or sanitized errors are logged; it does not refresh the dashboard, run models/AI, or store post content. A passing check confirms access at that moment, not guaranteed ticker coverage on every refresh. Changing a secret does not itself trigger a workflow; use **Run workflow** to recheck after credential changes.
+
+For local checks with the variables already exported, use `npm run check:reddit` (Node 24). GitHub secrets are not automatically available on your laptop. Reddit app registration alone does not establish approved API access; consult the [Reddit Data API guidance](https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki) for access requirements.
 
 If OAuth is not configured, the script uses the WallStreetBets `hot` RSS feed, with an alternate-host fallback on failure. It does not chain public JSON endpoints and additional subreddit feeds in this mode. RSS remains best-effort; OAuth is the supported path for the broader multi-subreddit hot/new/top-day sample, not a guarantee of access. Live posts require valid timestamps within the trailing 24 hours. RSS and mixed OAuth/RSS samples are unranked mentions rather than popularity rankings. When a live pull fails, the dashboard can show `data/cache/reddit-tape-cache.json` for up to 24 hours, clearly labeled as cached; otherwise the UI shows one concise unavailable message and retains diagnostic errors in JSON.
 

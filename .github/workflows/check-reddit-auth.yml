@@ -1,0 +1,46 @@
+name: Check Reddit OAuth
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/check-reddit-auth.yml
+      - scripts/check-reddit-auth.mjs
+      - scripts/ingest/reddit-auth.mjs
+      - tests/reddit-auth.test.mjs
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reddit-oauth-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Test diagnostic without credentials
+        run: node --test tests/reddit-auth.test.mjs tests/reddit-ingestion.test.mjs
+
+      - name: Check token and authenticated listing
+        env:
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
+        run: npm run check:reddit

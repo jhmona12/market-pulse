@@ -18,7 +18,8 @@ import {
   visibleTextFromHtml
 } from "./ingest/sources.mjs";
 import { parseRedditRssListing, redditListingPostsFromJson, redditSortsForMode, redditSourcesForMode, recentRedditPosts, redditMetricsFromPosts } from "./ingest/reddit.mjs";
-import { cancelResponseBody, fetchJsonWithRetry, fetchTextWithRetry } from "./ingest/http.mjs";
+import { fetchJsonWithRetry, fetchTextWithRetry } from "./ingest/http.mjs";
+import { fetchRedditAccessToken } from "./ingest/reddit-auth.mjs";
 import { buildAiMemoInputPayload, buildAiRecommendationResponseSchema } from "./snapshot/ai-memo.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -1449,31 +1450,6 @@ function cachedRedditTape(cache, currentErrors) {
   };
 }
 
-async function fetchRedditAccessToken() {
-  if (!redditClientId || !redditClientSecret) {
-    return { token: null, mode: "public", error: "REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured" };
-  }
-  const body = new URLSearchParams({ grant_type: "client_credentials" });
-  const authorization = Buffer.from(`${redditClientId}:${redditClientSecret}`).toString("base64");
-  const response = await fetch("https://www.reddit.com/api/v1/access_token", {
-    method: "POST",
-    headers: {
-      authorization: `Basic ${authorization}`,
-      "content-type": "application/x-www-form-urlencoded",
-      "user-agent": redditUserAgent,
-      accept: "application/json"
-    },
-    body
-  });
-  if (!response.ok) {
-    await cancelResponseBody(response);
-    throw new Error(`OAuth token request failed: ${response.status} ${response.statusText}`);
-  }
-  const payload = await response.json();
-  if (!payload.access_token) throw new Error("OAuth token response did not include access_token");
-  return { token: payload.access_token, mode: "oauth" };
-}
-
 async function fetchRedditRssListing(subreddit, segment, sort = "hot", limit = redditPostLimit) {
   const sortPath = sort === "hot" ? "" : `${sort}/`;
   const topWindow = sort === "top" ? "?t=day" : "";
@@ -1538,7 +1514,7 @@ async function fetchRedditTape(knownSymbols) {
   const cache = await loadRedditCache();
   let oauth = { token: null, mode: "public" };
   try {
-    oauth = await fetchRedditAccessToken();
+    oauth = await fetchRedditAccessToken({ clientId: redditClientId, clientSecret: redditClientSecret, userAgent: redditUserAgent });
   } catch (error) {
     oauth = { token: null, mode: "public", error: error.message };
   }
