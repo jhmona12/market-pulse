@@ -89,6 +89,16 @@ Local verification on October 18:
 - Full `scripts/verify.mjs`: **66 JavaScript tests and 28 Python tests passed**, plus JavaScript syntax, Python compile, dashboard schema/data contracts, and workflow checks.
 - Workflow YAML parsing passed.
 - Independent strict live status/four-artifact hash check passed for existing production run `39142262920`.
-- New tests are isolated from external services; mocked availability proves retry policy, not future service uptime. Local Python is 3.12; hosted Python remains 3.11, so the next hosted run is still an environment verification boundary.
+- New tests are isolated from external services; mocked availability proves retry policy, not future service uptime. Local verification used Python 3.12; hosted validation is recorded below.
 
 No retraining, model/label changes, schedule changes, paid service setup, fresh AI calls, or generated dashboard writes were performed for this investigation. The verification results above were recorded before rollout; the user subsequently approved deploying this patch. Deployment status belongs to the [Pages workflow history](https://github.com/jhmona12/market-pulse/actions/workflows/pages.yml), while new scoring/publication belongs to the [refresh workflow history](https://github.com/jhmona12/market-pulse/actions/workflows/refresh-data.yml). Match the run's commit to the patch: the October 18 morning success predates it, and a Pages-only deployment does not recalculate model scores.
+
+## Rollout Verification
+
+Reliability fix commit `9967c5d2fe79970b93c7a3497a429cfa9342d6a2` was pushed to `main` on October 18. [Pages deployment 39169337048](https://github.com/jhmona12/market-pulse/actions/runs/39169337048) completed successfully. Its hosted Node 24 / Python 3.11 verifier also passed all 66 JavaScript and 28 Python tests, followed by successful artifact packaging and Pages deployment. This activates the workflow changes for subsequent runs; it is not a full market-data refresh.
+
+## Separate Reddit Finding
+
+The October 18 morning snapshot reports `authMode: "public"` and missing `REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET`. Its RSS request succeeded with 25 WallStreetBets posts; 9 survived the 24-hour filter, none produced a recognized ticker, and `topTickers` was empty despite `status: "ready"`. This is not evidence of a failed HTTP request in that run.
+
+One returned title explicitly mentions `IREN`, which was absent from the recognition universe. A local assertion replay of that title produced no signal without `IREN` in `knownSymbols`, and one direct `IREN` signal when the symbol was supplied. The RSS sample also lacks vote/comment metrics and does not include comment threads. This narrows the issue to limited access/coverage, symbol recognition, and misleading readiness/empty-state reporting. These Reddit changes were not included in the refresh-reliability deployment; the diagnostic does not establish the accuracy of the post's underlying claim.

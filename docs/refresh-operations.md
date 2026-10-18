@@ -23,7 +23,7 @@ The refresh workflow additionally runs both unit suites immediately after depend
 
 A push to `main` triggers `.github/workflows/pages.yml`, which installs verification dependencies, runs the verifier, and deploys the committed static bundle. It does not execute the calendar, model scorers, or briefing generator. Refresh-code changes apply to the next `.github/workflows/refresh-data.yml` run.
 
-For an immediate post-deployment refresh, use Actions > Refresh Market Data > Run workflow on `main`. Confirm the run's commit includes the fix. Rerunning an older failed workflow uses its old commit, not newly pushed code. A manual refresh deliberately has target `manual`; it does not complete a scheduled target or suppress that target's backup attempt.
+For an immediate post-deployment refresh, use Actions > Refresh Market Data > Run workflow on `main`. Confirm the run's commit includes the fix. An older rerun retains its original workflow definition, but this project's `Sync latest default branch` step can fast-forward its checked-out scripts to newer `main`. That mixes an older workflow with newer files, so start a new run to test the complete fix. A manual refresh deliberately has target `manual`; it does not complete a scheduled target or suppress that target's backup attempt.
 
 For rollout verification, inspect the push deployment's commit and successful verification/deployment steps, then compare the live dashboard bundle with the committed files. A later fresh-data run must pass preflight, both scorers, snapshot verification, deployment, and the live artifact probe before it counts as a successful refresh. Publishing a code patch with the existing dataset is not evidence that new model scoring has occurred.
 
@@ -103,6 +103,10 @@ Without OAuth, the refresh uses the WallStreetBets `hot` RSS feed, with an alter
 Metric labels follow the actual returned posts, not the presence of credentials. Only an entirely OAuth-JSON sample includes vote/comment metrics; RSS or mixed samples are labeled `unranked_recent_mentions`, not a popularity or concentration ranking. Live posts must have a valid timestamp within the trailing 24 hours; future, undated, and older posts are excluded. A clean last-good sample may be used for up to 24 hours and is labeled cached; otherwise the dashboard shows Reddit as unavailable and excludes it from the investment conclusion.
 
 Detailed transport errors remain in `marketIntelligence.reddit.currentFetchErrors` and per-subreddit `sortStatuses`. The UI displays only the concise `statusReason`.
+
+Current limitation: Reddit `status: "ready"` means recent posts were retrieved, not that usable ticker signals were found. Check `sampleCoverage.postCount`, `topTickers`, `metricMode`, and `currentFetchErrors` together. An RSS request can succeed with zero extracted tickers, while missing OAuth credentials are only recorded in the detailed errors. The empty UI currently does not explain that distinction.
+
+Ticker recognition is not a market-wide securities directory: bare uppercase symbols must occur in the configured stock/ETF universe, model rankings, or the supplemental `redditTickerAllowList` in `update-data.mjs`. Explicit cashtags use a separate filter. The collector reads post titles/bodies, not comment threads or text inside screenshots. These limits can miss real discussion even when the feed is available. Expanding recognition requires symbol validation and regression tests, not accepting every uppercase word as a ticker.
 
 ## HTTP Ingestion Policy
 
