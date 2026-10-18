@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-17T15:36:23.100Z",
+  "generatedAt": "2026-10-18T01:10:52.328Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-10-17T15:33:09.425698+00:00",
+    "generatedAt": "2026-10-18T01:07:34.157222+00:00",
     "asOfDate": "2026-10-16",
     "expectedAsOfDate": "2026-10-16",
     "isStale": false,
@@ -1415,11 +1415,12 @@
     }
   },
   "note": {
-    "headline": "Breadth is narrow, so keep long exposure concentrated in the cleanest setups; leadership is concentrated in MRNA, DELL, LITE, MU, MRVL.",
-    "body": "The current market-driver read is thin because few configured sources yielded current dated articles. 36% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, P, DDOG, ILMN, IT.",
+    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
+    "body": "The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism. 36% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, P, DDOG, ILMN, IT.",
     "changed": [
+      "Macro: South Korea's finance minister said semiconductor growth can last at least through 2027 as supply remains tight despite a global chip sell-off. (M2)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: The last successful Reddit sample (13.9 hours old) highlighted MSCI, AMD, TSLA, NVDA; treat this as stale sentiment context, not verified news.",
+      "Retail attention: The last successful Reddit sample (23.5 hours old) highlighted MSCI, AMD, TSLA, NVDA; treat this as stale sentiment context, not verified news.",
       "Breadth: 45% of the screened universe is above the 50-day average, 55% is above the 200-day, and 36% clears both trend lines.",
       "Tactical implication: MRNA (Top Decile), P (Top Decile), DDOG (Top Decile), ILMN (Top Decile) are the setups that currently merit review after the market backdrop is considered."
     ],
@@ -1435,11 +1436,11 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 106607,
+      "inputTokens": 107147,
       "cachedInputTokens": 0,
-      "outputTokens": 2915,
+      "outputTokens": 2847,
       "reasoningTokens": 0,
-      "totalTokens": 109522,
+      "totalTokens": 109994,
       "estimatedCostUsd": 0.006496,
       "pricingPerMillion": {
         "input": 0.05,
@@ -1448,8 +1449,8 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Current source tape is thin; rely more heavily on model and macro checks.",
-    "macroView": "No fresh professional market driver cleared the filter for this refresh. Next macro decision points: FOMC Rate Decision on 2026-10-28; GDP Advance Estimate on 2026-10-29; Personal Income and Outlays on 2026-10-29. Sector confirmation: Energy +7.21% over 30D, +5.74% vs SPY; Consumer Staples +5.84% over 30D, +4.37% vs SPY; Health Care +5.73% over 30D, +4.26% vs SPY.",
+    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
+    "macroView": "The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism. South Korea's finance minister said semiconductor growth can last at least through 2027 as supply remains tight despite a global chip sell-off. Next macro decision points: FOMC Rate Decision on 2026-10-28; GDP Advance Estimate on 2026-10-29; Personal Income and Outlays on 2026-10-29. Sector confirmation: Energy +7.21% over 30D, +5.74% vs SPY; Consumer Staples +5.84% over 30D, +4.37% vs SPY; Health Care +5.73% over 30D, +4.26% vs SPY.",
     "dailyRead": null,
     "recommendations": [
       {
@@ -1463,8 +1464,8 @@
         "marketCap": "$87.0B",
         "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.1.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "No fresh macro or market-driver conclusion cleared the current source filter.",
-        "macroEvidence": "No direct company-level macro catalyst is asserted.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+        "macroEvidence": "CNBC Earnings RSS, 2026-10-17: AI stocks plunge. Inflation heats up.",
         "modelEvidence": "Rank #1 of 499; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -3.11%; 14D +14.74%; 30D +49.71%; 60D vs SPY +278.69%; RSI 57; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
@@ -1472,10 +1473,11 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "S1",
-          "S11",
+          "S12",
           "C1-EARNINGS",
+          "C1-MARKETCAP",
           "C1-IR",
-          "C1-MARKETCAP"
+          "S6"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1492,17 +1494,18 @@
         "marketCap": "$287.2B",
         "earningsContext": "Last reported 2026-09-01 for the Jul 2026 fiscal quarter; EPS 6.76 versus consensus 4.72; surprise 43.22%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 6.41.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "No fresh macro or market-driver conclusion cleared the current source filter.",
-        "macroEvidence": "No direct company-level macro catalyst is asserted.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+        "macroEvidence": "CNBC Earnings RSS, 2026-10-17: AI stocks plunge. Inflation heats up.",
         "modelEvidence": "Rank #2 of 499; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -22.92%; 14D -19.70%; 30D -19.81%; 60D vs SPY -0.84%; RSI 29; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
         "risk": "Above-sector volatility; Below 50d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C2-EARNINGS",
           "C2-IR",
-          "C2-MARKETCAP"
+          "C2-EARNINGS",
+          "C2-MARKETCAP",
+          "S6"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
@@ -1519,8 +1522,8 @@
         "marketCap": "$74.7B",
         "earningsContext": "Last reported 2026-08-11 for the Jun 2026 fiscal quarter; EPS 2.64 versus consensus 2.62; surprise 0.76%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 3.82.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "No fresh macro or market-driver conclusion cleared the current source filter.",
-        "macroEvidence": "No direct company-level macro catalyst is asserted.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+        "macroEvidence": "CNBC Earnings RSS, 2026-10-17: AI stocks plunge. Inflation heats up.",
         "modelEvidence": "Rank #3 of 499; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Above 200d trend; Liquid versus universe.",
         "technicalEvidence": "7D -25.31%; 14D -24.07%; 30D -10.36%; 60D vs SPY -4.79%; RSI 42; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
@@ -1528,8 +1531,9 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C3-EARNINGS",
+          "C3-MARKETCAP",
           "C3-IR",
-          "C3-MARKETCAP"
+          "S6"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
@@ -1546,8 +1550,8 @@
         "marketCap": "$994.3B",
         "earningsContext": "Last reported 2026-09-30 for the Aug 2026 fiscal quarter; EPS 33.19 versus consensus 31.41; surprise 5.67%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Nov 2026 with consensus 37.93.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "No fresh macro or market-driver conclusion cleared the current source filter.",
-        "macroEvidence": "No direct company-level macro catalyst is asserted.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+        "macroEvidence": "CNBC Earnings RSS, 2026-10-17: AI stocks plunge. Inflation heats up.",
         "modelEvidence": "Rank #4 of 499; 99.4 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -14.58%; 14D -18.23%; 30D -5.13%; 60D vs SPY -14.89%; RSI 27; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
@@ -1555,8 +1559,9 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C4-EARNINGS",
+          "C4-MARKETCAP",
           "C4-IR",
-          "C4-MARKETCAP"
+          "S6"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
@@ -1573,8 +1578,8 @@
         "marketCap": "$199.8B",
         "earningsContext": "Last reported 2026-08-27 for the Jul 2026 fiscal quarter; EPS 0.62 versus consensus 0.65; surprise -4.62%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.79.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "No fresh macro or market-driver conclusion cleared the current source filter.",
-        "macroEvidence": "No direct company-level macro catalyst is asserted.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+        "macroEvidence": "CNBC Earnings RSS, 2026-10-17: AI stocks plunge. Inflation heats up.",
         "modelEvidence": "Rank #5 of 499; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -17.24%; 14D -16.31%; 30D -0.80%; 60D vs SPY +5.21%; RSI 38; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
@@ -1582,8 +1587,9 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C5-EARNINGS",
+          "C5-MARKETCAP",
           "C5-IR",
-          "C5-MARKETCAP"
+          "S6"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
@@ -1600,8 +1606,8 @@
         "marketCap": "$188.8B",
         "earningsContext": "Last reported 2026-08-05 for the Jun 2026 fiscal quarter; EPS 38.82 versus consensus 33.28; surprise 16.65%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 45.22.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "No fresh macro or market-driver conclusion cleared the current source filter.",
-        "macroEvidence": "No direct company-level macro catalyst is asserted.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+        "macroEvidence": "CNBC Earnings RSS, 2026-10-17: AI stocks plunge. Inflation heats up.",
         "modelEvidence": "Rank #6 of 499; 99.0 percentile; reasons: Long-horizon momentum ahead of sector median; Above 200d trend; Liquid versus universe.",
         "technicalEvidence": "7D -17.86%; 14D -24.46%; 30D -14.52%; 60D vs SPY -22.97%; RSI 17; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
@@ -1609,8 +1615,9 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C6-EARNINGS",
+          "C6-MARKETCAP",
           "C6-IR",
-          "C6-MARKETCAP"
+          "S6"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
@@ -1843,25 +1850,32 @@
       "Do watch names DELL, LITE, MU regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
+      "O1",
+      "O2",
       "S1",
-      "S11",
       "S4",
+      "S6",
+      "S12",
       "C1-IR",
-      "C2-EARNINGS"
+      "C1-EARNINGS",
+      "C2-EARNINGS",
+      "C4-EARNINGS",
+      "C5-EARNINGS",
+      "C6-EARNINGS"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Featured source angle: The note describes Wall Street as having a rough week driven by AI infrastructure concerns, rising oil prices, and inflationary pressures, with caution warranted after signs of negative momentum divergences in majors and failed breakouts in tech and high beta stocks.",
+      "summary": "Featured source angle: Cautionary weekly read tied to AI infrastructure concerns, higher borrowing costs, and energy price signals that coincided with a weaker week for equities.",
       "cards": [
         {
           "sourceRef": "S8",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Weekly Trader's Outlook",
-          "thesis": "The note describes Wall Street as having a rough week driven by AI infrastructure concerns, rising oil prices, and inflationary pressures, with caution warranted after signs of negative momentum divergences in majors and failed breakouts in tech and high beta stocks.",
-          "whyItMatters": "This frames a risk backdrop where entrenched headwinds may limit upside in equities in the near term, suggesting investors should monitor shifts in AI investment sentiment, commodity pressures, and breadth of strength beyond defensive sectors.",
-          "marketReadThrough": "Monitor: Week-over-week performance is tracking losses across equities, with defensive areas showing relative strength and technology / high-beta segments exhibiting failed breakouts. Watch for any change in oil price direction, AI-related spending sentiment, and broader momentum breadth as observable confirmations of the ongoing cautious stance.",
-          "variantAngle": "Inference: If the current breadth signals persist (negative momentum divergences and failed breakouts) alongside higher oil prices, one might infer a higher probability of continued selective weakness in cyclic and high-beta areas rather than a broad market reversal, though this remains contingent on macro and AI-related demand developments.",
+          "thesis": "Cautionary weekly read tied to AI infrastructure concerns, higher borrowing costs, and energy price signals that coincided with a weaker week for equities.",
+          "whyItMatters": "The piece links ongoing AI and semiconductors headwinds and inflationary pressure to a broader risk-off tone, suggesting that sentiment could remain fragile as these themes interact with macro costs and oil dynamics.",
+          "marketReadThrough": "Monitor: observable week-over-week sentiment and sector rotation patterns as described, including defensive tilt and tech / energy sector signals, without assuming any directional market outcome.",
+          "variantAngle": "Inference: given the week’s framing, if AI-related concerns and oil-price weakness persist, one plausible partial effect is a continued pressure on cyclical tech and high-beta names, conditioned on the persistence of those themes in the reported weekly review.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-10-16T20:46:59.000Z",
@@ -1875,16 +1889,16 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Featured source angle: The note describes Wall Street as having a rough week driven by AI infrastructure concerns, rising oil prices, and inflationary pressures, with caution warranted after signs of negative momentum divergences in majors and failed breakouts in tech and high beta stocks.",
+    "summary": "Featured source angle: Cautionary weekly read tied to AI infrastructure concerns, higher borrowing costs, and energy price signals that coincided with a weaker week for equities.",
     "cards": [
       {
         "sourceRef": "S8",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Weekly Trader's Outlook",
-        "thesis": "The note describes Wall Street as having a rough week driven by AI infrastructure concerns, rising oil prices, and inflationary pressures, with caution warranted after signs of negative momentum divergences in majors and failed breakouts in tech and high beta stocks.",
-        "whyItMatters": "This frames a risk backdrop where entrenched headwinds may limit upside in equities in the near term, suggesting investors should monitor shifts in AI investment sentiment, commodity pressures, and breadth of strength beyond defensive sectors.",
-        "marketReadThrough": "Monitor: Week-over-week performance is tracking losses across equities, with defensive areas showing relative strength and technology / high-beta segments exhibiting failed breakouts. Watch for any change in oil price direction, AI-related spending sentiment, and broader momentum breadth as observable confirmations of the ongoing cautious stance.",
-        "variantAngle": "Inference: If the current breadth signals persist (negative momentum divergences and failed breakouts) alongside higher oil prices, one might infer a higher probability of continued selective weakness in cyclic and high-beta areas rather than a broad market reversal, though this remains contingent on macro and AI-related demand developments.",
+        "thesis": "Cautionary weekly read tied to AI infrastructure concerns, higher borrowing costs, and energy price signals that coincided with a weaker week for equities.",
+        "whyItMatters": "The piece links ongoing AI and semiconductors headwinds and inflationary pressure to a broader risk-off tone, suggesting that sentiment could remain fragile as these themes interact with macro costs and oil dynamics.",
+        "marketReadThrough": "Monitor: observable week-over-week sentiment and sector rotation patterns as described, including defensive tilt and tech / energy sector signals, without assuming any directional market outcome.",
+        "variantAngle": "Inference: given the week’s framing, if AI-related concerns and oil-price weakness persist, one plausible partial effect is a continued pressure on cyclical tech and high-beta names, conditioned on the persistence of those themes in the reported weekly review.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-10-16T20:46:59.000Z",
@@ -1903,12 +1917,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-10-17T15:35:28.132Z",
+    "generatedAt": "2026-10-18T01:09:53.486Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-10-17T01:39:27.462Z"
+      "previousRefreshAt": "2026-10-17T15:36:23.100Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1919,7 +1933,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-10-17T15:33:11.855Z",
+      "generatedAt": "2026-10-18T01:07:37.166Z",
       "lookbackHours": 96,
       "releases": [
         {
@@ -1962,12 +1976,8 @@
     },
     "sourceHealth": {
       "checked": 25,
-      "live": 20,
+      "live": 21,
       "blockedOrFailed": [
-        {
-          "name": "EIA Today In Energy",
-          "reason": "Source check failed: This operation was aborted"
-        },
         {
           "name": "BLS Economic News Releases",
           "reason": "Source check failed: 403 Forbidden"
@@ -1986,16 +1996,73 @@
         }
       ]
     },
-    "professionalDrivers": [],
+    "professionalDrivers": [
+      {
+        "id": "M1",
+        "title": "AI stocks plunge. Inflation heats up. Where we&apos;re still finding opportunities",
+        "sourceName": "CNBC Earnings RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/investingclub/2026/10/17/ai-stocks-plunge-inflation-heats-up-where-were-still-finding-opportunities.html",
+        "publishedAt": "2026-10-17T15:42:34.000Z",
+        "summary": "The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+        "excerpt": "The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+        "themes": [
+          "Earnings",
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 9.5,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M2",
+        "title": "Semiconductor market to remain solid ‘at least through next year,’ South Korea finance minister says",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/10/17/south-korea-semiconductor-outlook-lee-hyoung-il.html",
+        "publishedAt": "2026-10-17T16:45:15.000Z",
+        "summary": "South Korea's finance minister said semiconductor growth can last at least through 2027 as supply remains tight despite a global chip sell-off.",
+        "excerpt": "South Korea's finance minister said semiconductor growth can last at least through 2027 as supply remains tight despite a global chip sell-off.",
+        "themes": [
+          "Macro and growth",
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 8.4,
+        "score": 78,
+        "tickers": []
+      }
+    ],
     "topThemes": [
       {
         "theme": "Macro and growth",
+        "count": 3
+      },
+      {
+        "theme": "AI and semis",
         "count": 2
+      },
+      {
+        "theme": "Earnings",
+        "count": 1
+      },
+      {
+        "theme": "Rates and central banks",
+        "count": 1
+      },
+      {
+        "theme": "Geopolitics and policy",
+        "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-10-17T15:35:28.122Z",
+      "generatedAt": "2026-10-18T01:09:53.475Z",
       "dates": [
         "2026-10-16",
         "2026-10-17",
@@ -2227,12 +2294,21 @@
           "title": "Investors are buying up vast tracts of timberland across U.S. in one of market&apos;s longest-term bets",
           "sourceName": "CNBC Top News RSS",
           "url": "https://www.cnbc.com/2026/10/17/timberland-investing-returns-risk.html",
-          "publishedAt": "2026-10-17T13:47:59.000Z",
+          "publishedAt": "2026-10-17T16:31:06.000Z",
           "summary": "Timberland managers buying for pension funds and other institutional investors can wait decades for returns, but the market can also be a profit trap.",
           "tickers": []
         },
         {
           "id": "E2",
+          "title": "AI stocks plunge. Inflation heats up. Where we&apos;re still finding opportunities",
+          "sourceName": "CNBC Earnings RSS",
+          "url": "https://www.cnbc.com/investingclub/2026/10/17/ai-stocks-plunge-inflation-heats-up-where-were-still-finding-opportunities.html",
+          "publishedAt": "2026-10-17T15:42:34.000Z",
+          "summary": "The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+          "tickers": []
+        },
+        {
+          "id": "E3",
           "title": "Weekly Trader's Outlook",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
@@ -2241,7 +2317,7 @@
           "tickers": []
         },
         {
-          "id": "E3",
+          "id": "E4",
           "title": "Investors Play Defense While Volatility Stirs",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-digest",
@@ -2250,7 +2326,7 @@
           "tickers": []
         },
         {
-          "id": "E4",
+          "id": "E5",
           "title": "Schwab Market Perspective",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/stock-market-outlook",
@@ -2259,7 +2335,7 @@
           "tickers": []
         },
         {
-          "id": "E5",
+          "id": "E6",
           "title": "BNY stock pops on strong earnings — showing exactly why we like this bank in this market",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/investingclub/2026/10/15/bny-stock-pops-on-strong-earnings-showing-exactly-why-we-like-this-bank-in-this-market.html",
@@ -2270,21 +2346,12 @@
           ]
         },
         {
-          "id": "E6",
+          "id": "E7",
           "title": "TSMC posts record profit for a sixth straight quarter, beating estimates on AI boom",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/10/15/tsmc-third-quarter-profit-global-ai-.html",
           "publishedAt": "2026-10-15T08:09:37.000Z",
           "summary": "TSMC reported its third-quarter earnings on Thursday.",
-          "tickers": []
-        },
-        {
-          "id": "E7",
-          "title": "Anthropic&apos;s third-quarter revenue is said to hit $16.8 billion ahead of IPO",
-          "sourceName": "CNBC Earnings RSS",
-          "url": "https://www.cnbc.com/2026/10/15/anthropics-third-quarter-revenue-hits-16point8-billion-ipo.html",
-          "publishedAt": "2026-10-15T03:48:58.000Z",
-          "summary": "Anthropic reports third-quarter stands at $16.8 billion ahead of its IPO.",
           "tickers": []
         }
       ],
@@ -2292,7 +2359,7 @@
     },
     "reddit": {
       "status": "cache_fallback",
-      "generatedAt": "2026-10-17T15:33:12.302Z",
+      "generatedAt": "2026-10-18T01:07:37.628Z",
       "authMode": "public",
       "metricMode": "unranked_recent_mentions",
       "sampleCoverage": {
@@ -2723,7 +2790,7 @@
         "OAuth: REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET not configured"
       ],
       "sourceGeneratedAt": "2026-10-17T01:36:16.772Z",
-      "cacheAgeHours": 13.9
+      "cacheAgeHours": 23.5
     },
     "marketMovers": {
       "source": "Yahoo Finance predefined screeners",
@@ -3133,8 +3200,10 @@
       "errors": []
     },
     "briefingBullets": [
+      "Policy/geopolitics: The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism. (M1)",
+      "Macro: South Korea's finance minister said semiconductor growth can last at least through 2027 as supply remains tight despite a global chip sell-off. (M2)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: The last successful Reddit sample (13.9 hours old) highlighted MSCI, AMD, TSLA, NVDA; treat this as stale sentiment context, not verified news."
+      "Retail attention: The last successful Reddit sample (23.5 hours old) highlighted MSCI, AMD, TSLA, NVDA; treat this as stale sentiment context, not verified news."
     ]
   },
   "avoidList": {
@@ -27731,7 +27800,7 @@
       "return30": 10.48,
       "return60": 6.24,
       "return90": 6.76,
-      "ytdReturn": 16.92,
+      "ytdReturn": 16.91,
       "beta60d": -0.35,
       "above50": true,
       "above100": true,
@@ -55952,7 +56021,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-10-16T20:46:59.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Wall Street has Rough Week on AI Concerns, Rising Oil Prices Stocks are on track for weekly losses as concerns around the AI infrastructure buildout, rising borrowing costs and inflationary pressures weigh on investor sentiment. October 16, 2026 • Nathan Peterson The Week That Was If you read Rachel's blog from last Friday, you might recall that she had a \"cautious\" outlook for stocks this week, citing negative momentum divergences in the majors, relative strength in defensive areas of the market, failed breakouts in tech and high beta stocks, and a potential near-term trough in oil prices (from a technical perspective). Stocks are on track to be down across the board this week, so caution was warranted. There were several bearish catalysts working against Wall Street this week: artificial intelligence (AI) concerns, warm/hot inflation data, rising oil prices: AI concerns – following last week's Financial Times report that OpenAI's revenue was not tracking as strongly as expected, memory stocks were hit by both a report that CXMT is closer to making a denser DRAM cell architecture, which could have long-term memory supply implications and the Korea Composite Stock Price Index (KOSPI) dropped 14% this week. Then, GPU rental cloud services provider CoreWeave's five-year credit default swaps (CDS) hit a record high this week, all of which generated a sell-off across the entire AI complex. The PHLX Semiconductor Index (SOX) is on track to be down for its eighth consecutive day today (more on the SOX in the \"Technical Take\" section below). The monthly Consumer Price Index (CPI) and Producer Price Index (PPI) reports both came in warmer than expected. Oddly enough",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Wall Street has Rough Week on AI Concerns, Rising Oil Prices Stocks are on track for weekly losses as concerns around the AI infrastructure buildout, rising borrowing costs and inflationary pressures weigh on investor sentiment. October 16, 2026 • Nathan Peterson The Week That Was If you read Rachel's blog from last Friday, you might recall that she had a \"cautious\" outlook for stocks this week, citing negative momentum divergences in the majors, relative strength in defensive areas of the market, failed breakouts in tech and high beta stocks, and a potential near-term trough in oil prices (from a technical perspective). Stocks are on track to be down across the board this week, so caution was warranted. There were several bearish catalysts working against Wall Street this week: artificial intelligence (AI) concerns, warm/hot inflation data, rising oil prices: AI concerns – following last week's Financial Times report that OpenAI's revenue was not tracking as strongly as expected, memory stocks were hit by both a report that CXMT is closer to making a denser DRAM cell architecture, which could have long-term memory supply implications and the Korea Composite Stock Price Index (KOSPI) dropped 14% this week. Then, GPU rental cloud services provider CoreWeave's five-year credit default swaps (CDS) hit a record high this week, all of which generated a sell-off across the entire AI complex. The PHLX Semiconductor Index (SOX) is on track to be down for its eighth consecutive day today (more on the SOX in the \"Technical Take\" section below). The monthly Consumer Price Index (CPI) and Producer Price Index (PPI) reports both came in warmer than expected",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -55961,7 +56030,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-digest",
           "publishedAt": "2026-10-16T15:10:18.000Z",
           "summary": "Investors rotate to staples as volatility returns, cash draws big inflows, banks signal a sturdy economy, and crypto faces macro headwinds.",
-          "excerpt": "Investors Play Defense While Volatility Stirs | Charles Schwab Search Learn Markets and Economy Investors Play Defense While Volatility Stirs Investors rotate to staples as volatility returns, cash attracts the biggest inflows since COVID, banks signal a sturdy economy, and crypto faces macro headwinds. October 16, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Playing defense in equities Defensive positioning showed up in the stock market late this week as consumer staples took the sector lead. Stocks like Walmart (WMT) and Berkshire Hathaway (BRK.B) gained. The defensive rotation is clear: Healthcare and consumer staples gained Thursday as technology fell. Broader participation hasn't collapsed, but mega-cap technology weakness has an outsized index impact. Investors might want to watch credit conditions , Treasury yields, Fed guidance, and semiconductor stabilization rather than chasing either the selloff or the defensive trade. Anthropic , Micron (MU), ASML (ASML) and Taiwan Semiconductor Manufacturing (TSM) all recently impressed with either results, guidance or both—but markets are questioning the cost of financing the AI buildout. That's been a common theme for about a year since \"hyperscalers\" began taking on debt to build their AI capabilities even as Treasury yields continued their long ascent, raising borrowing costs. DIY investing? Trading? Professional advice? See how Schwab can help Bank earni",
+          "excerpt": "Investors Play Defense While Volatility Stirs | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Investors Play Defense While Volatility Stirs Investors rotate to staples as volatility returns, cash attracts the biggest inflows since COVID, banks signal a sturdy economy, and crypto faces macro headwinds. October 16, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Playing defense in equities Defensive positioning showed up in the stock market late this week as consumer staples took the sector lead. Stocks like Walmart (WMT) and Berkshire Hathaway (BRK.B) gained. The defensive rotation is clear: Healthcare and consumer staples gained Thursday as technology fell. Broader participation hasn't collapsed, but mega-cap technology weakness has an outsized index impact. Investors might want to watch credit conditions , Treasury yields, Fed guidance, and semiconductor stabilization rather than chasing either the selloff or the defensive trade. Anthropic , Micron (MU), ASML (ASML) and Taiwan Semiconductor Manufacturing (TSM) all recently impressed with either results, guidance or both—but markets are questioning the cost of financing the AI buildout. That's been a common theme for about a year since \"hyperscalers\" began taking on debt to build their AI capabilities even as Treasury yields continued their long ascent, raising borrowing costs. DIY investing? Trading? Professional advice? See h",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -55970,7 +56039,7 @@
           "url": "https://www.schwab.com/learn/story/stock-market-outlook",
           "publishedAt": "2026-10-16T14:42:45.000Z",
           "summary": "What to expect from the stock and bond markets? Find out Schwab's perspective from our Schwab Center for Financial Research experts.",
-          "excerpt": "Schwab's Market Perspective | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Schwab Market Perspective Our point of view on recent market and economic activity. October 16, 2026 • Liz Ann Sonders • Kevin Gordon • Collin Martin • Michelle Gibley • Chris Ferrarone Artificial intelligence (AI) and the Federal Reserve rate hike have dominated headlines recently—and investors might be wondering how these things will affect them. While there are many existential questions that come along with the AI question, we're going to leave those for the philosophers and instead tackle what we do best: analyzing and breaking down the data. This month, we dive into how AI might be affecting the labor market, what rising rates might mean for global equities, and why corporate bonds might be worth a second look. Read more from our experts: DIY investing? Trading? Professional advice? See how Schwab can help U.S. stocks and economy: How is AI affecting the labor market? AI has yet to cause broad labor-market disruption , but hiring remains choppy and job losses are concentrated in AI-exposed industries, such as information and finance. AI investment appears to be boosting productivity and corporate profits more than payrolls, reinforcing narrow market leadership and the divide between capital and labor. AI-related job creation remains limited and uneven, while import-heavy capital spending may limit the technology buildout's near-term benefit to U.S. growth and employment. Global stocks and economy: How do rising rates impact global equities? Higher interest rates do not automatically mean lower stock prices. The reasons rates are rising, the speed of the move, and the strength of earnings matter more. Inflation, energy shocks, fiscal concerns, and sudden incre",
+          "excerpt": "Schwab's Market Perspective | Charles Schwab Search Insights & Education Markets and Economy Schwab Market Perspective Our point of view on recent market and economic activity. October 16, 2026 • Liz Ann Sonders • Kevin Gordon • Collin Martin • Michelle Gibley • Chris Ferrarone Artificial intelligence (AI) and the Federal Reserve rate hike have dominated headlines recently—and investors might be wondering how these things will affect them. While there are many existential questions that come along with the AI question, we're going to leave those for the philosophers and instead tackle what we do best: analyzing and breaking down the data. This month, we dive into how AI might be affecting the labor market, what rising rates might mean for global equities, and why corporate bonds might be worth a second look. Read more from our experts: DIY investing? Trading? Professional advice? See how Schwab can help U.S. stocks and economy: How is AI affecting the labor market? AI has yet to cause broad labor-market disruption , but hiring remains choppy and job losses are concentrated in AI-exposed industries, such as information and finance. AI investment appears to be boosting productivity and corporate profits more than payrolls, reinforcing narrow market leadership and the divide between capital and labor. AI-related job creation remains limited and uneven, while import-heavy capital spending may limit the technology buildout's near-term benefit to U.S. growth and employment. Global stocks and economy: How do rising rates impact global equities? Higher interest rates do not automatically mean lower stock prices. The reasons rates are rising, the speed of the move, and the strength of earnings matter more. Inflation, energy shocks, fiscal concerns, and sudden increases in yields",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         }
       ],
@@ -56088,11 +56157,11 @@
       "cadence": "Daily",
       "trust": "Very high",
       "notes": "Energy market and oil/gas context from the U.S. Energy Information Administration.",
-      "title": "EIA Today In Energy",
-      "summary": "Source check failed: This operation was aborted",
+      "title": "Today in Energy - U.S. Energy Information Administration (EIA)",
+      "summary": "No recent dated articles found in the last 30 days.",
       "articles": [],
       "articleCount": 0,
-      "ok": false
+      "ok": true
     },
     {
       "name": "BLS Economic News Releases",
@@ -56240,11 +56309,11 @@
       "articles": [
         {
           "sourceName": "CNBC Markets",
-          "title": "Berkshire shares buck market sell-off, rally to highest since Buffett said he would step down as CEO",
-          "url": "https://www.cnbc.com/2026/10/17/berkshire-rally-to-highest-since-buffett-announcement.html",
-          "publishedAt": "2026-10-17T12:46:21.000Z",
-          "summary": "Berkshire Hathaway shares are at their highest level since Warren Buffett told shareholders at the May 2025 annual meeting he planned to step down as CEO at the end of that year.",
-          "excerpt": "Berkshire rally to highest since Buffett announcement Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu In this article BRK.B BRK.B Follow your favorite stocks CREATE FREE ACCOUNT (This is the Warren Buffett Watch newsletter, news and analysis on all things Warren Buffett and Berkshire Hathaway. You can sign up here to receive it every Friday evening in your inbox.) Berkshire Hathaway shares closed Friday at their highest level since Warren Buffett told shareholders at the May 2025 annual meeting he planned to step down as CEO at the end of that year . The day before that Saturday surprise, both the Class A and Class B shares had closed at all-time highs. Over the next three months, they lost more than 14% of their value as investors worried a \" Buffett premium \" was dissolving. It's been more than a year since their post-meeting low in August of 2025, and the recovery has not been a straight line, but BRK.A ended Friday at $798,000, just 1.4% below its all-time closing high of $809,350. The B shares finished at $532.02, also 1.4% under their all-time closing high of $539.80. Zoom In Icon Arrows pointing outwards A loss Thursday broke a 10-session winning streak that added 5% to Berkshire's stock prices but they rebounded with gains of more than 1% Friday. CNBC Pro thinks investors may be happy Berkshire is spending some of its big cash pile under CEO Greg Abel, with $4.5 billion of buybacks in Q2 , investments in Alphabet , Taylor Morrison Home , Lennar , (although there haven't been any buys of that stock since October 2), and now, Bending Spoons . (More on that below). It also notes Keefe, Bruyette & Woods analyst Meyer Shields believes higher short-term interest rates are helping to lift the shares. ",
+          "title": "U.S. presses China on Mastercard, Citigroup market access in bilateral Bangkok talks, official says",
+          "url": "https://www.cnbc.com/2026/10/16/us-china-mastercard-citigroup-market-access.html",
+          "publishedAt": "2026-10-16T16:11:09.000Z",
+          "summary": "The U.S. raised market access issues for Mastercard and Citigroup in China during bilateral meetings in Bangkok this week, a U.S. Treasury official says.",
+          "excerpt": "U.S. raises Mastercard, Citigroup China market access in talks: Official Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu Key Points U.S. officials raised market access issues for Mastercard and Citigroup in China during bilateral meetings in Bangkok this week, according to a U.S. Treasury official. The regulatory approval was agreed to during Chinese leader Xi’s September Washington visit with President Trump, the official said. The progress follows China's Oct. 13 approval for Visa to begin preparing a wholly owned domestic card-clearing business. In this article MA C Follow your favorite stocks CREATE FREE ACCOUNT A Citibank branch in New York, US, on Sunday, Oct. 11, 2026. Michael Nagle | Bloomberg | Getty Images BANGKOK – U.S. officials pressed Beijing on market access issues for Mastercard Inc and Citigroup Inc during at least two bilateral meetings with Chinese counterparts in Bangkok this week, according to a U.S. Treasury official. The Treasury delegation, led by Deputy Secretary Francis Brooke, held bilateral meetings with officials from the People's Bank of China and the finance ministry on the sidelines of the Group of 20 finance meetings and the IMF-World Bank annual gathering this week, the official said, speaking on condition of anonymity to discuss the closed-door meetings. The talks included market access for U.S. companies, including Mastercard, Visa and Citigroup, the official said, adding that regulatory approval was part of the agreement reached during the meeting between Presidents Donald Trump and Xi Jinping during the latter's state visit in Washington last month. The sideline meetings in Bangkok continued discussions on implementing these deals, the official said. The PBOC, Chin",
           "discoveredFrom": "https://www.cnbc.com/markets/"
         }
       ],
@@ -56263,29 +56332,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "&apos;Dead money’ for a decade: Why this hedge fund approach may deliver an advantage over bonds",
-          "url": "https://www.cnbc.com/2026/10/17/dead-money-for-a-decade-hedge-fund-approach-that-may-trump-bonds.html",
-          "publishedAt": "2026-10-17T15:00:01.000Z",
-          "summary": "Investors may want to rethink their bond allocation and opt for managed futures exposure.",
-          "excerpt": "Investors may want to rethink their bond allocation and opt for managed futures exposure.",
+          "title": "Trump waives broad new Russia sanctions, Zelenskyy condemns it as &apos;wrong&apos;",
+          "url": "https://www.cnbc.com/2026/10/17/trump-waives-russia-related-sanctions-tariffs-before-they-take-effect-.html",
+          "publishedAt": "2026-10-17T19:35:18.000Z",
+          "summary": "Trump signed the Graham Bill, which targeted Russia over its invasion of Ukraine, into law in September.",
+          "excerpt": "Trump signed the Graham Bill, which targeted Russia over its invasion of Ukraine, into law in September.",
+          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+        },
+        {
+          "sourceName": "CNBC Top News RSS",
+          "title": "Semiconductor market to remain solid ‘at least through next year,’ South Korea finance minister says",
+          "url": "https://www.cnbc.com/2026/10/17/south-korea-semiconductor-outlook-lee-hyoung-il.html",
+          "publishedAt": "2026-10-17T16:45:15.000Z",
+          "summary": "South Korea's finance minister said semiconductor growth can last at least through 2027 as supply remains tight despite a global chip sell-off.",
+          "excerpt": "South Korea's finance minister said semiconductor growth can last at least through 2027 as supply remains tight despite a global chip sell-off.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
           "title": "Investors are buying up vast tracts of timberland across U.S. in one of market&apos;s longest-term bets",
           "url": "https://www.cnbc.com/2026/10/17/timberland-investing-returns-risk.html",
-          "publishedAt": "2026-10-17T13:47:59.000Z",
+          "publishedAt": "2026-10-17T16:31:06.000Z",
           "summary": "Timberland managers buying for pension funds and other institutional investors can wait decades for returns, but the market can also be a profit trap.",
           "excerpt": "Timberland managers buying for pension funds and other institutional investors can wait decades for returns, but the market can also be a profit trap.",
-          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
-        },
-        {
-          "sourceName": "CNBC Top News RSS",
-          "title": "Berkshire shares buck market sell-off, rally to highest since Buffett said he would step down as CEO",
-          "url": "https://www.cnbc.com/2026/10/17/berkshire-rally-to-highest-since-buffett-announcement.html",
-          "publishedAt": "2026-10-17T12:46:21.000Z",
-          "summary": "Berkshire Hathaway shares are at their highest level since Warren Buffett told shareholders at the May 2025 annual meeting he planned to step down as CEO at the end of that year.",
-          "excerpt": "Berkshire Hathaway shares are at their highest level since Warren Buffett told shareholders at the May 2025 annual meeting he planned to step down as CEO at the end of that year.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56304,6 +56373,15 @@
       "articles": [
         {
           "sourceName": "CNBC Earnings RSS",
+          "title": "AI stocks plunge. Inflation heats up. Where we&apos;re still finding opportunities",
+          "url": "https://www.cnbc.com/investingclub/2026/10/17/ai-stocks-plunge-inflation-heats-up-where-were-still-finding-opportunities.html",
+          "publishedAt": "2026-10-17T15:42:34.000Z",
+          "summary": "The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+          "excerpt": "The sinking AI trade rattled last week's market. But solid bank earnings and a rotation beyond tech gave us reasons for optimism.",
+          "discoveredFrom": "https://www.cnbc.com/id/15839135/device/rss/rss.html"
+        },
+        {
+          "sourceName": "CNBC Earnings RSS",
           "title": "BNY stock pops on strong earnings — showing exactly why we like this bank in this market",
           "url": "https://www.cnbc.com/investingclub/2026/10/15/bny-stock-pops-on-strong-earnings-showing-exactly-why-we-like-this-bank-in-this-market.html",
           "publishedAt": "2026-10-15T18:16:41.000Z",
@@ -56318,15 +56396,6 @@
           "publishedAt": "2026-10-15T08:09:37.000Z",
           "summary": "TSMC reported its third-quarter earnings on Thursday.",
           "excerpt": "TSMC reported its third-quarter earnings on Thursday.",
-          "discoveredFrom": "https://www.cnbc.com/id/15839135/device/rss/rss.html"
-        },
-        {
-          "sourceName": "CNBC Earnings RSS",
-          "title": "Anthropic&apos;s third-quarter revenue is said to hit $16.8 billion ahead of IPO",
-          "url": "https://www.cnbc.com/2026/10/15/anthropics-third-quarter-revenue-hits-16point8-billion-ipo.html",
-          "publishedAt": "2026-10-15T03:48:58.000Z",
-          "summary": "Anthropic reports third-quarter stands at $16.8 billion ahead of its IPO.",
-          "excerpt": "Anthropic reports third-quarter stands at $16.8 billion ahead of its IPO.",
           "discoveredFrom": "https://www.cnbc.com/id/15839135/device/rss/rss.html"
         }
       ],
@@ -56345,9 +56414,18 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
+          "title": "Is Apple’s foldable iPhone Duo worth $2,000? See how it stacks up against other foldable phones.",
+          "url": "https://www.marketwatch.com/story/is-apples-foldable-iphone-duo-worth-2-000-see-how-it-stacks-up-against-other-foldable-phones-c9066b13?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-17T18:40:00.000Z",
+          "summary": "Preorders for the iPhone Duo began Friday, marking Apple’s debut in a foldable phone market largely dominated by Samsung and Google.",
+          "excerpt": "Preorders for the iPhone Duo began Friday, marking Apple’s debut in a foldable phone market largely dominated by Samsung and Google.",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
           "title": "‘Some people did everything right’: I lost my home in the Great Recession. I rent in my 50s. Why is that judged as failure?",
           "url": "https://www.marketwatch.com/story/i-earn-110-000-a-year-i-lost-my-home-in-the-great-recession-im-renting-in-my-50s-why-is-that-judged-as-failure-d1371d67?mod=mw_rss_topstories",
-          "publishedAt": "2026-10-17T13:00:00.000Z",
+          "publishedAt": "2026-10-17T16:47:00.000Z",
           "summary": "”I earn $110,000 a year.”",
           "excerpt": "”I earn $110,000 a year.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
@@ -56359,15 +56437,6 @@
           "publishedAt": "2026-10-17T13:00:00.000Z",
           "summary": "Individual investors and second-home buyers accounted for 1 in 5 home purchases in September — the highest share in a little over a year.",
           "excerpt": "Individual investors and second-home buyers accounted for 1 in 5 home purchases in September — the highest share in a little over a year.",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Silver’s recent 50% drop from a record high hints that an economic slowdown looms",
-          "url": "https://www.marketwatch.com/story/silvers-recent-50-drop-from-a-record-high-hints-that-an-economic-slowdown-looms-e9fdfaf1?mod=mw_rss_topstories",
-          "publishedAt": "2026-10-17T12:30:00.000Z",
-          "summary": "There’s a relatively off-the-radar commodity that can provide hints on where the economy is headed — and it’s seen its value drop more than 50% from a record high earlier this year.",
-          "excerpt": "There’s a relatively off-the-radar commodity that can provide hints on where the economy is headed — and it’s seen its value drop more than 50% from a record high earlier this year.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
