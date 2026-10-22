@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-21T01:38:20.006Z",
+  "generatedAt": "2026-10-22T17:08:54.708Z",
   "window": {
-    "today": "2026-10-20",
+    "today": "2026-10-22",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-10-13",
-    "endDate": "2027-04-20"
+    "startDate": "2026-10-15",
+    "endDate": "2027-04-22"
   },
   "sources": [
     {
@@ -17,7 +17,7 @@
     {
       "source": "BLS Consumer Price Index",
       "status": "ready",
-      "eventCount": 3,
+      "eventCount": 2,
       "scraper": "fred-release-calendar"
     },
     {
@@ -40,19 +40,6 @@
     }
   ],
   "events": [
-    {
-      "date": "2026-10-14",
-      "time": "8:30 AM ET",
-      "event": "Consumer Price Index",
-      "title": "Consumer Price Index",
-      "source": "BLS",
-      "importance": "High",
-      "sourceUrl": "https://fred.stlouisfed.org/releases/calendar?od=asc&rid=10&ve=2026-12-31&view=year&vs=2026-01-01",
-      "sourceName": "FRED release calendar",
-      "upstreamSource": "BLS",
-      "scraper": "fred-release-calendar",
-      "note": "FRED calendar for the BLS CPI release. Direct BLS schedule pages can block automated requests."
-    },
     {
       "date": "2026-10-15",
       "time": "8:30 AM ET",
