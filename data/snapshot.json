@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-25T01:18:00.242Z",
+  "generatedAt": "2026-10-25T16:19:16.400Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-10-25T01:14:52.113752+00:00",
+    "generatedAt": "2026-10-25T16:16:10.386067+00:00",
     "asOfDate": "2026-10-23",
     "expectedAsOfDate": "2026-10-23",
     "isStale": false,
@@ -1418,12 +1418,13 @@
     }
   },
   "note": {
-    "headline": "Oil and geopolitical risk keep position sizing tighter.",
-    "body": "Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off. 45% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, CRWD, DDOG, PLTR, IT.",
+    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
+    "body": "Peak earnings season, plus a Fed meeting and fresh inflation data. 45% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, CRWD, DDOG, PLTR, IT.",
     "changed": [
-      "Rates: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off. (M1)",
-      "Earnings: Large-cap reporters are moving enough to affect index tone; focus on guidance read-throughs from SLB, INFY rather than the full mover list.",
-      "Retail attention: AMZN, RAPP, GE, AMGN have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
+      "Policy/geopolitics: Saudi Arabia says it intercepted Houthi missiles and drones, while the Houthis claimed attacks on airports and energy sites amid rising regional supply risks. (M2)",
+      "Commodities: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off. (M4)",
+      "Earnings: The mover screen is two-sided and mostly idiosyncratic, so it is a catalyst-risk check rather than a broad market signal.",
+      "Retail attention: AMZN, BROS, AMGN have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
       "Breadth: 58% of the screened universe is above the 50-day average, 58% is above the 200-day, and 45% clears both trend lines.",
       "Tactical implication: MRNA (Top Decile), CRWD (Top Decile), DDOG (Top Decile), PLTR (Top Decile) are the setups that currently merit review after the market backdrop is considered."
     ],
@@ -1439,12 +1440,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 108584,
+      "inputTokens": 110799,
       "cachedInputTokens": 0,
-      "outputTokens": 2567,
+      "outputTokens": 2534,
       "reasoningTokens": 0,
-      "totalTokens": 111151,
-      "estimatedCostUsd": 0.006456,
+      "totalTokens": 113333,
+      "estimatedCostUsd": 0.006554,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1452,8 +1453,8 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Oil and geopolitical risk keep position sizing tighter.",
-    "macroView": "Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off. European governments race to turn defense spending pledges into military capability, boosting companies' order books. Next macro decision points: FOMC Rate Decision on 2026-10-28; GDP Advance Estimate on 2026-10-29; Personal Income and Outlays on 2026-10-29. Sector confirmation: Energy +11.16% over 30D, +12.18% vs SPY; Consumer Staples +7.07% over 30D, +8.09% vs SPY; Utilities +7.07% over 30D, +8.09% vs SPY.",
+    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
+    "macroView": "Peak earnings season, plus a Fed meeting and fresh inflation data. Saudi Arabia says it intercepted Houthi missiles and drones, while the Houthis claimed attacks on airports and energy sites amid rising regional supply risks. Next macro decision points: FOMC Rate Decision on 2026-10-28; GDP Advance Estimate on 2026-10-29; Personal Income and Outlays on 2026-10-29. Sector confirmation: Energy +11.16% over 30D, +12.18% vs SPY; Consumer Staples +7.07% over 30D, +8.09% vs SPY; Utilities +7.07% over 30D, +8.09% vs SPY.",
     "dailyRead": null,
     "recommendations": [
       {
@@ -1467,8 +1468,8 @@
         "marketCap": "$79.9B",
         "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.1.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-10-23: Investors Seek Safety Amid AI Sell-Off, Oil Surge",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Peak earnings season, plus a Fed meeting and fresh inflation data.",
+        "macroEvidence": "CNBC Markets, 2026-10-25: Here are 4 big things we're watching in the stock market this week",
         "modelEvidence": "Rank #3 of 499; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -8.22%; 14D -11.07%; 30D +9.88%; 60D vs SPY +242.76%; RSI 49; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
@@ -1478,9 +1479,7 @@
           "C3-EARNINGS",
           "C3-IR",
           "C3-MARKETCAP",
-          "S7",
-          "S11",
-          "S8"
+          "S1"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1497,8 +1496,8 @@
         "marketCap": "$263.7B",
         "earningsContext": "Last reported 2026-08-26 for the Jul 2026 fiscal quarter; EPS 0.01 versus consensus 0.05; surprise -80%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-10-23: Investors Seek Safety Amid AI Sell-Off, Oil Surge",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Peak earnings season, plus a Fed meeting and fresh inflation data.",
+        "macroEvidence": "CNBC Markets, 2026-10-25: Here are 4 big things we're watching in the stock market this week",
         "modelEvidence": "Rank #6 of 499; 99.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +13.27%; 14D -6.35%; 30D -1.87%; 60D vs SPY +36.34%; RSI 44; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
@@ -1506,10 +1505,9 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C6-EARNINGS",
-          "C6-MARKETCAP",
           "C6-IR",
-          "S4",
-          "S8"
+          "C6-MARKETCAP",
+          "S1"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1526,8 +1524,8 @@
         "marketCap": "$200.4B",
         "earningsContext": "Last reported 2026-08-27 for the Jul 2026 fiscal quarter; EPS 0.62 versus consensus 0.65; surprise -4.62%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.79.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-10-23: Investors Seek Safety Amid AI Sell-Off, Oil Surge",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Peak earnings season, plus a Fed meeting and fresh inflation data.",
+        "macroEvidence": "CNBC Markets, 2026-10-25: Here are 4 big things we're watching in the stock market this week",
         "modelEvidence": "Rank #2 of 499; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +0.30%; 14D -16.99%; 30D -12.40%; 60D vs SPY +21.97%; RSI 33; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
@@ -1535,40 +1533,12 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C2-EARNINGS",
-          "C2-MARKETCAP",
           "C2-IR",
-          "S8"
+          "C2-MARKETCAP",
+          "S1"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
-        ]
-      },
-      {
-        "symbol": "MRNA",
-        "action": "Research long setup",
-        "conviction": "High",
-        "setup": "Momentum confirmed",
-        "whyNow": "Rank #3 of 499; +242.76% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "rationale": "MRNA is momentum confirmed by the dashboard rules. Rank #3 of 499; +242.76% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "companyOverview": "Moderna is a pioneer and leader in the field of mRNA medicine. Through the advancement of its technology platform, Moderna is reimagining how medicines are made to transform how we treat and prevent diseases. Since its founding, Moderna's mRNA platform has enabled the development of vaccines and therapeutics across...",
-        "marketCap": "$79.9B",
-        "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.1.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-10-23: Investors Seek Safety Amid AI Sell-Off, Oil Surge",
-        "modelEvidence": "Rank #3 of 499; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D -8.22%; 14D -11.07%; 30D +9.88%; 60D vs SPY +242.76%; RSI 49; above both the 50-day and 200-day moving averages",
-        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
-        "risk": "Above-sector volatility",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C3-EARNINGS",
-          "C3-MARKETCAP",
-          "C3-IR",
-          "S8"
-        ],
-        "setupTags": [
-          "Momentum Confirmed"
         ]
       },
       {
@@ -1582,8 +1552,8 @@
         "marketCap": "$179.9B",
         "earningsContext": "Last reported 2026-08-05 for the Jun 2026 fiscal quarter; EPS 38.82 versus consensus 33.28; surprise 16.65%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 45.22.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-10-23: Investors Seek Safety Amid AI Sell-Off, Oil Surge",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Peak earnings season, plus a Fed meeting and fresh inflation data.",
+        "macroEvidence": "CNBC Markets, 2026-10-25: Here are 4 big things we're watching in the stock market this week",
         "modelEvidence": "Rank #4 of 499; 99.4 percentile; reasons: Long-horizon momentum ahead of sector median; Above 200d trend; Liquid versus universe.",
         "technicalEvidence": "7D -4.72%; 14D -21.73%; 30D -31.85%; 60D vs SPY -5.99%; RSI 17; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
@@ -1593,7 +1563,7 @@
           "C4-EARNINGS",
           "C4-MARKETCAP",
           "C4-IR",
-          "S8"
+          "S1"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
@@ -1610,8 +1580,8 @@
         "marketCap": "$290.2B",
         "earningsContext": "Last reported 2026-09-01 for the Jul 2026 fiscal quarter; EPS 6.76 versus consensus 4.72; surprise 43.22%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 6.41.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off.",
-        "macroEvidence": "Schwab Weekly Market Outlook, 2026-10-23: Investors Seek Safety Amid AI Sell-Off, Oil Surge",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Peak earnings season, plus a Fed meeting and fresh inflation data.",
+        "macroEvidence": "CNBC Markets, 2026-10-25: Here are 4 big things we're watching in the stock market this week",
         "modelEvidence": "Rank #5 of 499; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +1.19%; 14D -22.01%; 30D -16.87%; 60D vs SPY +10.19%; RSI 31; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
@@ -1619,9 +1589,37 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C5-EARNINGS",
-          "C5-MARKETCAP",
           "C5-IR",
-          "S8"
+          "C5-MARKETCAP",
+          "S1"
+        ],
+        "setupTags": [
+          "Not Momentum Confirmed"
+        ]
+      },
+      {
+        "symbol": "LITE",
+        "action": "Watch, do not chase",
+        "conviction": "Review",
+        "setup": "Not momentum confirmed",
+        "whyNow": "Rank #1 of 499; +6.36% 60-day return versus SPY; below one or both major moving averages.",
+        "rationale": "The model ranks LITE highly, but the setup is not clean momentum yet. Rank #1 of 499; +6.36% 60-day return versus SPY; below one or both major moving averages.",
+        "companyOverview": "Lumentum (NASDAQ: LITE) is a global leader in optical and photonic technologies that power the networks and infrastructure behind AI, cloud computing, and next-generation communications. Built on decades of photonics innovation, Lumentum delivers high-performance lasers, modules, and optical subsystems that enable s...",
+        "marketCap": "$68.5B",
+        "earningsContext": "Last reported 2026-08-11 for the Jun 2026 fiscal quarter; EPS 2.64 versus consensus 2.62; surprise 0.76%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus 3.82.",
+        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Peak earnings season, plus a Fed meeting and fresh inflation data.",
+        "macroEvidence": "CNBC Markets, 2026-10-25: Here are 4 big things we're watching in the stock market this week",
+        "modelEvidence": "Rank #1 of 499; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
+        "technicalEvidence": "7D -8.25%; 14D -31.47%; 30D -19.30%; 60D vs SPY +6.36%; RSI 23; below one or both major moving averages",
+        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
+        "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
+        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
+        "sourceRefs": [
+          "C1-EARNINGS",
+          "C1-MARKETCAP",
+          "C1-IR",
+          "S1"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
@@ -1847,28 +1845,38 @@
       "Do watch names LITE, MRVL, SNDK regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
+      "S1",
+      "S2",
+      "S3",
       "S4",
+      "S5",
       "S6",
-      "S11",
       "S7",
-      "S10"
+      "S8",
+      "C3-EARNINGS",
+      "C6-EARNINGS",
+      "C9-EARNINGS",
+      "C11-EARNINGS"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "AI Deeper Read was unavailable, so these are the highest-quality differentiated source angles selected deterministically. AI output did not pass the evidence guardrails.",
+      "summary": "Featured source angle: The Schwab note describes a week where AI concerns and Middle East tension contributed to a risk-off tilt, with the Nasdaq and S&P 500 showing modest weekly declines after an early-week bounce, and notes that the near-term trajectory depends on whether the earlier support levels hold or break.",
       "cards": [
         {
-          "sourceRef": "S6",
+          "sourceRef": "S9",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Weekly Trader's Outlook",
+          "thesis": "The Schwab note describes a week where AI concerns and Middle East tension contributed to a risk-off tilt, with the Nasdaq and S&P 500 showing modest weekly declines after an early-week bounce, and notes that the near-term trajectory depends on whether the earlier support levels hold or break.",
+          "whyItMatters": "This emphasizes how AI-related sentiment and macro tensions can suppress upside with traders reassessing risk, underscoring a fragile near-term pattern around key index support levels.",
+          "marketReadThrough": "Monitor: the report frames a week with a shift toward Treasuries and risk-off behavior as AI concerns linger and markets test support levels, which can be observed in the price action around the S&P 500 and Nasdaq during the week.",
+          "variantAngle": "Inference: If AI concerns and macro tensions persist, the path for the indices may hinge on whether the current intermediate-term support holds, potentially limiting upside in the near term without a clear breakout above those levels.",
+          "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-10-23T20:47:09.000Z",
-          "thesis": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "whyItMatters": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Volatile Week for Stocks as AI Concerns, Middle East Tension Drive \"Risk-Off\" Behavior The Nasdaq and S&P 500 are on track for modest weekly losses as lingering AI concerns send some investors into Treasuries.  October 23, 2026 • Nathan Peterson The Week That Was If you read last Friday's blog, you might recall that I had a \"breakout\" outlook for stocks this week, noting that the S&P 500 Index (SPX) and...",
-          "marketReadThrough": "Monitor: confirm whether the source's stated AI and semis mechanism appears in related prices, yields, margins, or sector-relative performance.",
-          "variantAngle": "Inference: the investable question is whether the source's stated mechanism changes sector margins or policy expectations; the article does not establish that outcome on its own.",
-          "confidence": "High"
+          "sourceRefs": [
+            "S9"
+          ]
         }
       ]
     }
@@ -1876,19 +1884,22 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "AI Deeper Read was unavailable, so these are the highest-quality differentiated source angles selected deterministically. AI output did not pass the evidence guardrails.",
+    "summary": "Featured source angle: The Schwab note describes a week where AI concerns and Middle East tension contributed to a risk-off tilt, with the Nasdaq and S&P 500 showing modest weekly declines after an early-week bounce, and notes that the near-term trajectory depends on whether the earlier support levels hold or break.",
     "cards": [
       {
-        "sourceRef": "S6",
+        "sourceRef": "S9",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Weekly Trader's Outlook",
+        "thesis": "The Schwab note describes a week where AI concerns and Middle East tension contributed to a risk-off tilt, with the Nasdaq and S&P 500 showing modest weekly declines after an early-week bounce, and notes that the near-term trajectory depends on whether the earlier support levels hold or break.",
+        "whyItMatters": "This emphasizes how AI-related sentiment and macro tensions can suppress upside with traders reassessing risk, underscoring a fragile near-term pattern around key index support levels.",
+        "marketReadThrough": "Monitor: the report frames a week with a shift toward Treasuries and risk-off behavior as AI concerns linger and markets test support levels, which can be observed in the price action around the S&P 500 and Nasdaq during the week.",
+        "variantAngle": "Inference: If AI concerns and macro tensions persist, the path for the indices may hinge on whether the current intermediate-term support holds, potentially limiting upside in the near term without a clear breakout above those levels.",
+        "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-10-23T20:47:09.000Z",
-        "thesis": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-        "whyItMatters": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Volatile Week for Stocks as AI Concerns, Middle East Tension Drive \"Risk-Off\" Behavior The Nasdaq and S&P 500 are on track for modest weekly losses as lingering AI concerns send some investors into Treasuries.  October 23, 2026 • Nathan Peterson The Week That Was If you read last Friday's blog, you might recall that I had a \"breakout\" outlook for stocks this week, noting that the S&P 500 Index (SPX) and...",
-        "marketReadThrough": "Monitor: confirm whether the source's stated AI and semis mechanism appears in related prices, yields, margins, or sector-relative performance.",
-        "variantAngle": "Inference: the investable question is whether the source's stated mechanism changes sector margins or policy expectations; the article does not establish that outcome on its own.",
-        "confidence": "High"
+        "sourceRefs": [
+          "S9"
+        ]
       }
     ]
   },
@@ -1901,12 +1912,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-10-25T01:17:11.925Z",
+    "generatedAt": "2026-10-25T16:18:29.670Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-10-24T15:59:44.019Z"
+      "previousRefreshAt": "2026-10-25T01:18:00.242Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1917,7 +1928,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-10-25T01:14:55.403Z",
+      "generatedAt": "2026-10-25T16:16:13.312Z",
       "lookbackHours": 96,
       "releases": []
     },
@@ -1946,6 +1957,65 @@
     "professionalDrivers": [
       {
         "id": "M1",
+        "title": "Here are 4 big things we're watching in the stock market this week",
+        "sourceName": "CNBC Markets",
+        "sourceCategory": "News",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/investingclub/2026/10/25/here-are-4-big-things-were-watching-in-the-stock-market-this-week.html",
+        "publishedAt": "2026-10-25T14:58:26.000Z",
+        "summary": "Peak earnings season, plus a Fed meeting and fresh inflation data.",
+        "excerpt": "Here are 4 big things we're watching in the stock market this week Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu The busiest week of third-quarter earnings season is here. And if that wasn't enough, there's also a Federal Reserve policy meeting and fresh inflation data on deck. The jam-packed week arrives at a critical moment for Wall Street, as the engine of the full-year bull market — the artificial intelligence trade — continues to leak fluid . The midterm elections, a source of market uncertainty, are also less than 10 days away. And the headlines out of the Middle East still paint an ugly picture, keeping elevated oil prices front and center for equity investors. We have 11 Club names on the earnings calendar, including tech heavyweights Amazon, Microsoft and Alphabet, so let's get right into what to watch for (all revenue and earnings estimates are courtesy of LSEG). 1. Tuesday earnings: Boeing kicks off the week Tuesday morning, and it's our lone report that day. The most important metric is free cash flow, including the third-quarter figure (consensus is $330 million, weighed down by a $700 million payment to the Justice Department). Any updates to the full-year guide (roughly $2 billion) are also welcome, along with commentary on 2027 expectations. Other topics of note: whether production of the 737 Max has stabilized at 47 a month, details on the delivery timelines for 737 Max 7 and Max 10 variants following FAA approval , and the flight-software glitch . Management may also be asked whether the prolonged conflict in the Middle East is affecting customer demand. Revenue: $23.8 billion EPS: loss of 21 cents 2. Wednesday earnings: Before the bell, GE Vernova's gas turbine business is the clea",
+        "themes": [
+          "Earnings",
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "Commodities and energy",
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 1.3,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M2",
+        "title": "Saudi Arabia says it intercepted missiles and drones from Iran-backed Houthis",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/10/25/saudi-arabia-houthi-missile-drone-interceptions.html",
+        "publishedAt": "2026-10-25T13:41:37.000Z",
+        "summary": "Saudi Arabia says it intercepted Houthi missiles and drones, while the Houthis claimed attacks on airports and energy sites amid rising regional supply risks.",
+        "excerpt": "Saudi Arabia says it intercepted Houthi missiles and drones, while the Houthis claimed attacks on airports and energy sites amid rising regional supply risks.",
+        "themes": [
+          "Geopolitics and policy",
+          "Commodities and energy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 2.6,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M3",
+        "title": "I paid off $11,000 of credit card debt in 18 months while still traveling, shopping and living my life",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/make-it/2026/10/25/pay-off-credit-card-debt.html",
+        "publishedAt": "2026-10-25T14:00:01.000Z",
+        "summary": "I racked up over $11,000 in credit card debt traveling, shopping and dining out.",
+        "excerpt": "I racked up over $11,000 in credit card debt traveling, shopping and dining out. Here's how I paid it all off in under two years.",
+        "themes": [
+          "Credit and liquidity"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 2.3,
+        "score": 78,
+        "tickers": []
+      },
+      {
+        "id": "M4",
         "title": "Investors Seek Safety Amid AI Sell-Off, Oil Surge",
         "sourceName": "Schwab Weekly Market Outlook",
         "sourceCategory": "Institution research",
@@ -1953,7 +2023,7 @@
         "url": "https://www.schwab.com/learn/story/weekly-digest",
         "publishedAt": "2026-10-23T16:11:30.000Z",
         "summary": "Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off.",
-        "excerpt": "Investors Seek Safety Amid AI Sell-Off, Oil Surge | Charles Schwab Search Learn Markets and Economy Investors Seek Safety Amid AI Sell-Off, Oil Surge Investors sought safety in Treasuries this week as crude prices surged and AI-linked stocks sold off. Yields and earnings remain in focus as central banks meet next week. October 23, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Crude pulling strings This week's stock sell-off reminds investors that crude oil remains a direction setter on Wall Street even amid the parade of earnings. More attacks on oil vessels and increasing tensions between Iran and the U.S. had investors worried even as The Wall Street Journal reported that exports of oil from the Middle East now exceed levels seen before the war. Exporters have found alternate routes to bypass the Strait of Hormuz, but crude product prices remain high, especially for diesel. High shipping costs remain a burden within the industry, and likely are getting passed along to consumers . Several companies, including United Airlines (UAL) and Philip Morris (PM), said in their earnings reports that rising energy costs are a burden. United cut the high end of its earnings guidance. U.S. weekly crude stockpiles, which traditionally rise toward the end of the year, fell by more than three million barrels, the U.S. Energy Information Administration said Wednesday. Strong results from Union Pacific (UNP), Norfolk South",
+        "excerpt": "Investors Seek Safety Amid AI Sell-Off, Oil Surge | Charles Schwab Search Insights & Education Markets and Economy Investors Seek Safety Amid AI Sell-Off, Oil Surge Investors sought safety in Treasuries this week as crude prices surged and AI-linked stocks sold off. Yields and earnings remain in focus as central banks meet next week. October 23, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Crude pulling strings This week's stock sell-off reminds investors that crude oil remains a direction setter on Wall Street even amid the parade of earnings. More attacks on oil vessels and increasing tensions between Iran and the U.S. had investors worried even as The Wall Street Journal reported that exports of oil from the Middle East now exceed levels seen before the war. Exporters have found alternate routes to bypass the Strait of Hormuz, but crude product prices remain high, especially for diesel. High shipping costs remain a burden within the industry, and likely are getting passed along to consumers . Several companies, including United Airlines (UAL) and Philip Morris (PM), said in their earnings reports that rising energy costs are a burden. United cut the high end of its earnings guidance. U.S. weekly crude stockpiles, which traditionally rise toward the end of the year, fell by more than three million barrels, the U.S. Energy Information Administration said Wednesday. Strong results from Union Pacific (UNP)",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -1962,12 +2032,12 @@
           "AI and semis"
         ],
         "freshness": "Important older item",
-        "ageHours": 33.1,
+        "ageHours": 48.1,
         "score": 62,
         "tickers": []
       },
       {
-        "id": "M2",
+        "id": "M5",
         "title": "Defense giant Saab sees orders triple after Gripen fighter jet deal with Ukraine",
         "sourceName": "CNBC Earnings RSS",
         "sourceCategory": "News RSS",
@@ -1980,7 +2050,7 @@
           "Geopolitics and policy"
         ],
         "freshness": "Important older item",
-        "ageHours": 32.8,
+        "ageHours": 47.9,
         "score": 46,
         "tickers": []
       }
@@ -1988,427 +2058,38 @@
     "topThemes": [
       {
         "theme": "Geopolitics and policy",
-        "count": 2
-      },
-      {
-        "theme": "Earnings",
-        "count": 1
-      },
-      {
-        "theme": "Rates and central banks",
-        "count": 1
+        "count": 4
       },
       {
         "theme": "Commodities and energy",
-        "count": 1
+        "count": 3
+      },
+      {
+        "theme": "Earnings",
+        "count": 2
+      },
+      {
+        "theme": "Rates and central banks",
+        "count": 2
       },
       {
         "theme": "AI and semis",
+        "count": 2
+      },
+      {
+        "theme": "Credit and liquidity",
         "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-10-25T01:17:11.915Z",
+      "generatedAt": "2026-10-25T16:18:29.659Z",
       "dates": [
-        "2026-10-23",
         "2026-10-24",
-        "2026-10-25"
+        "2026-10-25",
+        "2026-10-26"
       ],
       "calendars": [
-        {
-          "date": "2026-10-23",
-          "asOf": "Fri, Oct 23, 2026",
-          "status": "ready",
-          "error": null,
-          "rowCount": 32,
-          "rows": [
-            {
-              "date": "2026-10-23",
-              "symbol": "AXP",
-              "name": "American Express Company",
-              "time": "time-not-supplied",
-              "marketCap": "$219,590,492,000",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$4.47",
-              "noOfEsts": "9",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "E",
-              "name": "ENI S.p.A.",
-              "time": "time-not-supplied",
-              "marketCap": "$93,663,461,000",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$1.92",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "SLB",
-              "name": "SLB Limited",
-              "time": "time-not-supplied",
-              "marketCap": "$73,539,297,000",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.62",
-              "noOfEsts": "10",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "INFY",
-              "name": "Infosys Limited",
-              "time": "time-not-supplied",
-              "marketCap": "$53,625,082,000",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.21",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "FCNCA",
-              "name": "First Citizens BancShares, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$24,808,273,900",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$46.61",
-              "noOfEsts": "5",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "RCI",
-              "name": "Rogers Communication, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$17,872,898,000",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.84",
-              "noOfEsts": "4",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "RDY",
-              "name": "Dr. Reddy's Laboratories Ltd",
-              "time": "time-not-supplied",
-              "marketCap": "$11,042,511,900",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.16",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "BAH",
-              "name": "Booz Allen Hamilton Holding Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$9,450,789,900",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$1.44",
-              "noOfEsts": "6",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "ALV",
-              "name": "Autoliv, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$8,706,440,200",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$2.21",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "MKTX",
-              "name": "MarketAxess Holdings, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$5,794,861,600",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$1.95",
-              "noOfEsts": "7",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "BCPC",
-              "name": "Balchem Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$5,522,229,800",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$1.54",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "RITM",
-              "name": "Rithm Capital Corp.",
-              "time": "time-not-supplied",
-              "marketCap": "$4,846,972,900",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.51",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "FLG",
-              "name": "Flagstar Bank, N.A.",
-              "time": "time-not-supplied",
-              "marketCap": "$4,748,662,300",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.06",
-              "noOfEsts": "10",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "GNTX",
-              "name": "Gentex Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$4,580,255,700",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.51",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "FHB",
-              "name": "First Hawaiian, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$3,179,533,820",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.60",
-              "noOfEsts": "6",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "GRC",
-              "name": "Gorman-Rupp Company (The)",
-              "time": "time-not-supplied",
-              "marketCap": "$1,852,150,400",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.67",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "RBCAA",
-              "name": "Republic Bancorp, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$1,810,268,670",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$1.66",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "PFBC",
-              "name": "Preferred Bank",
-              "time": "time-not-supplied",
-              "marketCap": "$1,559,425,790",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$2.69",
-              "noOfEsts": "6",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "TV",
-              "name": "Grupo Televisa S.A.B.",
-              "time": "time-not-supplied",
-              "marketCap": "$1,475,021,060",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.03",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "TMP",
-              "name": "Tompkins Financial Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$1,449,509,120",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$1.91",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "MCBS",
-              "name": "MetroCity Bankshares, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$1,019,718,910",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "WRLD",
-              "name": "World Acceptance Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$791,131,780",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.78",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "RCBC",
-              "name": "River City Bank",
-              "time": "time-after-hours",
-              "marketCap": "$788,367,550",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$1.29",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "COFS",
-              "name": "ChoiceOne Financial Services, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$510,431,904",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.93",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "PDLB",
-              "name": "Ponce Financial Group, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$495,126,336",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$9.40",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "FXNC",
-              "name": "First National Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$269,922,464",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.63",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "FCAP",
-              "name": "First Capital, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$213,855,328",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "EAF",
-              "name": "GrafTech International Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$194,386,624",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "($1.46)",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "BVFL",
-              "name": "BV Financial, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$191,181,536",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "HOST",
-              "name": "Host Digital Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$68,503,648",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "AMST",
-              "name": "Amesite Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$4,127,716",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            },
-            {
-              "date": "2026-10-23",
-              "symbol": "PW",
-              "name": "Power REIT",
-              "time": "time-not-supplied",
-              "marketCap": "$2,511,358",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "3",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-23"
-            }
-          ]
-        },
         {
           "date": "2026-10-24",
           "asOf": "Sat, Oct 24, 2026",
@@ -2424,65 +2105,610 @@
           "error": null,
           "rowCount": 0,
           "rows": []
+        },
+        {
+          "date": "2026-10-26",
+          "asOf": "Mon, Oct 26, 2026",
+          "status": "ready",
+          "error": null,
+          "rowCount": 74,
+          "rows": [
+            {
+              "date": "2026-10-26",
+              "symbol": "VZ",
+              "name": "Verizon Communications Inc.",
+              "time": "time-pre-market",
+              "marketCap": "$187,795,833,000",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.27",
+              "noOfEsts": "7",
+              "lastYearReportDate": "10/29/2025",
+              "lastYearEps": "$1.21",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "WELL",
+              "name": "Welltower Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$171,104,846,000",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.64",
+              "noOfEsts": "6",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$1.34",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "CDNS",
+              "name": "Cadence Design Systems, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$85,275,443,000",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.61",
+              "noOfEsts": "6",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$1.51",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "NUE",
+              "name": "Nucor Corporation",
+              "time": "time-after-hours",
+              "marketCap": "$58,547,536,000",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$5.71",
+              "noOfEsts": "4",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$2.63",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "PSA",
+              "name": "Public Storage",
+              "time": "time-after-hours",
+              "marketCap": "$57,761,649,000",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$4.27",
+              "noOfEsts": "5",
+              "lastYearReportDate": "10/29/2025",
+              "lastYearEps": "$4.31",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "HIG",
+              "name": "The Hartford Insurance Group, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$37,773,099,000",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$3.15",
+              "noOfEsts": "10",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$3.78",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "CLS",
+              "name": "Celestica, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$30,840,543,200",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$2.88",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$1.44",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "CINF",
+              "name": "Cincinnati Financial Corporation",
+              "time": "time-after-hours",
+              "marketCap": "$27,362,066,400",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.99",
+              "noOfEsts": "8",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$2.85",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "BRO",
+              "name": "Brown & Brown, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$24,925,124,600",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.08",
+              "noOfEsts": "8",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$1.05",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "PFG",
+              "name": "Principal Financial Group Inc",
+              "time": "time-after-hours",
+              "marketCap": "$23,575,062,500",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$2.46",
+              "noOfEsts": "5",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$2.10",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "PKX",
+              "name": "POSCO HOLDINGS INC.",
+              "time": "time-not-supplied",
+              "marketCap": "$16,947,359,700",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.29",
+              "noOfEsts": "1",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.94",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "CX",
+              "name": "Cemex S.A.B. de C.V.",
+              "time": "time-pre-market",
+              "marketCap": "$15,325,912,100",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.25",
+              "noOfEsts": "1",
+              "lastYearReportDate": "10/28/2025",
+              "lastYearEps": "$0.16",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "SUI",
+              "name": "Sun Communities, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$14,599,062,500",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$2.30",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/29/2025",
+              "lastYearEps": "$2.28",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "SMMT",
+              "name": "Summit Therapeutics Inc. ",
+              "time": "time-not-supplied",
+              "marketCap": "$12,435,745,800",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "($0.28)",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/20/2025",
+              "lastYearEps": "($0.31)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "BMRN",
+              "name": "BioMarin Pharmaceutical Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$10,962,081,800",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.52",
+              "noOfEsts": "7",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "($0.08)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "GGB",
+              "name": "Gerdau S.A.",
+              "time": "time-after-hours",
+              "marketCap": "$10,028,551,200",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.18",
+              "noOfEsts": "1",
+              "lastYearReportDate": "10/30/2025",
+              "lastYearEps": "$0.10",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "AMKR",
+              "name": "Amkor Technology, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$9,702,069,200",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.79",
+              "noOfEsts": "4",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.51",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "RMBS",
+              "name": "Rambus, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$9,298,413,600",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.65",
+              "noOfEsts": "1",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.44",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "BRX",
+              "name": "Brixmor Property Group Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$8,672,212,000",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.59",
+              "noOfEsts": "6",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.56",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "SSD",
+              "name": "Simpson Manufacturing Company, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$7,660,856,800",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$2.49",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$2.58",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "ARE",
+              "name": "Alexandria Real Estate Equities, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$7,550,147,100",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.52",
+              "noOfEsts": "4",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$2.22",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "NE",
+              "name": "Noble Corporation plc",
+              "time": "time-after-hours",
+              "marketCap": "$7,016,275,500",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.20",
+              "noOfEsts": "2",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.19",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "PSMT",
+              "name": "PriceSmart, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$5,295,357,400",
+              "fiscalQuarterEnding": "Aug/2026",
+              "epsForecast": "",
+              "noOfEsts": "2",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$1.02",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "PECO",
+              "name": "Phillips Edison & Company, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$4,927,923,200",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.69",
+              "noOfEsts": "5",
+              "lastYearReportDate": "10/23/2025",
+              "lastYearEps": "$0.65",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "MMYT",
+              "name": "MakeMyTrip Limited",
+              "time": "time-pre-market",
+              "marketCap": "$4,264,619,780",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.36",
+              "noOfEsts": "1",
+              "lastYearReportDate": "10/28/2025",
+              "lastYearEps": "$0.30",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "DORM",
+              "name": "Dorman Products, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$3,783,344,640",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.97",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$2.62",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "AGYS",
+              "name": "Agilysys, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$3,386,669,060",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.38",
+              "noOfEsts": "4",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.26",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "ARLP",
+              "name": "Alliance Resource Partners, L.P.",
+              "time": "time-pre-market",
+              "marketCap": "$3,325,829,890",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.82",
+              "noOfEsts": "1",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.70",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "PRK",
+              "name": "Park National Corporation",
+              "time": "time-not-supplied",
+              "marketCap": "$3,318,025,220",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$3.31",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$2.87",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "CLBK",
+              "name": "Columbia Financial, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$2,927,260,160",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.13",
+              "noOfEsts": "2",
+              "lastYearReportDate": "10/20/2025",
+              "lastYearEps": "$0.07",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "HWKN",
+              "name": "Hawkins, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$2,779,939,330",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.22",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/29/2025",
+              "lastYearEps": "$1.08",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "BOH",
+              "name": "Bank of Hawaii Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$2,771,784,700",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.52",
+              "noOfEsts": "5",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$1.20",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "HTO",
+              "name": "H2O America ",
+              "time": "time-after-hours",
+              "marketCap": "$2,455,320,060",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.06",
+              "noOfEsts": "1",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$1.27",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "NWBI",
+              "name": "Northwest Bancshares, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$2,261,328,900",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.35",
+              "noOfEsts": "5",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.29",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "BLX",
+              "name": "Bladex, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$2,082,228,100",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "",
+              "noOfEsts": "2",
+              "lastYearReportDate": "N/A",
+              "lastYearEps": "$1.48",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "CTOS",
+              "name": "Custom Truck One Source, Inc.",
+              "time": "time-after-hours",
+              "marketCap": "$2,017,974,140",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.01",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "($0.03)",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "GABC",
+              "name": "German American Bancorp, Inc.",
+              "time": "time-not-supplied",
+              "marketCap": "$1,921,028,610",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.01",
+              "noOfEsts": "4",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.92",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "WHR",
+              "name": "Whirlpool Corporation",
+              "time": "time-after-hours",
+              "marketCap": "$1,877,742,080",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.78",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$2.09",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "FSUN",
+              "name": "FIRSTSUN CAPITAL BANCORP",
+              "time": "time-after-hours",
+              "marketCap": "$1,841,464,450",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$0.98",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$0.82",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            },
+            {
+              "date": "2026-10-26",
+              "symbol": "LKFN",
+              "name": "Lakeland Financial Corporation",
+              "time": "time-pre-market",
+              "marketCap": "$1,476,058,500",
+              "fiscalQuarterEnding": "Sep/2026",
+              "epsForecast": "$1.08",
+              "noOfEsts": "3",
+              "lastYearReportDate": "10/27/2025",
+              "lastYearEps": "$1.03",
+              "sourceName": "Nasdaq earnings calendar",
+              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-10-26"
+            }
+          ]
         }
       ],
       "earningsMovers": [
         {
-          "symbol": "FLG",
-          "name": "Flagstar Bank, N.A.",
-          "price": 10.38,
-          "changePct": -9.27,
-          "change": -1.06,
-          "volume": 24244782,
-          "marketCap": 4308663808,
+          "symbol": "NE",
+          "name": "Noble Corporation plc A",
+          "price": 47.7,
+          "changePct": 8.53,
+          "change": 3.75,
+          "volume": 2002137,
+          "marketCap": 7614934016,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
+          "moverBucket": "gainer"
+        },
+        {
+          "symbol": "MMYT",
+          "name": "MakeMyTrip Limited",
+          "price": 42.09,
+          "changePct": -7.17,
+          "change": -3.25,
+          "volume": 1164462,
+          "marketCap": 3958929152,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/",
           "moverBucket": "loser"
         },
         {
-          "symbol": "RITM",
-          "name": "Rithm Capital Corp.",
-          "price": 9.39,
-          "changePct": 8.18,
-          "change": 0.71,
-          "volume": 15782449,
-          "marketCap": 5243442176,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
-          "moverBucket": "gainer"
-        },
-        {
-          "symbol": "FCNCA",
-          "name": "First Citizens BancShares, Inc.",
-          "price": 2375.84,
-          "changePct": 8.15,
-          "change": 179.08,
-          "volume": 298540,
-          "marketCap": 26399334400,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
-          "moverBucket": "gainer"
-        },
-        {
-          "symbol": "SLB",
-          "name": "SLB Limited",
-          "price": 53.06,
-          "changePct": 7.08,
-          "change": 3.51,
-          "volume": 19041356,
-          "marketCap": 78316560384,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
-          "moverBucket": "gainer"
-        },
-        {
-          "symbol": "INFY",
-          "name": "Infosys Limited",
-          "price": 12.35,
-          "changePct": -6.58,
-          "change": -0.87,
-          "volume": 45949762,
-          "marketCap": 50022150144,
+          "symbol": "VZ",
+          "name": "Verizon Communications Inc.",
+          "price": 44.66,
+          "changePct": -1.19,
+          "change": -0.54,
+          "volume": 51071223,
+          "marketCap": 185552257024,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/",
           "moverBucket": "most_active"
@@ -2491,6 +2717,33 @@
       "articleHeadlines": [
         {
           "id": "E1",
+          "title": "Here are 4 big things we're watching in the stock market this week",
+          "sourceName": "CNBC Markets",
+          "url": "https://www.cnbc.com/investingclub/2026/10/25/here-are-4-big-things-were-watching-in-the-stock-market-this-week.html",
+          "publishedAt": "2026-10-25T14:58:26.000Z",
+          "summary": "Peak earnings season, plus a Fed meeting and fresh inflation data.",
+          "tickers": []
+        },
+        {
+          "id": "E2",
+          "title": "Here are 4 big things we&apos;re watching in the stock market this week",
+          "sourceName": "CNBC Top News RSS",
+          "url": "https://www.cnbc.com/investingclub/2026/10/25/here-are-4-big-things-were-watching-in-the-stock-market-this-week.html",
+          "publishedAt": "2026-10-25T14:58:26.000Z",
+          "summary": "Peak earnings season, plus a Fed meeting and fresh inflation data.",
+          "tickers": []
+        },
+        {
+          "id": "E3",
+          "title": "More than a third of S&P 500 companies are about to report earnings as market confidence cracks",
+          "sourceName": "MarketWatch Top Stories RSS",
+          "url": "https://www.marketwatch.com/story/more-than-a-third-of-s-p-500-companies-are-about-to-report-earnings-as-market-confidence-cracks-03b7a8f1?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-25T14:00:00.000Z",
+          "summary": "“With cautious to negative market sentiment, it could be a tricky week,” one strategist says.",
+          "tickers": []
+        },
+        {
+          "id": "E4",
           "title": "Weekly Trader's Outlook",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
@@ -2499,7 +2752,7 @@
           "tickers": []
         },
         {
-          "id": "E2",
+          "id": "E5",
           "title": "Investors Seek Safety Amid AI Sell-Off, Oil Surge",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-digest",
@@ -2508,7 +2761,7 @@
           "tickers": []
         },
         {
-          "id": "E3",
+          "id": "E6",
           "title": "AI Pressure Persists, Oil Up as Price Data Looms",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/stock-market-update-open",
@@ -2517,7 +2770,7 @@
           "tickers": []
         },
         {
-          "id": "E4",
+          "id": "E7",
           "title": "CNBC Daily Open: AI spending fears haunt markets before Halloween",
           "sourceName": "CNBC Markets",
           "url": "https://www.cnbc.com/2026/10/23/cnbc-daily-open-ai-spending-elon-musk-bill-ackman-jensen-huang.html",
@@ -2530,7 +2783,7 @@
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-10-25T01:15:00.284Z",
+      "generatedAt": "2026-10-25T16:16:17.335Z",
       "authMode": "oauth",
       "metricMode": "ranked_attention",
       "sampleCoverage": {
@@ -2540,9 +2793,9 @@
           "new",
           "top"
         ],
-        "postCount": 27,
+        "postCount": 19,
         "includesVoteAndCommentCounts": true,
-        "oauthPostCount": 27,
+        "oauthPostCount": 19,
         "rssPostCount": 0
       },
       "sourceNote": "Reddit OAuth API across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
@@ -2553,7 +2806,37 @@
           "segment": "Retail momentum",
           "status": "ready",
           "error": null,
-          "postCount": 6,
+          "postCount": 3,
+          "sortStatuses": [
+            {
+              "sort": "hot",
+              "status": "ready",
+              "method": "oauth_json",
+              "error": null,
+              "postCount": 40
+            },
+            {
+              "sort": "new",
+              "status": "ready",
+              "method": "oauth_json",
+              "error": null,
+              "postCount": 40
+            },
+            {
+              "sort": "top",
+              "status": "ready",
+              "method": "oauth_json",
+              "error": null,
+              "postCount": 3
+            }
+          ]
+        },
+        {
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "status": "ready",
+          "error": null,
+          "postCount": 5,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2579,41 +2862,11 @@
           ]
         },
         {
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "status": "ready",
-          "error": null,
-          "postCount": 11,
-          "sortStatuses": [
-            {
-              "sort": "hot",
-              "status": "ready",
-              "method": "oauth_json",
-              "error": null,
-              "postCount": 40
-            },
-            {
-              "sort": "new",
-              "status": "ready",
-              "method": "oauth_json",
-              "error": null,
-              "postCount": 40
-            },
-            {
-              "sort": "top",
-              "status": "ready",
-              "method": "oauth_json",
-              "error": null,
-              "postCount": 11
-            }
-          ]
-        },
-        {
           "subreddit": "investing",
           "segment": "Retail investing",
           "status": "ready",
           "error": null,
-          "postCount": 7,
+          "postCount": 8,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2634,7 +2887,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 7
+              "postCount": 8
             }
           ]
         },
@@ -2705,8 +2958,8 @@
           "mentions": 2,
           "signalStrength": 4.8,
           "directMentions": 2,
-          "score": 698,
-          "comments": 343,
+          "score": 981,
+          "comments": 467,
           "subreddits": [
             "stocks",
             "investing"
@@ -2715,69 +2968,48 @@
             {
               "title": "Amazon is spending $220 BILLION on AI… and still can't keep up with demand.",
               "subreddit": "stocks",
-              "score": 698,
-              "comments": 306,
+              "score": 981,
+              "comments": 423,
               "permalink": "https://www.reddit.com/r/stocks/comments/1xedqxi/amazon_is_spending_220_billion_on_ai_and_still/"
             },
             {
               "title": "Amazon is spending $220 BILLION on AI… and still can't keep up with demand.",
               "subreddit": "investing",
               "score": 0,
-              "comments": 37,
+              "comments": 44,
               "permalink": "https://www.reddit.com/r/investing/comments/1xedq4d/amazon_is_spending_220_billion_on_ai_and_still/"
             }
           ],
-          "attentionScore": 120.19
+          "attentionScore": 129.4
         },
         {
-          "symbol": "RAPP",
+          "symbol": "BROS",
           "mentions": 1,
-          "signalStrength": 3.2,
+          "signalStrength": 4.5,
           "directMentions": 1,
-          "score": 12,
+          "score": 1,
           "comments": 3,
           "subreddits": [
-            "stocks"
+            "options"
           ],
           "posts": [
             {
-              "title": "Insider buying and selling this week",
-              "subreddit": "stocks",
-              "score": 12,
+              "title": "$BROS option ideas going into earnings",
+              "subreddit": "options",
+              "score": 1,
               "comments": 3,
-              "permalink": "https://www.reddit.com/r/stocks/comments/1xeif31/insider_buying_and_selling_this_week/"
+              "permalink": "https://www.reddit.com/r/options/comments/1xf52d1/bros_option_ideas_going_into_earnings/"
             }
           ],
-          "attentionScore": 56.3
-        },
-        {
-          "symbol": "GE",
-          "mentions": 1,
-          "signalStrength": 2.5,
-          "directMentions": 1,
-          "score": 84,
-          "comments": 19,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
-            {
-              "title": "This guy is one of us! Lambo in the Regard Spot in Parking Lot of GE Aerospace. Calls on GE it is!",
-              "subreddit": "wallstreetbets",
-              "score": 84,
-              "comments": 19,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xemyei/this_guy_is_one_of_us_lambo_in_the_regard_spot_in/"
-            }
-          ],
-          "attentionScore": 51.02
+          "attentionScore": 69.14
         },
         {
           "symbol": "AMGN",
           "mentions": 1,
           "signalStrength": 2.4,
           "directMentions": 1,
-          "score": 13,
-          "comments": 0,
+          "score": 53,
+          "comments": 4,
           "subreddits": [
             "stocks"
           ],
@@ -2785,45 +3017,27 @@
             {
               "title": "Amgen’s Imdelltra Combination Reduced the Risk of Death by 58% in a Phase 3 Trial for Small-Cell Lung Cancer",
               "subreddit": "stocks",
-              "score": 13,
-              "comments": 0,
+              "score": 53,
+              "comments": 4,
               "permalink": "https://www.reddit.com/r/stocks/comments/1xend4r/amgens_imdelltra_combination_reduced_the_risk_of/"
             }
           ],
-          "attentionScore": 48.2
+          "attentionScore": 48.95
         }
       ],
       "topPosts": [
         {
-          "id": "1xe9fc7",
+          "id": "1xf3n5p",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Just the Tip - that's always how it starts...",
-          "url": "https://i.redd.it/flwkztks8fxh1.png",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xe9fc7/just_the_tip_thats_always_how_it_starts/",
-          "createdAt": "2026-10-24T14:00:37.000Z",
-          "score": 4918,
-          "comments": 99,
+          "title": "Sound advice",
+          "url": "https://i.redd.it/n6igbo3khmxh1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xf3n5p/sound_advice/",
+          "createdAt": "2026-10-25T14:22:02.000Z",
+          "score": 3300,
+          "comments": 132,
           "upvoteRatio": 0.97,
           "flair": "Meme",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xele6w",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "No Signs of AI Payoff Outside the Tech Sector",
-          "url": "https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xele6w/no_signs_of_ai_payoff_outside_the_tech_sector/",
-          "createdAt": "2026-10-24T22:12:37.000Z",
-          "score": 661,
-          "comments": 414,
-          "upvoteRatio": 0.91,
-          "flair": "News",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -2838,9 +3052,9 @@
           "url": "https://www.reddit.com/r/stocks/comments/1xedqxi/amazon_is_spending_220_billion_on_ai_and_still/",
           "permalink": "https://www.reddit.com/r/stocks/comments/1xedqxi/amazon_is_spending_220_billion_on_ai_and_still/",
           "createdAt": "2026-10-24T16:56:54.000Z",
-          "score": 698,
-          "comments": 306,
-          "upvoteRatio": 0.91,
+          "score": 981,
+          "comments": 423,
+          "upvoteRatio": 0.9,
           "flair": null,
           "tickers": [
             "AMZN"
@@ -2855,88 +3069,16 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xe6f0t",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "Thoughts on the AI sell off this month",
-          "url": "https://www.reddit.com/r/stocks/comments/1xe6f0t/thoughts_on_the_ai_sell_off_this_month/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1xe6f0t/thoughts_on_the_ai_sell_off_this_month/",
-          "createdAt": "2026-10-24T11:38:35.000Z",
-          "score": 166,
-          "comments": 472,
-          "upvoteRatio": 0.74,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xec7qy",
-          "subreddit": "investing",
-          "segment": "Retail investing",
-          "title": "Brent at $117 and the SPR has nothing left to give if this gets worse",
-          "url": "https://www.reddit.com/r/investing/comments/1xec7qy/brent_at_117_and_the_spr_has_nothing_left_to_give/",
-          "permalink": "https://www.reddit.com/r/investing/comments/1xec7qy/brent_at_117_and_the_spr_has_nothing_left_to_give/",
-          "createdAt": "2026-10-24T15:55:30.000Z",
-          "score": 243,
-          "comments": 92,
-          "upvoteRatio": 0.93,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xe5ipq",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "SpaceX’s 13 GW target implies ~$125B of capex a quarter. How is that funded?",
-          "url": "https://www.reddit.com/r/stocks/comments/1xe5ipq/spacexs_13_gw_target_implies_125b_of_capex_a/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1xe5ipq/spacexs_13_gw_target_implies_125b_of_capex_a/",
-          "createdAt": "2026-10-24T10:47:51.000Z",
-          "score": 93,
-          "comments": 94,
-          "upvoteRatio": 0.87,
-          "flair": "Company Discussion",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xebjx6",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "What are you doing with your investments leading into midterms?",
-          "url": "https://www.reddit.com/r/stocks/comments/1xebjx6/what_are_you_doing_with_your_investments_leading/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1xebjx6/what_are_you_doing_with_your_investments_leading/",
-          "createdAt": "2026-10-24T15:28:30.000Z",
-          "score": 41,
-          "comments": 99,
-          "upvoteRatio": 0.75,
-          "flair": "Advice",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xdxshn",
+          "id": "1xeqlcq",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Selling puts and buying long call options",
-          "url": "https://i.redd.it/zwdrkb5x0cxh1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xdxshn/selling_puts_and_buying_long_call_options/",
-          "createdAt": "2026-10-24T03:10:58.000Z",
-          "score": 144,
-          "comments": 34,
-          "upvoteRatio": 0.89,
+          "title": "Software is KING now, Semi is no longer conducting",
+          "url": "https://i.redd.it/seq9i3oqxixh1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xeqlcq/software_is_king_now_semi_is_no_longer_conducting/",
+          "createdAt": "2026-10-25T02:25:36.000Z",
+          "score": 1065,
+          "comments": 181,
+          "upvoteRatio": 0.92,
           "flair": "Gain",
           "tickers": [],
           "tickerWeights": {},
@@ -2945,26 +3087,110 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xemyei",
+          "id": "1xen4pa",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "This guy is one of us! Lambo in the Regard Spot in Parking Lot of GE Aerospace. Calls on GE it is!",
-          "url": "https://i.redd.it/jpecq2oo1ixh1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xemyei/this_guy_is_one_of_us_lambo_in_the_regard_spot_in/",
-          "createdAt": "2026-10-24T23:25:58.000Z",
-          "score": 84,
-          "comments": 19,
-          "upvoteRatio": 0.79,
-          "flair": "Meme",
-          "tickers": [
-            "GE"
-          ],
-          "tickerWeights": {
-            "GE": 2.5
-          },
-          "directTickers": [
-            "GE"
-          ],
+          "title": "I’m in the green!",
+          "url": "https://i.redd.it/p0819k473ixh1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xen4pa/im_in_the_green/",
+          "createdAt": "2026-10-24T23:34:25.000Z",
+          "score": 223,
+          "comments": 17,
+          "upvoteRatio": 0.95,
+          "flair": "Loss",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xeypyn",
+          "subreddit": "investing",
+          "segment": "Retail investing",
+          "title": "Is there an instrument that combines the safety of bonds with at least some possibility of upside?",
+          "url": "https://www.reddit.com/r/investing/comments/1xeypyn/is_there_an_instrument_that_combines_the_safety/",
+          "permalink": "https://www.reddit.com/r/investing/comments/1xeypyn/is_there_an_instrument_that_combines_the_safety/",
+          "createdAt": "2026-10-25T10:16:55.000Z",
+          "score": 21,
+          "comments": 60,
+          "upvoteRatio": 0.68,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xf2nmj",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Reddit will post its earnings Thursday after close. What are we thinking?",
+          "url": "https://www.reddit.com/r/stocks/comments/1xf2nmj/reddit_will_post_its_earnings_thursday_after/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1xf2nmj/reddit_will_post_its_earnings_thursday_after/",
+          "createdAt": "2026-10-25T13:40:17.000Z",
+          "score": 22,
+          "comments": 56,
+          "upvoteRatio": 0.78,
+          "flair": "Crystal Ball Post",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xf331w",
+          "subreddit": "investing",
+          "segment": "Retail investing",
+          "title": "S&amp;P Stagnation And Other Recession Indicators.",
+          "url": "https://www.reddit.com/r/investing/comments/1xf331w/sp_stagnation_and_other_recession_indicators/",
+          "permalink": "https://www.reddit.com/r/investing/comments/1xf331w/sp_stagnation_and_other_recession_indicators/",
+          "createdAt": "2026-10-25T13:59:14.000Z",
+          "score": 46,
+          "comments": 44,
+          "upvoteRatio": 0.75,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xf4mtw",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "South Korea's KOSPI Stocks Plunge Wipes approximately $830 Billion; SK sinks 30%, Samsung down 24%, Hyundai and Hanwha dropped 20%",
+          "url": "https://www.reddit.com/r/stocks/comments/1xf4mtw/south_koreas_kospi_stocks_plunge_wipes/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1xf4mtw/south_koreas_kospi_stocks_plunge_wipes/",
+          "createdAt": "2026-10-25T15:02:30.000Z",
+          "score": 69,
+          "comments": 26,
+          "upvoteRatio": 0.63,
+          "flair": "Broad market news",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xernwk",
+          "subreddit": "options",
+          "segment": "Options sentiment",
+          "title": "Zero commissions options brokers and their fills quality",
+          "url": "https://www.reddit.com/r/options/comments/1xernwk/zero_commissions_options_brokers_and_their_fills/",
+          "permalink": "https://www.reddit.com/r/options/comments/1xernwk/zero_commissions_options_brokers_and_their_fills/",
+          "createdAt": "2026-10-25T03:21:23.000Z",
+          "score": 23,
+          "comments": 48,
+          "upvoteRatio": 0.85,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
           "filteredAsGeneric": false,
           "fetchMethod": "oauth_json"
         },
@@ -2977,8 +3203,8 @@
           "permalink": "https://www.reddit.com/r/investing/comments/1xeip2b/how_is_this_not_the_top_i_have_listed_everything/",
           "createdAt": "2026-10-24T20:15:55.000Z",
           "score": 0,
-          "comments": 42,
-          "upvoteRatio": 0.37,
+          "comments": 44,
+          "upvoteRatio": 0.38,
           "flair": null,
           "tickers": [],
           "tickerWeights": {},
@@ -2995,8 +3221,8 @@
           "permalink": "https://www.reddit.com/r/investing/comments/1xedq4d/amazon_is_spending_220_billion_on_ai_and_still/",
           "createdAt": "2026-10-24T16:56:02.000Z",
           "score": 0,
-          "comments": 37,
-          "upvoteRatio": 0.41,
+          "comments": 44,
+          "upvoteRatio": 0.44,
           "flair": null,
           "tickers": [
             "AMZN"
@@ -3011,17 +3237,17 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xe3d4w",
-          "subreddit": "options",
-          "segment": "Options sentiment",
-          "title": "Tasty Trade Liquidity",
-          "url": "https://www.reddit.com/r/options/comments/1xe3d4w/tasty_trade_liquidity/",
-          "permalink": "https://www.reddit.com/r/options/comments/1xe3d4w/tasty_trade_liquidity/",
-          "createdAt": "2026-10-24T08:34:26.000Z",
-          "score": 6,
-          "comments": 29,
-          "upvoteRatio": 0.69,
-          "flair": null,
+          "id": "1xf1cmm",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "South Korea Current Account Surplus Surpasses Germany and Japan Combined in Q2",
+          "url": "https://www.reddit.com/r/stocks/comments/1xf1cmm/south_korea_current_account_surplus_surpasses/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1xf1cmm/south_korea_current_account_surplus_surpasses/",
+          "createdAt": "2026-10-25T12:40:48.000Z",
+          "score": 63,
+          "comments": 12,
+          "upvoteRatio": 0.91,
+          "flair": "Broad market news",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3029,51 +3255,39 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xen4pa",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "I’m in the green!",
-          "url": "https://i.redd.it/p0819k473ixh1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xen4pa/im_in_the_green/",
-          "createdAt": "2026-10-24T23:34:25.000Z",
-          "score": 46,
-          "comments": 7,
-          "upvoteRatio": 0.93,
-          "flair": "Loss",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
+          "id": "1xend4r",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Amgen’s Imdelltra Combination Reduced the Risk of Death by 58% in a Phase 3 Trial for Small-Cell Lung Cancer",
+          "url": "https://www.reddit.com/r/stocks/comments/1xend4r/amgens_imdelltra_combination_reduced_the_risk_of/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1xend4r/amgens_imdelltra_combination_reduced_the_risk_of/",
+          "createdAt": "2026-10-24T23:45:44.000Z",
+          "score": 53,
+          "comments": 4,
+          "upvoteRatio": 0.91,
+          "flair": "Company News",
+          "tickers": [
+            "AMGN"
+          ],
+          "tickerWeights": {
+            "AMGN": 2.4
+          },
+          "directTickers": [
+            "AMGN"
+          ],
           "filteredAsGeneric": false,
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xdygxm",
+          "id": "1xeraf9",
           "subreddit": "investing",
           "segment": "Retail investing",
-          "title": "Pinterest (PINS): Fairly Valued at ~$20/share",
-          "url": "https://www.reddit.com/r/investing/comments/1xdygxm/pinterest_pins_fairly_valued_at_20share/",
-          "permalink": "https://www.reddit.com/r/investing/comments/1xdygxm/pinterest_pins_fairly_valued_at_20share/",
-          "createdAt": "2026-10-24T03:47:40.000Z",
-          "score": 0,
-          "comments": 24,
-          "upvoteRatio": 0.36,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xe99f3",
-          "subreddit": "options",
-          "segment": "Options sentiment",
-          "title": "Options simulator",
-          "url": "https://www.reddit.com/r/options/comments/1xe99f3/options_simulator/",
-          "permalink": "https://www.reddit.com/r/options/comments/1xe99f3/options_simulator/",
-          "createdAt": "2026-10-24T13:53:44.000Z",
-          "score": 11,
-          "comments": 17,
+          "title": "Wednesday’s hyperscaler capex guides are a seesaw, bad for the spenders, potentially great for chips.",
+          "url": "https://www.reddit.com/r/investing/comments/1xeraf9/wednesdays_hyperscaler_capex_guides_are_a_seesaw/",
+          "permalink": "https://www.reddit.com/r/investing/comments/1xeraf9/wednesdays_hyperscaler_capex_guides_are_a_seesaw/",
+          "createdAt": "2026-10-25T03:01:50.000Z",
+          "score": 13,
+          "comments": 16,
           "upvoteRatio": 0.83,
           "flair": null,
           "tickers": [],
@@ -3083,17 +3297,35 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xeopn4",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "I KNEW THEY WOULD GO DOWN EVENTUALLY AFTER MY PUT OPTIONS EXPIRED 3 YEARS AGO",
-          "url": "https://i.redd.it/xqlffiewfixh1.png",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xeopn4/i_knew_they_would_go_down_eventually_after_my_put/",
-          "createdAt": "2026-10-25T00:50:25.000Z",
-          "score": 20,
-          "comments": 12,
-          "upvoteRatio": 0.81,
-          "flair": "Meme",
+          "id": "1xeidt0",
+          "subreddit": "investing",
+          "segment": "Retail investing",
+          "title": "AI tech investing strategy",
+          "url": "https://www.reddit.com/r/investing/comments/1xeidt0/ai_tech_investing_strategy/",
+          "permalink": "https://www.reddit.com/r/investing/comments/1xeidt0/ai_tech_investing_strategy/",
+          "createdAt": "2026-10-24T20:02:45.000Z",
+          "score": 0,
+          "comments": 16,
+          "upvoteRatio": 0.33,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xen4l7",
+          "subreddit": "options",
+          "segment": "Options sentiment",
+          "title": "SPX 5DTE Stops and SPX Gap Resolution | community research pt9",
+          "url": "https://www.reddit.com/r/options/comments/1xen4l7/spx_5dte_stops_and_spx_gap_resolution_community/",
+          "permalink": "https://www.reddit.com/r/options/comments/1xen4l7/spx_5dte_stops_and_spx_gap_resolution_community/",
+          "createdAt": "2026-10-24T23:34:15.000Z",
+          "score": 19,
+          "comments": 1,
+          "upvoteRatio": 0.82,
+          "flair": null,
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3116,7 +3348,7 @@
           "changePct": 21.74,
           "change": 8.19,
           "volume": 6892870,
-          "marketCap": 4692207104,
+          "marketCap": 4695336960,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
@@ -3182,7 +3414,7 @@
           "changePct": 9.06,
           "change": 7.14,
           "volume": 17320678,
-          "marketCap": 36576403456,
+          "marketCap": 37568888832,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
         },
@@ -3371,7 +3603,7 @@
           "changePct": -8.67,
           "change": -1.87,
           "volume": 2311178,
-          "marketCap": 2356077568,
+          "marketCap": 2304177152,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
         }
@@ -3513,10 +3745,12 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: European governments race to turn defense spending pledges into military capability, boosting companies' order books. (M2)",
-      "Rates: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off. (M1)",
-      "Earnings: Large-cap reporters are moving enough to affect index tone; focus on guidance read-throughs from SLB, INFY rather than the full mover list.",
-      "Retail attention: AMZN, RAPP, GE, AMGN have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
+      "Policy/geopolitics: Saudi Arabia says it intercepted Houthi missiles and drones, while the Houthis claimed attacks on airports and energy sites amid rising regional supply risks. (M2)",
+      "Rates: Peak earnings season, plus a Fed meeting and fresh inflation data. (M1)",
+      "Commodities: Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off. (M4)",
+      "Credit: I racked up over $11,000 in credit card debt traveling, shopping and dining out. (M3)",
+      "Earnings: The mover screen is two-sided and mostly idiosyncratic, so it is a catalyst-risk check rather than a broad market signal.",
+      "Retail attention: AMZN, BROS, AMGN have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
     ]
   },
   "avoidList": {
@@ -56393,7 +56627,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-digest",
           "publishedAt": "2026-10-23T16:11:30.000Z",
           "summary": "Investors seek safety in Treasuries as oil prices surge and AI-linked stocks sell off. Yields and earnings are in focus with central bank meetings ahead.",
-          "excerpt": "Investors Seek Safety Amid AI Sell-Off, Oil Surge | Charles Schwab Search Learn Markets and Economy Investors Seek Safety Amid AI Sell-Off, Oil Surge Investors sought safety in Treasuries this week as crude prices surged and AI-linked stocks sold off. Yields and earnings remain in focus as central banks meet next week. October 23, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Crude pulling strings This week's stock sell-off reminds investors that crude oil remains a direction setter on Wall Street even amid the parade of earnings. More attacks on oil vessels and increasing tensions between Iran and the U.S. had investors worried even as The Wall Street Journal reported that exports of oil from the Middle East now exceed levels seen before the war. Exporters have found alternate routes to bypass the Strait of Hormuz, but crude product prices remain high, especially for diesel. High shipping costs remain a burden within the industry, and likely are getting passed along to consumers . Several companies, including United Airlines (UAL) and Philip Morris (PM), said in their earnings reports that rising energy costs are a burden. United cut the high end of its earnings guidance. U.S. weekly crude stockpiles, which traditionally rise toward the end of the year, fell by more than three million barrels, the U.S. Energy Information Administration said Wednesday. Strong results from Union Pacific (UNP), Norfolk South",
+          "excerpt": "Investors Seek Safety Amid AI Sell-Off, Oil Surge | Charles Schwab Search Insights & Education Markets and Economy Investors Seek Safety Amid AI Sell-Off, Oil Surge Investors sought safety in Treasuries this week as crude prices surged and AI-linked stocks sold off. Yields and earnings remain in focus as central banks meet next week. October 23, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Crude pulling strings This week's stock sell-off reminds investors that crude oil remains a direction setter on Wall Street even amid the parade of earnings. More attacks on oil vessels and increasing tensions between Iran and the U.S. had investors worried even as The Wall Street Journal reported that exports of oil from the Middle East now exceed levels seen before the war. Exporters have found alternate routes to bypass the Strait of Hormuz, but crude product prices remain high, especially for diesel. High shipping costs remain a burden within the industry, and likely are getting passed along to consumers . Several companies, including United Airlines (UAL) and Philip Morris (PM), said in their earnings reports that rising energy costs are a burden. United cut the high end of its earnings guidance. U.S. weekly crude stockpiles, which traditionally rise toward the end of the year, fell by more than three million barrels, the U.S. Energy Information Administration said Wednesday. Strong results from Union Pacific (UNP)",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56641,15 +56875,6 @@
       "articles": [
         {
           "sourceName": "Axios Macro RSS",
-          "title": "Trump orders new investigation of Fed's Lisa Cook - Axios",
-          "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBaTFduakwwLUdRVWF1SzQ0YTdjX3NTWHFFVEdPeTA1VEkzaVpQclBtLTBMcTFnbFpmVFN4Z0w2N2U0X3pFVzJJZE56LVdGZUhkZndzSFpESXdFc1IwZjM4R3ln?oc=5",
-          "publishedAt": "2026-10-09T07:00:00.000Z",
-          "summary": "Trump orders new investigation of Fed's Lisa Cook Axios",
-          "excerpt": "Trump orders new investigation of Fed's Lisa Cook Axios",
-          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-          "sourceName": "Axios Macro RSS",
           "title": "Eurodrama in currency markets raises U.S. dollar's standing - Axios",
           "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFB1TmFZdTU4Z2RxbUI5djBNWmhlT2F0RXhfdlFOcGt4LUR1WG9rN1FYbmxGR3ZVTldyVjBITW5BNjB2SDI4bkMxTi1pMmpmSHoyNGNDdFZOem1LTGZ5djhZVFVaSW56UmdG?oc=5",
           "publishedAt": "2026-10-05T07:00:00.000Z",
@@ -56664,6 +56889,15 @@
           "publishedAt": "2026-10-02T07:00:00.000Z",
           "summary": "U.S. adds 29,000 jobs in September, unemployment edges up Axios",
           "excerpt": "U.S. adds 29,000 jobs in September, unemployment edges up Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Macro RSS",
+          "title": "Fed watchdog clears former chair Powell in renovation probe - Axios",
+          "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE4xdUg2VEt2TkxEam1sSG8wR0UzazRibTRYUFFvVWpjSWdMUGJ4TnBxUWxNZXVXNFowRGNSdS1KSkFMVERKcnBGUE1ocmhxM0pCbEFwejJ6emxfTk9NMElLSk13VVBidw?oc=5",
+          "publishedAt": "2026-09-30T07:00:00.000Z",
+          "summary": "Fed watchdog clears former chair Powell in renovation probe Axios",
+          "excerpt": "Fed watchdog clears former chair Powell in renovation probe Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
         }
       ],
@@ -56682,6 +56916,15 @@
       "articles": [
         {
           "sourceName": "CNBC Markets",
+          "title": "Here are 4 big things we're watching in the stock market this week",
+          "url": "https://www.cnbc.com/investingclub/2026/10/25/here-are-4-big-things-were-watching-in-the-stock-market-this-week.html",
+          "publishedAt": "2026-10-25T14:58:26.000Z",
+          "summary": "Peak earnings season, plus a Fed meeting and fresh inflation data.",
+          "excerpt": "Here are 4 big things we're watching in the stock market this week Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu The busiest week of third-quarter earnings season is here. And if that wasn't enough, there's also a Federal Reserve policy meeting and fresh inflation data on deck. The jam-packed week arrives at a critical moment for Wall Street, as the engine of the full-year bull market — the artificial intelligence trade — continues to leak fluid . The midterm elections, a source of market uncertainty, are also less than 10 days away. And the headlines out of the Middle East still paint an ugly picture, keeping elevated oil prices front and center for equity investors. We have 11 Club names on the earnings calendar, including tech heavyweights Amazon, Microsoft and Alphabet, so let's get right into what to watch for (all revenue and earnings estimates are courtesy of LSEG). 1. Tuesday earnings: Boeing kicks off the week Tuesday morning, and it's our lone report that day. The most important metric is free cash flow, including the third-quarter figure (consensus is $330 million, weighed down by a $700 million payment to the Justice Department). Any updates to the full-year guide (roughly $2 billion) are also welcome, along with commentary on 2027 expectations. Other topics of note: whether production of the 737 Max has stabilized at 47 a month, details on the delivery timelines for 737 Max 7 and Max 10 variants following FAA approval , and the flight-software glitch . Management may also be asked whether the prolonged conflict in the Middle East is affecting customer demand. Revenue: $23.8 billion EPS: loss of 21 cents 2. Wednesday earnings: Before the bell, GE Vernova's gas turbine business is the clea",
+          "discoveredFrom": "https://www.cnbc.com/markets/"
+        },
+        {
+          "sourceName": "CNBC Markets",
           "title": "CNBC Daily Open: AI spending fears haunt markets before Halloween",
           "url": "https://www.cnbc.com/2026/10/23/cnbc-daily-open-ai-spending-elon-musk-bill-ackman-jensen-huang.html",
           "publishedAt": "2026-10-23T01:42:35.000Z",
@@ -56690,7 +56933,7 @@
           "discoveredFrom": "https://www.cnbc.com/markets/"
         }
       ],
-      "articleCount": 1,
+      "articleCount": 2,
       "ok": true
     },
     {
@@ -56705,29 +56948,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "American embassies tighten security as Iran threat warnings intensify ahead of U.S. midterm elections",
-          "url": "https://www.cnbc.com/2026/10/24/iran-threats-us-embassies-middle-east.html",
-          "publishedAt": "2026-10-24T21:07:01.000Z",
-          "summary": "A memo from DNI director Jay Clayton said Iran is in the \"advanced stages\" of planning attacks against Americans.",
-          "excerpt": "A memo from DNI director Jay Clayton said Iran is in the \"advanced stages\" of planning attacks against Americans.",
+          "title": "Here are 4 big things we&apos;re watching in the stock market this week",
+          "url": "https://www.cnbc.com/investingclub/2026/10/25/here-are-4-big-things-were-watching-in-the-stock-market-this-week.html",
+          "publishedAt": "2026-10-25T14:58:26.000Z",
+          "summary": "Peak earnings season, plus a Fed meeting and fresh inflation data.",
+          "excerpt": "Peak earnings season, plus a Fed meeting and fresh inflation data.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "After SpaceX restores high-speed service, Musk claims Ukraine violated Starlink agreement",
-          "url": "https://www.cnbc.com/2026/10/24/ukraine-starlink-starshield-service-restored.html",
-          "publishedAt": "2026-10-24T20:38:30.000Z",
-          "summary": "Ukraine says restrictions on Starlink and Starshield have been lifted, restoring connectivity to fast-moving military systems after disruptions.",
-          "excerpt": "Ukraine says restrictions on Starlink and Starshield have been lifted, restoring connectivity to fast-moving military systems after disruptions.",
+          "title": "I paid off $11,000 of credit card debt in 18 months while still traveling, shopping and living my life",
+          "url": "https://www.cnbc.com/make-it/2026/10/25/pay-off-credit-card-debt.html",
+          "publishedAt": "2026-10-25T14:00:01.000Z",
+          "summary": "I racked up over $11,000 in credit card debt traveling, shopping and dining out. Here's how I paid it all off in under two years.",
+          "excerpt": "I racked up over $11,000 in credit card debt traveling, shopping and dining out. Here's how I paid it all off in under two years.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "AI funding fears rattle Wall Street. Here&apos;s how we&apos;re adjusting our portfolio",
-          "url": "https://www.cnbc.com/investingclub/2026/10/24/ai-funding-fears-rattle-wall-street-heres-how-were-adjusting-our-portfolio.html",
-          "publishedAt": "2026-10-24T16:14:00.000Z",
-          "summary": "The rotation out of AI stocks benefited several defensive Club stocks.",
-          "excerpt": "The rotation out of AI stocks benefited several defensive Club stocks.",
+          "title": "Saudi Arabia says it intercepted missiles and drones from Iran-backed Houthis",
+          "url": "https://www.cnbc.com/2026/10/25/saudi-arabia-houthi-missile-drone-interceptions.html",
+          "publishedAt": "2026-10-25T13:41:37.000Z",
+          "summary": "Saudi Arabia says it intercepted Houthi missiles and drones, while the Houthis claimed attacks on airports and energy sites amid rising regional supply risks.",
+          "excerpt": "Saudi Arabia says it intercepted Houthi missiles and drones, while the Houthis claimed attacks on airports and energy sites amid rising regional supply risks.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56787,15 +57030,33 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "I want to pay off $4,500 in credit-card debt in 2 months. Is this possible?",
-          "url": "https://www.marketwatch.com/story/i-want-to-pay-off-4-500-in-credit-card-debt-in-2-months-is-this-possible-059d9a21?mod=mw_rss_topstories",
-          "publishedAt": "2026-10-24T17:39:00.000Z",
-          "summary": "“I’m 32 years old and feel like I should know how to do this stuff by now.”",
-          "excerpt": "“I’m 32 years old and feel like I should know how to do this stuff by now.”",
+          "title": "More than a third of S&P 500 companies are about to report earnings as market confidence cracks",
+          "url": "https://www.marketwatch.com/story/more-than-a-third-of-s-p-500-companies-are-about-to-report-earnings-as-market-confidence-cracks-03b7a8f1?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-25T14:00:00.000Z",
+          "summary": "“With cautious to negative market sentiment, it could be a tricky week,” one strategist says.",
+          "excerpt": "“With cautious to negative market sentiment, it could be a tricky week,” one strategist says.",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
+          "title": "‘Nonanswers’ aren’t working. This is what investors really need from the Fed.",
+          "url": "https://www.marketwatch.com/story/non-answers-arent-working-this-is-what-investors-really-need-from-the-fed-673a9dce?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-25T12:44:00.000Z",
+          "summary": "What really matters to investors, economists say, is for Fed Chairman Kevin Warsh to prove he can successfully communicate the central bank’s strategy.",
+          "excerpt": "What really matters to investors, economists say, is for Fed Chairman Kevin Warsh to prove he can successfully communicate the central bank’s strategy.",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
+          "title": "Why economic health no longer dictates stock-market returns",
+          "url": "https://www.marketwatch.com/story/why-economic-health-no-longer-dictates-stock-market-returns-c44b88f2?mod=mw_rss_topstories",
+          "publishedAt": "2026-10-25T12:00:00.000Z",
+          "summary": "There is a wide disconnect between Wall Street and Main Street, and AI could drive them even further apart",
+          "excerpt": "There is a wide disconnect between Wall Street and Main Street, and AI could drive them even further apart",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
-      "articleCount": 1,
+      "articleCount": 3,
       "ok": true
     },
     {
