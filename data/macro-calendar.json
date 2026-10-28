@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-28T02:19:36.094Z",
+  "generatedAt": "2026-10-28T18:20:12.939Z",
   "window": {
-    "today": "2026-10-27",
+    "today": "2026-10-28",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-10-20",
-    "endDate": "2027-04-27"
+    "startDate": "2026-10-21",
+    "endDate": "2027-04-28"
   },
   "sources": [
     {
@@ -35,7 +35,7 @@
     {
       "source": "Federal Reserve FOMC calendar",
       "status": "ready",
-      "eventCount": 4,
+      "eventCount": 5,
       "scraper": "federal-reserve-fomc-calendar"
     }
   ],
@@ -242,6 +242,18 @@
       "sourceName": "Federal Reserve FOMC calendar",
       "scraper": "federal-reserve-fomc-calendar",
       "projectionMaterialsExpected": true
+    },
+    {
+      "date": "2027-04-28",
+      "time": "2:00 PM ET",
+      "event": "FOMC Rate Decision",
+      "title": "FOMC meeting decision (April 27-28, 2027)",
+      "source": "Federal Reserve",
+      "importance": "High",
+      "sourceUrl": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "sourceName": "Federal Reserve FOMC calendar",
+      "scraper": "federal-reserve-fomc-calendar",
+      "projectionMaterialsExpected": false
     }
   ]
 }
