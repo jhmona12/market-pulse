@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-07T18:05:16.587Z",
+  "generatedAt": "2026-11-08T06:11:40.876Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-11-07T18:02:19.483931+00:00",
+    "generatedAt": "2026-11-08T06:08:43.629586+00:00",
     "asOfDate": "2026-11-06",
     "expectedAsOfDate": "2026-11-06",
     "isStale": false,
@@ -1445,33 +1445,36 @@
     }
   },
   "note": {
-    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
-    "body": "The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence. 49% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, CRL.",
+    "headline": "AI-driven long-horizon momentum favors Moderna while tactical setup is confirmed for Dell and Okta, but volatility warns on OKTA",
+    "body": "Markets breathe with AI and semiconductors leadership still intact but friction from higher-rate expectations and erosion in long-horizon momentum economies keep risk controls tight.  Moderna leads the 1Y momentum cohort with a strong uptrend and 252-day context supporting continued upside; cross-checks with the 14-day model align with a constructive stance on MRNA, while DELL and OKTA sit in the top decile but require activation and risk management given volatility flags.",
     "changed": [
-      "Macro: Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. (M3)",
+      "Rates: Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. (M1)",
       "Earnings: The mover screen is two-sided and mostly idiosyncratic, so it is a catalyst-risk check rather than a broad market signal.",
-      "Retail attention: PLTR, INTC, UIS, AMD have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
+      "Retail attention: AVGO, MU, AMD, NOW have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
       "Breadth: 62% of the screened universe is above the 50-day average, 58% is above the 200-day, and 49% clears both trend lines.",
-      "Tactical implication: MRNA (Top Decile), CRL (Top Decile), OKTA (Model Risk Check) are the setups that currently merit review after the market backdrop is considered."
+      "Tactical implication: MRNA (Top Decile), CRL (Top Decile), OKTA (Model Risk Check) are the setups that currently merit review after the market backdrop is considered.",
+      "Macro release: Employment Situation data was not available officially due to a 403 error, but the market is dialing in a hot inflation / inflation persistence narrative with CPI and PPI upcoming this week (O1)."
     ],
     "watch": [
       "Next catalyst: Consumer Price Index on 2026-11-10 at 8:30 AM ET; Producer Price Index on 2026-11-13 at 8:30 AM ET; GDP Second Estimate on 2026-11-25 at 8:30 AM ET; reassess rates and sector leadership after the release.",
       "Confirmation risk: OKTA, DELL, SNDK, LITE rank highly but are not momentum confirmed; keep them in the watch bucket until price trend improves.",
-      "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book."
+      "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
+      "Monitor upcoming CPI (Nov 10) and PPI (Nov 13) releases for risk-on / off impulses in tech and semis.",
+      "Watch Dell’s activation level at 343.  6 and Moderna’s momentum confirm status; be prepared to activate if close above rebound thresholds within 5 days."
     ],
-    "generatedBy": "deterministic"
+    "generatedBy": "ai_with_fact_guardrails"
   },
   "aiRecommendations": {
     "status": "ready",
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 111078,
+      "inputTokens": 111417,
       "cachedInputTokens": 0,
-      "outputTokens": 1819,
+      "outputTokens": 1982,
       "reasoningTokens": 0,
-      "totalTokens": 112897,
-      "estimatedCostUsd": 0.006282,
+      "totalTokens": 113399,
+      "estimatedCostUsd": 0.006364,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1479,9 +1482,24 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Inflation and rates risk remain the main constraint on high-beta exposure.",
-    "macroView": "The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence. Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. Next macro decision points: Consumer Price Index on 2026-11-10; Producer Price Index on 2026-11-13; GDP Second Estimate on 2026-11-25. Sector confirmation: Consumer Staples +10.26% over 30D, +15.65% vs SPY; Health Care +9.47% over 30D, +14.86% vs SPY; Real Estate +8.45% over 30D, +13.84% vs SPY.",
-    "dailyRead": null,
+    "headline": "Diesel supply pressure is adding to inflation and rates risk.",
+    "macroView": "Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. Cisco's AI infrastructure orders reinforce the spending cycle behind the semiconductor and networking trade. Next macro decision points: Consumer Price Index on 2026-11-10; Producer Price Index on 2026-11-13; GDP Second Estimate on 2026-11-25. Sector confirmation: Consumer Staples +10.26% over 30D, +15.65% vs SPY; Health Care +9.47% over 30D, +14.86% vs SPY; Real Estate +8.45% over 30D, +13.84% vs SPY.",
+    "dailyRead": {
+      "headline": "AI-driven long-horizon momentum favors Moderna while tactical setup is confirmed for Dell and Okta, but volatility warns on OKTA",
+      "body": "Markets breathe with AI and semiconductors leadership still intact but friction from higher-rate expectations and erosion in long-horizon momentum economies keep risk controls tight.  Moderna leads the 1Y momentum cohort with a strong uptrend and 252-day context supporting continued upside; cross-checks with the 14-day model align with a constructive stance on MRNA, while DELL and OKTA sit in the top decile but require activation and risk management given volatility flags.",
+      "keyTakeaways": [
+        "Macro release: Employment Situation data was not available officially due to a 403 error, but the market is dialing in a hot inflation / inflation persistence narrative with CPI and PPI upcoming this week (O1).",
+        "Market drivers: 14D tactical model ranks Moderna, Dell, and Okta in the top decile with momentum signals; 1Y long-horizon context also flags real estate leaders like Erie and Alexandria Real Estate as potential longer-horizon leaders, but technicals show mixed trend health across software and semis.",
+        "Earnings: Moderna beat on guidance last seen (MRNA) with strong forward trajectory; Dell posted solid Jul quarter with high EPS surprise and robust next-period consensus (C3, C2).",
+        "Real-time momentum: MRNA shows momentum confirmed, approaching 52-week high proximity with strong 60 / 120 / 252 day performance; OKTA is high-ranked but not momentum-confirmed with volatility flags; Dell is a top rebound-watch with activation pending.",
+        "Reddit attention: AI and semiconductors chatter remains elevated but not disproportionately concentrated on a single name; murmurs around Nvidia / AI infrastructure influence remain topics but not explicit signals in top tickers list."
+      ],
+      "watchItems": [
+        "Monitor upcoming CPI (Nov 10) and PPI (Nov 13) releases for risk-on / off impulses in tech and semis.",
+        "Watch Dell’s activation level at 343. 6 and Moderna’s momentum confirm status; be prepared to activate if close above rebound thresholds within 5 days.",
+        "Monitor OKTA for momentum confirmation despite top-decile rank due to volatility risk and below-50d-trend signals."
+      ]
+    },
     "recommendations": [
       {
         "symbol": "MRNA",
@@ -1490,12 +1508,12 @@
         "setup": "Momentum confirmed",
         "whyNow": "Rank #3 of 500; +304.60% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
         "rationale": "MRNA is momentum confirmed by the dashboard rules. Rank #3 of 500; +304.60% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "companyOverview": "Moderna is a leader in the creation of the field of mRNA medicine. Through the advancement of mRNA technology, Moderna is reimagining how medicines are made and transforming how we treat and prevent disease for everyone. By working at the intersection of science, technology and health for more than a decade, the com...",
+        "companyOverview": "Moderna is a pioneer and leader in the field of mRNA medicine. Through the advancement of its technology platform, Moderna is reimagining how medicines are made to transform how we treat and prevent diseases. Since its founding, Moderna's mRNA platform has enabled the development of vaccines and therapeutics across...",
         "marketCap": "$101.5B",
         "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.1.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-11-07: The 2027 tax brackets are out. See what the standard deduction and SALT tax breaks will be.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation.",
+        "macroEvidence": "Schwab Weekly Market Outlook, 2026-11-06: Strong El Niño Expected to Pump Up Food Inflation",
         "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D +14.64%; 14D +27.03%; 30D +29.37%; 60D vs SPY +304.60%; RSI 59; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
@@ -1503,14 +1521,13 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C3-EARNINGS",
-          "S13",
           "S11",
-          "S9",
-          "S6",
+          "S7",
+          "S1",
           "S12",
           "C3-IR",
           "C3-MARKETCAP",
-          "S4"
+          "S9"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1527,8 +1544,8 @@
         "marketCap": "$209.0B",
         "earningsContext": "Last reported 2026-09-01 for the Jul 2026 fiscal quarter; EPS 6.76 versus consensus 4.72; surprise 43.22%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 6.41.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-11-07: The 2027 tax brackets are out. See what the standard deduction and SALT tax breaks will be.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation.",
+        "macroEvidence": "Schwab Weekly Market Outlook, 2026-11-06: Strong El Niño Expected to Pump Up Food Inflation",
         "modelEvidence": "Rank #2 of 500; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Liquid versus universe.",
         "technicalEvidence": "7D -22.57%; 14D -28.02%; 30D -43.18%; 60D vs SPY -28.23%; RSI 32; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
@@ -1536,13 +1553,9 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C2-EARNINGS",
-          "S1",
-          "S6",
-          "S10",
-          "S3",
           "C2-IR",
           "C2-MARKETCAP",
-          "S4"
+          "S9"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1551,33 +1564,31 @@
         ]
       },
       {
-        "symbol": "MRNA",
-        "action": "Research long setup",
-        "conviction": "High",
-        "setup": "Momentum confirmed",
-        "whyNow": "Rank #3 of 500; +304.60% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "rationale": "MRNA is momentum confirmed by the dashboard rules. Rank #3 of 500; +304.60% 60-day return versus SPY; above both the 50-day and 200-day moving averages.",
-        "companyOverview": "Moderna is a leader in the creation of the field of mRNA medicine. Through the advancement of mRNA technology, Moderna is reimagining how medicines are made and transforming how we treat and prevent disease for everyone. By working at the intersection of science, technology and health for more than a decade, the com...",
-        "marketCap": "$101.5B",
-        "earningsContext": "Last reported 2026-07-31 for the Jun 2026 fiscal quarter; EPS -1.97 versus consensus -1.97; surprise 0%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Sep 2026 with consensus -1.1.",
+        "symbol": "OKTA",
+        "action": "Watch, do not chase",
+        "conviction": "Review",
+        "setup": "Not momentum confirmed",
+        "whyNow": "Rank #1 of 500; +14.11% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
+        "rationale": "The model ranks OKTA highly, but the setup is not clean momentum yet. Rank #1 of 500; +14.11% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
+        "companyOverview": "Okta, Inc. is The World's Identity Company. We secure AI, machine, and human identity so everyone is free to safely use any technology. Our workforce and customer solutions empower businesses and developers to protect their AI agents, users, employees, and partners while driving security, efficiencies, and innovatio...",
+        "marketCap": "$29.5B",
+        "earningsContext": "Last reported 2026-08-26 for the Jul 2026 fiscal quarter; EPS 0.58 versus consensus 0.44; surprise 31.82%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.43.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-11-07: The 2027 tax brackets are out. See what the standard deduction and SALT tax breaks will be.",
-        "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +14.64%; 14D +27.03%; 30D +29.37%; 60D vs SPY +304.60%; RSI 59; above both the 50-day and 200-day moving averages",
-        "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility.",
-        "risk": "Above-sector volatility",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation.",
+        "macroEvidence": "Schwab Weekly Market Outlook, 2026-11-06: Strong El Niño Expected to Pump Up Food Inflation",
+        "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D -18.99%; 14D -20.82%; 30D -22.62%; 60D vs SPY +14.11%; RSI 41; above the 200-day average but below the 50-day average",
+        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
+        "risk": "Above-sector volatility; Below 50d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C3-EARNINGS",
-          "S11",
-          "S3",
-          "C3-IR",
-          "C3-MARKETCAP",
-          "S4"
+          "C1-EARNINGS",
+          "C1-IR",
+          "C1-MARKETCAP",
+          "S9"
         ],
         "setupTags": [
-          "Momentum Confirmed"
+          "Not Momentum Confirmed"
         ]
       }
     ],
@@ -1799,25 +1810,25 @@
       "Do watch names OKTA, DELL, SNDK regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
-      "S13",
-      "S11",
-      "S18",
       "S3",
-      "S9"
+      "S7",
+      "S11",
+      "S1",
+      "S3"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Featured source angle: The Schwab note describes a setup where tech deterioration and defensive leadership have persisted through the week, with equities showing potential continued downside risk as technicals suggest broken support levels and a shift in leadership.",
+      "summary": "Featured source angle: The Schwab note describes the market as showing defensive leadership amid a tech stock sell-off and technical damage, suggesting the evidence point toward increased downside risk for equity markets without asserting a guaranteed outcome.",
       "cards": [
         {
           "sourceRef": "S8",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Weekly Trader's Outlook",
-          "thesis": "The Schwab note describes a setup where tech deterioration and defensive leadership have persisted through the week, with equities showing potential continued downside risk as technicals suggest broken support levels and a shift in leadership.",
-          "whyItMatters": "This provides a concrete, text-backed characterization of market dynamics (tech weakness, defensive rotation, broken support) that can inform cross-asset risk checks without prescribing a directional bet.",
-          "marketReadThrough": "Monitor: observe whether the tech-heavy indices hold or breach key support and whether defensive sectors continue to lead in the coming sessions, as the piece ties current conditions to recently broken levels and patterns.",
-          "variantAngle": "Inference: the evidence points to a probability that downside pressure may persist if the described support breaches remain intact, suggesting continued caution rather than a reversal.",
+          "thesis": "The Schwab note describes the market as showing defensive leadership amid a tech stock sell-off and technical damage, suggesting the evidence point toward increased downside risk for equity markets without asserting a guaranteed outcome.",
+          "whyItMatters": "This contrasts with any complacent view and signals that sector leadership is shifting, which could influence risk budgeting and position sizing for portfolios concerned with drawdown potential.",
+          "marketReadThrough": "Monitor: check for continued weakness in tech, any breach of key support levels, and the persistence of defensive leadership signals in coming weeks as observable confirmations of the described dynamic.",
+          "variantAngle": "Inference: if tech deterioration and defensive rotation persist, it may indicate heightened sensitivity of equity markets to macro shocks, though the outcome remains probabilistic rather than certain.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-11-06T20:52:28.000Z",
@@ -1829,10 +1840,10 @@
           "sourceRef": "S15",
           "sourceName": "Morgan Stanley Ideas",
           "title": "Morgan Stanley Research | Morgan Stanley",
-          "thesis": "Morgan Stanley frames the policy and AI-infrastructure discussion around the possibility that a Democratic midterm victory could reshape fiscal policy and increase scrutiny of AI investments, while keeping the broad economic and market outlook intact.",
-          "whyItMatters": "This adds a policy-and-technology risk lens to the macro backdrop, linking potential fiscal shifts and AI-infrastructure scrutiny to market fundamentals without asserting a fixed outcome.",
-          "marketReadThrough": "Monitor: check for any policy announcements or AI-investment scrutiny signals that align with the described scenario, and observe whether the broader economic outlook remains broadly unchanged.",
-          "variantAngle": "Inference: there is a non-zero chance that policy shifts or AI-related investment debates could alter sector valuations modestly, but the evidence does not imply a fundamental market re-rating is imminent.",
+          "thesis": "Morgan Stanley notes that a Democratic midterm victory could reshape fiscal policy and increase scrutiny of AI infrastructure investment, while the broader macro outlook remains intact; the claim preserves a non-commitment to a specific market move.",
+          "whyItMatters": "It highlights potential policy-driven shifts that could influence AI-related capex and sector dynamics, providing a contextual risk factor rather than a prediction about stocks or indices.",
+          "marketReadThrough": "Monitor: gauge any new policy signals or AI investment scrutiny after US midterms and observe how Morgan Stanley frames the overall market backdrop in light of those signals.",
+          "variantAngle": "Inference: should policy scrutiny rise around AI infrastructure, there may be a measured effect on related equities or funding flows, but this remains a probabilistic possibility rather than a forecast.",
           "confidence": "Medium",
           "url": "https://www.morganstanley.com/what-we-do/research",
           "publishedAt": "2026-11-04T00:00:00.000Z",
@@ -1846,16 +1857,16 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Featured source angle: The Schwab note describes a setup where tech deterioration and defensive leadership have persisted through the week, with equities showing potential continued downside risk as technicals suggest broken support levels and a shift in leadership.",
+    "summary": "Featured source angle: The Schwab note describes the market as showing defensive leadership amid a tech stock sell-off and technical damage, suggesting the evidence point toward increased downside risk for equity markets without asserting a guaranteed outcome.",
     "cards": [
       {
         "sourceRef": "S8",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Weekly Trader's Outlook",
-        "thesis": "The Schwab note describes a setup where tech deterioration and defensive leadership have persisted through the week, with equities showing potential continued downside risk as technicals suggest broken support levels and a shift in leadership.",
-        "whyItMatters": "This provides a concrete, text-backed characterization of market dynamics (tech weakness, defensive rotation, broken support) that can inform cross-asset risk checks without prescribing a directional bet.",
-        "marketReadThrough": "Monitor: observe whether the tech-heavy indices hold or breach key support and whether defensive sectors continue to lead in the coming sessions, as the piece ties current conditions to recently broken levels and patterns.",
-        "variantAngle": "Inference: the evidence points to a probability that downside pressure may persist if the described support breaches remain intact, suggesting continued caution rather than a reversal.",
+        "thesis": "The Schwab note describes the market as showing defensive leadership amid a tech stock sell-off and technical damage, suggesting the evidence point toward increased downside risk for equity markets without asserting a guaranteed outcome.",
+        "whyItMatters": "This contrasts with any complacent view and signals that sector leadership is shifting, which could influence risk budgeting and position sizing for portfolios concerned with drawdown potential.",
+        "marketReadThrough": "Monitor: check for continued weakness in tech, any breach of key support levels, and the persistence of defensive leadership signals in coming weeks as observable confirmations of the described dynamic.",
+        "variantAngle": "Inference: if tech deterioration and defensive rotation persist, it may indicate heightened sensitivity of equity markets to macro shocks, though the outcome remains probabilistic rather than certain.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-11-06T20:52:28.000Z",
@@ -1867,10 +1878,10 @@
         "sourceRef": "S15",
         "sourceName": "Morgan Stanley Ideas",
         "title": "Morgan Stanley Research | Morgan Stanley",
-        "thesis": "Morgan Stanley frames the policy and AI-infrastructure discussion around the possibility that a Democratic midterm victory could reshape fiscal policy and increase scrutiny of AI investments, while keeping the broad economic and market outlook intact.",
-        "whyItMatters": "This adds a policy-and-technology risk lens to the macro backdrop, linking potential fiscal shifts and AI-infrastructure scrutiny to market fundamentals without asserting a fixed outcome.",
-        "marketReadThrough": "Monitor: check for any policy announcements or AI-investment scrutiny signals that align with the described scenario, and observe whether the broader economic outlook remains broadly unchanged.",
-        "variantAngle": "Inference: there is a non-zero chance that policy shifts or AI-related investment debates could alter sector valuations modestly, but the evidence does not imply a fundamental market re-rating is imminent.",
+        "thesis": "Morgan Stanley notes that a Democratic midterm victory could reshape fiscal policy and increase scrutiny of AI infrastructure investment, while the broader macro outlook remains intact; the claim preserves a non-commitment to a specific market move.",
+        "whyItMatters": "It highlights potential policy-driven shifts that could influence AI-related capex and sector dynamics, providing a contextual risk factor rather than a prediction about stocks or indices.",
+        "marketReadThrough": "Monitor: gauge any new policy signals or AI investment scrutiny after US midterms and observe how Morgan Stanley frames the overall market backdrop in light of those signals.",
+        "variantAngle": "Inference: should policy scrutiny rise around AI infrastructure, there may be a measured effect on related equities or funding flows, but this remains a probabilistic possibility rather than a forecast.",
         "confidence": "Medium",
         "url": "https://www.morganstanley.com/what-we-do/research",
         "publishedAt": "2026-11-04T00:00:00.000Z",
@@ -1889,12 +1900,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-11-07T18:04:38.385Z",
+    "generatedAt": "2026-11-08T06:11:02.155Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-11-07T06:07:31.492Z"
+      "previousRefreshAt": "2026-11-07T18:05:16.587Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1905,7 +1916,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-11-07T18:02:22.193Z",
+      "generatedAt": "2026-11-08T06:08:45.794Z",
       "lookbackHours": 96,
       "releases": [
         {
@@ -1953,20 +1964,21 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "The 2027 tax brackets are out. See what the standard deduction and SALT tax breaks will be.",
-        "sourceName": "MarketWatch Top Stories RSS",
-        "sourceCategory": "News RSS",
-        "trust": "Medium",
-        "url": "https://www.marketwatch.com/story/the-2027-tax-brackets-are-out-see-what-the-standard-deduction-and-salt-tax-breaks-will-be-5dd1d293?mod=mw_rss_topstories",
-        "publishedAt": "2026-11-07T16:30:00.000Z",
-        "summary": "The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence.",
-        "excerpt": "The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence.",
+        "title": "Strong El Niño Expected to Pump Up Food Inflation",
+        "sourceName": "Schwab Weekly Market Outlook",
+        "sourceCategory": "Institution research",
+        "trust": "High",
+        "url": "https://www.schwab.com/learn/story/strong-el-nino-expected-to-pump-up-food-inflation",
+        "publishedAt": "2026-11-06T16:46:20.000Z",
+        "summary": "Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation.",
+        "excerpt": "Strong El Niño Expected to Pump Up Food Inflation | Charles Schwab Search Insights & Education Markets and Economy Strong El Niño Expected to Pump Up Food Inflation Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. November 6, 2026 • Henry Hoenig What may turn out to be the strongest El Niño on record appears likely to hit global crops in coming months. This complex weather pattern threatens to combine with existing disruptions to fertilizer and diesel supplies to send global food prices sharply higher. In the United States, a very strong El Niño alone would typically drive food prices higher. Throw in higher diesel and fertilizer prices, and the pressure households have felt during the past five years of elevated inflation may get even worse. State of U.S. food inflation From a Federal Reserve policy standpoint, food inflation remains relatively contained. After hitting 3.2% in April, overall food inflation slowed to 2.5% in September, accounting for 9% of the 3.7% year-over-year increase in the Consumer Price Index (CPI). But prices in some categories are rising faster. Prices for cereals and cereal products, beef, and fruits and vegetables all rose more than 3% from a year earlier in September, with the price of 100% ground beef jumping 7.4%. And regardless of the current inflation rate, food price increases have taken a seemingly ever-growing bite out of household budgets in recent years. The CPI food index has risen 25% in five years, while fruit and vegetable prices are up 17%, and the cost of 100% ground beef is up 51%. In 2025, the middle quintile of U.S. households by income spent about 12% of their pre-tax income on food. DIY investing? Trading? Professional advice? S",
         "themes": [
-          "Rates and central banks"
+          "Rates and central banks",
+          "Macro and growth"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 1.6,
-        "score": 92,
+        "freshness": "Important older item",
+        "ageHours": 37.4,
+        "score": 54,
         "tickers": []
       },
       {
@@ -1984,27 +1996,8 @@
           "Rates and central banks",
           "AI and semis"
         ],
-        "freshness": "Last 24 hours",
-        "ageHours": 18.9,
-        "score": 70,
-        "tickers": []
-      },
-      {
-        "id": "M3",
-        "title": "Strong El Niño Expected to Pump Up Food Inflation",
-        "sourceName": "Schwab Weekly Market Outlook",
-        "sourceCategory": "Institution research",
-        "trust": "High",
-        "url": "https://www.schwab.com/learn/story/strong-el-nino-expected-to-pump-up-food-inflation",
-        "publishedAt": "2026-11-06T16:46:20.000Z",
-        "summary": "Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation.",
-        "excerpt": "Strong El Niño Expected to Pump Up Food Inflation | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Strong El Niño Expected to Pump Up Food Inflation Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. November 6, 2026 • Henry Hoenig What may turn out to be the strongest El Niño on record appears likely to hit global crops in coming months. This complex weather pattern threatens to combine with existing disruptions to fertilizer and diesel supplies to send global food prices sharply higher. In the United States, a very strong El Niño alone would typically drive food prices higher. Throw in higher diesel and fertilizer prices, and the pressure households have felt during the past five years of elevated inflation may get even worse. State of U.S. food inflation From a Federal Reserve policy standpoint, food inflation remains relatively contained. After hitting 3.2% in April, overall food inflation slowed to 2.5% in September, accounting for 9% of the 3.7% year-over-year increase in the Consumer Price Index (CPI). But prices in some categories are rising faster. Prices for cereals and cereal products, beef, and fruits and vegetables all rose more than 3% from a year earlier in September, with the price of 100% ground beef jumping 7.4%. And regardless of the current inflation rate, food price increases have taken a seemingly ever-growing bite out of household budgets in recent years. The CPI food index has risen 25% in five years, while fruit and vegetable prices are up 17%, and the cost of 100% ground beef is up 51%. In 2025, the middle quintile of U.S. households by income spent about 12% of their pre-tax income on food. DIY investing? Trading? Professi",
-        "themes": [
-          "Rates and central banks",
-          "Macro and growth"
-        ],
         "freshness": "Important older item",
-        "ageHours": 25.3,
+        "ageHours": 31,
         "score": 54,
         "tickers": []
       }
@@ -2012,7 +2005,7 @@
     "topThemes": [
       {
         "theme": "Rates and central banks",
-        "count": 3
+        "count": 2
       },
       {
         "theme": "Macro and growth",
@@ -2029,7 +2022,7 @@
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-11-07T18:04:38.377Z",
+      "generatedAt": "2026-11-08T06:11:02.147Z",
       "dates": [
         "2026-11-06",
         "2026-11-07",
@@ -2243,7 +2236,7 @@
               "marketCap": "$11,301,260,300",
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
-              "noOfEsts": "2",
+              "noOfEsts": "N/A",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-06"
             },
@@ -2411,7 +2404,7 @@
               "marketCap": "$3,741,557,760",
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
-              "noOfEsts": "2",
+              "noOfEsts": "N/A",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-06"
             },
@@ -2541,8 +2534,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "2",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "N/A",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-07"
             },
@@ -2555,8 +2546,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "$5.91",
               "noOfEsts": "2",
-              "lastYearReportDate": "11/01/2025",
-              "lastYearEps": "$6.26",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-07"
             }
@@ -2684,15 +2673,6 @@
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "Berkshire Hathaway more than doubles buybacks in third quarter as earnings decline",
-          "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/11/07/berkshire-hathaway-q3-2026-earnings-buybacks.html",
-          "publishedAt": "2026-11-07T15:23:46.000Z",
-          "summary": "Berkshire Hathaway said Saturday it accelerated its share repurchases during the third quarter, as operating and overall profits took a hit.",
-          "tickers": []
-        },
-        {
-          "id": "E2",
           "title": "Cramer’s week ahead: AI data center stocks face another hurdle and so does the Fed",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/06/cramer-coreweave-nebius-earnings.html",
@@ -2701,7 +2681,7 @@
           "tickers": []
         },
         {
-          "id": "E3",
+          "id": "E2",
           "title": "Weekly Trader's Outlook",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
@@ -2710,7 +2690,7 @@
           "tickers": []
         },
         {
-          "id": "E4",
+          "id": "E3",
           "title": "Moderna raises 2026 outlook as CEO says newer vaccines are gaining traction",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/06/moderna-mrna-earnings-q3-2026.html",
@@ -2719,7 +2699,7 @@
           "tickers": []
         },
         {
-          "id": "E5",
+          "id": "E4",
           "title": "India as an AI hedge? The country's stocks could see robust inflows as markets globally tank",
           "sourceName": "CNBC Markets",
           "url": "https://www.cnbc.com/2026/11/06/india-ai-tech-hedge-nifty50.html",
@@ -2728,7 +2708,7 @@
           "tickers": []
         },
         {
-          "id": "E6",
+          "id": "E5",
           "title": "S&P 500 snaps 3-day skid on Election Day as chip stocks rebound",
           "sourceName": "CNBC Markets",
           "url": "https://www.cnbc.com/2026/11/02/stock-market-today-live-updates.html",
@@ -2737,7 +2717,7 @@
           "tickers": []
         },
         {
-          "id": "E7",
+          "id": "E6",
           "title": "U.S. economy races ahead with 3.4% growth in third quarter - Axios",
           "sourceName": "Axios Macro RSS",
           "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBQTlllWGE1b1RiU08zQ0kzRWx0UDNwLXRwZEZQRGhpY2tydWJLWjdJaGVkSUxIcDBabWFIUnJIdUhnc214UFhESXU5ZXY1V2hya0dXWVAzXzNCLW1nZTdYNWJ0NA?oc=5",
@@ -2750,7 +2730,7 @@
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-11-07T18:02:26.639Z",
+      "generatedAt": "2026-11-08T06:08:49.174Z",
       "authMode": "oauth",
       "metricMode": "ranked_attention",
       "sampleCoverage": {
@@ -2760,9 +2740,9 @@
           "new",
           "top"
         ],
-        "postCount": 47,
+        "postCount": 35,
         "includesVoteAndCommentCounts": true,
-        "oauthPostCount": 47,
+        "oauthPostCount": 35,
         "rssPostCount": 0
       },
       "sourceNote": "Reddit OAuth API across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
@@ -2773,7 +2753,7 @@
           "segment": "Retail momentum",
           "status": "ready",
           "error": null,
-          "postCount": 21,
+          "postCount": 15,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2794,7 +2774,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 18
+              "postCount": 13
             }
           ]
         },
@@ -2833,7 +2813,7 @@
           "segment": "Retail investing",
           "status": "ready",
           "error": null,
-          "postCount": 10,
+          "postCount": 5,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2854,7 +2834,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 9
+              "postCount": 5
             }
           ]
         },
@@ -2863,7 +2843,7 @@
           "segment": "Fundamental research",
           "status": "ready",
           "error": null,
-          "postCount": 2,
+          "postCount": 1,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2914,82 +2894,69 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 3
+              "postCount": 4
             }
           ]
         }
       ],
       "topTickers": [
         {
-          "symbol": "PLTR",
-          "mentions": 1,
-          "signalStrength": 5.7,
-          "directMentions": 1,
-          "score": 47,
-          "comments": 35,
+          "symbol": "AVGO",
+          "mentions": 2,
+          "signalStrength": 5.3,
+          "directMentions": 2,
+          "score": 100,
+          "comments": 54,
           "subreddits": [
-            "wallstreetbets"
+            "wallstreetbets",
+            "stocks"
           ],
           "posts": [
             {
-              "title": "FCK you, $PLTR and $INTC",
+              "title": "Broadcom (AVGO) hit a 52 week low yesterday. Headed lower?",
+              "subreddit": "stocks",
+              "score": 100,
+              "comments": 42,
+              "permalink": "https://www.reddit.com/r/stocks/comments/1xqfhdb/broadcom_avgo_hit_a_52_week_low_yesterday_headed/"
+            },
+            {
+              "title": "$MU at 3.6x forward earnings is not cheap. It is the top.",
               "subreddit": "wallstreetbets",
-              "score": 66,
-              "comments": 50,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xppkv0/fck_you_pltr_and_intc/"
+              "score": 0,
+              "comments": 27,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqqrb8/mu_at_36x_forward_earnings_is_not_cheap_it_is_the/"
             }
           ],
-          "attentionScore": 83.11
+          "attentionScore": 104.66
         },
         {
-          "symbol": "INTC",
+          "symbol": "MU",
           "mentions": 1,
           "signalStrength": 5.3,
           "directMentions": 1,
-          "score": 47,
-          "comments": 35,
+          "score": 0,
+          "comments": 12,
           "subreddits": [
             "wallstreetbets"
           ],
           "posts": [
             {
-              "title": "FCK you, $PLTR and $INTC",
+              "title": "$MU at 3.6x forward earnings is not cheap. It is the top.",
               "subreddit": "wallstreetbets",
-              "score": 66,
-              "comments": 50,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xppkv0/fck_you_pltr_and_intc/"
+              "score": 0,
+              "comments": 27,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqqrb8/mu_at_36x_forward_earnings_is_not_cheap_it_is_the/"
             }
           ],
-          "attentionScore": 79.11
-        },
-        {
-          "symbol": "UIS",
-          "mentions": 1,
-          "signalStrength": 4.9,
-          "directMentions": 1,
-          "score": 22,
-          "comments": 22,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
-            {
-              "title": "Forget the picks and shovels, buy the dump trucks! $UIS",
-              "subreddit": "wallstreetbets",
-              "score": 22,
-              "comments": 22,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xpkh5e/forget_the_picks_and_shovels_buy_the_dump_trucks/"
-            }
-          ],
-          "attentionScore": 74.21
+          "attentionScore": 77.48
         },
         {
           "symbol": "AMD",
           "mentions": 1,
           "signalStrength": 2.9,
           "directMentions": 1,
-          "score": 98,
-          "comments": 117,
+          "score": 135,
+          "comments": 133,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -2997,12 +2964,12 @@
             {
               "title": "AMD -17% Thursday, +11% Friday. What a week. What's next?",
               "subreddit": "wallstreetbets",
-              "score": 98,
-              "comments": 117,
+              "score": 135,
+              "comments": 133,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xpzd5b/amd_17_thursday_11_friday_what_a_week_whats_next/"
             }
           ],
-          "attentionScore": 59.15
+          "attentionScore": 60.34
         },
         {
           "symbol": "NOW",
@@ -3010,7 +2977,7 @@
           "signalStrength": 3.3,
           "directMentions": 1,
           "score": 0,
-          "comments": 10,
+          "comments": 50,
           "subreddits": [
             "investing"
           ],
@@ -3019,11 +2986,11 @@
               "title": "Where would you invest your money RIGHT NOW given the current economic climate?",
               "subreddit": "investing",
               "score": 0,
-              "comments": 10,
+              "comments": 50,
               "permalink": "https://www.reddit.com/r/investing/comments/1xqcbgo/where_would_you_invest_your_money_right_now_given/"
             }
           ],
-          "attentionScore": 57.4
+          "attentionScore": 59
         },
         {
           "symbol": "SPY",
@@ -3031,7 +2998,7 @@
           "signalStrength": 2.9,
           "directMentions": 1,
           "score": 0,
-          "comments": 18,
+          "comments": 24,
           "subreddits": [
             "options"
           ],
@@ -3040,44 +3007,149 @@
               "title": "Do GEX filters improve trade selection for longer-dated SPY options—or just reduce trade frequency?",
               "subreddit": "options",
               "score": 0,
-              "comments": 18,
+              "comments": 24,
               "permalink": "https://www.reddit.com/r/options/comments/1xq2snq/do_gex_filters_improve_trade_selection_for/"
             }
           ],
-          "attentionScore": 53.72
+          "attentionScore": 53.96
+        },
+        {
+          "symbol": "IBKR",
+          "mentions": 1,
+          "signalStrength": 2.9,
+          "directMentions": 1,
+          "score": 9,
+          "comments": 7,
+          "subreddits": [
+            "options"
+          ],
+          "posts": [
+            {
+              "title": "Trouble getting filled on a 200-point SPX Short Box Spread on IBKR",
+              "subreddit": "options",
+              "score": 9,
+              "comments": 7,
+              "permalink": "https://www.reddit.com/r/options/comments/1xqd0cq/trouble_getting_filled_on_a_200point_spx_short/"
+            }
+          ],
+          "attentionScore": 53.41
+        },
+        {
+          "symbol": "ALAB",
+          "mentions": 1,
+          "signalStrength": 2.8,
+          "directMentions": 1,
+          "score": 0,
+          "comments": 12,
+          "subreddits": [
+            "wallstreetbets"
+          ],
+          "posts": [
+            {
+              "title": "$MU at 3.6x forward earnings is not cheap. It is the top.",
+              "subreddit": "wallstreetbets",
+              "score": 0,
+              "comments": 27,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqqrb8/mu_at_36x_forward_earnings_is_not_cheap_it_is_the/"
+            }
+          ],
+          "attentionScore": 52.48
+        },
+        {
+          "symbol": "MSTR",
+          "mentions": 1,
+          "signalStrength": 2.5,
+          "directMentions": 1,
+          "score": 2,
+          "comments": 0,
+          "subreddits": [
+            "options"
+          ],
+          "posts": [
+            {
+              "title": "MSTR calls next week",
+              "subreddit": "options",
+              "score": 2,
+              "comments": 0,
+              "permalink": "https://www.reddit.com/r/options/comments/1xqlgil/mstr_calls_next_week/"
+            }
+          ],
+          "attentionScore": 49.03
+        },
+        {
+          "symbol": "MRVL",
+          "mentions": 1,
+          "signalStrength": 2.4,
+          "directMentions": 1,
+          "score": 0,
+          "comments": 12,
+          "subreddits": [
+            "wallstreetbets"
+          ],
+          "posts": [
+            {
+              "title": "$MU at 3.6x forward earnings is not cheap. It is the top.",
+              "subreddit": "wallstreetbets",
+              "score": 0,
+              "comments": 27,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqqrb8/mu_at_36x_forward_earnings_is_not_cheap_it_is_the/"
+            }
+          ],
+          "attentionScore": 48.48
+        },
+        {
+          "symbol": "TTMI",
+          "mentions": 1,
+          "signalStrength": 2.4,
+          "directMentions": 1,
+          "score": 0,
+          "comments": 12,
+          "subreddits": [
+            "wallstreetbets"
+          ],
+          "posts": [
+            {
+              "title": "$MU at 3.6x forward earnings is not cheap. It is the top.",
+              "subreddit": "wallstreetbets",
+              "score": 0,
+              "comments": 27,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqqrb8/mu_at_36x_forward_earnings_is_not_cheap_it_is_the/"
+            }
+          ],
+          "attentionScore": 48.48
         }
       ],
       "topPosts": [
         {
-          "id": "1xpo1gj",
+          "id": "1xqcq4u",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Weekend Discussion Thread for the Weekend of November 7-8",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xpo1gj/weekend_discussion_thread_for_the_weekend_of/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xpo1gj/weekend_discussion_thread_for_the_weekend_of/",
-          "createdAt": "2026-11-06T21:00:39.000Z",
-          "score": 79,
-          "comments": 6148,
-          "upvoteRatio": 0.87,
-          "flair": null,
+          "title": "US intelligence believes Nvidia CEO Jensen Huang had affair with Chinese spy in honeypot operation",
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/us-intelligence-believes-jensen-huang-had-romantic-relationship-with-chinese-spy-in-honeypot-operation-spy-suspect-linked-to-company-accused-of-smuggling-usd2-billion-in-ai-chips",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqcq4u/us_intelligence_believes_nvidia_ceo_jensen_huang/",
+          "createdAt": "2026-11-07T18:05:00.000Z",
+          "score": 8044,
+          "comments": 677,
+          "upvoteRatio": 0.97,
+          "flair": "News",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
-          "filteredAsGeneric": true,
+          "filteredAsGeneric": false,
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xpswkr",
+          "id": "1xqhvjj",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Lost ~3 years of salary",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xpswkr/lost_3_years_of_salary/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xpswkr/lost_3_years_of_salary/",
-          "createdAt": "2026-11-07T00:35:57.000Z",
-          "score": 4304,
-          "comments": 1226,
-          "upvoteRatio": 0.89,
-          "flair": "Loss",
+          "title": "I am not the CEO of Grindr. Ask me anything.",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xqhvjj/i_am_not_the_ceo_of_grindr_ask_me_anything/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqhvjj/i_am_not_the_ceo_of_grindr_ask_me_anything/",
+          "createdAt": "2026-11-07T21:49:03.000Z",
+          "score": 5837,
+          "comments": 793,
+          "upvoteRatio": 0.92,
+          "flair": "Verified AMA ✅",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3092,8 +3164,8 @@
           "url": "https://i.redd.it/lkzz3ayx660i1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xq3jww/its_not_a_loss_if_i_dont_sell/",
           "createdAt": "2026-11-07T10:46:50.000Z",
-          "score": 2800,
-          "comments": 108,
+          "score": 3750,
+          "comments": 123,
           "upvoteRatio": 0.98,
           "flair": "Meme",
           "tickers": [],
@@ -3103,17 +3175,17 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xppjn5",
+          "id": "1xqf354",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Who is driving this bus",
-          "url": "https://i.redd.it/f79gm6fte20i1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xppjn5/who_is_driving_this_bus/",
-          "createdAt": "2026-11-06T22:03:26.000Z",
-          "score": 2048,
-          "comments": 131,
-          "upvoteRatio": 0.97,
-          "flair": "Meme",
+          "title": "Best trading year of my life",
+          "url": "https://i.redd.it/htyhvfh2v80i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqf354/best_trading_year_of_my_life/",
+          "createdAt": "2026-11-07T19:45:14.000Z",
+          "score": 1344,
+          "comments": 148,
+          "upvoteRatio": 0.92,
+          "flair": "Gain",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3121,71 +3193,17 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xq9s65",
+          "id": "1xqhd7e",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "The rest of 2026 would be interesting",
-          "url": "https://v.redd.it/dvpnq9a5r70i1",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xq9s65/the_rest_of_2026_would_be_interesting/",
-          "createdAt": "2026-11-07T16:01:27.000Z",
-          "score": 942,
-          "comments": 67,
-          "upvoteRatio": 0.91,
-          "flair": "Meme",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xpsqxd",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Do I belong",
-          "url": "https://www.reddit.com/gallery/1xpsqxd",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xpsqxd/do_i_belong/",
-          "createdAt": "2026-11-07T00:28:27.000Z",
-          "score": 469,
-          "comments": 99,
+          "title": "Boomers outperforming the \"AI bubble\"",
+          "url": "https://i.redd.it/j7wfbzjzc90i1.png",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqhd7e/boomers_outperforming_the_ai_bubble/",
+          "createdAt": "2026-11-07T21:25:40.000Z",
+          "score": 944,
+          "comments": 64,
           "upvoteRatio": 0.95,
-          "flair": "Loss",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xq0mxn",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "BLOOMBERG: HOW THE THURSDAY SELL-OFF UNFOLDED THAT ERASED $3.7 TRILLION",
-          "url": "https://www.reddit.com/r/stocks/comments/1xq0mxn/bloomberg_how_the_thursday_selloff_unfolded_that/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1xq0mxn/bloomberg_how_the_thursday_selloff_unfolded_that/",
-          "createdAt": "2026-11-07T07:36:19.000Z",
-          "score": 340,
-          "comments": 134,
-          "upvoteRatio": 0.75,
-          "flair": "Broad market news",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xpsw23",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Bull market incoming!",
-          "url": "https://i.redd.it/b2jyzzyw530i1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xpsw23/bull_market_incoming/",
-          "createdAt": "2026-11-07T00:35:20.000Z",
-          "score": 357,
-          "comments": 101,
-          "upvoteRatio": 0.91,
-          "flair": "Loss",
+          "flair": "Discussion",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3200,9 +3218,9 @@
           "url": "https://www.reddit.com/gallery/1xq9m23",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xq9m23/80_10k/",
           "createdAt": "2026-11-07T15:54:23.000Z",
-          "score": 244,
-          "comments": 78,
-          "upvoteRatio": 0.94,
+          "score": 737,
+          "comments": 146,
+          "upvoteRatio": 0.96,
           "flair": "Gain",
           "tickers": [],
           "tickerWeights": {},
@@ -3211,17 +3229,35 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xpmfh4",
+          "id": "1xq0mxn",
           "subreddit": "stocks",
           "segment": "Retail investing",
-          "title": "Is this actually an AI bubble burst, or just macro repricing?",
-          "url": "https://www.reddit.com/r/stocks/comments/1xpmfh4/is_this_actually_an_ai_bubble_burst_or_just_macro/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1xpmfh4/is_this_actually_an_ai_bubble_burst_or_just_macro/",
-          "createdAt": "2026-11-06T19:54:35.000Z",
-          "score": 64,
-          "comments": 138,
-          "upvoteRatio": 0.72,
-          "flair": null,
+          "title": "BLOOMBERG: HOW THE THURSDAY SELL-OFF UNFOLDED THAT ERASED $3.7 TRILLION",
+          "url": "https://www.reddit.com/r/stocks/comments/1xq0mxn/bloomberg_how_the_thursday_selloff_unfolded_that/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1xq0mxn/bloomberg_how_the_thursday_selloff_unfolded_that/",
+          "createdAt": "2026-11-07T07:36:19.000Z",
+          "score": 400,
+          "comments": 159,
+          "upvoteRatio": 0.76,
+          "flair": "Broad market news",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xqotls",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Originally declared “Dead Retail” stocks leading into Iran War are now up over 100% YTD.",
+          "url": "https://www.reddit.com/gallery/1xqotls",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqotls/originally_declared_dead_retail_stocks_leading/",
+          "createdAt": "2026-11-08T03:36:04.000Z",
+          "score": 217,
+          "comments": 99,
+          "upvoteRatio": 0.94,
+          "flair": "Discussion",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3236,9 +3272,9 @@
           "url": "https://www.reddit.com/r/wallstreetbets/comments/1xpzd5b/amd_17_thursday_11_friday_what_a_week_whats_next/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xpzd5b/amd_17_thursday_11_friday_what_a_week_whats_next/",
           "createdAt": "2026-11-07T06:17:54.000Z",
-          "score": 98,
-          "comments": 117,
-          "upvoteRatio": 0.84,
+          "score": 135,
+          "comments": 133,
+          "upvoteRatio": 0.86,
           "flair": "Discussion",
           "tickers": [
             "AMD"
@@ -3260,9 +3296,9 @@
           "url": "https://i.redd.it/s6mbg9xbm70i1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xq95n7/buy_and_hold_they_say/",
           "createdAt": "2026-11-07T15:34:40.000Z",
-          "score": 49,
-          "comments": 70,
-          "upvoteRatio": 0.9,
+          "score": 102,
+          "comments": 97,
+          "upvoteRatio": 0.87,
           "flair": "Loss",
           "tickers": [],
           "tickerWeights": {},
@@ -3271,16 +3307,76 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xpmw1v",
+          "id": "1xqq3zu",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Full Ported Calls, Lost 2/3 of my NW",
+          "url": "https://i.redd.it/n4i225u2kb0i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqq3zu/full_ported_calls_lost_23_of_my_nw/",
+          "createdAt": "2026-11-08T04:48:58.000Z",
+          "score": 109,
+          "comments": 56,
+          "upvoteRatio": 0.97,
+          "flair": "Loss",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xqqxo4",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "We did it boys!",
+          "url": "https://i.redd.it/yvq44rslsb0i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqqxo4/we_did_it_boys/",
+          "createdAt": "2026-11-08T05:36:46.000Z",
+          "score": 175,
+          "comments": 15,
+          "upvoteRatio": 0.98,
+          "flair": "Meme",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xqfhdb",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Broadcom (AVGO) hit a 52 week low yesterday. Headed lower?",
+          "url": "https://www.reddit.com/r/stocks/comments/1xqfhdb/broadcom_avgo_hit_a_52_week_low_yesterday_headed/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1xqfhdb/broadcom_avgo_hit_a_52_week_low_yesterday_headed/",
+          "createdAt": "2026-11-07T20:01:48.000Z",
+          "score": 100,
+          "comments": 42,
+          "upvoteRatio": 0.92,
+          "flair": "Company Discussion",
+          "tickers": [
+            "AVGO"
+          ],
+          "tickerWeights": {
+            "AVGO": 2.5
+          },
+          "directTickers": [
+            "AVGO"
+          ],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xqcrqn",
           "subreddit": "investing",
           "segment": "Retail investing",
-          "title": "Advice I wish I listened to early - don’t over complicate it",
-          "url": "https://www.reddit.com/r/investing/comments/1xpmw1v/advice_i_wish_i_listened_to_early_dont_over/",
-          "permalink": "https://www.reddit.com/r/investing/comments/1xpmw1v/advice_i_wish_i_listened_to_early_dont_over/",
-          "createdAt": "2026-11-06T20:12:48.000Z",
-          "score": 122,
-          "comments": 31,
-          "upvoteRatio": 0.84,
+          "title": "Does Net income actually matter for the AI companies?",
+          "url": "https://www.reddit.com/r/investing/comments/1xqcrqn/does_net_income_actually_matter_for_the_ai/",
+          "permalink": "https://www.reddit.com/r/investing/comments/1xqcrqn/does_net_income_actually_matter_for_the_ai/",
+          "createdAt": "2026-11-07T18:06:50.000Z",
+          "score": 9,
+          "comments": 57,
+          "upvoteRatio": 0.58,
           "flair": null,
           "tickers": [],
           "tickerWeights": {},
@@ -3289,62 +3385,41 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xppkv0",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "FCK you, $PLTR and $INTC",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xppkv0/fck_you_pltr_and_intc/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xppkv0/fck_you_pltr_and_intc/",
-          "createdAt": "2026-11-06T22:04:54.000Z",
-          "score": 66,
+          "id": "1xqcbgo",
+          "subreddit": "investing",
+          "segment": "Retail investing",
+          "title": "Where would you invest your money RIGHT NOW given the current economic climate?",
+          "url": "https://www.reddit.com/r/investing/comments/1xqcbgo/where_would_you_invest_your_money_right_now_given/",
+          "permalink": "https://www.reddit.com/r/investing/comments/1xqcbgo/where_would_you_invest_your_money_right_now_given/",
+          "createdAt": "2026-11-07T17:48:03.000Z",
+          "score": 0,
           "comments": 50,
-          "upvoteRatio": 0.9,
-          "flair": "Loss",
+          "upvoteRatio": 0.43,
+          "flair": null,
           "tickers": [
-            "PLTR",
-            "INTC"
+            "NOW"
           ],
           "tickerWeights": {
-            "PLTR": 5.7,
-            "INTC": 5.3
+            "NOW": 3.3
           },
           "directTickers": [
-            "PLTR",
-            "INTC"
+            "NOW"
           ],
           "filteredAsGeneric": false,
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xq8amg",
+          "id": "1xqk3gd",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "The best advice for challenging times",
-          "url": "https://i.redd.it/bnuow7mnf70i1.png",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xq8amg/the_best_advice_for_challenging_times/",
-          "createdAt": "2026-11-07T14:57:32.000Z",
-          "score": 84,
-          "comments": 24,
+          "title": "Pulled a 3x since the bottom of my several months long losing streak. Only 3 red days since mid-september.",
+          "url": "https://www.reddit.com/gallery/1xqk3gd",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqk3gd/pulled_a_3x_since_the_bottom_of_my_several_months/",
+          "createdAt": "2026-11-07T23:33:12.000Z",
+          "score": 61,
+          "comments": 19,
           "upvoteRatio": 0.85,
-          "flair": "Meme",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xqcb68",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Daddy Huang please save us",
-          "url": "https://i.redd.it/7jhpa2uz980i1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xqcb68/daddy_huang_please_save_us/",
-          "createdAt": "2026-11-07T17:47:42.000Z",
-          "score": 99,
-          "comments": 15,
-          "upvoteRatio": 0.83,
-          "flair": "Meme",
+          "flair": "Gain",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3627,17 +3702,6 @@
       ],
       "mostActive": [
         {
-          "symbol": "NVDA",
-          "name": "NVIDIA Corporation",
-          "price": 186.64,
-          "changePct": 2.78,
-          "change": 5.04,
-          "volume": 179308722,
-          "marketCap": 4506795900928,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
-        },
-        {
           "symbol": "INTC",
           "name": "Intel Corporation",
           "price": 56.28,
@@ -3645,6 +3709,17 @@
           "change": 4.03,
           "volume": 173312671,
           "marketCap": 299128193024,
+          "sourceName": "Yahoo Finance screener",
+          "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corporation",
+          "price": 186.64,
+          "changePct": 2.78,
+          "change": 5.04,
+          "volume": 179308722,
+          "marketCap": 4506795900928,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -3726,13 +3801,13 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "KVUE",
-          "name": "Kenvue Inc.",
-          "price": 19.31,
-          "changePct": -1.28,
-          "change": -0.25,
-          "volume": 66377525,
-          "marketCap": 37109346304,
+          "symbol": "CRWV",
+          "name": "CoreWeave, Inc.",
+          "price": 46.4,
+          "changePct": 6.28,
+          "change": 2.74,
+          "volume": 59192895,
+          "marketCap": 25591298048,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
@@ -3748,13 +3823,13 @@
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         },
         {
-          "symbol": "CRWV",
-          "name": "CoreWeave, Inc.",
-          "price": 46.4,
-          "changePct": 6.28,
-          "change": 2.74,
-          "volume": 59192895,
-          "marketCap": 25591298048,
+          "symbol": "AAL",
+          "name": "American Airlines Group, Inc.",
+          "price": 13.18,
+          "changePct": 1.93,
+          "change": 0.25,
+          "volume": 52417284,
+          "marketCap": 8733310976,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
         }
@@ -3762,11 +3837,10 @@
       "errors": []
     },
     "briefingBullets": [
-      "Rates: The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence. (M1)",
-      "Macro: Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. (M3)",
+      "Rates: Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. (M1)",
       "AI/semis: Cisco's AI infrastructure orders reinforce the spending cycle behind the semiconductor and networking trade. (M2)",
       "Earnings: The mover screen is two-sided and mostly idiosyncratic, so it is a catalyst-risk check rather than a broad market signal.",
-      "Retail attention: PLTR, INTC, UIS, AMD have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
+      "Retail attention: AVGO, MU, AMD, NOW have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
     ]
   },
   "avoidList": {
@@ -8388,9 +8462,9 @@
       "return14": -1.01,
       "return20": -23.38,
       "return30": -22.85,
-      "return60": -13.37,
-      "return90": -19.49,
-      "ytdReturn": 23.06,
+      "return60": -13.36,
+      "return90": -19.48,
+      "ytdReturn": 23.09,
       "beta60d": 1.78,
       "above50": false,
       "above100": false,
@@ -8398,15 +8472,15 @@
       "recentCross": false,
       "relativeStrength": -17.82,
       "history": [
-        636.71,
-        642.61,
-        642.63,
-        634.9,
-        643.5,
-        649.13,
-        644.36,
-        651.79,
-        642.51,
+        636.6,
+        642.5,
+        642.52,
+        634.79,
+        643.39,
+        649.02,
+        644.25,
+        651.68,
+        642.4,
         662.6,
         676.56,
         683.42,
@@ -8476,18 +8550,18 @@
       "stopSellBasis": "balanced_atr_chandelier",
       "stopSellComponents": {
         "chandelierStop": 603.47,
-        "trendStop": 610.61,
+        "trendStop": 610.57,
         "supportStop": 492.82,
         "lowerBound": 393.43,
         "upperBound": 485.6
       },
       "modelAsOfDate": "2026-11-06",
-      "return120": -25.18,
-      "relativeReturn60VsSpy": -14.36,
+      "return120": -25.17,
+      "relativeReturn60VsSpy": -14.35,
       "sectorReturn60": -12.21,
       "volatility60d": 0.0365,
       "volatility60dVsSector": 0.0173,
-      "distanceTo52wHigh": -31.11
+      "distanceTo52wHigh": -31.09
     },
     {
       "symbol": "GEV",
@@ -37871,9 +37945,9 @@
       "return14": 2.66,
       "return20": 13.82,
       "return30": 14.19,
-      "return60": 10.84,
-      "return90": 15.05,
-      "ytdReturn": 18.11,
+      "return60": 11.2,
+      "return90": 15.42,
+      "ytdReturn": 18.5,
       "beta60d": -0.48,
       "above50": true,
       "above100": true,
@@ -37881,16 +37955,16 @@
       "recentCross": false,
       "relativeStrength": 19.38,
       "history": [
-        218.07,
-        213.93,
-        213.88,
-        213.1,
-        212.72,
-        212.1,
-        212.93,
-        211.92,
-        209.87,
-        206.98,
+        217.36,
+        213.24,
+        213.19,
+        212.41,
+        212.03,
+        211.41,
+        212.24,
+        211.23,
+        209.19,
+        206.31,
         209.56,
         212.83,
         214.74,
@@ -37950,11 +38024,11 @@
       "stopSellBasis": null,
       "stopSellComponents": null,
       "modelAsOfDate": "2026-11-06",
-      "return120": 15.41,
-      "relativeReturn60VsSpy": 19.94,
+      "return120": 15.78,
+      "relativeReturn60VsSpy": 20.31,
       "sectorReturn60": -12.21,
-      "volatility60d": 0.013,
-      "volatility60dVsSector": -0.0062,
+      "volatility60d": 0.0131,
+      "volatility60dVsSector": -0.0061,
       "distanceTo52wHigh": -1.03
     },
     {
@@ -56619,7 +56693,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-11-06T20:52:28.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook \"Stealth bear market\" gains steam as tech deteriorates amid defensive leadership, creating further cracks in equity markets The weight of the evidence appears to be shifting toward increased downside risks for equity markets. November 6, 2026 • Rachel Dashiell The Week That Was If you read last week's blog, you may recall that Nate maintained a \"higher volatility\" forecast along with a \"moderately bearish\" outlook, citing technical damage across the indexes. He highlighted the tech stock sell-off as well as defensive rotation, which continued this week. The S&P 500 and the Nasdaq-100 appear to have broken key levels of support, completing their double-top patterns. The Russell 2000's near-term bounce was stalled at the 50-day moving average (SMA) followed by a nasty break below the 200-day SMA. Semiconductors also continued their downtrend, as they are trading roughly 15% below their 200-day SMA at the time of this writing on Thursday. Conversely, crude oil, despite its aggressive sell-off this week, appeared to have held support at its 200-day. We are roughly 70% through earnings season and earnings growth appears to be broadening. Outlook for Next Week At the time of this writing on Friday, all the major averages are lower, as the market reiterates its \"risk-off\" tone as the \"stealth bear market\" continues. Money continues to rotate into sectors such as Staples, Health Care, Utilities, Real Estate, Financials, and Materials and out of sectors such as Technology. Volatility could continue to remain elevated, with the Cboe Volatility Index (VIX) above 20, representing roughly 1.26% daily move in the S&P 500. As yields, as well as energy and commodities appea",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook \"Stealth bear market\" gains steam as tech deteriorates amid defensive leadership, creating further cracks in equity markets The weight of the evidence appears to be shifting toward increased downside risks for equity markets. November 6, 2026 • Rachel Dashiell The Week That Was If you read last week's blog, you may recall that Nate maintained a \"higher volatility\" forecast along with a \"moderately bearish\" outlook, citing technical damage across the indexes. He highlighted the tech stock sell-off as well as defensive rotation, which continued this week. The S&P 500 and the Nasdaq-100 appear to have broken key levels of support, completing their double-top patterns. The Russell 2000's near-term bounce was stalled at the 50-day moving average (SMA) followed by a nasty break below the 200-day SMA. Semiconductors also continued their downtrend, as they are trading roughly 15% below their 200-day SMA at the time of this writing on Thursday. Conversely, crude oil, despite its aggressive sell-off this week, appeared to have held support at its 200-day. We are roughly 70% through earnings season and earnings growth appears to be broadening. Outlook for Next Week At the time of this writing on Friday, all the major averages are lower, as the market reiterates its \"risk-off\" tone as the \"stealth bear market\" continues. Money continues to rotate into sectors such as Staples, Health Care, Utilities, Real Estate, Financials, and Materials and out of sectors such as Technology. Volatility could continue to remain elevated, with the Cboe Volatility Index (VIX) above 20, representing roughly 1.26% daily move in the S&P 500. As yields, as well as energy and commodities appear to soften, bo",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56628,7 +56702,7 @@
           "url": "https://www.schwab.com/learn/story/strong-el-nino-expected-to-pump-up-food-inflation",
           "publishedAt": "2026-11-06T16:46:20.000Z",
           "summary": "Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation.",
-          "excerpt": "Strong El Niño Expected to Pump Up Food Inflation | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Strong El Niño Expected to Pump Up Food Inflation Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. November 6, 2026 • Henry Hoenig What may turn out to be the strongest El Niño on record appears likely to hit global crops in coming months. This complex weather pattern threatens to combine with existing disruptions to fertilizer and diesel supplies to send global food prices sharply higher. In the United States, a very strong El Niño alone would typically drive food prices higher. Throw in higher diesel and fertilizer prices, and the pressure households have felt during the past five years of elevated inflation may get even worse. State of U.S. food inflation From a Federal Reserve policy standpoint, food inflation remains relatively contained. After hitting 3.2% in April, overall food inflation slowed to 2.5% in September, accounting for 9% of the 3.7% year-over-year increase in the Consumer Price Index (CPI). But prices in some categories are rising faster. Prices for cereals and cereal products, beef, and fruits and vegetables all rose more than 3% from a year earlier in September, with the price of 100% ground beef jumping 7.4%. And regardless of the current inflation rate, food price increases have taken a seemingly ever-growing bite out of household budgets in recent years. The CPI food index has risen 25% in five years, while fruit and vegetable prices are up 17%, and the cost of 100% ground beef is up 51%. In 2025, the middle quintile of U.S. households by income spent about 12% of their pre-tax income on food. DIY investing? Trading? Professi",
+          "excerpt": "Strong El Niño Expected to Pump Up Food Inflation | Charles Schwab Search Insights & Education Markets and Economy Strong El Niño Expected to Pump Up Food Inflation Forecasts call for the strongest El Niño in decades. It could combine with diesel and fertilizer supply disruptions to reignite food inflation. November 6, 2026 • Henry Hoenig What may turn out to be the strongest El Niño on record appears likely to hit global crops in coming months. This complex weather pattern threatens to combine with existing disruptions to fertilizer and diesel supplies to send global food prices sharply higher. In the United States, a very strong El Niño alone would typically drive food prices higher. Throw in higher diesel and fertilizer prices, and the pressure households have felt during the past five years of elevated inflation may get even worse. State of U.S. food inflation From a Federal Reserve policy standpoint, food inflation remains relatively contained. After hitting 3.2% in April, overall food inflation slowed to 2.5% in September, accounting for 9% of the 3.7% year-over-year increase in the Consumer Price Index (CPI). But prices in some categories are rising faster. Prices for cereals and cereal products, beef, and fruits and vegetables all rose more than 3% from a year earlier in September, with the price of 100% ground beef jumping 7.4%. And regardless of the current inflation rate, food price increases have taken a seemingly ever-growing bite out of household budgets in recent years. The CPI food index has risen 25% in five years, while fruit and vegetable prices are up 17%, and the cost of 100% ground beef is up 51%. In 2025, the middle quintile of U.S. households by income spent about 12% of their pre-tax income on food. DIY investing? Trading? Professional advice? S",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56949,11 +57023,20 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Meta chief strategy officer Dave Wehner leaves to join AI infrastructure startup Fireworks as CFO",
-          "url": "https://www.cnbc.com/2026/11/07/dave-wehner-meta-fireworks-cfo.html",
-          "publishedAt": "2026-11-07T17:51:16.000Z",
-          "summary": "Dave Wehner, Meta’s chief strategy officer, is leaving the company to become CFO of Fireworks, the AI infrastructure startup valued at $17.5 billion in July.",
-          "excerpt": "Dave Wehner, Meta’s chief strategy officer, is leaving the company to become CFO of Fireworks, the AI infrastructure startup valued at $17.5 billion in July.",
+          "title": "Risk of Iran war escalation remains high despite Democratic sweep in U.S. midterm elections",
+          "url": "https://www.cnbc.com/2026/11/07/iran-war-midterm-election-oil-price-trump.html",
+          "publishedAt": "2026-11-07T22:17:52.000Z",
+          "summary": "The U.S. and Iran are on a collision course as tensions in the Middle East simmer.",
+          "excerpt": "The U.S. and Iran are on a collision course as tensions in the Middle East simmer.",
+          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+        },
+        {
+          "sourceName": "CNBC Top News RSS",
+          "title": "Decisive election. Dramatic stock swings. How we handled the market last week",
+          "url": "https://www.cnbc.com/investingclub/2026/11/07/decisive-election-dramatic-stock-swings-how-we-handled-the-market-last-week.html",
+          "publishedAt": "2026-11-07T16:31:00.000Z",
+          "summary": "On Friday, Jim Cramer revealed his strategy for navigating this new era at the Investing Club's 4th Annual Meeting.",
+          "excerpt": "On Friday, Jim Cramer revealed his strategy for navigating this new era at the Investing Club's 4th Annual Meeting.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
@@ -56963,15 +57046,6 @@
           "publishedAt": "2026-11-07T16:02:33.000Z",
           "summary": "Healthcare stocks may struggle to find momentum as the Democrats get ready to take over Congress.",
           "excerpt": "Healthcare stocks may struggle to find momentum as the Democrats get ready to take over Congress.",
-          "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
-        },
-        {
-          "sourceName": "CNBC Top News RSS",
-          "title": "Berkshire Hathaway more than doubles buybacks in third quarter as earnings decline",
-          "url": "https://www.cnbc.com/2026/11/07/berkshire-hathaway-q3-2026-earnings-buybacks.html",
-          "publishedAt": "2026-11-07T15:23:46.000Z",
-          "summary": "Berkshire Hathaway said Saturday it accelerated its share repurchases during the third quarter, as operating and overall profits took a hit.",
-          "excerpt": "Berkshire Hathaway said Saturday it accelerated its share repurchases during the third quarter, as operating and overall profits took a hit.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -57031,29 +57105,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
+          "title": "Second-guessing my adviser: Is an annuity the right move in this market?",
+          "url": "https://www.marketwatch.com/story/my-adviser-recommended-an-annuity-is-it-the-right-move-in-this-market-environment-00edbbf6?mod=mw_rss_topstories",
+          "publishedAt": "2026-11-07T20:36:00.000Z",
+          "summary": "“I haven’t committed to the strategy yet and would appreciate some independent perspectives.”",
+          "excerpt": "“I haven’t committed to the strategy yet and would appreciate some independent perspectives.”",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
+          "title": "Here are the 2027 capital-gains tax rates for each income level",
+          "url": "https://www.marketwatch.com/story/here-are-the-2027-capital-gains-tax-rates-for-each-income-level-166fc306?mod=mw_rss_topstories",
+          "publishedAt": "2026-11-07T19:48:00.000Z",
+          "summary": "How much will you pay in capital-gains taxes next year? The IRS just released this crucial information.",
+          "excerpt": "How much will you pay in capital-gains taxes next year? The IRS just released this crucial information.",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
           "title": "Democrats’ big election win revives a difficult Social Security question: Who pays?",
           "url": "https://www.marketwatch.com/story/democrats-big-election-win-revives-a-difficult-social-security-question-who-pays-17ba9448?mod=mw_rss_topstories",
           "publishedAt": "2026-11-07T17:43:00.000Z",
           "summary": "There are many ideas for saving Social Security. All of them will hurt.",
           "excerpt": "There are many ideas for saving Social Security. All of them will hurt.",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "The S&P 500 could be dangerously exposed to AI. Here are some simple alternatives.",
-          "url": "https://www.marketwatch.com/story/the-s-p-500-has-become-a-big-ai-bet-here-are-some-simple-alternatives-3c7574a4?mod=mw_rss_topstories",
-          "publishedAt": "2026-11-07T16:40:00.000Z",
-          "summary": "The large-cap index is nowhere near as diversified as you think.",
-          "excerpt": "The large-cap index is nowhere near as diversified as you think.",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "The 2027 tax brackets are out. See what the standard deduction and SALT tax breaks will be.",
-          "url": "https://www.marketwatch.com/story/the-2027-tax-brackets-are-out-see-what-the-standard-deduction-and-salt-tax-breaks-will-be-5dd1d293?mod=mw_rss_topstories",
-          "publishedAt": "2026-11-07T16:30:00.000Z",
-          "summary": "The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence.",
-          "excerpt": "The tax brackets at the heart of Americans’ income-tax bills will be adjusting at a steeper level in 2027 compared to this year, underscoring inflation’s rekindled presence.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
