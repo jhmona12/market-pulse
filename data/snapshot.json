@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-15T19:26:22.506Z",
+  "generatedAt": "2026-11-16T06:40:38.808Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-11-15T19:23:12.938394+00:00",
+    "generatedAt": "2026-11-16T06:37:36.275718+00:00",
     "asOfDate": "2026-11-13",
     "expectedAsOfDate": "2026-11-13",
     "isStale": false,
@@ -1422,32 +1422,36 @@
     }
   },
   "note": {
-    "headline": "Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-    "body": "Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade. 59% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA, APP, CRL, CVNA.",
+    "headline": "Nvidia-tilt momentum pivots as AI assets hold up but mixed reactions widens into FOMC week",
+    "body": "Markets face near-term pressure from potential Fed policy tightening and ongoing inflation persistence, but long-horizon model signals flag leadership in IT and semiconductors with Okta, Dell, Micron, and Moderna among top names; tactical risk remains elevated due to volatility flags and volume confirmation gaps.",
     "changed": [
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M1)",
+      "Rates: Fed faces tougher inflation fight as pressure builds for more rate hikes Axios (M3)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: NVDA, DXYZ, ACHR, PLTR have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
+      "Retail attention: NVDA, WMT, GOOG, SLV have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
       "Breadth: 71% of the screened universe is above the 50-day average, 67% is above the 200-day, and 59% clears both trend lines.",
       "Tactical implication: MRNA (Top Decile), APP (Top Decile), CRL (Top Decile), CVNA (Top Decile) are the setups that currently merit review after the market backdrop is considered."
     ],
     "watch": [
       "Next catalyst: FOMC Rate Decision on 2026-11-17 at 2:00 PM ET; GDP Second Estimate on 2026-11-25 at 8:30 AM ET; Personal Income and Outlays on 2026-11-25 at 8:30 AM ET; reassess rates and sector leadership after the release.",
       "Confirmation risk: OKTA, DELL, MU, SNDK rank highly but are not momentum confirmed; keep them in the watch bucket until price trend improves.",
-      "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book."
+      "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
+      "CPI release on 2026-12-10; watch for sticky inflation signals vs expectations",
+      "Earnings calendar: focus on mega-cap AI / data-center beneficiaries and 1H results of key IT names (MU, MRVL, INTC, AMD) to confirm sector breadth"
     ],
-    "generatedBy": "deterministic"
+    "generatedBy": "ai_with_fact_guardrails"
   },
   "aiRecommendations": {
     "status": "ready",
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 109706,
+      "inputTokens": 110623,
       "cachedInputTokens": 0,
-      "outputTokens": 2759,
+      "outputTokens": 2235,
       "reasoningTokens": 0,
-      "totalTokens": 112465,
-      "estimatedCostUsd": 0.006589,
+      "totalTokens": 112858,
+      "estimatedCostUsd": 0.006425,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1455,39 +1459,25 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-    "macroView": "Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade. Next macro decision points: FOMC Rate Decision on 2026-11-17; GDP Second Estimate on 2026-11-25; Personal Income and Outlays on 2026-11-25. Sector confirmation: Health Care +8.56% over 30D, +10.54% vs SPY; Financials +7.63% over 30D, +9.61% vs SPY; Consumer Discretionary +7.61% over 30D, +9.59% vs SPY.",
-    "dailyRead": null,
+    "headline": "U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite.",
+    "macroView": "Fed faces tougher inflation fight as pressure builds for more rate hikes Axios U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. Next macro decision points: FOMC Rate Decision on 2026-11-17; GDP Second Estimate on 2026-11-25; Personal Income and Outlays on 2026-11-25. Sector confirmation: Health Care +8.56% over 30D, +10.54% vs SPY; Financials +7.63% over 30D, +9.61% vs SPY; Consumer Discretionary +7.61% over 30D, +9.59% vs SPY.",
+    "dailyRead": {
+      "headline": "Nvidia-tilt momentum pivots as AI assets hold up but mixed reactions widens into FOMC week",
+      "body": "Markets face near-term pressure from potential Fed policy tightening and ongoing inflation persistence, but long-horizon model signals flag leadership in IT and semiconductors with Okta, Dell, Micron, and Moderna among top names; tactical risk remains elevated due to volatility flags and volume confirmation gaps.",
+      "keyTakeaways": [
+        "Macro release: Producer Price Index release expected; official read unavailable (403) but PPI science risk looms; higher costs could cap risk appetite near term (O1).",
+        "Market drivers: IT / semiconductors leadership intact on long-horizon momentum; chip and AI names post strong 1Y model signals, notably OKTA, MRNA, MU, and SNDK with Top Decile rankings, though risk flags (volatility, weak volume) persist.",
+        "Breadth: Sector leadership concentrated in Information Technology; XLK weak on 1D but long-horizon leaders clustered in IT (CIEN and FLEX and MRVL and SMCI and CNX).",
+        "Model read: 14-day tactical leaders OKTA, DELL, MU, SNDK, MRNA showing cross-sectional strength; 1-year horizon confirms several non-NVDA leaders, with OKTA and MRVL in rebound-watch states.",
+        "Risk: Elevated by above-sector volatility signals, light volume confirmations, and a few single-name idiosyncrasies; same-day macro data gaps add uncertainty to price-action interpretation."
+      ],
+      "watchItems": [
+        "CPI release on 2026-12-10; watch for sticky inflation signals vs expectations",
+        "Earnings calendar: focus on mega-cap AI / data-center beneficiaries and 1H results of key IT names (MU, MRVL, INTC, AMD) to confirm sector breadth",
+        "Macro risk: if PPI prints hotter than expected, expect yields to grind higher and IT names to reprice; if cooler, rate-cut expectations may rally breadth of risk assets"
+      ]
+    },
     "recommendations": [
-      {
-        "symbol": "OKTA",
-        "action": "Watch, do not chase",
-        "conviction": "Review",
-        "setup": "Not momentum confirmed",
-        "whyNow": "Rank #1 of 500; +37.14% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "rationale": "The model ranks OKTA highly, but the setup is not clean momentum yet. Rank #1 of 500; +37.14% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
-        "companyOverview": "Okta, Inc. is The World's Identity Company. We secure AI, machine, and human identity so everyone is free to safely use any technology. Our workforce and customer solutions empower businesses and developers to protect their AI agents, users, employees, and partners while driving security, efficiencies, and innovatio...",
-        "marketCap": "$32.0B",
-        "earningsContext": "Last reported 2026-08-26 for the Jul 2026 fiscal quarter; EPS 0.58 versus consensus 0.44; surprise 31.82%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.43.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-15: 3 big things we&apos;re watching in the stock market in the week ahead",
-        "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
-        "technicalEvidence": "7D +8.41%; 14D -12.18%; 30D -13.71%; 60D vs SPY +37.14%; RSI 29; above the 200-day average but below the 50-day average",
-        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Below 50d trend; Weak volume confirmation",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "S1",
-          "C1-EARNINGS",
-          "C1-IR",
-          "C1-MARKETCAP",
-          "S3"
-        ],
-        "setupTags": [
-          "Not Momentum Confirmed"
-        ]
-      },
       {
         "symbol": "MRNA",
         "action": "Research long setup",
@@ -1499,19 +1489,21 @@
         "marketCap": "$90.4B",
         "earningsContext": "Last reported 2026-11-06 for the Sep 2026 fiscal quarter; EPS 0.38 versus consensus -1.1; surprise 134.55%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus -2.3.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-15: 3 big things we&apos;re watching in the stock market in the week ahead",
+        "macroLink": "Portfolio backdrop, not a company catalyst: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-16: China confirms Xi-Trump-Putin historic summit. What will be on the agenda?",
         "modelEvidence": "Rank #5 of 500; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
         "technicalEvidence": "7D -12.12%; 14D +0.74%; 30D -1.29%; 60D vs SPY +68.38%; RSI 58; above both the 50-day and 200-day moving averages",
         "momentumEvidence": "Momentum confirmed; risk flags: Above-sector volatility; Weak volume confirmation.",
         "risk": "Above-sector volatility; Weak volume confirmation",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "S5",
           "C5-EARNINGS",
           "C5-IR",
           "C5-MARKETCAP",
-          "S3"
+          "S11",
+          "S12",
+          "S1",
+          "S2"
         ],
         "setupTags": [
           "Momentum Confirmed"
@@ -1528,52 +1520,50 @@
         "marketCap": "$880.6B",
         "earningsContext": "Last reported 2026-09-30 for the Aug 2026 fiscal quarter; EPS 33.19 versus consensus 31.41; surprise 5.67%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Nov 2026 with consensus 37.95.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-15: 3 big things we&apos;re watching in the stock market in the week ahead",
+        "macroLink": "Portfolio backdrop, not a company catalyst: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-16: China confirms Xi-Trump-Putin historic summit. What will be on the agenda?",
         "modelEvidence": "Rank #3 of 500; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Above 200d trend; Liquid versus universe.",
         "technicalEvidence": "7D +12.80%; 14D -12.03%; 30D -14.86%; 60D vs SPY -19.27%; RSI 40; above the 200-day average but below the 50-day average",
         "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend.",
         "risk": "Above-sector volatility; Below 50d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "S3",
           "C3-EARNINGS",
+          "C3-MARKETCAP",
           "C3-IR",
-          "C3-MARKETCAP"
+          "S12",
+          "S2"
         ],
         "setupTags": [
           "Not Momentum Confirmed"
         ]
       },
       {
-        "symbol": "MRVL",
-        "action": "Watch for activation",
+        "symbol": "OKTA",
+        "action": "Watch, do not chase",
         "conviction": "Review",
-        "setup": "Model rebound watch",
-        "whyNow": "Rank #7 of 500; -36.70% 60-day return versus SPY; below one or both major moving averages.",
-        "rationale": "The model ranks MRVL highly, but price has not confirmed a rebound. Requires a close above $165.64 within 5 trading days before it is actionable. Rank #7 of 500; -36.70% 60-day return versus SPY; below one or both major moving averages.",
-        "companyOverview": "To deliver the data infrastructure technology that connects the world, we're building solutions on the most powerful foundation: our partnerships with our customers. Trusted by the world's leading technology companies for over 30 years, we move, store, process and secure the world's data with semiconductor solutions...",
-        "marketCap": "$137.5B",
-        "earningsContext": "Last reported 2026-08-27 for the Jul 2026 fiscal quarter; EPS 0.62 versus consensus 0.65; surprise -4.62%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.79.",
+        "setup": "Not momentum confirmed",
+        "whyNow": "Rank #1 of 500; +37.14% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
+        "rationale": "The model ranks OKTA highly, but the setup is not clean momentum yet. Rank #1 of 500; +37.14% 60-day return versus SPY; above the 200-day average but below the 50-day average.",
+        "companyOverview": "Okta, Inc. is The World's Identity Company. We secure AI, machine, and human identity so everyone is free to safely use any technology. Our workforce and customer solutions empower businesses and developers to protect their AI agents, users, employees, and partners while driving security, efficiencies, and innovatio...",
+        "marketCap": "$32.0B",
+        "earningsContext": "Last reported 2026-08-26 for the Jul 2026 fiscal quarter; EPS 0.58 versus consensus 0.44; surprise 31.82%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.43.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-15: 3 big things we&apos;re watching in the stock market in the week ahead",
-        "modelEvidence": "Rank #7 of 500; 98.8 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
-        "technicalEvidence": "7D +11.02%; 14D -20.18%; 30D -36.09%; 60D vs SPY -36.70%; RSI 29; below one or both major moving averages",
-        "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
-        "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
+        "macroLink": "Portfolio backdrop, not a company catalyst: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-16: China confirms Xi-Trump-Putin historic summit. What will be on the agenda?",
+        "modelEvidence": "Rank #1 of 500; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Top-sector 120d return rank; Above 200d trend.",
+        "technicalEvidence": "7D +8.41%; 14D -12.18%; 30D -13.71%; 60D vs SPY +37.14%; RSI 29; above the 200-day average but below the 50-day average",
+        "momentumEvidence": "Not momentum confirmed; risk flags: Above-sector volatility; Below 50d trend; Weak volume confirmation.",
+        "risk": "Above-sector volatility; Below 50d trend; Weak volume confirmation",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C7-EARNINGS",
-          "S7",
-          "C7-IR",
-          "C7-MARKETCAP",
-          "S3"
+          "C1-IR",
+          "C1-EARNINGS",
+          "C1-MARKETCAP",
+          "S2"
         ],
         "setupTags": [
-          "Model Rebound Watch",
-          "Not Momentum Confirmed",
-          "Activation Pending"
+          "Not Momentum Confirmed"
         ]
       },
       {
@@ -1587,50 +1577,18 @@
         "marketCap": "$125.9B",
         "earningsContext": "Last reported 2026-10-29 for the Sep 2026 fiscal quarter; EPS 48.92 versus consensus 46.19; surprise 5.91%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 56.12.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-15: 3 big things we&apos;re watching in the stock market in the week ahead",
+        "macroLink": "Portfolio backdrop, not a company catalyst: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-16: China confirms Xi-Trump-Putin historic summit. What will be on the agenda?",
         "modelEvidence": "Rank #4 of 500; 99.4 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
         "technicalEvidence": "7D +5.98%; 14D -23.10%; 30D -36.94%; 60D vs SPY -43.87%; RSI 34; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
         "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "S4",
           "C4-EARNINGS",
-          "C4-IR",
           "C4-MARKETCAP",
-          "S3"
-        ],
-        "setupTags": [
-          "Model Rebound Watch",
-          "Not Momentum Confirmed",
-          "Activation Pending"
-        ]
-      },
-      {
-        "symbol": "FIX",
-        "action": "Watch for activation",
-        "conviction": "Review",
-        "setup": "Model rebound watch",
-        "whyNow": "Rank #12 of 500; -32.61% 60-day return versus SPY; below one or both major moving averages.",
-        "rationale": "The model ranks FIX highly, but price has not confirmed a rebound. Requires a close above $1169.02 within 5 trading days before it is actionable. Rank #12 of 500; -32.61% 60-day return versus SPY; below one or both major moving averages.",
-        "companyOverview": "Comfort Systems USA is a leading provider of commercial, industrial and institutional heating, ventilation, air conditioning and electrical contracting services, with 211 locations in 155 cities around the nation.",
-        "marketCap": "$38.9B",
-        "earningsContext": "Last reported 2026-10-22 for the Sep 2026 fiscal quarter; EPS 13.91 versus consensus 12.71; surprise 9.44%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 13.62.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-15: 3 big things we&apos;re watching in the stock market in the week ahead",
-        "modelEvidence": "Rank #12 of 500; 97.8 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
-        "technicalEvidence": "7D +9.43%; 14D -9.67%; 30D -27.78%; 60D vs SPY -32.61%; RSI 43; below one or both major moving averages",
-        "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend; Weak volume confirmation.",
-        "risk": "Above-sector volatility; Below 50d trend; Below 200d trend; Weak volume confirmation",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "S11",
-          "C12-EARNINGS",
-          "C12-IR",
-          "C12-MARKETCAP",
-          "S3"
+          "C4-IR",
+          "S2"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1857,45 +1815,48 @@
       "Do watch names OKTA, DELL, MU regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
+      "O1",
       "S1",
+      "S2",
+      "S3",
+      "S4",
       "S5",
       "S6",
-      "S11",
       "S12"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Featured source angle: Morgan Stanley argues that an intact AI investment cycle persists even if U.S. midterm results could delay some data-center projects, creating buying opportunities across infrastructure, software, and adopters.",
+      "summary": "Featured source angle: Morgan Stanley argues that the AI investment cycle remains intact and that buying opportunities exist across infrastructure, software, and adopters, even if data-center projects could see delays from the U.S. midterm results.",
       "cards": [
         {
-          "sourceRef": "S15",
+          "sourceRef": "S16",
           "sourceName": "Morgan Stanley Ideas",
           "title": "Morgan Stanley Research | Morgan Stanley",
-          "thesis": "Morgan Stanley argues that an intact AI investment cycle persists even if U.S. midterm results could delay some data-center projects, creating buying opportunities across infrastructure, software, and adopters.",
-          "whyItMatters": "This framing ties AI- and infrastructure-related capital flows to potential windows for allocation despite election-year uncertainty, suggesting sector bias rather than broad market directional bets.",
-          "marketReadThrough": "Monitor: look for any data-center project delays or AI-related capex signals that corroborate or contradict the expectation of continued AI investment activity and related infra / software demand.",
-          "variantAngle": "Inference: if the AI investment cycle remains intact, investors might see selective capex opportunities emerging in infrastructure and software segments more than in hardware-heavy data-center builds, though timing remains uncertain due to policy cycles.",
+          "thesis": "Morgan Stanley argues that the AI investment cycle remains intact and that buying opportunities exist across infrastructure, software, and adopters, even if data-center projects could see delays from the U.S. midterm results.",
+          "whyItMatters": "This statement highlights a nuanced view: macro policy events may perturb timing but not necessarily derail the ongoing AI investment cycle, suggesting selective opportunities across segments rather than a broad shift.",
+          "marketReadThrough": "Monitor: observe whether AI-related capex announcements and project timelines show resilience or delay in the near term, which would support or challenge the idea of an intact AI investment cycle despite policy headwinds.",
+          "variantAngle": "Inference: if policy actions delay some infrastructure projects, the evidence could still be consistent with continued investment in AI software and adopters, though the pace may be uneven.",
           "confidence": "Medium",
           "url": "https://www.morganstanley.com/what-we-do/research",
           "publishedAt": "2026-11-11T00:00:00.000Z",
           "sourceRefs": [
-            "S15"
+            "S16"
           ]
         },
         {
-          "sourceRef": "S7",
+          "sourceRef": "S8",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Weekly Trader's Outlook",
-          "thesis": "Schwab highlights a volatile week with a rebound in stock markets despite Nvidia-related uncertainty and higher yields, framing next week as a potential continuation of a technical bounce from oversold levels.",
-          "whyItMatters": "Frames sentiment around headline volatility (Nvidia CEO resignation) and macro factors (rates) as drivers of short-term risk appetite, rather than a clear directional forecast.",
-          "marketReadThrough": "Monitor: observe whether the weekly gains persist or fade, and whether the Nvidia-related sentiment shift translates into broader flows or a reversal in defensive rotations.",
-          "variantAngle": "Inference: the observed rebound could reflect a temporary technical bounce; if volatility remains elevated, market participants may lean more to risk-off or defensive positioning rather than extending a rally.",
-          "confidence": "Medium",
+          "thesis": "Schwab notes that stocks recovered from last week’s Nvidia-related fallout and that higher yields and Fed rate expectations influenced market dynamics, with volatility and defensive rotations shaping a technical bounce.",
+          "whyItMatters": "This provides a behavioural read on risk sentiment and sector rotation, suggesting that headlines around a single mega-cap can drive short-term moves, while underlying technicals may support a rebound.",
+          "marketReadThrough": "Monitor: track intra-week moves and volatility shifts as markets react to earnings, Fed expectations, and rate probabilities to see if the rebound persists beyond a single-news event.",
+          "variantAngle": "Inference: if a rebound persists alongside continued higher yields, it may indicate that markets are pricing in a more data-dependent path for rates rather than a full shift in risk appetite.",
+          "confidence": "Low",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-11-13T22:46:24.000Z",
           "sourceRefs": [
-            "S7"
+            "S8"
           ]
         }
       ]
@@ -1904,36 +1865,36 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Featured source angle: Morgan Stanley argues that an intact AI investment cycle persists even if U.S. midterm results could delay some data-center projects, creating buying opportunities across infrastructure, software, and adopters.",
+    "summary": "Featured source angle: Morgan Stanley argues that the AI investment cycle remains intact and that buying opportunities exist across infrastructure, software, and adopters, even if data-center projects could see delays from the U.S. midterm results.",
     "cards": [
       {
-        "sourceRef": "S15",
+        "sourceRef": "S16",
         "sourceName": "Morgan Stanley Ideas",
         "title": "Morgan Stanley Research | Morgan Stanley",
-        "thesis": "Morgan Stanley argues that an intact AI investment cycle persists even if U.S. midterm results could delay some data-center projects, creating buying opportunities across infrastructure, software, and adopters.",
-        "whyItMatters": "This framing ties AI- and infrastructure-related capital flows to potential windows for allocation despite election-year uncertainty, suggesting sector bias rather than broad market directional bets.",
-        "marketReadThrough": "Monitor: look for any data-center project delays or AI-related capex signals that corroborate or contradict the expectation of continued AI investment activity and related infra / software demand.",
-        "variantAngle": "Inference: if the AI investment cycle remains intact, investors might see selective capex opportunities emerging in infrastructure and software segments more than in hardware-heavy data-center builds, though timing remains uncertain due to policy cycles.",
+        "thesis": "Morgan Stanley argues that the AI investment cycle remains intact and that buying opportunities exist across infrastructure, software, and adopters, even if data-center projects could see delays from the U.S. midterm results.",
+        "whyItMatters": "This statement highlights a nuanced view: macro policy events may perturb timing but not necessarily derail the ongoing AI investment cycle, suggesting selective opportunities across segments rather than a broad shift.",
+        "marketReadThrough": "Monitor: observe whether AI-related capex announcements and project timelines show resilience or delay in the near term, which would support or challenge the idea of an intact AI investment cycle despite policy headwinds.",
+        "variantAngle": "Inference: if policy actions delay some infrastructure projects, the evidence could still be consistent with continued investment in AI software and adopters, though the pace may be uneven.",
         "confidence": "Medium",
         "url": "https://www.morganstanley.com/what-we-do/research",
         "publishedAt": "2026-11-11T00:00:00.000Z",
         "sourceRefs": [
-          "S15"
+          "S16"
         ]
       },
       {
-        "sourceRef": "S7",
+        "sourceRef": "S8",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Weekly Trader's Outlook",
-        "thesis": "Schwab highlights a volatile week with a rebound in stock markets despite Nvidia-related uncertainty and higher yields, framing next week as a potential continuation of a technical bounce from oversold levels.",
-        "whyItMatters": "Frames sentiment around headline volatility (Nvidia CEO resignation) and macro factors (rates) as drivers of short-term risk appetite, rather than a clear directional forecast.",
-        "marketReadThrough": "Monitor: observe whether the weekly gains persist or fade, and whether the Nvidia-related sentiment shift translates into broader flows or a reversal in defensive rotations.",
-        "variantAngle": "Inference: the observed rebound could reflect a temporary technical bounce; if volatility remains elevated, market participants may lean more to risk-off or defensive positioning rather than extending a rally.",
-        "confidence": "Medium",
+        "thesis": "Schwab notes that stocks recovered from last week’s Nvidia-related fallout and that higher yields and Fed rate expectations influenced market dynamics, with volatility and defensive rotations shaping a technical bounce.",
+        "whyItMatters": "This provides a behavioural read on risk sentiment and sector rotation, suggesting that headlines around a single mega-cap can drive short-term moves, while underlying technicals may support a rebound.",
+        "marketReadThrough": "Monitor: track intra-week moves and volatility shifts as markets react to earnings, Fed expectations, and rate probabilities to see if the rebound persists beyond a single-news event.",
+        "variantAngle": "Inference: if a rebound persists alongside continued higher yields, it may indicate that markets are pricing in a more data-dependent path for rates rather than a full shift in risk appetite.",
+        "confidence": "Low",
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-11-13T22:46:24.000Z",
         "sourceRefs": [
-          "S7"
+          "S8"
         ]
       }
     ]
@@ -1947,12 +1908,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-11-15T19:25:31.084Z",
+    "generatedAt": "2026-11-16T06:39:55.753Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-11-15T06:43:43.464Z"
+      "previousRefreshAt": "2026-11-15T19:26:22.506Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1963,7 +1924,7 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-11-15T19:23:14.978Z",
+      "generatedAt": "2026-11-16T06:37:39.253Z",
       "lookbackHours": 96,
       "releases": [
         {
@@ -1988,7 +1949,7 @@
     },
     "sourceHealth": {
       "checked": 25,
-      "live": 19,
+      "live": 21,
       "blockedOrFailed": [
         {
           "name": "BLS Economic News Releases",
@@ -2003,14 +1964,6 @@
           "reason": "Source check failed: 403 Forbidden"
         },
         {
-          "name": "Axios Markets RSS",
-          "reason": "Source check failed: 503 Service Unavailable"
-        },
-        {
-          "name": "Axios Macro RSS",
-          "reason": "Source check failed: 503 Service Unavailable"
-        },
-        {
           "name": "Yahoo Finance News",
           "reason": "Source check failed: fetch failed"
         }
@@ -2019,41 +1972,82 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "3 big things we&apos;re watching in the stock market in the week ahead",
+        "title": "China confirms Xi-Trump-Putin historic summit. What will be on the agenda?",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/investingclub/2026/11/15/3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
-        "publishedAt": "2026-11-15T15:26:20.000Z",
-        "summary": "Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-        "excerpt": "Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
+        "url": "https://www.cnbc.com/2026/11/16/trump-xi-putin-ukraine-nuclear-tariffs-russia-iran-.html",
+        "publishedAt": "2026-11-16T04:34:00.000Z",
+        "summary": "The talks are expected to focus on issues including nuclear non-proliferation, the Middle East war, trade policies and, possibly, the Ukraine war.",
+        "excerpt": "The talks are expected to focus on issues including nuclear non-proliferation, the Middle East war, trade policies and, possibly, the Ukraine war.",
         "themes": [
-          "Geopolitics and policy",
-          "AI and semis"
+          "Geopolitics and policy"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 4,
+        "ageHours": 2.1,
         "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M2",
+        "title": "China’s slowdown deepens in October as industrial output, retail sales, investment miss estimates",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/11/16/china-retail-sales-october-industrial-output-investment.html",
+        "publishedAt": "2026-11-16T03:53:59.000Z",
+        "summary": "A deepening reliance on external demand leaves China more exposed to shocks abroad as domestic momentum fades, analysts say.",
+        "excerpt": "A deepening reliance on external demand leaves China more exposed to shocks abroad as domestic momentum fades, analysts say.",
+        "themes": [
+          "Earnings",
+          "Geopolitics and policy",
+          "Macro and growth"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 2.8,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M3",
+        "title": "Fed faces tougher inflation fight as pressure builds for more rate hikes - Axios",
+        "sourceName": "Axios Macro RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBDR2FBVnZjdTZUR1ZQSjRQLXBkamFfVVZiQjFxb016UE1oWS1qTl9Ha0ZPeEpaMGs3TXJMbV9sRGtickN1YkxzSTc0QVR2X2NnWGRMSXNrVG0wSWEyMktzVWRkWmhidzZMNXZzZkZNN3dXTms?oc=5",
+        "publishedAt": "2026-11-12T16:56:42.000Z",
+        "summary": "Fed faces tougher inflation fight as pressure builds for more rate hikes Axios",
+        "excerpt": "Fed faces tougher inflation fight as pressure builds for more rate hikes Axios",
+        "themes": [
+          "Rates and central banks"
+        ],
+        "freshness": "Important older item",
+        "ageHours": 85.7,
+        "score": 46,
         "tickers": []
       }
     ],
     "topThemes": [
       {
         "theme": "Geopolitics and policy",
-        "count": 1
-      },
-      {
-        "theme": "AI and semis",
-        "count": 1
+        "count": 2
       },
       {
         "theme": "Macro and growth",
+        "count": 2
+      },
+      {
+        "theme": "Earnings",
+        "count": 1
+      },
+      {
+        "theme": "Rates and central banks",
         "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-11-15T19:25:31.074Z",
+      "generatedAt": "2026-11-16T06:39:55.744Z",
       "dates": [
         "2026-11-14",
         "2026-11-15",
@@ -2650,15 +2644,33 @@
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "Nvidia is gearing up for one of Wall Street’s most anticipated earnings calls in years",
-          "sourceName": "MarketWatch Top Stories RSS",
-          "url": "https://www.marketwatch.com/story/nvidia-is-gearing-up-for-one-of-wall-streets-most-anticipated-earnings-calls-in-years-91855b1e?mod=mw_rss_topstories",
-          "publishedAt": "2026-11-15T15:00:00.000Z",
-          "summary": "Jensen Huang’s sudden departure has made Tuesday’s earnings call “the most important in the company’s history.”",
+          "title": "AI is reshaping banking jobs – but its ability to drive profits remains unclear",
+          "sourceName": "CNBC Top News RSS",
+          "url": "https://www.cnbc.com/2026/11/16/how-ai-is-changing-banking-jobs-hiring-and-revenue.html",
+          "publishedAt": "2026-11-16T06:20:55.000Z",
+          "summary": "Europe's banks are using AI to cut routine work, redeploy staff and hire more technical talent.",
           "tickers": []
         },
         {
           "id": "E2",
+          "title": "Stock futures slip as traders brace for Nvidia earnings, Anthropic IPO this week: Live updates",
+          "sourceName": "CNBC Markets",
+          "url": "https://www.cnbc.com/2026/11/15/stock-market-today-live-updates.html",
+          "publishedAt": "2026-11-15T23:04:03.000Z",
+          "summary": "The Dow, S&P 500 and Nasdaq posted their biggest weekly gains since August, rising more than 2% each.",
+          "tickers": []
+        },
+        {
+          "id": "E3",
+          "title": "Nvidia is gearing up for one of Wall Street’s most anticipated earnings calls in years",
+          "sourceName": "MarketWatch Top Stories RSS",
+          "url": "https://www.marketwatch.com/story/nvidia-is-gearing-up-for-one-of-wall-streets-most-anticipated-earnings-calls-in-years-91855b1e?mod=mw_rss_topstories",
+          "publishedAt": "2026-11-15T21:32:00.000Z",
+          "summary": "Jensen Huang’s sudden departure has made Tuesday’s earnings call “the most important in the company’s history.”",
+          "tickers": []
+        },
+        {
+          "id": "E4",
           "title": "Weekly Trader's Outlook",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
@@ -2667,7 +2679,7 @@
           "tickers": []
         },
         {
-          "id": "E3",
+          "id": "E5",
           "title": "CEO Shakeups: What History Tells Investors",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/ceo-shakeups-what-history-tells-investors",
@@ -2676,7 +2688,7 @@
           "tickers": []
         },
         {
-          "id": "E4",
+          "id": "E6",
           "title": "Nvidia Fallout, Key Levels, and a Hawkish Fed",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-digest",
@@ -2685,7 +2697,7 @@
           "tickers": []
         },
         {
-          "id": "E5",
+          "id": "E7",
           "title": "Cerebras pops after beating on quarterly revenue and announcing Microsoft deal",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/12/cerebras-systems-cbrs-q3-earnings-report-2026.html",
@@ -2694,7 +2706,7 @@
           "tickers": []
         },
         {
-          "id": "E6",
+          "id": "E8",
           "title": "Cisco beats on earnings, says AI infrastructure revenue will double this fiscal year",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/12/cisco-csco-q1-2027-earnings.html",
@@ -2703,7 +2715,7 @@
           "tickers": []
         },
         {
-          "id": "E7",
+          "id": "E9",
           "title": "Market News | Wells Fargo Investment Institute",
           "sourceName": "Wells Fargo Advisors Stock Market News",
           "url": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm?linknav=topnav:ourInsights:marketCommentary:stockMarket",
@@ -2712,7 +2724,7 @@
           "tickers": []
         },
         {
-          "id": "E8",
+          "id": "E10",
           "title": "Nebius falls 16% as company expects increased 2026 capex spend, issues weak outlook",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/12/nebius-q3-earnings-report-2026.html",
@@ -2721,7 +2733,7 @@
           "tickers": []
         },
         {
-          "id": "E9",
+          "id": "E11",
           "title": "Morgan Stanley Research | Morgan Stanley",
           "sourceName": "Morgan Stanley Ideas",
           "url": "https://www.morganstanley.com/what-we-do/research",
@@ -2730,7 +2742,7 @@
           "tickers": []
         },
         {
-          "id": "E10",
+          "id": "E12",
           "title": "S&P 500 snaps 3-day skid on Election Day as chip stocks rebound",
           "sourceName": "CNBC Markets",
           "url": "https://www.cnbc.com/2026/11/02/stock-market-today-live-updates.html",
@@ -2743,7 +2755,7 @@
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-11-15T19:23:18.587Z",
+      "generatedAt": "2026-11-16T06:37:44.149Z",
       "authMode": "oauth",
       "metricMode": "ranked_attention",
       "sampleCoverage": {
@@ -2753,9 +2765,9 @@
           "new",
           "top"
         ],
-        "postCount": 50,
+        "postCount": 41,
         "includesVoteAndCommentCounts": true,
-        "oauthPostCount": 50,
+        "oauthPostCount": 41,
         "rssPostCount": 0
       },
       "sourceNote": "Reddit OAuth API across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
@@ -2766,7 +2778,7 @@
           "segment": "Retail momentum",
           "status": "ready",
           "error": null,
-          "postCount": 32,
+          "postCount": 18,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2787,7 +2799,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 27
+              "postCount": 17
             }
           ]
         },
@@ -2796,7 +2808,7 @@
           "segment": "Retail investing",
           "status": "ready",
           "error": null,
-          "postCount": 6,
+          "postCount": 10,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2817,7 +2829,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 5
+              "postCount": 10
             }
           ]
         },
@@ -2826,7 +2838,7 @@
           "segment": "Retail investing",
           "status": "ready",
           "error": null,
-          "postCount": 4,
+          "postCount": 8,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2847,7 +2859,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 3
+              "postCount": 8
             }
           ]
         },
@@ -2886,7 +2898,7 @@
           "segment": "Options sentiment",
           "status": "ready",
           "error": null,
-          "postCount": 8,
+          "postCount": 5,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2907,7 +2919,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 8
+              "postCount": 5
             }
           ]
         }
@@ -2915,110 +2927,48 @@
       "topTickers": [
         {
           "symbol": "NVDA",
-          "mentions": 8,
-          "signalStrength": 24,
-          "directMentions": 8,
-          "score": 3330,
-          "comments": 1783,
+          "mentions": 4,
+          "signalStrength": 12.4,
+          "directMentions": 4,
+          "score": 1224,
+          "comments": 414,
           "subreddits": [
             "wallstreetbets",
+            "stocks",
             "options"
           ],
           "posts": [
             {
-              "title": "Turns out the \"shortage\" was NVDA funding the startups buying NVDA chips. I'm the regard who called it organic demand",
-              "subreddit": "wallstreetbets",
-              "score": 16136,
-              "comments": 1396,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwc37o/turns_out_the_shortage_was_nvda_funding_the/"
-            },
-            {
-              "title": "Retail investors hold ~28% of NVDA stocks, we just need 15% to call for a special meeting!",
-              "subreddit": "wallstreetbets",
-              "score": 1618,
-              "comments": 433,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwlbov/retail_investors_hold_28_of_nvda_stocks_we_just/"
-            },
-            {
               "title": "What if I told you one of the more interesting clues about NVDA isn't coming from America?",
               "subreddit": "wallstreetbets",
-              "score": 610,
-              "comments": 205,
+              "score": 1095,
+              "comments": 252,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwwi0a/what_if_i_told_you_one_of_the_more_interesting/"
-            }
-          ],
-          "attentionScore": 553.27
-        },
-        {
-          "symbol": "DXYZ",
-          "mentions": 1,
-          "signalStrength": 2.8,
-          "directMentions": 1,
-          "score": 1200,
-          "comments": 500,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
+            },
             {
-              "title": "How I'm playing the Anthropic IPO for a possible 200x Gain with Call Options",
+              "title": "Sold puts on NVDA",
+              "subreddit": "options",
+              "score": 129,
+              "comments": 111,
+              "permalink": "https://www.reddit.com/r/options/comments/1xwzk8u/sold_puts_on_nvda/"
+            },
+            {
+              "title": "PE on NVDA means nothing right now",
               "subreddit": "wallstreetbets",
-              "score": 2139,
-              "comments": 541,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwft7z/how_im_playing_the_anthropic_ipo_for_a_possible/"
+              "score": 0,
+              "comments": 45,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwv2ls/pe_on_nvda_means_nothing_right_now/"
             }
           ],
-          "attentionScore": 90
-        },
-        {
-          "symbol": "ACHR",
-          "mentions": 1,
-          "signalStrength": 5.7,
-          "directMentions": 1,
-          "score": 8,
-          "comments": 9,
-          "subreddits": [
-            "stocks"
-          ],
-          "posts": [
-            {
-              "title": "Could $ACHR and $PLTR be big winners from the FAA modernization push? What other stocks are you watching?",
-              "subreddit": "stocks",
-              "score": 12,
-              "comments": 13,
-              "permalink": "https://www.reddit.com/r/stocks/comments/1xwbxev/could_achr_and_pltr_be_big_winners_from_the_faa/"
-            }
-          ],
-          "attentionScore": 81.49
-        },
-        {
-          "symbol": "PLTR",
-          "mentions": 1,
-          "signalStrength": 5.7,
-          "directMentions": 1,
-          "score": 8,
-          "comments": 9,
-          "subreddits": [
-            "stocks"
-          ],
-          "posts": [
-            {
-              "title": "Could $ACHR and $PLTR be big winners from the FAA modernization push? What other stocks are you watching?",
-              "subreddit": "stocks",
-              "score": 12,
-              "comments": 13,
-              "permalink": "https://www.reddit.com/r/stocks/comments/1xwbxev/could_achr_and_pltr_be_big_winners_from_the_faa/"
-            }
-          ],
-          "attentionScore": 81.49
+          "attentionScore": 254.92
         },
         {
           "symbol": "WMT",
           "mentions": 1,
           "signalStrength": 5.3,
           "directMentions": 1,
-          "score": 27,
-          "comments": 20,
+          "score": 46,
+          "comments": 35,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -3026,154 +2976,85 @@
             {
               "title": "$WMT Is Overvalued",
               "subreddit": "wallstreetbets",
-              "score": 27,
-              "comments": 20,
+              "score": 46,
+              "comments": 35,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwwq7f/wmt_is_overvalued/"
             }
           ],
-          "attentionScore": 78.2
+          "attentionScore": 79.09
         },
         {
-          "symbol": "TSLA",
-          "mentions": 1,
-          "signalStrength": 4.5,
-          "directMentions": 1,
-          "score": 18,
-          "comments": 26,
-          "subreddits": [
-            "options"
-          ],
-          "posts": [
-            {
-              "title": "Time to short $TSLA again",
-              "subreddit": "options",
-              "score": 18,
-              "comments": 26,
-              "permalink": "https://www.reddit.com/r/options/comments/1xwl215/time_to_short_tsla_again/"
-            }
-          ],
-          "attentionScore": 70.31
-        },
-        {
-          "symbol": "RSG",
-          "mentions": 1,
-          "signalStrength": 3.6,
-          "directMentions": 1,
-          "score": 180,
-          "comments": 79,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
-            {
-              "title": "Title: 🔔 Bill Gates’ fund quietly bought $1.58B of a trash company while everyone watched Nvidia crash",
-              "subreddit": "wallstreetbets",
-              "score": 180,
-              "comments": 79,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xx1e5r/title_bill_gates_fund_quietly_bought_158b_of_a/"
-            }
-          ],
-          "attentionScore": 65.86
-        },
-        {
-          "symbol": "META",
-          "mentions": 1,
-          "signalStrength": 3.3,
-          "directMentions": 1,
-          "score": 17,
-          "comments": 63,
-          "subreddits": [
-            "options"
-          ],
-          "posts": [
-            {
-              "title": "Wheel assigned on META",
-              "subreddit": "options",
-              "score": 17,
-              "comments": 63,
-              "permalink": "https://www.reddit.com/r/options/comments/1xwpcs7/wheel_assigned_on_meta/"
-            }
-          ],
-          "attentionScore": 59.78
-        },
-        {
-          "symbol": "MSTR",
-          "mentions": 1,
-          "signalStrength": 2.9,
-          "directMentions": 1,
-          "score": 153,
-          "comments": 72,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
-            {
-              "title": "Saylor's done it again! Bitcoin craters over 25% since the same month of MSTR's Q2 Earnings release. Bitcoin down nearly 6% on the session",
-              "subreddit": "wallstreetbets",
-              "score": 153,
-              "comments": 72,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwfswx/saylors_done_it_again_bitcoin_craters_over_25/"
-            }
-          ],
-          "attentionScore": 58.18
-        },
-        {
-          "symbol": "TTWO",
+          "symbol": "GOOG",
           "mentions": 1,
           "signalStrength": 2.5,
           "directMentions": 1,
-          "score": 0,
-          "comments": 13,
+          "score": 156,
+          "comments": 142,
+          "subreddits": [
+            "wallstreetbets"
+          ],
+          "posts": [
+            {
+              "title": "GOOG Gemini model launches turn the entire narrative upside down and seems not priced in?",
+              "subreddit": "wallstreetbets",
+              "score": 156,
+              "comments": 142,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xxcqwg/goog_gemini_model_launches_turn_the_entire/"
+            }
+          ],
+          "attentionScore": 57.02
+        },
+        {
+          "symbol": "SLV",
+          "mentions": 1,
+          "signalStrength": 2.5,
+          "directMentions": 1,
+          "score": 1,
+          "comments": 28,
           "subreddits": [
             "stocks"
           ],
           "posts": [
             {
-              "title": "TTWO - buy now or after GTA 6 launch day dip?",
+              "title": "what should i do with my 200 shares of SLV currently at a 56% unrealized loss?",
               "subreddit": "stocks",
-              "score": 0,
-              "comments": 13,
-              "permalink": "https://www.reddit.com/r/stocks/comments/1xwiq22/ttwo_buy_now_or_after_gta_6_launch_day_dip/"
+              "score": 1,
+              "comments": 28,
+              "permalink": "https://www.reddit.com/r/stocks/comments/1xxexy2/what_should_i_do_with_my_200_shares_of_slv/"
             }
           ],
-          "attentionScore": 49.52
+          "attentionScore": 50.13
         }
       ],
       "topPosts": [
         {
-          "id": "1xwc37o",
+          "id": "1xx6mql",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Turns out the \"shortage\" was NVDA funding the startups buying NVDA chips. I'm the regard who called it organic demand",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xwc37o/turns_out_the_shortage_was_nvda_funding_the/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwc37o/turns_out_the_shortage_was_nvda_funding_the/",
-          "createdAt": "2026-11-14T20:13:09.000Z",
-          "score": 16136,
-          "comments": 1396,
-          "upvoteRatio": 0.92,
-          "flair": "Discussion",
-          "tickers": [
-            "NVDA"
-          ],
-          "tickerWeights": {
-            "NVDA": 5.3
-          },
-          "directTickers": [
-            "NVDA"
-          ],
-          "filteredAsGeneric": false,
+          "title": "What Are Your Moves Tomorrow, November 16, 2026",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xx6mql/what_are_your_moves_tomorrow_november_16_2026/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xx6mql/what_are_your_moves_tomorrow_november_16_2026/",
+          "createdAt": "2026-11-15T21:00:38.000Z",
+          "score": 76,
+          "comments": 7085,
+          "upvoteRatio": 0.83,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": true,
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xx1tj8",
+          "id": "1xxakkr",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "This is gonna get taken down in 5 mins so enjoy!",
-          "url": "https://v.redd.it/zgst0cfidt1i1",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xx1tj8/this_is_gonna_get_taken_down_in_5_mins_so_enjoy/",
-          "createdAt": "2026-11-15T17:48:29.000Z",
-          "score": 4848,
-          "comments": 280,
+          "title": "Jensen choosing his assistant after returning to Nvidia",
+          "url": "https://v.redd.it/xk5doobj6v1i1",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xxakkr/jensen_choosing_his_assistant_after_returning_to/",
+          "createdAt": "2026-11-15T23:52:57.000Z",
+          "score": 5793,
+          "comments": 244,
           "upvoteRatio": 0.88,
           "flair": "Meme",
           "tickers": [],
@@ -3183,16 +3064,34 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xwye98",
+          "id": "1xx5hj8",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Jensen Huang discusses comeback as Nvidia CEO with allies",
+          "url": "https://www.reddit.com/r/stocks/comments/1xx5hj8/jensen_huang_discusses_comeback_as_nvidia_ceo/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1xx5hj8/jensen_huang_discusses_comeback_as_nvidia_ceo/",
+          "createdAt": "2026-11-15T20:13:29.000Z",
+          "score": 1940,
+          "comments": 749,
+          "upvoteRatio": 0.9,
+          "flair": "Company News",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xx3xel",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Megaspeed says Alice Huang left the company in August 2025 - IT WAS ALL JUST A BIG MISUNDERSTANDING!",
-          "url": "https://www.reuters.com/business/megaspeed-says-alice-huang-left-company-august-2025-2026-11-15/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwye98/megaspeed_says_alice_huang_left_the_company_in/",
-          "createdAt": "2026-11-15T15:33:38.000Z",
-          "score": 3130,
-          "comments": 381,
-          "upvoteRatio": 0.95,
+          "title": "Jensen Huang discusses comeback as Nvidia CEO with allies",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xx3xel/jensen_huang_discusses_comeback_as_nvidia_ceo/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xx3xel/jensen_huang_discusses_comeback_as_nvidia_ceo/",
+          "createdAt": "2026-11-15T19:11:25.000Z",
+          "score": 1335,
+          "comments": 563,
+          "upvoteRatio": 0.91,
           "flair": "News",
           "tickers": [],
           "tickerWeights": {},
@@ -3201,17 +3100,17 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xwdol4",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Nvidia director sold nearly $1B in stock weeks before the Jensen Huang scandal broke",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xwdol4/nvidia_director_sold_nearly_1b_in_stock_weeks/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwdol4/nvidia_director_sold_nearly_1b_in_stock_weeks/",
-          "createdAt": "2026-11-14T21:22:34.000Z",
-          "score": 2949,
-          "comments": 160,
-          "upvoteRatio": 0.95,
-          "flair": "News",
+          "id": "1xx415g",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Anthropic is a fucking disaster.",
+          "url": "https://www.reddit.com/r/stocks/comments/1xx415g/anthropic_is_a_fucking_disaster/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1xx415g/anthropic_is_a_fucking_disaster/",
+          "createdAt": "2026-11-15T19:15:33.000Z",
+          "score": 978,
+          "comments": 705,
+          "upvoteRatio": 0.86,
+          "flair": "Company Discussion",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3219,143 +3118,17 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xwft7z",
+          "id": "1xxceyf",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "How I'm playing the Anthropic IPO for a possible 200x Gain with Call Options",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xwft7z/how_im_playing_the_anthropic_ipo_for_a_possible/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwft7z/how_im_playing_the_anthropic_ipo_for_a_possible/",
-          "createdAt": "2026-11-14T22:59:20.000Z",
-          "score": 2139,
-          "comments": 541,
-          "upvoteRatio": 0.82,
-          "flair": "DD",
-          "tickers": [
-            "DXYZ"
-          ],
-          "tickerWeights": {
-            "DXYZ": 2.8
-          },
-          "directTickers": [
-            "DXYZ"
-          ],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xwlbov",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Retail investors hold ~28% of NVDA stocks, we just need 15% to call for a special meeting!",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xwlbov/retail_investors_hold_28_of_nvda_stocks_we_just/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwlbov/retail_investors_hold_28_of_nvda_stocks_we_just/",
-          "createdAt": "2026-11-15T03:34:03.000Z",
-          "score": 1618,
-          "comments": 433,
-          "upvoteRatio": 0.83,
+          "title": "If you went all-in on a random S&amp;P 500 company on 1/1/2000 and held until now, the chance of losing almost everything is 62%.",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xxceyf/if_you_went_allin_on_a_random_sp_500_company_on/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xxceyf/if_you_went_allin_on_a_random_sp_500_company_on/",
+          "createdAt": "2026-11-16T01:19:09.000Z",
+          "score": 1437,
+          "comments": 155,
+          "upvoteRatio": 0.92,
           "flair": "Discussion",
-          "tickers": [
-            "NVDA"
-          ],
-          "tickerWeights": {
-            "NVDA": 2.9
-          },
-          "directTickers": [
-            "NVDA"
-          ],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xwdwu8",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Quite the achievement",
-          "url": "https://v.redd.it/0uv63ygmcn1i1",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwdwu8/quite_the_achievement/",
-          "createdAt": "2026-11-14T21:32:46.000Z",
-          "score": 1005,
-          "comments": 190,
-          "upvoteRatio": 0.89,
-          "flair": "News",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xwh9hr",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "SpaceX just caught Starship. Who’s getting rich and who’s getting fucked?",
-          "url": "https://www.nytimes.com/video/science/space/100000011285269/spacex-starship-launch.html",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwh9hr/spacex_just_caught_starship_whos_getting_rich_and/",
-          "createdAt": "2026-11-15T00:05:45.000Z",
-          "score": 363,
-          "comments": 493,
-          "upvoteRatio": 0.77,
-          "flair": "Discussion",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xwhukf",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "So NVDA puts right?",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xwhukf/so_nvda_puts_right/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwhukf/so_nvda_puts_right/",
-          "createdAt": "2026-11-15T00:34:01.000Z",
-          "score": 190,
-          "comments": 492,
-          "upvoteRatio": 0.74,
-          "flair": "Discussion",
-          "tickers": [
-            "NVDA"
-          ],
-          "tickerWeights": {
-            "NVDA": 2.5
-          },
-          "directTickers": [
-            "NVDA"
-          ],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xwfmsx",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Singaporean Government’s Clarification Statement on Wall Street Journal’s Article",
-          "url": "https://www.mha.gov.sg/media-room/newsroom/clarification-statement-on-wall-street-journals-article/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwfmsx/singaporean_governments_clarification_statement/",
-          "createdAt": "2026-11-14T22:51:02.000Z",
-          "score": 724,
-          "comments": 199,
-          "upvoteRatio": 0.97,
-          "flair": "News",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xwz927",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Bessent Says Nvidia Needs ‘Dramatic Shakeup’ After Huang Ouster",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-15/bessent-says-nvidia-needs-dramatic-shakeup-after-huang-ouster",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwz927/bessent_says_nvidia_needs_dramatic_shakeup_after/",
-          "createdAt": "2026-11-15T16:08:47.000Z",
-          "score": 546,
-          "comments": 273,
-          "upvoteRatio": 0.88,
-          "flair": "News",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3370,9 +3143,9 @@
           "url": "https://i.redd.it/4un3uao5bs1i1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwwi0a/what_if_i_told_you_one_of_the_more_interesting/",
           "createdAt": "2026-11-15T14:13:23.000Z",
-          "score": 610,
-          "comments": 205,
-          "upvoteRatio": 0.71,
+          "score": 1095,
+          "comments": 252,
+          "upvoteRatio": 0.73,
           "flair": "Discussion",
           "tickers": [
             "NVDA"
@@ -3394,8 +3167,8 @@
           "url": "https://www.reddit.com/r/stocks/comments/1xx06i4/scott_bessent_on_fox_torching_jensen_huang/",
           "permalink": "https://www.reddit.com/r/stocks/comments/1xx06i4/scott_bessent_on_fox_torching_jensen_huang/",
           "createdAt": "2026-11-15T16:45:14.000Z",
-          "score": 451,
-          "comments": 248,
+          "score": 731,
+          "comments": 374,
           "upvoteRatio": 0.86,
           "flair": null,
           "tickers": [],
@@ -3405,16 +3178,130 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xwio6f",
-          "subreddit": "options",
-          "segment": "Options sentiment",
-          "title": "Nvidia $200 calls expire next Friday.",
-          "url": "https://www.reddit.com/r/options/comments/1xwio6f/nvidia_200_calls_expire_next_friday/",
-          "permalink": "https://www.reddit.com/r/options/comments/1xwio6f/nvidia_200_calls_expire_next_friday/",
-          "createdAt": "2026-11-15T01:15:22.000Z",
-          "score": 181,
-          "comments": 337,
-          "upvoteRatio": 0.8,
+          "id": "1xxf3bu",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Intel sued by shareholders following 29% stock plunge",
+          "url": "https://www.reuters.com/business/intel-sued-by-shareholders-following-29-stock-plunge-2026-11-15/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xxf3bu/intel_sued_by_shareholders_following_29_stock/",
+          "createdAt": "2026-11-16T03:32:34.000Z",
+          "score": 935,
+          "comments": 123,
+          "upvoteRatio": 0.97,
+          "flair": "News",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xx048b",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Judge allows motion to DRAM price-fixing lawsuit against Micron, Samsung and SK hynix saying chipmakers acted like hawks flying in formation",
+          "url": "https://www.tomshardware.com/tech-industry/big-tech/judge-denies-motion-to-dismiss-dram-price-fixing-lawsuit-against-micron-samsung-and-sk-hynix-says-chipmakers-acted-like-hawks-flying-in-formation-finds-evidence-of-dram-collusion-plausible-after-500-percent-price-surge",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xx048b/judge_allows_motion_to_dram_pricefixing_lawsuit/",
+          "createdAt": "2026-11-15T16:42:41.000Z",
+          "score": 638,
+          "comments": 67,
+          "upvoteRatio": 0.96,
+          "flair": "News",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xx263n",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Billionaires Back Jensen Huang—KoGuan Cuts Nvidia Investment Plans, Musk Pays Tribute",
+          "url": "https://www.forbes.com/sites/siladityaray/2026/11/13/billionaire-investor-koguan-vows-to-stop-buying-nvidia-stock-after-huang-exit-musk-and-others-back-ex-ceo/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xx263n/billionaires_back_jensen_huangkoguan_cuts_nvidia/",
+          "createdAt": "2026-11-15T18:02:03.000Z",
+          "score": 479,
+          "comments": 119,
+          "upvoteRatio": 0.89,
+          "flair": "News",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xwr97u",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Nvidia reports Tuesday... first time in 33 years without Jensen on the call. What actually are you watching on this call?",
+          "url": "https://www.reddit.com/r/stocks/comments/1xwr97u/nvidia_reports_tuesday_first_time_in_33_years/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1xwr97u/nvidia_reports_tuesday_first_time_in_33_years/",
+          "createdAt": "2026-11-15T09:25:17.000Z",
+          "score": 272,
+          "comments": 90,
+          "upvoteRatio": 0.93,
+          "flair": "Company Discussion",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xxcqwg",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "GOOG Gemini model launches turn the entire narrative upside down and seems not priced in?",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xxcqwg/goog_gemini_model_launches_turn_the_entire/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xxcqwg/goog_gemini_model_launches_turn_the_entire/",
+          "createdAt": "2026-11-16T01:35:02.000Z",
+          "score": 156,
+          "comments": 142,
+          "upvoteRatio": 0.79,
+          "flair": "Discussion",
+          "tickers": [
+            "GOOG"
+          ],
+          "tickerWeights": {
+            "GOOG": 2.5
+          },
+          "directTickers": [
+            "GOOG"
+          ],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xxfsqd",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "U.S Gov to Name Nvidia Among AI ‘National Champions’",
+          "url": "https://www.wsj.com/tech/ai/trump-administration-to-name-nvidia-among-ai-national-champions-c9284344",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xxfsqd/us_gov_to_name_nvidia_among_ai_national_champions/",
+          "createdAt": "2026-11-16T04:09:57.000Z",
+          "score": 243,
+          "comments": 90,
+          "upvoteRatio": 0.9,
+          "flair": "News",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1xx3iuq",
+          "subreddit": "investing",
+          "segment": "Retail investing",
+          "title": "Bessent Urges Nvidia to Pick Outsider as Next CEO",
+          "url": "https://www.reddit.com/r/investing/comments/1xx3iuq/bessent_urges_nvidia_to_pick_outsider_as_next_ceo/",
+          "permalink": "https://www.reddit.com/r/investing/comments/1xx3iuq/bessent_urges_nvidia_to_pick_outsider_as_next_ceo/",
+          "createdAt": "2026-11-15T18:55:18.000Z",
+          "score": 157,
+          "comments": 125,
+          "upvoteRatio": 0.78,
           "flair": null,
           "tickers": [],
           "tickerWeights": {},
@@ -3423,38 +3310,26 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1xwiot6",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Major misconception about the export control on Nvidia chips and their Singapore revenue (spoiler: they are perfectly legal)",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xwiot6/major_misconception_about_the_export_control_on/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwiot6/major_misconception_about_the_export_control_on/",
-          "createdAt": "2026-11-15T01:16:19.000Z",
-          "score": 372,
-          "comments": 189,
-          "upvoteRatio": 0.8,
-          "flair": "Discussion",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1xwfbgr",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Are all you Nvidia doomers sitting on all cash?",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1xwfbgr/are_all_you_nvidia_doomers_sitting_on_all_cash/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1xwfbgr/are_all_you_nvidia_doomers_sitting_on_all_cash/",
-          "createdAt": "2026-11-14T22:36:34.000Z",
-          "score": 0,
-          "comments": 219,
-          "upvoteRatio": 0.44,
-          "flair": "Discussion",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
+          "id": "1xwzk8u",
+          "subreddit": "options",
+          "segment": "Options sentiment",
+          "title": "Sold puts on NVDA",
+          "url": "https://www.reddit.com/r/options/comments/1xwzk8u/sold_puts_on_nvda/",
+          "permalink": "https://www.reddit.com/r/options/comments/1xwzk8u/sold_puts_on_nvda/",
+          "createdAt": "2026-11-15T16:20:49.000Z",
+          "score": 129,
+          "comments": 111,
+          "upvoteRatio": 0.89,
+          "flair": null,
+          "tickers": [
+            "NVDA"
+          ],
+          "tickerWeights": {
+            "NVDA": 2.9
+          },
+          "directTickers": [
+            "NVDA"
+          ],
           "filteredAsGeneric": false,
           "fetchMethod": "oauth_json"
         }
@@ -3484,7 +3359,7 @@
           "price": 135.66,
           "changePct": 27.86,
           "change": 29.56,
-          "volume": 8416155,
+          "volume": 8430190,
           "marketCap": 7216694272,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3495,7 +3370,7 @@
           "price": 85.69,
           "changePct": 14.06,
           "change": 10.56,
-          "volume": 936050,
+          "volume": 1023787,
           "marketCap": 9483867136,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3506,7 +3381,7 @@
           "price": 13.22,
           "changePct": 11.75,
           "change": 1.39,
-          "volume": 152420449,
+          "volume": 152617295,
           "marketCap": 63965421568,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3539,7 +3414,7 @@
           "price": 15.8,
           "changePct": 10.03,
           "change": 1.44,
-          "volume": 1458008,
+          "volume": 1458043,
           "marketCap": 4315432960,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3550,7 +3425,7 @@
           "price": 24.89,
           "changePct": 8.83,
           "change": 2.02,
-          "volume": 2571535,
+          "volume": 2572742,
           "marketCap": 2043141248,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3561,7 +3436,7 @@
           "price": 13.8,
           "changePct": 8.58,
           "change": 1.09,
-          "volume": 12505907,
+          "volume": 12529478,
           "marketCap": 5232409088,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3572,7 +3447,7 @@
           "price": 44.78,
           "changePct": 7.85,
           "change": 3.26,
-          "volume": 2900315,
+          "volume": 2901629,
           "marketCap": 3355989760,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/"
@@ -3640,7 +3515,7 @@
           "price": 10.16,
           "changePct": -8.72,
           "change": -0.97,
-          "volume": 1942451,
+          "volume": 1944876,
           "marketCap": 13044710400,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3673,7 +3548,7 @@
           "price": 16.5,
           "changePct": -8.33,
           "change": -1.5,
-          "volume": 3780891,
+          "volume": 3782933,
           "marketCap": 2988059648,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3695,7 +3570,7 @@
           "price": 327.98,
           "changePct": -7.31,
           "change": -25.85,
-          "volume": 1182126,
+          "volume": 1185265,
           "marketCap": 11714631680,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-losers/"
@@ -3752,7 +3627,7 @@
           "price": 13.22,
           "changePct": 11.75,
           "change": 1.39,
-          "volume": 152420449,
+          "volume": 152617295,
           "marketCap": 63965421568,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
@@ -3807,7 +3682,7 @@
           "price": 2.9,
           "changePct": -4.92,
           "change": -0.15,
-          "volume": 61083529,
+          "volume": 62046369,
           "marketCap": 7266434560,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
@@ -3851,7 +3726,7 @@
           "price": 8.07,
           "changePct": -2.54,
           "change": -0.21,
-          "volume": 50656340,
+          "volume": 50752419,
           "marketCap": 45667610624,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
@@ -3862,7 +3737,7 @@
           "price": 22.18,
           "changePct": 0,
           "change": 0,
-          "volume": 50483208,
+          "volume": 50508319,
           "marketCap": 149414985728,
           "sourceName": "Yahoo Finance screener",
           "sourceUrl": "https://finance.yahoo.com/markets/stocks/most-actives/"
@@ -3871,9 +3746,11 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade. (M1)",
+      "Policy/geopolitics: U.S.-China policy risk is still in the foreground, which matters most for semiconductors, exporters, and broad risk appetite. (M1)",
+      "Rates: Fed faces tougher inflation fight as pressure builds for more rate hikes Axios (M3)",
+      "Macro: A deepening reliance on external demand leaves China more exposed to shocks abroad as domestic momentum fades, analysts say. (M2)",
       "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
-      "Retail attention: NVDA, DXYZ, ACHR, PLTR have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
+      "Retail attention: NVDA, WMT, GOOG, SLV have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
     ]
   },
   "avoidList": {
@@ -56965,7 +56842,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-11-13T22:46:24.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Stocks See Weekly Gains Despite Nvidia Fallout Stocks recovered from last week's sell-off, despite news of Jensen Huang's resignation from Nvidia, higher Treasury yields, and Fed rate hike probabilities. November 13, 2026 • Nathan Peterson The Week That Was If you read last Friday's blog, you might recall that Rachel had a \"higher volatility\" and \"bearish\" outlook for stocks this week, noting the technical damage and defensive rotation in the markets. Stocks are on track for weekly gains, in what appears to be a technical bounce from oversold conditions (Rachel mentioned this possibility last week) in what has been another volatile week. The market-moving news of the week was Jensen Huang's resignation as CEO of Nvidia after news of a second extramarital affair surfaced mid-week. Shares of NVDA are on track to be down over 13% this week, but surprisingly, the PHLX Semiconductor Index (SOX) is looking to be up over 6% (CRWV's \"beat and raise\" quarter on Tuesday evening, coupled with a technically oversold condition helped chip stocks). Huang's departure leaves a lot of questions about the future of Nvidia, and I don't see how it can be interpreted other than a negative for the artificial intelligence (AI) secular growth story. Huang was likely considered the leading spokesperson for AI, helped orchestrate a $500B AI financing framework deal with six major banks and his company provided financial assistance and/or invested in multiple AI companies. While we don't know who will step in as Nvidia's CEO yet, it certainly seems possible that a less aggressive approach towards AI investments will be adopted given the scrutiny that the company will be ",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Learn Trading Weekly Trader's Outlook Stocks See Weekly Gains Despite Nvidia Fallout Stocks recovered from last week's sell-off, despite news of Jensen Huang's resignation from Nvidia, higher Treasury yields, and Fed rate hike probabilities. November 13, 2026 • Nathan Peterson The Week That Was If you read last Friday's blog, you might recall that Rachel had a \"higher volatility\" and \"bearish\" outlook for stocks this week, noting the technical damage and defensive rotation in the markets. Stocks are on track for weekly gains, in what appears to be a technical bounce from oversold conditions (Rachel mentioned this possibility last week) in what has been another volatile week. The market-moving news of the week was Jensen Huang's resignation as CEO of Nvidia after news of a second extramarital affair surfaced mid-week. Shares of NVDA are on track to be down over 13% this week, but surprisingly, the PHLX Semiconductor Index (SOX) is looking to be up over 6% (CRWV's \"beat and raise\" quarter on Tuesday evening, coupled with a technically oversold condition helped chip stocks). Huang's departure leaves a lot of questions about the future of Nvidia, and I don't see how it can be interpreted other than a negative for the artificial intelligence (AI) secular growth story. Huang was likely considered the leading spokesperson for AI, helped orchestrate a $500B AI financing framework deal with six major banks and his company provided financial assistance and/or invested in multiple AI companies. While we don't know who will step in as Nvidia's CEO yet, it certainly seems possible that a less aggressive approach towards AI investments will be adopted given the scrutiny that the company will be under in the coming months. Y",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56974,7 +56851,7 @@
           "url": "https://www.schwab.com/learn/story/ceo-shakeups-what-history-tells-investors",
           "publishedAt": "2026-11-13T17:57:18.000Z",
           "summary": "Whether it's a long-planned exit or a sudden departure, history shows CEO shakeups can have a big impact on a company’s operations, culture, and stock price.",
-          "excerpt": "CEO Shakeups: Lessons from History | Charles Schwab Search Learn Markets and Economy CEO Shakeups: What History Tells Investors Whether it's a long-planned exit or a sudden departure, history shows CEO shakeups can have a big impact on a company's operations, plans, culture, and stock price. November 13, 2026 • Dan Rosenberg • Henry Hoenig Key takeaways Some companies, even the world's largest, have not outlined clear succession plans. This uncertainty can impact stocks in the short or long term. Historically, performance has been mixed following high-profile departures. It's worth checking SEC filings, listening to earnings calls, and reading media reports about companies to see how they plan to handle succession. In the case of a \"celebrity\" CEO like Nvidia's Jensen Huang or the late Steve Jobs, a CEO departure can have huge company and market ramifications. Many companies have had their ups and downs after high-profile CEOs left or were fired, including Apple, Hewlett-Packard, and Berkshire Hathaway. The sudden departure of Nvidia (NVDA) CEO Jensen Huang , who resigned amid scandal, highlights the risks involved when a visionary founder and CEO leaves a company without a clear plan in place. Not only can it spell uncertainty for the company, but a sudden leadership shift can jolt investors, especially if the replacement is an outsider. Huang, who co-founded Nvidia in 1993 and gained enough celebrity to once be a guest on Air Force One, had no successor lined up. While Nvidia CFO Colette Kress quickly took over as interim CEO, the chipmaker was forced to begin its search for a long-term replacement as its stock plunged. Nvidia shares dropped nearly 25% between October 29, when news of Huang's affair with an alleged Chinese spy first broke, and November 12, when he off",
+          "excerpt": "CEO Shakeups: Lessons from History | Charles Schwab Search Insights & Education Markets and Economy CEO Shakeups: What History Tells Investors Whether it's a long-planned exit or a sudden departure, history shows CEO shakeups can have a big impact on a company's operations, plans, culture, and stock price. November 13, 2026 • Dan Rosenberg • Henry Hoenig Key takeaways Some companies, even the world's largest, have not outlined clear succession plans. This uncertainty can impact stocks in the short or long term. Historically, performance has been mixed following high-profile departures. It's worth checking SEC filings, listening to earnings calls, and reading media reports about companies to see how they plan to handle succession. In the case of a \"celebrity\" CEO like Nvidia's Jensen Huang or the late Steve Jobs, a CEO departure can have huge company and market ramifications. Many companies have had their ups and downs after high-profile CEOs left or were fired, including Apple, Hewlett-Packard, and Berkshire Hathaway. The sudden departure of Nvidia (NVDA) CEO Jensen Huang , who resigned amid scandal, highlights the risks involved when a visionary founder and CEO leaves a company without a clear plan in place. Not only can it spell uncertainty for the company, but a sudden leadership shift can jolt investors, especially if the replacement is an outsider. Huang, who co-founded Nvidia in 1993 and gained enough celebrity to once be a guest on Air Force One, had no successor lined up. While Nvidia CFO Colette Kress quickly took over as interim CEO, the chipmaker was forced to begin its search for a long-term replacement as its stock plunged. Nvidia shares dropped nearly 25% between October 29, when news of Huang's affair with an alleged Chinese spy first broke, and November ",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56983,7 +56860,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-digest",
           "publishedAt": "2026-11-13T17:27:33.000Z",
           "summary": "A hot CPI report has the Fed weighing a possible 50-basis-point hike. Plus, fallout from the Nvidia scandal, key S&P technical levels, and sliding bitcoin.",
-          "excerpt": "A Hawkish Fed, Nvidia Fallout, and Hot CPI | Charles Schwab Search Learn Markets and Economy Nvidia Fallout, Key Levels, and a Hawkish Fed A hot CPI report has the Fed weighing a possible 50-basis-point hike. Plus, fallout from the Nvidia scandal, key technical levels on the S&P 500, and a sliding bitcoin. November 13, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Key levels to watch after wild week Technically, the sell-off last Thursday came after the S&P 500 ® Index tested and failed to claw past its then-50-day moving average of 7,690. Buying support arrived when it tested its 200-day moving average of 7,330. The next zone of resistance could be in the old support area between 7,600 and 7,620, while taking out the 50-day moving average above that—now just shy of 7,670—would be a key clearing event. Thursday's bloodbath took the forward price-to-earnings (P/E) ratio of the S&P 500 down to 17.8, about 1.4 points below the average over the last 10 years and the lowest since late 2023. However, a lower P/E ratio doesn't necessarily suggest a market bottom. One related metric to watch in coming weeks is whether major companies start adjusting forward earnings and margin guidance, especially after the recent tech weakness. If estimates begin falling, it could suggest valuations aren't as low as they now appear. DIY investing? Trading? Professional advice? See how Schwab can help Nvidia (NVDA) fallout assesse",
+          "excerpt": "A Hawkish Fed, Nvidia Fallout, and Hot CPI | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Nvidia Fallout, Key Levels, and a Hawkish Fed A hot CPI report has the Fed weighing a possible 50-basis-point hike. Plus, fallout from the Nvidia scandal, key technical levels on the S&P 500, and a sliding bitcoin. November 13, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Key levels to watch after wild week Technically, the sell-off last Thursday came after the S&P 500 ® Index tested and failed to claw past its then-50-day moving average of 7,690. Buying support arrived when it tested its 200-day moving average of 7,330. The next zone of resistance could be in the old support area between 7,600 and 7,620, while taking out the 50-day moving average above that—now just shy of 7,670—would be a key clearing event. Thursday's bloodbath took the forward price-to-earnings (P/E) ratio of the S&P 500 down to 17.8, about 1.4 points below the average over the last 10 years and the lowest since late 2023. However, a lower P/E ratio doesn't necessarily suggest a market bottom. One related metric to watch in coming weeks is whether major companies start adjusting forward earnings and margin guidance, especially after the recent tech weakness. If estimates begin falling, it could suggest valuations aren't as low as they now appear. DIY investing? Trading? Professional advice? See how Schwab can help ",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         }
       ],
@@ -57176,11 +57053,39 @@
       "cadence": "Daily",
       "trust": "Medium",
       "notes": "Google News RSS scoped to Axios Markets coverage; used because direct Axios newsletter pages may block automated checks.",
-      "title": "Axios Markets RSS",
-      "summary": "Source check failed: 503 Service Unavailable",
-      "articles": [],
-      "articleCount": 0,
-      "ok": false
+      "title": "\"\"Axios Markets\" when:30d\" - Google News",
+      "summary": "Google News",
+      "articles": [
+        {
+          "sourceName": "Axios Markets RSS",
+          "title": "AI's anti-change agents - Axios",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9ldUJGUWpQTWRUUU9MMnJ1Ty1obmhRTUpzZkwyZWZrUEp2Vkg5VkNIY1ZIc2NCZVp4YTd5Q1VBUXlVeXhDdS1TRnNxT1RjVkRYS2R4TDRVUkNYUDgwNGFDbkNVN3hIZkk3OTROVldfd2cwcE5xM0E?oc=5",
+          "publishedAt": "2026-11-14T11:30:14.000Z",
+          "summary": "AI's anti-change agents Axios",
+          "excerpt": "AI's anti-change agents Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Markets RSS",
+          "title": "Markets like when the fog of uncertainty starts to lift - Axios",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1seTBmVlkyWlA5NUxmS2s5alZTV2dEeHpwMUR6b05PQ04yeFNlUFlqcXlmTkhFMGs0a2sxb3AwR1IyTG1tYkVkeHdFMjlyNG5YM1liblBXSDV1SWh0ZmEwREh2bUZXdk54ZEQwUHdIUmppdTQ?oc=5",
+          "publishedAt": "2026-11-04T08:00:00.000Z",
+          "summary": "Markets like when the fog of uncertainty starts to lift Axios",
+          "excerpt": "Markets like when the fog of uncertainty starts to lift Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Markets RSS",
+          "title": "AI debt: Can't stop, won't stop - Axios",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE44WmlKYnVRVDRSbnpHaXRtQ3ozc3g2YXpZVU56eFRVdHlJRlY2ODRqU25XVlZyRXJwT0JHeXRGdExYMGRpZEdIVFdBWjh1UFg0QlhlQUZQWlRtRlozYWg2dg?oc=5",
+          "publishedAt": "2026-11-03T08:00:00.000Z",
+          "summary": "AI debt: Can't stop, won't stop Axios",
+          "excerpt": "AI debt: Can't stop, won't stop Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Markets%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        }
+      ],
+      "articleCount": 3,
+      "ok": true
     },
     {
       "name": "Axios Macro RSS",
@@ -57189,11 +57094,39 @@
       "cadence": "Daily",
       "trust": "Medium",
       "notes": "Google News RSS scoped to Axios Macro coverage; used because direct Axios newsletter pages may block automated checks.",
-      "title": "Axios Macro RSS",
-      "summary": "Source check failed: 503 Service Unavailable",
-      "articles": [],
-      "articleCount": 0,
-      "ok": false
+      "title": "\"\"Axios Macro\" when:30d\" - Google News",
+      "summary": "Google News",
+      "articles": [
+        {
+          "sourceName": "Axios Macro RSS",
+          "title": "Fed faces tougher inflation fight as pressure builds for more rate hikes - Axios",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBDR2FBVnZjdTZUR1ZQSjRQLXBkamFfVVZiQjFxb016UE1oWS1qTl9Ha0ZPeEpaMGs3TXJMbV9sRGtickN1YkxzSTc0QVR2X2NnWGRMSXNrVG0wSWEyMktzVWRkWmhidzZMNXZzZkZNN3dXTms?oc=5",
+          "publishedAt": "2026-11-12T16:56:42.000Z",
+          "summary": "Fed faces tougher inflation fight as pressure builds for more rate hikes Axios",
+          "excerpt": "Fed faces tougher inflation fight as pressure builds for more rate hikes Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Macro RSS",
+          "title": "\"Strong hire, low fire\" labor market surprises economists - Axios",
+          "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5wMnZ6V3ozcDBpa2M4NGxjYXFFSmJoektjY19wRTVvN3pfdHI4alJuYnptcGpTNDFNaGRqVV9mWGU4RXhIdDIycVA1T29CMVhtazNqWXJwd1laTVp2TzVFelRKVVQxd0pPVzRRU0xZR2xBQQ?oc=5",
+          "publishedAt": "2026-11-06T08:00:00.000Z",
+          "summary": "\"Strong hire, low fire\" labor market surprises economists Axios",
+          "excerpt": "\"Strong hire, low fire\" labor market surprises economists Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+          "sourceName": "Axios Macro RSS",
+          "title": "U.S. economy races ahead with 3.4% growth in third quarter - Axios",
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBQTlllWGE1b1RiU08zQ0kzRWx0UDNwLXRwZEZQRGhpY2tydWJLWjdJaGVkSUxIcDBabWFIUnJIdUhnc214UFhESXU5ZXY1V2hya0dXWVAzXzNCLW1nZTdYNWJ0NA?oc=5",
+          "publishedAt": "2026-10-29T07:00:00.000Z",
+          "summary": "U.S. economy races ahead with 3.4% growth in third quarter Axios",
+          "excerpt": "U.S. economy races ahead with 3.4% growth in third quarter Axios",
+          "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
+        }
+      ],
+      "articleCount": 3,
+      "ok": true
     },
     {
       "name": "CNBC Markets",
@@ -57207,11 +57140,11 @@
       "articles": [
         {
           "sourceName": "CNBC Markets",
-          "title": "AI borrowers now drive nearly half of long-dated U.S. IG issuance. PIMCO sees 3 diversifiers",
-          "url": "https://www.cnbc.com/2026/11/12/ai-credit-debt-bond-markets-pimco.html",
-          "publishedAt": "2026-11-12T06:59:59.000Z",
-          "summary": "AI-related borrowing is concentrating long-dated corporate debt — and PIMCO sees three big plays for portfolio diversification.",
-          "excerpt": "AI debt boom reshapes credit diversification Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu Artificial intelligence-related borrowing is becoming a larger share of long-dated U.S. corporate debt — prompting investors to look beyond Big Tech for credit diversification. Investors could consider agency mortgage-backed securities, higher-rated private mortgage bonds and emerging market debt as credit portfolio diversifiers in a corporate debt market increasingly shaped by the AI build-out, according to Lotfi Karoui, managing director and multi-asset strategist at PIMCO. Karoui said AI-related bond issuance now weighs heavily on the broader debt market. Such borrowers now account for almost half of year-to-date gross issuance of non-financial U.S. investment-grade debt with maturities beyond 15 years, PIMCO said in a note Nov. 10. AI hyperscaler debt issuance is projected at around $250 billion in dollar-denominated bonds this year, according to Goldman Sachs forecasts. Estimates for the wider AI ecosystem debt issuance this year — which includes chipmakers, utilities and data center developers — range between $300 billion and $570 billion. There are growing concerns about an AI build-out slowdown prompted by the Democrats' sweeping victory in the U.S. midterm elections, which could pose a headache for long-duration investors looking for diversification, particularly as longer-dated U.S. Treasurys — the traditional duration portfolio hedge — have been rattled by volatility for much of 2026. \"For most of the past 3 years, the AI investment boom has been an equity story, but it is increasingly becoming a bond-market story,\" said Kevin Thozet, a member of Carmignac's investment committee. \"The numbers are bec",
+          "title": "Stock futures slip as traders brace for Nvidia earnings, Anthropic IPO this week: Live updates",
+          "url": "https://www.cnbc.com/2026/11/15/stock-market-today-live-updates.html",
+          "publishedAt": "2026-11-15T23:04:03.000Z",
+          "summary": "The Dow, S&P 500 and Nasdaq posted their biggest weekly gains since August, rising more than 2% each.",
+          "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu Traders work at the New York Stock Exchange, Nov. 10, 2026. NYSE Stock futures slipped Monday morning following a volatile week on Wall Street, as traders await a highly anticipated earnings report from Nvidia and a potentially record-setting public market debut of Anthropic. Nasdaq-100 futures declined 0.77%, while S&P 500 futures fell 0.37%. Dow Jones Industrial Average futures lost 103 points lower, or 0.20%. In Asia, markets were mostly lower with Japan's Nikkei 225 dropping 2.04% after third-quarter GDP unexpectedly shrank. South Korea Kospi slumped 3.48%, leading losses in the region. Australia's S&P/ASX 200 declined 0.41% as well. Mainland China's CSI 300 fell 0.83% after downbeat key economic data, while Hong Kong's Hang Seng Index gained 0.94%. Nvidia is set to report results after the bell on Tuesday. While analysts expect the chipmaker to post nearly 100% year-over-year earnings and revenue growth, investors will be more focused on how the company will move forward after Jensen Huang's exit as CEO. Huang last week resigned from his post after reports of multiple extramarital affairs, including one with an alleged Chinese spy. Nvidia shares dropped 13%, marking their biggest weekly slide since April 2025. \"The main task at hand for interim CEO Colette Kress [is to] restore order and give the Street confidence in the Nvidia story going forward,\" wrote Dan Ives, analyst at Yorkville Ives. \"This starts with earnings and the conference call this week on Tuesday after the bell…we still expect guidance and a typical conference call around robust business metrics with demand metrics that have clearly accelerated since l",
           "discoveredFrom": "https://www.cnbc.com/markets/"
         },
         {
@@ -57239,29 +57172,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Bessent calls for ‘dramatic shakeup’ at Nvidia, urges outside CEO",
-          "url": "https://www.cnbc.com/2026/11/15/bessent-nvidia-ceo-lutnick-megaspeed.html",
-          "publishedAt": "2026-11-15T18:10:18.000Z",
-          "summary": "Bessent has criticized Howard Lutnick’s department over suspected chip diversion to China while defending President Donald Trump’s handling of the matter.",
-          "excerpt": "Bessent has criticized Howard Lutnick’s department over suspected chip diversion to China while defending President Donald Trump’s handling of the matter.",
+          "title": "AI is reshaping banking jobs – but its ability to drive profits remains unclear",
+          "url": "https://www.cnbc.com/2026/11/16/how-ai-is-changing-banking-jobs-hiring-and-revenue.html",
+          "publishedAt": "2026-11-16T06:20:55.000Z",
+          "summary": "Europe's banks are using AI to cut routine work, redeploy staff and hire more technical talent.",
+          "excerpt": "Europe's banks are using AI to cut routine work, redeploy staff and hire more technical talent.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Trump breaks silence about FAA nationwide ground stop, blames Biden administration",
-          "url": "https://www.cnbc.com/2026/11/15/trump-breaks-silence-on-faa-nationwide-ground-stop-blames-biden-.html",
-          "publishedAt": "2026-11-15T16:56:40.000Z",
-          "summary": "Trump blamed the Biden administration for the FAA’s aging system after a nationwide ground stop disrupted air travel and urged Congress to approve more funding.",
-          "excerpt": "Trump blamed the Biden administration for the FAA’s aging system after a nationwide ground stop disrupted air travel and urged Congress to approve more funding.",
+          "title": "China confirms Xi-Trump-Putin historic summit. What will be on the agenda?",
+          "url": "https://www.cnbc.com/2026/11/16/trump-xi-putin-ukraine-nuclear-tariffs-russia-iran-.html",
+          "publishedAt": "2026-11-16T04:34:00.000Z",
+          "summary": "The talks are expected to focus on issues including nuclear non-proliferation, the Middle East war, trade policies and, possibly, the Ukraine war.",
+          "excerpt": "The talks are expected to focus on issues including nuclear non-proliferation, the Middle East war, trade policies and, possibly, the Ukraine war.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "3 big things we&apos;re watching in the stock market in the week ahead",
-          "url": "https://www.cnbc.com/investingclub/2026/11/15/3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html",
-          "publishedAt": "2026-11-15T15:26:20.000Z",
-          "summary": "Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
-          "excerpt": "Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.",
+          "title": "China’s slowdown deepens in October as industrial output, retail sales, investment miss estimates",
+          "url": "https://www.cnbc.com/2026/11/16/china-retail-sales-october-industrial-output-investment.html",
+          "publishedAt": "2026-11-16T03:53:59.000Z",
+          "summary": "A deepening reliance on external demand leaves China more exposed to shocks abroad as domestic momentum fades, analysts say.",
+          "excerpt": "A deepening reliance on external demand leaves China more exposed to shocks abroad as domestic momentum fades, analysts say.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -57321,33 +57254,24 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "China’s hottest stocks these days have one thing in common: names that sound like sheep",
-          "url": "https://www.marketwatch.com/story/chinas-hottest-stocks-these-days-have-one-thing-in-common-names-that-sound-like-sheep-6176e521?mod=mw_rss_topstories",
-          "publishedAt": "2026-11-15T15:22:00.000Z",
-          "summary": "Shares of fish processors, lighting manufacturers and appliance makers have soared ahead of the Year of the Sheep. Investor appetite has had little to do with the status of their businesses.",
-          "excerpt": "Shares of fish processors, lighting manufacturers and appliance makers have soared ahead of the Year of the Sheep. Investor appetite has had little to do with the status of their businesses.",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
           "title": "Nvidia is gearing up for one of Wall Street’s most anticipated earnings calls in years",
           "url": "https://www.marketwatch.com/story/nvidia-is-gearing-up-for-one-of-wall-streets-most-anticipated-earnings-calls-in-years-91855b1e?mod=mw_rss_topstories",
-          "publishedAt": "2026-11-15T15:00:00.000Z",
+          "publishedAt": "2026-11-15T21:32:00.000Z",
           "summary": "Jensen Huang’s sudden departure has made Tuesday’s earnings call “the most important in the company’s history.”",
           "excerpt": "Jensen Huang’s sudden departure has made Tuesday’s earnings call “the most important in the company’s history.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         },
         {
           "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Will the Anthropic IPO create a disturbance in the broader U.S. equity market, like SpaceX did?",
-          "url": "https://www.marketwatch.com/story/will-the-anthropic-ipo-create-a-disturbance-in-the-broader-u-s-equity-market-like-spacex-did-05ba4351?mod=mw_rss_topstories",
-          "publishedAt": "2026-11-15T14:00:00.000Z",
-          "summary": "SpaceX’s offering coincided with the June peak in semiconductors.",
-          "excerpt": "SpaceX’s offering coincided with the June peak in semiconductors.",
+          "title": "China’s hottest stocks these days have one thing in common: names that sound like sheep",
+          "url": "https://www.marketwatch.com/story/chinas-hottest-stocks-these-days-have-one-thing-in-common-names-that-sound-like-sheep-6176e521?mod=mw_rss_topstories",
+          "publishedAt": "2026-11-15T15:22:00.000Z",
+          "summary": "Shares of fish processors, lighting manufacturers and appliance makers have soared ahead of the Year of the Sheep. Investor appetite has had little to do with the status of their businesses.",
+          "excerpt": "Shares of fish processors, lighting manufacturers and appliance makers have soared ahead of the Year of the Sheep. Investor appetite has had little to do with the status of their businesses.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
-      "articleCount": 3,
+      "articleCount": 2,
       "ok": true
     },
     {
