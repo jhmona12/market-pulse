@@ -38,7 +38,7 @@ The script writes to `analysis/model-monitoring/output/`:
 - `summary.json` - machine-readable monitor summary.
 - `latest_summary.md` - plain-English readout.
 - `latest_summary.html` - standalone browser report with charts and tables.
-- `strict_post_training_decile_summary.csv` - truly out-of-sample decile table.
+- `strict_post_training_decile_summary.csv` - post-export monitoring decile table (legacy filename).
 - `strict_post_training_daily_deciles.csv` - daily decile performance rows.
 - `strict_post_training_top_bottom_daily.csv` - daily top/bottom spread rows.
 - `recent_completed_decile_summary.csv` - recent diagnostic table.
@@ -55,10 +55,18 @@ The script writes to `analysis/model-monitoring/output/`:
 
 ## How To Read It
 
-The strict post-training window is the cleanest check because it starts after
-the production model's training end date. It will be small immediately after a
-model is trained because a 14-trading-day label cannot be measured until the
-future has happened.
+The post-export window starts on the day after the model artifact's export date,
+not the last training signal date. A training signal's future outcome was already
+used to fit the model. For the May 4 artifact the earliest eligible signal date
+is May 5, not April 11. `--strict-start-date` may delay this boundary but cannot
+move it earlier. Results retain the `strict_post_training` filename/key for
+compatibility. Only fully matured 14-trading-day outcomes enter performance
+tables; this pipeline rejects other model horizons.
+
+This is more conservative retrospective monitoring, not a guarantee of unbiased
+investable returns: current constituents, overlapping labels, and revised vendor
+prices remain limitations. Reports generated before the November 18, 2026 audit
+used the old boundary and need regenerating.
 
 The recent completed window is a broader drift diagnostic. It can overlap the
 training period when the model was trained very recently, so it should not be

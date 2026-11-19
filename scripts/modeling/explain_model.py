@@ -7,6 +7,7 @@ import pandas as pd
 
 from common import FEATURES_DIR, MODELS_DIR, REPORTS_DIR, ROOT, write_json
 from schema import NON_FEATURE_COLUMNS
+from rank_validation import best_iteration_model
 
 try:
     import xgboost as xgb
@@ -33,7 +34,7 @@ def parse_args() -> argparse.Namespace:
 
 def load_frame(args: argparse.Namespace, feature_names: list[str]) -> pd.DataFrame:
     prediction_name = args.predictions or f"{args.model_name}_test_predictions.csv"
-    predictions = pd.read_csv(REPORTS_DIR / prediction_name, usecols=["date", "symbol", "predicted_probability"])
+    predictions = pd.read_csv(REPORTS_DIR / prediction_name, usecols=["date", "symbol"])
     predictions["date"] = pd.to_datetime(predictions["date"])
 
     needed_columns = ["date", "symbol", *feature_names]
@@ -48,6 +49,7 @@ def main() -> None:
     model_path = ROOT / args.model_path if args.model_path else MODELS_DIR / f"{args.model_name}.json"
     booster = xgb.Booster()
     booster.load_model(str(model_path))
+    booster = best_iteration_model(booster)
 
     feature_names = booster.feature_names
     if not feature_names:

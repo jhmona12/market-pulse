@@ -1,0 +1,133 @@
+{
+  "generatedAt": "2026-11-18T16:49:47.342047+00:00",
+  "sourceGeneratedAt": "2026-11-18T16:49:47.342047+00:00",
+  "modelMetadata": {
+    "targetColumn": "relevance_grade_sector_neutral_252d",
+    "returnColumn": "sector_neutral_forward_return_252d_after_cost",
+    "featureCount": 142,
+    "featureVersion": 2,
+    "modelSha256": "c3f6d61a2308c7a9681d996a1dc7fd21caa871ba259194df61c99dffb5f666d9",
+    "releaseId": "2026-11-18-quarantine",
+    "trainingRows": 76483,
+    "trainingSymbols": 739,
+    "trainingStartDate": "2012-11-19",
+    "trainingEndDate": "2025-11-03",
+    "numBoostRound": 120,
+    "trainSampleFrequency": "monthly",
+    "methodologyRationale": [
+      "Inherited 10-year daily / 15-year monthly windows; fixed tree count identical between evaluation and full fit.",
+      "Historical interval eligibility before breadth/ranks; continue observed post-removal outcomes; unresolved claims retained."
+    ]
+  },
+  "promotedMethodology": {
+    "trainingWindow": "15y / monthly",
+    "rationale": [
+      "Inherited 10-year daily / 15-year monthly windows; fixed tree count identical between evaluation and full fit.",
+      "Historical interval eligibility before breadth/ranks; continue observed post-removal outcomes; unresolved claims retained."
+    ]
+  },
+  "labelSummaries": [
+    {
+      "label": "Sector-neutral 252D return",
+      "description": "Ranks one-year total return versus the sector ETF, net of 15 bp estimated round-trip cost.",
+      "targetColumn": "relevance_grade_sector_neutral_252d",
+      "returnColumn": "sector_neutral_forward_return_252d_after_cost"
+    }
+  ],
+  "labelComparison": [],
+  "baselineComparison": {
+    "monthly": [],
+    "quarterly": []
+  },
+  "shapTopFeatures": [
+    {
+      "feature": "volatility_60d_minus_sector_median",
+      "label": "volatility_60d_minus_sector_median",
+      "meanAbsShap": 0.11459290236234665,
+      "meanShap": -0.09492532908916473
+    },
+    {
+      "feature": "beta_60d",
+      "label": "beta_60d",
+      "meanAbsShap": 0.025362815707921982,
+      "meanShap": -0.02079254761338234
+    },
+    {
+      "feature": "volatility_60d_pct_rank",
+      "label": "volatility_60d_pct_rank",
+      "meanAbsShap": 0.021031005308032036,
+      "meanShap": -0.016360588371753693
+    },
+    {
+      "feature": "distance_to_52w_low_minus_sector_median",
+      "label": "distance_to_52w_low_minus_sector_median",
+      "meanAbsShap": 0.019670424982905388,
+      "meanShap": -0.011775937862694263
+    },
+    {
+      "feature": "spy_price_vs_sma_200",
+      "label": "spy_price_vs_sma_200",
+      "meanAbsShap": 0.014839737676084042,
+      "meanShap": -3.131810808554292e-05
+    },
+    {
+      "feature": "rel_volatility_60d_vs_spy",
+      "label": "rel_volatility_60d_vs_spy",
+      "meanAbsShap": 0.013870423659682274,
+      "meanShap": -0.011057664640247822
+    },
+    {
+      "feature": "breadth_ret_120d_median",
+      "label": "breadth_ret_120d_median",
+      "meanAbsShap": 0.013729681260883808,
+      "meanShap": 3.768678288906813e-05
+    },
+    {
+      "feature": "breadth_volatility_60d_median",
+      "label": "breadth_volatility_60d_median",
+      "meanAbsShap": 0.013703872449696064,
+      "meanShap": -0.0011526625603437424
+    },
+    {
+      "feature": "momentum_252d_skip_20_sector_pct_rank",
+      "label": "momentum_252d_skip_20_sector_pct_rank",
+      "meanAbsShap": 0.013585752807557583,
+      "meanShap": -0.009900785982608795
+    },
+    {
+      "feature": "spy_ret_120d",
+      "label": "spy_ret_120d",
+      "meanAbsShap": 0.011151023209095001,
+      "meanShap": -5.90841518715024e-05
+    },
+    {
+      "feature": "sector_volatility_60d",
+      "label": "sector_volatility_60d",
+      "meanAbsShap": 0.010534859262406826,
+      "meanShap": -0.004778641741722822
+    },
+    {
+      "feature": "price_vs_sma_200_sector_pct_rank",
+      "label": "price_vs_sma_200_sector_pct_rank",
+      "meanAbsShap": 0.010233290493488312,
+      "meanShap": -0.006947480142116547
+    }
+  ],
+  "evaluation": {
+    "status": "development_only",
+    "releaseId": "2026-11-18-quarantine",
+    "modelSha256": "c3f6d61a2308c7a9681d996a1dc7fd21caa871ba259194df61c99dffb5f666d9",
+    "message": "The replacement has improved data-quality controls, not proven better returns. Previously inspected development tests are not an independent performance estimate. Old-model backtest medians are intentionally not carried forward.",
+    "testStart": "2024-12-02",
+    "testEnd": "2025-11-03",
+    "completeCommonCohorts": 4,
+    "totalCohorts": 12,
+    "reportUrl": "https://github.com/jhmona12/market-pulse/blob/main/docs/targeted-quarantine-experiment-2026-11-18.md"
+  },
+  "methodology": [
+    "Separate 252-trading-day rank model; scores are not return forecasts or probabilities.",
+    "Approximately 15 years of raw history with monthly signal dates; only matured labels enter training.",
+    "Historical membership and reviewed corporate actions are included, but unresolved outcomes and retrospective price reviews remain limitations.",
+    "No independent post-release performance is available at promotion. SHAP explains model output, not causal return drivers."
+  ]
+}

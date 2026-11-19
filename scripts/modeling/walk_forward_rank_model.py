@@ -5,6 +5,7 @@ import argparse
 import pandas as pd
 
 from common import FEATURES_DIR, MODELS_DIR, REPORTS_DIR, ROOT, write_json
+from rank_validation import best_iteration_model, label_horizon, resolve_embargo, validate_label_metadata
 from train_rank_model import (
     DEFAULT_EARLY_STOPPING_ROUNDS,
     DEFAULT_NUM_BOOST_ROUND,
@@ -48,7 +49,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--folds", type=int, default=4, help="Number of recent non-overlapping test folds.")
     parser.add_argument("--test-days", type=int, default=63, help="Trading days per test fold.")
     parser.add_argument("--validation-days", type=int, default=126, help="Trading days per validation fold.")
-    parser.add_argument("--embargo-days", type=int, default=14, help="Trading-date embargo around validation/test windows.")
+    parser.add_argument("--embargo-days", type=int, default=None, help="Excluded trading dates; defaults to label horizon + one entry-delay session.")
     parser.add_argument("--min-train-days", type=int, default=756, help="Minimum expanding-window train size.")
     parser.add_argument(
         "--min-symbol-rows",
@@ -70,6 +71,10 @@ def parse_args() -> argparse.Namespace:
 
 
 def fold_slices(unique_dates: pd.DatetimeIndex, args: argparse.Namespace) -> list[dict]:
+    horizon = label_horizon(getattr(args, "target_column", TARGET_COLUMN), getattr(args, "return_column", RETURN_COLUMN))
+    args.embargo_days = resolve_embargo(args.embargo_days, horizon)
+    if min(args.folds, args.test_days, args.validation_days, args.min_train_days) <= 0:
+        raise ValueError("Fold count and window lengths must be positive.")
     folds = []
     for fold_offset in reversed(range(args.folds)):
         test_end = len(unique_dates) - fold_offset * args.test_days
@@ -106,7 +111,7 @@ def train_fold(
 ) -> xgb.Booster:
     dtrain = make_dmatrix(train, feature_columns, target_column)
     dvalidation = make_dmatrix(validation, feature_columns, target_column)
-    return xgb.train(
+    booster = xgb.train(
         params=params or DEFAULT_RANK_PARAMS,
         dtrain=dtrain,
         num_boost_round=num_boost_round,
@@ -114,6 +119,7 @@ def train_fold(
         early_stopping_rounds=early_stopping_rounds,
         verbose_eval=False,
     )
+    return best_iteration_model(booster)
 
 
 def sample_dates(dates: pd.DatetimeIndex, frequency: str) -> pd.DatetimeIndex:
@@ -133,6 +139,7 @@ def sample_dates(dates: pd.DatetimeIndex, frequency: str) -> pd.DatetimeIndex:
 def main() -> None:
     args = parse_args()
     dataset_path = FEATURES_DIR / args.dataset
+    validate_label_metadata(dataset_path, args.target_column)
     dataset = pd.read_csv(dataset_path, compression="gzip")
     dataset["date"] = pd.to_datetime(dataset["date"])
     dataset, removed_symbols = filter_by_symbol_history(dataset, args.min_symbol_rows)
@@ -164,7 +171,6 @@ def main() -> None:
         ordered_test = test.sort_values(["date", "symbol"]).reset_index(drop=True)
         dtest = xgb.DMatrix(ordered_test[feature_columns].to_numpy(dtype=float), feature_names=feature_columns)
         ordered_test["predicted_rank_score"] = booster.predict(dtest)
-        ordered_test["predicted_probability"] = ordered_test["predicted_rank_score"]
         ordered_test["fold"] = fold["fold"]
         prediction_columns = [
             "fold",
@@ -176,7 +182,6 @@ def main() -> None:
             args.target_column,
             *[column for column in EXTRA_DIAGNOSTIC_COLUMNS if column in ordered_test.columns],
             "predicted_rank_score",
-            "predicted_probability",
         ] + (["candidate_momentum_setup"] if "candidate_momentum_setup" in ordered_test.columns else [])
         prediction_columns = list(dict.fromkeys(prediction_columns))
         predictions.append(ordered_test[prediction_columns].copy())
@@ -202,6 +207,8 @@ def main() -> None:
     combined.to_csv(REPORTS_DIR / f"{args.model_name}_test_predictions.csv", index=False)
 
     report = {
+        "evaluation_version": 2,
+        "prediction_tree_policy": "best_iteration_inclusive",
         "generated_at": pd.Timestamp.now("UTC").isoformat(),
         "dataset": str(dataset_path.relative_to(ROOT)),
         "prediction_path": str((REPORTS_DIR / f"{args.model_name}_test_predictions.csv").relative_to(ROOT)),

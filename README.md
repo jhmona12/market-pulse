@@ -539,6 +539,31 @@ There are two intentionally separate model families:
 - **14-day tactical rank model:** production dashboard model for short-term model-ranked momentum and rebound setups.
 - **252-day long-horizon rank model:** dashboard research model for one-year holding candidates. It reuses shared feature engineering, but has separate labels, datasets, reports, and model names.
 
+**Current release, November 18, 2026:** both targeted-quarantine candidates replace the old weights by explicit user request instead of shadow rollout. Data controls improve; better investment performance is **not established**. See [release methodology, identities and rollback](docs/model-promotion-2026-11-18.md). The earlier audit corrected early-stopping and temporal purging. Historical results below are provenance, not validated expected returns. Original hold decisions are superseded by the user's deployment choice, not a newly proven economic advantage. The drawdown-label experiment still needs rebuilding. [Audit](docs/model-audit-2026-11-18.md).
+
+| Model | Intended history / sampling | Saved training signal dates | Exported |
+| --- | --- | --- | --- |
+| Tactical, 14 trading days | About 10 years of raw prices; daily | 2017-11-16 through 2026-10-26 | 2026-11-18 |
+| Strategic, 252 trading days | About 15 years of raw prices; monthly | 2012-11-19 through 2025-11-03 | 2026-11-18 |
+
+Both deployed artifacts have 142 version-2 price/context features, dated historical membership and reviewed corporate actions, but not SEC fundamentals. Unreliable historical liquidity features are excluded. Tactical fitting uses 1,120,350 rows / 658 securities; strategic fitting uses 76,483 monthly rows / 739 securities. Scores are ranks, not probabilities. Daily refreshes score fresh inputs with fixed weights, not retrain. The three-year live fetch supplies trailing features, not the training lookback. Annual signal dates lag prices by a year for label maturity.
+
+The experiment chronology below records earlier decisions and candidates. The current deployed release is the quarantine pair described above; other candidates and legacy performance tables are not its performance evidence.
+
+**Controlled comparison:** [research commands](analysis/model-audit/README.md) freeze a separate cache, run matched walk-forward comparisons, save research-only candidates and produce a local HTML report. With prices through November 17, the corrected RSI/missing-volume features produced identical predictions in both model comparisons. Correcting early-stopping evaluation reduced the measured sector-relative returns; it did not demonstrate a better trading signal. The latest tactical refit improved mean sector-relative return by 0.24 percentage points versus the frozen incumbent, but the approximate block interval was -0.25 to +0.64 points and both had negative returns. No automatic model replacement is justified. See [results and limitations](docs/model-comparison-2026-11-18.md).
+
+**Subsequent tuning and deployment check:** six fixed recipes per horizon were tested on earlier validation windows, then the selected recipe was evaluated on a later development window and retrained on all matured labels. The selected candidates have 50 tactical / 30 strategic trees. The tactical candidate still trails simple baselines; the strategic candidate underperforms its inherited fixed recipe, with only six complete overlapping yearly test baskets. Neither is promoted. Both candidate and incumbent scoring paths pass isolated deployment replays on 500 current names. See [the readiness report](docs/model-deployment-check-2026-11-18.md) for exact samples, mean/median results, SHAP and limitations.
+
+The scorer validates model/feature/cache identity and preserves full-precision cached features. Old low-precision or version-1 caches are rejected and rebuilt by full tactical scoring before strategic scoring. Stop metrics remain available for reference names; YTD uses the prior year's close. Both replacements use corrected version-2 features and matching SHAP. Rank-change monitoring starts a new baseline when weights change.
+
+**Former constituents:** retain their historical records and finish existing holding-period outcomes after index removal. Do not admit future constituents before their membership date or silently erase missing terminal returns. Verified acquisition consideration and bankruptcy recoveries require security-level identity and consistent share units. The [corporate-action policy](docs/survivorship-and-corporate-actions.md) distinguishes implemented accounting/tests from the still-incomplete historical membership, sector and delisting reconstruction. This study is **not survivorship-free**.
+
+**Historical rebuild, subsequent research:** real historical intervals, prices for 700 tactical / 804 strategic historical securities, 187 archived sector snapshots and reviewed acquisition consideration are now integrated into training matrices. Both horizons were separately retuned and retrained using 142 price/context features, excluding unavailable historical volume/liquidity inputs. These candidates use prices through November 16 and remain isolated from production. Uncertain rights retain bounds rather than fabricated point values, and all remaining missing labels and archive discrepancies have review ledgers. This replaces the earlier contracts-only implementation, but is not a claim that every corporate action or historical record is verified. See [coverage, results and promotion decision](docs/historical-model-rebuild-2026-11-18.md) and [reproduction commands](analysis/model-audit/README.md#historical-membership-rebuild).
+
+**Data reconciliation follow-up:** a separate rebuild adds 21 verified completion records, masks omitted halt intervals, and restores a primary-confirmed Cintas special dividend. Unknown labels fall from 601 to 428 (14D) and 1,165 to 912 (252D); 54 vendor-return disagreements remain unresolved. Missingness is concentrated in former members, so blanket deletion is not considered unbiased. Corrected matrices are saved in `reconciled/`. See [the audit and exclusion recommendation](docs/historical-data-reconciliation-2026-11-18.md).
+
+**Targeted quarantine, latest experiment and release:** both arms were separately retuned and retrained. Quarantine excludes 524 tactical / 180 strategic predictor rows, rebuilds context, and retains unknown outcomes in portfolio accounting. In matched fixed-recipe tests, tactical mean sector-relative return falls from -0.45% to -1.16%; strategic mean rises from +4.90% to +5.49%, but median stock-basket return falls from +20.88% to +14.50%, with only 24/48 common complete monthly baskets. Candidate serving/assembly checks passed on 500 frozen reference names. The original economic gate recommended holding; the user subsequently chose to replace public models with this pair. See [the experiment](docs/targeted-quarantine-experiment-2026-11-18.md). These are overlapping development baskets, not CAGR or expected returns.
+
 The current primary dashboard model is an XGBoost learning-to-rank model. It is designed to answer a daily portfolio-selection question: which current S&P 500 stocks look most likely to outperform their sector over the next 14 trading days?
 
 ### Label
@@ -629,9 +654,9 @@ method: sector-neutral 252D return plus 0.5x clipped relative forward max drawdo
 
 Plain English: it rewards one-year outperformance that arrives with a smoother path versus the sector. Current testing says this improves drawdown modestly, but gives up too much actual return, so it remains a diagnostic label rather than the primary label.
 
-The model uses the same 156 shared price, liquidity, volatility, relative-strength, sector, and market-context features as the 14-day model. It does not reuse the 14-day target, 14-day reports, or production dashboard artifact names.
+The deployed model shares 142 version-2 price/context definitions with the tactical model, but keeps separate targets, weights, reports and artifact names. The older 156-feature studies below do not describe replacement-model performance.
 
-Promoted long-horizon method:
+Historical May method (superseded by the November release above):
 
 ```text
 raw price cache: about 20 years
@@ -648,9 +673,9 @@ target: relevance_grade_sector_neutral_252d
 Why this was selected:
 
 - The 252-trading-day label makes neighboring daily rows highly overlapping, so monthly train/validation sampling reduces duplicate training information.
-- The 15-year labeled window keeps more history than the original 10-year baseline without leaning as hard on older regimes where market structure and current-S&P survivor bias are more concerning.
-- In the window/sampling comparison, 15-year monthly training had the strongest monthly and quarterly median top-decile returns.
-- A targeted hyperparameter tuning pass then favored a shallower, lower-learning-rate model over the inherited default settings.
+- The intended 15-year raw-history window leaves roughly 13 years of labeled signal dates after feature warm-up and one-year outcome maturity. It was filtered from a longer cache; the saved dataset dates, not the cache's current length, define the fitted sample.
+- The historical window/sampling comparison favored monthly training, but the November audit requires rerunning that comparison before treating it as established superiority.
+- The historical targeted tuning pass favored shallower, lower-learning-rate trees. Keep that as a starting configuration, not a proven optimum; selection folds are development data, not an untouched holdout.
 
 ```text
 Run                  Sample    Monthly median   Quarterly median
@@ -685,7 +710,7 @@ Initial long-horizon walk-forward command:
   --folds 2 \
   --test-days 252 \
   --validation-days 252 \
-  --embargo-days 252 \
+  --embargo-days 253 \
   --min-train-days 700 \
   --num-boost-round 300 \
   --early-stopping-rounds 25
@@ -717,7 +742,7 @@ Drawdown-adjusted label:
   Mean forward max drawdown:      -17.39%
 ```
 
-The efficient tuning pass used the 15-year monthly dataset, monthly train/validation sampling, two recent one-year folds for the wider preset screen, and a four-fold confirmation run for the winning preset versus the inherited default. The selected preset is intentionally conservative: shallower trees, lower learning rate, and stronger dependence control from monthly sampling. It is an incremental improvement, not a clean sweep: the tuned preset improved daily mean return, hit rate, and quarterly median return in the confirmation run, while the prior default retained a slightly better monthly median and quarterly spread.
+The historical tuning pass used the 15-year monthly dataset, two recent one-year folds for the wider preset screen, and a four-fold comparison of the winning preset versus the inherited default. These are selection/development comparisons, not independent confirmation: the folds overlap the selection history and the old predictions included early-stopping patience trees. The numbers below describe that historical run and must be regenerated before choosing a new model. Monthly sampling reduces redundancy, but monthly one-year outcomes still overlap heavily.
 
 ```text
 Selected preset:                       depth2_more_rounds
@@ -770,15 +795,15 @@ Before treating this model as production-grade portfolio advice, review point-in
 
 ### Universe And Null Treatment
 
-- Universe: current S&P 500 constituents for training/scoring.
-- Price history: about 10 years of cached daily adjusted-close history from free public endpoints.
+- Universe: dated historical membership for replacement training; current constituents for daily scoring. Holding outcomes continue after index removal.
+- Price history: about 10 years for tactical research and a roughly 15-year filtered window for strategic research, from cached daily adjusted prices at free public endpoints.
 - Short-history current constituents are kept by default once they have enough trailing data to compute every required feature and enough future data to compute the label.
-- Nulls are not imputed. Rows with missing required features, infinite values, or missing labels are dropped from the training dataset.
+- Replacement training and live scoring use corrected version-2 RSI/missing-volume handling. Required non-finite predictors are not silently imputed. Unknown future outcomes are excluded from fitting but retained in evaluation accounting after selection. Version-1 feature caches cannot serve version-2 weights.
 - Macro/FRED observation-date fields are excluded by default because observation dates are not the same thing as market release dates.
 
-The current feature-complete dataset has `1,082,323` rows, `502` symbols, `156` features, zero feature null cells, and zero label mismatches. Most symbols have full coverage: `449` of `502` have more than 95% of the available post-feature history. The shortest histories are mostly spin-offs, IPOs, or newer S&P additions such as `SNDK`, `GEV`, `SOLV`, `VLTO`, `KVUE`, `GEHC`, `CEG`, `HOOD`, `APP`, and `COIN`.
+The legacy current-constituent dataset had `1,082,323` rows, `502` symbols and `156` features, with zero feature null cells and label mismatches. Those counts are not the November replacement samples. Short histories remain eligible once actual observations support every required predictor; they are not backfilled.
 
-For the long-horizon model specifically, `scripts/modeling/audit_long_horizon_history.py` currently finds `501` feature-complete symbols out of `503` current constituents and an earliest clean labeled date of `2017-05-04` with the current 10-year raw price cache. The point-in-time universe audit is free-source only: `scripts/modeling/build_sp500_point_in_time_universe.py` parses Wikipedia current constituents plus index changes and found `357` change rows, but removed-name intervals remain incomplete and are not forced into training.
+The original 10-year annual audit started in May 2017; the legacy 15-year build started in May 2012. Neither is the November historical-membership replacement sample. The first snapshot-union audit found 314 removals / 311 tickers, with 286 missing prices in that original cache. The later rebuild recovered a larger historical universe and integrated dated intervals, classifications and verified event records. Residual gaps are documented in the [historical rebuild report](docs/historical-model-rebuild-2026-11-18.md), not represented by the obsolete 286-name count.
 
 Fundamentals are audit-first. `scripts/modeling/audit_sec_fundamentals.py` tests official SEC Company Facts coverage and aligns future feature work around filing dates rather than fiscal period dates. A 25-name smoke test matched all 25 sampled constituents with zero request failures, but fundamentals are not wired into daily refresh until coverage and reliability are reviewed.
 
@@ -824,10 +849,10 @@ The main evaluation is an embargoed walk-forward test:
 - 4 recent non-overlapping test folds.
 - 63 trading days per test fold.
 - 126 trading days for validation.
-- 14 trading-day embargo around validation/test windows.
+- At least 15 excluded trading dates around tactical validation/test windows; 253 for strategic runs. These account for next-close entry plus the label horizon and keep the previous block's label exit strictly before the next block's first signal date.
 - Daily top-decile basket evaluation against sector-neutral after-cost 14-day returns.
 
-The current tuned rank model results:
+Historical tuned rank model results, before the November 2026 evaluation corrections (rerun required):
 
 ```text
 Top-decile sector-neutral 14-day return: +2.75%
@@ -854,10 +879,12 @@ S&P 500 into score deciles, and measures realized 14-trading-day performance by
 decile. It writes a plain-English summary, CSV tables, JSON diagnostics, and SVG
 charts to `analysis/model-monitoring/output/`.
 
-The strict post-training window is the cleanest check because it excludes dates
-used to train the current model. The recent completed window is broader and more
-useful for drift monitoring, but can overlap training when the model was trained
-recently.
+The post-export monitoring window starts after the saved model's export date,
+not merely its last training signal date (whose future outcome was part of
+training). Earlier overrides are rejected. The stored `strict_post_training`
+key remains for compatibility. The recent completed window is broader, but
+pre-export observations are explicitly marked as retrospective diagnostics.
+Neither removes current-constituent bias or overlapping outcomes.
 
 ### Ablation And Tuning
 

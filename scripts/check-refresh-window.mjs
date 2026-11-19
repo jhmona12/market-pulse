@@ -121,7 +121,8 @@ function writeOutputs(values) {
   }
 }
 
-if (eventName === "workflow_dispatch") {
+// Push events are limited by the workflow to model-release manifests, not snapshots.
+if (eventName === "workflow_dispatch" || eventName === "push") {
   writeOutputs({
     run_refresh: "true",
     scheduled_utc: "manual",

@@ -49,7 +49,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--folds", type=int, default=4, help="Number of recent non-overlapping test folds.")
     parser.add_argument("--test-days", type=int, default=63, help="Trading days per test fold.")
     parser.add_argument("--validation-days", type=int, default=126, help="Trading days per validation fold.")
-    parser.add_argument("--embargo-days", type=int, default=14, help="Trading-date embargo around validation/test windows.")
+    parser.add_argument("--embargo-days", type=int, default=None, help="Excluded trading dates; defaults to label horizon + one entry-delay session.")
     parser.add_argument("--min-train-days", type=int, default=756, help="Minimum expanding-window train size.")
     parser.add_argument(
         "--min-symbol-rows",

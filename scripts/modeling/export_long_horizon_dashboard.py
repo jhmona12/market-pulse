@@ -294,11 +294,20 @@ def main() -> None:
         "methodology": [
             "This is a separate long-horizon research model; it does not replace the 14-day tactical Momentum Book.",
             "Monthly and quarterly medians are emphasized because daily 252D outcomes overlap heavily and averages can be skewed by outliers.",
-            "The promoted long-horizon artifact uses 15 years of labeled history, monthly train/validation sampling, and a compact tuned XGBoost rank model.",
+            "The promoted long-horizon artifact uses an approximately 15-year raw-history window, shortened by feature warm-up and forward-label maturity, with monthly train/validation sampling and a compact XGBoost rank model.",
             "Baseline agreement labels compare the model with simple sector-relative and 12-1 momentum rules.",
             "The drawdown-adjusted label is experimental until walk-forward results show it improves returns without only selecting low-volatility laggards.",
         ],
     }
+    if metadata.get("feature_version") == 2:
+        evidence = read_json_if_exists(ROOT / metadata["dashboard_evidence_path"])
+        if not evidence or evidence.get("modelMetadata", {}).get("modelSha256") != metadata["model_sha256"]:
+            raise ValueError("Dashboard evidence does not match deployed model")
+        if live_scores and live_scores.get("model", {}).get("artifactSha256") != metadata["model_sha256"]:
+            raise ValueError("Live scores do not match dashboard evidence")
+        output.update(evidence)
+        output["generatedAt"] = pd.Timestamp.now("UTC").isoformat()
+        output["modelMetadata"]["liveModel"] = live_scores.get("model") if live_scores else None
     write_json(output, ROOT / args.output)
     print(f"Wrote long-horizon dashboard artifact to {args.output}")
 

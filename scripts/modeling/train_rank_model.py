@@ -10,6 +10,7 @@ from common import FEATURES_DIR, MODELS_DIR, REPORTS_DIR, ROOT, write_json
 from schema import RANK_RETURN_COLUMN as RETURN_COLUMN
 from schema import RANK_TARGET_COLUMN as TARGET_COLUMN
 from schema import feature_columns_for
+from rank_validation import best_iteration_model, label_horizon, resolve_embargo, validate_label_metadata, validate_training_frame
 
 try:
     import xgboost as xgb
@@ -96,7 +97,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--return-column", default=RETURN_COLUMN, help="Forward return column used for economic evaluation.")
     parser.add_argument("--test-days", type=int, default=252, help="Approximate number of trading days to reserve for test.")
     parser.add_argument("--validation-days", type=int, default=252, help="Approximate number of trading days to reserve for validation.")
-    parser.add_argument("--embargo-days", type=int, default=14, help="Trading-date embargo between train/validation/test windows.")
+    parser.add_argument("--embargo-days", type=int, default=None, help="Excluded trading dates between windows; defaults to label horizon + one entry-delay session.")
     parser.add_argument(
         "--min-symbol-rows",
         type=int,
@@ -136,7 +137,10 @@ def filter_by_symbol_history(dataset: pd.DataFrame, min_symbol_rows: int) -> tup
     return filtered, removed_rows
 
 
-def split_dates(dataset: pd.DataFrame, validation_days: int, test_days: int, embargo_days: int) -> tuple[pd.DatetimeIndex, pd.DatetimeIndex, pd.DatetimeIndex, dict]:
+def split_dates(dataset: pd.DataFrame, validation_days: int, test_days: int, embargo_days: int | None, horizon_days: int = 14) -> tuple[pd.DatetimeIndex, pd.DatetimeIndex, pd.DatetimeIndex, dict]:
+    embargo_days = resolve_embargo(embargo_days, horizon_days)
+    if min(validation_days, test_days) <= 0:
+        raise ValueError("Validation and test windows must be positive.")
     unique_dates = pd.DatetimeIndex(sorted(dataset["date"].drop_duplicates()))
     if len(unique_dates) <= validation_days + test_days + embargo_days * 2 + 10:
         raise ValueError("Not enough history to create embargoed train/validation/test splits.")
@@ -168,6 +172,7 @@ def group_sizes(frame: pd.DataFrame) -> list[int]:
 
 
 def make_dmatrix(frame: pd.DataFrame, feature_columns: list[str], target_column: str = TARGET_COLUMN) -> xgb.DMatrix:
+    validate_training_frame(frame, feature_columns, target_column)
     ordered = frame.sort_values(["date", "symbol"]).reset_index(drop=True)
     matrix = xgb.DMatrix(
         ordered[feature_columns].to_numpy(dtype=float),
@@ -244,16 +249,20 @@ def evaluate_ranked(
 def main() -> None:
     args = parse_args()
     dataset_path = FEATURES_DIR / args.dataset
+    validate_label_metadata(dataset_path, args.target_column)
     dataset = pd.read_csv(dataset_path, compression="gzip")
     dataset["date"] = pd.to_datetime(dataset["date"])
     dataset, removed_symbols = filter_by_symbol_history(dataset, args.min_symbol_rows)
     feature_columns = feature_columns_for(args.dataset)
+    horizon_days = label_horizon(args.target_column, args.return_column)
+    args.embargo_days = resolve_embargo(args.embargo_days, horizon_days)
 
     train_dates, validation_dates, test_dates, split_metadata = split_dates(
         dataset,
         args.validation_days,
         args.test_days,
         args.embargo_days,
+        horizon_days,
     )
     original_train_date_count = len(train_dates)
     original_validation_date_count = len(validation_dates)
@@ -275,11 +284,11 @@ def main() -> None:
         early_stopping_rounds=args.early_stopping_rounds,
         verbose_eval=False,
     )
+    booster = best_iteration_model(booster)
 
     ordered_test = test.sort_values(["date", "symbol"]).reset_index(drop=True)
     dtest = xgb.DMatrix(ordered_test[feature_columns].to_numpy(dtype=float), feature_names=feature_columns)
     ordered_test["predicted_rank_score"] = booster.predict(dtest)
-    ordered_test["predicted_probability"] = ordered_test["predicted_rank_score"]
 
     model_base = MODELS_DIR / args.model_name
     model_base.parent.mkdir(parents=True, exist_ok=True)
@@ -294,16 +303,17 @@ def main() -> None:
         args.target_column,
         *[column for column in EXTRA_DIAGNOSTIC_COLUMNS if column in ordered_test.columns],
         "predicted_rank_score",
-        "predicted_probability",
     ]
     if "candidate_momentum_setup" in ordered_test.columns:
-        prediction_columns.insert(-2, "candidate_momentum_setup")
+        prediction_columns.insert(-1, "candidate_momentum_setup")
     prediction_columns = list(dict.fromkeys(prediction_columns))
     predictions = ordered_test[prediction_columns].copy()
     predictions = predictions.sort_values(["date", "predicted_rank_score"], ascending=[True, False])
     predictions.to_csv(REPORTS_DIR / f"{args.model_name}_test_predictions.csv", index=False)
 
     report = {
+        "evaluation_version": 2,
+        "prediction_tree_policy": "best_iteration_inclusive",
         "generated_at": pd.Timestamp.now("UTC").isoformat(),
         "dataset": str(dataset_path.relative_to(ROOT)),
         "model_path": str(model_base.with_suffix(".json").relative_to(ROOT)),

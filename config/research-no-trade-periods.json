@@ -1,0 +1,9 @@
+{
+  "policy": "Inclusive regular-session no-trade periods; mask bars, never replace halted closes with zero returns. Supplement the frozen publisher no-trade and exit-gap records.",
+  "periods": [
+    {"security_id":"BIIB","start":"2023-06-09","end":"2023-06-09","source_url":"https://investors.biogen.com/news-releases/news-release-details/biogen-stock-trading-halted-today-fda-advisory-committee-review","note":"Company announced Nasdaq halt for FDA committee meeting; archive carries the preceding close."},
+    {"security_id":"SIVB","start":"2023-03-10","end":"2023-03-27","source_url":"https://ir.nasdaq.com/news-releases/news-release-details/nasdaq-halts-svb-financial-group","note":"Nasdaq halt began before the March 10 regular session; frozen exit_gaps.csv records the next observed OTC trade on March 28."},
+    {"security_id":"SBNY","start":"2023-03-14","end":"2023-03-27","source_url":"https://infomemo.theocc.com/infomemos?number=52112","note":"OCC trading-halt restriction; publisher exit_gaps.csv also identifies March 10 as last actual trade and March 28 as next trade, extending the mask to March 13."},
+    {"security_id":"FRC","start":"2023-05-01","end":"2023-05-02","source_url":"https://ir.theice.com/press/news-details/2023/NYSE-to-Suspend-Trading-Immediately-in-First-Republic-Bank-FRC-and-Commence-Delisting-Proceedings/default.aspx","note":"NYSE immediate suspension May 1; archive first OTC trade May 3. No synthetic entry at the stale $3.51 close."}
+  ]
+}

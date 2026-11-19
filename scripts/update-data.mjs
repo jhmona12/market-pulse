@@ -21,6 +21,7 @@ import { parseRedditRssListing, redditListingPostsFromJson, redditSortsForMode, 
 import { fetchJsonWithRetry, fetchTextWithRetry } from "./ingest/http.mjs";
 import { fetchRedditAccessToken } from "./ingest/reddit-auth.mjs";
 import { buildAiMemoInputPayload, buildAiRecommendationResponseSchema } from "./snapshot/ai-memo.mjs";
+import { loadModelEvidence } from "./snapshot/model-evidence.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const maxTickers = Number.parseInt(process.env.MAX_TICKERS || "0", 10);
@@ -634,6 +635,8 @@ async function loadModelExplainability() {
 }
 
 async function loadLongHorizonResearchBase() {
+  const metadata = JSON.parse(await readFile(join(root, "models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research_metadata.json"), "utf8"));
+  if (metadata.feature_version === 2) return loadModelEvidence(root, metadata);
   try {
     const text = await readFile(join(root, longHorizonOutput), "utf8");
     return JSON.parse(text);
@@ -671,6 +674,10 @@ async function loadPreviousModelMonitoring() {
 }
 
 function publicModelSummary(modelRankings, explainability) {
+  if (modelRankings.model?.featureVersion === 2 &&
+      explainability?.modelSha256 !== modelRankings.model.artifactSha256) {
+    throw new Error("Tactical SHAP explanation and live scores refer to different models");
+  }
   return {
     status: modelRankings.status,
     generatedAt: modelRankings.generatedAt,
@@ -690,6 +697,8 @@ function publicModelSummary(modelRankings, explainability) {
       ? {
           generatedAt: explainability.generatedAt,
           sourceModel: explainability.sourceModel,
+          modelSha256: explainability.modelSha256,
+          featureVersion: explainability.featureVersion,
           method: explainability.method,
           notes: explainability.notes,
           topFeatures: (explainability.topFeatures || []).slice(0, 10)
@@ -1912,6 +1921,10 @@ function buildLongHorizonContext({ longHorizonRankings, tacticalRankings }) {
 }
 
 function buildLongHorizonResearch({ base, longHorizonRankings, modelScorebook, stockMetadata, marketCapCache }) {
+  if (longHorizonRankings.model?.featureVersion === 2 &&
+      base.modelMetadata?.modelSha256 !== longHorizonRankings.model.artifactSha256) {
+    throw new Error("Long-horizon evidence and live scores refer to different models");
+  }
   const rows = buildLongHorizonRows({ longHorizonRankings, modelScorebook, stockMetadata, marketCapCache });
   const trends = summarizeLongHorizonTrends(rows);
   const status = longHorizonRankings.status === "ready" ? "ready" : longHorizonRankings.status || "missing";
@@ -2042,12 +2055,14 @@ function buildModelMonitoring({ modelScorebook, previousMonitoring }) {
   const currentSnapshot = {
     generatedAt,
     asOfDate,
+    modelSha256: modelScorebook.model?.artifactSha256 || null,
     rowCount,
     topDecileCutoff,
     rows: currentRows.map(compactMonitoringHistoryRow)
   };
   const priorHistory = Array.isArray(previousMonitoring?.history) ? previousMonitoring.history : [];
-  const distinctPriorHistory = priorHistory.filter((snapshot) => snapshot?.asOfDate && snapshot.asOfDate !== asOfDate);
+  const distinctPriorHistory = priorHistory.filter((snapshot) => snapshot?.asOfDate && snapshot.asOfDate !== asOfDate &&
+    snapshot.modelSha256 === currentSnapshot.modelSha256);
   const priorSnapshot = distinctPriorHistory[0] || null;
   const lookbackSnapshot = distinctPriorHistory[4] || distinctPriorHistory[distinctPriorHistory.length - 1] || null;
   const priorRows = monitoringRankMap(priorSnapshot);
@@ -2109,7 +2124,8 @@ function buildModelMonitoring({ modelScorebook, previousMonitoring }) {
       "Top decile means model rank is inside the best 10% of the current scored S&P 500 reference universe.",
       "A new entrant is a current top-decile name that was outside the top decile in the prior distinct refresh.",
       "Rank upgrades flag names that stayed in the top decile but improved at least 25 rank slots since the prior distinct refresh or 50 rank slots over the available multi-refresh lookback.",
-      "The first generated monitoring snapshot is a baseline; entrant tracking begins once at least one prior distinct refresh exists."
+      "The first generated monitoring snapshot is a baseline; entrant tracking begins once at least one prior distinct refresh exists.",
+      "Rank changes only compare snapshots scored by the same model artifact. Replacing weights starts a new baseline; older history is retained separately."
     ]
   };
 }
@@ -4772,7 +4788,9 @@ async function main() {
 
 export {
   buildAiDeeperRead,
+  buildLongHorizonResearch,
   buildLongHorizonRows,
+  buildModelScorebook,
   buildModelMonitoring,
   bottomModelSectorClusters,
   checkSource,

@@ -132,9 +132,15 @@ def drop_feature_groups(feature_columns: list[str], groups: list[str]) -> tuple[
     return kept, dropped
 
 
+def dataset_metadata_path(dataset_path: Path) -> Path:
+    base = dataset_path.with_suffix("") if dataset_path.suffix == ".gz" else dataset_path
+    base = base.with_suffix("") if base.suffix == ".csv" else base
+    return dataset_path.with_name(f"{base.name}_metadata.json")
+
+
 def feature_columns_for(dataset_name: str, features_dir: Path = FEATURES_DIR) -> list[str]:
-    metadata_path = features_dir / "training_dataset_metadata.json"
-    if dataset_name == DEFAULT_DATASET_NAME and metadata_path.exists():
+    metadata_path = dataset_metadata_path(features_dir / dataset_name)
+    if metadata_path.exists():
         with metadata_path.open(encoding="utf-8") as handle:
             metadata = json.load(handle)
         if metadata.get("feature_columns"):

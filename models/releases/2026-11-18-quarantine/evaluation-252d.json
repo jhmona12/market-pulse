@@ -1,0 +1,527 @@
+{
+  "horizon": 252,
+  "as_of": "2026-11-16",
+  "selected_recipe": "longer_fit",
+  "rounds": 120,
+  "params": {
+    "objective": "rank:ndcg",
+    "eval_metric": [
+      "ndcg@25",
+      "ndcg@50"
+    ],
+    "eta": 0.025,
+    "max_depth": 2,
+    "min_child_weight": 80.0,
+    "subsample": 0.9,
+    "colsample_bytree": 0.85,
+    "lambda": 4.0,
+    "alpha": 0.0,
+    "seed": 42,
+    "tree_method": "hist",
+    "nthread": 4
+  },
+  "recipes": [
+    {
+      "name": "inherited_fixed",
+      "params": {
+        "objective": "rank:ndcg",
+        "eval_metric": [
+          "ndcg@25",
+          "ndcg@50"
+        ],
+        "eta": 0.025,
+        "max_depth": 2,
+        "min_child_weight": 80.0,
+        "subsample": 0.9,
+        "colsample_bytree": 0.85,
+        "lambda": 4.0,
+        "alpha": 0.0,
+        "seed": 42,
+        "tree_method": "hist",
+        "nthread": 4
+      },
+      "rounds": 60
+    },
+    {
+      "name": "shorter_fit",
+      "params": {
+        "objective": "rank:ndcg",
+        "eval_metric": [
+          "ndcg@25",
+          "ndcg@50"
+        ],
+        "eta": 0.025,
+        "max_depth": 2,
+        "min_child_weight": 80.0,
+        "subsample": 0.9,
+        "colsample_bytree": 0.85,
+        "lambda": 4.0,
+        "alpha": 0.0,
+        "seed": 42,
+        "tree_method": "hist",
+        "nthread": 4
+      },
+      "rounds": 30
+    },
+    {
+      "name": "longer_fit",
+      "params": {
+        "objective": "rank:ndcg",
+        "eval_metric": [
+          "ndcg@25",
+          "ndcg@50"
+        ],
+        "eta": 0.025,
+        "max_depth": 2,
+        "min_child_weight": 80.0,
+        "subsample": 0.9,
+        "colsample_bytree": 0.85,
+        "lambda": 4.0,
+        "alpha": 0.0,
+        "seed": 42,
+        "tree_method": "hist",
+        "nthread": 4
+      },
+      "rounds": 120
+    },
+    {
+      "name": "shallow_regularized",
+      "params": {
+        "objective": "rank:ndcg",
+        "eval_metric": [
+          "ndcg@25",
+          "ndcg@50"
+        ],
+        "eta": 0.025,
+        "max_depth": 2,
+        "min_child_weight": 160,
+        "subsample": 0.9,
+        "colsample_bytree": 0.85,
+        "lambda": 8,
+        "alpha": 0.0,
+        "seed": 42,
+        "tree_method": "hist",
+        "nthread": 4
+      },
+      "rounds": 60
+    },
+    {
+      "name": "slow_regularized",
+      "params": {
+        "objective": "rank:ndcg",
+        "eval_metric": [
+          "ndcg@25",
+          "ndcg@50"
+        ],
+        "eta": 0.0125,
+        "max_depth": 2,
+        "min_child_weight": 160,
+        "subsample": 0.9,
+        "colsample_bytree": 0.85,
+        "lambda": 8,
+        "alpha": 0.0,
+        "seed": 42,
+        "tree_method": "hist",
+        "nthread": 4
+      },
+      "rounds": 120
+    },
+    {
+      "name": "depth_three",
+      "params": {
+        "objective": "rank:ndcg",
+        "eval_metric": [
+          "ndcg@25",
+          "ndcg@50"
+        ],
+        "eta": 0.025,
+        "max_depth": 3,
+        "min_child_weight": 120,
+        "subsample": 0.9,
+        "colsample_bytree": 0.85,
+        "lambda": 8,
+        "alpha": 0.0,
+        "seed": 42,
+        "tree_method": "hist",
+        "nthread": 4
+      },
+      "rounds": 60
+    }
+  ],
+  "validation_summary": [
+    {
+      "stage": "depth_three",
+      "mean_excess": -0.05261825657646473,
+      "median_excess": -0.07503985901547408,
+      "mean_member_median": 0.13966307439722167,
+      "spread": -0.05115359267172848,
+      "dates": 7
+    },
+    {
+      "stage": "inherited_fixed",
+      "mean_excess": -0.06265522901237697,
+      "median_excess": -0.0803411733886328,
+      "mean_member_median": 0.16515697647801034,
+      "spread": -0.06089844245614972,
+      "dates": 7
+    },
+    {
+      "stage": "longer_fit",
+      "mean_excess": -0.035831350168739284,
+      "median_excess": -0.06321419471787845,
+      "mean_member_median": 0.17139777835700495,
+      "spread": -0.028078126401593413,
+      "dates": 7
+    },
+    {
+      "stage": "shallow_regularized",
+      "mean_excess": -0.07979968234827406,
+      "median_excess": -0.09386205464464246,
+      "mean_member_median": 0.13204226477777456,
+      "spread": -0.08497969393461224,
+      "dates": 7
+    },
+    {
+      "stage": "shorter_fit",
+      "mean_excess": -0.05820347969372573,
+      "median_excess": -0.06462563229294487,
+      "mean_member_median": 0.164098335831364,
+      "spread": -0.06940977213431468,
+      "dates": 7
+    },
+    {
+      "stage": "slow_regularized",
+      "mean_excess": -0.07367760595582003,
+      "median_excess": -0.08875215412530713,
+      "mean_member_median": 0.12808304365866807,
+      "spread": -0.06887585061538393,
+      "dates": 7
+    }
+  ],
+  "test_summary": [
+    {
+      "stage": "inherited_fixed",
+      "mean_stock_return": 0.5344246799021729,
+      "median_stock_return": 0.3748264764502941,
+      "mean_member_median": 0.24685278396810406,
+      "mean_excess": 0.31462124485716286,
+      "median_excess": 0.20049614376185948,
+      "spread": 0.42801483014848773,
+      "dates": 4
+    },
+    {
+      "stage": "low_volatility",
+      "mean_stock_return": 0.06313598095350353,
+      "median_stock_return": 0.06701375547732058,
+      "mean_member_median": 0.054432111057893175,
+      "mean_excess": -0.032316010657662,
+      "median_excess": -0.029789857478979605,
+      "spread": -0.3458684859108512,
+      "dates": 4
+    },
+    {
+      "stage": "momentum_60d",
+      "mean_stock_return": 0.31023816352107114,
+      "median_stock_return": 0.3294396692884799,
+      "mean_member_median": 0.16569586844225637,
+      "mean_excess": 0.1289996165524341,
+      "median_excess": 0.15728147584256127,
+      "spread": 0.16801870468532815,
+      "dates": 4
+    },
+    {
+      "stage": "selected_recipe",
+      "mean_stock_return": 0.5385189630985658,
+      "median_stock_return": 0.40290428073389695,
+      "mean_member_median": 0.24019388754014803,
+      "mean_excess": 0.3261202186141471,
+      "median_excess": 0.21238676186104344,
+      "spread": 0.4321974510292112,
+      "dates": 4
+    }
+  ],
+  "test_start": "2024-12-02",
+  "test_end": "2025-11-03",
+  "common_complete_test_cohorts": 4,
+  "test_cohorts": 12,
+  "effects": {
+    "inherited_fixed": {
+      "status": "insufficient_blocks",
+      "mean_difference": -0.008166243688529555,
+      "approximate_95pct_block_interval": null,
+      "paired_dates": 7,
+      "block_cohorts": 12,
+      "warning": "Too few complete cohorts for two dependence-length blocks; no uncertainty interval is reported."
+    },
+    "momentum_60d": {
+      "status": "insufficient_blocks",
+      "mean_difference": 0.1137148231970233,
+      "approximate_95pct_block_interval": null,
+      "paired_dates": 7,
+      "block_cohorts": 12,
+      "warning": "Too few complete cohorts for two dependence-length blocks; no uncertainty interval is reported."
+    },
+    "low_volatility": {
+      "status": "insufficient_blocks",
+      "mean_difference": 0.35843622927180907,
+      "approximate_95pct_block_interval": null,
+      "paired_dates": 4,
+      "block_cohorts": 12,
+      "warning": "Too few complete cohorts for two dependence-length blocks; no uncertainty interval is reported."
+    }
+  },
+  "incumbent_comparable": false,
+  "candidate_path": "data/modeling/experiments/2026-11-18-pit/quarantine/price_only/tuning_252d/xgboost_rank_sector252_v2_candidate.json",
+  "candidate_metadata": {
+    "generated_at": "2026-11-18T16:49:47.342047+00:00",
+    "dataset": "frozen experiment v2 matrix",
+    "model_path": "data/modeling/experiments/2026-11-18-pit/quarantine/price_only/tuning_252d/xgboost_rank_sector252_v2_candidate.json",
+    "target_column": "relevance_grade_sector_neutral_252d",
+    "return_column": "sector_neutral_forward_return_252d_after_cost",
+    "feature_count": 142,
+    "feature_columns": [
+      "ret_1d",
+      "ret_5d",
+      "ret_10d",
+      "ret_20d",
+      "ret_60d",
+      "ret_120d",
+      "ret_5d_reversal",
+      "momentum_126d_skip_10",
+      "momentum_252d_skip_20",
+      "volatility_20d",
+      "volatility_60d",
+      "downside_volatility_20d",
+      "downside_volatility_60d",
+      "max_daily_return_20d",
+      "ret_20d_vol_adj",
+      "ret_60d_vol_adj",
+      "price_vs_sma_20",
+      "price_vs_sma_50",
+      "price_vs_sma_100",
+      "price_vs_sma_200",
+      "sma_20_vs_50",
+      "sma_50_vs_200",
+      "rsi_14",
+      "distance_to_52w_high",
+      "distance_to_52w_low",
+      "beta_60d",
+      "idiosyncratic_ret_20d",
+      "idiosyncratic_ret_60d",
+      "spy_ret_20d",
+      "spy_ret_60d",
+      "spy_ret_120d",
+      "spy_volatility_20d",
+      "spy_volatility_60d",
+      "spy_price_vs_sma_50",
+      "spy_price_vs_sma_200",
+      "spy_rsi_14",
+      "rel_ret_20d_vs_spy",
+      "rel_ret_60d_vs_spy",
+      "rel_ret_120d_vs_spy",
+      "rel_rsi_vs_spy",
+      "rel_volatility_20d_vs_spy",
+      "rel_volatility_60d_vs_spy",
+      "breadth_above_50",
+      "breadth_above_200",
+      "breadth_ret_20d_median",
+      "breadth_ret_60d_median",
+      "breadth_ret_120d_median",
+      "breadth_volatility_20d_median",
+      "breadth_volatility_60d_median",
+      "sector_ret_20d",
+      "sector_ret_60d",
+      "sector_ret_120d",
+      "sector_momentum_126d_skip_10",
+      "sector_momentum_252d_skip_20",
+      "sector_volatility_20d",
+      "sector_volatility_60d",
+      "sector_price_vs_sma_50",
+      "sector_price_vs_sma_200",
+      "sector_rsi_14",
+      "ret_5d_reversal_pct_rank",
+      "ret_20d_pct_rank",
+      "ret_60d_pct_rank",
+      "ret_120d_pct_rank",
+      "momentum_126d_skip_10_pct_rank",
+      "momentum_252d_skip_20_pct_rank",
+      "ret_20d_vol_adj_pct_rank",
+      "ret_60d_vol_adj_pct_rank",
+      "rsi_14_pct_rank",
+      "volatility_20d_pct_rank",
+      "volatility_60d_pct_rank",
+      "downside_volatility_20d_pct_rank",
+      "downside_volatility_60d_pct_rank",
+      "max_daily_return_20d_pct_rank",
+      "price_vs_sma_50_pct_rank",
+      "price_vs_sma_200_pct_rank",
+      "distance_to_52w_high_pct_rank",
+      "distance_to_52w_low_pct_rank",
+      "beta_60d_pct_rank",
+      "rel_ret_20d_vs_spy_pct_rank",
+      "rel_ret_60d_vs_spy_pct_rank",
+      "rel_ret_120d_vs_spy_pct_rank",
+      "rel_rsi_vs_spy_pct_rank",
+      "rel_volatility_20d_vs_spy_pct_rank",
+      "rel_volatility_60d_vs_spy_pct_rank",
+      "idiosyncratic_ret_20d_pct_rank",
+      "idiosyncratic_ret_60d_pct_rank",
+      "ret_5d_reversal_sector_pct_rank",
+      "ret_20d_sector_pct_rank",
+      "ret_60d_sector_pct_rank",
+      "ret_120d_sector_pct_rank",
+      "momentum_126d_skip_10_sector_pct_rank",
+      "momentum_252d_skip_20_sector_pct_rank",
+      "ret_20d_vol_adj_sector_pct_rank",
+      "ret_60d_vol_adj_sector_pct_rank",
+      "rsi_14_sector_pct_rank",
+      "volatility_20d_sector_pct_rank",
+      "volatility_60d_sector_pct_rank",
+      "downside_volatility_20d_sector_pct_rank",
+      "downside_volatility_60d_sector_pct_rank",
+      "max_daily_return_20d_sector_pct_rank",
+      "price_vs_sma_50_sector_pct_rank",
+      "price_vs_sma_200_sector_pct_rank",
+      "distance_to_52w_high_sector_pct_rank",
+      "distance_to_52w_low_sector_pct_rank",
+      "beta_60d_sector_pct_rank",
+      "rel_ret_20d_vs_spy_sector_pct_rank",
+      "rel_ret_60d_vs_spy_sector_pct_rank",
+      "rel_ret_120d_vs_spy_sector_pct_rank",
+      "rel_rsi_vs_spy_sector_pct_rank",
+      "rel_volatility_20d_vs_spy_sector_pct_rank",
+      "rel_volatility_60d_vs_spy_sector_pct_rank",
+      "idiosyncratic_ret_20d_sector_pct_rank",
+      "idiosyncratic_ret_60d_sector_pct_rank",
+      "ret_20d_minus_sector_median",
+      "ret_60d_minus_sector_median",
+      "ret_120d_minus_sector_median",
+      "momentum_126d_skip_10_minus_sector_median",
+      "momentum_252d_skip_20_minus_sector_median",
+      "ret_20d_vol_adj_minus_sector_median",
+      "ret_60d_vol_adj_minus_sector_median",
+      "rsi_14_minus_sector_median",
+      "volatility_20d_minus_sector_median",
+      "volatility_60d_minus_sector_median",
+      "downside_volatility_20d_minus_sector_median",
+      "downside_volatility_60d_minus_sector_median",
+      "max_daily_return_20d_minus_sector_median",
+      "distance_to_52w_high_minus_sector_median",
+      "distance_to_52w_low_minus_sector_median",
+      "beta_60d_minus_sector_median",
+      "idiosyncratic_ret_20d_minus_sector_median",
+      "idiosyncratic_ret_60d_minus_sector_median",
+      "rel_ret_20d_vs_sector_etf",
+      "rel_ret_60d_vs_sector_etf",
+      "rel_ret_120d_vs_sector_etf",
+      "rel_momentum_126d_vs_sector_etf",
+      "rel_momentum_252d_vs_sector_etf",
+      "volatility_20d_vs_sector_etf",
+      "volatility_60d_vs_sector_etf",
+      "price_vs_sector_sma_50",
+      "price_vs_sector_sma_200",
+      "rsi_vs_sector_etf",
+      "technical_composite_score"
+    ],
+    "training_rows": 76483,
+    "training_symbols": 739,
+    "training_start_date": "2012-11-19",
+    "training_end_date": "2025-11-03",
+    "training_date_count": 157,
+    "original_training_date_count": 157,
+    "train_sample_frequency": "monthly",
+    "params": {
+      "objective": "rank:ndcg",
+      "eval_metric": [
+        "ndcg@25",
+        "ndcg@50"
+      ],
+      "eta": 0.025,
+      "max_depth": 2,
+      "min_child_weight": 80.0,
+      "subsample": 0.9,
+      "colsample_bytree": 0.85,
+      "lambda": 4.0,
+      "alpha": 0.0,
+      "seed": 42,
+      "tree_method": "hist",
+      "nthread": 4
+    },
+    "num_boost_round": 120,
+    "notes": "Fixed recipe selected on earlier validation dates. Historical test already inspected; not independent confirmation.",
+    "methodology_rationale": [
+      "Inherited 10-year daily / 15-year monthly windows; fixed tree count identical between evaluation and full fit.",
+      "Historical interval eligibility before breadth/ranks; continue observed post-removal outcomes; unresolved claims retained."
+    ],
+    "feature_version": 2,
+    "target_horizon_days": 252,
+    "model_sha256": "c3f6d61a2308c7a9681d996a1dc7fd21caa871ba259194df61c99dffb5f666d9",
+    "source_matrix_hashes": {
+      ".csv": "332babe4494c269434e8596fe571a4eb3f1536af3e8a84b14fcbd0331b713af3",
+      ".npy": "13e6fc5601b1056925cd25580f2e3cc3d6691c073a1da6ed2b51783953a473c4",
+      ".json": "0bae1be4f95c46b80bda631ef1689c442a789dd7af738d0b03d87af0ce6c31bb"
+    },
+    "status": "shadow_candidate_not_promoted",
+    "feature_policy": "price_only",
+    "universe_policy": "Historical interval eligibility before breadth/ranks; continue observed post-removal outcomes; unresolved claims retained.",
+    "sector_policy": "Last observed archived IVV sector, lagged one session, expiry 366 calendar days; classifications (not prices) carried through 2017 archive gap, ages audited; no future backfill. Legacy telecom benchmark IYZ.",
+    "source_hashes": {
+      "archive": "6212ca017d0bdd1fa38645cde7310eabc8508ec54f9c44937e083bfd08441666",
+      "sector": "8abb0b3d51aa0e62434d5f0b321048d7c55cc48837060ab08e01a76f1ceefa71",
+      "events": "ea5953a84ecf9a7faceeb542e48ec1425d9549cd15861fc702877de464f46b0a",
+      "identities": "b0253ff5bcbe1e19b91cab5b5d49b8932e0fd429ef54ea05aba29dbccc8b4a9d",
+      "no_trade_periods": "10448ef10e0171530b6775be0857f4d426cf624ef22b254f96fa5ac3adb6bbdc",
+      "price_reviews": "2a80bcf55b2e5c1c7383d0b5deef8645e929d610d9b5cd5a55b8b48b6196744d"
+    },
+    "quality": {
+      "historical_securities": 804,
+      "feature_complete_symbols": 747,
+      "eligible_signal_rows": 78866,
+      "feature_complete_rows": 77544,
+      "full_feature_complete_rows": 77371,
+      "unresolved_outcome_rows": 1061,
+      "resolved_terminal_rows": 516,
+      "price_quality_unknown_outcome_rows": 208,
+      "bounded_not_point_labels": 31,
+      "unknown_sector_signal_rows": 701,
+      "minimum_date_coverage": 0.9227722772277228,
+      "mean_date_coverage": 0.9832059731093785
+    },
+    "quarantine_policy": {
+      "enabled": true,
+      "ledger_sha256": "a0c721379b984fbd7b7b6ab14b987dcef0aaa423b49f0a8fb5ca63eb6008784d",
+      "flagged_observations": 54,
+      "feature_lookback_sessions": 252,
+      "future_outcomes": "Unknown if holding window spans disputed return; not an ex-ante exclusion"
+    }
+  },
+  "source_matrix_hashes": {
+    ".csv": "332babe4494c269434e8596fe571a4eb3f1536af3e8a84b14fcbd0331b713af3",
+    ".npy": "13e6fc5601b1056925cd25580f2e3cc3d6691c073a1da6ed2b51783953a473c4",
+    ".json": "0bae1be4f95c46b80bda631ef1689c442a789dd7af738d0b03d87af0ce6c31bb"
+  },
+  "folds": [
+    {
+      "fold": 3,
+      "train_end": "2020-11-03",
+      "validation_start": "2021-11-05",
+      "validation_end": "2022-11-04",
+      "test_start": "2023-11-09",
+      "test_end": "2024-11-08"
+    },
+    {
+      "fold": 4,
+      "train_end": "2021-11-03",
+      "validation_start": "2022-11-07",
+      "validation_end": "2023-11-07",
+      "test_start": "2024-11-11",
+      "test_end": "2025-11-12"
+    }
+  ],
+  "elapsed_seconds": 19.5,
+  "promotion_status": "not_promoted",
+  "limitations": [
+    "Test dates already inspected in prior work; development comparison, not untouched confirmation.",
+    "Historical membership, sector and terminal-return gaps remain. Deployment testing is separate from economic validation."
+  ]
+}

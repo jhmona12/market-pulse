@@ -14,6 +14,8 @@ import numpy as np
 import pandas as pd
 
 from build_training_dataset import build_market_context, enrich_price_features, sector_name_for_etf
+from rank_validation import require_feature_version
+from artifact_contract import artifact_hash, model_feature_version, validate_model_artifact, validate_reference_version
 from common import ROOT, SECTOR_ETFS, fetch_sp500_constituents, fetch_yahoo_history, run_config_for_years, write_json
 from price_diagnostics import record_price_readiness
 from model_features import (
@@ -225,7 +227,7 @@ def load_constituents(max_symbols: int) -> tuple[pd.DataFrame, str]:
     return constituents, source
 
 
-def load_price_frame(symbol: str, years: int, yahoo_host: str = "query1.finance.yahoo.com") -> tuple[str, pd.DataFrame | None, str | None]:
+def load_price_frame(symbol: str, years: int, yahoo_host: str = "query1.finance.yahoo.com", feature_version: int = 1) -> tuple[str, pd.DataFrame | None, str | None]:
     config = run_config_for_years(years)
     expected_as_of = latest_expected_market_data_date()
     last_error: Exception | None = None
@@ -243,7 +245,7 @@ def load_price_frame(symbol: str, years: int, yahoo_host: str = "query1.finance.
                 frame[column] = pd.to_numeric(frame[column], errors="coerce")
             frame = frame.dropna(subset=["close"]).sort_values("date").reset_index(drop=True)
             frame["symbol"] = symbol
-            return symbol, enrich_price_features(frame), None
+            return symbol, enrich_price_features(frame, feature_version=feature_version), None
         except Exception as error:  # noqa: BLE001
             last_error = error
             if attempt < 3:
@@ -251,11 +253,11 @@ def load_price_frame(symbol: str, years: int, yahoo_host: str = "query1.finance.
     return symbol, None, str(last_error or "unknown error")
 
 
-def fetch_symbol_frames(symbols: list[str], years: int, max_workers: int, *, yahoo_host: str = "query1.finance.yahoo.com") -> tuple[dict[str, pd.DataFrame], dict[str, str]]:
+def fetch_symbol_frames(symbols: list[str], years: int, max_workers: int, *, yahoo_host: str = "query1.finance.yahoo.com", feature_version: int = 1) -> tuple[dict[str, pd.DataFrame], dict[str, str]]:
     frames: dict[str, pd.DataFrame] = {}
     failures: dict[str, str] = {}
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = [executor.submit(load_price_frame, symbol, years, yahoo_host) for symbol in symbols]
+        futures = [executor.submit(load_price_frame, symbol, years, yahoo_host, feature_version) for symbol in symbols]
         for future in as_completed(futures):
             symbol, frame, error = future.result()
             if frame is None:
@@ -324,6 +326,7 @@ def wait_for_expected_session_frames(
     years: int,
     max_workers: int,
     diagnostic_dir: Path | None = None,
+    feature_version: int = 1,
 ) -> tuple[dict[str, pd.DataFrame], dict[str, str], dict]:
     attempts = max(1, int(os.environ.get("MODEL_DATA_READINESS_ATTEMPTS", DEFAULT_DATA_READINESS_ATTEMPTS)))
     delay_seconds = max(0.0, float(os.environ.get("MODEL_DATA_READINESS_DELAY_SECONDS", DEFAULT_DATA_READINESS_DELAY_SECONDS)))
@@ -360,7 +363,7 @@ def wait_for_expected_session_frames(
         print(f"{message}. Retrying {len(retry_symbols)} affected histories via {retry_host} after {delay_seconds:.0f}s.", flush=True)
         if delay_seconds:
             time.sleep(delay_seconds)
-        refreshed_frames, refreshed_failures = fetch_symbol_frames(retry_symbols, years, max_workers, yahoo_host=retry_host)
+        refreshed_frames, refreshed_failures = fetch_symbol_frames(retry_symbols, years, max_workers, yahoo_host=retry_host, feature_version=feature_version)
         symbol_frames.update(refreshed_frames)
         for symbol in refreshed_frames:
             failures.pop(symbol, None)
@@ -629,8 +632,8 @@ def dashboard_metrics_for_frame(symbol: str, frame: pd.DataFrame, benchmark: pd.
     latest = clean.iloc[-1]
     latest_date = latest["date"]
     latest_close = latest["close"]
-    first_ytd = clean[clean["date"].ge(pd.Timestamp(year=latest_date.year, month=1, day=1))]
-    ytd_base = first_ytd.iloc[0]["close"] if not first_ytd.empty else clean.iloc[0]["close"]
+    prior_year = clean[clean["date"].lt(pd.Timestamp(year=latest_date.year, month=1, day=1))]
+    ytd_base = prior_year.iloc[-1]["close"] if not prior_year.empty else None
     volume = pd.to_numeric(clean.get("volume", pd.Series(dtype=float)), errors="coerce")
     avg_volume_20 = volume.tail(20).mean() if len(volume) else np.nan
     beta_60d = 1.0 if symbol == "SPY" else beta_to_benchmark(clean, benchmark) if benchmark is not None else None
@@ -736,6 +739,7 @@ def build_base_feature_dataset(
     breadth: pd.DataFrame,
     sector_context: pd.DataFrame,
     spy: pd.DataFrame,
+    *, sector_history: dict[str, pd.DataFrame] | None = None,
 ) -> pd.DataFrame:
     sector_lookup = constituents.set_index("symbol")["sector"].to_dict()
     dataset_frames = []
@@ -744,7 +748,10 @@ def build_base_feature_dataset(
         if frame is None:
             continue
         frame = frame.copy()
-        frame["sector"] = sector_lookup[symbol]
+        if sector_history is None:
+            frame["sector"] = sector_lookup[symbol]
+        else:
+            frame = frame.merge(sector_history[symbol][["date", "sector"]], on="date", how="left", validate="one_to_one")
         frame["symbol"] = symbol
         frame = frame.merge(spy, on="date", how="left")
         frame = frame.merge(breadth, on="date", how="left")
@@ -912,7 +919,9 @@ def frame_records(frame: pd.DataFrame, columns: list[str] | None = None) -> list
     for column in frame.columns:
         if pd.api.types.is_datetime64_any_dtype(frame[column]):
             frame[column] = frame[column].dt.date.astype(str)
-    return json.loads(frame.to_json(orient="records"))
+    # pandas' default JSON precision rounds tiny liquidity features to zero.
+    # Keep IEEE float values through Python's lossless JSON float round-trip.
+    return frame.astype(object).where(pd.notna(frame), None).to_dict(orient="records")
 
 
 def records_frame(records: list[dict]) -> pd.DataFrame:
@@ -981,10 +990,12 @@ def score_rows(
     scoring_date: date | pd.Timestamp | None = None,
     reference_symbols: set[str] | None = None,
     minimum_coverage: float = 0.0,
+    feature_version: int = 1,
 ) -> pd.DataFrame:
     latest = scoring_rows_for_date(dataset, feature_columns, scoring_date, reference_symbols, minimum_coverage)
     booster = xgb.Booster()
     booster.load_model(str(model_path))
+    require_feature_version(booster, feature_version)
     dmatrix = xgb.DMatrix(latest[feature_columns].to_numpy(dtype=float), feature_names=feature_columns)
     latest["model_score"] = booster.predict(dmatrix)
     latest = latest.sort_values("model_score", ascending=False).reset_index(drop=True)
@@ -1064,6 +1075,8 @@ def write_reference_cache(
         "status": "ready",
         "generatedAt": pd.Timestamp.now("UTC").isoformat(),
         "asOfDate": latest_date.date().isoformat(),
+        "featureVersion": model_feature_version(metadata),
+        "serializationVersion": 2,
         "referenceUniverse": "Current S&P 500",
         "referenceUniverseCount": int(len(reference_score_series)),
         "model": {
@@ -1075,11 +1088,14 @@ def write_reference_cache(
             "numBoostRound": metadata.get("num_boost_round"),
             "trainingEndDate": metadata.get("training_end_date"),
             "constituentSource": constituent_source,
+            "featureVersion": model_feature_version(metadata),
+            "artifactSha256": artifact_hash(model_path),
         },
         "referenceRows": frame_records(reference_base, reference_cache_columns(reference_base)),
         "breadthRows": frame_records(breadth),
         "referenceScores": frame_records(reference_scores),
         "referenceRankings": reference_rankings,
+        "dashboardMetrics": {symbol: dashboard_metrics[symbol] for symbol in reference_symbols if symbol in dashboard_metrics},
         "marketRows": market_rows,
         "sectorRows": sector_rows,
     }
@@ -1184,6 +1200,7 @@ def score_focus_with_reference_cache(
     feature_columns: list[str],
     focus_symbols: list[str],
 ) -> dict:
+    feature_version = validate_reference_version(cache, metadata, model_path, require_scores=True)
     reference_rows = records_frame(cache.get("referenceRows", []))
     breadth = records_frame(cache.get("breadthRows", []))
     reference_scores_frame = records_frame(cache.get("referenceScores", []))
@@ -1212,7 +1229,7 @@ def score_focus_with_reference_cache(
     dashboard_metrics: dict[str, dict] = {}
     if external_focus:
         required_symbols = list(dict.fromkeys([*external_focus, "SPY", *SECTOR_ETFS]))
-        symbol_frames, failures = fetch_symbol_frames(required_symbols, args.years, args.max_workers)
+        symbol_frames, failures = fetch_symbol_frames(required_symbols, args.years, args.max_workers, feature_version=feature_version)
         missing_context = [symbol for symbol in ["SPY", *SECTOR_ETFS] if symbol not in symbol_frames]
         if missing_context:
             raise ValueError(f"Missing required model context histories: {missing_context}")
@@ -1273,7 +1290,7 @@ def score_focus_with_reference_cache(
             missing_features = [column for column in feature_columns if column not in dataset.columns]
             if missing_features:
                 raise ValueError(f"Cached feature matrix is missing model features: {missing_features}")
-            scored = score_rows(dataset, model_path, feature_columns)
+            scored = score_rows(dataset, model_path, feature_columns, feature_version=feature_version)
             scored["model_universe_count"] = len(scored)
             scored_focus = scored[scored["symbol"].isin(external_focus)].copy()
             reference_name_lookup = (
@@ -1353,12 +1370,15 @@ def score_focus_with_reference_cache(
 
 
 def cached_dashboard_metrics(cache: dict) -> dict[str, dict]:
+    if cache.get("dashboardMetrics"):
+        return cache["dashboardMetrics"]
     keys = [
         "priceDataDate",
         "changePct",
         "return7",
         "return14",
         "return30",
+        "return60",
         "return90",
         "ytdReturn",
         "volumeRatio",
@@ -1388,6 +1408,7 @@ def score_reference_cache(
     metadata: dict,
     feature_columns: list[str],
 ) -> dict:
+    feature_version = validate_reference_version(cache, metadata, model_path)
     reference_rows = records_frame(cache.get("referenceRows", []))
     if reference_rows.empty:
         raise ValueError("reference cache is missing referenceRows")
@@ -1399,7 +1420,7 @@ def score_reference_cache(
     if missing_features:
         raise ValueError(f"Cached feature matrix is missing model features: {missing_features}")
 
-    scored = score_rows(dataset, model_path, feature_columns)
+    scored = score_rows(dataset, model_path, feature_columns, feature_version=feature_version)
     scored["model_universe_count"] = len(scored)
     latest_date = scored["date"].max().date().isoformat() if not scored.empty else None
     assert_fresh_as_of(latest_date, "cached reference model rankings")
@@ -1426,6 +1447,8 @@ def score_reference_cache(
             "numBoostRound": metadata.get("num_boost_round"),
             "trainingEndDate": metadata.get("training_end_date"),
             "constituentSource": cache.get("model", {}).get("constituentSource"),
+            "featureVersion": feature_version,
+            "artifactSha256": artifact_hash(model_path),
         },
         "scoredCount": len(rankings),
         "requestedSymbolCount": int(len(reference_rows)),
@@ -1463,6 +1486,7 @@ def main() -> None:
     model_path = model_dir / f"{args.model_name}.json"
     metadata_path = model_dir / f"{args.model_name}_metadata.json"
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    feature_version = validate_model_artifact(model_path, metadata)
     feature_columns = list(metadata["feature_columns"])
 
     focus_symbols = parse_focus_symbols(args.focus_symbols)
@@ -1495,7 +1519,7 @@ def main() -> None:
     constituents, constituent_source = load_constituents(args.max_symbols)
     reference_symbols = set(constituents["symbol"].astype(str))
     required_symbols = list(dict.fromkeys([*constituents["symbol"].tolist(), *focus_symbols, "SPY", *SECTOR_ETFS, *MARKET_STRIP_SYMBOLS]))
-    symbol_frames, failures = fetch_symbol_frames(required_symbols, args.years, args.max_workers)
+    symbol_frames, failures = fetch_symbol_frames(required_symbols, args.years, args.max_workers, feature_version=feature_version)
     expected_session = latest_expected_market_data_date()
     required_context_symbols = list(dict.fromkeys(["SPY", *SECTOR_ETFS, *MARKET_STRIP_SYMBOLS]))
     symbol_frames, failures, readiness = wait_for_expected_session_frames(
@@ -1507,6 +1531,7 @@ def main() -> None:
         args.years,
         args.max_workers,
         diagnostic_dir=ROOT / "data" / "diagnostics",
+        feature_version=feature_version,
     )
     missing_context = [symbol for symbol in ["SPY", *SECTOR_ETFS] if symbol not in symbol_frames]
     if missing_context:
@@ -1537,6 +1562,7 @@ def main() -> None:
         scoring_date=expected_session,
         reference_symbols=reference_symbols,
         minimum_coverage=readiness["minimumCoverage"],
+        feature_version=feature_version,
     )
     scored["model_universe_count"] = len(scored)
     latest_date = scored["date"].max().date().isoformat() if not scored.empty else None
@@ -1570,6 +1596,8 @@ def main() -> None:
             "numBoostRound": metadata.get("num_boost_round"),
             "trainingEndDate": metadata.get("training_end_date"),
             "constituentSource": constituent_source,
+            "featureVersion": feature_version,
+            "artifactSha256": artifact_hash(model_path),
         },
         "scoredCount": len(rankings),
         "requestedSymbolCount": len(constituents),

@@ -19,6 +19,7 @@ MODELING_DIR = ROOT / "scripts" / "modeling"
 sys.path.insert(0, str(MODELING_DIR))
 
 from model_features import add_cross_sectional_model_features  # noqa: E402
+from rank_validation import best_iteration_model, label_horizon, strict_monitoring_start  # noqa: E402
 from score_live_rank_model import (  # noqa: E402
     MARKET_STRIP_SYMBOLS,
     SECTOR_ETFS,
@@ -65,12 +66,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-workers", type=int, default=8, help="Concurrent Yahoo fetch workers.")
     parser.add_argument("--max-symbols", type=int, default=0, help="Development cap for S&P 500 symbols.")
     parser.add_argument("--recent-dates", type=int, default=60, help="Completed scoring dates in the recent diagnostic window.")
-    parser.add_argument("--horizon-days", type=int, default=DEFAULT_HORIZON_DAYS, help="Forward outcome horizon.")
+    parser.add_argument("--horizon-days", type=int, choices=[DEFAULT_HORIZON_DAYS], default=DEFAULT_HORIZON_DAYS, help="This monitor implements only the 14-trading-day outcome horizon.")
     parser.add_argument("--cost-bps", type=float, default=DEFAULT_COST_BPS, help="Round-trip cost for sector-neutral returns.")
     parser.add_argument(
         "--strict-start-date",
         default=None,
-        help="Optional strict-window start date. Defaults to the day after the model training end date.",
+        help="Optional later strict-window start date. Cannot precede the day after model export.",
     )
     return parser.parse_args()
 
@@ -152,6 +153,7 @@ def score_feature_rows(dataset: pd.DataFrame, model_path: Path, feature_columns:
     scored = dataset.dropna(subset=feature_columns).copy()
     booster = xgb.Booster()
     booster.load_model(str(model_path))
+    booster = best_iteration_model(booster)
     matrix = xgb.DMatrix(scored[feature_columns].to_numpy(dtype=float), feature_names=feature_columns)
     scored["model_score"] = booster.predict(matrix)
     return scored.sort_values(["date", "model_score"], ascending=[True, False]).reset_index(drop=True)
@@ -1479,23 +1481,24 @@ def main() -> None:
     model_metadata, model_path = load_model_metadata(model_dir, args.model_name)
     feature_columns = list(model_metadata["feature_columns"])
     return_column = model_metadata.get("return_column", "sector_neutral_forward_return_14d_after_cost")
+    if label_horizon(model_metadata["target_column"], return_column) != args.horizon_days:
+        raise ValueError("This monitoring pipeline supports only the matching 14D model and outcomes.")
+    strict_start = strict_monitoring_start(model_metadata, args.strict_start_date)
 
     print(f"Fetching fresh price history for model monitoring ({args.years} years)...")
     dataset, fetch_metadata = fetch_monitoring_dataset(args, feature_columns)
     all_scored = assign_deciles(score_feature_rows(dataset, model_path, feature_columns))
     scored = filter_completed_outcomes(all_scored, return_column)
 
-    training_end = pd.to_datetime(model_metadata["training_end_date"])
-    strict_start = pd.to_datetime(args.strict_start_date) if args.strict_start_date else training_end + pd.Timedelta(days=1)
-    strict = scored[scored["date"].gt(training_end) & scored["date"].ge(strict_start)].copy()
+    strict = scored[scored["date"].ge(strict_start)].copy()
     recent_dates = sorted(scored["date"].dropna().unique())[-args.recent_dates :]
     recent = scored[scored["date"].isin(recent_dates)].copy()
 
     strict_result = summarize_window(
         "strict_post_training",
-        "Strict Post-Training",
+        "Post-Export Monitoring",
         (
-            "This is the cleanest live-style check because it excludes dates used for training. "
+            "This window starts after the saved model was exported, not merely after its last training signal date. "
             "It may be small until more 14-trading-day outcomes complete."
         ),
         strict,
@@ -1503,9 +1506,9 @@ def main() -> None:
         args.horizon_days,
     )
     recent_warning = None
-    if not recent.empty and recent["date"].min() <= training_end:
+    if not recent.empty and recent["date"].min() < strict_start:
         recent_warning = (
-            "This window overlaps the training period because the production model was trained very recently. "
+            "This window includes dates before the saved model was available, potentially overlapping training outcomes or selection. "
             "Use it as a drift diagnostic, not as a clean performance claim."
         )
     recent_result = summarize_window(
@@ -1535,6 +1538,8 @@ def main() -> None:
             "path": str(model_path.relative_to(ROOT)),
             "trainingStartDate": model_metadata.get("training_start_date"),
             "trainingEndDate": model_metadata.get("training_end_date"),
+            "exportedAt": model_metadata.get("generated_at"),
+            "strictMonitoringStartDate": str(strict_start.date()),
             "targetColumn": model_metadata.get("target_column"),
             "returnColumn": return_column,
             "featureCount": len(feature_columns),
@@ -1560,7 +1565,7 @@ def main() -> None:
             "topFeatures": frame_records_for_summary(shap_features.head(15)),
         },
         "notes": [
-            "Strict post-training results are the cleanest, but may have few dates immediately after retraining.",
+            "Post-export monitoring excludes pre-export dates; its stored window key remains strict_post_training for compatibility. Historical prices and the current-constituent universe still require caution.",
             "Daily 14-trading-day outcomes overlap. Treat short windows as calibration checks, not definitive proof.",
             "Recent completed results are useful for drift monitoring even when they overlap the training period.",
         ],

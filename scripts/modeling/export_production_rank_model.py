@@ -7,6 +7,7 @@ import pandas as pd
 
 from common import FEATURES_DIR, ROOT, write_json
 from train_rank_model import DEFAULT_RANK_PARAMS, RETURN_COLUMN, TARGET_COLUMN, feature_columns_for, make_dmatrix, rank_params_from_args, sample_dates
+from rank_validation import label_horizon, validate_label_metadata
 
 try:
     import xgboost as xgb
@@ -66,6 +67,8 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     dataset_path = FEATURES_DIR / args.dataset
+    validate_label_metadata(dataset_path, args.target_column)
+    horizon_days = label_horizon(args.target_column, args.return_column)
     dataset = pd.read_csv(dataset_path, compression="gzip")
     dataset["date"] = pd.to_datetime(dataset["date"])
     feature_columns = feature_columns_for(args.dataset)
@@ -96,6 +99,7 @@ def main() -> None:
         "model_path": str(model_path.relative_to(ROOT)),
         "target_column": args.target_column,
         "return_column": args.return_column,
+        "target_horizon_days": horizon_days,
         "feature_count": len(feature_columns),
         "feature_columns": feature_columns,
         "training_rows": int(len(dataset)),

@@ -1,0 +1,17 @@
+{
+  "policy": "Reviewed identity links only, never sector backfills. The sector remains the value in the dated holdings row. Validate against eligible archive labels; do not join on ticker alone.",
+  "source_url": "https://github.com/riazarbi/sp500-scraper/tree/main/ishares/sp500/csv",
+  "evidence_file": "20101130.csv",
+  "identities": [
+    {"isin":"US1712321017","security_id":"CB-201601","holding_name":"CHUBB CORP"},
+    {"isin":"CH0044328745","security_id":"CB","holding_name":"ACE LTD"},
+    {"isin":"US4783661071","security_id":"JCI-201609","holding_name":"JOHNSON CONTROLS INC"},
+    {"isin":"CH0100383485","security_id":"JCI","holding_name":"TYCO INTERNATIONAL LTD"},
+    {"isin":"US0184901025","security_id":"AGN-201503","holding_name":"ALLERGAN"},
+    {"isin":"US7045491047","security_id":"BTUUQ-201704","holding_name":"PEABODY ENERGY CORP"},
+    {"isin":"US3142111034","security_id":"FII","holding_name":"FEDERATED HERMES INC CLASS B"},
+    {"isin":"US8123501061","security_id":"SHLD-201810","holding_name":"SEARS HOLDINGS CORP"},
+    {"isin":"US2518931033","security_id":"ATGE","holding_name":"DEVRY EDUCATION GROUP INC"},
+    {"isin":"US8031111037","security_id":"HSH-201408","holding_name":"SARA LEE CORP."}
+  ]
+}

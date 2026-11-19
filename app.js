@@ -1732,6 +1732,7 @@ function renderLongHorizonSummary() {
   const monthly = findLongHorizonCohort(primary, "monthly");
   const modelMeta = research.modelMetadata || {};
   const methodology = research.promotedMethodology || {};
+  const developmentOnly = research.evaluation?.status === "development_only";
   const trends = research.trends || {};
   const generatedAt = research.sourceGeneratedAt || research.generatedAt;
   meta.textContent =
@@ -1751,7 +1752,12 @@ function renderLongHorizonSummary() {
       <strong>${esc(primary.label || "252D sector-neutral")}</strong>
       <small>${esc(primary.description || "One-year return versus sector ETF")}</small>
     </div>
+    ${developmentOnly ? `
     <div class="monitor-card">
+      <span>Validation Status</span>
+      <strong>Development only</strong>
+      <small>Improved data controls; better investment performance is not established.</small>
+    </div>` : `<div class="monitor-card">
       <span>Quarterly Backtest Median</span>
       <strong class="${decimalReturnClass(quarterly.top_decile_return_median)}">${esc(displayReturnDecimal(quarterly.top_decile_return_median))}</strong>
       <small>Median one-year sector-relative return for quarterly test cohorts</small>
@@ -1760,7 +1766,7 @@ function renderLongHorizonSummary() {
       <span>Monthly Backtest Median</span>
       <strong class="${decimalReturnClass(monthly.top_decile_return_median)}">${esc(displayReturnDecimal(monthly.top_decile_return_median))}</strong>
       <small>Median one-year sector-relative return for monthly test cohorts; mean ${esc(displayReturnDecimal(monthly.top_decile_return_mean))}</small>
-    </div>
+    </div>`}
     <div class="monitor-card">
       <span>Cross-Horizon Agreement</span>
       <strong>${esc(trends.bothStrongCount ?? 0)}</strong>
@@ -1789,6 +1795,11 @@ function renderLongHorizonSummary() {
   `;
 
   if (notesTarget) {
+    if (developmentOnly) {
+      notesTarget.innerHTML = `<div><strong>New model, separate evidence</strong><span>${esc(research.evaluation.message)}</span></div>
+        <div><strong>Historical test coverage</strong><span>${esc(research.evaluation.completeCommonCohorts)} of ${esc(research.evaluation.totalCohorts)} monthly baskets had complete outcomes across comparison strategies. Missing outcomes and overlapping one-year windows limit conclusions. <a href="https://github.com/jhmona12/market-pulse/blob/main/docs/targeted-quarantine-experiment-2026-11-18.md" target="_blank" rel="noopener">Read the evaluation</a>.</span></div>`;
+      return;
+    }
     notesTarget.innerHTML = `
       <div>
         <strong>How to read the monthly and quarterly medians</strong>
@@ -1842,7 +1853,7 @@ function renderLongHorizonBaselines() {
   if (!target) return;
   const rows = state.longHorizon.baselineComparison?.quarterly || [];
   if (!rows.length) {
-    target.innerHTML = `<div class="empty-state">Baseline comparison unavailable.</div>`;
+    target.innerHTML = `<div class="empty-state">${state.longHorizon.evaluation?.status === "development_only" ? "Prior-model backtest statistics are not attributed to these replacement weights. See the development evaluation above." : "Baseline comparison unavailable."}</div>`;
     return;
   }
   target.innerHTML = rows
@@ -2278,6 +2289,8 @@ async function loadLongHorizonResearch() {
       sourceGeneratedAt: payload.sourceGeneratedAt || null,
       asOfDate: payload.asOfDate || null,
       modelMetadata: payload.modelMetadata || {},
+      promotedMethodology: payload.promotedMethodology || {},
+      evaluation: payload.evaluation || null,
       labelSummaries: payload.labelSummaries || [],
       labelComparison: payload.labelComparison || [],
       rows: payload.rows || payload.topCandidates || [],

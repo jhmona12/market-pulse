@@ -1,8 +1,21 @@
 # Long-Horizon Rank Model
 
+**Current deployment:** the November 18 user-directed release replaces both
+weights with the targeted-quarantine candidates. Strategic fitting uses 142
+version-2 features, 120 depth-2 trees and 76,483 rows across 739 historical
+securities, monthly sampled from 2012-11-19 through 2025-11-03. The roughly
+15-year history/monthly-sampling rationale remains; economic superiority is not
+established. [Release and rollback](model-promotion-2026-11-18.md). Earlier
+unchanged-weight statements and tables below describe the chronology before
+this promotion, not the current artifacts or their validated performance.
+
 This note documents the separate 252-trading-day research model. It is intentionally not mixed with the production 14-day dashboard model.
 
+**November 18, 2026 audit:** the performance and tuning tables in this document are historical, pre-fix results. Native XGBoost evaluation included trees after the early-stopping best iteration; new evaluations trim those trees. Temporal splits now require at least 253 excluded trading dates for next-close 252D labels. The experimental drawdown label also confused entry-relative loss with peak-to-trough drawdown and now needs rebuilding. None of these changes retrained or replaced the deployed weights. See [the complete audit](model-audit-2026-11-18.md).
+
 ## Purpose
+
+**Historical-universe rebuild:** a subsequent, isolated candidate now uses dated membership and sectors, former-member prices and reviewed terminal consideration, with a new bounded tuning/full-refit pass. The deployed weights below remain unchanged. See [the rebuilt dataset, latest results and remaining gates](historical-model-rebuild-2026-11-18.md); do not mix its numbers with the original current-member study.
 
 The 14-day model is a tactical trading model. The 252-day model is a research model for one-year holding candidates.
 
@@ -97,6 +110,8 @@ return column = drawdown_adjusted_sector_neutral_return_252d_after_cost
 
 Plain English: a stock that outperforms its sector and gets there with a smaller forward drawdown receives a better label. A stock that outperforms only after a much deeper drawdown receives a penalty. This is an experiment, not the production label.
 
+New datasets mark `label_version: 2` and calculate drawdown relative to the running peak from entry through exit, requiring the entire path. Older experimental datasets instead measured worst loss from entry; their comparisons below do not establish the value of the corrected label.
+
 ## Initial Dataset
 
 Initial local dataset build:
@@ -124,7 +139,7 @@ monthly sampled dates: 157
 training symbols: 500
 target: relevance_grade_sector_neutral_252d
 return column: sector_neutral_forward_return_252d_after_cost
-train/validation sampling: first trading day of each month
+train/validation sampling: first available dataset date of each month, after splitting
 test evaluation: full daily test windows, summarized mainly with monthly and quarterly cohorts
 selected parameters: eta 0.025, max_depth 2, min_child_weight 80, subsample 0.90, colsample_bytree 0.85, lambda 4
 exported boost rounds: 60
@@ -133,9 +148,9 @@ exported boost rounds: 60
 Rationale:
 
 - The 252-trading-day label makes adjacent daily training rows highly overlapping. Monthly sampling reduces duplicate label information without changing the out-of-sample test window.
-- A 15-year labeled window preserves more regimes than the original 10-year run while avoiding the weaker 20-year result, which may mix older regimes with current-constituent survivor bias.
-- We compared 10-year daily, 15-year daily/weekly/monthly, and 20-year daily/weekly/monthly training. The 15-year monthly run had the strongest monthly and quarterly median top-decile returns.
-- We then ran an efficient targeted hyperparameter tuning pass. A shallow, lower-learning-rate XGBoost preset beat the inherited default in the wider two-fold screen and a narrower four-fold confirmation.
+- The approximately 15-year raw-history choice leaves about 13 years of complete labeled dates after trailing-feature warm-up and forward-label maturity. The cached 15-year dataset was filtered from the 20-year build; reproduce that filter explicitly on any rebuild.
+- Historical comparisons covered 10-year daily, 15-year daily/weekly/monthly, and 20-year daily/weekly/monthly training. They favored 15-year monthly, but need rerunning with the audited evaluation code.
+- A targeted tuning pass favored shallow, lower-learning-rate trees. Its two-fold screen and four-fold comparison reused development history, so neither is an untouched final test.
 
 Comparison:
 
@@ -149,7 +164,7 @@ Comparison:
 | 20y | weekly | +26.11% | +26.11% | +29.08% |
 | 20y | monthly | +28.59% | +27.09% | +29.35% |
 
-This does not prove older data is bad. It says the best current long-horizon research setup is not "more daily rows"; it is a cleaner 15-year window with monthly train/validation sampling.
+This does not prove older data is bad or that 15-year monthly is optimal. Retain it as the starting configuration for a corrected evaluation. Monthly samples still have overlapping one-year outcomes; they are not independent observations.
 
 ## Initial Research Run
 
@@ -164,7 +179,7 @@ Command:
   --folds 2 \
   --test-days 252 \
   --validation-days 252 \
-  --embargo-days 252 \
+  --embargo-days 253 \
   --min-train-days 700 \
   --num-boost-round 300 \
   --early-stopping-rounds 25
@@ -209,7 +224,7 @@ Command:
   --folds 2 \
   --test-days 252 \
   --validation-days 252 \
-  --embargo-days 252 \
+  --embargo-days 253 \
   --min-train-days 700 \
   --num-boost-round 300 \
   --early-stopping-rounds 25
@@ -239,7 +254,7 @@ Command:
   --folds 2 \
   --test-days 252 \
   --validation-days 252 \
-  --embargo-days 252 \
+  --embargo-days 253 \
   --min-train-days 700 \
   --train-sample-frequency monthly \
   --preset current_default \
@@ -421,7 +436,7 @@ History coverage is audited with:
 .venv-model/bin/python scripts/modeling/audit_long_horizon_history.py
 ```
 
-Current audit:
+Initial 10-year audit (historical, not the later 15-year dataset):
 
 ```text
 Feature-complete symbols: 501 of 503 current constituents
@@ -429,7 +444,7 @@ Earliest feature-complete date: 2017-05-04
 95% coverage start date: 2017-05-04 with the current 10-year raw cache
 ```
 
-The raw cache currently starts in 2016, and the 252-day feature/label requirements push the clean labeled start date to 2017. Extending further back requires fetching a longer raw price cache first. Use fewer years with cleaner features if older data introduces stale symbols, missing sector context, or unreliable prices.
+That original cache started in 2016. Longer history was subsequently fetched, and the deployed strategic artifact uses monthly signal dates from 2012-05-23 through 2025-05-01. The November audit scanned all 1,473,215 rows of the 15-year daily dataset: no duplicate stock/date keys, non-finite model input cells, or mismatches in stock return minus sector return minus 15 bp. This does not independently validate vendor prices or remove survivorship bias.
 
 Free point-in-time S&P 500 membership is audited with:
 
@@ -449,8 +464,8 @@ The initial smoke test matched 25 of 25 sampled S&P constituents to SEC Company 
 
 ## Next Research Steps
 
-- Fetch and audit a longer raw price cache, then decide whether the cleaner training start can move earlier than 2017.
-- Keep the drawdown-adjusted label as a diagnostic until it improves actual sector-neutral returns, not just path smoothness.
-- Run a broader hyperparameter search only after the label decision is stable.
+- Refresh and audit the raw cache, preserve a reproducible 15-year dataset window, and correct legacy RSI behavior as a versioned dataset/model rebuild.
+- Rebuild the drawdown-adjusted labels with the corrected peak-to-trough definition before comparing them to the primary label.
+- Rerun best-tree, purged evaluation before more tuning; reserve new, fully matured post-selection dates as a holdout.
 - Promote SEC fundamentals only after the coverage audit proves the fields are reliable enough to refresh without daily fragility.
 - Use the point-in-time universe artifact for bias analysis first; do not force incomplete removed-name data into training.

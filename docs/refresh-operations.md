@@ -15,6 +15,14 @@ The live probe uses bounded requests and a different query parameter on each att
 
 Runtime cache saving is optional and only runs after successful model scoring. A cache-service outage must not prevent otherwise verified data from publishing.
 
+### Model Cache Compatibility
+
+The reference cache uses `serializationVersion: 2` to preserve full-precision floating-point features. Earlier pandas JSON output could round tiny liquidity inputs to zero and change cached model ranks. Old-format caches are rejected; never fix that rejection by editing the version tag. Rebuild from prices with the full tactical scorer, then run strategic cache scoring. The regular refresh already uses this ordering. A standalone strategic cache command against an old cache fails intentionally; private Ticker Lab falls back to a full rebuild when its cache is invalid.
+
+Model metadata chooses feature version 1 (legacy rollback) or 2 (the November 18 replacement defaults). Model feature order, tree count, label horizon and version must match metadata; version-2 artifacts require a matching SHA-256 hash. Reusing cached scores additionally requires the same model identity. Sharing feature caches across horizons requires matching definitions and current row dates, followed by independent scoring. A cache's as-of label cannot override stale underlying rows. Old caches must be rebuilt, not relabeled. Strategic evaluation evidence is loaded from its model release each refresh; mismatched evidence/SHAP stops assembly. Rank changes compare only identical model hashes. See [promotion and rollback](model-promotion-2026-11-18.md).
+
+The cache retains dashboard/stop metrics for all reference names so strategic leaders do not lose fields when absent from the tactical shortlist. See [the November deployment audit](model-deployment-check-2026-11-18.md) for the precision regression, full/cached rank parity, YTD correction and rollout boundaries. These serving corrections do not promote candidate weights or retrain models during daily refresh.
+
 Both the refresh and push-to-Pages workflows provision Python 3.11 and install `scripts/modeling/requirements.txt` before verification. The verifier includes Python model tests even when no model scoring is requested; a Node-only Pages job is insufficient. Locally, `PYTHON` explicitly selects the interpreter for both compile checks and tests, otherwise `.venv-model/bin/python` is preferred when available. Workflow fixtures enforce dependency-install ordering in both publication paths.
 
 The refresh workflow additionally runs both unit suites immediately after dependency installation, before calendar requests, price pulls, scoring, or paid AI synthesis. The later full verification remains required because preflight cannot validate outputs that have not been generated yet.

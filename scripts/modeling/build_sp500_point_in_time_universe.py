@@ -84,7 +84,8 @@ def parse_changes(html: str) -> pd.DataFrame:
     records = []
     current_date = None
     for row in rows:
-        clean = [cell.strip() for cell in row if cell.strip()]
+        # Empty added/removed cells are positional data, not whitespace to drop.
+        clean = [cell.strip() for cell in row]
         if not clean or clean[0].lower() in {"date", "effective date", "ticker"}:
             continue
         parsed_date = pd.to_datetime(clean[0], errors="coerce")
@@ -113,6 +114,22 @@ def parse_changes(html: str) -> pd.DataFrame:
     frame = frame.dropna(subset=["change_date"]).sort_values("change_date")
     frame["change_date"] = frame["change_date"].dt.date.astype(str)
     return frame
+
+
+def fetch_changes() -> tuple[pd.DataFrame, str, str]:
+    urls = ["https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+            "https://en.wikipedia.org/wiki/Historical_components_of_the_S%26P_500"]
+    errors = []
+    for url in urls:
+        try:
+            html = fetch_text(url)
+        except (OSError, ValueError, RuntimeError) as exc:
+            errors.append(f"{url}: {type(exc).__name__}")
+            continue
+        changes = parse_changes(html)
+        if not changes.empty:
+            return changes, url, html
+    raise ValueError(f"No historical membership rows found; refusing an empty survivorship audit. Fetch errors: {errors}")
 
 
 def build_membership(current: pd.DataFrame, changes: pd.DataFrame) -> pd.DataFrame:
@@ -174,9 +191,8 @@ def build_membership(current: pd.DataFrame, changes: pd.DataFrame) -> pd.DataFra
 
 def main() -> None:
     args = parse_args()
-    html = fetch_text("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies")
+    changes, changes_url, _ = fetch_changes()
     current = fetch_sp500_constituents()
-    changes = parse_changes(html)
     membership = build_membership(current, changes)
 
     REFERENCE_DIR.mkdir(parents=True, exist_ok=True)
@@ -188,7 +204,7 @@ def main() -> None:
     write_json(
         {
             "generated_at": pd.Timestamp.now("UTC").isoformat(),
-            "source_url": "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+            "source_url": changes_url,
             "membership_path": str(output_path.relative_to(ROOT)),
             "changes_path": str(changes_path.relative_to(ROOT)),
             "current_member_count": int((membership["membership_status"] == "current").sum()),

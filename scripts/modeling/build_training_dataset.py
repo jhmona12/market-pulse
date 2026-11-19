@@ -15,6 +15,7 @@ from schema import (
     SECTOR_HURDLE_TARGET_COLUMN,
     SECTOR_POSITIVE_TARGET_COLUMN,
     TARGET_HORIZON,
+    dataset_metadata_path,
 )
 
 
@@ -32,12 +33,34 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def validate_price_calendar(frame: pd.DataFrame, symbol: str, calendar: pd.DatetimeIndex) -> None:
+    dates = pd.DatetimeIndex(frame["date"])
+    close = frame["close"].to_numpy(dtype=float)
+    if frame.empty or dates.isna().any() or dates.duplicated().any():
+        raise ValueError(f"{symbol}: training price dates must be nonempty, non-null and unique.")
+    if not np.isfinite(close).all() or (close <= 0).any():
+        raise ValueError(f"{symbol}: invalid training close; repair the cache instead of dropping sessions.")
+    if calendar.empty or calendar.hasnans or calendar.has_duplicates:
+        raise ValueError("SPY training calendar must be nonempty, non-null and unique.")
+    if dates.max() != calendar.max():
+        raise ValueError(f"{symbol}: training history ends {dates.max().date()}, not benchmark end {calendar.max().date()}; refresh the cache.")
+    # Allow IPOs and shorter histories, but never compress holes inside a
+    # listed history: positional shifts must describe matching market sessions.
+    expected = calendar[(calendar >= dates.min()) & (calendar <= dates.max())]
+    observed = dates[(dates >= calendar.min()) & (dates <= calendar.max())]
+    missing, extra = expected.difference(observed), observed.difference(expected)
+    if len(missing) or len(extra):
+        raise ValueError(f"{symbol}: training calendar mismatch ({len(missing)} missing, {len(extra)} extra SPY sessions); repair the cache before labeling.")
+
+
 def load_price(symbol: str) -> pd.DataFrame:
     frame = pd.read_csv(PRICES_DIR / f"{symbol}.csv")
     frame["date"] = pd.to_datetime(frame["date"])
     for column in ("open", "high", "low", "close", "volume"):
         frame[column] = pd.to_numeric(frame[column], errors="coerce")
-    frame = frame.dropna(subset=["close"]).sort_values("date").reset_index(drop=True)
+    frame = frame.sort_values("date").reset_index(drop=True)
+    calendar = pd.DatetimeIndex(frame["date"] if symbol == "SPY" else pd.to_datetime(pd.read_csv(PRICES_DIR / "SPY.csv", usecols=["date"])["date"]))
+    validate_price_calendar(frame, symbol, calendar)
     frame["symbol"] = symbol
     return frame
 
@@ -46,7 +69,9 @@ def sma(series: pd.Series, window: int) -> pd.Series:
     return series.rolling(window).mean()
 
 
-def rsi(series: pd.Series, window: int = 14) -> pd.Series:
+def rsi(series: pd.Series, window: int = 14, *, feature_version: int = 1) -> pd.Series:
+    if feature_version not in (1, 2):
+        raise ValueError("Unsupported technical feature version")
     delta = series.diff()
     gains = delta.clip(lower=0.0)
     losses = -delta.clip(upper=0.0)
@@ -54,18 +79,21 @@ def rsi(series: pd.Series, window: int = 14) -> pd.Series:
     avg_loss = losses.rolling(window).mean()
     rs = avg_gain / avg_loss.replace(0, np.nan)
     result = 100 - (100 / (1 + rs))
-    return result.fillna(50)
+    if feature_version == 1:
+        return result.fillna(50)
+    result = result.mask(avg_loss.eq(0) & avg_gain.gt(0), 100.0)
+    return result.mask(avg_loss.eq(0) & avg_gain.eq(0), 50.0)
 
 
-def enrich_price_features(frame: pd.DataFrame) -> pd.DataFrame:
+def enrich_price_features(frame: pd.DataFrame, *, feature_version: int = 1) -> pd.DataFrame:
     close = frame["close"]
-    volume = frame["volume"].fillna(0)
-    frame["ret_1d"] = close.pct_change(1)
-    frame["ret_5d"] = close.pct_change(5)
-    frame["ret_10d"] = close.pct_change(10)
-    frame["ret_20d"] = close.pct_change(20)
-    frame["ret_60d"] = close.pct_change(60)
-    frame["ret_120d"] = close.pct_change(120)
+    volume = frame["volume"].fillna(0) if feature_version == 1 else frame["volume"].where(frame["volume"].ge(0))
+    frame["ret_1d"] = close.pct_change(1, fill_method=None)
+    frame["ret_5d"] = close.pct_change(5, fill_method=None)
+    frame["ret_10d"] = close.pct_change(10, fill_method=None)
+    frame["ret_20d"] = close.pct_change(20, fill_method=None)
+    frame["ret_60d"] = close.pct_change(60, fill_method=None)
+    frame["ret_120d"] = close.pct_change(120, fill_method=None)
     frame["volatility_20d"] = frame["ret_1d"].rolling(20).std()
     frame["volatility_60d"] = frame["ret_1d"].rolling(60).std()
     frame["downside_volatility_20d"] = frame["ret_1d"].clip(upper=0).rolling(20).std()
@@ -84,7 +112,7 @@ def enrich_price_features(frame: pd.DataFrame) -> pd.DataFrame:
     frame["price_vs_sma_200"] = close / frame["sma_200"] - 1
     frame["sma_20_vs_50"] = frame["sma_20"] / frame["sma_50"] - 1
     frame["sma_50_vs_200"] = frame["sma_50"] / frame["sma_200"] - 1
-    frame["rsi_14"] = rsi(close, 14)
+    frame["rsi_14"] = rsi(close, 14, feature_version=feature_version)
     frame["avg_volume_20"] = volume.rolling(20).mean()
     frame["avg_volume_60"] = volume.rolling(60).mean()
     frame["volume_ratio_20"] = volume / frame["avg_volume_20"].replace(0, np.nan)
@@ -414,7 +442,7 @@ def main() -> None:
         "meta_return_hurdle": args.meta_return_hurdle,
         "meta_drawdown_floor": args.meta_drawdown_floor,
     }
-    write_json(metadata, FEATURES_DIR / "training_dataset_metadata.json")
+    write_json(metadata, dataset_metadata_path(output_path))
     print(f"Wrote {len(dataset)} rows across {dataset['symbol'].nunique()} symbols to {output_path.relative_to(ROOT)}")
 
 

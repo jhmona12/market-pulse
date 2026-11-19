@@ -5,6 +5,7 @@ import argparse
 import pandas as pd
 
 from common import FEATURES_DIR, REPORTS_DIR, ROOT, write_json
+from rank_validation import validate_label_metadata
 from train_rank_model import (
     DEFAULT_EARLY_STOPPING_ROUNDS,
     DEFAULT_NUM_BOOST_ROUND,
@@ -140,7 +141,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--folds", type=int, default=4, help="Number of recent non-overlapping test folds.")
     parser.add_argument("--test-days", type=int, default=63, help="Trading days per test fold.")
     parser.add_argument("--validation-days", type=int, default=126, help="Trading days per validation fold.")
-    parser.add_argument("--embargo-days", type=int, default=14, help="Trading-date embargo around validation/test windows.")
+    parser.add_argument("--embargo-days", type=int, default=None, help="Excluded trading dates; defaults to label horizon + one entry-delay session.")
     parser.add_argument("--min-train-days", type=int, default=756, help="Minimum expanding-window train size.")
     parser.add_argument(
         "--min-symbol-rows",
@@ -282,6 +283,7 @@ def evaluate_preset(
 def main() -> None:
     args = parse_args()
     dataset_path = FEATURES_DIR / args.dataset
+    validate_label_metadata(dataset_path, args.target_column)
     dataset = pd.read_csv(dataset_path, compression="gzip")
     dataset["date"] = pd.to_datetime(dataset["date"])
     dataset, removed_symbols = filter_by_symbol_history(dataset, args.min_symbol_rows)
@@ -351,6 +353,9 @@ def main() -> None:
     summary_path = REPORTS_DIR / f"{args.output_name}_summary.csv"
     summary.to_csv(summary_path, index=False)
     payload = {
+        "evaluation_version": 2,
+        "prediction_tree_policy": "best_iteration_inclusive",
+        "selection_warning": "These folds rank hyperparameters and are development data, not an untouched final holdout.",
         "generated_at": pd.Timestamp.now("UTC").isoformat(),
         "dataset": str(dataset_path.relative_to(ROOT)),
         "target_column": args.target_column,

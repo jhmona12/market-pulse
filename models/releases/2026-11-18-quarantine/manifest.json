@@ -1,0 +1,32 @@
+{
+  "releaseId": "2026-11-18-quarantine",
+  "promotedAt": "2026-11-19T05:45:45.738887+00:00",
+  "authorization": "User requested public replacement instead of shadow rollout.",
+  "performanceStatus": "Improvement not established; economic gate inconclusive/negative. Explicit user-directed promotion.",
+  "models": [
+    {
+      "horizon": 14,
+      "path": "models/rank/xgboost_rank_sector14_tuned.json",
+      "modelSha256": "d75d7bd53c3854b4d042499520f9445b68e19a9321b9131eccb8a97539db5e74",
+      "previousFiles": {
+        "models/rank/xgboost_rank_sector14_tuned.json": "a0046b8279fc65620805ad9f703157752ed73a0ea29502bbf15116b512e30605",
+        "models/rank/xgboost_rank_sector14_tuned_metadata.json": "5373449e03a574ea19698500335794eba32cba447758e0e3b7047df0da78c56e",
+        "models/rank/xgboost_rank_sector14_tuned_explainability.json": "98a6e12a897af9695c00969891e364785bcda87e942e68af0537cfe81b68d8d2"
+      },
+      "featureVersion": 2,
+      "featureCount": 142
+    },
+    {
+      "horizon": 252,
+      "path": "models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research.json",
+      "modelSha256": "c3f6d61a2308c7a9681d996a1dc7fd21caa871ba259194df61c99dffb5f666d9",
+      "previousFiles": {
+        "models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research.json": "3545669ef52a35abd59b760a942c43757c83b70d9b022c573c0cbbb84ea75496",
+        "models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research_metadata.json": "2d5faefeb7231033d85a99a13d77524778b32a7f872bd7ec2f3894d62c49603d",
+        "models/long-horizon/xgboost_rank_sector252_15y_monthly_tuned_research_explainability.json": "7493fe4ca42fc40723527220311ca8aac9066b2ceb33c24fe7b1207fcb4d89a9"
+      },
+      "featureVersion": 2,
+      "featureCount": 142
+    }
+  ]
+}

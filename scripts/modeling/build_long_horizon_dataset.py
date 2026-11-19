@@ -24,6 +24,7 @@ from schema import (
     LONG_RELATIVE_DRAWDOWN_COLUMN,
     LONG_SECTOR_HURDLE_TARGET_COLUMN,
     LONG_SECTOR_POSITIVE_TARGET_COLUMN,
+    dataset_metadata_path,
 )
 
 
@@ -82,7 +83,10 @@ def add_forward_path_labels(frame: pd.DataFrame, horizon_days: int) -> pd.DataFr
         [close.shift(-offset).rename(offset) for offset in range(1, horizon_days + 2)],
         axis=1,
     )
-    frame[f"max_drawdown_{horizon_days}d_next_close"] = future_path.div(entry_close, axis=0).sub(1).min(axis=1)
+    # Peak-to-trough loss, not just the worst loss relative to the entry price.
+    # Require the entire forward path; incomplete labels must stay missing.
+    running_peak = future_path.cummax(axis=1)
+    frame[f"max_drawdown_{horizon_days}d_next_close"] = future_path.div(running_peak).sub(1).min(axis=1, skipna=False)
     return frame
 
 
@@ -306,6 +310,8 @@ def main() -> None:
         "start_date": str(dataset["date"].min().date()),
         "end_date": str(dataset["date"].max().date()),
         "target_horizon_days": horizon,
+        "label_version": 2,
+        "drawdown_definition": "Minimum adjusted-close return from the running peak within the complete entry-to-exit path; not maximum adverse excursion from entry.",
         "entry_timing": "next trading day's adjusted close",
         "exit_timing": f"{horizon} trading days after entry",
         "target_column": LONG_RANK_TARGET_COLUMN,
@@ -328,10 +334,7 @@ def main() -> None:
             "Macro observation-date features remain disabled by default to avoid release-date leakage.",
         ],
     }
-    metadata_name = args.output_name.replace(".csv.gz", "_metadata.json")
-    write_json(metadata, FEATURES_DIR / metadata_name)
-    if args.output_name == "long_horizon_training_dataset.csv.gz":
-        write_json(metadata, FEATURES_DIR / "long_horizon_training_dataset_metadata.json")
+    write_json(metadata, dataset_metadata_path(output_path))
     print(f"Wrote {len(dataset)} rows across {dataset['symbol'].nunique()} symbols to {output_path.relative_to(ROOT)}")
 
 

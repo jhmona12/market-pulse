@@ -1,6 +1,10 @@
 name: Refresh Market Data
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "models/releases/**/manifest.json"
   schedule:
     # GitHub scheduled runners are best-effort and can start late. Keep two
     # attempts per target window, then use data/refresh-ledger.json to make each
