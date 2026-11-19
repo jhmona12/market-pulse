@@ -51,4 +51,9 @@ test("strategic release notes cannot force an implicit oversized grid column", (
     const rule = css.split(`.${selector} {`)[1].split("}")[0];
     assert.match(rule, /grid-template-columns: minmax\(0, 1fr\)/);
   }
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const cssVersion = html.match(/styles\.css\?v=([^"\s]+)/)?.[1];
+  const appVersion = html.match(/app\.js\?v=([^"\s]+)/)?.[1];
+  assert.equal(cssVersion, "20261118-model-release");
+  assert.equal(appVersion, cssVersion);
 });
