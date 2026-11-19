@@ -44,3 +44,11 @@ test("release push bypasses scheduled-window deduplication without creating a re
   const pages = readFileSync(new URL("../.github/workflows/pages.yml", import.meta.url), "utf8");
   assert.ok(pages.indexOf("git pull --ff-only") < pages.indexOf("npm run verify"));
 });
+
+test("strategic release notes cannot force an implicit oversized grid column", () => {
+  const css = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
+  for (const selector of ["long-horizon-panel", "long-horizon-section"]) {
+    const rule = css.split(`.${selector} {`)[1].split("}")[0];
+    assert.match(rule, /grid-template-columns: minmax\(0, 1fr\)/);
+  }
+});

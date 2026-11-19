@@ -1689,7 +1689,15 @@ li {
 
 .long-horizon-panel {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
+}
+
+.long-horizon-panel > *,
+.long-horizon-panel .monitor-card,
+.long-horizon-panel .long-horizon-item > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .scoreboard-controls {
@@ -1829,6 +1837,8 @@ li {
 
 .long-horizon-section {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
   gap: 8px;
 }
 
