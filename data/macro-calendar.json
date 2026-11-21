@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-20T21:03:42.978Z",
+  "generatedAt": "2026-11-21T07:15:25.141Z",
   "window": {
-    "today": "2026-11-20",
+    "today": "2026-11-21",
     "lookbackDays": 7,
     "monthsAhead": 6,
-    "startDate": "2026-11-13",
-    "endDate": "2027-05-20"
+    "startDate": "2026-11-14",
+    "endDate": "2027-05-21"
   },
   "sources": [
     {
@@ -23,7 +23,7 @@
     {
       "source": "BLS Producer Price Index",
       "status": "ready",
-      "eventCount": 2,
+      "eventCount": 1,
       "scraper": "fred-release-calendar"
     },
     {
@@ -40,19 +40,6 @@
     }
   ],
   "events": [
-    {
-      "date": "2026-11-13",
-      "time": "8:30 AM ET",
-      "event": "Producer Price Index",
-      "title": "Producer Price Index",
-      "source": "BLS",
-      "importance": "High",
-      "sourceUrl": "https://fred.stlouisfed.org/releases/calendar?od=asc&rid=46&ve=2026-12-31&view=year&vs=2026-01-01",
-      "sourceName": "FRED release calendar",
-      "upstreamSource": "BLS",
-      "scraper": "fred-release-calendar",
-      "note": "FRED calendar for the BLS PPI release. Direct BLS schedule pages can block automated requests."
-    },
     {
       "date": "2026-11-17",
       "time": "2:00 PM ET",
