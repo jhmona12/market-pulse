@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-22T20:25:24.100Z",
+  "generatedAt": "2026-11-23T07:50:31.548Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-11-22T20:22:08.504591+00:00",
+    "generatedAt": "2026-11-23T07:47:11.655198+00:00",
     "asOfDate": "2026-11-20",
     "expectedAsOfDate": "2026-11-20",
     "isStale": false,
@@ -1425,33 +1425,36 @@
     }
   },
   "note": {
-    "headline": "If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
-    "body": "Bitcoin’s sell-off is tracking risk assets again as experts weigh rates, ETF flows, politics and whether the crypto can function as a market hedge. 33% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are none.",
+    "headline": "AI-driven long-horizon momentum flags WDC and CIEN and MRVL; tactical read requires rebound confirmation.",
+    "body": "Markets are being driven by AI-related risk premia and liquidity concerns, with the 60-day semi / IT momentum under pressure as cash flow normalization and sector breadth temper rallies.  The long-horizon model cluster remains constructive for a subset of IT names, especially Western Digital, Ciena, and Marvell, but current price action keeps them as rebound-watch rather than immediate buyers; activation hinges on close above defined levels within a 5-day window and within risk controls.",
     "changed": [
-      "Rates: Bitcoin’s sell-off is tracking risk assets again as experts weigh rates, ETF flows, politics and whether the crypto can function as a market hedge. (M2)",
+      "Policy/geopolitics: Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds. (M1)",
+      "Commodities: Bitcoin’s sell-off is tracking risk assets again as experts weigh rates, ETF flows, politics and whether the crypto can function as a market hedge. (M5)",
       "Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation.",
-      "Retail attention: NVDA, ORCL, TTWO, SPY have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
+      "Retail attention: ORCL, ANT, PSA, GOOGL have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
       "Breadth: 42% of the screened universe is above the 50-day average, 48% is above the 200-day, and 33% clears both trend lines.",
       "Tactical implication: WDC (Model Rebound Watch) are the setups that currently merit review after the market backdrop is considered."
     ],
     "watch": [
       "Next catalyst: GDP Second Estimate on 2026-11-25 at 8:30 AM ET; Personal Income and Outlays on 2026-11-25 at 8:30 AM ET; Gross Domestic Product on 2026-12-02 at 8:30 AM ET; reassess rates and sector leadership after the release.",
       "Confirmation risk: WDC, CIEN, MRVL, LITE rank highly but are not momentum confirmed; keep them in the watch bucket until price trend improves.",
-      "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book."
+      "Confirmation check: ETF leaders are SPY, QQQ, IWM; if they roll over while single-name ranks stay high, reduce confidence in the long book.",
+      "GDP second estimate and BEA reports due 11 / 25 could shift macro risk stamp; monitor for revisions and profit signals in BE and GDP lines.  (UpcomingEvents)",
+      "Earnings: Focus on next prints from IT hardware / equipment names; track next report dates if provided.  (C1-EARNINGS, C2-EARNINGS, C4-EARNINGS, C9-EARNINGS)"
     ],
-    "generatedBy": "deterministic"
+    "generatedBy": "ai_with_fact_guardrails"
   },
   "aiRecommendations": {
     "status": "ready",
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 106443,
+      "inputTokens": 108752,
       "cachedInputTokens": 0,
-      "outputTokens": 2633,
+      "outputTokens": 2753,
       "reasoningTokens": 0,
-      "totalTokens": 109076,
-      "estimatedCostUsd": 0.006375,
+      "totalTokens": 111505,
+      "estimatedCostUsd": 0.006539,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1459,9 +1462,25 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
-    "macroView": "Bitcoin’s sell-off is tracking risk assets again as experts weigh rates, ETF flows, politics and whether the crypto can function as a market hedge. Next macro decision points: GDP Second Estimate on 2026-11-25; Personal Income and Outlays on 2026-11-25; Gross Domestic Product on 2026-12-02. Sector confirmation: Consumer Staples +3.85% over 30D, +14.62% vs SPY; Utilities +1.64% over 30D, +12.41% vs SPY; Real Estate +0.95% over 30D, +11.72% vs SPY.",
-    "dailyRead": null,
+    "headline": "Oil and geopolitical risk keep position sizing tighter.",
+    "macroView": "Can the AI trade rebound? Plus, a big week for retail activity and Fed policy discussion. Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds. Next macro decision points: GDP Second Estimate on 2026-11-25; Personal Income and Outlays on 2026-11-25; Gross Domestic Product on 2026-12-02. Sector confirmation: Consumer Staples +3.85% over 30D, +14.62% vs SPY; Utilities +1.64% over 30D, +12.41% vs SPY; Real Estate +0.95% over 30D, +11.72% vs SPY.",
+    "dailyRead": {
+      "headline": "AI-driven long-horizon momentum flags WDC and CIEN and MRVL; tactical read requires rebound confirmation.",
+      "body": "Markets are being driven by AI-related risk premia and liquidity concerns, with the 60-day semi / IT momentum under pressure as cash flow normalization and sector breadth temper rallies.  The long-horizon model cluster remains constructive for a subset of IT names, especially Western Digital, Ciena, and Marvell, but current price action keeps them as rebound-watch rather than immediate buyers; activation hinges on close above defined levels within a 5-day window and within risk controls.",
+      "keyTakeaways": [
+        "Macro: AI jitters and geopolitical risk weigh on risk assets; IT / semis show structural leadership but require price confirmation to translate to long exposure.  (S1, S2, S14)",
+        "Market breadth: Information Technology leads in top momentum despite broader market weakness; sector leadership concentrated in a tight IT cluster with rebound-watch setups.  (S14, S9)",
+        "Model read: Top decile 14-day ranks favor WDC, CIEN, MRVL, LITE; 1-year long-horizon confirms several IT names as potential mean-reversion candidates, but activation is conditional on momentum confirmation and volatility risk.  (model c1, longHorizonContext)",
+        "Company context: Western Digital, Ciena, and Marvell are principal long-horizon leaders with activated rebound-watch dynamics; each carries elevated volatility risk and defined activation rules.  (C1, C2, C3)"
+      ],
+      "watchItems": [
+        "GDP second estimate and BEA reports due 11 / 25 could shift macro risk stamp; monitor for revisions and profit signals in BE and GDP lines.  (UpcomingEvents)",
+        "Earnings: Focus on next prints from IT hardware / equipment names; track next report dates if provided.  (C1-EARNINGS, C2-EARNINGS, C4-EARNINGS, C9-EARNINGS)",
+        "Price action: Watch for activation signals on WDC (274. 54), CIEN (247.",
+        "Macro risk: If oil / energy shocks persist or if AI capex outlook deteriorates, expect rotation out of IT; avoid crowded long exposure until momentum confirms.  (M1, S3)",
+        "Reddit sentiment: Top ticker concentration around IT and AI names; monitor potential crowding risk despite model-confirmed leaders.  (reddit."
+      ]
+    },
     "recommendations": [
       {
         "symbol": "WDC",
@@ -1471,23 +1490,21 @@
         "whyNow": "Rank #1 of 499; -33.14% 60-day return versus SPY; below one or both major moving averages.",
         "rationale": "The model ranks WDC highly, but price has not confirmed a rebound. Requires a close above $274.54 within 5 trading days before it is actionable. Rank #1 of 499; -33.14% 60-day return versus SPY; below one or both major moving averages.",
         "companyOverview": "WD, also known as Western Digital, builds the storage infrastructure that powers certainty in the AI-driven data economy. At the forefront of innovation, WD partners with the world's leading hyperscalers, cloud service providers, and enterprises to enable reliable storage solutions that are proven and trusted at sca...",
-        "marketCap": "N/A",
+        "marketCap": "$97.7B",
         "earningsContext": "Last reported 2026-10-22 for the Sep 2026 fiscal quarter; EPS 4.43 versus consensus 3.99; surprise 11.03%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 5.63.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-11-22: These little-known investments could be among the best bargains in a crash",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-23: Yemen&apos;s Houthis claim attacks on Saudi oil refinery as Trump warns of new strikes next year",
         "modelEvidence": "Rank #1 of 499; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
         "technicalEvidence": "7D -11.68%; 14D -1.01%; 30D -31.02%; 60D vs SPY -33.14%; RSI 33; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
         "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "S1",
-          "S2",
           "C1-IR",
           "C1-EARNINGS",
-          "S11",
-          "S12"
+          "C1-MARKETCAP",
+          "S3"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1506,8 +1523,8 @@
         "marketCap": "$33.2B",
         "earningsContext": "Last reported 2026-09-03 for the Jul 2026 fiscal quarter; EPS 1.91 versus consensus 1.46; surprise 30.82%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 1.77.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-11-22: These little-known investments could be among the best bargains in a crash",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-23: Yemen&apos;s Houthis claim attacks on Saudi oil refinery as Trump warns of new strikes next year",
         "modelEvidence": "Rank #2 of 499; 99.8 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
         "technicalEvidence": "7D -16.46%; 14D -3.71%; 30D -35.14%; 60D vs SPY -31.07%; RSI 39; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
@@ -1517,7 +1534,7 @@
           "C2-IR",
           "C2-EARNINGS",
           "C2-MARKETCAP",
-          "S1"
+          "S3"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1536,18 +1553,18 @@
         "marketCap": "$107.2B",
         "earningsContext": "Last reported 2026-08-27 for the Jul 2026 fiscal quarter; EPS 0.62 versus consensus 0.65; surprise -4.62%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.79.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-11-22: These little-known investments could be among the best bargains in a crash",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-23: Yemen&apos;s Houthis claim attacks on Saudi oil refinery as Trump warns of new strikes next year",
         "modelEvidence": "Rank #3 of 499; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
         "technicalEvidence": "7D -22.00%; 14D -13.40%; 30D -50.04%; 60D vs SPY -39.02%; RSI 31; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
         "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C3-IR",
           "C3-EARNINGS",
           "C3-MARKETCAP",
-          "S1"
+          "C3-IR",
+          "S3"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1566,18 +1583,18 @@
         "marketCap": "$41.8B",
         "earningsContext": "Last reported 2026-11-02 for the Sep 2026 fiscal quarter; EPS 3.76 versus consensus 3.82; surprise -1.57%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 4.86.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-11-22: These little-known investments could be among the best bargains in a crash",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-23: Yemen&apos;s Houthis claim attacks on Saudi oil refinery as Trump warns of new strikes next year",
         "modelEvidence": "Rank #4 of 499; 99.4 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
         "technicalEvidence": "7D -22.81%; 14D -14.49%; 30D -45.86%; 60D vs SPY -41.51%; RSI 30; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
         "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C4-IR",
           "C4-EARNINGS",
+          "C4-IR",
           "C4-MARKETCAP",
-          "S1"
+          "S3"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1593,20 +1610,21 @@
         "whyNow": "Rank #5 of 499; -32.23% 60-day return versus SPY; below one or both major moving averages.",
         "rationale": "The model ranks FLEX highly, but price has not confirmed a rebound. Requires a close above $69.75 within 5 trading days before it is actionable. Rank #5 of 499; -32.23% 60-day return versus SPY; below one or both major moving averages.",
         "companyOverview": "Flex (Reg. No. 199002645H) is the manufacturing partner of choice that helps leading brands design, build, and manage products that improve the world. With a global footprint spanning 30 countries, Flex delivers advanced manufacturing and supply chain solutions, innovative products and technology, and lifecycle serv...",
-        "marketCap": "N/A",
+        "marketCap": "$24.5B",
         "earningsContext": "Last reported 2026-10-28 for the Sep 2026 fiscal quarter; EPS 1.09 versus consensus 0.97; surprise 12.37%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 1.12.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-11-22: These little-known investments could be among the best bargains in a crash",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-23: Yemen&apos;s Houthis claim attacks on Saudi oil refinery as Trump warns of new strikes next year",
         "modelEvidence": "Rank #5 of 499; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median.",
         "technicalEvidence": "7D -11.66%; 14D -5.07%; 30D -23.20%; 60D vs SPY -32.23%; RSI 35; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
         "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C5-IR",
           "C5-EARNINGS",
-          "S1"
+          "C5-IR",
+          "C5-MARKETCAP",
+          "S3"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1622,20 +1640,21 @@
         "whyNow": "Rank #6 of 499; -34.25% 60-day return versus SPY; below one or both major moving averages.",
         "rationale": "The model ranks RDDT highly, but price has not confirmed a rebound. Requires a close above $90.25 within 5 trading days before it is actionable. Rank #6 of 499; -34.25% 60-day return versus SPY; below one or both major moving averages.",
         "companyOverview": "Reddit is a community of communities. Built on shared interests and passions, it is home to the most open and authentic conversations online. Every day, millions of people post, vote, comment, and search for answers across nearly every topic imaginable, and brands build trusted relationships with their audiences. Wi...",
-        "marketCap": "N/A",
+        "marketCap": "$16.5B",
         "earningsContext": "Last reported 2026-10-29 for the Sep 2026 fiscal quarter; EPS 1.4 versus consensus 1.31; surprise 6.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 1.76.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
-        "macroEvidence": "MarketWatch Top Stories RSS, 2026-11-22: These little-known investments could be among the best bargains in a crash",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-23: Yemen&apos;s Houthis claim attacks on Saudi oil refinery as Trump warns of new strikes next year",
         "modelEvidence": "Rank #6 of 499; 99.0 percentile; reasons: Liquid versus universe.",
         "technicalEvidence": "7D -13.33%; 14D -10.27%; 30D -44.33%; 60D vs SPY -34.25%; RSI 45; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
         "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C6-IR",
           "C6-EARNINGS",
-          "S1"
+          "C6-IR",
+          "C6-MARKETCAP",
+          "S3"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1861,47 +1880,50 @@
     "sourceRefs": [
       "S1",
       "S2",
-      "C1-IR",
-      "C2-IR",
-      "C3-IR",
-      "C4-IR",
-      "C5-IR",
-      "S11",
-      "S12"
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "C1-EARNINGS",
+      "C2-EARNINGS",
+      "C3-EARNINGS",
+      "C4-EARNINGS",
+      "C5-EARNINGS",
+      "C6-EARNINGS"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Featured source angle: Explicit note that stocks experienced a rough week and that investors rotated away from the AI trade, despite Nvidia’s earnings; this supports a narrative of shifting sentiment rather than a clear upturn in AI-driven winners.",
+      "summary": "Featured source angle: The Schwab piece notes market rotation away from the AI trade despite Nvidia’s results, suggesting that near-term sentiment is shifting even when a single earnings beat dominates the tech narrative.",
       "cards": [
         {
-          "sourceRef": "S7",
+          "sourceRef": "S8",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "Weekly Trader's Outlook",
-          "thesis": "Explicit note that stocks experienced a rough week and that investors rotated away from the AI trade, despite Nvidia’s earnings; this supports a narrative of shifting sentiment rather than a clear upturn in AI-driven winners.",
-          "whyItMatters": "Signals a palpable shift in sector bets and risk appetite, suggesting that even strong AI earnings do not guarantee broad market leadership and that rotation dynamics may matter for short-term performance.",
-          "marketReadThrough": "Monitor: observe whether next week’s price action shows continued rotation away from AI-related names or a re-acceleration of AI-led bets, as market commentators frame the prior week’s dynamics.",
-          "variantAngle": "Inference: there is a probabilistic implication that AI-related momentum may wane temporarily as investors reprice risk following a large-name earnings event, rather than a sustained trend reversal.",
+          "thesis": "The Schwab piece notes market rotation away from the AI trade despite Nvidia’s results, suggesting that near-term sentiment is shifting even when a single earnings beat dominates the tech narrative.",
+          "whyItMatters": "It provides a concrete observation about investor rotation and sentiment in the AI / tech space, underscoring the fragility of a crowded theme and the potential for continued volatility as big-name earnings land.",
+          "marketReadThrough": "Monitor: look for follow-on commentary on whether the AI trade loss of momentum is sustained or reversed in the next week, particularly around Nvidia and related semis; watch for any stated changes in risk appetite indicated by volume or breadth.",
+          "variantAngle": "Inference: if the rotation away from AI persists, the signal may reflect a broader risk-off stance among growth-focused inflows rather than a technical breakout in AI stocks.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-11-21T01:00:47.000Z",
           "sourceRefs": [
-            "S7"
+            "S8"
           ]
         },
         {
-          "sourceRef": "S15",
+          "sourceRef": "S16",
           "sourceName": "Morgan Stanley Ideas",
           "title": "Morgan Stanley Research | Morgan Stanley",
-          "thesis": "Highlights that AI spending supports near-3.4% global growth and that an oil shock maintains central bank hikes and sticky inflation, framing a cautious-but-constructive view on risk-taking in a high-quality equity universe.",
-          "whyItMatters": "Provides a macro backdrop that could influence stock selection with emphasis on quality and valuation, warning that oil-driven inflation dynamics and policy constraints can shape upside and risk.",
-          "marketReadThrough": "Monitor: check for evidence of durable earnings quality signals and risk-appetite shifts in equities despite macro headwinds, particularly in sectors linked to AI, energy, and technology.",
-          "variantAngle": "Inference: the evidence suggests a probabilistic tilt toward favoring high-quality, reasonably valued equities if growth remains supported by AI spend and inflation remains sticky but contained.",
-          "confidence": "Low",
+          "thesis": "Morgan Stanley frames a risk-tolerant stance for 2027 with a focus on quality and resilience, noting that AI spending supports global growth near 3.4% while oil shocks and central bank dynamics shape rates.",
+          "whyItMatters": "It links macro developments (oil shocks, central banks) with equity risk appetite, suggesting that the earnings and growth backdrop remains tied to energy and policy dynamics rather than purely company-level outperformance.",
+          "marketReadThrough": "Monitor: confirm whether the research highlights a shift toward higher-quality equities and less cyclicality as oil uncertainty and rate expectations evolve, visible through sector / quality rotations.",
+          "variantAngle": "Inference: the observation that AI spending supports growth could translate into a higher emphasis on durable earnings and balance-sheet strength rather than speculation on high-valuation tech.",
+          "confidence": "Medium",
           "url": "https://www.morganstanley.com/what-we-do/research",
           "publishedAt": "2026-11-18T00:00:00.000Z",
           "sourceRefs": [
-            "S15"
+            "S16"
           ]
         }
       ]
@@ -1910,36 +1932,36 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Featured source angle: Explicit note that stocks experienced a rough week and that investors rotated away from the AI trade, despite Nvidia’s earnings; this supports a narrative of shifting sentiment rather than a clear upturn in AI-driven winners.",
+    "summary": "Featured source angle: The Schwab piece notes market rotation away from the AI trade despite Nvidia’s results, suggesting that near-term sentiment is shifting even when a single earnings beat dominates the tech narrative.",
     "cards": [
       {
-        "sourceRef": "S7",
+        "sourceRef": "S8",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "Weekly Trader's Outlook",
-        "thesis": "Explicit note that stocks experienced a rough week and that investors rotated away from the AI trade, despite Nvidia’s earnings; this supports a narrative of shifting sentiment rather than a clear upturn in AI-driven winners.",
-        "whyItMatters": "Signals a palpable shift in sector bets and risk appetite, suggesting that even strong AI earnings do not guarantee broad market leadership and that rotation dynamics may matter for short-term performance.",
-        "marketReadThrough": "Monitor: observe whether next week’s price action shows continued rotation away from AI-related names or a re-acceleration of AI-led bets, as market commentators frame the prior week’s dynamics.",
-        "variantAngle": "Inference: there is a probabilistic implication that AI-related momentum may wane temporarily as investors reprice risk following a large-name earnings event, rather than a sustained trend reversal.",
+        "thesis": "The Schwab piece notes market rotation away from the AI trade despite Nvidia’s results, suggesting that near-term sentiment is shifting even when a single earnings beat dominates the tech narrative.",
+        "whyItMatters": "It provides a concrete observation about investor rotation and sentiment in the AI / tech space, underscoring the fragility of a crowded theme and the potential for continued volatility as big-name earnings land.",
+        "marketReadThrough": "Monitor: look for follow-on commentary on whether the AI trade loss of momentum is sustained or reversed in the next week, particularly around Nvidia and related semis; watch for any stated changes in risk appetite indicated by volume or breadth.",
+        "variantAngle": "Inference: if the rotation away from AI persists, the signal may reflect a broader risk-off stance among growth-focused inflows rather than a technical breakout in AI stocks.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
         "publishedAt": "2026-11-21T01:00:47.000Z",
         "sourceRefs": [
-          "S7"
+          "S8"
         ]
       },
       {
-        "sourceRef": "S15",
+        "sourceRef": "S16",
         "sourceName": "Morgan Stanley Ideas",
         "title": "Morgan Stanley Research | Morgan Stanley",
-        "thesis": "Highlights that AI spending supports near-3.4% global growth and that an oil shock maintains central bank hikes and sticky inflation, framing a cautious-but-constructive view on risk-taking in a high-quality equity universe.",
-        "whyItMatters": "Provides a macro backdrop that could influence stock selection with emphasis on quality and valuation, warning that oil-driven inflation dynamics and policy constraints can shape upside and risk.",
-        "marketReadThrough": "Monitor: check for evidence of durable earnings quality signals and risk-appetite shifts in equities despite macro headwinds, particularly in sectors linked to AI, energy, and technology.",
-        "variantAngle": "Inference: the evidence suggests a probabilistic tilt toward favoring high-quality, reasonably valued equities if growth remains supported by AI spend and inflation remains sticky but contained.",
-        "confidence": "Low",
+        "thesis": "Morgan Stanley frames a risk-tolerant stance for 2027 with a focus on quality and resilience, noting that AI spending supports global growth near 3.4% while oil shocks and central bank dynamics shape rates.",
+        "whyItMatters": "It links macro developments (oil shocks, central banks) with equity risk appetite, suggesting that the earnings and growth backdrop remains tied to energy and policy dynamics rather than purely company-level outperformance.",
+        "marketReadThrough": "Monitor: confirm whether the research highlights a shift toward higher-quality equities and less cyclicality as oil uncertainty and rate expectations evolve, visible through sector / quality rotations.",
+        "variantAngle": "Inference: the observation that AI spending supports growth could translate into a higher emphasis on durable earnings and balance-sheet strength rather than speculation on high-valuation tech.",
+        "confidence": "Medium",
         "url": "https://www.morganstanley.com/what-we-do/research",
         "publishedAt": "2026-11-18T00:00:00.000Z",
         "sourceRefs": [
-          "S15"
+          "S16"
         ]
       }
     ]
@@ -1953,12 +1975,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-11-22T20:24:28.356Z",
+    "generatedAt": "2026-11-23T07:49:31.663Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-11-22T07:01:12.923Z"
+      "previousRefreshAt": "2026-11-22T20:25:24.100Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1969,18 +1991,14 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-11-22T20:22:11.794Z",
+      "generatedAt": "2026-11-23T07:47:15.073Z",
       "lookbackHours": 96,
       "releases": []
     },
     "sourceHealth": {
       "checked": 25,
-      "live": 20,
+      "live": 21,
       "blockedOrFailed": [
-        {
-          "name": "Bank of America Institute",
-          "reason": "Source check failed: 403 Forbidden"
-        },
         {
           "name": "BLS Economic News Releases",
           "reason": "Source check failed: 403 Forbidden"
@@ -2002,6 +2020,65 @@
     "professionalDrivers": [
       {
         "id": "M1",
+        "title": "Yemen&apos;s Houthis claim attacks on Saudi oil refinery as Trump warns of new strikes next year",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/11/23/trump-iran-war-hormuz-saudi-.html",
+        "publishedAt": "2026-11-23T03:52:17.000Z",
+        "summary": "Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
+        "excerpt": "Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
+        "themes": [
+          "Geopolitics and policy",
+          "Commodities and energy"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 4,
+        "score": 100,
+        "tickers": []
+      },
+      {
+        "id": "M2",
+        "title": "3 big things we&apos;re watching in the market this Thanksgiving week",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/investingclub/2026/11/22/3-big-things-were-watching-in-the-market-this-thanksgiving-week.html",
+        "publishedAt": "2026-11-23T00:42:54.000Z",
+        "summary": "Can the AI trade rebound? Plus, a big week for retail activity and Fed policy discussion.",
+        "excerpt": "Can the AI trade rebound? Plus, a big week for retail activity and Fed policy discussion.",
+        "themes": [
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 7.1,
+        "score": 92,
+        "tickers": []
+      },
+      {
+        "id": "M3",
+        "title": "Corporate America hunts for ‘generational’ growth in AI, trading cards and the L.A. airport",
+        "sourceName": "MarketWatch Top Stories RSS",
+        "sourceCategory": "News RSS",
+        "trust": "Medium",
+        "url": "https://www.marketwatch.com/story/corporate-america-hunts-for-generational-growth-in-ai-trading-cards-and-the-l-a-airport-3072eb1a?mod=mw_rss_topstories",
+        "publishedAt": "2026-11-22T21:51:00.000Z",
+        "summary": "There’s been no shortage of trends deemed once-in-a-generation by executives on earnings calls.",
+        "excerpt": "There’s been no shortage of trends deemed once-in-a-generation by executives on earnings calls.",
+        "themes": [
+          "Earnings",
+          "Macro and growth",
+          "AI and semis"
+        ],
+        "freshness": "Since prior refresh",
+        "ageHours": 10,
+        "score": 74,
+        "tickers": []
+      },
+      {
+        "id": "M4",
         "title": "These little-known investments could be among the best bargains in a crash",
         "sourceName": "MarketWatch Top Stories RSS",
         "sourceCategory": "News RSS",
@@ -2013,13 +2090,13 @@
         "themes": [
           "Market color"
         ],
-        "freshness": "Since prior refresh",
-        "ageHours": 2,
-        "score": 86,
+        "freshness": "Last 24 hours",
+        "ageHours": 13.4,
+        "score": 56,
         "tickers": []
       },
       {
-        "id": "M2",
+        "id": "M5",
         "title": "Bitcoin sell-off: Crypto is failing the 'digital gold' test again as it sinks with stocks",
         "sourceName": "CNBC Markets",
         "sourceCategory": "News",
@@ -2034,32 +2111,40 @@
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 53.4,
+        "ageHours": 64.8,
         "score": 46,
         "tickers": []
       }
     ],
     "topThemes": [
       {
-        "theme": "Market color",
-        "count": 1
-      },
-      {
-        "theme": "Rates and central banks",
-        "count": 1
+        "theme": "Geopolitics and policy",
+        "count": 2
       },
       {
         "theme": "Commodities and energy",
-        "count": 1
+        "count": 2
+      },
+      {
+        "theme": "Rates and central banks",
+        "count": 2
+      },
+      {
+        "theme": "AI and semis",
+        "count": 2
       },
       {
         "theme": "Macro and growth",
+        "count": 2
+      },
+      {
+        "theme": "Earnings",
         "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-11-22T20:24:28.344Z",
+      "generatedAt": "2026-11-23T07:49:31.652Z",
       "dates": [
         "2026-11-21",
         "2026-11-22",
@@ -2090,8 +2175,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "N/A",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "($0.09)",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-22"
             }
@@ -2642,15 +2725,24 @@
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "Saudi Arabia, Bahrain report new attacks as Iran says it remains open to a deal with U.S.",
-          "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/11/22/saudi-houthi-bahrain-iran-attacks-araghchi-talks.html",
-          "publishedAt": "2026-11-22T13:25:47.000Z",
-          "summary": "Saudi Arabia said it destroyed a drone launched by Iran-backed Houthis, while Bahrain said an industrial facility was hit by Iranian projectiles.",
+          "title": "The number of 401(k) millionaires drops amid stock-market swings",
+          "sourceName": "MarketWatch Top Stories RSS",
+          "url": "https://www.marketwatch.com/story/the-number-of-401-k-millionaires-drops-amid-stock-market-swings-23939b94?mod=mw_rss_topstories",
+          "publishedAt": "2026-11-23T05:01:00.000Z",
+          "summary": "‘It was a rocky quarter’: 401(k) balances drop and affordability concerns persist, Fidelity says",
           "tickers": []
         },
         {
           "id": "E2",
+          "title": "Corporate America hunts for ‘generational’ growth in AI, trading cards and the L.A. airport",
+          "sourceName": "MarketWatch Top Stories RSS",
+          "url": "https://www.marketwatch.com/story/corporate-america-hunts-for-generational-growth-in-ai-trading-cards-and-the-l-a-airport-3072eb1a?mod=mw_rss_topstories",
+          "publishedAt": "2026-11-22T21:51:00.000Z",
+          "summary": "There’s been no shortage of trends deemed once-in-a-generation by executives on earnings calls.",
+          "tickers": []
+        },
+        {
+          "id": "E3",
           "title": "Weekly Trader's Outlook",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
@@ -2659,7 +2751,7 @@
           "tickers": []
         },
         {
-          "id": "E3",
+          "id": "E4",
           "title": "November Nightmare on Wall Street: AI Trade Cracks",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/market-volatility",
@@ -2668,7 +2760,7 @@
           "tickers": []
         },
         {
-          "id": "E4",
+          "id": "E5",
           "title": "Gap names new Athleta CEO, says Old Navy turnaround is seeing signs of progress",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/19/gap-gap-q3-2026-earnings.html",
@@ -2677,7 +2769,7 @@
           "tickers": []
         },
         {
-          "id": "E5",
+          "id": "E6",
           "title": "Market News | Wells Fargo Investment Institute",
           "sourceName": "Wells Fargo Advisors Stock Market News",
           "url": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm?linknav=topnav:ourInsights:marketCommentary:stockMarket",
@@ -2686,7 +2778,7 @@
           "tickers": []
         },
         {
-          "id": "E6",
+          "id": "E7",
           "title": "Palo Alto stock jumps on earnings beat and company&apos;s big bet on securing open-weight models",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/19/palo-alto-networks-earnings-applied-compute.html",
@@ -2695,7 +2787,7 @@
           "tickers": []
         },
         {
-          "id": "E7",
+          "id": "E8",
           "title": "Walmart hikes outlook as CEO tells CNBC retailer aims to keep prices low despite soaring fuel costs",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/19/walmart-wmt-q3-2026-earnings.html",
@@ -2704,7 +2796,7 @@
           "tickers": []
         },
         {
-          "id": "E8",
+          "id": "E9",
           "title": "Morgan Stanley Research | Morgan Stanley",
           "sourceName": "Morgan Stanley Ideas",
           "url": "https://www.morganstanley.com/what-we-do/research",
@@ -2713,7 +2805,7 @@
           "tickers": []
         },
         {
-          "id": "E9",
+          "id": "E10",
           "title": "Weekly Natural Gas Storage Report - EIA",
           "sourceName": "EIA Today In Energy",
           "url": "http://ir.eia.gov/ngs/ngs.html",
@@ -2722,7 +2814,7 @@
           "tickers": []
         },
         {
-          "id": "E10",
+          "id": "E11",
           "title": "S&P 500 snaps 3-day skid on Election Day as chip stocks rebound",
           "sourceName": "CNBC Markets",
           "url": "https://www.cnbc.com/2026/11/02/stock-market-today-live-updates.html",
@@ -2735,7 +2827,7 @@
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-11-22T20:22:16.274Z",
+      "generatedAt": "2026-11-23T07:47:19.736Z",
       "authMode": "oauth",
       "metricMode": "ranked_attention",
       "sampleCoverage": {
@@ -2745,9 +2837,9 @@
           "new",
           "top"
         ],
-        "postCount": 64,
+        "postCount": 63,
         "includesVoteAndCommentCounts": true,
-        "oauthPostCount": 64,
+        "oauthPostCount": 63,
         "rssPostCount": 0
       },
       "sourceNote": "Reddit OAuth API across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
@@ -2758,7 +2850,7 @@
           "segment": "Retail momentum",
           "status": "ready",
           "error": null,
-          "postCount": 37,
+          "postCount": 33,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2779,7 +2871,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 32
+              "postCount": 31
             }
           ]
         },
@@ -2788,7 +2880,7 @@
           "segment": "Retail investing",
           "status": "ready",
           "error": null,
-          "postCount": 10,
+          "postCount": 9,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2809,7 +2901,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 10
+              "postCount": 9
             }
           ]
         },
@@ -2818,7 +2910,7 @@
           "segment": "Retail investing",
           "status": "ready",
           "error": null,
-          "postCount": 13,
+          "postCount": 15,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2839,7 +2931,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 13
+              "postCount": 15
             }
           ]
         },
@@ -2878,7 +2970,7 @@
           "segment": "Options sentiment",
           "status": "ready",
           "error": null,
-          "postCount": 3,
+          "postCount": 5,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2899,54 +2991,19 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 2
+              "postCount": 5
             }
           ]
         }
       ],
       "topTickers": [
         {
-          "symbol": "NVDA",
-          "mentions": 3,
-          "signalStrength": 8.3,
-          "directMentions": 3,
-          "score": 721,
-          "comments": 139,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
-            {
-              "title": "SEC probe reportedly investigates NVDA accounting",
-              "subreddit": "wallstreetbets",
-              "score": 557,
-              "comments": 67,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y29gbt/sec_probe_reportedly_investigates_nvda_accounting/"
-            },
-            {
-              "title": "Insider info NVDA",
-              "subreddit": "wallstreetbets",
-              "score": 72,
-              "comments": 50,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2yjg6/insider_info_nvda/"
-            },
-            {
-              "title": "NVDA PUTS🥇",
-              "subreddit": "wallstreetbets",
-              "score": 92,
-              "comments": 22,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2bek4/nvda_puts/"
-            }
-          ],
-          "attentionScore": 171.38
-        },
-        {
           "symbol": "ORCL",
           "mentions": 1,
           "signalStrength": 4.5,
           "directMentions": 1,
-          "score": 729,
-          "comments": 223,
+          "score": 969,
+          "comments": 268,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -2954,62 +3011,41 @@
             {
               "title": "$ORCL - something WILL hit the news",
               "subreddit": "wallstreetbets",
-              "score": 729,
-              "comments": 223,
+              "score": 969,
+              "comments": 268,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2p6dw/orcl_something_will_hit_the_news/"
             }
           ],
-          "attentionScore": 88.86
+          "attentionScore": 94.25
         },
         {
-          "symbol": "TTWO",
+          "symbol": "ANT",
           "mentions": 1,
-          "signalStrength": 2.4,
+          "signalStrength": 4.5,
           "directMentions": 1,
-          "score": 1200,
-          "comments": 289,
+          "score": 980,
+          "comments": 226,
           "subreddits": [
             "wallstreetbets"
           ],
           "posts": [
             {
-              "title": "GTA the real metaverse.",
+              "title": "WSJ: $ANT cannot meet long term obligations (Junk grade)",
               "subreddit": "wallstreetbets",
-              "score": 4127,
-              "comments": 289,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2aen6/gta_the_real_metaverse/"
+              "score": 980,
+              "comments": 226,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y3b3xg/wsj_ant_cannot_meet_long_term_obligations_junk/"
             }
           ],
-          "attentionScore": 77.56
-        },
-        {
-          "symbol": "SPY",
-          "mentions": 1,
-          "signalStrength": 3.7,
-          "directMentions": 1,
-          "score": 11,
-          "comments": 58,
-          "subreddits": [
-            "wallstreetbets"
-          ],
-          "posts": [
-            {
-              "title": "I performed quantitative study on SPY and QQQ from its historical price data since 1990s",
-              "subreddit": "wallstreetbets",
-              "score": 15,
-              "comments": 82,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2gnza/i_performed_quantitative_study_on_spy_and_qqq/"
-            }
-          ],
-          "attentionScore": 63.48
+          "attentionScore": 92.74
         },
         {
           "symbol": "PSA",
           "mentions": 1,
           "signalStrength": 2.5,
           "directMentions": 1,
-          "score": 350,
-          "comments": 193,
+          "score": 547,
+          "comments": 232,
           "subreddits": [
             "stocks"
           ],
@@ -3017,33 +3053,117 @@
             {
               "title": "PSA KIDS STOP SHORTING - You have no idea what you’re doing",
               "subreddit": "stocks",
-              "score": 350,
-              "comments": 193,
+              "score": 547,
+              "comments": 232,
               "permalink": "https://www.reddit.com/r/stocks/comments/1y2mx3x/psa_kids_stop_shorting_you_have_no_idea_what/"
             }
           ],
-          "attentionScore": 61.97
+          "attentionScore": 66.48
         },
         {
-          "symbol": "QQQ",
+          "symbol": "GOOGL",
           "mentions": 1,
-          "signalStrength": 3.3,
+          "signalStrength": 2.5,
           "directMentions": 1,
-          "score": 11,
-          "comments": 58,
+          "score": 375,
+          "comments": 197,
+          "subreddits": [
+            "stocks"
+          ],
+          "posts": [
+            {
+              "title": "Why This Market Pullback Is a Gift for Buying Google Alphabet (GOOGL)",
+              "subreddit": "stocks",
+              "score": 375,
+              "comments": 197,
+              "permalink": "https://www.reddit.com/r/stocks/comments/1y2zi1u/why_this_market_pullback_is_a_gift_for_buying/"
+            }
+          ],
+          "attentionScore": 62.51
+        },
+        {
+          "symbol": "ARE",
+          "mentions": 1,
+          "signalStrength": 2.5,
+          "directMentions": 1,
+          "score": 137,
+          "comments": 139,
           "subreddits": [
             "wallstreetbets"
           ],
           "posts": [
             {
-              "title": "I performed quantitative study on SPY and QQQ from its historical price data since 1990s",
+              "title": "Bulls checking on bears after Sunday futures - WE ARE SO BACK!",
               "subreddit": "wallstreetbets",
-              "score": 15,
-              "comments": 82,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2gnza/i_performed_quantitative_study_on_spy_and_qqq/"
+              "score": 194,
+              "comments": 196,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y34e5z/bulls_checking_on_bears_after_sunday_futures_we/"
             }
           ],
-          "attentionScore": 59.48
+          "attentionScore": 56.6
+        },
+        {
+          "symbol": "SO",
+          "mentions": 1,
+          "signalStrength": 2.5,
+          "directMentions": 1,
+          "score": 137,
+          "comments": 139,
+          "subreddits": [
+            "wallstreetbets"
+          ],
+          "posts": [
+            {
+              "title": "Bulls checking on bears after Sunday futures - WE ARE SO BACK!",
+              "subreddit": "wallstreetbets",
+              "score": 194,
+              "comments": 196,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y34e5z/bulls_checking_on_bears_after_sunday_futures_we/"
+            }
+          ],
+          "attentionScore": 56.6
+        },
+        {
+          "symbol": "COST",
+          "mentions": 1,
+          "signalStrength": 2.9,
+          "directMentions": 1,
+          "score": 38,
+          "comments": 31,
+          "subreddits": [
+            "wallstreetbets"
+          ],
+          "posts": [
+            {
+              "title": "COST Earnings Lottos are Too Cheap!!! 50k yolo, 30X upside",
+              "subreddit": "wallstreetbets",
+              "score": 38,
+              "comments": 31,
+              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y35hll/cost_earnings_lottos_are_too_cheap_50k_yolo_30x/"
+            }
+          ],
+          "attentionScore": 54.81
+        },
+        {
+          "symbol": "DTE",
+          "mentions": 1,
+          "signalStrength": 2.9,
+          "directMentions": 1,
+          "score": 21,
+          "comments": 26,
+          "subreddits": [
+            "options"
+          ],
+          "posts": [
+            {
+              "title": "Managing 0.70+ Delta LEAPS in a pullback: Cut at -40% or let 400+ DTE play out?",
+              "subreddit": "options",
+              "score": 21,
+              "comments": 26,
+              "permalink": "https://www.reddit.com/r/options/comments/1y308yq/managing_070_delta_leaps_in_a_pullback_cut_at_40/"
+            }
+          ],
+          "attentionScore": 54.35
         }
       ],
       "topPosts": [
@@ -3055,8 +3175,8 @@
           "url": "https://i.redd.it/ugizebwc953i1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2mmcq/this_is_sadly_true/",
           "createdAt": "2026-11-22T10:50:36.000Z",
-          "score": 16527,
-          "comments": 302,
+          "score": 20497,
+          "comments": 349,
           "upvoteRatio": 0.97,
           "flair": "Meme",
           "tickers": [],
@@ -3066,17 +3186,53 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y2blzm",
+          "id": "1y2ztge",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Cathie Wood sold Nvidia under $130 she bought over $220 this year. Bought Anthropic around $97 and lose 10% next day.",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-sold-nvidia-bought-145242005.html",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2blzm/cathie_wood_sold_nvidia_under_130_she_bought_over/",
-          "createdAt": "2026-11-22T00:17:33.000Z",
-          "score": 6774,
-          "comments": 506,
+          "title": "What Are Your Moves Tomorrow, November 23, 2026",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1y2ztge/what_are_your_moves_tomorrow_november_23_2026/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2ztge/what_are_your_moves_tomorrow_november_23_2026/",
+          "createdAt": "2026-11-22T21:00:42.000Z",
+          "score": 56,
+          "comments": 8391,
+          "upvoteRatio": 0.72,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": true,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1y2tvfp",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "My wife and I discussing our finances after I YOLO'd our retirement into a triple leveraged semiconductor ETF 6 weeks ago",
+          "url": "https://v.redd.it/ybht7ams173i1",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2tvfp/my_wife_and_i_discussing_our_finances_after_i/",
+          "createdAt": "2026-11-22T16:52:01.000Z",
+          "score": 10777,
+          "comments": 223,
           "upvoteRatio": 0.97,
-          "flair": "News",
+          "flair": "Meme",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1y3316m",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "We Are So Back",
+          "url": "https://i.redd.it/t2iu7wu3093i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y3316m/we_are_so_back/",
+          "createdAt": "2026-11-22T23:25:52.000Z",
+          "score": 9679,
+          "comments": 729,
+          "upvoteRatio": 0.89,
+          "flair": "Meme",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3091,8 +3247,8 @@
           "url": "https://i.redd.it/fd966o9pk43i1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2khq3/red_light_therapy/",
           "createdAt": "2026-11-22T08:32:23.000Z",
-          "score": 5905,
-          "comments": 64,
+          "score": 7339,
+          "comments": 71,
           "upvoteRatio": 0.97,
           "flair": "Meme",
           "tickers": [],
@@ -3102,16 +3258,16 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y2tvfp",
+          "id": "1y2y975",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "My wife and I discussing our finances after I YOLO'd our retirement into a triple leveraged semiconductor ETF 6 weeks ago",
-          "url": "https://v.redd.it/ybht7ams173i1",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2tvfp/my_wife_and_i_discussing_our_finances_after_i/",
-          "createdAt": "2026-11-22T16:52:01.000Z",
-          "score": 4964,
-          "comments": 127,
-          "upvoteRatio": 0.98,
+          "title": "You know who is not concerned about AI bubble?",
+          "url": "https://i.redd.it/ti16i209y73i1.png",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2y975/you_know_who_is_not_concerned_about_ai_bubble/",
+          "createdAt": "2026-11-22T19:53:45.000Z",
+          "score": 6240,
+          "comments": 523,
+          "upvoteRatio": 0.95,
           "flair": "Meme",
           "tickers": [],
           "tickerWeights": {},
@@ -3120,17 +3276,17 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y273h3",
+          "id": "1y37b48",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "This chart is ridiculous",
-          "url": "https://i.redd.it/k3vdspnr213i1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y273h3/this_chart_is_ridiculous/",
-          "createdAt": "2026-11-21T20:46:32.000Z",
-          "score": 3174,
-          "comments": 848,
-          "upvoteRatio": 0.93,
-          "flair": "Discussion",
+          "title": "Is it happening?",
+          "url": "https://i.redd.it/xsqjn9mq1a3i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y37b48/is_it_happening/",
+          "createdAt": "2026-11-23T02:56:48.000Z",
+          "score": 2999,
+          "comments": 686,
+          "upvoteRatio": 0.88,
+          "flair": "News",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3138,41 +3294,71 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y2aen6",
+          "id": "1y33fdu",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "GTA the real metaverse.",
-          "url": "https://i.redd.it/4p9j25f1u13i1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2aen6/gta_the_real_metaverse/",
-          "createdAt": "2026-11-21T23:19:23.000Z",
-          "score": 4127,
-          "comments": 289,
-          "upvoteRatio": 0.93,
-          "flair": "Discussion",
-          "tickers": [
-            "TTWO"
-          ],
-          "tickerWeights": {
-            "TTWO": 2.4
-          },
-          "directTickers": [
-            "TTWO"
-          ],
+          "title": "Tomorrow fingers crossed",
+          "url": "https://i.redd.it/7y7hgcqh393i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y33fdu/tomorrow_fingers_crossed/",
+          "createdAt": "2026-11-22T23:44:51.000Z",
+          "score": 3110,
+          "comments": 204,
+          "upvoteRatio": 0.94,
+          "flair": "News",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
           "filteredAsGeneric": false,
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y2etd2",
+          "id": "1y2w555",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "We’ve never been here before",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1y2etd2/weve_never_been_here_before/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2etd2/weve_never_been_here_before/",
-          "createdAt": "2026-11-22T03:02:22.000Z",
-          "score": 740,
-          "comments": 654,
-          "upvoteRatio": 0.67,
-          "flair": "Discussion",
+          "title": "Intel Chief Jay Clayton confirms China got access to US advanced AI chips.",
+          "url": "https://edition.cnn.com/2026/11/22/politics/video/cnn-sotu-jay-clayton-dana-bash-ai-chips-nvidia-scandal-digvid",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2w555/intel_chief_jay_clayton_confirms_china_got_access/",
+          "createdAt": "2026-11-22T18:26:02.000Z",
+          "score": 2006,
+          "comments": 151,
+          "upvoteRatio": 0.97,
+          "flair": "News",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1y2rzub",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Lost 54k at 19..",
+          "url": "https://www.reddit.com/gallery/1y2rzub",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2rzub/lost_54k_at_19/",
+          "createdAt": "2026-11-22T15:31:19.000Z",
+          "score": 633,
+          "comments": 701,
+          "upvoteRatio": 0.77,
+          "flair": "Loss",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1y2tmti",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Huge returns YTD",
+          "url": "https://i.redd.it/2c5z4dczz63i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2tmti/huge_returns_ytd/",
+          "createdAt": "2026-11-22T16:41:36.000Z",
+          "score": 1660,
+          "comments": 94,
+          "upvoteRatio": 0.98,
+          "flair": "Gain",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3187,8 +3373,8 @@
           "url": "https://i.redd.it/vyx3rpx1063i1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2p6dw/orcl_something_will_hit_the_news/",
           "createdAt": "2026-11-22T13:20:13.000Z",
-          "score": 729,
-          "comments": 223,
+          "score": 969,
+          "comments": 268,
           "upvoteRatio": 0.94,
           "flair": "News",
           "tickers": [
@@ -3204,34 +3390,40 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y2rzub",
+          "id": "1y3b3xg",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Lost 54k at 19..",
-          "url": "https://www.reddit.com/gallery/1y2rzub",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2rzub/lost_54k_at_19/",
-          "createdAt": "2026-11-22T15:31:19.000Z",
-          "score": 320,
-          "comments": 415,
-          "upvoteRatio": 0.76,
-          "flair": "Loss",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
+          "title": "WSJ: $ANT cannot meet long term obligations (Junk grade)",
+          "url": "https://i.redd.it/t0jv37uu2b3i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y3b3xg/wsj_ant_cannot_meet_long_term_obligations_junk/",
+          "createdAt": "2026-11-23T06:24:51.000Z",
+          "score": 980,
+          "comments": 226,
+          "upvoteRatio": 0.98,
+          "flair": "News",
+          "tickers": [
+            "ANT"
+          ],
+          "tickerWeights": {
+            "ANT": 4.5
+          },
+          "directTickers": [
+            "ANT"
+          ],
           "filteredAsGeneric": false,
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y2w555",
+          "id": "1y2w9jd",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Intel Chief Jay Clayton confirms China got access to US advanced AI chips.",
-          "url": "https://edition.cnn.com/2026/11/22/politics/video/cnn-sotu-jay-clayton-dana-bash-ai-chips-nvidia-scandal-digvid",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2w555/intel_chief_jay_clayton_confirms_china_got_access/",
-          "createdAt": "2026-11-22T18:26:02.000Z",
-          "score": 775,
-          "comments": 95,
-          "upvoteRatio": 0.97,
+          "title": "Scott Bessent refuses to rule out Jensen Huang’s return to Nvidia",
+          "url": "https://www.ft.com/content/91b7a3a6-8ac5-4327-ad03-6d951f287346?syn-25a6b1a6=1",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2w9jd/scott_bessent_refuses_to_rule_out_jensen_huangs/",
+          "createdAt": "2026-11-22T18:31:07.000Z",
+          "score": 839,
+          "comments": 294,
+          "upvoteRatio": 0.9,
           "flair": "News",
           "tickers": [],
           "tickerWeights": {},
@@ -3240,35 +3432,17 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y2tmti",
+          "id": "1y38sw6",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Huge returns YTD",
-          "url": "https://i.redd.it/2c5z4dczz63i1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2tmti/huge_returns_ytd/",
-          "createdAt": "2026-11-22T16:41:36.000Z",
-          "score": 827,
-          "comments": 67,
-          "upvoteRatio": 0.98,
-          "flair": "Gain",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1y2ctq2",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "This is a correction, not a bear market.",
-          "url": "https://www.reddit.com/r/stocks/comments/1y2ctq2/this_is_a_correction_not_a_bear_market/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1y2ctq2/this_is_a_correction_not_a_bear_market/",
-          "createdAt": "2026-11-22T01:19:07.000Z",
-          "score": 258,
-          "comments": 342,
-          "upvoteRatio": 0.7,
-          "flair": "Meta",
+          "title": "U.S. Tracked Alice Huang’s Contacts With China Spy Agency During Nvidia Affair",
+          "url": "https://www.nytimes.com/2026/11/22/us/politics/alice-huang-china-spy-agency-nvidia.html",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y38sw6/us_tracked_alice_huangs_contacts_with_china_spy/",
+          "createdAt": "2026-11-23T04:15:17.000Z",
+          "score": 853,
+          "comments": 163,
+          "upvoteRatio": 0.92,
+          "flair": "News",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3283,9 +3457,9 @@
           "url": "https://www.reddit.com/r/stocks/comments/1y2mx3x/psa_kids_stop_shorting_you_have_no_idea_what/",
           "permalink": "https://www.reddit.com/r/stocks/comments/1y2mx3x/psa_kids_stop_shorting_you_have_no_idea_what/",
           "createdAt": "2026-11-22T11:09:06.000Z",
-          "score": 350,
-          "comments": 193,
-          "upvoteRatio": 0.75,
+          "score": 547,
+          "comments": 232,
+          "upvoteRatio": 0.79,
           "flair": null,
           "tickers": [
             "PSA"
@@ -3296,66 +3470,6 @@
           "directTickers": [
             "PSA"
           ],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1y29gbt",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "SEC probe reportedly investigates NVDA accounting",
-          "url": "https://finance.yahoo.com/markets/article/nvidia-stock-extends-25-trillion-rout-as-sec-probe-reportedly-investigates-its-accounting-194945274.html",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y29gbt/sec_probe_reportedly_investigates_nvda_accounting/",
-          "createdAt": "2026-11-21T22:33:51.000Z",
-          "score": 557,
-          "comments": 67,
-          "upvoteRatio": 0.84,
-          "flair": "News",
-          "tickers": [
-            "NVDA"
-          ],
-          "tickerWeights": {
-            "NVDA": 2.5
-          },
-          "directTickers": [
-            "NVDA"
-          ],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1y2w9jd",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Scott Bessent refuses to rule out Jensen Huang’s return to Nvidia",
-          "url": "https://www.ft.com/content/91b7a3a6-8ac5-4327-ad03-6d951f287346?syn-25a6b1a6=1",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y2w9jd/scott_bessent_refuses_to_rule_out_jensen_huangs/",
-          "createdAt": "2026-11-22T18:31:07.000Z",
-          "score": 344,
-          "comments": 171,
-          "upvoteRatio": 0.87,
-          "flair": "News",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1y29u1q",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Day 33 - 18,1% from peak",
-          "url": "https://i.redd.it/hff11c96p13i1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y29u1q/day_33_181_from_peak/",
-          "createdAt": "2026-11-21T22:52:07.000Z",
-          "score": 469,
-          "comments": 108,
-          "upvoteRatio": 0.97,
-          "flair": "Discussion",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
           "filteredAsGeneric": false,
           "fetchMethod": "oauth_json"
         }
@@ -3770,9 +3884,12 @@
       "errors": []
     },
     "briefingBullets": [
-      "Rates: Bitcoin’s sell-off is tracking risk assets again as experts weigh rates, ETF flows, politics and whether the crypto can function as a market hedge. (M2)",
+      "Policy/geopolitics: Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds. (M1)",
+      "Rates: Can the AI trade rebound? Plus, a big week for retail activity and Fed policy discussion. (M2)",
+      "Commodities: Bitcoin’s sell-off is tracking risk assets again as experts weigh rates, ETF flows, politics and whether the crypto can function as a market hedge. (M5)",
+      "Macro: There’s been no shortage of trends deemed once-in-a-generation by executives on earnings calls. (M3)",
       "Earnings: Post-report reactions skew negative, so avoid assuming model strength can offset weak guidance without company-specific confirmation.",
-      "Retail attention: NVDA, ORCL, TTWO, SPY have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
+      "Retail attention: ORCL, ANT, PSA, GOOGL have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
     ]
   },
   "avoidList": {
@@ -56478,11 +56595,11 @@
       "cadence": "Weekly",
       "trust": "High",
       "notes": "Public consumer, macro, and market research.",
-      "title": "Bank of America Institute",
-      "summary": "Source check failed: 403 Forbidden",
+      "title": "Bank of America Institute – Where Thought Finds Leadership",
+      "summary": "No recent dated articles found in the last 30 days.",
       "articles": [],
       "articleCount": 0,
-      "ok": false
+      "ok": true
     },
     {
       "name": "Schwab Weekly Market Outlook",
@@ -56500,7 +56617,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-traders-outlook",
           "publishedAt": "2026-11-21T01:00:47.000Z",
           "summary": "Read our weekly market review, complete with commentary on the previous week in the stock markets and our outlook for the upcoming week.",
-          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search all articles, videos, and podcasts Trading Weekly Trader's Outlook Stocks Drop, Volatility Spikes on AI Concerns Stocks had a rough week, despite a \"beat and raise\" quarter from Nvidia, as investors continued to rotate away from the AI trade. November 20, 2026 • Nathan Peterson The Week That Was Note: We will not publish a Weekly Trader's Outlook on November 27th due to the holiday- shortened week and potentially lighter volume. If you read last Friday's blog, you might recall that I had a \"breakout\" forecast for the Nasdaq Composite (which I used a proxy for the tech/artificial intelligence, or AI complex), noting that the $COMP was right at its 200-day SMA and Nvidia earnings were on deck this week. For reference, I defined \"breakout\" as a \"2% or greater move in the Nasdaq by today.\" Unfortunately for the bulls, there was a downside \"breakout\" in the Nasdaq this week. The Nasdaq is on track to be down over 8.5% at the time of this writing as negative sentiment and bearish momentum plagues the tech/AI complex. Not even Nvidia's strong quarterly results, along with increased 2028 revenue guidance (from 70% to 75%) was enough to re-ignite investor confidence in the AI trade. To me it seems apparent that the concerns surrounding AI isn't demand for compute, or the potential long-term benefits of AI, but more around the liquidity/financing needed to further the data center buildout. On the economic front, the monthly retail sales report was firm, with the Control Group coming in above estimates, so the consumer still appears to be holding up. The minutes from the October Federal Open Market Committee (FOMC) meeting were also released, and although we know that nearly all members voted in favor of holding rates st",
+          "excerpt": "Weekly Trader's Stock Market Outlook | Charles Schwab Search Insights & Education Trading Weekly Trader's Outlook Stocks Drop, Volatility Spikes on AI Concerns Stocks had a rough week, despite a \"beat and raise\" quarter from Nvidia, as investors continued to rotate away from the AI trade. November 20, 2026 • Nathan Peterson The Week That Was Note: We will not publish a Weekly Trader's Outlook on November 27th due to the holiday- shortened week and potentially lighter volume. If you read last Friday's blog, you might recall that I had a \"breakout\" forecast for the Nasdaq Composite (which I used a proxy for the tech/artificial intelligence, or AI complex), noting that the $COMP was right at its 200-day SMA and Nvidia earnings were on deck this week. For reference, I defined \"breakout\" as a \"2% or greater move in the Nasdaq by today.\" Unfortunately for the bulls, there was a downside \"breakout\" in the Nasdaq this week. The Nasdaq is on track to be down over 8.5% at the time of this writing as negative sentiment and bearish momentum plagues the tech/AI complex. Not even Nvidia's strong quarterly results, along with increased 2028 revenue guidance (from 70% to 75%) was enough to re-ignite investor confidence in the AI trade. To me it seems apparent that the concerns surrounding AI isn't demand for compute, or the potential long-term benefits of AI, but more around the liquidity/financing needed to further the data center buildout. On the economic front, the monthly retail sales report was firm, with the Control Group coming in above estimates, so the consumer still appears to be holding up. The minutes from the October Federal Open Market Committee (FOMC) meeting were also released, and although we know that nearly all members voted in favor of holding rates steady, they als",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -56518,7 +56635,7 @@
           "url": "https://www.schwab.com/learn/story/weekly-digest",
           "publishedAt": "2026-11-20T17:41:47.000Z",
           "summary": "The S&P 500 Index slips below its 200-day moving average, bitcoin founders to test bear-market lows, and echoes of late 2018 creep up.",
-          "excerpt": "Stocks Continue Lower as 2018 Echoes Grow Louder | Charles Schwab Search Learn Markets and Economy Stocks Continue Lower as 2018 Echoes Grow Louder The S&P 500 Index slips below its 200-day moving average, bitcoin founders, and echoes of late 2018 creep up. November 20, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Editor's note: This week's Digest is a bit shorter than usual, due to continued volatility and a losing streak in major market averages that is likely to be the worst since February 2020. Our goal with the Weekly Digest is to present content that is still relevant and useful, so we have eliminated sections that no longer fit that description. DIY investing? Trading? Professional advice? See how Schwab can help Late-2018 nostalgia afoot? Similarities exist between now and the post-midterm election period in late 2018 when the Fed was hiking, fiscal brinksmanship was underway, defensive sectors were leading, and Presidents Trump and Xi were meeting, noted Liz Ann Sonders , chief investment strategist at the Schwab Center for Financial Research, or SCFR. The S&P 500 ® Index nearly fell into bear territory then as tech stocks tanked. Staples, real estate, and utilities are three of the five leading sectors since mid-October, and it's tougher for the index to rally when leading stocks have relatively low market capitalizations. Another factor is the growing chance of a more active Fed early next year",
+          "excerpt": "Stocks Continue Lower as 2018 Echoes Grow Louder | Charles Schwab Search all articles, videos, and podcasts Markets and Economy Stocks Continue Lower as 2018 Echoes Grow Louder The S&P 500 Index slips below its 200-day moving average, bitcoin founders, and echoes of late 2018 creep up. November 20, 2026 • Beginner Every morning before the opening bell, the Schwab Market Update sets the stage for the day ahead, covering key market movers, economic developments, and emerging themes. Each edition includes \"Three things to watch\" while Thursdays feature a weekly section, \"Crypto currents.\" This recap revisits select items for those who may have missed them, helping traders head into the weekend better informed. Editor's note: This week's Digest is a bit shorter than usual, due to continued volatility and a losing streak in major market averages that is likely to be the worst since February 2020. Our goal with the Weekly Digest is to present content that is still relevant and useful, so we have eliminated sections that no longer fit that description. DIY investing? Trading? Professional advice? See how Schwab can help Late-2018 nostalgia afoot? Similarities exist between now and the post-midterm election period in late 2018 when the Fed was hiking, fiscal brinksmanship was underway, defensive sectors were leading, and Presidents Trump and Xi were meeting, noted Liz Ann Sonders , chief investment strategist at the Schwab Center for Financial Research, or SCFR. The S&P 500 ® Index nearly fell into bear territory then as tech stocks tanked. Staples, real estate, and utilities are three of the five leading sectors since mid-October, and it's tougher for the index to rally when leading stocks have relatively low market capitalizations. Another factor is the growing chance of a mo",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         }
       ],
@@ -56808,6 +56925,15 @@
       "articles": [
         {
           "sourceName": "CNBC Markets",
+          "title": "S&P 500 futures rebound sharply to rise 2%, kick-starting shortened week after tech rout: Live updates",
+          "url": "https://www.cnbc.com/2026/11/22/stock-market-today-live-updates.html",
+          "publishedAt": "2026-11-22T23:01:37.000Z",
+          "summary": "Last week, the major indexes tumbled as worries about the artificial intelligence trade continued to spook investors, despite Anthropic's record debut.",
+          "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu Traders work on the floor of the New York Stock Exchange (NYSE) in New York City, U.S., August 4, 2026. Jeenah Moon | Reuters U.S. equity futures bounced on Monday, as a shortened week on Wall Street got underway after all three major averages ended Friday in correction territory . Futures tied to the Dow Jones Industrial Average gained 745 points, or 1.55%. S&P 500 futures added 2.16%, and Nasdaq-100 futures rose 3.03%. In Asia, South Korea's Kospi fell 2.63%, with heavyweights Samsung Electronics and SK Hynix down about 2.35% and 1.89%, respectively. Australia's S&P/ASX 200 was 0.13% down. Hong Kong's Hang Seng Index slipped 1.27% on its open, and mainland China's CSI 300 fell 0.18%. Japan's markets were closed for a public holiday. Last week, major indexes tumbled as worries about the artificial intelligence trade continued to spook investors, despite Anthropic's record debut on Thursday. By the end of the rout last week — which was the worst weekly decline for the Nasdaq Composite and Dow in more than six years, and the largest for the S&P 500 since April 2025 — all three of the major averages were in correction territory, and the Nasdaq turned negative for the year. The Nasdaq-100 index ended Friday in bear market territory on an intraday basis, but was just shy of that mark based on the decline from its closing high on Oct. 6. Investors this week will get a breather, no matter what price action looks like. Markets are closed on Thursday for the Thanksgiving holiday, and Friday's session will be shortened with the closing bell set to ring at 1:00 p.m. All eyes are set to be on the shaky tech trade, as investors examin",
+          "discoveredFrom": "https://www.cnbc.com/markets/"
+        },
+        {
+          "sourceName": "CNBC Markets",
           "title": "Bitcoin sell-off: Crypto is failing the 'digital gold' test again as it sinks with stocks",
           "url": "https://www.cnbc.com/2026/11/20/bitcoin-price-gold-market-hedge.html",
           "publishedAt": "2026-11-20T15:03:25.000Z",
@@ -56825,7 +56951,7 @@
           "discoveredFrom": "https://www.cnbc.com/markets/"
         }
       ],
-      "articleCount": 2,
+      "articleCount": 3,
       "ok": true
     },
     {
@@ -56840,29 +56966,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Saudi Arabia, Bahrain report new attacks as Iran says it remains open to a deal with U.S.",
-          "url": "https://www.cnbc.com/2026/11/22/saudi-houthi-bahrain-iran-attacks-araghchi-talks.html",
-          "publishedAt": "2026-11-22T13:25:47.000Z",
-          "summary": "Saudi Arabia said it destroyed a drone launched by Iran-backed Houthis, while Bahrain said an industrial facility was hit by Iranian projectiles.",
-          "excerpt": "Saudi Arabia said it destroyed a drone launched by Iran-backed Houthis, while Bahrain said an industrial facility was hit by Iranian projectiles.",
+          "title": "How Asian countries are looking to prop up markets as AI downturn sinks stocks",
+          "url": "https://www.cnbc.com/2026/11/23/asia-markets-kospi-taiwan-china-csi300.html",
+          "publishedAt": "2026-11-23T06:50:48.000Z",
+          "summary": "Market regulators in South Korea, China and Taiwan have introduced new measures to support markets.",
+          "excerpt": "Market regulators in South Korea, China and Taiwan have introduced new measures to support markets.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Top Wall Street analysts favor these 3 dividend stocks for strong returns",
-          "url": "https://www.cnbc.com/2026/11/22/top-wall-street-analysts-favor-these-stocks-for-strong-returns.html",
-          "publishedAt": "2026-11-22T12:13:56.000Z",
-          "summary": "Wall Street analysts can help shortlist attractive dividend-paying stocks, as their recommendations are backed by thorough analysis of a company's financials.",
-          "excerpt": "Wall Street analysts can help shortlist attractive dividend-paying stocks, as their recommendations are backed by thorough analysis of a company's financials.",
+          "title": "Yemen&apos;s Houthis claim attacks on Saudi oil refinery as Trump warns of new strikes next year",
+          "url": "https://www.cnbc.com/2026/11/23/trump-iran-war-hormuz-saudi-.html",
+          "publishedAt": "2026-11-23T03:52:17.000Z",
+          "summary": "Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
+          "excerpt": "Yemen's Iran-aligned Houthis claimed an operation against Saudi Arabia's Rabigh oil refinery, as diplomatic efforts to end the war face long odds.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "The Nasdaq is in freefall. Here&apos;s one stock to look at",
-          "url": "https://www.cnbc.com/2026/11/22/the-nasdaq-is-in-freefall-heres-one-stock-to-look-at.html",
-          "publishedAt": "2026-11-22T12:10:39.000Z",
-          "summary": "Elevated options premiums are creating an opportunity in Amazon",
-          "excerpt": "Elevated options premiums are creating an opportunity in Amazon",
+          "title": "3 big things we&apos;re watching in the market this Thanksgiving week",
+          "url": "https://www.cnbc.com/investingclub/2026/11/22/3-big-things-were-watching-in-the-market-this-thanksgiving-week.html",
+          "publishedAt": "2026-11-23T00:42:54.000Z",
+          "summary": "Can the AI trade rebound? Plus, a big week for retail activity and Fed policy discussion.",
+          "excerpt": "Can the AI trade rebound? Plus, a big week for retail activity and Fed policy discussion.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -56922,29 +57048,29 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
+          "title": "The number of 401(k) millionaires drops amid stock-market swings",
+          "url": "https://www.marketwatch.com/story/the-number-of-401-k-millionaires-drops-amid-stock-market-swings-23939b94?mod=mw_rss_topstories",
+          "publishedAt": "2026-11-23T05:01:00.000Z",
+          "summary": "‘It was a rocky quarter’: 401(k) balances drop and affordability concerns persist, Fidelity says",
+          "excerpt": "‘It was a rocky quarter’: 401(k) balances drop and affordability concerns persist, Fidelity says",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
+          "title": "Corporate America hunts for ‘generational’ growth in AI, trading cards and the L.A. airport",
+          "url": "https://www.marketwatch.com/story/corporate-america-hunts-for-generational-growth-in-ai-trading-cards-and-the-l-a-airport-3072eb1a?mod=mw_rss_topstories",
+          "publishedAt": "2026-11-22T21:51:00.000Z",
+          "summary": "There’s been no shortage of trends deemed once-in-a-generation by executives on earnings calls.",
+          "excerpt": "There’s been no shortage of trends deemed once-in-a-generation by executives on earnings calls.",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
           "title": "These little-known investments could be among the best bargains in a crash",
           "url": "https://www.marketwatch.com/story/these-little-known-investments-could-be-among-the-best-bargains-in-a-crash-78a379b4?mod=mw_rss_topstories",
           "publishedAt": "2026-11-22T18:23:00.000Z",
           "summary": "If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
           "excerpt": "If this stock market turmoil turns into a full-blown crash, look for low-risk investment bargains among closed-end funds.",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "‘Nvidia’s turmoil has me spooked’: Is it time to sell my stocks and buy real estate?",
-          "url": "https://www.marketwatch.com/story/nvidia-spooked-me-should-i-sell-my-stocks-or-ride-out-the-market-turmoil-560583c6?mod=mw_rss_topstories",
-          "publishedAt": "2026-11-22T17:00:00.000Z",
-          "summary": "If you are tempted to ditch stocks for property or CDs, take a deep breath before making any sudden moves.",
-          "excerpt": "If you are tempted to ditch stocks for property or CDs, take a deep breath before making any sudden moves.",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "I’m terrified of a market crash. Should I put $400,000 of my $1 million retirement savings into an annuity?",
-          "url": "https://www.marketwatch.com/story/were-in-our-50s-and-terrified-of-a-market-crash-should-we-put-400-000-of-our-1-million-retirement-savings-into-an-annuity-1943f240?mod=mw_rss_topstories",
-          "publishedAt": "2026-11-22T16:32:00.000Z",
-          "summary": "“We have a house worth $450,000. Our combined annual income is $125,000.”",
-          "excerpt": "“We have a house worth $450,000. Our combined annual income is $125,000.”",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
