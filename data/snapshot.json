@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-26T22:24:58.808Z",
+  "generatedAt": "2026-11-27T08:46:07.354Z",
   "model": {
     "status": "ready",
-    "generatedAt": "2026-11-26T22:22:01.144176+00:00",
+    "generatedAt": "2026-11-27T08:43:09.919676+00:00",
     "asOfDate": "2026-11-25",
     "expectedAsOfDate": "2026-11-25",
     "isStale": false,
@@ -1432,13 +1432,13 @@
     }
   },
   "note": {
-    "headline": "Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
+    "headline": "Funding and credit signals argue for tighter risk control.",
     "body": "Inflation appears to be gaining steam and spreading beyond energy, raising the heat on Federal Reserve policymakers to raise rates again in December. 47% of screened names are above both the 50-day and 200-day averages; trend-confirmed model leaders are MRNA.",
     "changed": [
-      "Policy/geopolitics: S&P Global Ratings said Nvidia's credit rating could be cut by one notch as it flagged \"rising\" management and governance risk at the chipmaker. (M2)",
+      "Policy/geopolitics: Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027. (M3)",
       "Rates: Inflation appears to be gaining steam and spreading beyond energy, raising the heat on Federal Reserve policymakers to raise rates again in December. (M4)",
-      "Earnings: Post-report reactions skew positive, but confirm whether the strength clusters by sector before treating it as a broader risk-on signal.",
-      "Retail attention: NVDA, QQQ, ERO, JD have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
+      "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
+      "Retail attention: NVDA, SPCX, AAPL, AMZN have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news.",
       "Breadth: 59% of the screened universe is above the 50-day average, 58% is above the 200-day, and 47% clears both trend lines.",
       "Tactical implication: MRNA (Top Decile), WDC (Model Rebound Watch) are the setups that currently merit review after the market backdrop is considered."
     ],
@@ -1454,12 +1454,12 @@
     "model": "gpt-5-nano",
     "usage": {
       "model": "gpt-5-nano",
-      "inputTokens": 114106,
+      "inputTokens": 110828,
       "cachedInputTokens": 0,
-      "outputTokens": 2719,
+      "outputTokens": 2724,
       "reasoningTokens": 0,
-      "totalTokens": 116825,
-      "estimatedCostUsd": 0.006793,
+      "totalTokens": 113552,
+      "estimatedCostUsd": 0.006631,
       "pricingPerMillion": {
         "input": 0.05,
         "cachedInput": 0.005,
@@ -1467,8 +1467,8 @@
       }
     },
     "companyContextCount": 12,
-    "headline": "Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
-    "macroView": "Inflation appears to be gaining steam and spreading beyond energy, raising the heat on Federal Reserve policymakers to raise rates again in December. S&P Global Ratings said Nvidia's credit rating could be cut by one notch as it flagged \"rising\" management and governance risk at the chipmaker. Next macro decision points: Gross Domestic Product on 2026-12-02; Employment Situation on 2026-12-04; FOMC Rate Decision on 2026-12-09. Sector confirmation: Consumer Staples +4.93% over 30D, +11.29% vs SPY; Consumer Discretionary +2.83% over 30D, +9.19% vs SPY; Utilities +2.49% over 30D, +8.85% vs SPY.",
+    "headline": "Funding and credit signals argue for tighter risk control.",
+    "macroView": "Inflation appears to be gaining steam and spreading beyond energy, raising the heat on Federal Reserve policymakers to raise rates again in December. Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027. Next macro decision points: Gross Domestic Product on 2026-12-02; Employment Situation on 2026-12-04; FOMC Rate Decision on 2026-12-09. Sector confirmation: Consumer Staples +4.93% over 30D, +11.29% vs SPY; Consumer Discretionary +2.83% over 30D, +9.19% vs SPY; Utilities +2.49% over 30D, +8.85% vs SPY.",
     "dailyRead": null,
     "recommendations": [
       {
@@ -1482,18 +1482,48 @@
         "marketCap": "$102.0B",
         "earningsContext": "Last reported 2026-10-22 for the Sep 2026 fiscal quarter; EPS 4.43 versus consensus 3.99; surprise 11.03%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 5.63.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-26: Semiconductor chips are the new oil.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-27: Private markets are more accessible than ever for investors.",
         "modelEvidence": "Rank #1 of 499; 100.0 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
         "technicalEvidence": "7D -5.46%; 14D -13.04%; 30D -23.50%; 60D vs SPY -33.81%; RSI 51; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
         "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C1-EARNINGS",
           "C1-IR",
+          "C1-EARNINGS",
           "C1-MARKETCAP",
-          "S4"
+          "S1"
+        ],
+        "setupTags": [
+          "Model Rebound Watch",
+          "Not Momentum Confirmed",
+          "Activation Pending"
+        ]
+      },
+      {
+        "symbol": "RDDT",
+        "action": "Watch for activation",
+        "conviction": "Review",
+        "setup": "Model rebound watch",
+        "whyNow": "Rank #2 of 499; -31.05% 60-day return versus SPY; below one or both major moving averages.",
+        "rationale": "The model ranks RDDT highly, but price has not confirmed a rebound. Requires a close above $96.92 within 5 trading days before it is actionable. Rank #2 of 499; -31.05% 60-day return versus SPY; below one or both major moving averages.",
+        "companyOverview": "Reddit is a community of communities. Built on shared interests and passions, it is home to the most open and authentic conversations online. Every day, millions of people post, vote, comment, and search for answers across nearly every topic imaginable, and brands build trusted relationships with their audiences. Wi...",
+        "marketCap": "$17.7B",
+        "earningsContext": "Last reported 2026-10-29 for the Sep 2026 fiscal quarter; EPS 1.4 versus consensus 1.31; surprise 6.87%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 1.76.",
+        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-27: Private markets are more accessible than ever for investors.",
+        "modelEvidence": "Rank #2 of 499; 99.8 percentile; reasons: Liquid versus universe.",
+        "technicalEvidence": "7D -2.74%; 14D -13.39%; 30D -33.90%; 60D vs SPY -31.05%; RSI 48; below one or both major moving averages",
+        "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend; Weak volume confirmation.",
+        "risk": "Above-sector volatility; Below 50d trend; Below 200d trend; Weak volume confirmation",
+        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
+        "sourceRefs": [
+          "C2-IR",
+          "C2-EARNINGS",
+          "C2-MARKETCAP",
+          "S1"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1512,18 +1542,18 @@
         "marketCap": "$114.8B",
         "earningsContext": "Last reported 2026-08-27 for the Jul 2026 fiscal quarter; EPS 0.62 versus consensus 0.65; surprise -4.62%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 0.79.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-26: Semiconductor chips are the new oil.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-27: Private markets are more accessible than ever for investors.",
         "modelEvidence": "Rank #3 of 499; 99.6 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
         "technicalEvidence": "7D -10.04%; 14D -22.43%; 30D -43.99%; 60D vs SPY -32.07%; RSI 49; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
         "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
-          "C3-EARNINGS",
           "C3-IR",
+          "C3-EARNINGS",
           "C3-MARKETCAP",
-          "S4"
+          "S1"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1542,8 +1572,8 @@
         "marketCap": "$34.4B",
         "earningsContext": "Last reported 2026-09-03 for the Jul 2026 fiscal quarter; EPS 1.91 versus consensus 1.46; surprise 30.82%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Oct 2026 with consensus 1.77.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-26: Semiconductor chips are the new oil.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-27: Private markets are more accessible than ever for investors.",
         "modelEvidence": "Rank #5 of 499; 99.2 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
         "technicalEvidence": "7D -8.92%; 14D -17.99%; 30D -27.73%; 60D vs SPY -26.94%; RSI 53; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
@@ -1551,9 +1581,9 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C5-EARNINGS",
-          "C5-IR",
           "C5-MARKETCAP",
-          "S4"
+          "C5-IR",
+          "S1"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1572,8 +1602,8 @@
         "marketCap": "$231.1B",
         "earningsContext": "Last reported 2026-10-21 for the Sep 2026 fiscal quarter; EPS 2.2 versus consensus 2.17; surprise 1.38%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 2.34.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-26: Semiconductor chips are the new oil.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-27: Private markets are more accessible than ever for investors.",
         "modelEvidence": "Rank #10 of 499; 98.2 percentile; reasons: Long-horizon momentum ahead of sector median; Liquid versus universe.",
         "technicalEvidence": "7D -12.60%; 14D -21.57%; 30D -22.10%; 60D vs SPY -30.50%; RSI 50; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
@@ -1581,39 +1611,9 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C10-EARNINGS",
-          "C10-IR",
           "C10-MARKETCAP",
-          "S4"
-        ],
-        "setupTags": [
-          "Model Rebound Watch",
-          "Not Momentum Confirmed",
-          "Activation Pending"
-        ]
-      },
-      {
-        "symbol": "COIN",
-        "action": "Watch for activation",
-        "conviction": "Review",
-        "setup": "Model rebound watch",
-        "whyNow": "Rank #8 of 499; -35.66% 60-day return versus SPY; below one or both major moving averages.",
-        "rationale": "The model ranks COIN highly, but price has not confirmed a rebound. Requires a close above $107.37 within 5 trading days before it is actionable. Rank #8 of 499; -35.66% 60-day return versus SPY; below one or both major moving averages.",
-        "companyOverview": "Coinbase (NASDAQ: COIN) is on a mission to increase economic freedom in the world. The most trusted crypto platform, Coinbase stores more digital assets than any other company and is building the everything exchange - one place to access crypto, equities, derivatives, prediction markets, and more. Coinbase serves co...",
-        "marketCap": "$27.5B",
-        "earningsContext": "Last reported 2026-10-29 for the Sep 2026 fiscal quarter; EPS 0.28 versus consensus -0.16; surprise 275%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus -0.07.",
-        "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-26: Semiconductor chips are the new oil.",
-        "modelEvidence": "Rank #8 of 499; 98.6 percentile; reasons: Liquid versus universe.",
-        "technicalEvidence": "7D -6.14%; 14D -23.89%; 30D -35.01%; 60D vs SPY -35.66%; RSI 23; below one or both major moving averages",
-        "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
-        "risk": "Above-sector volatility; Below 50d trend; Below 200d trend",
-        "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
-        "sourceRefs": [
-          "C8-EARNINGS",
-          "C8-IR",
-          "C8-MARKETCAP",
-          "S4"
+          "C10-IR",
+          "S1"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1632,8 +1632,8 @@
         "marketCap": "$24.8B",
         "earningsContext": "Last reported 2026-10-28 for the Sep 2026 fiscal quarter; EPS 1.09 versus consensus 0.97; surprise 12.37%. Exact next report date was not available; Nasdaq lists the next forecast fiscal period as Dec 2026 with consensus 1.12.",
         "recentNews": "No clear recent company-specific catalyst was found in the supplied headlines.",
-        "macroLink": "Portfolio backdrop, not a company catalyst: Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
-        "macroEvidence": "CNBC Top News RSS, 2026-11-26: Semiconductor chips are the new oil.",
+        "macroLink": "Portfolio backdrop, not a company catalyst: Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
+        "macroEvidence": "CNBC Top News RSS, 2026-11-27: Private markets are more accessible than ever for investors.",
         "modelEvidence": "Rank #4 of 499; 99.4 percentile; reasons: Long-horizon momentum ahead of sector median.",
         "technicalEvidence": "7D -10.17%; 14D -14.87%; 30D -12.68%; 60D vs SPY -31.40%; RSI 51; below one or both major moving averages",
         "momentumEvidence": "Model rebound watch; risk flags: Above-sector volatility; Below 50d trend; Below 200d trend.",
@@ -1641,9 +1641,9 @@
         "invalidation": "Downgrade if price loses trend confirmation, the model rank falls materially, or sector confirmation weakens.",
         "sourceRefs": [
           "C4-EARNINGS",
-          "C4-IR",
           "C4-MARKETCAP",
-          "S4"
+          "C4-IR",
+          "S1"
         ],
         "setupTags": [
           "Model Rebound Watch",
@@ -1861,37 +1861,37 @@
       "Do watch names WDC, RDDT, MRVL regain the missing trend confirmation, or should they stay out of the active book?"
     ],
     "sourceRefs": [
+      "S1",
+      "S3",
       "S4",
-      "S6",
-      "S7",
-      "S8",
+      "S5",
       "S9",
+      "S10",
+      "S11",
       "S12",
-      "S14",
       "S15",
       "S16",
-      "S18",
-      "C1-EARNINGS",
-      "C3-EARNINGS"
+      "S8",
+      "S13"
     ],
     "deeperRead": {
       "status": "ready",
       "lookbackDays": 7,
-      "summary": "Featured source angle: Energy supplies have improved and demand has adjusted, yet price risks remain, with tight inventories and high freight costs leaving the oil market vulnerable to renewed disruption that could sustain inflationary pressure.",
+      "summary": "Featured source angle: Energy-market balance has improved since the peak of the shock, yet persistent inventories, freight costs, and refined-product tightness may leave prices vulnerable to renewed disruption, with knock-on effects for inflation pressures and interest-rate trajectories.",
       "cards": [
         {
-          "sourceRef": "S14",
+          "sourceRef": "S15",
           "sourceName": "Schwab Weekly Market Outlook",
           "title": "How the Evolving Energy Shock May Impact Markets",
-          "thesis": "Energy supplies have improved and demand has adjusted, yet price risks remain, with tight inventories and high freight costs leaving the oil market vulnerable to renewed disruption that could sustain inflationary pressure.",
-          "whyItMatters": "This frames energy as a persistent risk factor for inflation and rates, suggesting that even with better supply dynamics, the macro landscape can hinge on rare disruptions and policy responses.",
-          "marketReadThrough": "Monitor: observe evolving balance in energy inventories, freight costs, and refined-product tightness for signs of renewed price pressure or relief that could influence inflation trajectories and policy stance.",
-          "variantAngle": "Inference: if inventories stay lean and geopolitical risk remains unresolved, the energy shock could continue to contribute to elevated price risk, potentially constraining consumer spending and asset valuations without asserting a specific outcome.",
+          "thesis": "Energy-market balance has improved since the peak of the shock, yet persistent inventories, freight costs, and refined-product tightness may leave prices vulnerable to renewed disruption, with knock-on effects for inflation pressures and interest-rate trajectories.",
+          "whyItMatters": "These dynamics could influence the cost of energy inputs and broader inflation signals, affecting bonds, consumer budgets, and equity participation in the energy and energy-related sectors.",
+          "marketReadThrough": "Monitor: observe whether inventories remain depleted, freight rates stay elevated, and refined-product markets stay tight, as these factors would be consistent with ongoing price risk potential even if supply and flows have improved.",
+          "variantAngle": "Inference: if inventories stay low and shipping costs stay high, energy prices might exhibit renewed volatility, which could feed into inflation expectations and pressure rate-sensitive sectors, though a durable peace could alter that path.",
           "confidence": "Medium",
           "url": "https://www.schwab.com/learn/story/how-evolving-energy-shock-may-impact-markets",
           "publishedAt": "2026-11-23T20:26:12.000Z",
           "sourceRefs": [
-            "S14"
+            "S15"
           ]
         }
       ]
@@ -1900,21 +1900,21 @@
   "deeperRead": {
     "status": "ready",
     "lookbackDays": 7,
-    "summary": "Featured source angle: Energy supplies have improved and demand has adjusted, yet price risks remain, with tight inventories and high freight costs leaving the oil market vulnerable to renewed disruption that could sustain inflationary pressure.",
+    "summary": "Featured source angle: Energy-market balance has improved since the peak of the shock, yet persistent inventories, freight costs, and refined-product tightness may leave prices vulnerable to renewed disruption, with knock-on effects for inflation pressures and interest-rate trajectories.",
     "cards": [
       {
-        "sourceRef": "S14",
+        "sourceRef": "S15",
         "sourceName": "Schwab Weekly Market Outlook",
         "title": "How the Evolving Energy Shock May Impact Markets",
-        "thesis": "Energy supplies have improved and demand has adjusted, yet price risks remain, with tight inventories and high freight costs leaving the oil market vulnerable to renewed disruption that could sustain inflationary pressure.",
-        "whyItMatters": "This frames energy as a persistent risk factor for inflation and rates, suggesting that even with better supply dynamics, the macro landscape can hinge on rare disruptions and policy responses.",
-        "marketReadThrough": "Monitor: observe evolving balance in energy inventories, freight costs, and refined-product tightness for signs of renewed price pressure or relief that could influence inflation trajectories and policy stance.",
-        "variantAngle": "Inference: if inventories stay lean and geopolitical risk remains unresolved, the energy shock could continue to contribute to elevated price risk, potentially constraining consumer spending and asset valuations without asserting a specific outcome.",
+        "thesis": "Energy-market balance has improved since the peak of the shock, yet persistent inventories, freight costs, and refined-product tightness may leave prices vulnerable to renewed disruption, with knock-on effects for inflation pressures and interest-rate trajectories.",
+        "whyItMatters": "These dynamics could influence the cost of energy inputs and broader inflation signals, affecting bonds, consumer budgets, and equity participation in the energy and energy-related sectors.",
+        "marketReadThrough": "Monitor: observe whether inventories remain depleted, freight rates stay elevated, and refined-product markets stay tight, as these factors would be consistent with ongoing price risk potential even if supply and flows have improved.",
+        "variantAngle": "Inference: if inventories stay low and shipping costs stay high, energy prices might exhibit renewed volatility, which could feed into inflation expectations and pressure rate-sensitive sectors, though a durable peace could alter that path.",
         "confidence": "Medium",
         "url": "https://www.schwab.com/learn/story/how-evolving-energy-shock-may-impact-markets",
         "publishedAt": "2026-11-23T20:26:12.000Z",
         "sourceRefs": [
-          "S14"
+          "S15"
         ]
       }
     ]
@@ -1928,12 +1928,12 @@
     "staleDataReused": false
   },
   "marketIntelligence": {
-    "generatedAt": "2026-11-26T22:24:21.560Z",
+    "generatedAt": "2026-11-27T08:45:28.688Z",
     "window": {
       "mode": "rolling_24h_with_important_older_context",
       "freshHours": 24,
       "importantLookbackHours": 96,
-      "previousRefreshAt": "2026-11-26T08:31:21.065Z"
+      "previousRefreshAt": "2026-11-26T22:24:58.808Z"
     },
     "marketDataStatus": {
       "status": "fresh",
@@ -1944,14 +1944,18 @@
       "staleDataReused": false
     },
     "officialMacro": {
-      "generatedAt": "2026-11-26T22:22:04.368Z",
+      "generatedAt": "2026-11-27T08:43:12.625Z",
       "lookbackHours": 96,
       "releases": []
     },
     "sourceHealth": {
       "checked": 25,
-      "live": 21,
+      "live": 20,
       "blockedOrFailed": [
+        {
+          "name": "Bank of America Institute",
+          "reason": "Source check failed: 403 Forbidden"
+        },
         {
           "name": "BLS Economic News Releases",
           "reason": "Source check failed: 403 Forbidden"
@@ -1973,41 +1977,39 @@
     "professionalDrivers": [
       {
         "id": "M1",
-        "title": "Semiconductor chips are the new oil. Here&apos;s why",
+        "title": "Private markets are more accessible than ever for investors. Getting out is another matter",
         "sourceName": "CNBC Top News RSS",
         "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/11/26/semiconductor-chips-are-the-new-oil-heres-why.html",
-        "publishedAt": "2026-11-26T17:52:15.000Z",
-        "summary": "Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
-        "excerpt": "Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
+        "url": "https://www.cnbc.com/2026/11/27/private-markets-retail-investors-liquidity.html",
+        "publishedAt": "2026-11-27T08:05:09.000Z",
+        "summary": "Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
+        "excerpt": "Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
         "themes": [
-          "Commodities and energy",
-          "AI and semis"
+          "Credit and liquidity"
         ],
         "freshness": "Since prior refresh",
-        "ageHours": 4.5,
-        "score": 100,
+        "ageHours": 0.7,
+        "score": 78,
         "tickers": []
       },
       {
         "id": "M2",
-        "title": "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
-        "sourceName": "CNBC Markets",
-        "sourceCategory": "News",
+        "title": "Tech German software major SAP is reportedly weighing cutting at least 10,000 jobs in AI push",
+        "sourceName": "CNBC Top News RSS",
+        "sourceCategory": "News RSS",
         "trust": "Medium",
-        "url": "https://www.cnbc.com/2026/11/26/nvidia-market-governance-risk.html",
-        "publishedAt": "2026-11-26T02:57:32.000Z",
-        "summary": "S&P Global Ratings said Nvidia's credit rating could be cut by one notch as it flagged \"rising\" management and governance risk at the chipmaker.",
-        "excerpt": "Nvidia rating could be cut due to 'rising' M&G risk, says S&P Global Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu Key Points Nvidia's credit rating could be cut by one notch over the next 90 days if the company continues to show \"deficiencies\" in its management and governance framework, S&P Global Ratings said. In a Wednesday note, S&P cited the \"long tenure\" of certain board members as a factor that could compromise their independence. The warning comes after Moody's Ratings lowered its outlook on Nvidia to stable from positive on Nov. 18. In this article NVDA Follow your favorite stocks CREATE FREE ACCOUNT Visual China Group | Getty Images Nvidia's credit rating could be cut by one notch over the next 90 days if the company continues to have \"deficiencies\" in its management and governance framework, S&P Global Ratings said in the wake of the Jensen Huang's ouster and reinstatement as Nvidia CEO. \"News regarding the CEO and questions regarding potential export control violations have exposed vulnerabilities in Nvidia's management and governance framework, especially in regard to its board structure, composition, and effectiveness,\" S&P said in a Wednesday note . Nvidia currently holds an AA rating, the third-highest level. Stock Chart Icon Stock chart icon Nvidia on Wednesday S&P has placed the chipmaker on \"CreditWatch with negative implications,\" though any potential downgrade would be limited to one notch, to AA-, unless investigations or disclosures lead the agency to conclude that Nvidia's reputation or future prospects have also been harmed. A downgrade can pressure bond prices, push yields higher and raise borrowing costs. Nvidia priced $25 billion of investment-grade senior notes in June, w",
+        "url": "https://www.cnbc.com/2026/11/27/sap-job-cuts-ai-restructuring.html",
+        "publishedAt": "2026-11-27T07:15:44.000Z",
+        "summary": "SAP is weighing cuts of at least 10,000 jobs as it reshapes its software business around AI, Bloomberg reported.",
+        "excerpt": "SAP is weighing cuts of at least 10,000 jobs as it reshapes its software business around AI, Bloomberg reported.",
         "themes": [
-          "Rates and central banks",
-          "Geopolitics and policy",
-          "Credit and liquidity"
+          "Macro and growth",
+          "AI and semis"
         ],
-        "freshness": "Last 24 hours",
-        "ageHours": 19.4,
-        "score": 70,
+        "freshness": "Since prior refresh",
+        "ageHours": 1.5,
+        "score": 78,
         "tickers": []
       },
       {
@@ -2019,7 +2021,7 @@
         "url": "https://www.schwab.com/learn/story/how-evolving-energy-shock-may-impact-markets",
         "publishedAt": "2026-11-23T20:26:12.000Z",
         "summary": "Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027.",
-        "excerpt": "How the Evolving Energy Shock May Impact Markets | Charles Schwab Search all articles, videos, and podcasts International How the Evolving Energy Shock May Impact Markets Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027. November 23, 2026 • Chris Ferrarone • Heather O'Leary Key takeaways Nine months into the Iran war, the oil shock has evolved. Oil production and flows have improved and demand has adjusted, bringing the market into better balance. But depleted inventories, expensive freight, and tight refined-product markets may leave prices vulnerable to renewed disruption. Persistently expensive energy would likely keep inflation and interest-rate pressure elevated. A durable peace could reverse that mix quickly, supporting consumers, bonds, and broader equity participation while challenging the Energy-sector leadership since the Iran war started. Exposure to the U.S. Energy sector remains useful as a potential geopolitical and inflation hedge, but the opportunity has become more selective as earnings expectations have risen. The key risk to Energy stocks in 2027 may not be recession, but a resolution of the Iran war. The oil shock is changing Nine months into the Iran war, the most surprising development may be what has not happened. Early in the conflict, the sudden halt of oil flows through the Strait of Hormuz led many forecasters to warn that a prolonged disruption could significantly weaken global growth and raise inflation. For example, the International Monetary Fund's (IMF) April World Economic Outlook estimated that under a prolonged-disruption scenario, global gross domestic product (GDP) growth could slow to 2.5%, and inflation could rise to 5.4%. I",
+        "excerpt": "How the Evolving Energy Shock May Impact Markets | Charles Schwab Search Learn International How the Evolving Energy Shock May Impact Markets Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027. November 23, 2026 • Chris Ferrarone • Heather O'Leary Key takeaways Nine months into the Iran war, the oil shock has evolved. Oil production and flows have improved and demand has adjusted, bringing the market into better balance. But depleted inventories, expensive freight, and tight refined-product markets may leave prices vulnerable to renewed disruption. Persistently expensive energy would likely keep inflation and interest-rate pressure elevated. A durable peace could reverse that mix quickly, supporting consumers, bonds, and broader equity participation while challenging the Energy-sector leadership since the Iran war started. Exposure to the U.S. Energy sector remains useful as a potential geopolitical and inflation hedge, but the opportunity has become more selective as earnings expectations have risen. The key risk to Energy stocks in 2027 may not be recession, but a resolution of the Iran war. The oil shock is changing Nine months into the Iran war, the most surprising development may be what has not happened. Early in the conflict, the sudden halt of oil flows through the Strait of Hormuz led many forecasters to warn that a prolonged disruption could significantly weaken global growth and raise inflation. For example, the International Monetary Fund's (IMF) April World Economic Outlook estimated that under a prolonged-disruption scenario, global gross domestic product (GDP) growth could slow to 2.5%, and inflation could rise to 5.4%. Its latest forecast, released ",
         "themes": [
           "Earnings",
           "Rates and central banks",
@@ -2028,7 +2030,7 @@
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 74,
+        "ageHours": 84.3,
         "score": 62,
         "tickers": []
       },
@@ -2048,14 +2050,34 @@
           "Macro and growth"
         ],
         "freshness": "Important older item",
-        "ageHours": 77.2,
+        "ageHours": 87.6,
+        "score": 54,
+        "tickers": []
+      },
+      {
+        "id": "M5",
+        "title": "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
+        "sourceName": "CNBC Markets",
+        "sourceCategory": "News",
+        "trust": "Medium",
+        "url": "https://www.cnbc.com/2026/11/26/nvidia-market-governance-risk.html",
+        "publishedAt": "2026-11-26T02:57:32.000Z",
+        "summary": "S&P Global Ratings said Nvidia's credit rating could be cut by one notch as it flagged \"rising\" management and governance risk at the chipmaker.",
+        "excerpt": "Nvidia rating could be cut due to 'rising' M&G risk, says S&P Global Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu Key Points Nvidia's credit rating could be cut by one notch over the next 90 days if the company continues to show \"deficiencies\" in its management and governance framework, S&P Global Ratings said. In a Wednesday note, S&P cited the \"long tenure\" of certain board members as a factor that could compromise their independence. The warning comes after Moody's Ratings lowered its outlook on Nvidia to stable from positive on Nov. 18. In this article NVDA Follow your favorite stocks CREATE FREE ACCOUNT Visual China Group | Getty Images Nvidia's credit rating could be cut by one notch over the next 90 days if the company continues to have \"deficiencies\" in its management and governance framework, S&P Global Ratings said in the wake of the Jensen Huang's ouster and reinstatement as Nvidia CEO. \"News regarding the CEO and questions regarding potential export control violations have exposed vulnerabilities in Nvidia's management and governance framework, especially in regard to its board structure, composition, and effectiveness,\" S&P said in a Wednesday note . Nvidia currently holds an AA rating, the third-highest level. Stock Chart Icon Stock chart icon Nvidia on Wednesday S&P has placed the chipmaker on \"CreditWatch with negative implications,\" though any potential downgrade would be limited to one notch, to AA-, unless investigations or disclosures lead the agency to conclude that Nvidia's reputation or future prospects have also been harmed. A downgrade can pressure bond prices, push yields higher and raise borrowing costs. Nvidia priced $25 billion of investment-grade senior notes in June, w",
+        "themes": [
+          "Rates and central banks",
+          "Geopolitics and policy",
+          "Credit and liquidity"
+        ],
+        "freshness": "Important older item",
+        "ageHours": 29.8,
         "score": 54,
         "tickers": []
       }
     ],
     "topThemes": [
       {
-        "theme": "Commodities and energy",
+        "theme": "Macro and growth",
         "count": 3
       },
       {
@@ -2063,340 +2085,31 @@
         "count": 3
       },
       {
+        "theme": "Credit and liquidity",
+        "count": 2
+      },
+      {
         "theme": "Geopolitics and policy",
         "count": 2
       },
       {
-        "theme": "Macro and growth",
+        "theme": "Commodities and energy",
         "count": 2
       },
       {
         "theme": "AI and semis",
         "count": 1
-      },
-      {
-        "theme": "Credit and liquidity",
-        "count": 1
       }
     ],
     "earnings": {
       "status": "ready",
-      "generatedAt": "2026-11-26T22:24:21.548Z",
+      "generatedAt": "2026-11-27T08:45:28.677Z",
       "dates": [
-        "2026-11-25",
         "2026-11-26",
-        "2026-11-27"
+        "2026-11-27",
+        "2026-11-28"
       ],
       "calendars": [
-        {
-          "date": "2026-11-25",
-          "asOf": "Wed, Nov 25, 2026",
-          "status": "ready",
-          "error": null,
-          "rowCount": 25,
-          "rows": [
-            {
-              "date": "2026-11-25",
-              "symbol": "DE",
-              "name": "Deere & Company",
-              "time": "time-not-supplied",
-              "marketCap": "$165,485,298,000",
-              "fiscalQuarterEnding": "Oct/2026",
-              "epsForecast": "$4.07",
-              "noOfEsts": "9",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "LI",
-              "name": "Li Auto Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$10,456,837,100",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "($0.08)",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "BZ",
-              "name": "KANZHUN LIMITED",
-              "time": "time-not-supplied",
-              "marketCap": "$6,010,986,000",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "($0.02)",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "BMA",
-              "name": "Macro Bank Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$3,124,587,780",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$1.44",
-              "noOfEsts": "2",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "GDS",
-              "name": "GDS Holdings Limited",
-              "time": "time-not-supplied",
-              "marketCap": "$2,763,207,170",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$1.31",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "FORTY",
-              "name": "Formula Systems (1985) Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$1,678,408,830",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "IMKTA",
-              "name": "Ingles Markets, Incorporated",
-              "time": "time-not-supplied",
-              "marketCap": "$1,597,237,120",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "HDL",
-              "name": "SUPER HI INTERNATIONAL HOLDING LTD.",
-              "time": "time-not-supplied",
-              "marketCap": "$637,943,300",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "$0.01",
-              "noOfEsts": "1",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "FINV",
-              "name": "FinVolution Group",
-              "time": "time-not-supplied",
-              "marketCap": "$585,513,150",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "MAGN",
-              "name": "Magnera Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$489,744,000",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "GOTU",
-              "name": "Gaotu Techedu Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$488,805,760",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "PSNY",
-              "name": "Polestar Automotive Holding UK Limited",
-              "time": "time-pre-market",
-              "marketCap": "$450,127,552",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "DSX",
-              "name": "Diana Shipping inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$293,616,320",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "GASS",
-              "name": "StealthGas, Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$279,264,512",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "EH",
-              "name": "EHang Holdings Limited",
-              "time": "time-not-supplied",
-              "marketCap": "$175,202,784",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "OMSE",
-              "name": "OMS Energy Technologies Inc.",
-              "time": "time-pre-market",
-              "marketCap": "$159,182,640",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "YSG",
-              "name": "Yatsen Holding Limited",
-              "time": "time-not-supplied",
-              "marketCap": "$156,755,216",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "LEE",
-              "name": "Lee Enterprises, Incorporated",
-              "time": "time-not-supplied",
-              "marketCap": "$138,879,440",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "CMCM",
-              "name": "Cheetah Mobile Inc.",
-              "time": "time-not-supplied",
-              "marketCap": "$56,116,508",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "SJ",
-              "name": "Scienjoy Holding Corporation",
-              "time": "time-not-supplied",
-              "marketCap": "$45,010,536",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "NNOX",
-              "name": "NANO-X IMAGING LTD",
-              "time": "time-not-supplied",
-              "marketCap": "$17,064,476",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "OPHI",
-              "name": "CollPlant Biotechnologies Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$9,626,506",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "ALAR",
-              "name": "Alarum Technologies Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$7,014,106",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "ADXN",
-              "name": "Addex Therapeutics Ltd",
-              "time": "time-not-supplied",
-              "marketCap": "$6,576,332",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            },
-            {
-              "date": "2026-11-25",
-              "symbol": "EOCN",
-              "name": "Eocene Ltd.",
-              "time": "time-not-supplied",
-              "marketCap": "$2,041,467",
-              "fiscalQuarterEnding": "Sep/2026",
-              "epsForecast": "",
-              "noOfEsts": "N/A",
-              "sourceName": "Nasdaq earnings calendar",
-              "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-25"
-            }
-          ]
-        },
         {
           "date": "2026-11-26",
           "asOf": "Thu, Nov 26, 2026",
@@ -2413,8 +2126,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "$0.26",
               "noOfEsts": "3",
-              "lastYearReportDate": "10/30/2025",
-              "lastYearEps": "$0.49",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2427,8 +2138,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "($0.19)",
               "noOfEsts": "5",
-              "lastYearReportDate": "11/06/2025",
-              "lastYearEps": "($0.28)",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2441,8 +2150,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "3",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "$0.17",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2455,8 +2162,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "5",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "($0.26)",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2469,8 +2174,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "5",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "$0.11",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2483,8 +2186,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "3",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "$0.08",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2497,8 +2198,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "($0.17)",
               "noOfEsts": "1",
-              "lastYearReportDate": "11/13/2025",
-              "lastYearEps": "($0.14)",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2511,8 +2210,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "5",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "($10.50)",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2525,8 +2222,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "5",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "$0.09",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2539,8 +2234,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "3",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "($0.02)",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2553,8 +2246,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "3",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "$0.05",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2567,8 +2258,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "3",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "($8.33)",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2581,8 +2270,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "5",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "$56.36",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             },
@@ -2595,8 +2282,6 @@
               "fiscalQuarterEnding": "Sep/2026",
               "epsForecast": "",
               "noOfEsts": "5",
-              "lastYearReportDate": "N/A",
-              "lastYearEps": "($4.40)",
               "sourceName": "Nasdaq earnings calendar",
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-26"
             }
@@ -2778,64 +2463,29 @@
               "sourceUrl": "https://www.nasdaq.com/market-activity/earnings?date=2026-11-27"
             }
           ]
-        }
-      ],
-      "earningsMovers": [
-        {
-          "symbol": "BZ",
-          "name": "KANZHUN LIMITED - American Depo",
-          "price": 14.34,
-          "changePct": 12.56,
-          "change": 1.6,
-          "volume": 8340953,
-          "marketCap": 6273831936,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
-          "moverBucket": "gainer"
         },
         {
-          "symbol": "LI",
-          "name": "Li Auto Inc.",
-          "price": 11.88,
-          "changePct": 11.03,
-          "change": 1.18,
-          "volume": 10477747,
-          "marketCap": 11610020864,
-          "sourceName": "Yahoo Finance screener",
-          "sourceUrl": "https://finance.yahoo.com/markets/stocks/day-gainers/",
-          "moverBucket": "gainer"
+          "date": "2026-11-28",
+          "asOf": "Sat, Nov 28, 2026",
+          "status": "ready",
+          "error": null,
+          "rowCount": 0,
+          "rows": []
         }
       ],
+      "earningsMovers": [],
       "articleHeadlines": [
         {
           "id": "E1",
-          "title": "Trump demands probe into ‘record setting error’ after third-quarter GDP data gets massive revision higher",
+          "title": "Tech German software major SAP is reportedly weighing cutting at least 10,000 jobs in AI push",
           "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/11/26/trump-gdp-revision-investigation.html",
-          "publishedAt": "2026-11-26T21:13:17.000Z",
-          "summary": "President Donald Trump on Thursday deemed the latest gross domestic product revision a mistake, claiming that it should be \"immediately investigated.\"",
+          "url": "https://www.cnbc.com/2026/11/27/sap-job-cuts-ai-restructuring.html",
+          "publishedAt": "2026-11-27T07:15:44.000Z",
+          "summary": "SAP is weighing cuts of at least 10,000 jobs as it reshapes its software business around AI, Bloomberg reported.",
           "tickers": []
         },
         {
           "id": "E2",
-          "title": "Microdrama apps chase profits as Hollywood moves into short-form, vertical video",
-          "sourceName": "CNBC Top News RSS",
-          "url": "https://www.cnbc.com/2026/11/26/micro-drama-apps-hollywood-vertical-video.html",
-          "publishedAt": "2026-11-26T18:27:43.000Z",
-          "summary": "The microdrama category has exploded at a time when traditional forms of media face waning interest and YouTube claims more viewing hours.",
-          "tickers": []
-        },
-        {
-          "id": "E3",
-          "title": "U.S. economy grew at rapid 4.3% pace in third quarter, new estimate shows - Axios",
-          "sourceName": "Axios Macro RSS",
-          "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5YdXR1UWd2RzJxbkJlTmNnNm9hcTA1ajJaaUVSSlloOEwxTjl6WTFERzVvT2dfVk9lTnZhVGRmSUt1Q21BdkZxQzgxZlZLdnFIN2VNQ0JYV3pvWmFNZmlFRXdyVHY1bm50?oc=5",
-          "publishedAt": "2026-11-26T11:12:09.000Z",
-          "summary": "U.S. economy grew at rapid 4.3% pace in third quarter, new estimate shows Axios",
-          "tickers": []
-        },
-        {
-          "id": "E4",
           "title": "Market News | Wells Fargo Investment Institute",
           "sourceName": "Wells Fargo Advisors Stock Market News",
           "url": "https://www.wellsfargoadvisors.com/research-analysis/commentary/stock-market-news.htm?linknav=topnav:ourInsights:marketCommentary:stockMarket",
@@ -2844,7 +2494,7 @@
           "tickers": []
         },
         {
-          "id": "E5",
+          "id": "E3",
           "title": "Dell earnings beat on AI strength, company authorizes $25 billion buyback",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/24/dell-earnings-report-q3-2027.html",
@@ -2853,7 +2503,7 @@
           "tickers": []
         },
         {
-          "id": "E6",
+          "id": "E4",
           "title": "Retail turnarounds are taking hold just in time for the holiday season",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/24/retail-turnarounds-holiday-season.html",
@@ -2862,7 +2512,7 @@
           "tickers": []
         },
         {
-          "id": "E7",
+          "id": "E5",
           "title": "Best Buy reports comparable sales growth of 6.1%, highest in five years",
           "sourceName": "CNBC Earnings RSS",
           "url": "https://www.cnbc.com/2026/11/24/best-buy-bby-q3-2027-earnings.html",
@@ -2871,7 +2521,7 @@
           "tickers": []
         },
         {
-          "id": "E8",
+          "id": "E6",
           "title": "How the Evolving Energy Shock May Impact Markets",
           "sourceName": "Schwab Weekly Market Outlook",
           "url": "https://www.schwab.com/learn/story/how-evolving-energy-shock-may-impact-markets",
@@ -2880,21 +2530,12 @@
           "tickers": []
         },
         {
-          "id": "E9",
+          "id": "E7",
           "title": "Weekly Natural Gas Storage Report - EIA",
           "sourceName": "EIA Today In Energy",
           "url": "http://ir.eia.gov/ngs/ngs.html",
           "publishedAt": "2026-11-20T00:00:00.000Z",
           "summary": "Weekly Natural Gas Storage Report - EIA",
-          "tickers": []
-        },
-        {
-          "id": "E10",
-          "title": "S&P 500 snaps 3-day skid on Election Day as chip stocks rebound",
-          "sourceName": "CNBC Markets",
-          "url": "https://www.cnbc.com/2026/11/02/stock-market-today-live-updates.html",
-          "publishedAt": "2026-11-02T23:09:32.000Z",
-          "summary": "The Nasdaq Composite rose on Tuesday as investors moved back into key technology stocks after recent pressure and geared up for U.S. midterm election results.",
           "tickers": []
         }
       ],
@@ -2902,7 +2543,7 @@
     },
     "reddit": {
       "status": "ready",
-      "generatedAt": "2026-11-26T22:22:09.115Z",
+      "generatedAt": "2026-11-27T08:43:16.437Z",
       "authMode": "oauth",
       "metricMode": "ranked_attention",
       "sampleCoverage": {
@@ -2912,9 +2553,9 @@
           "new",
           "top"
         ],
-        "postCount": 64,
+        "postCount": 51,
         "includesVoteAndCommentCounts": true,
-        "oauthPostCount": 64,
+        "oauthPostCount": 51,
         "rssPostCount": 0
       },
       "sourceNote": "Reddit OAuth API across hot/new/top-day posts; generic megathreads and portfolio dumps are filtered. Use as sentiment and attention only, not verified news.",
@@ -2925,7 +2566,7 @@
           "segment": "Retail momentum",
           "status": "ready",
           "error": null,
-          "postCount": 27,
+          "postCount": 26,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2946,7 +2587,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 27
+              "postCount": 22
             }
           ]
         },
@@ -2955,7 +2596,7 @@
           "segment": "Retail investing",
           "status": "ready",
           "error": null,
-          "postCount": 15,
+          "postCount": 8,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -2976,7 +2617,7 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 15
+              "postCount": 8
             }
           ]
         },
@@ -2985,7 +2626,7 @@
           "segment": "Retail investing",
           "status": "ready",
           "error": null,
-          "postCount": 19,
+          "postCount": 16,
           "sortStatuses": [
             {
               "sort": "hot",
@@ -3006,13 +2647,43 @@
               "status": "ready",
               "method": "oauth_json",
               "error": null,
-              "postCount": 18
+              "postCount": 16
             }
           ]
         },
         {
           "subreddit": "SecurityAnalysis",
           "segment": "Fundamental research",
+          "status": "error",
+          "error": "hot: no posts | new: no posts | top: no posts",
+          "postCount": 0,
+          "sortStatuses": [
+            {
+              "sort": "hot",
+              "status": "ready",
+              "method": "oauth_json",
+              "error": null,
+              "postCount": 40
+            },
+            {
+              "sort": "new",
+              "status": "ready",
+              "method": "oauth_json",
+              "error": null,
+              "postCount": 40
+            },
+            {
+              "sort": "top",
+              "status": "ready",
+              "method": "oauth_json",
+              "error": null,
+              "postCount": 0
+            }
+          ]
+        },
+        {
+          "subreddit": "options",
+          "segment": "Options sentiment",
           "status": "ready",
           "error": null,
           "postCount": 1,
@@ -3039,46 +2710,16 @@
               "postCount": 1
             }
           ]
-        },
-        {
-          "subreddit": "options",
-          "segment": "Options sentiment",
-          "status": "ready",
-          "error": null,
-          "postCount": 2,
-          "sortStatuses": [
-            {
-              "sort": "hot",
-              "status": "ready",
-              "method": "oauth_json",
-              "error": null,
-              "postCount": 40
-            },
-            {
-              "sort": "new",
-              "status": "ready",
-              "method": "oauth_json",
-              "error": null,
-              "postCount": 40
-            },
-            {
-              "sort": "top",
-              "status": "ready",
-              "method": "oauth_json",
-              "error": null,
-              "postCount": 2
-            }
-          ]
         }
       ],
       "topTickers": [
         {
           "symbol": "NVDA",
           "mentions": 5,
-          "signalStrength": 12.7,
+          "signalStrength": 12.2,
           "directMentions": 5,
-          "score": 1624,
-          "comments": 786,
+          "score": 1978,
+          "comments": 753,
           "subreddits": [
             "wallstreetbets",
             "stocks"
@@ -3087,105 +2728,55 @@
             {
               "title": "Jensen said he spends 90 minutes a day in therapy. NVDA board asks if his therapist is a woman.",
               "subreddit": "wallstreetbets",
-              "score": 19648,
-              "comments": 478,
+              "score": 23604,
+              "comments": 535,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5x3ba/jensen_said_he_spends_90_minutes_a_day_in_therapy/"
             },
             {
               "title": "Apple is outperforming every other Mag 7 stock this year by a huge margin.",
               "subreddit": "wallstreetbets",
-              "score": 538,
-              "comments": 170,
+              "score": 1221,
+              "comments": 267,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y68xxq/apple_is_outperforming_every_other_mag_7_stock/"
             },
             {
               "title": "Michael Burry says he’s now almost entirely long. Is it real?",
               "subreddit": "stocks",
-              "score": 454,
-              "comments": 188,
+              "score": 689,
+              "comments": 243,
               "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/"
             }
           ],
-          "attentionScore": 302.79
+          "attentionScore": 301.8
         },
         {
-          "symbol": "QQQ",
-          "mentions": 2,
-          "signalStrength": 6.2,
-          "directMentions": 2,
-          "score": 0,
-          "comments": 61,
-          "subreddits": [
-            "wallstreetbets",
-            "stocks"
-          ],
-          "posts": [
-            {
-              "title": "QQQ Q4 2026 is tracking Q4 2018 almost exactly. Déjà vu?",
-              "subreddit": "wallstreetbets",
-              "score": 0,
-              "comments": 37,
-              "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5ojxi/qqq_q4_2026_is_tracking_q4_2018_almost_exactly/"
-            },
-            {
-              "title": "SMH and TQQQ filled their April gaps. QQQ hasn't. Is one more flush coming?",
-              "subreddit": "stocks",
-              "score": 0,
-              "comments": 24,
-              "permalink": "https://www.reddit.com/r/stocks/comments/1y67hcy/smh_and_tqqq_filled_their_april_gaps_qqq_hasnt_is/"
-            }
-          ],
-          "attentionScore": 112.44
-        },
-        {
-          "symbol": "ERO",
+          "symbol": "SPCX",
           "mentions": 1,
-          "signalStrength": 2.8,
+          "signalStrength": 4.9,
           "directMentions": 1,
-          "score": 151,
-          "comments": 63,
+          "score": 1,
+          "comments": 6,
           "subreddits": [
             "stocks"
           ],
           "posts": [
             {
-              "title": "Michael Burry says he’s now almost entirely long. Is it real?",
+              "title": "JPMorgan sees a path for $SPCX to reach $400B in annualized AI compute revenue by the end of 2027",
               "subreddit": "stocks",
-              "score": 454,
-              "comments": 188,
-              "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/"
+              "score": 2,
+              "comments": 9,
+              "permalink": "https://www.reddit.com/r/stocks/comments/1y6nz82/jpmorgan_sees_a_path_for_spcx_to_reach_400b_in/"
             }
           ],
-          "attentionScore": 56.78
-        },
-        {
-          "symbol": "JD",
-          "mentions": 1,
-          "signalStrength": 2.8,
-          "directMentions": 1,
-          "score": 151,
-          "comments": 63,
-          "subreddits": [
-            "stocks"
-          ],
-          "posts": [
-            {
-              "title": "Michael Burry says he’s now almost entirely long. Is it real?",
-              "subreddit": "stocks",
-              "score": 454,
-              "comments": 188,
-              "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/"
-            }
-          ],
-          "attentionScore": 56.78
+          "attentionScore": 73.28
         },
         {
           "symbol": "AAPL",
           "mentions": 1,
           "signalStrength": 2.4,
           "directMentions": 1,
-          "score": 203,
-          "comments": 64,
+          "score": 454,
+          "comments": 101,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -3193,20 +2784,20 @@
             {
               "title": "Apple is outperforming every other Mag 7 stock this year by a huge margin.",
               "subreddit": "wallstreetbets",
-              "score": 538,
-              "comments": 170,
+              "score": 1221,
+              "comments": 267,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y68xxq/apple_is_outperforming_every_other_mag_7_stock/"
             }
           ],
-          "attentionScore": 53.62
+          "attentionScore": 58.84
         },
         {
           "symbol": "AMZN",
           "mentions": 1,
           "signalStrength": 2.4,
           "directMentions": 1,
-          "score": 203,
-          "comments": 64,
+          "score": 454,
+          "comments": 101,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -3214,20 +2805,20 @@
             {
               "title": "Apple is outperforming every other Mag 7 stock this year by a huge margin.",
               "subreddit": "wallstreetbets",
-              "score": 538,
-              "comments": 170,
+              "score": 1221,
+              "comments": 267,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y68xxq/apple_is_outperforming_every_other_mag_7_stock/"
             }
           ],
-          "attentionScore": 53.62
+          "attentionScore": 58.84
         },
         {
           "symbol": "MSFT",
           "mentions": 1,
           "signalStrength": 2.4,
           "directMentions": 1,
-          "score": 203,
-          "comments": 64,
+          "score": 454,
+          "comments": 101,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -3235,20 +2826,20 @@
             {
               "title": "Apple is outperforming every other Mag 7 stock this year by a huge margin.",
               "subreddit": "wallstreetbets",
-              "score": 538,
-              "comments": 170,
+              "score": 1221,
+              "comments": 267,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y68xxq/apple_is_outperforming_every_other_mag_7_stock/"
             }
           ],
-          "attentionScore": 53.62
+          "attentionScore": 58.84
         },
         {
           "symbol": "META",
           "mentions": 1,
           "signalStrength": 2.4,
           "directMentions": 1,
-          "score": 203,
-          "comments": 64,
+          "score": 454,
+          "comments": 101,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -3256,20 +2847,20 @@
             {
               "title": "Apple is outperforming every other Mag 7 stock this year by a huge margin.",
               "subreddit": "wallstreetbets",
-              "score": 538,
-              "comments": 170,
+              "score": 1221,
+              "comments": 267,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y68xxq/apple_is_outperforming_every_other_mag_7_stock/"
             }
           ],
-          "attentionScore": 53.62
+          "attentionScore": 58.84
         },
         {
           "symbol": "TSLA",
           "mentions": 1,
           "signalStrength": 2.4,
           "directMentions": 1,
-          "score": 203,
-          "comments": 64,
+          "score": 454,
+          "comments": 101,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -3277,20 +2868,20 @@
             {
               "title": "Apple is outperforming every other Mag 7 stock this year by a huge margin.",
               "subreddit": "wallstreetbets",
-              "score": 538,
-              "comments": 170,
+              "score": 1221,
+              "comments": 267,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y68xxq/apple_is_outperforming_every_other_mag_7_stock/"
             }
           ],
-          "attentionScore": 53.62
+          "attentionScore": 58.84
         },
         {
           "symbol": "GOOG",
           "mentions": 1,
           "signalStrength": 2.4,
           "directMentions": 1,
-          "score": 203,
-          "comments": 64,
+          "score": 454,
+          "comments": 101,
           "subreddits": [
             "wallstreetbets"
           ],
@@ -3298,83 +2889,83 @@
             {
               "title": "Apple is outperforming every other Mag 7 stock this year by a huge margin.",
               "subreddit": "wallstreetbets",
-              "score": 538,
-              "comments": 170,
+              "score": 1221,
+              "comments": 267,
               "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y68xxq/apple_is_outperforming_every_other_mag_7_stock/"
             }
           ],
-          "attentionScore": 53.62
+          "attentionScore": 58.84
         },
         {
-          "symbol": "AMD",
+          "symbol": "ERO",
           "mentions": 1,
-          "signalStrength": 2.9,
+          "signalStrength": 2.8,
+          "directMentions": 1,
+          "score": 230,
+          "comments": 81,
+          "subreddits": [
+            "stocks"
+          ],
+          "posts": [
+            {
+              "title": "Michael Burry says he’s now almost entirely long. Is it real?",
+              "subreddit": "stocks",
+              "score": 689,
+              "comments": 243,
+              "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/"
+            }
+          ],
+          "attentionScore": 58.69
+        },
+        {
+          "symbol": "JD",
+          "mentions": 1,
+          "signalStrength": 2.8,
+          "directMentions": 1,
+          "score": 230,
+          "comments": 81,
+          "subreddits": [
+            "stocks"
+          ],
+          "posts": [
+            {
+              "title": "Michael Burry says he’s now almost entirely long. Is it real?",
+              "subreddit": "stocks",
+              "score": 689,
+              "comments": 243,
+              "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/"
+            }
+          ],
+          "attentionScore": 58.69
+        },
+        {
+          "symbol": "QQQ",
+          "mentions": 1,
+          "signalStrength": 3.3,
           "directMentions": 1,
           "score": 0,
-          "comments": 15,
+          "comments": 33,
           "subreddits": [
-            "investing"
+            "stocks"
           ],
           "posts": [
             {
-              "title": "If you own Nvidia / AMD right now you're probably looking at chip demand and completely missing the debt piling up underneath it.",
-              "subreddit": "investing",
+              "title": "SMH and TQQQ filled their April gaps. QQQ hasn't. Is one more flush coming?",
+              "subreddit": "stocks",
               "score": 0,
-              "comments": 15,
-              "permalink": "https://www.reddit.com/r/investing/comments/1y5vdmw/if_you_own_nvidia_amd_right_now_youre_probably/"
+              "comments": 33,
+              "permalink": "https://www.reddit.com/r/stocks/comments/1y67hcy/smh_and_tqqq_filled_their_april_gaps_qqq_hasnt_is/"
             }
           ],
-          "attentionScore": 53.6
-        },
-        {
-          "symbol": "KO",
-          "mentions": 1,
-          "signalStrength": 2.9,
-          "directMentions": 1,
-          "score": 3,
-          "comments": 3,
-          "subreddits": [
-            "SecurityAnalysis"
-          ],
-          "posts": [
-            {
-              "title": "Bullish - Coca Cola (KO)",
-              "subreddit": "SecurityAnalysis",
-              "score": 3,
-              "comments": 3,
-              "permalink": "https://www.reddit.com/r/SecurityAnalysis/comments/1y5uun9/bullish_coca_cola_ko/"
-            }
-          ],
-          "attentionScore": 53.16
-        },
-        {
-          "symbol": "VOO",
-          "mentions": 1,
-          "signalStrength": 2.9,
-          "directMentions": 1,
-          "score": 0,
-          "comments": 2,
-          "subreddits": [
-            "investing"
-          ],
-          "posts": [
-            {
-              "title": "The Perfect Portfolio: 50% VOO + 50% GPIX",
-              "subreddit": "investing",
-              "score": 0,
-              "comments": 2,
-              "permalink": "https://www.reddit.com/r/investing/comments/1y6d8jt/the_perfect_portfolio_50_voo_50_gpix/"
-            }
-          ],
-          "attentionScore": 53.08
+          "attentionScore": 58.32
         },
         {
           "symbol": "NDX",
           "mentions": 1,
           "signalStrength": 2.4,
           "directMentions": 1,
-          "score": 151,
-          "comments": 63,
+          "score": 230,
+          "comments": 81,
           "subreddits": [
             "stocks"
           ],
@@ -3382,20 +2973,20 @@
             {
               "title": "Michael Burry says he’s now almost entirely long. Is it real?",
               "subreddit": "stocks",
-              "score": 454,
-              "comments": 188,
+              "score": 689,
+              "comments": 243,
               "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/"
             }
           ],
-          "attentionScore": 52.78
+          "attentionScore": 54.69
         },
         {
           "symbol": "PLTR",
           "mentions": 1,
           "signalStrength": 2.4,
           "directMentions": 1,
-          "score": 151,
-          "comments": 63,
+          "score": 230,
+          "comments": 81,
           "subreddits": [
             "stocks"
           ],
@@ -3403,12 +2994,54 @@
             {
               "title": "Michael Burry says he’s now almost entirely long. Is it real?",
               "subreddit": "stocks",
-              "score": 454,
-              "comments": 188,
+              "score": 689,
+              "comments": 243,
               "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/"
             }
           ],
-          "attentionScore": 52.78
+          "attentionScore": 54.69
+        },
+        {
+          "symbol": "MELI",
+          "mentions": 1,
+          "signalStrength": 2.4,
+          "directMentions": 1,
+          "score": 230,
+          "comments": 81,
+          "subreddits": [
+            "stocks"
+          ],
+          "posts": [
+            {
+              "title": "Michael Burry says he’s now almost entirely long. Is it real?",
+              "subreddit": "stocks",
+              "score": 689,
+              "comments": 243,
+              "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/"
+            }
+          ],
+          "attentionScore": 54.69
+        },
+        {
+          "symbol": "TPW",
+          "mentions": 1,
+          "signalStrength": 2.4,
+          "directMentions": 1,
+          "score": 230,
+          "comments": 81,
+          "subreddits": [
+            "stocks"
+          ],
+          "posts": [
+            {
+              "title": "Michael Burry says he’s now almost entirely long. Is it real?",
+              "subreddit": "stocks",
+              "score": 689,
+              "comments": 243,
+              "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/"
+            }
+          ],
+          "attentionScore": 54.69
         }
       ],
       "topPosts": [
@@ -3420,8 +3053,8 @@
           "url": "https://i.redd.it/5g9wyulzex3i1.png",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5x3ba/jensen_said_he_spends_90_minutes_a_day_in_therapy/",
           "createdAt": "2026-11-26T09:32:04.000Z",
-          "score": 19648,
-          "comments": 478,
+          "score": 23604,
+          "comments": 535,
           "upvoteRatio": 0.97,
           "flair": "Meme",
           "tickers": [
@@ -3437,24 +3070,6 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y5ld21",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Korean news anchor tears up over Nasdaq losses on live tv. \"It’s a very difficult market, and you must overcome it well.\"",
-          "url": "https://v.redd.it/9bh021py9u3i1",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5ld21/korean_news_anchor_tears_up_over_nasdaq_losses_on/",
-          "createdAt": "2026-11-25T22:59:52.000Z",
-          "score": 15828,
-          "comments": 1529,
-          "upvoteRatio": 0.96,
-          "flair": "News",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
           "id": "1y67rne",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
@@ -3462,8 +3077,8 @@
           "url": "https://www.themirror.com/news/us-news/billionaire-carl-icahn-loses-93-2122732",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y67rne/billionaire_carl_icahn_loses_93_of_his/",
           "createdAt": "2026-11-26T18:08:40.000Z",
-          "score": 8706,
-          "comments": 715,
+          "score": 14832,
+          "comments": 1072,
           "upvoteRatio": 0.97,
           "flair": "News",
           "tickers": [],
@@ -3473,21 +3088,21 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y5tgh2",
+          "id": "1y6booa",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Average day in this sub",
-          "url": "https://i.redd.it/jxzksnm8cw3i1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5tgh2/average_day_in_this_sub/",
-          "createdAt": "2026-11-26T05:54:52.000Z",
-          "score": 7265,
-          "comments": 126,
-          "upvoteRatio": 0.98,
-          "flair": "Meme",
+          "title": "What Are Your Moves Tomorrow, November 27, 2026",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1y6booa/what_are_your_moves_tomorrow_november_27_2026/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y6booa/what_are_your_moves_tomorrow_november_27_2026/",
+          "createdAt": "2026-11-26T21:00:39.000Z",
+          "score": 88,
+          "comments": 5710,
+          "upvoteRatio": 0.86,
+          "flair": null,
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
-          "filteredAsGeneric": false,
+          "filteredAsGeneric": true,
           "fetchMethod": "oauth_json"
         },
         {
@@ -3498,8 +3113,8 @@
           "url": "https://www.reddit.com/r/wallstreetbets/comments/1y5yin6/daily_discussion_thread_for_thanksgiving_day/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5yin6/daily_discussion_thread_for_thanksgiving_day/",
           "createdAt": "2026-11-26T11:00:39.000Z",
-          "score": 71,
-          "comments": 3560,
+          "score": 77,
+          "comments": 3590,
           "upvoteRatio": 0.89,
           "flair": null,
           "tickers": [],
@@ -3509,16 +3124,16 @@
           "fetchMethod": "oauth_json"
         },
         {
-          "id": "1y5t5hu",
+          "id": "1y6hali",
           "subreddit": "wallstreetbets",
           "segment": "Retail momentum",
-          "title": "Nvidia halts chip shipments to south-east Asia",
-          "url": "https://www.ft.com/content/7838a715-07d4-4605-aa60-21f5af2b2370?syn-25a6b1a6=1",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5t5hu/nvidia_halts_chip_shipments_to_southeast_asia/",
-          "createdAt": "2026-11-26T05:37:18.000Z",
-          "score": 2412,
-          "comments": 361,
-          "upvoteRatio": 0.97,
+          "title": "‘GTA VI’ Sold 47 Million Copies By End Of Launch Weekend—And Siphoned Players From ‘Call Of Duty,’ ‘Fortnite’ $ttwo",
+          "url": "https://www.forbes.com/sites/conormurray/2026/11/24/gta-vi-sold-47-million-copies-over-launch-weekend-and-siphoned-players-from-call-of-duty-fortnite/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y6hali/gta_vi_sold_47_million_copies_by_end_of_launch/",
+          "createdAt": "2026-11-27T01:49:35.000Z",
+          "score": 3803,
+          "comments": 298,
+          "upvoteRatio": 0.95,
           "flair": "News",
           "tickers": [],
           "tickerWeights": {},
@@ -3534,46 +3149,10 @@
           "url": "https://i.redd.it/py00g8w0zx3i1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5yyb0/inevitable_massive_bulls_run_imminent_based_on/",
           "createdAt": "2026-11-26T11:26:27.000Z",
-          "score": 1877,
-          "comments": 363,
-          "upvoteRatio": 0.9,
+          "score": 2435,
+          "comments": 402,
+          "upvoteRatio": 0.91,
           "flair": "Discussion",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1y5tg8t",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "2 California companies are buying Nvidia's most advanced chips.Those companies are actually Chinese-owned, a CBS News investigation reveals",
-          "url": "https://www.cbsnews.com/news/nvidia-china-ai-chips-computing-sales/?ftag=CNM-00-10aab6a&amp;linkId=1044491030&amp;fbclid=IwY2xjawV0plFleHRuA2FlbQIxMABwZG9mAWJyaWQRMW12T1JMS2NpVTNaeEFqYndzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEfiFXo67Ef3F7jhL62xqKSoHDITeBuluKMZc-YqrHwVE4rPONHsWVIQq0nCuM_aem_YxN-FFn7hQ4entviYVpfbg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5tg8t/2_california_companies_are_buying_nvidias_most/",
-          "createdAt": "2026-11-26T05:54:28.000Z",
-          "score": 1465,
-          "comments": 160,
-          "upvoteRatio": 0.96,
-          "flair": "News",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1y5op88",
-          "subreddit": "stocks",
-          "segment": "Retail investing",
-          "title": "S&amp;P warns Nvidia's board may be compromised, puts chipmaker's rating on downgrade watch",
-          "url": "https://www.reddit.com/r/stocks/comments/1y5op88/sp_warns_nvidias_board_may_be_compromised_puts/",
-          "permalink": "https://www.reddit.com/r/stocks/comments/1y5op88/sp_warns_nvidias_board_may_be_compromised_puts/",
-          "createdAt": "2026-11-26T01:39:15.000Z",
-          "score": 1288,
-          "comments": 229,
-          "upvoteRatio": 0.94,
-          "flair": "Company News",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
@@ -3588,32 +3167,14 @@
           "url": "https://www.axios.com/2026/11/26/musk-spacex-shares-trump-accounts",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y695jw/musk_makes_18_billion_spacex_stock_pledge_for/",
           "createdAt": "2026-11-26T19:07:20.000Z",
-          "score": 564,
-          "comments": 492,
-          "upvoteRatio": 0.85,
+          "score": 1370,
+          "comments": 919,
+          "upvoteRatio": 0.87,
           "flair": "News",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
           "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1y5rh39",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Remember the 2026 WSB Index? Well, the pie got cooked.",
-          "url": "https://www.reddit.com/gallery/1y5rh39",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5rh39/remember_the_2026_wsb_index_well_the_pie_got/",
-          "createdAt": "2026-11-26T04:06:14.000Z",
-          "score": 952,
-          "comments": 226,
-          "upvoteRatio": 0.97,
-          "flair": "Discussion",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": true,
           "fetchMethod": "oauth_json"
         },
         {
@@ -3624,50 +3185,14 @@
           "url": "https://www.ccn.com/news/crypto/cathie-woods-ark-bitcoin-etf-anthropic-ripple-ceo-crypto-rebound/",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y68j9v/cathie_woods_ark_buys_anthropic/",
           "createdAt": "2026-11-26T18:41:04.000Z",
-          "score": 1080,
-          "comments": 161,
+          "score": 1852,
+          "comments": 235,
           "upvoteRatio": 0.97,
           "flair": "News",
           "tickers": [],
           "tickerWeights": {},
           "directTickers": [],
           "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1y5xfbc",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "Guys make sure to buy the dip before endgame comes out! 🤗",
-          "url": "https://i.redd.it/7ttkgamtix3i1.jpeg",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5xfbc/guys_make_sure_to_buy_the_dip_before_endgame/",
-          "createdAt": "2026-11-26T09:53:31.000Z",
-          "score": 1109,
-          "comments": 106,
-          "upvoteRatio": 0.95,
-          "flair": "Meme",
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": false,
-          "fetchMethod": "oauth_json"
-        },
-        {
-          "id": "1y6booa",
-          "subreddit": "wallstreetbets",
-          "segment": "Retail momentum",
-          "title": "What Are Your Moves Tomorrow, November 27, 2026",
-          "url": "https://www.reddit.com/r/wallstreetbets/comments/1y6booa/what_are_your_moves_tomorrow_november_27_2026/",
-          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y6booa/what_are_your_moves_tomorrow_november_27_2026/",
-          "createdAt": "2026-11-26T21:00:39.000Z",
-          "score": 29,
-          "comments": 597,
-          "upvoteRatio": 0.9,
-          "flair": null,
-          "tickers": [],
-          "tickerWeights": {},
-          "directTickers": [],
-          "filteredAsGeneric": true,
           "fetchMethod": "oauth_json"
         },
         {
@@ -3678,9 +3203,9 @@
           "url": "https://i.redd.it/vb2fy5u0804i1.jpeg",
           "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y68xxq/apple_is_outperforming_every_other_mag_7_stock/",
           "createdAt": "2026-11-26T18:58:21.000Z",
-          "score": 538,
-          "comments": 170,
-          "upvoteRatio": 0.95,
+          "score": 1221,
+          "comments": 267,
+          "upvoteRatio": 0.96,
           "flair": "Discussion",
           "tickers": [
             "AAPL",
@@ -3713,6 +3238,24 @@
           "fetchMethod": "oauth_json"
         },
         {
+          "id": "1y5xfbc",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Guys make sure to buy the dip before endgame comes out! 🤗",
+          "url": "https://i.redd.it/7ttkgamtix3i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5xfbc/guys_make_sure_to_buy_the_dip_before_endgame/",
+          "createdAt": "2026-11-26T09:53:31.000Z",
+          "score": 1473,
+          "comments": 120,
+          "upvoteRatio": 0.95,
+          "flair": "Meme",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
           "id": "1y643tl",
           "subreddit": "stocks",
           "segment": "Retail investing",
@@ -3720,8 +3263,8 @@
           "url": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/",
           "permalink": "https://www.reddit.com/r/stocks/comments/1y643tl/michael_burry_says_hes_now_almost_entirely_long/",
           "createdAt": "2026-11-26T15:37:26.000Z",
-          "score": 454,
-          "comments": 188,
+          "score": 689,
+          "comments": 243,
           "upvoteRatio": 0.87,
           "flair": "Trades",
           "tickers": [
@@ -3759,9 +3302,101 @@
           ],
           "filteredAsGeneric": false,
           "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1y6f2aa",
+          "subreddit": "stocks",
+          "segment": "Retail investing",
+          "title": "Trump accounts traded NVIDIA stock 44 times this year",
+          "url": "https://www.reddit.com/r/stocks/comments/1y6f2aa/trump_accounts_traded_nvidia_stock_44_times_this/",
+          "permalink": "https://www.reddit.com/r/stocks/comments/1y6f2aa/trump_accounts_traded_nvidia_stock_44_times_this/",
+          "createdAt": "2026-11-26T23:50:22.000Z",
+          "score": 976,
+          "comments": 68,
+          "upvoteRatio": 0.96,
+          "flair": null,
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1y6dpgn",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Mods are sleeping early. Share your memes",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1y6dpgn/mods_are_sleeping_early_share_your_memes/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y6dpgn/mods_are_sleeping_early_share_your_memes/",
+          "createdAt": "2026-11-26T22:40:12.000Z",
+          "score": 566,
+          "comments": 203,
+          "upvoteRatio": 0.89,
+          "flair": "Shitpost",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1y67ay1",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "-1.3mm, need another 10x from here",
+          "url": "https://www.reddit.com/gallery/1y67ay1",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y67ay1/13mm_need_another_10x_from_here/",
+          "createdAt": "2026-11-26T17:49:34.000Z",
+          "score": 534,
+          "comments": 206,
+          "upvoteRatio": 0.94,
+          "flair": "Loss",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1y66lyf",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Alright, let’s play a little game! Everyone, drop your YTD and all-time returns. Let’s see who’s been winning",
+          "url": "https://i.redd.it/2mcl0rudqz3i1.jpeg",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y66lyf/alright_lets_play_a_little_game_everyone_drop/",
+          "createdAt": "2026-11-26T17:19:28.000Z",
+          "score": 275,
+          "comments": 301,
+          "upvoteRatio": 0.88,
+          "flair": "Discussion",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
+        },
+        {
+          "id": "1y5zmiw",
+          "subreddit": "wallstreetbets",
+          "segment": "Retail momentum",
+          "title": "Bears’ heads will be ripped off on Black Friday 2026",
+          "url": "https://www.reddit.com/r/wallstreetbets/comments/1y5zmiw/bears_heads_will_be_ripped_off_on_black_friday/",
+          "permalink": "https://www.reddit.com/r/wallstreetbets/comments/1y5zmiw/bears_heads_will_be_ripped_off_on_black_friday/",
+          "createdAt": "2026-11-26T12:05:53.000Z",
+          "score": 278,
+          "comments": 233,
+          "upvoteRatio": 0.82,
+          "flair": "DD",
+          "tickers": [],
+          "tickerWeights": {},
+          "directTickers": [],
+          "filteredAsGeneric": false,
+          "fetchMethod": "oauth_json"
         }
       ],
-      "currentFetchErrors": []
+      "currentFetchErrors": [
+        "SecurityAnalysis: hot: no posts | new: no posts | top: no posts"
+      ]
     },
     "marketMovers": {
       "source": "Yahoo Finance predefined screeners",
@@ -4171,12 +3806,12 @@
       "errors": []
     },
     "briefingBullets": [
-      "Policy/geopolitics: S&P Global Ratings said Nvidia's credit rating could be cut by one notch as it flagged \"rising\" management and governance risk at the chipmaker. (M2)",
+      "Policy/geopolitics: Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027. (M3)",
       "Rates: Inflation appears to be gaining steam and spreading beyond energy, raising the heat on Federal Reserve policymakers to raise rates again in December. (M4)",
-      "Commodities: Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand. (M1)",
-      "Macro: Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027. (M3)",
-      "Earnings: Post-report reactions skew positive, but confirm whether the strength clusters by sector before treating it as a broader risk-on signal.",
-      "Retail attention: NVDA, QQQ, ERO, JD have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
+      "Macro: SAP is weighing cuts of at least 10,000 jobs as it reshapes its software business around AI, Bloomberg reported. (M2)",
+      "Credit: Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus. (M1)",
+      "Earnings: No broad earnings-linked signal cleared the current screen; treat company reports as name-specific risk rather than a market driver.",
+      "Retail attention: NVDA, SPCX, AAPL, AMZN have the strongest filtered Reddit attention in the authenticated sample; use it as a crowding check, not verified news."
     ]
   },
   "avoidList": {
@@ -56923,11 +56558,11 @@
       "cadence": "Weekly",
       "trust": "High",
       "notes": "Public consumer, macro, and market research.",
-      "title": "Bank of America Institute – Where Thought Finds Leadership",
-      "summary": "No recent dated articles found in the last 30 days.",
+      "title": "Bank of America Institute",
+      "summary": "Source check failed: 403 Forbidden",
       "articles": [],
       "articleCount": 0,
-      "ok": true
+      "ok": false
     },
     {
       "name": "Schwab Weekly Market Outlook",
@@ -56954,7 +56589,7 @@
           "url": "https://www.schwab.com/learn/story/how-evolving-energy-shock-may-impact-markets",
           "publishedAt": "2026-11-23T20:26:12.000Z",
           "summary": "Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027.",
-          "excerpt": "How the Evolving Energy Shock May Impact Markets | Charles Schwab Search all articles, videos, and podcasts International How the Evolving Energy Shock May Impact Markets Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027. November 23, 2026 • Chris Ferrarone • Heather O'Leary Key takeaways Nine months into the Iran war, the oil shock has evolved. Oil production and flows have improved and demand has adjusted, bringing the market into better balance. But depleted inventories, expensive freight, and tight refined-product markets may leave prices vulnerable to renewed disruption. Persistently expensive energy would likely keep inflation and interest-rate pressure elevated. A durable peace could reverse that mix quickly, supporting consumers, bonds, and broader equity participation while challenging the Energy-sector leadership since the Iran war started. Exposure to the U.S. Energy sector remains useful as a potential geopolitical and inflation hedge, but the opportunity has become more selective as earnings expectations have risen. The key risk to Energy stocks in 2027 may not be recession, but a resolution of the Iran war. The oil shock is changing Nine months into the Iran war, the most surprising development may be what has not happened. Early in the conflict, the sudden halt of oil flows through the Strait of Hormuz led many forecasters to warn that a prolonged disruption could significantly weaken global growth and raise inflation. For example, the International Monetary Fund's (IMF) April World Economic Outlook estimated that under a prolonged-disruption scenario, global gross domestic product (GDP) growth could slow to 2.5%, and inflation could rise to 5.4%. I",
+          "excerpt": "How the Evolving Energy Shock May Impact Markets | Charles Schwab Search Learn International How the Evolving Energy Shock May Impact Markets Energy supplies have improved, but price risks remain. Learn what changing oil-market dynamics could mean for the economy, markets, and Energy stocks in 2027. November 23, 2026 • Chris Ferrarone • Heather O'Leary Key takeaways Nine months into the Iran war, the oil shock has evolved. Oil production and flows have improved and demand has adjusted, bringing the market into better balance. But depleted inventories, expensive freight, and tight refined-product markets may leave prices vulnerable to renewed disruption. Persistently expensive energy would likely keep inflation and interest-rate pressure elevated. A durable peace could reverse that mix quickly, supporting consumers, bonds, and broader equity participation while challenging the Energy-sector leadership since the Iran war started. Exposure to the U.S. Energy sector remains useful as a potential geopolitical and inflation hedge, but the opportunity has become more selective as earnings expectations have risen. The key risk to Energy stocks in 2027 may not be recession, but a resolution of the Iran war. The oil shock is changing Nine months into the Iran war, the most surprising development may be what has not happened. Early in the conflict, the sudden halt of oil flows through the Strait of Hormuz led many forecasters to warn that a prolonged disruption could significantly weaken global growth and raise inflation. For example, the International Monetary Fund's (IMF) April World Economic Outlook estimated that under a prolonged-disruption scenario, global gross domestic product (GDP) growth could slow to 2.5%, and inflation could rise to 5.4%. Its latest forecast, released ",
           "discoveredFrom": "https://www.schwab.com/learn/story/weekly-market-outlook"
         },
         {
@@ -57202,11 +56837,11 @@
       "articles": [
         {
           "sourceName": "Axios Macro RSS",
-          "title": "U.S. economy grew at rapid 4.3% pace in third quarter, new estimate shows - Axios",
-          "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5YdXR1UWd2RzJxbkJlTmNnNm9hcTA1ajJaaUVSSlloOEwxTjl6WTFERzVvT2dfVk9lTnZhVGRmSUt1Q21BdkZxQzgxZlZLdnFIN2VNQ0JYV3pvWmFNZmlFRXdyVHY1bm50?oc=5",
-          "publishedAt": "2026-11-26T11:12:09.000Z",
-          "summary": "U.S. economy grew at rapid 4.3% pace in third quarter, new estimate shows Axios",
-          "excerpt": "U.S. economy grew at rapid 4.3% pace in third quarter, new estimate shows Axios",
+          "title": "Trump demands investigation into GDP data revisions - Axios",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNWVlCaW5mTVRqakpXMHNGRVhybk5hTFZTSFVyRGlQbUJ4dU9yQ0Znam1ua3JGdVBubXhXanNtVVNzUExzeTZwTFpqMjdVZmVVbDZCQmNZbGlucFRHaE5zRTVkRkdBQk8ybkdaNjdKN1hKSVhWdXIyNlFCcGd5X3A0MA?oc=5",
+          "publishedAt": "2026-11-27T00:10:32.000Z",
+          "summary": "Trump demands investigation into GDP data revisions Axios",
+          "excerpt": "Trump demands investigation into GDP data revisions Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
         },
         {
@@ -57220,11 +56855,11 @@
         },
         {
           "sourceName": "Axios Macro RSS",
-          "title": "Oil prices and bond yields no longer moving together - Axios",
-          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1jOENuV2dCcFJCanA3cE5PYmVuckNzNmpuWlR6VDRaazFqWVFoWnNTV0FOamZwUl80STRIM0U1aEc4WXVVOE84eldMWXk5M3hyTTIwZ1FVR253VXRra01xQUNxeGNhNFpZR1p5Zg?oc=5",
-          "publishedAt": "2026-11-09T08:00:00.000Z",
-          "summary": "Oil prices and bond yields no longer moving together Axios",
-          "excerpt": "Oil prices and bond yields no longer moving together Axios",
+          "title": "\"Strong hire, low fire\" labor market surprises economists - Axios",
+          "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5wMnZ6V3ozcDBpa2M4NGxjYXFFSmJoektjY19wRTVvN3pfdHI4alJuYnptcGpTNDFNaGRqVV9mWGU4RXhIdDIycVA1T29CMVhtazNqWXJwd1laTVp2TzVFelRKVVQxd0pPVzRRU0xZR2xBQQ?oc=5",
+          "publishedAt": "2026-11-06T08:00:00.000Z",
+          "summary": "\"Strong hire, low fire\" labor market surprises economists Axios",
+          "excerpt": "\"Strong hire, low fire\" labor market surprises economists Axios",
           "discoveredFrom": "https://news.google.com/rss/search?q=%22Axios%20Macro%22%20when:30d&hl=en-US&gl=US&ceid=US:en"
         }
       ],
@@ -57243,6 +56878,15 @@
       "articles": [
         {
           "sourceName": "CNBC Markets",
+          "title": "Stock futures rise as Wall Street gets set to wrap up a volatile holiday week: Live updates",
+          "url": "https://www.cnbc.com/2026/11/26/stock-market-today-live-updates.html",
+          "publishedAt": "2026-11-26T23:01:49.000Z",
+          "summary": "Investors are wrapping up a turbulent trading week that was shortened due to the Thanksgiving holiday.",
+          "excerpt": "Stock market today: Live updates Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu Traders work on the floor of the New York Stock Exchange (NYSE) on November 25, 2026, in New York City. Spencer Platt | Getty Images U.S. equity futures rose early Friday, with investors set to wrap a turbulent shortened trading week due to the Thanksgiving holiday. S&P 500 futures were up 1.8%, while Nasdaq-100 futures advanced 2.89%. Futures tied to the Dow Jones Industrial Average were higher by 490 points, or 0.98%. The moves come amid a volatile week during an even more volatile month. In Asia, Japan's Nikkei 225 rose 0.3%, while South Korea's Kospi was up 0.6%. Australia's S&P/ASX 200 added 0.40%. The week kicked off with Jensen Huang getting reinstated as CEO at Nvidia , a move that sent the stock up 31% during Monday's session and drove the S&P 500 and Nasdaq Composite to post their best days since April 2025 . The Dow Jones Industrial Average advanced more than 1,400 points, or roughly 3%. Since then, however, the S&P 500 and Nasdaq have come under pressure as Nvidia and other artificial intelligence-related stocks have given back some of Monday's gains. That said, the two benchmarks are still on pace for winning weekly performances, along with the Dow. The S&P 500 is up almost 4% week to date, while the Nasdaq and Dow have risen more than 4%. The stock market was closed on Thursday for Thanksgiving, and it's scheduled to close on Friday at 1 p.m. ET. Prior to Huang's departure earlier this month, sentiment toward the AI trade was already downbeat, with investors growing concerned about debt financing , signs of moderation in capital expenditures and Democratic wins in the midterm elections resulting in a slowdown",
+          "discoveredFrom": "https://www.cnbc.com/markets/"
+        },
+        {
+          "sourceName": "CNBC Markets",
           "title": "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
           "url": "https://www.cnbc.com/2026/11/26/nvidia-market-governance-risk.html",
           "publishedAt": "2026-11-26T02:57:32.000Z",
@@ -57257,15 +56901,6 @@
           "publishedAt": "2026-11-20T15:03:25.000Z",
           "summary": "Bitcoin’s sell-off is tracking risk assets again as experts weigh rates, ETF flows, politics and whether the crypto can function as a market hedge.",
           "excerpt": "Bitcoin sell-off: Crypto is failing the 'digital gold' test again Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu Key Points Bitcoin’s recent sell-off has moved with risk assets again, weakening the case that it behaves as an independent market hedge. Experts point to rates, broad risk-off trading, ETF outflows and crypto-specific shocks as pressures on bitcoin. Institutional and corporate adoption has deepened, but it also gives investors more liquid ways to add or cut bitcoin exposure. In this article BTC.CM= MSTR Follow your favorite stocks CREATE FREE ACCOUNT Bloomberg | Bloomberg | Getty Images Bitcoin 's latest sell-off is reviving doubts that it can behave as the \"digital gold\" market hedge that crypto backers have long envisioned. Coming into 2026, experts said that showing bitcoin could serve as a market hedge rather than a risk-on asset that moves up and down with growth stocks was an important test for the cryptocurrency. Bitcoin was trading under $62,000 on Friday morning, down from an all-time high of more than $126,000 in early October last year. Its downward spiral in recent months and weeks has been precipitated by a confluence of factors. The heavy midterm elections losses for the Republicans, the Binance hack, and a world on edge about the security of all things technology — FAA ground stop, the outage of the National Security Agency's highly classified internal communications system, several online banking outages — have not helped the mood when it comes to putting trust in the digital world. But the market itself may be the biggest factor. Investors are currently in sell everything mode, including tech stocks and gold — the Dow Jones Industrial Average and S&P 500 tumbled into corre",
-          "discoveredFrom": "https://www.cnbc.com/markets/"
-        },
-        {
-          "sourceName": "CNBC Markets",
-          "title": "S&P 500 snaps 3-day skid on Election Day as chip stocks rebound",
-          "url": "https://www.cnbc.com/2026/11/02/stock-market-today-live-updates.html",
-          "publishedAt": "2026-11-02T23:09:32.000Z",
-          "summary": "The Nasdaq Composite rose on Tuesday as investors moved back into key technology stocks after recent pressure and geared up for U.S. midterm election results.",
-          "excerpt": "Stock market news for Nov. 3, 2026 Skip Navigation Markets Business Investing Tech Politics & Policy Video Watchlist Investing Club PRO Livestream Menu Traders work on the floor at the New York Stock Exchange (NYSE) in New York City, US, Oct. 26, 2026. Jeenah Moon | Reuters The Nasdaq Composite rose on Tuesday as investors moved back into key technology stocks after recent pressure and geared up for U.S. midterm election results . The tech-heavy index jumped 0.83% and closed at 25,372.01, recouping some of its latest losses. The Nasdaq-100 rose 0.7% to 28,180.26, remaining in correction territory and down about 10% from its recent high. The S&P 500 climbed 0.36% to 7,568.92 to break a three-day losing run. The Dow Jones Industrial Average lost 197.26 points, or 0.38%, to 51,786.72. The 30-stock index was weighed down by Apple shares. Apple fell almost 2% after the iPhone maker issued a disappointing margin forecast late Monday and iPad sales in the fiscal fourth-quarter missed the Street's estimates. Conversely, shares of chipmakers saw gains. Advanced Micro Devices — which releases its third-quarter results after the bell — gained more than 3%, while Broadcom rose 3%. Micron Technology and Nvidia each added more than 2%. Tuesday's advance marks a reversal from the pullback seen Monday, which sent the Nasdaq down more than 1% and extended a recent retreat in the Nasdaq Composite and S&P 500 to a third day. While semiconductor makers — and others tied to artificial intelligence — showed signs of recovery Tuesday, Shawn Snyder of Potomac Fund Management believes the market is not out of the woods. \"The concerns about the cost of capital and the level of debt financing necessary [are] going to persist for quite some time,\" the economic strategist told CNBC. But the trade t",
           "discoveredFrom": "https://www.cnbc.com/markets/"
         }
       ],
@@ -57284,29 +56919,29 @@
       "articles": [
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Trump demands probe into ‘record setting error’ after third-quarter GDP data gets massive revision higher",
-          "url": "https://www.cnbc.com/2026/11/26/trump-gdp-revision-investigation.html",
-          "publishedAt": "2026-11-26T21:13:17.000Z",
-          "summary": "President Donald Trump on Thursday deemed the latest gross domestic product revision a mistake, claiming that it should be \"immediately investigated.\"",
-          "excerpt": "President Donald Trump on Thursday deemed the latest gross domestic product revision a mistake, claiming that it should be \"immediately investigated.\"",
+          "title": "Private markets are more accessible than ever for investors. Getting out is another matter",
+          "url": "https://www.cnbc.com/2026/11/27/private-markets-retail-investors-liquidity.html",
+          "publishedAt": "2026-11-27T08:05:09.000Z",
+          "summary": "Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
+          "excerpt": "Retail access to private markets is growing, but PwC says education lags as redemption limits put liquidity risks in focus.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Microdrama apps chase profits as Hollywood moves into short-form, vertical video",
-          "url": "https://www.cnbc.com/2026/11/26/micro-drama-apps-hollywood-vertical-video.html",
-          "publishedAt": "2026-11-26T18:27:43.000Z",
-          "summary": "The microdrama category has exploded at a time when traditional forms of media face waning interest and YouTube claims more viewing hours.",
-          "excerpt": "The microdrama category has exploded at a time when traditional forms of media face waning interest and YouTube claims more viewing hours.",
+          "title": "Tech German software major SAP is reportedly weighing cutting at least 10,000 jobs in AI push",
+          "url": "https://www.cnbc.com/2026/11/27/sap-job-cuts-ai-restructuring.html",
+          "publishedAt": "2026-11-27T07:15:44.000Z",
+          "summary": "SAP is weighing cuts of at least 10,000 jobs as it reshapes its software business around AI, Bloomberg reported.",
+          "excerpt": "SAP is weighing cuts of at least 10,000 jobs as it reshapes its software business around AI, Bloomberg reported.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         },
         {
           "sourceName": "CNBC Top News RSS",
-          "title": "Semiconductor chips are the new oil. Here&apos;s why",
-          "url": "https://www.cnbc.com/2026/11/26/semiconductor-chips-are-the-new-oil-heres-why.html",
-          "publishedAt": "2026-11-26T17:52:15.000Z",
-          "summary": "Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
-          "excerpt": "Semiconductor exports overtook oil and gas for the first time in 2026, as the AI boom fueled chip demand.",
+          "title": "Spain’s Pablo Hernández de Cos set to lead European Central Bank",
+          "url": "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html",
+          "publishedAt": "2026-11-27T06:50:38.000Z",
+          "summary": "De Cos will lead the ECB into a period of political uncertainty and choppy growth, after winning the backing needed to succeed Christine Lagarde next year.",
+          "excerpt": "De Cos will lead the ECB into a period of political uncertainty and choppy growth, after winning the backing needed to succeed Christine Lagarde next year.",
           "discoveredFrom": "https://www.cnbc.com/id/100003114/device/rss/rss.html"
         }
       ],
@@ -57366,20 +57001,20 @@
       "articles": [
         {
           "sourceName": "MarketWatch Top Stories RSS",
+          "title": "Is the stock market open on Black Friday?",
+          "url": "https://www.marketwatch.com/story/is-the-stock-market-open-on-black-friday-0a735c45?mod=mw_rss_topstories",
+          "publishedAt": "2026-11-27T05:01:00.000Z",
+          "summary": "Here’s how the day after Thanksgiving will affect trading on Wall Street",
+          "excerpt": "Here’s how the day after Thanksgiving will affect trading on Wall Street",
+          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        },
+        {
+          "sourceName": "MarketWatch Top Stories RSS",
           "title": "I’m terrified of a market crash. Should I put $400,000 of my $1 million retirement savings into an annuity?",
           "url": "https://www.marketwatch.com/story/were-in-our-50s-and-terrified-of-a-market-crash-should-we-put-400-000-of-our-1-million-retirement-savings-into-an-annuity-1943f240?mod=mw_rss_topstories",
           "publishedAt": "2026-11-26T21:45:00.000Z",
           "summary": "“We have a house worth $450,000. Our combined annual income is $125,000.”",
           "excerpt": "“We have a house worth $450,000. Our combined annual income is $125,000.”",
-          "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        },
-        {
-          "sourceName": "MarketWatch Top Stories RSS",
-          "title": "Nvidia and the whole AI trade aren’t out of the woods — not by a long shot",
-          "url": "https://www.marketwatch.com/story/nvidia-and-the-whole-ai-trade-arent-out-of-the-woods-not-by-a-long-shot-bccc0025?mod=mw_rss_topstories",
-          "publishedAt": "2026-11-26T14:00:00.000Z",
-          "summary": "The ‘Bank of AI’ faces a host of troubles ahead.",
-          "excerpt": "The ‘Bank of AI’ faces a host of troubles ahead.",
           "discoveredFrom": "https://feeds.content.dowjones.io/public/rss/mw_topstories"
         }
       ],
